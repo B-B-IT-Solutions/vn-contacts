@@ -22,7 +22,7 @@ public class Account {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
-   @OneToMany(mappedBy = "users")
+   @OneToMany(mappedBy = "account")
    private List<User> users;
 
    @OneToMany(mappedBy = "account")
@@ -30,12 +30,12 @@ public class Account {
 
    @OneToMany(mappedBy = "account")
    private List<Module> modules;
-//
-//   @OneToMany(mappedBy = "account")
-//   private List<GroupType> groupTypes;
-//
-//   @OneToMany(mappedBy = "account")
-//   private List<RelationshipGroupType> relationshipGroupTypes;
+
+   @OneToMany(mappedBy = "account")
+   private List<GroupType> groupTypes;
+
+   @OneToMany(mappedBy = "account")
+   private List<RelationshipGroupType> relationshipGroupTypes;
 //
 //   @OneToMany(mappedBy = "account")
 //   private List<Gender> genders;

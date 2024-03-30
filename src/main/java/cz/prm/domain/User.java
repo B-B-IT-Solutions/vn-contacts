@@ -2,7 +2,9 @@ package cz.prm.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,5 +26,8 @@ public class User {
 
    @Column(name = "LAST_NAME")
    private String lastName;
+
+   @ManyToOne(fetch = FetchType.LAZY)
+   private Account account;
 
 }
