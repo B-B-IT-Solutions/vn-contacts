@@ -1,3 +1,6 @@
+server:
+  port: 8091
+
 #DB
 spring:
   datasource:
@@ -10,3 +13,8 @@ spring:
   liquibase:
     enabled: true
     change-log: db/changelog.xml
+
+#DB
+logging:
+  level:
+    root: INFO
