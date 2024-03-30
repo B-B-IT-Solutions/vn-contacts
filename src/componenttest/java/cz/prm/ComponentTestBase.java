@@ -9,8 +9,10 @@ import io.restassured.mapper.TypeRef;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
-//@SpringBootTest(webEnvironment = DEFINED_PORT)
+@ActiveProfiles("componenttest")
+@SpringBootTest(webEnvironment = DEFINED_PORT)
 public abstract class ComponentTestBase {
 
    @BeforeEach
