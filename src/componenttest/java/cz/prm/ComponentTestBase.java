@@ -10,7 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(webEnvironment = DEFINED_PORT)
+//@SpringBootTest(webEnvironment = DEFINED_PORT)
 public abstract class ComponentTestBase {
 
    @BeforeEach
