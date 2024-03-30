@@ -4,15 +4,15 @@ spring:
     url: jdbc:postgresql://localhost:5432/prm
     username: postgres
     password: test
-  jpa:
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
+#  jpa:
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
 
 #DB
-logging:
-  level:
-    #    org.springframework.web: INFO
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+#logging:
+#  level:
+#    org.springframework.web: INFO
+#    org.hibernate.SQL: DEBUG
+#    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
