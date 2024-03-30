@@ -30,8 +30,8 @@ public class Account {
    @OneToOne(mappedBy = "account")
    private User user;
 
-   @OneToMany(mappedBy = "account")
-   private List<Template> templates;
+//   @OneToMany(mappedBy = "account")
+//   private List<Template> templates;
 
    @OneToMany(mappedBy = "account")
    private List<Module> modules;
@@ -39,8 +39,8 @@ public class Account {
    @OneToMany(mappedBy = "account")
    private List<GroupType> groupTypes;
 
-   @OneToMany(mappedBy = "account")
-   private List<RelationshipGroupType> relationshipGroupTypes;
+//   @OneToMany(mappedBy = "account")
+//   private List<RelationshipGroupType> relationshipGroupTypes;
 
    @Column(name = "gender")
    @Enumerated(STRING)

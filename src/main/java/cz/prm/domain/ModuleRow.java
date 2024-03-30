@@ -1,11 +1,11 @@
 package cz.prm.domain;
 
-import jakarta.persistence.CascadeType;
+import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.FetchType.LAZY;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -24,18 +24,16 @@ public class ModuleRow {
 
    @Id
    @GeneratedValue
-   private Long id;
-
    @Column(name = "MODULE_ROW_ID")
    private Long moduleRowId;
 
    @Column(name = "POSITION")
    private Integer position;
 
-   @ManyToOne(fetch = FetchType.LAZY)
-   private Module module;
-
-   @OneToMany(mappedBy = "row", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+   @OneToMany(mappedBy = "row", fetch = LAZY, cascade = ALL, orphanRemoval = true)
    private Set<ModuleRowField> fields;
+
+   @ManyToOne(fetch = LAZY)
+   private Module module;
 
 }

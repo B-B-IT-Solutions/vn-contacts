@@ -4,9 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -16,7 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "module", schema = "public")
+@Table(name = "MODULE", schema = "public")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,25 +30,11 @@ public class Module {
    @Column(name = "TYPE")
    private String type;
 
-   @Column(name = "RESERVED_TO_CONTACT_INFORMATION")
-   private boolean reservedToContactInformation;
-
-   @Column(name = "PAGINATION")
-   private boolean pagination;
-
    @ManyToOne
    private Account account;
 
    @OneToMany(mappedBy = "module")
    private Set<ModuleRow> rows;
-
-   @ManyToMany
-   @JoinTable(
-       name = "module_template_page",
-       joinColumns = @JoinColumn(name = "module_id"),
-       inverseJoinColumns = @JoinColumn(name = "template_page_id")
-   )
-   private Set<TemplatePage> templatePages;
 
 
 }
