@@ -23,8 +23,9 @@ import lombok.NoArgsConstructor;
 public class Account {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
+   @GeneratedValue
+   @Column(name = "ACCOUNT_ID")
+   private Long accountId;
 
    @OneToMany(mappedBy = "account")
    private List<User> users;
@@ -45,7 +46,7 @@ public class Account {
    @Enumerated(STRING)
    private Gender gender;
 
-//   @OneToMany(mappedBy = "account")
+   //   @OneToMany(mappedBy = "account")
 //   private List<ContactInformationType> contactInformationTypes;
 //
 //   @OneToMany(mappedBy = "account")
@@ -54,8 +55,10 @@ public class Account {
 //   @OneToMany(mappedBy = "account")
 //   private List<PetCategory> petCategories;
 //
-//   @OneToMany(mappedBy = "account")
-//   private List<Emotion> emotions;
+   @Column(name = "emotion")
+   @Enumerated(STRING)
+   private Emotion emotion;
+
 //
 //   @ManyToMany(mappedBy = "accounts")
 //   private List<Currency> currencies;

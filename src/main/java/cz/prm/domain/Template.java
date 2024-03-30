@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class Template {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @GeneratedValue
    private Long id;
 
    @Column(name = "TEMPLATE_ID")

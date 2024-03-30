@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class GroupType {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @GeneratedValue
    private Long id;
 
    @Column(name = "GROUP_TYPE_ID")

@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class RelationshipGroupType {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @GeneratedValue
    private Long id;
 
    @Column(name = "RELATIONSHIP_GROUP_TYPE_ID")

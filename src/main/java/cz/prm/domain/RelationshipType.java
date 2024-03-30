@@ -23,7 +23,7 @@ public class RelationshipType {
    public static final String TYPE_CHILD = "child";
 
    @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @GeneratedValue
    private Long id;
    private String name;
    private String nameTranslationKey;

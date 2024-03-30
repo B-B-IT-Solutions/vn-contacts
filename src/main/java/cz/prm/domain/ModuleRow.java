@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class ModuleRow {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @GeneratedValue
    private Long id;
 
    @Column(name = "MODULE_ROW_ID")
