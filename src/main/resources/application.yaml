@@ -1,0 +1,12 @@
+#DB
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/prm
+    username: postgres
+    password: test
+  jpa:
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    enabled: true
+    change-log: db/changelog.xml
