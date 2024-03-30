@@ -23,6 +23,7 @@
     <maven-surefire.version>3.1.2</maven-surefire.version>
     <jacoco.line.coverage>0.99</jacoco.line.coverage>
     <jacoco.branch.coverage>0.99</jacoco.branch.coverage>
+    <liquibase.version>4.27.0</liquibase.version>
   </properties>
 
   <dependencies>
@@ -46,6 +47,11 @@
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>${postgresql.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+      <version>${liquibase.version}</version>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
