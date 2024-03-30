@@ -11,5 +11,8 @@
       <column name="first_name" type="varchar(255)"/>
       <column name="last_name" type="varchar(255)"/>
     </createTable>
+
+    <createTable tableName="account">
+    </createTable>
   </changeSet>
 </databaseChangeLog>
