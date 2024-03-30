@@ -23,25 +23,17 @@ public class TemplatePage {
 
    @Id
    @GeneratedValue
-   private Long id;
-
    @Column(name = "TEMPLATE_PAGE_ID")
    private Long templatePageId;
 
    @Column(name = "NAME")
    private String name;
 
-   @Column(name = "NAME_TRANSLATION_KEY")
-   private String nameTranslationKey;
-
    @Column(name = "POSITION")
    private Integer position;
 
    @Column(name = "SLUG")
    private String slug;
-
-   @Column(name = "CAN_BE_DELETED")
-   private boolean canBeDeleted;
 
    @Column(name = "TYPE")
    private String type;

@@ -6,7 +6,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -81,8 +80,5 @@ public class Account {
 //
 //   @OneToMany(mappedBy = "account")
 //   private List<Religion> religions;
-
-   private int storageLimitInMb;
-
 
 }
