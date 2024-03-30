@@ -13,5 +13,6 @@ spring:
 #DB
 logging:
   level:
-#    org.springframework.web: INFO
-    org.hibernate: DEBUG
+    #    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
