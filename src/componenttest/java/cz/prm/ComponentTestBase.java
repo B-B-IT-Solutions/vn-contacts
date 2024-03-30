@@ -16,7 +16,7 @@ public abstract class ComponentTestBase {
    @BeforeEach
    public void setup() {
       RestAssured.baseURI = "http://localhost/";
-      RestAssured.port = 80;
+      RestAssured.port = 8091;
    }
 
    public <T> List<T> getMany(String url, TypeRef<List<T>> type) {
