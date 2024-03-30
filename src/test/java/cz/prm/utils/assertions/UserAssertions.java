@@ -2,6 +2,7 @@ package cz.prm.utils.assertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.UserDto;
 import cz.prm.domain.User;
 import java.util.List;
 import java.util.Objects;
@@ -16,9 +17,23 @@ public class UserAssertions {
       });
    }
 
+   public static void assertUsersDto(List<User> users, List<UserDto> dtos) {
+      assertThat(users).isNotEmpty().hasSameSizeAs(dtos);
+      users.forEach(u1 -> {
+         var u2 = dtos.stream().filter(u -> Objects.equals(u1.getUserId(), u.getUserId())).findFirst().get();
+         assertUser(u1, u2);
+      });
+   }
+
    public static void assertUser(User user1, User user2) {
       assertThat(user1.getUserId()).isEqualTo(user2.getUserId());
       assertThat(user1.getFirstName()).isEqualTo(user2.getFirstName());
       assertThat(user1.getLastName()).isEqualTo(user2.getLastName());
+   }
+
+   public static void assertUser(User user, UserDto dto) {
+      assertThat(user.getUserId()).isEqualTo(dto.getUserId());
+      assertThat(user.getFirstName()).isEqualTo(dto.getFirstName());
+      assertThat(user.getLastName()).isEqualTo(dto.getLastName());
    }
 }

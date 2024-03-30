@@ -1,10 +1,12 @@
 package cz.prm.controllers;
 
 import static cz.prm.utils.UserUtils.users;
-import static cz.prm.utils.assertions.UserAssertions.assertUsers;
+import static cz.prm.utils.assertions.UserAssertions.assertUsersDto;
 import static org.mockito.Mockito.when;
 
+import cz.prm.controllers.mapppers.UserMapper;
 import cz.prm.services.UserService;
+import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,12 +18,13 @@ class UserControllerTest {
 
    @Mock
    private UserService userService;
+   private UserMapper mapper = MapperUtils.getUserMapper();
 
    private UserController controller;
 
    @BeforeEach
    void setUp() {
-      controller = new UserController(userService);
+      controller = new UserController(userService, mapper);
    }
 
    @Test
@@ -29,6 +32,6 @@ class UserControllerTest {
       var users = users();
       when(userService.getUsers()).thenReturn(users);
       var result = controller.getUsers();
-      assertUsers(result, users);
+      assertUsersDto(users, result);
    }
 }

@@ -20,8 +20,10 @@ public class User {
    @GeneratedValue
    @Column(name = "USER_ID")
    private Long userId;
+
    @Column(name = "FIRST_NAME")
    private String firstName;
+
    @Column(name = "LAST_NAME")
    private String lastName;
 

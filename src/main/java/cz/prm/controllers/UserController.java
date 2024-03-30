@@ -1,6 +1,7 @@
 package cz.prm.controllers;
 
-import cz.prm.domain.User;
+import cz.prm.controllers.dto.UserDto;
+import cz.prm.controllers.mapppers.UserMapper;
 import cz.prm.services.UserService;
 import java.util.List;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,12 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
    private UserService userService;
+   public UserMapper mapper;
 
-   public UserController(UserService userService) {
+   public UserController(UserService userService, UserMapper mapper) {
       this.userService = userService;
+      this.mapper = mapper;
    }
 
-   public List<User> getUsers() {
-      return userService.getUsers();
+   public List<UserDto> getUsers() {
+      var users = userService.getUsers();
+      return mapper.toUsersDto(users);
    }
 }
