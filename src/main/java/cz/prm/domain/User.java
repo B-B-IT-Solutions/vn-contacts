@@ -1,8 +1,12 @@
 package cz.prm.domain;
 
+import static jakarta.persistence.FetchType.LAZY;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.Instant;
@@ -54,7 +58,8 @@ public class User {
    @Column(name = "CONTACT_SORT_ORDER")
    private String contactSortOrder;
 
-   @OneToOne
+   @OneToOne(fetch = LAZY)
+   @JoinColumn(name = "ACCOUNT_ID")
    private Account account;
 
 }

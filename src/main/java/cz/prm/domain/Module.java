@@ -1,9 +1,12 @@
 package cz.prm.domain;
 
+import static jakarta.persistence.FetchType.LAZY;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -30,7 +33,8 @@ public class Module {
    @Column(name = "TYPE")
    private String type;
 
-   @ManyToOne
+   @ManyToOne(fetch = LAZY)
+   @JoinColumn(name = "ACCOUNT_ID")
    private Account account;
 
    @OneToMany(mappedBy = "module")
