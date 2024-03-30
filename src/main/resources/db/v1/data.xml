@@ -1,0 +1,19 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+  <changeSet author="sergej" id="1.0.1">
+    <insert tableName="user">
+      <column name="user_id" value="1"/>
+      <column name="first_name" value="Sergej"/>
+      <column name="last_name" value="Bobusky"/>
+    </insert>
+
+    <insert tableName="user">
+      <column name="user_id" value="2"/>
+      <column name="first_name" value="Viktoria"/>
+      <column name="last_name" value="Bobusky"/>
+    </insert>
+  </changeSet>
+</databaseChangeLog>
