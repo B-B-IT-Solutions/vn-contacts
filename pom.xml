@@ -9,9 +9,10 @@
     <name>Personal Relationship Management</name>
 
     <properties>
-        <java.version>17</java.version>
         <spring-boot.version>3.2.4</spring-boot.version>
         <lombok.version>1.18.32</lombok.version>
+        <maven.compiler.source>19</maven.compiler.source>
+        <maven.compiler.target>19</maven.compiler.target>
     </properties>
 
     <dependencies>
