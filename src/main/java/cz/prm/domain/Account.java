@@ -1,6 +1,10 @@
 package cz.prm.domain;
 
+import static jakarta.persistence.EnumType.STRING;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,13 +40,11 @@ public class Account {
 
    @OneToMany(mappedBy = "account")
    private List<RelationshipGroupType> relationshipGroupTypes;
-//
-//   @OneToMany(mappedBy = "account")
-//   private List<Gender> genders;
-//
-//   @OneToMany(mappedBy = "account")
-//   private List<Pronoun> pronouns;
-//
+
+   @Column(name = "gender")
+   @Enumerated(STRING)
+   private Gender gender;
+
 //   @OneToMany(mappedBy = "account")
 //   private List<ContactInformationType> contactInformationTypes;
 //
