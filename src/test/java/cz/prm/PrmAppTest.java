@@ -24,5 +24,5 @@ class PrmAppTest {
       springApp.verify(() -> SpringApplication.run(PrmApp.class, args));
     }
   }
-  
+
 }
