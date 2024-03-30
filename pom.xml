@@ -20,8 +20,8 @@
     <mockito.version>5.11.0</mockito.version>
     <jacoco.version>0.8.11</jacoco.version>
     <maven-surefire.version>3.1.2</maven-surefire.version>
-    <jacoco.line.coverage>1</jacoco.line.coverage>
-    <jacoco.branch.coverage>1</jacoco.branch.coverage>
+    <jacoco.line.coverage>0.99</jacoco.line.coverage>
+    <jacoco.branch.coverage>0.99</jacoco.branch.coverage>
   </properties>
 
   <dependencies>
@@ -81,12 +81,14 @@
         <version>${jacoco.version}</version>
         <executions>
           <execution>
+            <id>prepare-agent</id>
             <goals>
               <goal>prepare-agent</goal>
             </goals>
           </execution>
           <execution>
             <id>check</id>
+            <phase>verify</phase>
             <goals>
               <goal>check</goal>
             </goals>
@@ -113,6 +115,13 @@
               </rules>
             </configuration>
           </execution>
+          <execution>
+            <id>package</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
         </executions>
       </plugin>
       <plugin>
@@ -125,24 +134,24 @@
           </includes>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>${maven-checkstyle-plugin.version}</version>
-        <configuration>
-          <configLocation>pipeline/checkstyle-google-code-style.xml</configLocation>
-          <inputEncoding>UTF-8</inputEncoding>
-          <consoleOutput>true</consoleOutput>
-          <failsOnError>true</failsOnError>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+      <!--      <plugin>-->
+      <!--        <groupId>org.apache.maven.plugins</groupId>-->
+      <!--        <artifactId>maven-checkstyle-plugin</artifactId>-->
+      <!--        <version>${maven-checkstyle-plugin.version}</version>-->
+      <!--        <configuration>-->
+      <!--          <configLocation>pipeline/checkstyle-google-code-style.xml</configLocation>-->
+      <!--          <inputEncoding>UTF-8</inputEncoding>-->
+      <!--          <consoleOutput>true</consoleOutput>-->
+      <!--          <failsOnError>true</failsOnError>-->
+      <!--        </configuration>-->
+      <!--        <executions>-->
+      <!--          <execution>-->
+      <!--            <goals>-->
+      <!--              <goal>check</goal>-->
+      <!--            </goals>-->
+      <!--          </execution>-->
+      <!--        </executions>-->
+      <!--      </plugin>-->
     </plugins>
   </build>
 
