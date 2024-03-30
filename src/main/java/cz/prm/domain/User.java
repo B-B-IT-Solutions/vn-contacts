@@ -16,13 +16,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class User {
 
-  @Id
-  @GeneratedValue
-  @Column(name = "USER_ID")
-  private Long userId;
-  @Column(name = "FIRST_NAME")
-  private String firstName;
-  @Column(name = "LAST_NAME")
-  private String lastName;
+   @Id
+   @GeneratedValue
+   @Column(name = "USER_ID")
+   private Long userId;
+   @Column(name = "FIRST_NAME")
+   private String firstName;
+   @Column(name = "LAST_NAME")
+   private String lastName;
 
 }

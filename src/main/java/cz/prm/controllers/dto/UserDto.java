@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserDto {
 
-  @JsonProperty("firstName")
-  private String firstName;
+   @JsonProperty("firstName")
+   private String firstName;
 
-  @JsonProperty("lastName")
-  private String lastName;
+   @JsonProperty("lastName")
+   private String lastName;
 }
