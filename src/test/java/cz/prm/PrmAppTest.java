@@ -1,5 +1,7 @@
 package cz.prm;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -14,6 +16,12 @@ class PrmAppTest {
 
   @Mock
   private ConfigurableApplicationContext context;
+
+  @Test
+  void newInstance() {
+    var app = new PrmApp();
+    assertThat(app).isNotNull();
+  }
 
   @Test
   void mainTest() {
