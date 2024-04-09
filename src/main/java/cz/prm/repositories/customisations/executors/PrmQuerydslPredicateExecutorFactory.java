@@ -9,6 +9,7 @@ import org.springframework.data.envers.repository.support.EnversRevisionReposito
 import org.springframework.data.envers.repository.support.ReflectionRevisionEntityInformation;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
+import org.springframework.data.querydsl.SimpleEntityPathResolver;
 import org.springframework.data.repository.core.RepositoryMetadata;
 import org.springframework.data.repository.core.support.RepositoryComposition;
 import org.springframework.data.repository.core.support.RepositoryComposition.RepositoryFragments;
@@ -20,11 +21,13 @@ public class PrmQuerydslPredicateExecutorFactory extends JpaRepositoryFactory {
    private static final String QUERYDSL_PACKAGE_SUFFIX = ".querydsl";
 
    private EntityManager entityManager;
+   private SimpleEntityPathResolver entityPathResolver;
    private RevisionEntityInformation revisionEntityInformation;
 
    public PrmQuerydslPredicateExecutorFactory(EntityManager entityManager) {
       super(entityManager);
       this.entityManager = entityManager;
+      this.entityPathResolver = new SimpleEntityPathResolver(QUERYDSL_PACKAGE_SUFFIX);
       this.revisionEntityInformation = new ReflectionRevisionEntityInformation(DefaultRevisionEntity.class);
    }
 
@@ -42,7 +45,7 @@ public class PrmQuerydslPredicateExecutorFactory extends JpaRepositoryFactory {
    }
 
    private Object getPrmQuerydslTargetRepository(JpaEntityInformation<?, Object> entityInformation) {
-      return getTargetRepositoryViaReflection(PrmQueryDslJpaPredicateExecutor.class, entityInformation, entityManager, INSTANCE, null);
+      return getTargetRepositoryViaReflection(PrmQueryDslJpaPredicateExecutor.class, entityInformation, entityManager, entityPathResolver, null);
    }
 
    private Object getRevisionsTargetRepository(JpaEntityInformation<?, Object> entityInformation) {
