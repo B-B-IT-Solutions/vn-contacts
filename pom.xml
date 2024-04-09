@@ -79,6 +79,8 @@
 				 <groupId>com.querydsl</groupId>
 				 <artifactId>querydsl-apt</artifactId>
 				 <version>${querydsl.version}</version>
+				 <classifier>jakarta</classifier>
+				 <scope>provided</scope>
 			</dependency>
 			<dependency>
 				 <groupId>com.querydsl</groupId>
@@ -169,9 +171,6 @@
 									<configuration>
 										 <outputDirectory>target/generated-sources/annotations</outputDirectory>
 										 <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
-										 <options>
-												<querydsl.packageSuffix>.querydsl</querydsl.packageSuffix>
-										 </options>
 									</configuration>
 							 </execution>
 						</executions>

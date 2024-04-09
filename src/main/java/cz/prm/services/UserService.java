@@ -1,7 +1,7 @@
 package cz.prm.services;
 
 import cz.prm.domain.User;
-import cz.prm.repositories.UserRepository;
+import cz.prm.repositories.user.UserRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
 

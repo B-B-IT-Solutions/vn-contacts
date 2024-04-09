@@ -1,7 +1,7 @@
 package cz.prm.utils;
 
-import static cz.prm.utils.CommonUtils.randomLong;
-import static cz.prm.utils.CommonUtils.uuid;
+import static cz.prm.utils.TestUtils.randomLong;
+import static cz.prm.utils.TestUtils.uuid;
 
 import cz.prm.domain.User;
 import java.util.List;
