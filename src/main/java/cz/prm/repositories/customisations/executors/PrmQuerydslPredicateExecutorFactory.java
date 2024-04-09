@@ -1,7 +1,5 @@
 package cz.prm.repositories.customisations.executors;
 
-import static org.springframework.data.querydsl.SimpleEntityPathResolver.INSTANCE;
-
 import jakarta.persistence.EntityManager;
 import org.hibernate.envers.DefaultRevisionEntity;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
