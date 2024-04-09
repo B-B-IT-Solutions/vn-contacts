@@ -9,9 +9,9 @@ spring:
     password: test
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
   liquibase:
-    enabled: false
+    enabled: true
     change-log: db/changelog.xml
 
 #DB
