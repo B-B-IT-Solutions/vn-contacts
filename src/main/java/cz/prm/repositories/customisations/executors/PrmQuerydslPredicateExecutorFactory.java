@@ -3,7 +3,10 @@ package cz.prm.repositories.customisations.executors;
 import static org.springframework.data.querydsl.QuerydslUtils.QUERY_DSL_PRESENT;
 
 import jakarta.persistence.EntityManager;
+import org.hibernate.envers.DefaultRevisionEntity;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.data.envers.repository.support.EnversRevisionRepositoryImpl;
+import org.springframework.data.envers.repository.support.ReflectionRevisionEntityInformation;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
 import org.springframework.data.querydsl.EntityPathResolver;
@@ -11,6 +14,7 @@ import org.springframework.data.querydsl.SimpleEntityPathResolver;
 import org.springframework.data.repository.core.RepositoryMetadata;
 import org.springframework.data.repository.core.support.RepositoryComposition;
 import org.springframework.data.repository.core.support.RepositoryComposition.RepositoryFragments;
+import org.springframework.data.repository.core.support.RepositoryFragment;
 import org.springframework.data.repository.history.support.RevisionEntityInformation;
 
 public class PrmQuerydslPredicateExecutorFactory extends JpaRepositoryFactory {
@@ -25,7 +29,7 @@ public class PrmQuerydslPredicateExecutorFactory extends JpaRepositoryFactory {
       super(entityManager);
       this.entityManager = entityManager;
       this.entityPathResolver = new SimpleEntityPathResolver(QUERYDSL_PACKAGE_SUFFIX);
-//      this.revisionEntityInformation = new ReflectionRevisionEntityInformation()
+      this.revisionEntityInformation = new ReflectionRevisionEntityInformation(DefaultRevisionEntity.class);
    }
 
    @Override
@@ -39,9 +43,8 @@ public class PrmQuerydslPredicateExecutorFactory extends JpaRepositoryFactory {
          }
          var entityInformation = getEntityInformation(metadata.getDomainType());
          var querydslFragment = getPrmQuerydslTargetRepository(entityInformation);
-//      var revisionsFragment = getRevisionsTargetRepository(entityInformation);
-//      return fragments.append(RepositoryFragments.just(querydslFragment)).append(RepositoryFragment.implemented(revisionsFragment));
-         return fragments.append(RepositoryFragments.just(querydslFragment));
+         var revisionsFragment = getRevisionsTargetRepository(entityInformation);
+         return fragments.append(RepositoryFragments.just(querydslFragment)).append(RepositoryFragment.implemented(revisionsFragment));
       }
       return super.getRepositoryFragments(metadata);
    }
@@ -50,7 +53,7 @@ public class PrmQuerydslPredicateExecutorFactory extends JpaRepositoryFactory {
       return getTargetRepositoryViaReflection(PrmQueryDslJpaPredicateExecutor.class, entityInformation, entityManager, entityPathResolver, null);
    }
 
-//   private Object getRevisionsTargetRepository(JpaEntityInformation<?, Object> entityInformation) {
-//      return getTargetRepositoryViaReflection(EnversRevisionRepositoryImpl.class, revisionEntityInformation, entityManager, entityPathResolver);
-//   }
+   private Object getRevisionsTargetRepository(JpaEntityInformation<?, Object> entityInformation) {
+      return getTargetRepositoryViaReflection(EnversRevisionRepositoryImpl.class, revisionEntityInformation, entityManager, entityPathResolver);
+   }
 }
