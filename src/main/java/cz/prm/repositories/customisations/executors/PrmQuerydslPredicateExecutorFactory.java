@@ -1,0 +1,56 @@
+package cz.prm.repositories.customisations.executors;
+
+import static org.springframework.data.querydsl.QuerydslUtils.QUERY_DSL_PRESENT;
+
+import jakarta.persistence.EntityManager;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.data.jpa.repository.support.JpaEntityInformation;
+import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
+import org.springframework.data.querydsl.EntityPathResolver;
+import org.springframework.data.querydsl.SimpleEntityPathResolver;
+import org.springframework.data.repository.core.RepositoryMetadata;
+import org.springframework.data.repository.core.support.RepositoryComposition;
+import org.springframework.data.repository.core.support.RepositoryComposition.RepositoryFragments;
+import org.springframework.data.repository.history.support.RevisionEntityInformation;
+
+public class PrmQuerydslPredicateExecutorFactory extends JpaRepositoryFactory {
+
+   private static final String QUERYDSL_PACKAGE_SUFFIX = ".querydsl";
+
+   private EntityManager entityManager;
+   private EntityPathResolver entityPathResolver;
+   private RevisionEntityInformation revisionEntityInformation;
+
+   public PrmQuerydslPredicateExecutorFactory(EntityManager entityManager) {
+      super(entityManager);
+      this.entityManager = entityManager;
+      this.entityPathResolver = new SimpleEntityPathResolver(QUERYDSL_PACKAGE_SUFFIX);
+//      this.revisionEntityInformation = new ReflectionRevisionEntityInformation()
+   }
+
+   @Override
+   protected RepositoryComposition.RepositoryFragments getRepositoryFragments(RepositoryMetadata metadata) {
+      var fragments = RepositoryComposition.RepositoryFragments.empty();
+      var isPrmQueryDslRepository = QUERY_DSL_PRESENT && PrmQueryDslJpaPredicateExecutor.class.isAssignableFrom(metadata.getRepositoryInterface());
+      if (isPrmQueryDslRepository) {
+
+         if (metadata.isReactiveRepository()) {
+            throw new InvalidDataAccessApiUsageException("Cannot combine Querydsl and reactive repository in a single interface!");
+         }
+         var entityInformation = getEntityInformation(metadata.getDomainType());
+         var querydslFragment = getPrmQuerydslTargetRepository(entityInformation);
+//      var revisionsFragment = getRevisionsTargetRepository(entityInformation);
+//      return fragments.append(RepositoryFragments.just(querydslFragment)).append(RepositoryFragment.implemented(revisionsFragment));
+         return fragments.append(RepositoryFragments.just(querydslFragment));
+      }
+      return super.getRepositoryFragments(metadata);
+   }
+
+   private Object getPrmQuerydslTargetRepository(JpaEntityInformation<?, Object> entityInformation) {
+      return getTargetRepositoryViaReflection(PrmQueryDslJpaPredicateExecutor.class, entityInformation, entityManager, entityPathResolver, null);
+   }
+
+//   private Object getRevisionsTargetRepository(JpaEntityInformation<?, Object> entityInformation) {
+//      return getTargetRepositoryViaReflection(EnversRevisionRepositoryImpl.class, revisionEntityInformation, entityManager, entityPathResolver);
+//   }
+}
