@@ -230,7 +230,7 @@
 									</goals>
 									<configuration>
 										 <excludes>
-												<exclude>**/*MapperImpl.*</exclude>
+												<exclude>**/querydsl/Q.*,**/*MapperImpl.*</exclude>
 										 </excludes>
 										 <rules>
 												<rule>
