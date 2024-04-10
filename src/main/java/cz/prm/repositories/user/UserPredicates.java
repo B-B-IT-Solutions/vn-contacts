@@ -1,6 +1,6 @@
 package cz.prm.repositories.user;
 
-import static cz.prm.domain.querydsl.QUser.user;
+import static cz.prm.domain.QUser.user;
 
 import com.querydsl.core.types.Predicate;
 
