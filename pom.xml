@@ -202,7 +202,7 @@
 										 <goal>process</goal>
 									</goals>
 									<configuration>
-										 <outputDirectory>${project.build.directory}/generated-sources/annot</outputDirectory>
+										 <outputDirectory>${project.build.directory}/generated-sources/querydsl/</outputDirectory>
 										 <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
 										 <options>
 												<querydsl.packageSuffix>.querydsl</querydsl.packageSuffix>
