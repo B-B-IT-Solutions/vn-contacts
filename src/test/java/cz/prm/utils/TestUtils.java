@@ -3,7 +3,7 @@ package cz.prm.utils;
 import java.util.Random;
 import java.util.UUID;
 
-public class CommonUtils {
+public class TestUtils {
 
    private static Random random = new Random();
 

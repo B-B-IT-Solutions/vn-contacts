@@ -1,4 +1,4 @@
-package cz.prm.controllers.mapppers;
+package cz.prm.controllers.mappers;
 
 import static cz.prm.utils.UserUtils.user;
 import static cz.prm.utils.UserUtils.users;

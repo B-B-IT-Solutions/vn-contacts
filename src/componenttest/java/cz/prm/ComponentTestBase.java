@@ -5,7 +5,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 import static org.springframework.http.HttpStatus.OK;
 
 import io.restassured.RestAssured;
-import io.restassured.mapper.TypeRef;
+import io.restassured.common.mapper.TypeRef;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.context.SpringBootTest;

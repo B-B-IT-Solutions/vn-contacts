@@ -1,7 +1,7 @@
 package cz.prm.controllers;
 
 import cz.prm.controllers.dto.UserDto;
-import cz.prm.controllers.mapppers.UserMapper;
+import cz.prm.controllers.mappers.UserMapper;
 import cz.prm.services.UserService;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;

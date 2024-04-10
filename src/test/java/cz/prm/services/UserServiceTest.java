@@ -4,7 +4,7 @@ import static cz.prm.utils.UserUtils.users;
 import static cz.prm.utils.assertions.UserAssertions.assertUsers;
 import static org.mockito.Mockito.when;
 
-import cz.prm.repositories.UserRepository;
+import cz.prm.repositories.user.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

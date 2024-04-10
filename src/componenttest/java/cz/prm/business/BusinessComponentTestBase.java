@@ -2,7 +2,7 @@ package cz.prm.business;
 
 import cz.prm.ComponentTestBase;
 import cz.prm.controllers.dto.UserDto;
-import io.restassured.mapper.TypeRef;
+import io.restassured.common.mapper.TypeRef;
 import java.util.List;
 
 public class BusinessComponentTestBase extends ComponentTestBase {

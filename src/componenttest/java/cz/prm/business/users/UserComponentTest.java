@@ -12,6 +12,6 @@ public class UserComponentTest extends BusinessComponentTestBase {
    @Test
    void getUsersTest() {
       var users = getUsers();
-      assertThat(users).isEmpty();
+      assertThat(users).hasSize(2);
    }
 }
