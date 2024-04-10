@@ -1,9 +1,7 @@
 package cz.prm.repositories.customisations.executors;
 
 import com.querydsl.core.types.EntityPath;
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.PathBuilder;
-import com.querydsl.jpa.JPQLQuery;
 import jakarta.persistence.EntityManager;
 import javax.annotation.Nullable;
 import org.springframework.data.jpa.repository.support.CrudMethodMetadata;
@@ -24,8 +22,4 @@ public class PrmQueryDslJpaPredicateExecutor<T> extends QuerydslJpaPredicateExec
       this.querydsl = new Querydsl(entityManager, new PathBuilder<>(path.getType(), path.getMetadata()));
    }
 
-   @Override
-   public JPQLQuery<?> createQuery(Predicate predicate) {
-      return super.createQuery(predicate);
-   }
 }
