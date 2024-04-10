@@ -19,10 +19,6 @@
 			<assertj.version>3.25.3</assertj.version>
 			<mockito.version>5.11.0</mockito.version>
 			<maven-surefire.version>3.1.2</maven-surefire.version>
-			<jacoco.exclusions>**/querydsl/Q**.class,**/mappers/*MapperImpl.class</jacoco.exclusions>
-			<jacoco.line.coverage>0.99</jacoco.line.coverage>
-			<jacoco.branch.coverage>0.99</jacoco.branch.coverage>
-			<jacoco.version>0.8.11</jacoco.version>
 			<liquibase.version>4.27.0</liquibase.version>
 			<mapstruct.version>1.5.5.Final</mapstruct.version>
 			<rest-assured.version>5.4.0</rest-assured.version>
@@ -31,6 +27,10 @@
 			<spring-data-envers.version>3.2.0</spring-data-envers.version>
 			<hibernate-envers.version>6.3.2.Final</hibernate-envers.version>
 			<maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
+			<jacoco.exclusions>**/querydsl/Q**.class,**/mappers/*MapperImpl.class</jacoco.exclusions>
+			<jacoco.line.coverage>0.99</jacoco.line.coverage>
+			<jacoco.branch.coverage>0.99</jacoco.branch.coverage>
+			<jacoco.version>0.8.11</jacoco.version>
 	 </properties>
 	 
 	 <dependencies>
