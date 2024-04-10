@@ -14,18 +14,18 @@
 			<spring-boot.version>3.2.4</spring-boot.version>
 			<lombok.version>1.18.32</lombok.version>
 			<postgresql.version>42.7.3</postgresql.version>
-			<maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
-			<junit-jupiter.version>5.10.2</junit-jupiter.version>
-			<assertj.version>3.25.3</assertj.version>
-			<mockito.version>5.11.0</mockito.version>
-			<maven-surefire.version>3.1.2</maven-surefire.version>
 			<liquibase.version>4.27.0</liquibase.version>
 			<mapstruct.version>1.5.5.Final</mapstruct.version>
-			<rest-assured.version>5.4.0</rest-assured.version>
 			<build-helper-plugin.version>3.0.0</build-helper-plugin.version>
 			<querydsl.version>5.0.0</querydsl.version>
 			<spring-data-envers.version>3.2.0</spring-data-envers.version>
 			<hibernate-envers.version>6.3.2.Final</hibernate-envers.version>
+			<maven-checkstyle-plugin.version>3.2.1</maven-checkstyle-plugin.version>
+			<junit-jupiter.version>5.10.2</junit-jupiter.version>
+			<assertj.version>3.25.3</assertj.version>
+			<mockito.version>5.11.0</mockito.version>
+			<rest-assured.version>5.4.0</rest-assured.version>
+			<maven-surefire.version>3.1.2</maven-surefire.version>
 			<maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
 			<jacoco.exclusions>**/querydsl/Q**.class,**/mappers/*MapperImpl.class</jacoco.exclusions>
 			<jacoco.line.coverage>0.99</jacoco.line.coverage>
@@ -307,24 +307,27 @@
 							 </includes>
 						</configuration>
 				 </plugin>
-				 <!--      <plugin>-->
-				 <!--        <groupId>org.apache.maven.plugins</groupId>-->
-				 <!--        <artifactId>maven-checkstyle-plugin</artifactId>-->
-				 <!--        <version>${maven-checkstyle-plugin.version}</version>-->
-				 <!--        <configuration>-->
-				 <!--          <configLocation>pipeline/checkstyle-google-code-style.xml</configLocation>-->
-				 <!--          <inputEncoding>UTF-8</inputEncoding>-->
-				 <!--          <consoleOutput>true</consoleOutput>-->
-				 <!--          <failsOnError>true</failsOnError>-->
-				 <!--        </configuration>-->
-				 <!--        <executions>-->
-				 <!--          <execution>-->
-				 <!--            <goals>-->
-				 <!--              <goal>check</goal>-->
-				 <!--            </goals>-->
-				 <!--          </execution>-->
-				 <!--        </executions>-->
-				 <!--      </plugin>-->
+<!--				 <plugin>-->
+<!--						<groupId>org.apache.maven.plugins</groupId>-->
+<!--						<artifactId>maven-checkstyle-plugin</artifactId>-->
+<!--						<version>${maven-checkstyle-plugin.version}</version>-->
+<!--						<configuration>-->
+<!--							 <configLocation>.github/checkstyle/checkstyle-google-code-style.xml</configLocation>-->
+<!--							 <failOnViolation>true</failOnViolation>-->
+<!--							 <violationSeverity>warning</violationSeverity>-->
+<!--							 <logViolationsToConsole>true</logViolationsToConsole>-->
+<!--							 <includeTestSourceDirectory>true</includeTestSourceDirectory>-->
+<!--							 <testSourceDirectories>${basedir}/src/test,${basedir}/scr/componenttest</testSourceDirectories>-->
+<!--							 <excludes>${jacoco.exclusions}</excludes>-->
+<!--						</configuration>-->
+<!--						<executions>-->
+<!--							 <execution>-->
+<!--									<goals>-->
+<!--										 <goal>check</goal>-->
+<!--									</goals>-->
+<!--							 </execution>-->
+<!--						</executions>-->
+<!--				 </plugin>-->
 			</plugins>
 	 </build>
 
