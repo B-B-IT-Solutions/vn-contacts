@@ -10,10 +10,9 @@
 	 <name>Personal Relationship Management</name>
 	 
 	 <properties>
+			<java.version>19</java.version>
 			<spring-boot.version>3.2.4</spring-boot.version>
 			<lombok.version>1.18.32</lombok.version>
-			<maven.compiler.source>19</maven.compiler.source>
-			<maven.compiler.target>19</maven.compiler.target>
 			<postgresql.version>42.7.3</postgresql.version>
 			<maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
 			<junit-jupiter.version>5.10.2</junit-jupiter.version>
@@ -30,6 +29,7 @@
 			<querydsl.version>5.0.0</querydsl.version>
 			<spring-data-envers.version>3.2.0</spring-data-envers.version>
 			<hibernate-envers.version>6.3.2.Final</hibernate-envers.version>
+			<maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
 	 </properties>
 	 
 	 <dependencies>
@@ -103,11 +103,6 @@
 				 <version>${mapstruct.version}</version>
 			</dependency>
 			<dependency>
-				 <groupId>org.mapstruct</groupId>
-				 <artifactId>mapstruct-processor</artifactId>
-				 <version>${mapstruct.version}</version>
-			</dependency>
-			<dependency>
 				 <groupId>com.google.guava</groupId>
 				 <artifactId>guava</artifactId>
 				 <version>33.1.0-jre</version>
@@ -171,6 +166,47 @@
 									<goals>
 										 <goal>repackage</goal>
 									</goals>
+							 </execution>
+						</executions>
+				 </plugin>
+				 <plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>${maven-compiler-plugin.version}</version>
+						<configuration>
+							 <source>${java.version}</source>
+							 <target>${java.version}</target>
+							 <debug>true</debug>
+							 <encoding>UTF-8</encoding>
+							 <annotationProcessorPaths>
+									<path>
+										 <groupId>org.projectlombok</groupId>
+										 <artifactId>lombok</artifactId>
+										 <version>${lombok.version}</version>
+									</path>
+									<path>
+										 <groupId>org.mapstruct</groupId>
+										 <artifactId>mapstruct-processor</artifactId>
+										 <version>${mapstruct.version}</version>
+									</path>
+							 </annotationProcessorPaths>
+						</configuration>
+				 </plugin>
+				 <plugin>
+						<groupId>com.mysema.maven</groupId>
+						<artifactId>apt-maven-plugin</artifactId>
+						<version>1.1.3</version>
+						<executions>
+							 <execution>
+									<goals>
+										 <goal>process</goal>
+									</goals>
+									<configuration>
+										 <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+										 <options>
+												<querydsl.packageSuffix>.querydsl</querydsl.packageSuffix>
+										 </options>
+									</configuration>
 							 </execution>
 						</executions>
 				 </plugin>

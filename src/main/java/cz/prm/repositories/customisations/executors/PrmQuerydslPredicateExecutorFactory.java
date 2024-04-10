@@ -1,7 +1,5 @@
 package cz.prm.repositories.customisations.executors;
 
-import static org.springframework.data.querydsl.SimpleEntityPathResolver.INSTANCE;
-
 import jakarta.persistence.EntityManager;
 import org.hibernate.envers.DefaultRevisionEntity;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
@@ -45,7 +43,7 @@ public class PrmQuerydslPredicateExecutorFactory extends JpaRepositoryFactory {
    }
 
    private Object getPrmQuerydslTargetRepository(JpaEntityInformation<?, Object> entityInformation) {
-      return getTargetRepositoryViaReflection(PrmQueryDslJpaPredicateExecutor.class, entityInformation, entityManager, INSTANCE, null);
+      return getTargetRepositoryViaReflection(PrmQueryDslJpaPredicateExecutor.class, entityInformation, entityManager, entityPathResolver, null);
    }
 
    private Object getRevisionsTargetRepository(JpaEntityInformation<?, Object> entityInformation) {
