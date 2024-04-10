@@ -1,6 +1,6 @@
 package cz.prm.utils;
 
-import cz.prm.controllers.mapppers.UserMapper;
+import cz.prm.controllers.mappers.UserMapper;
 import org.mapstruct.factory.Mappers;
 
 public class MapperUtils {

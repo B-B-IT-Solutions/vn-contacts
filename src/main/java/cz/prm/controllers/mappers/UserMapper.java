@@ -1,4 +1,4 @@
-package cz.prm.controllers.mapppers;
+package cz.prm.controllers.mappers;
 
 import cz.prm.controllers.dto.UserDto;
 import cz.prm.domain.User;

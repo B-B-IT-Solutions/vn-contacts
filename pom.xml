@@ -18,10 +18,11 @@
 			<junit-jupiter.version>5.10.2</junit-jupiter.version>
 			<assertj.version>3.25.3</assertj.version>
 			<mockito.version>5.11.0</mockito.version>
-			<jacoco.version>0.8.11</jacoco.version>
 			<maven-surefire.version>3.1.2</maven-surefire.version>
+			<jacoco.exclusions>**/querydsl/Q**.class,**/mappers/*MapperImpl.class</jacoco.exclusions>
 			<jacoco.line.coverage>0.99</jacoco.line.coverage>
 			<jacoco.branch.coverage>0.99</jacoco.branch.coverage>
+			<jacoco.version>0.8.11</jacoco.version>
 			<liquibase.version>4.27.0</liquibase.version>
 			<mapstruct.version>1.5.5.Final</mapstruct.version>
 			<rest-assured.version>5.4.0</rest-assured.version>
@@ -230,7 +231,7 @@
 									</goals>
 									<configuration>
 										 <excludes>
-												<exclude>**/querydsl/Q.*,**/*MapperImpl.*</exclude>
+												<exclude>${jacoco.exclusions}</exclude>
 										 </excludes>
 										 <rules>
 												<rule>
