@@ -25,7 +25,7 @@
 			<jacoco.branch.coverage>0.99</jacoco.branch.coverage>
 			<liquibase.version>4.27.0</liquibase.version>
 			<mapstruct.version>1.5.5.Final</mapstruct.version>
-			<rest-assured.version>3.3.0</rest-assured.version>
+			<rest-assured.version>5.4.0</rest-assured.version>
 			<build-helper-plugin.version>3.0.0</build-helper-plugin.version>
 			<querydsl.version>5.0.0</querydsl.version>
 			<spring-data-envers.version>3.2.0</spring-data-envers.version>
