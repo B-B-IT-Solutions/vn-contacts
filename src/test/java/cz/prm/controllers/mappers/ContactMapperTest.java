@@ -2,7 +2,6 @@ package cz.prm.controllers.mappers;
 
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contacts;
-import static cz.prm.utils.assertions.UserAssertions.assertContact;
 import static cz.prm.utils.assertions.UserAssertions.assertContactsDto;
 
 import cz.prm.utils.MapperUtils;
@@ -11,19 +10,19 @@ import org.junit.jupiter.api.Test;
 
 class ContactMapperTest {
 
-   private ContactMapper mapper = MapperUtils.getUserMapper();
+   private ContactMapper mapper = MapperUtils.getContactMapper();
 
    @Test
-   void toUsersDto() {
+   void toContactsDto() {
       var users = contacts();
-      var dtos = mapper.toUsersDto(users);
+      var dtos = mapper.toContactsDto(users);
       assertContactsDto(users, dtos);
    }
 
    @Test
-   void toUserDto() {
+   void toContactDto() {
       var user = contact();
-      var dto = mapper.toUserDto(user);
+      var dto = mapper.toContactDto(user);
       UserAssertions.assertContact(user, dto);
    }
 }

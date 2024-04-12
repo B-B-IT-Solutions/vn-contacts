@@ -5,7 +5,7 @@ import org.mapstruct.factory.Mappers;
 
 public class MapperUtils {
 
-   public static ContactMapper getUserMapper() {
+   public static ContactMapper getContactMapper() {
       return Mappers.getMapper(ContactMapper.class);
    }
 }

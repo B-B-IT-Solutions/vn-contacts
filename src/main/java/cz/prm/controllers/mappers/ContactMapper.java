@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface ContactMapper {
 
-   List<ContactDto> toUsersDto(List<Contact> contacts);
+   List<ContactDto> toContactsDto(List<Contact> contacts);
 
-   ContactDto toUserDto(Contact contact);
+   ContactDto toContactDto(Contact contact);
 }

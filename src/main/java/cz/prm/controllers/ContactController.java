@@ -23,7 +23,7 @@ public class ContactController {
    @GetMapping
    public List<ContactDto> getContacts() {
       var contacts = userService.getContacts();
-      return mapper.toUsersDto(contacts);
+      return mapper.toContactsDto(contacts);
    }
 
 }

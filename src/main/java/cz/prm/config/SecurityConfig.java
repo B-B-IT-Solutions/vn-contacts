@@ -22,25 +22,13 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 @EnableWebSecurity
 public class SecurityConfig {
 
-   @Autowired
    private KeycloakGrantedAuthoritiesMapper keycloakGrantedAuthoritiesMapper;
-
-   @Autowired
    private KeycloakLogoutHandler keycloakLogoutHandler;
 
-   @Bean
-   public SessionRegistry sessionRegistry() {
-      return new SessionRegistryImpl();
-   }
-
-   @Bean
-   protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
-      return new RegisterSessionAuthenticationStrategy(sessionRegistry());
-   }
-
-   @Bean
-   public HttpSessionEventPublisher httpSessionEventPublisher() {
-      return new HttpSessionEventPublisher();
+   @Autowired
+   public SecurityConfig(KeycloakGrantedAuthoritiesMapper keycloakGrantedAuthoritiesMapper, KeycloakLogoutHandler keycloakLogoutHandler) {
+      this.keycloakGrantedAuthoritiesMapper = keycloakGrantedAuthoritiesMapper;
+      this.keycloakLogoutHandler = keycloakLogoutHandler;
    }
 
    @Bean
@@ -57,8 +45,23 @@ public class SecurityConfig {
    }
 
    @Bean
-   public GrantedAuthoritiesMapper userAuthoritiesMapperForKeycloak() {
+   public GrantedAuthoritiesMapper keycloakGrantedAuthoritiesMapper() {
       return keycloakGrantedAuthoritiesMapper;
+   }
+
+   @Bean
+   public SessionRegistry sessionRegistry() {
+      return new SessionRegistryImpl();
+   }
+
+   @Bean
+   protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
+      return new RegisterSessionAuthenticationStrategy(sessionRegistry());
+   }
+
+   @Bean
+   public HttpSessionEventPublisher httpSessionEventPublisher() {
+      return new HttpSessionEventPublisher();
    }
 
 }

@@ -18,7 +18,7 @@ class ContactControllerTest {
 
    @Mock
    private UserService userService;
-   private ContactMapper mapper = MapperUtils.getUserMapper();
+   private ContactMapper mapper = MapperUtils.getContactMapper();
 
    private ContactController controller;
 
