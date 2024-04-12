@@ -1,0 +1,47 @@
+{
+  "id": "prm",
+  "realm": "prm",
+  "sslRequired": "none",
+  "enabled": true,
+  "eventsEnabled": true,
+  "eventsExpiration": 900,
+  "adminEventsEnabled": true,
+  "adminEventsDetailsEnabled": true,
+  "attributes": {
+    "adminEventsExpiration": "900"
+  },
+  "clients": [
+    {
+      "id": "prm-backend",
+      "clientId": "prm-backend",
+      "name": "prm-backend",
+      "enabled": true,
+      "publicClient": true,
+      "rootUrl": "http://localhost:8091",
+      "adminUrl": "http://localhost:8091",
+      "baseUrl": "http://localhost:8091",
+      "redirectUris": [
+        "http://localhost:8091/*"
+      ],
+      "webOrigins": [
+        "${GF_URL}"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "admin",
+      "email": "bobuskysergej@gmail.com",
+      "username": "bobuskysergej",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "temporary": false,
+          "type": "password",
+          "value": "password123"
+        }
+      ]
+    }
+  ]
+}
