@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
-import cz.prm.domain.user.User;
+import cz.prm.domain.contact.Contact;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceUnitUtil;
@@ -54,11 +54,11 @@ class PrmQuerydslPredicateExecutorFactoryTest {
 
    @Test
    void getRepositoryFragments() {
-      doReturn(User.class).when(metadata).getDomainType();
+      doReturn(Contact.class).when(metadata).getDomainType();
       when(entityManager.getEntityManagerFactory()).thenReturn(entityManagerFactory);
       when(entityManagerFactory.getPersistenceUnitUtil()).thenReturn(persistenceUnitUtil);
       when(entityManager.getMetamodel()).thenReturn(metamodel);
-      when(metamodel.managedType(User.class)).thenReturn(managedType);
+      when(metamodel.managedType(Contact.class)).thenReturn(managedType);
       var result = factory.getRepositoryFragments(metadata);
       assertThat(result).isNotEmpty();
    }

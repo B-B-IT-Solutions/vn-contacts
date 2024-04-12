@@ -1,6 +1,6 @@
 package cz.prm.repositories.customisations.repositories;
 
-import static cz.prm.utils.UserUtils.user;
+import static cz.prm.utils.ContactUtils.contact;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -33,7 +33,7 @@ class RefreshAwareRepositoryImplTest {
 
    @Test
    void refresh() {
-      var user = user();
+      var user = contact();
       repository.refresh(user);
       verify(entityManager).refresh(user);
    }

@@ -2,7 +2,7 @@ package cz.prm.config;
 
 import static java.util.Optional.of;
 
-import cz.prm.domain.user.User;
+import cz.prm.domain.contact.Contact;
 import cz.prm.repositories.customisations.executors.PrmQuerydslPredicateExecutorFactoryBean;
 import cz.prm.repositories.customisations.repositories.RefreshAwareRepositoryImpl;
 import org.springframework.context.annotation.Bean;
@@ -18,8 +18,8 @@ import org.springframework.web.client.RestTemplate;
 public class AppConfig {
 
    @Bean
-   public AuditorAware<User> auditProvider() {
-      var user = new User();
+   public AuditorAware<Contact> auditProvider() {
+      var user = new Contact();
       user.setEmail("emai@email.com");
       return () -> of(user);
    }

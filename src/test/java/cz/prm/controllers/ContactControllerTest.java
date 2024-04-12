@@ -1,10 +1,10 @@
 package cz.prm.controllers;
 
-import static cz.prm.utils.UserUtils.users;
-import static cz.prm.utils.assertions.UserAssertions.assertUsersDto;
+import static cz.prm.utils.ContactUtils.contacts;
+import static cz.prm.utils.assertions.UserAssertions.assertContactsDto;
 import static org.mockito.Mockito.when;
 
-import cz.prm.controllers.mappers.UserMapper;
+import cz.prm.controllers.mappers.ContactMapper;
 import cz.prm.services.user.UserService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +18,7 @@ class ContactControllerTest {
 
    @Mock
    private UserService userService;
-   private UserMapper mapper = MapperUtils.getUserMapper();
+   private ContactMapper mapper = MapperUtils.getUserMapper();
 
    private ContactController controller;
 
@@ -28,11 +28,11 @@ class ContactControllerTest {
    }
 
    @Test
-   void getUsers() {
-      var users = users();
-      when(userService.getUsers()).thenReturn(users);
-      var result = controller.getUsers();
-      assertUsersDto(users, result);
+   void getContacts() {
+      var users = contacts();
+      when(userService.getContacts()).thenReturn(users);
+      var result = controller.getContacts();
+      assertContactsDto(users, result);
    }
 
 }

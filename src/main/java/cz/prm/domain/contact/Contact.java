@@ -1,4 +1,4 @@
-package cz.prm.domain.user;
+package cz.prm.domain.contact;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Contact {
 
    @Id
    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_sequence")

@@ -2,9 +2,9 @@ package cz.prm.services.user;
 
 import static java.lang.String.format;
 
-import cz.prm.domain.user.User;
-import cz.prm.repositories.user.UserPredicates;
-import cz.prm.repositories.user.UserRepository;
+import cz.prm.domain.contact.Contact;
+import cz.prm.repositories.user.ContactPredicates;
+import cz.prm.repositories.user.ContactRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.function.Supplier;
@@ -13,26 +13,26 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-   private UserRepository repository;
-   private UserPredicates predicates;
+   private ContactRepository repository;
+   private ContactPredicates predicates;
 
-   public UserService(UserRepository repository, UserPredicates predicates) {
+   public UserService(ContactRepository repository, ContactPredicates predicates) {
       this.repository = repository;
       this.predicates = predicates;
    }
 
-   public List<User> getUsers() {
+   public List<Contact> getContacts() {
       return repository.findAll();
    }
 
-   public User getUser(Long userId) {
-      var predicate = predicates.byUseId(userId);
+   public Contact getContact(Long contactId) {
+      var predicate = predicates.byContactId(contactId);
       var optional = repository.findOne(predicate);
-      return optional.orElseThrow(entityNotFoundSupplier(userId));
+      return optional.orElseThrow(entityNotFoundSupplier(contactId));
    }
 
    private Supplier<EntityNotFoundException> entityNotFoundSupplier(Long userId) {
-      return () -> new EntityNotFoundException(format("User for given id=[%s] not found!", userId));
+      return () -> new EntityNotFoundException(format("Contact for given id=[%s] not found!", userId));
    }
 
 }
