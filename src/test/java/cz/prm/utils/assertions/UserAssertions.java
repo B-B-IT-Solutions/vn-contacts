@@ -2,8 +2,9 @@ package cz.prm.utils.assertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.controllers.dto.UserDto;
-import cz.prm.domain.User;
+import cz.prm.controllers.dto.user.UserDto;
+import cz.prm.domain.user.User;
+import cz.prm.security.PrmUserDetails;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,5 +36,12 @@ public class UserAssertions {
       assertThat(user.getUserId()).isEqualTo(dto.getUserId());
       assertThat(user.getFirstName()).isEqualTo(dto.getFirstName());
       assertThat(user.getLastName()).isEqualTo(dto.getLastName());
+      assertThat(user.getEmail()).isEqualTo(dto.getEmail());
+   }
+
+   public static void assertUserDetails(User user, PrmUserDetails userDetails) {
+      assertThat(userDetails.getUsername()).isEqualTo(user.getEmail());
+      assertThat(userDetails.getPassword()).isEqualTo(user.getPassword());
+      assertThat(userDetails.getAuthorities()).isNotNull().isEmpty();
    }
 }

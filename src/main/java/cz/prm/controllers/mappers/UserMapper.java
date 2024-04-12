@@ -1,7 +1,7 @@
 package cz.prm.controllers.mappers;
 
-import cz.prm.controllers.dto.UserDto;
-import cz.prm.domain.User;
+import cz.prm.controllers.dto.user.UserDto;
+import cz.prm.domain.user.User;
 import java.util.List;
 import org.mapstruct.Mapper;
 

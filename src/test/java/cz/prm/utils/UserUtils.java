@@ -2,8 +2,9 @@ package cz.prm.utils;
 
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
+import static java.time.Instant.now;
 
-import cz.prm.domain.User;
+import cz.prm.domain.user.User;
 import java.util.List;
 import org.assertj.core.util.Lists;
 
@@ -18,6 +19,9 @@ public class UserUtils {
       user.setUserId(randomLong());
       user.setFirstName(uuid());
       user.setLastName(uuid());
+      user.setEmail(uuid());
+      user.setPassword(uuid());
+      user.setEmailVerifiedAt(now());
       return user;
    }
 

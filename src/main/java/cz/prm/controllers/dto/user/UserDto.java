@@ -1,4 +1,4 @@
-package cz.prm.controllers.dto;
+package cz.prm.controllers.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -18,4 +18,7 @@ public class UserDto {
 
    @JsonProperty("lastName")
    private String lastName;
+
+   @JsonProperty("email")
+   private String email;
 }

@@ -1,8 +1,8 @@
-package cz.prm.services;
+package cz.prm.services.user;
 
 import static java.lang.String.format;
 
-import cz.prm.domain.User;
+import cz.prm.domain.user.User;
 import cz.prm.repositories.user.UserPredicates;
 import cz.prm.repositories.user.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -28,10 +28,10 @@ public class UserService {
    public User getUser(Long userId) {
       var predicate = predicates.byUseId(userId);
       var optional = repository.findOne(predicate);
-      return optional.orElseThrow(exceptionSupplier(userId));
+      return optional.orElseThrow(entityNotFoundSupplier(userId));
    }
 
-   private Supplier<EntityNotFoundException> exceptionSupplier(Long userId) {
+   private Supplier<EntityNotFoundException> entityNotFoundSupplier(Long userId) {
       return () -> new EntityNotFoundException(format("User for given id=[%s] not found!", userId));
    }
 
