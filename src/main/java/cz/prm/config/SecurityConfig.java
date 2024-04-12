@@ -3,7 +3,6 @@ package cz.prm.config;
 import static org.springframework.security.config.Customizer.withDefaults;
 import static org.springframework.security.config.http.SessionCreationPolicy.ALWAYS;
 
-import cz.prm.config.keycloak.KeycloakGrantedAuthoritiesMapper;
 import cz.prm.config.keycloak.KeycloakLogoutHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
