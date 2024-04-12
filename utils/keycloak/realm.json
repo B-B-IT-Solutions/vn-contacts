@@ -87,7 +87,11 @@
           "type": "password",
           "value": "password123"
         }
-      ]
+      ],
+      "realmRoles": [
+        "prm-user"
+      ],
+      "groups": []
     },
     {
       "id": "bobuskaviktoria",
@@ -103,7 +107,11 @@
           "type": "password",
           "value": "password123"
         }
-      ]
+      ],
+      "realmRoles": [
+        "prm-user"
+      ],
+      "groups": []
     }
   ]
 }
