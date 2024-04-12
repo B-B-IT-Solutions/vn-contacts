@@ -54,7 +54,7 @@
   },
   "clients": [
     {
-      "id": "prm",
+      "id": "73ace884-ec54-48f8-9585-1ae5823ee545",
       "clientId": "prm",
       "name": "PRM Application",
       "enabled": true,

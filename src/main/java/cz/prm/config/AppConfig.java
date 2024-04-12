@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @EnableJpaAuditing(auditorAwareRef = "auditProvider")
@@ -22,4 +23,10 @@ public class AppConfig {
       user.setEmail("emai@email.com");
       return () -> of(user);
    }
+
+   @Bean
+   public RestTemplate restTemplate() {
+      return new RestTemplate();
+   }
+
 }

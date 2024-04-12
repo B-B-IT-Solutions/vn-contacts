@@ -31,6 +31,7 @@
 			<jacoco.line.coverage>0.99</jacoco.line.coverage>
 			<jacoco.branch.coverage>0.99</jacoco.branch.coverage>
 			<jacoco.version>0.8.11</jacoco.version>
+			<spring-security-test.version>6.1.0</spring-security-test.version>
 	 </properties>
 	 
 	 <dependencies>
@@ -63,7 +64,12 @@
 			<dependency>
 				 <groupId>org.springframework.boot</groupId>
 				 <artifactId>spring-boot-starter-security</artifactId>
-				 <version>${spring-data-envers.version}</version>
+				 <version>${spring-boot.version}</version>
+			</dependency>
+			<dependency>
+				 <groupId>org.springframework.boot</groupId>
+				 <artifactId>spring-boot-starter-oauth2-client</artifactId>
+				 <version>${spring-boot.version}</version>
 			</dependency>
 			<dependency>
 				 <groupId>org.springframework.boot</groupId>
@@ -116,6 +122,12 @@
 				 <groupId>org.springframework.boot</groupId>
 				 <artifactId>spring-boot-starter-test</artifactId>
 				 <version>${spring-boot.version}</version>
+				 <scope>test</scope>
+			</dependency>
+			<dependency>
+				 <groupId>org.springframework.security</groupId>
+				 <artifactId>spring-security-test</artifactId>
+				 <version>${spring-security-test.version}</version>
 				 <scope>test</scope>
 			</dependency>
 			<dependency>
@@ -312,27 +324,27 @@
 							 </includes>
 						</configuration>
 				 </plugin>
-<!--				 <plugin>-->
-<!--						<groupId>org.apache.maven.plugins</groupId>-->
-<!--						<artifactId>maven-checkstyle-plugin</artifactId>-->
-<!--						<version>${maven-checkstyle-plugin.version}</version>-->
-<!--						<configuration>-->
-<!--							 <configLocation>.github/checkstyle/checkstyle-google-code-style.xml</configLocation>-->
-<!--							 <failOnViolation>true</failOnViolation>-->
-<!--							 <violationSeverity>warning</violationSeverity>-->
-<!--							 <logViolationsToConsole>true</logViolationsToConsole>-->
-<!--							 <includeTestSourceDirectory>true</includeTestSourceDirectory>-->
-<!--							 <testSourceDirectories>${basedir}/src/test,${basedir}/scr/componenttest</testSourceDirectories>-->
-<!--							 <excludes>${jacoco.exclusions}</excludes>-->
-<!--						</configuration>-->
-<!--						<executions>-->
-<!--							 <execution>-->
-<!--									<goals>-->
-<!--										 <goal>check</goal>-->
-<!--									</goals>-->
-<!--							 </execution>-->
-<!--						</executions>-->
-<!--				 </plugin>-->
+				 <!--				 <plugin>-->
+				 <!--						<groupId>org.apache.maven.plugins</groupId>-->
+				 <!--						<artifactId>maven-checkstyle-plugin</artifactId>-->
+				 <!--						<version>${maven-checkstyle-plugin.version}</version>-->
+				 <!--						<configuration>-->
+				 <!--							 <configLocation>.github/checkstyle/checkstyle-google-code-style.xml</configLocation>-->
+				 <!--							 <failOnViolation>true</failOnViolation>-->
+				 <!--							 <violationSeverity>warning</violationSeverity>-->
+				 <!--							 <logViolationsToConsole>true</logViolationsToConsole>-->
+				 <!--							 <includeTestSourceDirectory>true</includeTestSourceDirectory>-->
+				 <!--							 <testSourceDirectories>${basedir}/src/test,${basedir}/scr/componenttest</testSourceDirectories>-->
+				 <!--							 <excludes>${jacoco.exclusions}</excludes>-->
+				 <!--						</configuration>-->
+				 <!--						<executions>-->
+				 <!--							 <execution>-->
+				 <!--									<goals>-->
+				 <!--										 <goal>check</goal>-->
+				 <!--									</goals>-->
+				 <!--							 </execution>-->
+				 <!--						</executions>-->
+				 <!--				 </plugin>-->
 			</plugins>
 	 </build>
 

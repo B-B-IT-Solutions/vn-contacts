@@ -13,6 +13,22 @@ spring:
   liquibase:
     enabled: true
     change-log: db/changelog.xml
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8090/realms/prm
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8090/realms/prm
+            user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            client-id: prm
+            authorization-grant-type: authorization_code
+            scope: openid
+
 
 #DB
 logging:
