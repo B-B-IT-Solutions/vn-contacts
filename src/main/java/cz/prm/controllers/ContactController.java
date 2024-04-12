@@ -2,13 +2,13 @@ package cz.prm.controllers;
 
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.mappers.ContactMapper;
-import cz.prm.services.user.UserService;
+import cz.prm.services.contact.UserService;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("users")
+@RequestMapping("contacts")
 @RestController
 public class ContactController {
 

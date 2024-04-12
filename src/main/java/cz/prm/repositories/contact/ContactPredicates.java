@@ -1,4 +1,4 @@
-package cz.prm.repositories.user;
+package cz.prm.repositories.contact;
 
 import static cz.prm.domain.contact.querydsl.QContact.contact;
 

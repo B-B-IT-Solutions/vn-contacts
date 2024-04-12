@@ -1,10 +1,10 @@
-package cz.prm.services.user;
+package cz.prm.services.contact;
 
 import static java.lang.String.format;
 
 import cz.prm.domain.contact.Contact;
-import cz.prm.repositories.user.ContactPredicates;
-import cz.prm.repositories.user.ContactRepository;
+import cz.prm.repositories.contact.ContactPredicates;
+import cz.prm.repositories.contact.ContactRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.function.Supplier;

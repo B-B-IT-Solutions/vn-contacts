@@ -5,7 +5,7 @@ import static cz.prm.utils.assertions.UserAssertions.assertContactsDto;
 import static org.mockito.Mockito.when;
 
 import cz.prm.controllers.mappers.ContactMapper;
-import cz.prm.services.user.UserService;
+import cz.prm.services.contact.UserService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

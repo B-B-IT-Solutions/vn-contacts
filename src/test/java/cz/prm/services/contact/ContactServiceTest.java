@@ -1,4 +1,4 @@
-package cz.prm.services.user;
+package cz.prm.services.contact;
 
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contacts;
@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
-import cz.prm.repositories.user.ContactPredicates;
-import cz.prm.repositories.user.ContactRepository;
+import cz.prm.repositories.contact.ContactPredicates;
+import cz.prm.repositories.contact.ContactRepository;
 import cz.prm.utils.assertions.UserAssertions;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;

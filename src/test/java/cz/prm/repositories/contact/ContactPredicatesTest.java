@@ -1,4 +1,4 @@
-package cz.prm.repositories.user;
+package cz.prm.repositories.contact;
 
 import static cz.prm.utils.TestUtils.uuid;
 import static java.lang.String.format;
