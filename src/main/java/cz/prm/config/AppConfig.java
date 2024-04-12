@@ -2,7 +2,7 @@ package cz.prm.config;
 
 import static java.util.Optional.of;
 
-import cz.prm.domain.User;
+import cz.prm.domain.user.User;
 import cz.prm.repositories.customisations.executors.PrmQuerydslPredicateExecutorFactoryBean;
 import cz.prm.repositories.customisations.repositories.RefreshAwareRepositoryImpl;
 import org.springframework.context.annotation.Bean;

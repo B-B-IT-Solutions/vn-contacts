@@ -1,4 +1,4 @@
-package cz.prm.domain;
+package cz.prm.domain.user;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
