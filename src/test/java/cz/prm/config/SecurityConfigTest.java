@@ -1,7 +1,6 @@
 package cz.prm.config;
 
 import static com.google.common.collect.Maps.newHashMap;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -24,7 +23,6 @@ import org.springframework.security.config.annotation.web.configurers.AuthorizeH
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer.AuthorizedUrl;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @ExtendWith(MockitoExtension.class)
 class SecurityConfigTest {
@@ -80,9 +78,4 @@ class SecurityConfigTest {
       verify(csrfConfigurer).disable();
    }
 
-   @Test
-   void auditProvider() {
-      var encoder = securityConfig.passwordEncoder();
-      assertThat(encoder).isNotNull().isInstanceOf(BCryptPasswordEncoder.class);
-   }
 }

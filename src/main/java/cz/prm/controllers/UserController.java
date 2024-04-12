@@ -4,6 +4,8 @@ import cz.prm.controllers.dto.user.UserDto;
 import cz.prm.controllers.mappers.UserMapper;
 import cz.prm.services.user.UserService;
 import java.util.List;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,5 +26,11 @@ public class UserController {
    public List<UserDto> getUsers() {
       var users = userService.getUsers();
       return mapper.toUsersDto(users);
+   }
+
+   @GetMapping("current-user")
+   public UserDto getCurrentUser(OAuth2AuthenticationToken authToken) {
+      var oidcUser = (DefaultOidcUser) authToken.getPrincipal();
+      return new UserDto(oidcUser.getUserInfo());
    }
 }
