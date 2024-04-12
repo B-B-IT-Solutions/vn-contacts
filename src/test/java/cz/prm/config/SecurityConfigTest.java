@@ -7,7 +7,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.config.http.SessionCreationPolicy.ALWAYS;
 
-import cz.prm.config.keycloak.KeycloakGrantedAuthoritiesMapper;
 import cz.prm.config.keycloak.KeycloakLogoutHandler;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +25,8 @@ import org.springframework.security.config.annotation.web.configurers.AuthorizeH
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer.AuthorizedUrl;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
+import org.springframework.security.config.annotation.web.configurers.oauth2.client.OAuth2LoginConfigurer;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
@@ -33,8 +34,6 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 @ExtendWith(MockitoExtension.class)
 class SecurityConfigTest {
 
-   @Mock
-   private KeycloakGrantedAuthoritiesMapper authoritiesMapper;
    @Mock
    private KeycloakLogoutHandler logoutHandler;
    @Mock
@@ -47,6 +46,10 @@ class SecurityConfigTest {
    private ApplicationContext applicationContext;
    @Mock
    private AuthorizeHttpRequestsConfigurer authorizeHttpRequestsConfigurer;
+   @Mock
+   private OAuth2ResourceServerConfigurer resourceServerConfigurer;
+   @Mock
+   private OAuth2LoginConfigurer loginConfigurer;
    @Mock
    private SessionManagementConfigurer sessionManagementConfigurer;
    @Mock
@@ -68,6 +71,8 @@ class SecurityConfigTest {
       sharedObjects.put(ApplicationContext.class, applicationContext);
       httpSecurity = new HttpSecurity(objectPostProcessor, authenticationManagerBuilder, sharedObjects);
       httpSecurity.with(authorizeHttpRequestsConfigurer, dummyCustomize);
+      httpSecurity.with(resourceServerConfigurer, dummyCustomize);
+      httpSecurity.with(loginConfigurer, dummyCustomize);
       httpSecurity.with(sessionManagementConfigurer, dummyCustomize);
       httpSecurity.with(csrfConfigurer, dummyCustomize);
 
@@ -80,10 +85,10 @@ class SecurityConfigTest {
       when(authenticationManagerBuilder.build()).thenReturn(authenticationManager);
       when(applicationContext.getBeanNamesForType(any(Class.class))).thenReturn(new String[0]);
       when(authorizeHttpRequestsConfigurer.getRegistry()).thenReturn(requestMatcherRegistry);
-      when(requestMatcherRegistry.requestMatchers(any(String[].class))).thenReturn(authorizedUrl);
+//      when(requestMatcherRegistry.requestMatchers(any(String[].class))).thenReturn(authorizedUrl);
       when(requestMatcherRegistry.anyRequest()).thenReturn(authorizedUrl);
-      when(authorizedUrl.permitAll()).thenReturn(requestMatcherRegistry);
-      when(authorizedUrl.hasAnyRole(any(String[].class))).thenReturn(requestMatcherRegistry);
+//      when(authorizedUrl.permitAll()).thenReturn(requestMatcherRegistry);
+//      when(authorizedUrl.hasAnyRole(any(String[].class))).thenReturn(requestMatcherRegistry);
 
       securityConfig.filterChain(httpSecurity);
       verify(sessionManagementConfigurer).sessionCreationPolicy(ALWAYS);
