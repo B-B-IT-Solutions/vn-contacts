@@ -1,4 +1,4 @@
-package cz.prm.business.users;
+package cz.prm.business.contacts;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 public class ContactComponentTest extends BusinessComponentTestBase {
 
    @Test
-   void getUsersTest() {
-      var users = getUsers();
-      assertThat(users).hasSize(2);
+   void getContactsTest() {
+      var contacts = getContacts();
+      assertThat(contacts).hasSize(2);
    }
 }
