@@ -1,5 +1,7 @@
 package cz.prm.config.keycloak;
 
+import static org.springframework.web.util.UriComponentsBuilder.fromUriString;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -27,9 +29,7 @@ public class KeycloakLogoutHandler implements LogoutHandler {
 
    private void logoutFromKeycloak(OidcUser user) {
       var endSessionEndpoint = user.getIssuer() + "/protocol/openid-connect/logout";
-      var builder = UriComponentsBuilder
-          .fromUriString(endSessionEndpoint)
-          .queryParam("id_token_hint", user.getIdToken().getTokenValue());
+      var builder = fromUriString(endSessionEndpoint).queryParam("id_token_hint", user.getIdToken().getTokenValue());
 
       var logoutResponse = restTemplate.getForEntity(builder.toUriString(), String.class);
       if (logoutResponse.getStatusCode().is2xxSuccessful()) {

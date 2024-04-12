@@ -9,17 +9,17 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
-import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 
 @ExtendWith(MockitoExtension.class)
 class UserControllerTest {
 
    @Mock
-   private OAuth2AuthenticationToken authToken;
+   private Authentication authToken;
    @Mock
-   private DefaultOidcUser oidcUser;
+   private OidcUser oidcUser;
    @Mock
    private OidcUserInfo oidcUserInfo;
 

@@ -1,8 +1,8 @@
 package cz.prm.controllers;
 
 import cz.prm.controllers.dto.user.UserDto;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
    @GetMapping("current-user")
-   public UserDto getCurrentUser(OAuth2AuthenticationToken authToken) {
-      var oidcUser = (DefaultOidcUser) authToken.getPrincipal();
+   public UserDto getCurrentUser(Authentication authToken) {
+      var oidcUser = (OidcUser) authToken.getPrincipal();
       return new UserDto(oidcUser.getUserInfo());
    }
 }
