@@ -19,10 +19,9 @@ public class SecurityConfig {
    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
       http.authorizeHttpRequests(authorize -> authorize
               .requestMatchers("/admin/**").hasAnyRole("ADMIN")
-              .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
-              .requestMatchers("/login/**").permitAll()
-              .anyRequest().authenticated())
+              .anyRequest().permitAll())
           .httpBasic(withDefaults())
+          .csrf(csrf -> csrf.disable())
           .sessionManagement(session -> session.sessionCreationPolicy(ALWAYS));
       return http.build();
    }

@@ -1,0 +1,12 @@
+#DB
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/prm
+    username: postgres
+    password: test
+
+#DB
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG

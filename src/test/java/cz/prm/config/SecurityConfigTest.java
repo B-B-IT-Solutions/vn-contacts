@@ -22,7 +22,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer.AuthorizationManagerRequestMatcherRegistry;
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer.AuthorizedUrl;
-import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -42,6 +42,8 @@ class SecurityConfigTest {
    @Mock
    private SessionManagementConfigurer sessionManagementConfigurer;
    @Mock
+   private CsrfConfigurer csrfConfigurer;
+   @Mock
    private AuthorizationManagerRequestMatcherRegistry requestMatcherRegistry;
    @Mock
    private AuthorizedUrl authorizedUrl;
@@ -59,6 +61,7 @@ class SecurityConfigTest {
       httpSecurity = new HttpSecurity(objectPostProcessor, authenticationManagerBuilder, sharedObjects);
       httpSecurity.with(authorizeHttpRequestsConfigurer, dummyCustomize);
       httpSecurity.with(sessionManagementConfigurer, dummyCustomize);
+      httpSecurity.with(csrfConfigurer, dummyCustomize);
    }
 
    @Test
@@ -74,6 +77,7 @@ class SecurityConfigTest {
 
       securityConfig.filterChain(httpSecurity);
       verify(sessionManagementConfigurer).sessionCreationPolicy(ALWAYS);
+      verify(csrfConfigurer).disable();
    }
 
    @Test
