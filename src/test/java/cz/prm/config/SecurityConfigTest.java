@@ -71,7 +71,7 @@ class SecurityConfigTest {
       httpSecurity.with(sessionManagementConfigurer, dummyCustomize);
       httpSecurity.with(csrfConfigurer, dummyCustomize);
 
-      securityConfig = new SecurityConfig(authoritiesMapper, logoutHandler);
+      securityConfig = new SecurityConfig(logoutHandler);
    }
 
    @Test
@@ -88,12 +88,6 @@ class SecurityConfigTest {
       securityConfig.filterChain(httpSecurity);
       verify(sessionManagementConfigurer).sessionCreationPolicy(ALWAYS);
       verify(csrfConfigurer).disable();
-   }
-
-   @Test
-   void keycloakGrantedAuthoritiesMapper() {
-      var result = securityConfig.keycloakGrantedAuthoritiesMapper();
-      assertThat(result).isNotNull().isSameAs(authoritiesMapper);
    }
 
    @Test
