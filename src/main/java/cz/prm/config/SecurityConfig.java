@@ -23,9 +23,7 @@ public class SecurityConfig {
               .requestMatchers("/login/**").permitAll()
               .anyRequest().authenticated())
           .httpBasic(withDefaults())
-          .sessionManagement(session -> {
-             session.sessionCreationPolicy(ALWAYS);
-          });
+          .sessionManagement(session -> session.sessionCreationPolicy(ALWAYS));
       return http.build();
    }
 

@@ -42,8 +42,6 @@ class SecurityConfigTest {
    @Mock
    private SessionManagementConfigurer sessionManagementConfigurer;
    @Mock
-   private HttpBasicConfigurer httpBasicConfigurer;
-   @Mock
    private AuthorizationManagerRequestMatcherRegistry requestMatcherRegistry;
    @Mock
    private AuthorizedUrl authorizedUrl;
@@ -61,7 +59,6 @@ class SecurityConfigTest {
       httpSecurity = new HttpSecurity(objectPostProcessor, authenticationManagerBuilder, sharedObjects);
       httpSecurity.with(authorizeHttpRequestsConfigurer, dummyCustomize);
       httpSecurity.with(sessionManagementConfigurer, dummyCustomize);
-//      httpSecurity.with(httpBasicConfigurer, dummyCustomize);
    }
 
    @Test
