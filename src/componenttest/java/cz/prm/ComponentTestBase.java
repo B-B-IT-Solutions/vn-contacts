@@ -1,24 +1,25 @@
 package cz.prm;
 
 import static io.restassured.RestAssured.given;
-import static java.net.URI.create;
 import static java.util.Collections.singletonList;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.DEFINED_PORT;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED;
 
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.client.RestTemplate;
 
 @ActiveProfiles("componenttest")
 @SpringBootTest(webEnvironment = DEFINED_PORT)
@@ -26,6 +27,8 @@ public abstract class ComponentTestBase {
 
    @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
    private String authServerUrl;
+   @Autowired
+   private RestTemplate restTemplate;
 
    @BeforeEach
    public void setup() {
@@ -44,27 +47,21 @@ public abstract class ComponentTestBase {
    protected String getAccessToken() {
       try {
          var authServerTokenURL = authServerUrl + "/protocol/openid-connect/token";
-         var authorizationURI = create(authServerTokenURL);
-         var webclient = WebClient.builder().build();
+
+         var headers = new HttpHeaders();
+         headers.setContentType(APPLICATION_FORM_URLENCODED);
+
          var formData = new LinkedMultiValueMap<String, String>();
          formData.put("grant_type", singletonList("password"));
          formData.put("client_id", singletonList("prm"));
          formData.put("username", singletonList("bobuskysergej"));
          formData.put("password", singletonList("password123"));
 
-         var result = webclient.post()
-             .uri(authorizationURI)
-             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-             .body(BodyInserters.fromFormData(formData))
-             .retrieve()
-             .bodyToMono(String.class)
-             .block();
+         var entity = new HttpEntity<>(formData, headers);
 
-         JacksonJsonParser jsonParser = new JacksonJsonParser();
-
-         return "Bearer " + jsonParser.parseMap(result)
-             .get("access_token")
-             .toString();
+         var result = restTemplate.postForEntity(authServerTokenURL, entity, String.class).getBody();
+         var jsonParser = new JacksonJsonParser();
+         return "Bearer " + jsonParser.parseMap(result).get("access_token").toString();
       } catch (Exception e) {
          throw new RuntimeException(e);
       }
