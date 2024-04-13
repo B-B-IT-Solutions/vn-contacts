@@ -26,7 +26,7 @@ jobs:
         ports:
           - 8080:8080
         env:
-          KC_DB: postgres
+          KC_DB: postgres123
           KC_DB_USERNAME: postgres
           KC_DB_PASSWORD: test
           KC_DB_URL: "jdbc:postgresql://postgres:5432/prm"
@@ -41,18 +41,18 @@ jobs:
         run: docker logs "${{job.services.keycloak.id}}"
       - name: Checkout Code
         uses: actions/checkout@v4
-      #      - run: apt-get update; apt-get install curl -y
-      #      - run: curl --output /dev/null --head http://keycloak:8080/auth
-      #      - name: Keycloak Admin CLI
-      #        uses: carlosthe19916/keycloak-action@0.4
-      #        with:
-      #          server: http://keycloak:8080/auth
-      #          realm: master
-      #          client: admin-cli
-      #          username: admin
-      #          password: test
-      #          server-wait-timeout: 30
-      #          kcadm: create realms -f ./utils/keycloak/realm.json
+        #      - run: apt-get update; apt-get install curl -y
+        #      - run: curl --output /dev/null --head http://keycloak:8080/auth
+      - name: Keycloak Admin CLI
+        uses: carlosthe19916/keycloak-action@0.4
+        with:
+          server: http://keycloak:8080/auth
+          realm: master
+          client: admin-cli
+          username: admin
+          password: test
+          server-wait-timeout: 30
+          kcadm: create realms -f ./utils/keycloak/realm.json
       - name: Set up JDK 19
         uses: actions/setup-java@v2
         with:
