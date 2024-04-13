@@ -7,7 +7,6 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED;
 
-import dasniko.testcontainers.keycloak.KeycloakContainer;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import java.util.List;
@@ -20,13 +19,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestTemplate;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 @ActiveProfiles("componenttest")
-@Testcontainers(disabledWithoutDocker = true)
+//@Testcontainers(disabledWithoutDocker = true)
 @SpringBootTest(webEnvironment = DEFINED_PORT)
 public abstract class ComponentTestBase {
 
@@ -36,13 +32,16 @@ public abstract class ComponentTestBase {
    @Autowired
    protected RestTemplate restTemplate;
 
-   @Container
-   static KeycloakContainer keycloak = new KeycloakContainer().withRealmImportFile("classpath:utils/keycloak/realm.json");
+   //   @Container
+//   static KeycloakContainer keycloak;
 
    @BeforeAll
    public static void setup() throws Exception {
       RestAssured.baseURI = "http://localhost/";
       RestAssured.port = 8091;
+
+//      keycloak = new KeycloakContainer().withRealmImportFile("keycloak/realm.json");
+//      keycloak.start();
    }
 
    public <T> List<T> getMany(String url, TypeRef<List<T>> type) {

@@ -13,26 +13,26 @@ services:
       test: [ "CMD", "pg_isready", "-U", "postgres" ]
     volumes:
       - prm_data:/var/lib/postgresql/data
-#  keycloak:
-#    image: quay.io/keycloak/keycloak:24.0.2
-#    command: [ "start-dev", "--import-realm" ]
-#    restart: unless-stopped
-#    environment:
-#      KC_DB: postgres
-#      KC_DB_USERNAME: postgres
-#      KC_DB_PASSWORD: test
-#      KC_DB_URL: "jdbc:postgresql://postgres:5432/prm"
-#      KC_METRICS_ENABLED: true
-#      KC_LOG_LEVEL: INFO
-#      KC_REALM_NAME: prm
-#      KEYCLOAK_ADMIN: admin
-#      KEYCLOAK_ADMIN_PASSWORD: test
-#    ports:
-#      - 8090:8080
-#    volumes:
-#      - ./keycloak/realm.json:/opt/keycloak/data/import/realm.json:ro
-#    depends_on:
-#      - postgres
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.2
+    command: [ "start-dev", "--import-realm" ]
+    restart: unless-stopped
+    environment:
+      KC_DB: postgres
+      KC_DB_USERNAME: postgres
+      KC_DB_PASSWORD: test
+      KC_DB_URL: "jdbc:postgresql://postgres:5432/prm"
+      KC_METRICS_ENABLED: true
+      KC_LOG_LEVEL: INFO
+      KC_REALM_NAME: prm
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: test
+    ports:
+      - 8090:8080
+    volumes:
+      - ./keycloak/realm.json:/opt/keycloak/data/import/realm.json:ro
+    depends_on:
+      - postgres
 volumes:
   prm_data:
     driver: local
