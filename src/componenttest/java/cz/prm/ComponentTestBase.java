@@ -37,7 +37,7 @@ public abstract class ComponentTestBase {
    protected RestTemplate restTemplate;
 
    @Container
-   static KeycloakContainer keycloak = new KeycloakContainer();
+   static KeycloakContainer keycloak = new KeycloakContainer(.withRealmImportFile("classpath:utils/keycloak/realm.json");
 
    @BeforeAll
    public static void setup() throws Exception {
