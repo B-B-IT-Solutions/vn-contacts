@@ -45,7 +45,7 @@ jobs:
         with:
           server: http://keycloak:8090
           realm: master
-          client: prm
+          client: admin-cli
           username: admin
           password: test
           server-wait-timeout: 30
