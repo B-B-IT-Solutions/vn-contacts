@@ -1,9 +1,8 @@
 package cz.prm.controllers;
 
 import cz.prm.controllers.dto.user.UserDto;
-import cz.prm.controllers.mappers.UserMapper;
-import cz.prm.services.user.UserService;
-import java.util.List;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,17 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
-   private UserService userService;
-   public UserMapper mapper;
-
-   public UserController(UserService userService, UserMapper mapper) {
-      this.userService = userService;
-      this.mapper = mapper;
-   }
-
-   @GetMapping
-   public List<UserDto> getUsers() {
-      var users = userService.getUsers();
-      return mapper.toUsersDto(users);
+   @GetMapping("current-user")
+   public UserDto getCurrentUser(Authentication authToken) {
+      var oidcUser = (OidcUser) authToken.getPrincipal();
+      return new UserDto(oidcUser.getUserInfo());
    }
 }

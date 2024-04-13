@@ -10,7 +10,7 @@
 				<createSequence cacheSize="1" cycle="false" startValue="10000" minValue="10000" maxValue="9223372036854775807"
 												sequenceName="user_id_sequence"/>
 				
-				<createTable tableName="user">
+				<createTable tableName="contact">
 						<column name="user_id" type="bigint">
 								<constraints primaryKey="true" primaryKeyName="users_pk" nullable="false"/>
 						</column>

@@ -2,46 +2,40 @@ package cz.prm.utils.assertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.controllers.dto.user.UserDto;
-import cz.prm.domain.user.User;
-import cz.prm.security.PrmUserDetails;
+import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.domain.contact.Contact;
 import java.util.List;
 import java.util.Objects;
 
 public class UserAssertions {
 
-   public static void assertUsers(List<User> users1, List<User> users2) {
-      assertThat(users1).isNotEmpty().hasSameSizeAs(users2);
-      users1.forEach(u1 -> {
-         var u2 = users2.stream().filter(u -> Objects.equals(u1.getUserId(), u.getUserId())).findFirst().get();
-         assertUser(u1, u2);
+   public static void assertContacts(List<Contact> contacts1, List<Contact> contacts2) {
+      assertThat(contacts1).isNotEmpty().hasSameSizeAs(contacts2);
+      contacts1.forEach(c1 -> {
+         var c2 = contacts2.stream().filter(u -> Objects.equals(c1.getUserId(), u.getUserId())).findFirst().get();
+         assertContact(c1, c2);
       });
    }
 
-   public static void assertUsersDto(List<User> users, List<UserDto> dtos) {
-      assertThat(users).isNotEmpty().hasSameSizeAs(dtos);
-      users.forEach(u1 -> {
+   public static void assertContactsDto(List<Contact> contacts, List<ContactDto> dtos) {
+      assertThat(contacts).isNotEmpty().hasSameSizeAs(dtos);
+      contacts.forEach(u1 -> {
          var u2 = dtos.stream().filter(u -> Objects.equals(u1.getUserId(), u.getUserId())).findFirst().get();
-         assertUser(u1, u2);
+         assertContact(u1, u2);
       });
    }
 
-   public static void assertUser(User user1, User user2) {
-      assertThat(user1.getUserId()).isEqualTo(user2.getUserId());
-      assertThat(user1.getFirstName()).isEqualTo(user2.getFirstName());
-      assertThat(user1.getLastName()).isEqualTo(user2.getLastName());
+   public static void assertContact(Contact contact1, Contact contact2) {
+      assertThat(contact1.getUserId()).isEqualTo(contact2.getUserId());
+      assertThat(contact1.getFirstName()).isEqualTo(contact2.getFirstName());
+      assertThat(contact1.getLastName()).isEqualTo(contact2.getLastName());
    }
 
-   public static void assertUser(User user, UserDto dto) {
-      assertThat(user.getUserId()).isEqualTo(dto.getUserId());
-      assertThat(user.getFirstName()).isEqualTo(dto.getFirstName());
-      assertThat(user.getLastName()).isEqualTo(dto.getLastName());
-      assertThat(user.getEmail()).isEqualTo(dto.getEmail());
+   public static void assertContact(Contact contact, ContactDto dto) {
+      assertThat(contact.getUserId()).isEqualTo(dto.getUserId());
+      assertThat(contact.getFirstName()).isEqualTo(dto.getFirstName());
+      assertThat(contact.getLastName()).isEqualTo(dto.getLastName());
+      assertThat(contact.getEmail()).isEqualTo(dto.getEmail());
    }
 
-   public static void assertUserDetails(User user, PrmUserDetails userDetails) {
-      assertThat(userDetails.getUsername()).isEqualTo(user.getEmail());
-      assertThat(userDetails.getPassword()).isEqualTo(user.getPassword());
-      assertThat(userDetails.getAuthorities()).isNotNull().isEmpty();
-   }
 }

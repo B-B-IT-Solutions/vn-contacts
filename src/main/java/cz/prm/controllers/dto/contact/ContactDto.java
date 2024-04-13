@@ -1,4 +1,4 @@
-package cz.prm.controllers.dto.user;
+package cz.prm.controllers.dto.contact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class ContactDto {
 
    @JsonProperty("userId")
    private Long userId;
@@ -29,11 +29,4 @@ public class UserDto {
    @JsonProperty("fullName")
    private String fullName;
 
-   public UserDto(OidcUserInfo userInfo) {
-      this.username = userInfo.getPreferredUsername();
-      this.email = userInfo.getEmail();
-      this.fullName = userInfo.getFullName();
-      this.firstName = userInfo.getGivenName();
-      this.lastName = userInfo.getFamilyName();
-   }
 }

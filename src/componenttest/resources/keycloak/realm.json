@@ -1,0 +1,130 @@
+{
+  "id": "prm",
+  "realm": "prm",
+  "sslRequired": "none",
+  "enabled": true,
+  "eventsEnabled": true,
+  "eventsExpiration": 900,
+  "adminEventsEnabled": true,
+  "adminEventsDetailsEnabled": true,
+  "attributes": {
+    "adminEventsExpiration": "900"
+  },
+  "roles": {
+    "realm": [
+      {
+        "id": "prm-user",
+        "name": "prm-user",
+        "description": "Default role for PRM users",
+        "clientRole": false,
+        "containerId": "prm",
+        "composite": true,
+        "composites": {
+          "realm": [
+            "offline_access",
+            "uma_authorization"
+          ],
+          "client": {
+            "account": [
+              "manage-account",
+              "view-profile"
+            ]
+          }
+        }
+      },
+      {
+        "id": "108eef4c-3c47-42ea-830a-a9b0a8afdaa2",
+        "name": "uma_authorization",
+        "description": "${role_uma_authorization}",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "prm",
+        "attributes": {}
+      },
+      {
+        "id": "9eff1975-7839-477b-9fb4-cdfe166e51da",
+        "name": "offline_access",
+        "description": "${role_offline-access}",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "prm",
+        "attributes": {}
+      }
+    ]
+  },
+  "clients": [
+    {
+      "id": "73ace884-ec54-48f8-9585-1ae5823ee545",
+      "clientId": "prm",
+      "name": "PRM Application",
+      "enabled": true,
+      "publicClient": true,
+      "rootUrl": "http://localhost:8091",
+      "adminUrl": "http://localhost:8091",
+      "baseUrl": "http://localhost:8091",
+      "redirectUris": [
+        "http://localhost:8091/*"
+      ],
+      "webOrigins": [
+        "http://localhost:8091/"
+      ],
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "defaultClientScopes": [
+        "web-origins",
+        "acr",
+        "profile",
+        "roles",
+        "email",
+        "microprofile-jwt"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "bobuskysergej",
+      "email": "bobuskysergej@gmail.com",
+      "username": "bobuskysergej",
+      "firstName": "Sergej",
+      "lastName": "Bobusky",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "temporary": false,
+          "type": "password",
+          "value": "password123"
+        }
+      ],
+      "realmRoles": [
+        "prm-user"
+      ],
+      "groups": []
+    },
+    {
+      "id": "bobuskaviktoria",
+      "email": "bobuskaviktoria@gmail.com",
+      "username": "bobuskaviktoria",
+      "firstName": "Viktoria",
+      "lastName": "Bobuska",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "temporary": false,
+          "type": "password",
+          "value": "password123"
+        }
+      ],
+      "realmRoles": [
+        "prm-user"
+      ],
+      "groups": []
+    }
+  ]
+}
