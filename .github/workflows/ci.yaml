@@ -38,7 +38,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - run: curl --output /dev/null --head http://keycloak:8080/auth
+      - run: curl --output /dev/null --head http://localhost:8080/auth
       #      - name: Keycloak Admin CLI
       #        uses: carlosthe19916/keycloak-action@0.4
       #        with:
