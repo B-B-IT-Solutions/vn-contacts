@@ -7,10 +7,11 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED;
 
+import dasniko.testcontainers.keycloak.KeycloakContainer;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.json.JacksonJsonParser;
@@ -19,19 +20,27 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestTemplate;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 @ActiveProfiles("componenttest")
+@Testcontainers(disabledWithoutDocker = true)
 @SpringBootTest(webEnvironment = DEFINED_PORT)
 public abstract class ComponentTestBase {
 
    @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
    private String authServerUrl;
-   @Autowired
-   private RestTemplate restTemplate;
 
-   @BeforeEach
-   public void setup() {
+   @Autowired
+   protected RestTemplate restTemplate;
+
+   @Container
+   static KeycloakContainer keycloak = new KeycloakContainer();
+
+   @BeforeAll
+   public static void setup() throws Exception {
       RestAssured.baseURI = "http://localhost/";
       RestAssured.port = 8091;
    }
