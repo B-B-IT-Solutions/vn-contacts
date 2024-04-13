@@ -27,12 +27,10 @@ jobs:
         ports:
           - 8080:8080
         env:
-          KC_DB: postgres
+          KC_DB: prm
           KC_DB_USERNAME: postgres
           KC_DB_PASSWORD: test
 #          KC_DB_URL: "jdbc:postgresql://postgres:5432/prm"
-          KC_METRICS_ENABLED: true
-          KC_LOG_LEVEL: INFO
           KC_REALM_NAME: prm
           KEYCLOAK_ADMIN: admin
           KEYCLOAK_ADMIN_PASSWORD: test
