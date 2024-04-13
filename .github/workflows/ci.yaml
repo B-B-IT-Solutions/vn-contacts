@@ -24,7 +24,7 @@ jobs:
       keycloak:
         image: quay.io/keycloak/keycloak:24.0.2
         ports:
-          - 8180:8080
+          - 8090:8080
         env:
           KC_DB: postgres
           KC_DB_USERNAME: postgres
@@ -43,7 +43,7 @@ jobs:
       - name: Keycloak Admin CLI
         uses: carlosthe19916/keycloak-action@0.4
         with:
-          server: http://keycloak:8080/auth # Use port 8080 instead of 8180
+          server: http://keycloak:8090/auth # Use port 8080 instead of 8180
           username: admin
           password: test
           kcadm: create realms -f ./utils/keycloak/realm.json
