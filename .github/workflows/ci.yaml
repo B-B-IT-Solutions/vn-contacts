@@ -34,8 +34,11 @@ jobs:
           KEYCLOAK_ADMIN: admin
           KEYCLOAK_ADMIN_PASSWORD: test
           options: >-
-            --entrypoint "kc.sh start-dev"
+            --entrypoint "kc.sh" "start-dev"
     steps:
+      - name: Keycloak start-dev
+        run:
+          docker exec ${{ job.services.keycloak.id }} sh -c 'kc.sh start-dev'
       - name: Keycloak logs
         if: always()
         run: docker logs "${{job.services.keycloak.id}}"
