@@ -36,7 +36,7 @@ jobs:
     steps:
       - name: Keycloak start-dev
         run:
-          docker exec ${{ job.services.keycloak.id }} sh -c 'kc.sh start-dev'
+          docker exec ${{job.services.keycloak.id}} sh -c 'kc.sh start-dev'
       - name: Keycloak logs
         if: always()
         run: docker logs "${{job.services.keycloak.id}}"
