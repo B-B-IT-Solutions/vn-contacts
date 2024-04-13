@@ -35,8 +35,8 @@ jobs:
           KC_REALM_NAME: prm
           KEYCLOAK_ADMIN: admin
           KEYCLOAK_ADMIN_PASSWORD: test
-        volumes:
-          - ${{github.workspace}}/utils/keycloak/realm.json:/opt/keycloak/data/import/realm.json
+#        volumes:
+#          - ${{github.workspace}}/utils/keycloak/realm.json:/opt/keycloak/data/import/realm.json
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
