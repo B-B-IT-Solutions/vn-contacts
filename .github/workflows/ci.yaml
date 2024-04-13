@@ -39,16 +39,17 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - name: Keycloak Admin CLI
-        uses: carlosthe19916/keycloak-action@0.4
-        with:
-          server: http://keycloak:8080/auth
-          realm: master
-          client: admin-cli
-          username: admin
-          password: test
-          server-wait-timeout: 30
-          kcadm: create realms -f ./utils/keycloak/realm.json
+      - run: curl --output /dev/null --head http://keycloak:8080/auth
+      #      - name: Keycloak Admin CLI
+      #        uses: carlosthe19916/keycloak-action@0.4
+      #        with:
+      #          server: http://keycloak:8080/auth
+      #          realm: master
+      #          client: admin-cli
+      #          username: admin
+      #          password: test
+      #          server-wait-timeout: 30
+      #          kcadm: create realms -f ./utils/keycloak/realm.json
       - name: Set up JDK 19
         uses: actions/setup-java@v2
         with:
