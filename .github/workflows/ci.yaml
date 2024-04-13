@@ -43,7 +43,7 @@ jobs:
       - name: Keycloak Admin CLI
         uses: carlosthe19916/keycloak-action@0.4
         with:
-          server: http://keycloak:8090
+          server: http://keycloak:8090/auth
           realm: master
           client: admin-cli
           username: admin
