@@ -25,7 +25,7 @@ public class KeycloakGrantedAuthoritiesMapper implements GrantedAuthoritiesMappe
    public Collection<? extends GrantedAuthority> mapAuthorities(Collection<? extends GrantedAuthority> authorities) {
       var mappedAuthorities = new HashSet<GrantedAuthority>();
       var authority = authorities.iterator().next();
-      boolean isOidc = authority instanceof OidcUserAuthority;
+      var isOidc = authority instanceof OidcUserAuthority;
 
       if (isOidc) {
          var oidcUserAuthority = (OidcUserAuthority) authority;
