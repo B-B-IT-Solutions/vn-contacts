@@ -33,8 +33,6 @@ jobs:
           KC_REALM_NAME: prm
           KEYCLOAK_ADMIN: admin
           KEYCLOAK_ADMIN_PASSWORD: test
-          options: >-
-            --entrypoint "kc.sh" "start-dev"
     steps:
       - name: Keycloak start-dev
         run:
