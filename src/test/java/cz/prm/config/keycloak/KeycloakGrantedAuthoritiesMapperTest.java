@@ -1,6 +1,7 @@
 package cz.prm.config.keycloak;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static cz.prm.utils.TestUtils.uuid;
 import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -20,6 +21,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
+import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
 
 @ExtendWith(MockitoExtension.class)
 class KeycloakGrantedAuthoritiesMapperTest {
@@ -31,6 +33,7 @@ class KeycloakGrantedAuthoritiesMapperTest {
    private static String ROLE_ADMIN = "admin";
    private static String ROLE_PRM_USER = "prm-user";
    private static String ROLE_DELEGATE = "delegate";
+   private static String ROLE_ANONYMOUS = "anonymous";
 
    @Mock
    private OidcUserInfo oidcUserInfo;
@@ -97,7 +100,38 @@ class KeycloakGrantedAuthoritiesMapperTest {
       var auth = new OidcUserAuthority(oidcIdToken, oidcUserInfo);
       authorities.add(auth);
 
+      var result = authoritiesMapper.mapAuthorities(authorities);
+      assertThat(result).isEmpty();
+   }
+
+   @Test
+   void mapAuthorities_Oauth2UserRealmAccessRoleClaims() {
+      var roles = newArrayList(ROLE_ADMIN, ROLE_PRM_USER, ROLE_DELEGATE, ROLE_ANONYMOUS);
+      var realmClaims = new HashMap<String, Object>();
+      realmClaims.put(ROLES_CLAIM, roles);
+
+      var attributes = new HashMap<String, Object>();
+      attributes.put(REALM_ACCESS_CLAIM, realmClaims);
+
+      var authorities = new ArrayList<OAuth2UserAuthority>();
+      var auth = new OAuth2UserAuthority(attributes);
+      authorities.add(auth);
+
       var result = (Collection<GrantedAuthority>) authoritiesMapper.mapAuthorities(authorities);
+      var expectedRoles = toSpringRoles(ROLE_ADMIN, ROLE_PRM_USER, ROLE_DELEGATE, ROLE_ANONYMOUS);
+      assertThat(result).hasSize(4).containsExactlyInAnyOrderElementsOf(expectedRoles);
+   }
+
+   @Test
+   void mapAuthorities_Oauth2UserNoRoleClaims() {
+      var attributes = new HashMap<String, Object>();
+      attributes.put(uuid(), uuid());
+
+      var authorities = new ArrayList<OAuth2UserAuthority>();
+      var auth = new OAuth2UserAuthority(attributes);
+      authorities.add(auth);
+
+      var result = authoritiesMapper.mapAuthorities(authorities);
       assertThat(result).isEmpty();
    }
 
