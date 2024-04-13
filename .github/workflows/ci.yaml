@@ -34,11 +34,7 @@ jobs:
           KEYCLOAK_ADMIN: admin
           KEYCLOAK_ADMIN_PASSWORD: test
           options: >-
-            --entrypoint start-dev	
-            --health-cmd "curl -f http://localhost:8080/auth/realms/master"
-            --health-interval 30s
-            --health-timeout 10s
-            --health-retries 5
+            --entrypoint "kc.sh start-dev"
     steps:
       - name: Keycloak logs
         if: always()
