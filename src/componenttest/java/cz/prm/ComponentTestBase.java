@@ -58,7 +58,6 @@ public abstract class ComponentTestBase {
          formData.put("password", singletonList("password123"));
 
          var entity = new HttpEntity<>(formData, headers);
-
          var result = restTemplate.postForEntity(authServerTokenURL, entity, String.class).getBody();
          var jsonParser = new JacksonJsonParser();
          return "Bearer " + jsonParser.parseMap(result).get("access_token").toString();
