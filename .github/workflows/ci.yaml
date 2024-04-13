@@ -47,6 +47,7 @@ jobs:
           client: prm
           username: admin
           password: test
+          server-wait-timeout: 30
           kcadm: create realms -f ./utils/keycloak/realm.json
       - name: Set up JDK 19
         uses: actions/setup-java@v2
