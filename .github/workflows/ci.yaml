@@ -44,6 +44,7 @@ jobs:
         uses: carlosthe19916/keycloak-action@0.4
         with:
           server: http://keycloak:8090
+          realm: master
           client: prm
           username: admin
           password: test
