@@ -21,41 +21,9 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
-      keycloak:
-        image: quay.io/keycloak/keycloak:24.0.2
-        ports:
-          - 8080:8080
-        env:
-          KC_DB: postgres
-          KC_DB_USERNAME: postgres
-          KC_DB_PASSWORD: test
-          KC_DB_URL: "jdbc:postgresql://postgres:5432/prm"
-          KC_REALM_NAME: prm
-          KEYCLOAK_ADMIN: admin
-          KEYCLOAK_ADMIN_PASSWORD: test
-          options: >-
-            --entrypoint "kc.sh" "start-dev"
     steps:
-      - name: Keycloak start-dev
-        run: |
-          docker run --name keycloak -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=test  --entrypoint dev-start  quay.io/keycloak/keycloak:24.0.2
-      - name: Keycloak logs
-        if: always()
-        run: docker logs "${{job.services.keycloak.id}}"
       - name: Checkout Code
         uses: actions/checkout@v4
-        #      - run: apt-get update; apt-get install curl -y
-        #      - run: curl --output /dev/null --head http://keycloak:8080/auth
-      - name: Keycloak Admin CLI
-        uses: carlosthe19916/keycloak-action@0.4
-        with:
-          server: http://keycloak:8080/auth
-          realm: master
-          client: admin-cli
-          username: admin
-          password: test
-          server-wait-timeout: 30
-          kcadm: create realms -f ./utils/keycloak/realm.json
       - name: Set up JDK 19
         uses: actions/setup-java@v2
         with:
