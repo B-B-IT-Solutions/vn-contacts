@@ -7,6 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: ubuntu
     services:
       postgres:
         image: postgres:16.2
@@ -38,6 +39,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+      - run: apt-get update; apt-get install curl -y
       - run: curl --output /dev/null --head http://keycloak:8080/auth
       #      - name: Keycloak Admin CLI
       #        uses: carlosthe19916/keycloak-action@0.4
