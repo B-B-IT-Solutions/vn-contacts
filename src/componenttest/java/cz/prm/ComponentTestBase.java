@@ -7,6 +7,7 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED;
 
+import dasniko.testcontainers.keycloak.KeycloakContainer;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import java.util.List;
@@ -18,6 +19,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,22 +29,25 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootTest(webEnvironment = DEFINED_PORT)
 public abstract class ComponentTestBase {
 
-   @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
-   private String authServerUrl;
-
    @Autowired
    protected RestTemplate restTemplate;
 
    //   @Container
-//   static KeycloakContainer keycloak;
+   protected static KeycloakContainer keycloak;
 
    @BeforeAll
-   public static void setup() throws Exception {
+   public static void setup() {
       RestAssured.baseURI = "http://localhost/";
       RestAssured.port = 8091;
 
-//      keycloak = new KeycloakContainer().withRealmImportFile("keycloak/realm.json");
-//      keycloak.start();
+      keycloak = new KeycloakContainer().withRealmImportFile("keycloak/realm.json").withExposedPorts(8080);
+      keycloak.start();
+   }
+
+   @DynamicPropertySource
+   static void registerResourceServerIssuerProperty(DynamicPropertyRegistry registry) {
+      registry.add("spring.security.oauth2.resourceserver.jwt.issuer-uri", () -> keycloak.getAuthServerUrl() + "/realms/prm");
+      registry.add("spring.security.oauth2.client.provider.keycloak.issuer-uri", () -> keycloak.getAuthServerUrl() + "/realms/prm");
    }
 
    public <T> List<T> getMany(String url, TypeRef<List<T>> type) {
@@ -54,19 +60,18 @@ public abstract class ComponentTestBase {
 
    protected String getAccessToken() {
       try {
-         var authServerTokenURL = authServerUrl + "/protocol/openid-connect/token";
-
-         var headers = new HttpHeaders();
-         headers.setContentType(APPLICATION_FORM_URLENCODED);
-
          var formData = new LinkedMultiValueMap<String, String>();
          formData.put("grant_type", singletonList("password"));
          formData.put("client_id", singletonList("prm"));
          formData.put("username", singletonList("bobuskysergej"));
          formData.put("password", singletonList("password123"));
 
+         var headers = new HttpHeaders();
+         headers.setContentType(APPLICATION_FORM_URLENCODED);
+
          var entity = new HttpEntity<>(formData, headers);
-         var result = restTemplate.postForEntity(authServerTokenURL, entity, String.class).getBody();
+         var tokenUrl = keycloak.getAuthServerUrl() + "/realms/prm/protocol/openid-connect/token";
+         var result = restTemplate.postForEntity(tokenUrl, entity, String.class).getBody();
          var jsonParser = new JacksonJsonParser();
          return "Bearer " + jsonParser.parseMap(result).get("access_token").toString();
       } catch (Exception e) {
