@@ -51,8 +51,6 @@ public class KeycloakGrantedAuthoritiesMapper implements GrantedAuthoritiesMappe
 
    private List<GrantedAuthority> mapOidcUserAuthorities(OidcUserAuthority oidcUserAuthority) {
       var userInfo = oidcUserAuthority.getUserInfo();
-      // Tokens can be configured to return roles under
-      // Groups or REALM ACCESS hence have to check both
       if (userInfo.hasClaim(REALM_ACCESS_CLAIM)) {
          var realmAccess = userInfo.getClaimAsMap(REALM_ACCESS_CLAIM);
          var roles = (Collection<String>) realmAccess.get(ROLES_CLAIM);
