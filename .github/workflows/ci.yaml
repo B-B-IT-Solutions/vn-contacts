@@ -26,7 +26,7 @@ jobs:
         ports:
           - 8080:8080
         env:
-          KC_DB: postgres123
+          KC_DB: postgres
           KC_DB_USERNAME: postgres
           KC_DB_PASSWORD: test
           KC_DB_URL: "jdbc:postgresql://postgres:5432/prm"
