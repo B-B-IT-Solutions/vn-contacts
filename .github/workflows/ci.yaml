@@ -35,11 +35,18 @@ jobs:
           KC_REALM_NAME: prm
           KEYCLOAK_ADMIN: admin
           KEYCLOAK_ADMIN_PASSWORD: test
-#        volumes:
-#          - ${{github.workspace}}/utils/keycloak/realm.json:/opt/keycloak/data/import/realm.json
+    #        volumes:
+    #          - ${{github.workspace}}/utils/keycloak/realm.json:/opt/keycloak/data/import/realm.json
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+      - name: Keycloak Admin CLI
+        uses: carlosthe19916/keycloak-action@0.4
+        with:
+          server: http://keycloak:8080/auth # Use port 8080 instead of 8180
+          username: admin
+          password: test
+          kcadm: create realms -f ./utils/keycloak/realm.json
       - name: Set up JDK 19
         uses: actions/setup-java@v2
         with:
