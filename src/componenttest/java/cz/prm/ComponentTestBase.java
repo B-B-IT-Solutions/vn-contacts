@@ -3,6 +3,7 @@ package cz.prm;
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
+import static java.util.Objects.isNull;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.DEFINED_PORT;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.OK;
@@ -13,12 +14,14 @@ import dasniko.testcontainers.keycloak.KeycloakContainer;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import java.util.List;
+import java.util.Objects;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -26,6 +29,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+@DirtiesContext
 @ActiveProfiles("componenttest")
 @SpringBootTest(webEnvironment = DEFINED_PORT)
 public abstract class ComponentTestBase {
@@ -40,9 +44,14 @@ public abstract class ComponentTestBase {
    public static void setup() {
       RestAssured.baseURI = "http://localhost/";
       RestAssured.port = 8091;
-      keycloak = new KeycloakContainer().withRealmImportFile("keycloak/realm.json");
-      keycloak.start();
+      startKeycloak();
+   }
 
+   public static void startKeycloak() {
+      if (isNull(keycloak)) {
+         keycloak = new KeycloakContainer().withRealmImportFile("keycloak/realm.json");
+         keycloak.start();
+      }
    }
 
    @DynamicPropertySource
