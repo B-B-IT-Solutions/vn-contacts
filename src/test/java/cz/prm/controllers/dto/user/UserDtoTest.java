@@ -13,14 +13,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.jwt.Jwt;
 
 @ExtendWith(MockitoExtension.class)
 class UserDtoTest {
 
    @Mock
-   private OidcUserInfo oidcUserInfo;
+   private OidcUser oidcUser;
    @Mock
    private Jwt jwt;
 
@@ -32,13 +32,13 @@ class UserDtoTest {
       var firstName = uuid();
       var lastName = uuid();
 
-      when(oidcUserInfo.getEmail()).thenReturn(email);
-      when(oidcUserInfo.getPreferredUsername()).thenReturn(username);
-      when(oidcUserInfo.getFullName()).thenReturn(fullName);
-      when(oidcUserInfo.getGivenName()).thenReturn(firstName);
-      when(oidcUserInfo.getFamilyName()).thenReturn(lastName);
+      when(oidcUser.getClaimAsString(PREFERRED_USERNAME)).thenReturn(username);
+      when(oidcUser.getClaimAsString(EMAIL)).thenReturn(email);
+      when(oidcUser.getClaimAsString(NAME)).thenReturn(fullName);
+      when(oidcUser.getClaimAsString(GIVEN_NAME)).thenReturn(firstName);
+      when(oidcUser.getClaimAsString(FAMILY_NAME)).thenReturn(lastName);
 
-      var dto = new UserDto(oidcUserInfo);
+      var dto = new UserDto(oidcUser);
       assertThat(dto.getUsername()).isEqualTo(username);
       assertThat(dto.getEmail()).isEqualTo(email);
       assertThat(dto.getFullName()).isEqualTo(fullName);

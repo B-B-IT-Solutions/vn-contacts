@@ -10,8 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
-import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.core.ClaimAccessor;
 
 @Data
 @NoArgsConstructor
@@ -36,15 +35,7 @@ public class UserDto {
    @JsonProperty("fullName")
    private String fullName;
 
-   public UserDto(OidcUserInfo userInfo) {
-      this.username = userInfo.getPreferredUsername();
-      this.email = userInfo.getEmail();
-      this.fullName = userInfo.getFullName();
-      this.firstName = userInfo.getGivenName();
-      this.lastName = userInfo.getFamilyName();
-   }
-
-   public UserDto(Jwt jwt) {
+   public UserDto(ClaimAccessor jwt) {
       this.username = jwt.getClaimAsString(PREFERRED_USERNAME);
       this.email = jwt.getClaimAsString(EMAIL);
       this.fullName = jwt.getClaimAsString(NAME);

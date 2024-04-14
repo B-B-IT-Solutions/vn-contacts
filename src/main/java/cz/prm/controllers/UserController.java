@@ -17,7 +17,7 @@ public class UserController {
    public UserDto getCurrentUser(Authentication authToken) {
       if (authToken instanceof OAuth2AuthenticationToken) {
          var oidcUser = (OidcUser) authToken.getPrincipal();
-         return new UserDto(oidcUser.getUserInfo());
+         return new UserDto(oidcUser);
       }
       var jwt = (Jwt) authToken.getPrincipal();
       return new UserDto(jwt);
