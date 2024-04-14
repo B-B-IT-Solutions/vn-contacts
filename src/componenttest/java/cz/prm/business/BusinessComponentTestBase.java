@@ -1,7 +1,12 @@
 package cz.prm.business;
 
+import static cz.prm.utils.ComponentTestUser.USER_1;
+import static cz.prm.utils.ComponentTestUser.USER_2;
+import static cz.prm.utils.ComponentTestUser.USER_3;
+
 import cz.prm.ComponentTestBase;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 import java.util.List;
 
@@ -9,9 +14,21 @@ public class BusinessComponentTestBase extends ComponentTestBase {
 
    private static String CONTACTS_URL = "contacts";
 
-   protected List<ContactDto> getContacts() {
+   protected List<ContactDto> user1GetContacts() {
+      return getContacts(USER_1);
+   }
+
+   protected List<ContactDto> user2GetContacts() {
+      return getContacts(USER_2);
+   }
+
+   protected List<ContactDto> user3GetContacts() {
+      return getContacts(USER_3);
+   }
+
+   protected List<ContactDto> getContacts(ComponentTestUser user) {
       var typeRef = new TypeRef<List<ContactDto>>() {
       };
-      return getMany(CONTACTS_URL, typeRef);
+      return getMany(CONTACTS_URL, user, typeRef);
    }
 }

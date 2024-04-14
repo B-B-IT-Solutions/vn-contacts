@@ -8,6 +8,7 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED;
 
+import cz.prm.utils.ComponentTestUser;
 import dasniko.testcontainers.keycloak.KeycloakContainer;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
@@ -50,18 +51,18 @@ public abstract class ComponentTestBase {
       registry.add("spring.security.oauth2.client.provider.keycloak.issuer-uri", () -> keycloak.getAuthServerUrl() + "/realms/prm");
    }
 
-   public <T> List<T> getMany(String url, TypeRef<List<T>> type) {
-      var accessToken = getAccessToken();
+   public <T> List<T> getMany(String url, ComponentTestUser user, TypeRef<List<T>> type) {
+      var accessToken = getAccessToken(user);
       return given().header(AUTHORIZATION, accessToken).when().get(url).then().log().ifError().assertThat()
           .statusCode(OK.value())
           .extract()
           .as(type);
    }
 
-   protected String getAccessToken() {
+   protected String getAccessToken(ComponentTestUser user) {
       try {
          var tokenUrl = accessTokenUrl();
-         var formData = accessTokenFormData();
+         var formData = accessTokenFormData(user);
          var headers = accessTokenHeaders();
          var entity = new HttpEntity<>(formData, headers);
          var response = restTemplate.postForEntity(tokenUrl, entity, String.class).getBody();
@@ -71,12 +72,12 @@ public abstract class ComponentTestBase {
       }
    }
 
-   private MultiValueMap<String, String> accessTokenFormData() {
+   private MultiValueMap<String, String> accessTokenFormData(ComponentTestUser user) {
       var formData = new LinkedMultiValueMap<String, String>();
       formData.put("grant_type", singletonList("password"));
       formData.put("client_id", singletonList("prm"));
-      formData.put("username", singletonList("bobuskysergej"));
-      formData.put("password", singletonList("password123"));
+      formData.put("username", singletonList(user.getUsername()));
+      formData.put("password", singletonList(user.getPassword()));
       return formData;
    }
 

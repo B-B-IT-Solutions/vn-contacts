@@ -9,7 +9,13 @@ public class ContactComponentTest extends BusinessComponentTestBase {
 
    @Test
    void getContactsTest() {
-      var contacts = getContacts();
+      var contacts = user1GetContacts();
+      assertThat(contacts).hasSize(2);
+
+      contacts = user2GetContacts();
+      assertThat(contacts).hasSize(2);
+
+      contacts = user3GetContacts();
       assertThat(contacts).hasSize(2);
    }
 }
