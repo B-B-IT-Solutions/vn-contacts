@@ -1,4 +1,4 @@
-package cz.prm.business;
+package cz.prm.business.contacts;
 
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
@@ -10,7 +10,7 @@ import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 import java.util.List;
 
-public class BusinessComponentTestBase extends ComponentTestBase {
+public class ContactComponentTestBase extends ComponentTestBase {
 
    private static String CONTACTS_URL = "contacts";
 

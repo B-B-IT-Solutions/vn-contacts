@@ -2,10 +2,9 @@ package cz.prm.business.contacts;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.business.BusinessComponentTestBase;
 import org.junit.jupiter.api.Test;
 
-public class ContactComponentTest extends BusinessComponentTestBase {
+public class ContactComponentTest extends ContactComponentTestBase {
 
    @Test
    void getContactsTest() {

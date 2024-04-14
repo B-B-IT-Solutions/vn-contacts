@@ -51,6 +51,14 @@ public abstract class ComponentTestBase {
       registry.add("spring.security.oauth2.client.provider.keycloak.issuer-uri", () -> keycloak.getAuthServerUrl() + "/realms/prm");
    }
 
+   public <T> T getOne(String url, ComponentTestUser user, TypeRef<T> type) {
+      var accessToken = getAccessToken(user);
+      return given().header(AUTHORIZATION, accessToken).when().get(url).then().log().ifError().assertThat()
+          .statusCode(OK.value())
+          .extract()
+          .as(type);
+   }
+
    public <T> List<T> getMany(String url, ComponentTestUser user, TypeRef<List<T>> type) {
       var accessToken = getAccessToken(user);
       return given().header(AUTHORIZATION, accessToken).when().get(url).then().log().ifError().assertThat()
