@@ -87,11 +87,11 @@
   ],
   "users": [
     {
-      "id": "bobuskysergej",
-      "email": "bobuskysergej@gmail.com",
-      "username": "bobuskysergej",
-      "firstName": "Sergej",
-      "lastName": "Bobusky",
+      "id": "user1",
+      "email": "user1@gmail.com",
+      "username": "user1",
+      "firstName": "User 1 First Name",
+      "lastName": "User 1 Last Name",
       "enabled": true,
       "emailVerified": true,
       "credentials": [
@@ -107,11 +107,71 @@
       "groups": []
     },
     {
-      "id": "bobuskaviktoria",
-      "email": "bobuskaviktoria@gmail.com",
-      "username": "bobuskaviktoria",
-      "firstName": "Viktoria",
-      "lastName": "Bobuska",
+      "id": "user2",
+      "email": "user2@gmail.com",
+      "username": "user2",
+      "firstName": "User 2 First Name",
+      "lastName": "User 2 Last Name",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "temporary": false,
+          "type": "password",
+          "value": "password123"
+        }
+      ],
+      "realmRoles": [
+        "prm-user"
+      ],
+      "groups": []
+    },
+    {
+      "id": "user3",
+      "email": "user3@gmail.com",
+      "username": "user3",
+      "firstName": "User 3 First Name",
+      "lastName": "User 3 Last Name",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "temporary": false,
+          "type": "password",
+          "value": "password123"
+        }
+      ],
+      "realmRoles": [
+        "prm-user"
+      ],
+      "groups": []
+    },
+    {
+      "id": "user4",
+      "email": "user4@gmail.com",
+      "username": "user4",
+      "firstName": "User 4 First Name",
+      "lastName": "User 4 Last Name",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "temporary": false,
+          "type": "password",
+          "value": "password123"
+        }
+      ],
+      "realmRoles": [
+        "prm-user"
+      ],
+      "groups": []
+    },
+    {
+      "id": "user5",
+      "email": "user5@gmail.com",
+      "username": "user5",
+      "firstName": "User 5 First Name",
+      "lastName": "User 5 Last Name",
       "enabled": true,
       "emailVerified": true,
       "credentials": [
