@@ -129,7 +129,7 @@
         {
           "temporary": false,
           "type": "password",
-          "value": "password123"
+          "value": "123"
         }
       ],
       "realmRoles": [
@@ -149,7 +149,7 @@
         {
           "temporary": false,
           "type": "password",
-          "value": "password123"
+          "value": "123"
         }
       ],
       "realmRoles": [
