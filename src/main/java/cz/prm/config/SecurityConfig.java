@@ -22,8 +22,6 @@ public class SecurityConfig {
    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
       http.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
           .oauth2ResourceServer((oauth2) -> oauth2.jwt(withDefaults()))
-//          .oauth2Login(withDefaults())
-//          .logout(logout -> logout.addLogoutHandler(keycloakLogoutHandler).logoutSuccessUrl("/"))
           .csrf(csrf -> csrf.disable())
           .sessionManagement(session -> session.sessionCreationPolicy(ALWAYS));
       return http.build();
