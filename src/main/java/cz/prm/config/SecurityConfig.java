@@ -1,7 +1,7 @@
 package cz.prm.config;
 
 import static org.springframework.security.config.Customizer.withDefaults;
-import static org.springframework.security.config.http.SessionCreationPolicy.ALWAYS;
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ public class SecurityConfig {
       http.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
           .oauth2ResourceServer((oauth2) -> oauth2.jwt(withDefaults()))
           .csrf(csrf -> csrf.disable())
-          .sessionManagement(session -> session.sessionCreationPolicy(ALWAYS));
+          .sessionManagement(session -> session.sessionCreationPolicy(STATELESS));
       return http.build();
    }
 

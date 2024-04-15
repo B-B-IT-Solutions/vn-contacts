@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.security.config.http.SessionCreationPolicy.ALWAYS;
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -78,13 +78,11 @@ class SecurityConfigTest {
       when(authenticationManagerBuilder.build()).thenReturn(authenticationManager);
       when(applicationContext.getBeanNamesForType(any(Class.class))).thenReturn(new String[0]);
       when(authorizeHttpRequestsConfigurer.getRegistry()).thenReturn(requestMatcherRegistry);
-//      when(requestMatcherRegistry.requestMatchers(any(String[].class))).thenReturn(authorizedUrl);
       when(requestMatcherRegistry.anyRequest()).thenReturn(authorizedUrl);
-//      when(authorizedUrl.permitAll()).thenReturn(requestMatcherRegistry);
-//      when(authorizedUrl.hasAnyRole(any(String[].class))).thenReturn(requestMatcherRegistry);
+      when(authorizedUrl.authenticated()).thenReturn(requestMatcherRegistry);
 
       securityConfig.filterChain(httpSecurity);
-      verify(sessionManagementConfigurer).sessionCreationPolicy(ALWAYS);
+      verify(sessionManagementConfigurer).sessionCreationPolicy(STATELESS);
       verify(csrfConfigurer).disable();
    }
 
