@@ -31,7 +31,7 @@ class ContactControllerTest {
    void getContacts() {
       var users = contacts();
       when(userService.getContacts()).thenReturn(users);
-      var result = controller.getContacts();
+      var result = controller.getContacts(null);
       assertContactsDto(users, result);
    }
 

@@ -4,6 +4,7 @@ import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.mappers.ContactMapper;
 import cz.prm.services.contact.UserService;
 import java.util.List;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +22,7 @@ public class ContactController {
    }
 
    @GetMapping
-   public List<ContactDto> getContacts() {
+   public List<ContactDto> getContacts(Authentication authToken) {
       var contacts = userService.getContacts();
       return mapper.toContactsDto(contacts);
    }

@@ -3,8 +3,6 @@ package cz.prm.config;
 import static org.springframework.security.config.Customizer.withDefaults;
 import static org.springframework.security.config.http.SessionCreationPolicy.ALWAYS;
 
-import cz.prm.config.keycloak.KeycloakLogoutHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,19 +18,12 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 @EnableWebSecurity
 public class SecurityConfig {
 
-   private KeycloakLogoutHandler keycloakLogoutHandler;
-
-   @Autowired
-   public SecurityConfig(KeycloakLogoutHandler keycloakLogoutHandler) {
-      this.keycloakLogoutHandler = keycloakLogoutHandler;
-   }
-
    @Bean
    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
       http.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
           .oauth2ResourceServer((oauth2) -> oauth2.jwt(withDefaults()))
-          .oauth2Login(withDefaults())
-          .logout(logout -> logout.addLogoutHandler(keycloakLogoutHandler).logoutSuccessUrl("/"))
+//          .oauth2Login(withDefaults())
+//          .logout(logout -> logout.addLogoutHandler(keycloakLogoutHandler).logoutSuccessUrl("/"))
           .csrf(csrf -> csrf.disable())
           .sessionManagement(session -> session.sessionCreationPolicy(ALWAYS));
       return http.build();

@@ -7,7 +7,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.config.http.SessionCreationPolicy.ALWAYS;
 
-import cz.prm.config.keycloak.KeycloakLogoutHandler;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +24,6 @@ import org.springframework.security.config.annotation.web.configurers.AuthorizeH
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer.AuthorizedUrl;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
-import org.springframework.security.config.annotation.web.configurers.oauth2.client.OAuth2LoginConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
@@ -34,8 +32,6 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 @ExtendWith(MockitoExtension.class)
 class SecurityConfigTest {
 
-   @Mock
-   private KeycloakLogoutHandler logoutHandler;
    @Mock
    private ObjectPostProcessor objectPostProcessor;
    @Mock
@@ -48,8 +44,6 @@ class SecurityConfigTest {
    private AuthorizeHttpRequestsConfigurer authorizeHttpRequestsConfigurer;
    @Mock
    private OAuth2ResourceServerConfigurer resourceServerConfigurer;
-   @Mock
-   private OAuth2LoginConfigurer loginConfigurer;
    @Mock
    private SessionManagementConfigurer sessionManagementConfigurer;
    @Mock
@@ -72,11 +66,10 @@ class SecurityConfigTest {
       httpSecurity = new HttpSecurity(objectPostProcessor, authenticationManagerBuilder, sharedObjects);
       httpSecurity.with(authorizeHttpRequestsConfigurer, dummyCustomize);
       httpSecurity.with(resourceServerConfigurer, dummyCustomize);
-      httpSecurity.with(loginConfigurer, dummyCustomize);
       httpSecurity.with(sessionManagementConfigurer, dummyCustomize);
       httpSecurity.with(csrfConfigurer, dummyCustomize);
 
-      securityConfig = new SecurityConfig(logoutHandler);
+      securityConfig = new SecurityConfig();
    }
 
    @Test
