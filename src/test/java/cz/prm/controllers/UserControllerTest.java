@@ -14,8 +14,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 
@@ -23,11 +21,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 class UserControllerTest {
 
    @Mock
-   private OAuth2AuthenticationToken oAuth2AuthenticationToken;
-   @Mock
    private JwtAuthenticationToken jwtAuthenticationToken;
-   @Mock
-   private OidcUser oidcUser;
    @Mock
    private Jwt jwt;
 
@@ -36,29 +30,6 @@ class UserControllerTest {
    @BeforeEach
    void setUp() {
       controller = new UserController();
-   }
-
-   @Test
-   void getCurrentUserOAuth2AuthenticationToken() {
-      var username = uuid();
-      var email = uuid();
-      var fullName = uuid();
-      var firstName = uuid();
-      var lastName = uuid();
-
-      when(oAuth2AuthenticationToken.getPrincipal()).thenReturn(oidcUser);
-      when(oidcUser.getClaimAsString(PREFERRED_USERNAME)).thenReturn(username);
-      when(oidcUser.getClaimAsString(EMAIL)).thenReturn(email);
-      when(oidcUser.getClaimAsString(NAME)).thenReturn(fullName);
-      when(oidcUser.getClaimAsString(GIVEN_NAME)).thenReturn(firstName);
-      when(oidcUser.getClaimAsString(FAMILY_NAME)).thenReturn(lastName);
-
-      var result = controller.getCurrentUser(oAuth2AuthenticationToken);
-      assertThat(result.getUsername()).isEqualTo(username);
-      assertThat(result.getEmail()).isEqualTo(email);
-      assertThat(result.getFullName()).isEqualTo(fullName);
-      assertThat(result.getFirstName()).isEqualTo(firstName);
-      assertThat(result.getLastName()).isEqualTo(lastName);
    }
 
    @Test

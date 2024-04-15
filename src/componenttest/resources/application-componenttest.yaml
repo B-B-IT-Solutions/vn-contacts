@@ -13,8 +13,8 @@ spring:
 #      hibernate:
 #        format_sql: true
 
-#DB
-#logging:
+
+#LOGGING:
 #  level:
 #    org.springframework.web: INFO
 #    org.hibernate.SQL: DEBUG
