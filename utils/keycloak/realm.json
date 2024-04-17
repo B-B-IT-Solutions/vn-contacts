@@ -54,37 +54,6 @@
   },
   "clients": [
     {
-      "id": "73ace884-ec54-48f8-9585-1ae5823ee545",
-      "clientId": "prm-backend",
-      "name": "PRM Backend Application",
-      "enabled": true,
-      "publicClient": true,
-      "rootUrl": "http://localhost:8091",
-      "adminUrl": "http://localhost:8091",
-      "baseUrl": "http://localhost:8091",
-      "redirectUris": [
-        "http://localhost:8091/*"
-      ],
-      "webOrigins": [
-        "http://localhost:8091"
-      ],
-      "standardFlowEnabled": true,
-      "directAccessGrantsEnabled": true,
-      "defaultClientScopes": [
-        "web-origins",
-        "acr",
-        "profile",
-        "roles",
-        "email",
-        "microprofile-jwt"
-      ],
-      "optionalClientScopes": [
-        "address",
-        "phone",
-        "offline_access"
-      ]
-    },
-    {
       "id": "cecf820e-8623-4276-b154-1cb170de7eba",
       "clientId": "prm-ui",
       "name": "PRM UI Application",
