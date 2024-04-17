@@ -92,7 +92,7 @@ public abstract class ComponentTestBase {
    private MultiValueMap<String, String> accessTokenFormData(ComponentTestUser user) {
       var formData = new LinkedMultiValueMap<String, String>();
       formData.put("grant_type", singletonList("password"));
-      formData.put("client_id", singletonList("prm"));
+      formData.put("client_id", singletonList("componenttest"));
       formData.put("username", singletonList(user.getUsername()));
       formData.put("password", singletonList(user.getPassword()));
       return formData;
