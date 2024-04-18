@@ -3,13 +3,14 @@
   "realm": "prm",
   "sslRequired": "none",
   "enabled": true,
-  "eventsEnabled": true,
-  "eventsExpiration": 900,
-  "adminEventsEnabled": true,
-  "adminEventsDetailsEnabled": true,
-  "attributes": {
-    "adminEventsExpiration": "900"
-  },
+  "registrationAllowed": true,
+  "registrationEmailAsUsername": true,
+  "rememberMe": true,
+  "verifyEmail": true,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
   "roles": {
     "realm": [
       {
