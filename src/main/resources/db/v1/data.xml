@@ -2,22 +2,22 @@
 									 xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 									 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 									 xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-		
-		<changeSet author="sergej" id="1.0.1">
-				<insert tableName="contact">
-						<column name="user_id" value="1"/>
-						<column name="first_name" value="Sergej"/>
-						<column name="last_name" value="Bobusky"/>
-						<column name="email" value="bobuskysergej@gmail.com"/>
-						<column name="password" value="password123"/>
-				</insert>
-				
-				<insert tableName="contact">
-						<column name="user_id" value="2"/>
-						<column name="first_name" value="Viktoria"/>
-						<column name="last_name" value="Bobuska"/>
-						<column name="email" value="bobuskaviktoria@gmail.com"/>
-						<column name="password" value="password123"/>
-				</insert>
-		</changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.1">
+			<insert tableName="contact">
+				 <column name="contact_id" value="1"/>
+				 <column name="first_name" value="Sergej"/>
+				 <column name="last_name" value="Bobusky"/>
+				 <column name="email" value="bobuskysergej@gmail.com"/>
+				 <column name="password" value="password123"/>
+			</insert>
+			
+			<insert tableName="contact">
+				 <column name="contact_id" value="2"/>
+				 <column name="first_name" value="Viktoria"/>
+				 <column name="last_name" value="Bobuska"/>
+				 <column name="email" value="bobuskaviktoria@gmail.com"/>
+				 <column name="password" value="password123"/>
+			</insert>
+	 </changeSet>
 </databaseChangeLog>
