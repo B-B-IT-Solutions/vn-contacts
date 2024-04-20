@@ -25,7 +25,8 @@ public class SecurityContextComponentTestUtils {
    }
 
    public static void clearContext() {
-      SecurityContextHolder.setContext(null);
+      var context = new SecurityContextImpl();
+      SecurityContextHolder.setContext(context);
    }
 
    private static void ensureUserContext(ComponentTestUser user) {
