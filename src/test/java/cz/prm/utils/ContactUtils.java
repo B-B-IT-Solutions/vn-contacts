@@ -20,8 +20,7 @@ public class ContactUtils {
       user.setFirstName(uuid());
       user.setLastName(uuid());
       user.setEmail(uuid());
-      user.setPassword(uuid());
-      user.setEmailVerifiedAt(now());
+      user.setOwner(uuid());
       return user;
    }
 
