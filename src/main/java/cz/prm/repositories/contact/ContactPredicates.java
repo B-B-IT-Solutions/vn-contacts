@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class ContactPredicates {
 
-   public Predicate byContactId(Long userId) {
-      return contact.userId.eq(userId);
+   public Predicate contacts(String username) {
+      return contact.owner.eq(username);
    }
 
-   public Predicate byEmail(String email) {
-      return contact.email.eq(email);
+   public Predicate byContactId(Long userId) {
+      return contact.contactId.eq(userId);
    }
 
 }

@@ -9,7 +9,7 @@
 				 <column name="first_name" value="Sergej"/>
 				 <column name="last_name" value="Bobusky"/>
 				 <column name="email" value="bobuskysergej@gmail.com"/>
-				 <column name="password" value="password123"/>
+				 <column name="owner" value="bobuskysergej"/>
 			</insert>
 			
 			<insert tableName="contact">
@@ -17,7 +17,7 @@
 				 <column name="first_name" value="Viktoria"/>
 				 <column name="last_name" value="Bobuska"/>
 				 <column name="email" value="bobuskaviktoria@gmail.com"/>
-				 <column name="password" value="password123"/>
+				 <column name="owner" value="bobuskysergej"/>
 			</insert>
 	 </changeSet>
 </databaseChangeLog>

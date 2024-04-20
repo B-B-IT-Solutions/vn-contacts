@@ -19,13 +19,7 @@ public class ContactDto {
    @JsonProperty("lastName")
    private String lastName;
 
-   @JsonProperty("username")
-   private String username;
-
    @JsonProperty("email")
    private String email;
-
-   @JsonProperty("fullName")
-   private String fullName;
 
 }

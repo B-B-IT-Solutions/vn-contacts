@@ -17,16 +17,17 @@ class ContactPredicatesTest {
    }
 
    @Test
-   void byContactId() {
-      var query = predicates.byContactId(11L);
-      assertThat(query).hasToString("contact.userId = 11");
+   void contacts() {
+      var username = uuid();
+      var query = predicates.contacts(username);
+      var expectedString = format("contact.owner = %s", username);
+      assertThat(query).hasToString(expectedString);
    }
 
    @Test
-   void byEmail() {
-      var email = uuid();
-      var query = predicates.byEmail(email);
-      var expectedString = format("contact.email = %s", email);
-      assertThat(query).hasToString(expectedString);
+   void byContactId() {
+      var query = predicates.byContactId(11L);
+      assertThat(query).hasToString("contact.contactId = 11");
    }
+
 }
