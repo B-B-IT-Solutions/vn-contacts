@@ -2,7 +2,8 @@ package cz.prm.services.contact;
 
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contacts;
-import static cz.prm.utils.assertions.UserAssertions.assertContact;
+import static cz.prm.utils.assertions.ContactAssertions.assertContact;
+import static cz.prm.utils.assertions.ContactAssertions.assertContacts;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -11,7 +12,6 @@ import static org.mockito.Mockito.when;
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
-import cz.prm.utils.assertions.UserAssertions;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,19 +27,19 @@ class ContactServiceTest {
    @Mock
    private ContactPredicates predicates;
 
-   private UserService userService;
+   private ContactService contactService;
 
    @BeforeEach
    void setUp() {
-      userService = new UserService(repository, predicates);
+      contactService = new ContactService(repository, predicates);
    }
 
    @Test
    void getContacts() {
       var users = contacts();
       when(repository.findAll()).thenReturn(users);
-      var result = userService.getContacts();
-      UserAssertions.assertContacts(result, users);
+      var result = contactService.getContacts();
+      assertContacts(result, users);
    }
 
    @Test
@@ -48,7 +48,7 @@ class ContactServiceTest {
       var predicate = new BooleanBuilder();
       when(predicates.byContactId(contact.getContactId())).thenReturn(predicate);
       when(repository.findOne(predicate)).thenReturn(of(contact));
-      var result = userService.getContact(contact.getContactId());
+      var result = contactService.getContact(contact.getContactId());
       assertContact(result, contact);
    }
 
@@ -58,7 +58,7 @@ class ContactServiceTest {
       var predicate = new BooleanBuilder();
       when(predicates.byContactId(contact.getContactId())).thenReturn(predicate);
       when(repository.findOne(predicate)).thenReturn(empty());
-      assertThrows(EntityNotFoundException.class, () -> userService.getContact(contact.getContactId()));
+      assertThrows(EntityNotFoundException.class, () -> contactService.getContact(contact.getContactId()));
    }
 
 }

@@ -11,12 +11,12 @@ import java.util.function.Supplier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class ContactService {
 
    private ContactRepository repository;
    private ContactPredicates predicates;
 
-   public UserService(ContactRepository repository, ContactPredicates predicates) {
+   public ContactService(ContactRepository repository, ContactPredicates predicates) {
       this.repository = repository;
       this.predicates = predicates;
    }

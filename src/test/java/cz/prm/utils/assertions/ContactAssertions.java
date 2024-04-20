@@ -7,7 +7,7 @@ import cz.prm.domain.contact.Contact;
 import java.util.List;
 import java.util.Objects;
 
-public class UserAssertions {
+public class ContactAssertions {
 
    public static void assertContacts(List<Contact> contacts1, List<Contact> contacts2) {
       assertThat(contacts1).isNotEmpty().hasSameSizeAs(contacts2);
@@ -20,7 +20,7 @@ public class UserAssertions {
    public static void assertContactsDto(List<Contact> contacts, List<ContactDto> dtos) {
       assertThat(contacts).isNotEmpty().hasSameSizeAs(dtos);
       contacts.forEach(u1 -> {
-         var u2 = dtos.stream().filter(u -> Objects.equals(u1.getContactId(), u.getUserId())).findFirst().get();
+         var u2 = dtos.stream().filter(u -> Objects.equals(u1.getContactId(), u.getContactId())).findFirst().get();
          assertContact(u1, u2);
       });
    }
@@ -32,7 +32,7 @@ public class UserAssertions {
    }
 
    public static void assertContact(Contact contact, ContactDto dto) {
-      assertThat(contact.getContactId()).isEqualTo(dto.getUserId());
+      assertThat(contact.getContactId()).isEqualTo(dto.getContactId());
       assertThat(contact.getFirstName()).isEqualTo(dto.getFirstName());
       assertThat(contact.getLastName()).isEqualTo(dto.getLastName());
       assertThat(contact.getEmail()).isEqualTo(dto.getEmail());
