@@ -7,12 +7,9 @@
 				<createSequence cacheSize="1" cycle="false" startValue="1" minValue="1" maxValue="9223372036854775807"
 												sequenceName="hiberante_sequence"/>
 				
-				<createSequence cacheSize="1" cycle="false" startValue="10000" minValue="10000" maxValue="9223372036854775807"
-												sequenceName="user_id_sequence"/>
-				
 				<createTable tableName="contact">
-						<column name="user_id" type="bigint">
-								<constraints primaryKey="true" primaryKeyName="users_pk" nullable="false"/>
+						<column name="contact_id" type="bigint">
+								<constraints primaryKey="true" primaryKeyName="contact_pk" nullable="false"/>
 						</column>
 						<column name="first_name" type="VARCHAR(255)"/>
 						<column name="last_name" type="VARCHAR(255)"/>

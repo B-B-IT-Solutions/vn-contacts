@@ -16,7 +16,7 @@ public class ContactUtils {
 
    public static Contact contact() {
       var user = new Contact();
-      user.setUserId(randomLong());
+      user.setContactId(randomLong());
       user.setFirstName(uuid());
       user.setLastName(uuid());
       user.setEmail(uuid());

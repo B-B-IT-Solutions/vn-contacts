@@ -3,9 +3,7 @@ package cz.prm.domain.contact;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.time.Instant;
 import lombok.AllArgsConstructor;
@@ -20,10 +18,9 @@ import lombok.NoArgsConstructor;
 public class Contact {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_sequence")
-   @SequenceGenerator(name = "user_id_sequence", sequenceName = "user_id_sequence", allocationSize = 1)
-   @Column(name = "USER_ID")
-   private Long userId;
+   @GeneratedValue
+   @Column(name = "CONTACT_ID")
+   private Long contactId;
 
    @Column(name = "FIRST_NAME")
    private String firstName;

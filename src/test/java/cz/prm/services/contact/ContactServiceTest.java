@@ -46,9 +46,9 @@ class ContactServiceTest {
    void getContact() {
       var contact = contact();
       var predicate = new BooleanBuilder();
-      when(predicates.byContactId(contact.getUserId())).thenReturn(predicate);
+      when(predicates.byContactId(contact.getContactId())).thenReturn(predicate);
       when(repository.findOne(predicate)).thenReturn(of(contact));
-      var result = userService.getContact(contact.getUserId());
+      var result = userService.getContact(contact.getContactId());
       assertContact(result, contact);
    }
 
@@ -56,9 +56,9 @@ class ContactServiceTest {
    void getContact_EntityNotFound() {
       var contact = contact();
       var predicate = new BooleanBuilder();
-      when(predicates.byContactId(contact.getUserId())).thenReturn(predicate);
+      when(predicates.byContactId(contact.getContactId())).thenReturn(predicate);
       when(repository.findOne(predicate)).thenReturn(empty());
-      assertThrows(EntityNotFoundException.class, () -> userService.getContact(contact.getUserId()));
+      assertThrows(EntityNotFoundException.class, () -> userService.getContact(contact.getContactId()));
    }
 
 }
