@@ -2,6 +2,7 @@ package cz.prm.services.contact;
 
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contacts;
+import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertContacts;
 import static java.util.Optional.empty;
@@ -12,11 +13,14 @@ import static org.mockito.Mockito.when;
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
+import cz.prm.security.SecurityContextUtils;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
@@ -36,10 +40,16 @@ class ContactServiceTest {
 
    @Test
    void getContacts() {
-      var users = contacts();
-      when(repository.findAll()).thenReturn(users);
-      var result = contactService.getContacts();
-      assertContacts(result, users);
+      try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
+         var username = uuid();
+         var users = contacts();
+         var predicate = new BooleanBuilder();
+         context.when(() -> SecurityContextUtils.getUsername()).thenReturn(username);
+         when(predicates.contacts(username)).thenReturn(predicate);
+         when(repository.findAll(predicate)).thenReturn(users);
+         var result = contactService.getContacts();
+         assertContacts(result, users);
+      }
    }
 
    @Test

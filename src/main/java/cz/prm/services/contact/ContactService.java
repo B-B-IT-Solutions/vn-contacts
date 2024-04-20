@@ -1,5 +1,7 @@
 package cz.prm.services.contact;
 
+import static com.google.common.collect.Lists.newArrayList;
+import static cz.prm.security.SecurityContextUtils.getUsername;
 import static java.lang.String.format;
 
 import cz.prm.domain.contact.Contact;
@@ -22,7 +24,9 @@ public class ContactService {
    }
 
    public List<Contact> getContacts() {
-      return repository.findAll();
+      var username = getUsername();
+      var predicate = predicates.contacts(username);
+      return newArrayList(repository.findAll(predicate));
    }
 
    public Contact getContact(Long contactId) {
