@@ -1,17 +1,22 @@
 package cz.prm.controllers;
 
 import static cz.prm.utils.ContactUtils.contact;
+import static cz.prm.utils.ContactUtils.contactDto;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactsDto;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import cz.prm.controllers.mappers.ContactMapper;
+import cz.prm.domain.contact.Contact;
 import cz.prm.services.contact.ContactService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -20,6 +25,8 @@ class ContactControllerTest {
 
    @Mock
    private ContactService contactService;
+   @Captor
+   private ArgumentCaptor<Contact> contactCapt;
    private ContactMapper mapper = MapperUtils.getContactMapper();
 
    private ContactController controller;
@@ -44,6 +51,15 @@ class ContactControllerTest {
       when(contactService.getContact(contactId)).thenReturn(contact);
       var result = controller.getContact(contactId);
       assertContact(contact, result);
+   }
+
+   @Test
+   void createContact() {
+      var dto = contactDto();
+      controller.createContact(dto);
+      verify(contactService).createContact(contactCapt.capture());
+      var contact = contactCapt.getValue();
+      assertContact(contact, dto);
    }
 
 }

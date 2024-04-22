@@ -7,6 +7,7 @@ import static cz.prm.utils.assertions.ContactAssertions.assertContacts;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
@@ -61,6 +62,13 @@ class ContactServiceTest {
       when(predicates.byContactId(contact.getContactId())).thenReturn(predicate);
       when(repository.findOne(predicate)).thenReturn(empty());
       assertThrows(EntityNotFoundException.class, () -> contactService.getContact(contact.getContactId()));
+   }
+
+   @Test
+   void createContact() {
+      var contact = contact();
+      contactService.createContact(contact);
+      verify(repository).save(contact);
    }
 
 }

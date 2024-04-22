@@ -1,6 +1,7 @@
 package cz.prm.controllers.mappers;
 
 import static cz.prm.utils.ContactUtils.contact;
+import static cz.prm.utils.ContactUtils.contactDto;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactsDto;
@@ -23,6 +24,13 @@ class ContactMapperTest {
    void toContactDto() {
       var contact = contact();
       var dto = mapper.toContactDto(contact);
+      assertContact(contact, dto);
+   }
+
+   @Test
+   void toContact() {
+      var dto = contactDto();
+      var contact = mapper.toContact(dto);
       assertContact(contact, dto);
    }
 }
