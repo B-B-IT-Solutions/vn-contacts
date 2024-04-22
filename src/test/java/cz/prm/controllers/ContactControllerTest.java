@@ -37,6 +37,15 @@ class ContactControllerTest {
    }
 
    @Test
+   void createContact() {
+      var dto = contactDto();
+      controller.createContact(dto);
+      verify(contactService).createContact(contactCapt.capture());
+      var contact = contactCapt.getValue();
+      assertContact(contact, dto);
+   }
+
+   @Test
    void getContacts() {
       var contacts = contacts();
       when(contactService.getContacts()).thenReturn(contacts);
@@ -51,15 +60,6 @@ class ContactControllerTest {
       when(contactService.getContact(contactId)).thenReturn(contact);
       var result = controller.getContact(contactId);
       assertContact(contact, result);
-   }
-
-   @Test
-   void createContact() {
-      var dto = contactDto();
-      controller.createContact(dto);
-      verify(contactService).createContact(contactCapt.capture());
-      var contact = contactCapt.getValue();
-      assertContact(contact, dto);
    }
 
 }

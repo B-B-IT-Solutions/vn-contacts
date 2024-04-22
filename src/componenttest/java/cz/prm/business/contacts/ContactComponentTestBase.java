@@ -9,8 +9,8 @@ import static java.util.stream.Collectors.toList;
 
 import cz.prm.ComponentTestBase;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.custom.ComponentTestContactRepository;
 import cz.prm.domain.contact.Contact;
-import cz.prm.repositories.contact.ContactRepository;
 import cz.prm.services.contact.ContactService;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
@@ -25,7 +25,7 @@ public class ContactComponentTestBase extends ComponentTestBase {
    protected static String CONTACT_URL = CONTACTS_URL + "/%s";
 
    @Autowired
-   protected ContactRepository contactRepository;
+   protected ComponentTestContactRepository contactRepository;
    @Autowired
    protected ContactService contactService;
 
@@ -58,6 +58,18 @@ public class ContactComponentTestBase extends ComponentTestBase {
       return getContact(contactId, USER_3);
    }
 
+   protected void user1CreateContact(ContactDto dto) {
+      createContact(dto, USER_1);
+   }
+
+   protected void user2CreateContact(ContactDto dto) {
+      createContact(dto, USER_2);
+   }
+
+   protected void user3CreateContact(ContactDto dto) {
+      createContact(dto, USER_3);
+   }
+
    protected void user1GetContactExpectNotFound(Long contactId) {
       getContactExpectNotFound(contactId, USER_1);
    }
@@ -83,6 +95,10 @@ public class ContactComponentTestBase extends ComponentTestBase {
       return getOne(url, user, typeRef);
    }
 
+   protected void createContact(ContactDto dto, ComponentTestUser user) {
+      post(CONTACTS_URL, user, dto);
+   }
+
    protected void getContactExpectNotFound(Long contactId, ComponentTestUser user) {
       var url = format(CONTACT_URL, contactId);
       getExpectNotFount(url, user);
@@ -99,5 +115,9 @@ public class ContactComponentTestBase extends ComponentTestBase {
    protected Contact createContact(ComponentTestUser user) {
       var contact = contact(user);
       return contactRepository.save(contact);
+   }
+
+   protected Contact getContactFromDb(ContactDto dto) {
+      return contactRepository.getByEmail(dto.getEmail());
    }
 }

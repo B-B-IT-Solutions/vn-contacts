@@ -36,6 +36,13 @@ class ContactServiceTest {
    }
 
    @Test
+   void createContact() {
+      var contact = contact();
+      contactService.createContact(contact);
+      verify(repository).save(contact);
+   }
+
+   @Test
    void getContacts() {
       var users = contacts();
       var predicate = new BooleanBuilder();
@@ -62,13 +69,6 @@ class ContactServiceTest {
       when(predicates.byContactId(contact.getContactId())).thenReturn(predicate);
       when(repository.findOne(predicate)).thenReturn(empty());
       assertThrows(EntityNotFoundException.class, () -> contactService.getContact(contact.getContactId()));
-   }
-
-   @Test
-   void createContact() {
-      var contact = contact();
-      contactService.createContact(contact);
-      verify(repository).save(contact);
    }
 
 }

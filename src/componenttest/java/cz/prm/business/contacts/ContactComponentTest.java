@@ -3,6 +3,7 @@ package cz.prm.business.contacts;
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
+import static cz.prm.utils.ContactComponentTestUtils.contactDto;
 import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertContact;
 import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertContacts;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -77,5 +78,13 @@ public class ContactComponentTest extends ContactComponentTestBase {
       assertContact(contact, contactDto);
       user1GetContactExpectNotFound(contactId);
       user2GetContactExpectNotFound(contactId);
+   }
+
+   @Test
+   void createContact() {
+      var dto = contactDto();
+      user1CreateContact(dto);
+      var contact = getContactFromDb(dto);
+      assertContact(contact, dto);
    }
 }

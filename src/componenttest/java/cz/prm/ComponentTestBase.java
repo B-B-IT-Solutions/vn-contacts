@@ -63,6 +63,11 @@ public abstract class ComponentTestBase {
       registry.add("spring.security.oauth2.client.provider.keycloak.issuer-uri", () -> keycloak.getAuthServerUrl() + "/realms/prm");
    }
 
+   protected <T> void post(String url, ComponentTestUser user, T body) {
+      given().spec(postRequestSpec(body, user)).expect().log().ifError().when().post(url).then().assertThat()
+          .statusCode(OK.value());
+   }
+
    protected <T> T getOne(String url, ComponentTestUser user, TypeRef<T> type) {
       return given().spec(getRequestSpec(user)).expect().log().ifError().when().get(url).then().assertThat()
           .statusCode(OK.value())
@@ -83,6 +88,12 @@ public abstract class ComponentTestBase {
 
    protected void getExpectStatus(String url, ComponentTestUser user, HttpStatus status) {
       given().spec(getRequestSpec(user)).expect().when().get(url).then().statusCode(status.value());
+   }
+
+   protected <T> RequestSpecification postRequestSpec(T body, ComponentTestUser user) {
+      var accessToken = getAccessToken(user);
+      return new RequestSpecBuilder().setAccept(ContentType.JSON).setContentType(ContentType.JSON).addHeader(AUTHORIZATION, accessToken).setBody(body)
+          .build();
    }
 
    protected RequestSpecification getRequestSpec(ComponentTestUser user) {

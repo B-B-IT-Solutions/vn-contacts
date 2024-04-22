@@ -22,6 +22,10 @@ public class ContactService {
       this.predicates = predicates;
    }
 
+   public void createContact(Contact contact) {
+      repository.save(contact);
+   }
+
    public List<Contact> getContacts() {
       var predicate = predicates.contacts();
       return newArrayList(repository.findAll(predicate));
@@ -31,10 +35,6 @@ public class ContactService {
       var predicate = predicates.byContactId(contactId);
       var optional = repository.findOne(predicate);
       return optional.orElseThrow(entityNotFoundSupplier(contactId));
-   }
-
-   public void createContact(Contact contact) {
-      repository.save(contact);
    }
 
    private Supplier<EntityNotFoundException> entityNotFoundSupplier(Long userId) {
