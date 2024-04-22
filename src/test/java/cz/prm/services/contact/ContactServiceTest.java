@@ -13,6 +13,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
+import cz.prm.domain.contact.Contact;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
 import cz.prm.security.SecurityContextUtils;
@@ -20,6 +21,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
@@ -32,6 +35,8 @@ class ContactServiceTest {
    private ContactRepository repository;
    @Mock
    private ContactPredicates predicates;
+   @Captor
+   private ArgumentCaptor<Contact> contactCapt;
 
    private ContactService contactService;
 
@@ -53,6 +58,30 @@ class ContactServiceTest {
          verify(repository).save(contact);
          assertThat(contact.getOwner()).isEqualTo(username);
       }
+   }
+
+   @Test
+   void updateContact() {
+      var contactIdDb = contact();
+      var updatedContact = contact();
+      var predicate = new BooleanBuilder();
+      when(predicates.byContactId(contactIdDb.getContactId())).thenReturn(predicate);
+      when(repository.findOne(predicate)).thenReturn(of(contactIdDb));
+
+      contactService.updateContact(contactIdDb.getContactId(), updatedContact);
+      verify(repository).save(contactCapt.capture());
+      var savedContact = contactCapt.getValue();
+      assertFieldsUpdated(contactIdDb, updatedContact, savedContact);
+   }
+
+   @Test
+   void updateContact_EntityNotFound() {
+      var contactIdDb = contact();
+      var updatedContact = contact();
+      var predicate = new BooleanBuilder();
+      when(predicates.byContactId(contactIdDb.getContactId())).thenReturn(predicate);
+      when(repository.findOne(predicate)).thenReturn(empty());
+      assertThrows(EntityNotFoundException.class, () -> contactService.updateContact(contactIdDb.getContactId(), updatedContact));
    }
 
    @Test
@@ -82,6 +111,14 @@ class ContactServiceTest {
       when(predicates.byContactId(contact.getContactId())).thenReturn(predicate);
       when(repository.findOne(predicate)).thenReturn(empty());
       assertThrows(EntityNotFoundException.class, () -> contactService.getContact(contact.getContactId()));
+   }
+
+   private static void assertFieldsUpdated(Contact contactIdDb, Contact updatedContact, Contact savedContact) {
+      assertThat(contactIdDb.getContactId()).isEqualTo(savedContact.getContactId());
+      assertThat(contactIdDb.getOwner()).isEqualTo(savedContact.getOwner());
+      assertThat(savedContact.getFirstName()).isEqualTo(updatedContact.getFirstName());
+      assertThat(savedContact.getLastName()).isEqualTo(updatedContact.getLastName());
+      assertThat(savedContact.getEmail()).isEqualTo(updatedContact.getEmail());
    }
 
 }

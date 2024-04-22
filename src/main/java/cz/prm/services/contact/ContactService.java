@@ -29,12 +29,28 @@ public class ContactService {
       repository.save(contact);
    }
 
+   public void updateContact(Long contactId, Contact updatedContact) {
+      var savedContact = getContactById(contactId);
+      updateContact(savedContact, updatedContact);
+      repository.save(savedContact);
+   }
+
    public List<Contact> getContacts() {
       var predicate = predicates.contacts();
       return newArrayList(repository.findAll(predicate));
    }
 
    public Contact getContact(Long contactId) {
+      return getContactById(contactId);
+   }
+
+   private void updateContact(Contact savedContact, Contact updatedContact) {
+      savedContact.setFirstName(updatedContact.getFirstName());
+      savedContact.setLastName(updatedContact.getLastName());
+      savedContact.setEmail(updatedContact.getEmail());
+   }
+
+   private Contact getContactById(Long contactId) {
       var predicate = predicates.byContactId(contactId);
       var optional = repository.findOne(predicate);
       return optional.orElseThrow(entityNotFoundSupplier(contactId));

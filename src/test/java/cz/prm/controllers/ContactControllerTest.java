@@ -5,6 +5,7 @@ import static cz.prm.utils.ContactUtils.contactDto;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactsDto;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -41,6 +42,15 @@ class ContactControllerTest {
       var dto = contactDto();
       controller.createContact(dto);
       verify(contactService).createContact(contactCapt.capture());
+      var contact = contactCapt.getValue();
+      assertContact(contact, dto);
+   }
+
+   @Test
+   void updateContact() {
+      var dto = contactDto();
+      controller.updateContact(dto.getContactId(), dto);
+      verify(contactService).updateContact(eq(dto.getContactId()), contactCapt.capture());
       var contact = contactCapt.getValue();
       assertContact(contact, dto);
    }

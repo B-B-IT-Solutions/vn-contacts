@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,12 @@ public class ContactController {
    public void createContact(@RequestBody ContactDto dto) {
       var contact = mapper.toContact(dto);
       contactService.createContact(contact);
+   }
+
+   @PutMapping("/{contactId}")
+   public void updateContact(@PathVariable("contactId") Long contactId, @RequestBody ContactDto dto) {
+      var contact = mapper.toContact(dto);
+      contactService.updateContact(contactId, contact);
    }
 
    @GetMapping
