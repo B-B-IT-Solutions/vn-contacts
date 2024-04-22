@@ -2,10 +2,12 @@ package cz.prm.services.contact;
 
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contacts;
+import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertContacts;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -13,11 +15,14 @@ import static org.mockito.Mockito.when;
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
+import cz.prm.security.SecurityContextUtils;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
@@ -37,9 +42,17 @@ class ContactServiceTest {
 
    @Test
    void createContact() {
-      var contact = contact();
-      contactService.createContact(contact);
-      verify(repository).save(contact);
+      try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
+         var contact = contact();
+         contact.setOwner(null);
+         var username = uuid();
+         context.when(() -> SecurityContextUtils.getUsername()).thenReturn(username);
+         assertThat(contact.getOwner()).isNull();
+
+         contactService.createContact(contact);
+         verify(repository).save(contact);
+         assertThat(contact.getOwner()).isEqualTo(username);
+      }
    }
 
    @Test
