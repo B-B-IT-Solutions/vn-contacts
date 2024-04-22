@@ -1,6 +1,8 @@
 package cz.prm.controllers;
 
+import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contacts;
+import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactsDto;
 import static org.mockito.Mockito.when;
 
@@ -33,6 +35,15 @@ class ContactControllerTest {
       when(contactService.getContacts()).thenReturn(contacts);
       var result = controller.getContacts();
       assertContactsDto(contacts, result);
+   }
+
+   @Test
+   void getContact() {
+      var contact = contact();
+      var contactId = contact.getContactId();
+      when(contactService.getContact(contactId)).thenReturn(contact);
+      var result = controller.getContact(contactId);
+      assertContact(contact, result);
    }
 
 }

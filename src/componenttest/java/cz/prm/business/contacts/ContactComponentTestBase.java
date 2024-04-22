@@ -4,6 +4,7 @@ import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
 import static cz.prm.utils.ContactComponentTestUtils.contact;
+import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
 import cz.prm.ComponentTestBase;
@@ -19,7 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class ContactComponentTestBase extends ComponentTestBase {
 
-   private static String CONTACTS_URL = "contacts";
+   protected static String CONTACTS_URL = "contacts";
+   protected static String CONTACT_URL = CONTACTS_URL + "/%s";
+
    @Autowired
    protected ContactRepository contactRepository;
    @Autowired
@@ -37,10 +40,29 @@ public class ContactComponentTestBase extends ComponentTestBase {
       return getContacts(USER_3);
    }
 
+   protected ContactDto user1GetContact(Long contactId) {
+      return getContact(contactId, USER_1);
+   }
+
+   protected ContactDto user2GetContact(Long contactId) {
+      return getContact(contactId, USER_2);
+   }
+
+   protected ContactDto user3GetContact(Long contactId) {
+      return getContact(contactId, USER_3);
+   }
+
    protected List<ContactDto> getContacts(ComponentTestUser user) {
       var typeRef = new TypeRef<List<ContactDto>>() {
       };
       return getMany(CONTACTS_URL, user, typeRef);
+   }
+
+   protected ContactDto getContact(Long contactId, ComponentTestUser user) {
+      var url = format(CONTACT_URL, contactId);
+      var typeRef = new TypeRef<ContactDto>() {
+      };
+      return getOne(url, user, typeRef);
    }
 
    protected List<Contact> createContacts(ComponentTestUser user) {
