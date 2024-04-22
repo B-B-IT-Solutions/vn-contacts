@@ -37,15 +37,25 @@ public class ContactComponentTest extends ContactComponentTestBase {
    @Test
    void getContact() {
       var contact = createContact(USER_1);
-      var contactDto = user1GetContact(contact.getContactId());
+      var contactId = contact.getContactId();
+
+      var contactDto = user1GetContact(contactId);
       assertContact(contact, contactDto);
+      user2GetContactExpectNotFound(contactId);
+      user3GetContactExpectNotFound(contactId);
 
       contact = createContact(USER_2);
-      contactDto = user2GetContact(contact.getContactId());
+      contactId = contact.getContactId();
+      contactDto = user2GetContact(contactId);
       assertContact(contact, contactDto);
+      user1GetContactExpectNotFound(contactId);
+      user3GetContactExpectNotFound(contactId);
 
       contact = createContact(USER_3);
-      contactDto = user3GetContact(contact.getContactId());
+      contactId = contact.getContactId();
+      contactDto = user3GetContact(contactId);
       assertContact(contact, contactDto);
+      user1GetContactExpectNotFound(contactId);
+      user2GetContactExpectNotFound(contactId);
    }
 }

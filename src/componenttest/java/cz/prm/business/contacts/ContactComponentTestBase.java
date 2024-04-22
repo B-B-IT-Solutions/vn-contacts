@@ -16,6 +16,7 @@ import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 import java.util.List;
 import java.util.stream.IntStream;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ContactComponentTestBase extends ComponentTestBase {
@@ -27,6 +28,11 @@ public class ContactComponentTestBase extends ComponentTestBase {
    protected ContactRepository contactRepository;
    @Autowired
    protected ContactService contactService;
+
+   @BeforeEach
+   void setUp() {
+      contactRepository.deleteAll();
+   }
 
    protected List<ContactDto> user1GetContacts() {
       return getContacts(USER_1);
@@ -52,6 +58,18 @@ public class ContactComponentTestBase extends ComponentTestBase {
       return getContact(contactId, USER_3);
    }
 
+   protected void user1GetContactExpectNotFound(Long contactId) {
+      getContactExpectNotFound(contactId, USER_1);
+   }
+
+   protected void user2GetContactExpectNotFound(Long contactId) {
+      getContactExpectNotFound(contactId, USER_2);
+   }
+
+   protected void user3GetContactExpectNotFound(Long contactId) {
+      getContactExpectNotFound(contactId, USER_3);
+   }
+
    protected List<ContactDto> getContacts(ComponentTestUser user) {
       var typeRef = new TypeRef<List<ContactDto>>() {
       };
@@ -63,6 +81,11 @@ public class ContactComponentTestBase extends ComponentTestBase {
       var typeRef = new TypeRef<ContactDto>() {
       };
       return getOne(url, user, typeRef);
+   }
+
+   protected void getContactExpectNotFound(Long contactId, ComponentTestUser user) {
+      var url = format(CONTACT_URL, contactId);
+      getExpectNotFount(url, user);
    }
 
    protected List<Contact> createContacts(ComponentTestUser user) {
