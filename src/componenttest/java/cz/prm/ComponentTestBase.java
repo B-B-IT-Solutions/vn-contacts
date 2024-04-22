@@ -64,14 +64,14 @@ public abstract class ComponentTestBase {
    }
 
    protected <T> T getOne(String url, ComponentTestUser user, TypeRef<T> type) {
-      return given().spec(getRequestSpec(user)).when().get(url).then().log().ifError().assertThat()
+      return given().spec(getRequestSpec(user)).expect().log().ifError().when().get(url).then().assertThat()
           .statusCode(OK.value())
           .extract()
           .as(type);
    }
 
    protected <T> List<T> getMany(String url, ComponentTestUser user, TypeRef<List<T>> type) {
-      return given().spec(getRequestSpec(user)).when().get(url).then().log().ifError().assertThat()
+      return given().spec(getRequestSpec(user)).expect().log().ifError().when().get(url).then().assertThat()
           .statusCode(OK.value())
           .extract()
           .as(type);
