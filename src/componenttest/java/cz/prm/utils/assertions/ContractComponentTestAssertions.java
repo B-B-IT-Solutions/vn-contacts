@@ -18,8 +18,10 @@ public class ContractComponentTestAssertions {
    }
 
    public static void assertContact(Contact contact, ContactDto contactDto) {
-      assertThat(contactDto.getEmail()).isEqualTo(contact.getEmail());
-      assertThat(contactDto.getFirstName()).isEqualTo(contact.getFirstName());
-      assertThat(contactDto.getLastName()).isEqualTo(contact.getLastName());
+      assertThat(contact.getContactId()).isEqualTo(contactDto.getContactId());
+      assertThat(contact.getEmail()).isEqualTo(contactDto.getEmail());
+      assertThat(contact.getFirstName()).isEqualTo(contactDto.getFirstName());
+      assertThat(contact.getLastName()).isEqualTo(contactDto.getLastName());
+      assertThat(contact.getOwner()).isNotEmpty();
    }
 }

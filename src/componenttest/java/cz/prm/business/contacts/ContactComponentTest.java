@@ -13,6 +13,39 @@ import org.junit.jupiter.api.Test;
 public class ContactComponentTest extends ContactComponentTestBase {
 
    @Test
+   void createContact() {
+      var toCreateDto = contactDto();
+      user1CreateContact(toCreateDto);
+      var contact = getContactFromDb(toCreateDto);
+      var contactId = contact.getContactId();
+
+      var createdDto = user1GetContact(contactId);
+      assertContact(contact, createdDto);
+      user2GetContactExpectNotFound(contactId);
+      user3GetContactExpectNotFound(contactId);
+
+      toCreateDto = contactDto();
+      user2CreateContact(toCreateDto);
+      contact = getContactFromDb(toCreateDto);
+      contactId = contact.getContactId();
+
+      createdDto = user2GetContact(contactId);
+      assertContact(contact, createdDto);
+      user1GetContactExpectNotFound(contactId);
+      user3GetContactExpectNotFound(contactId);
+
+      toCreateDto = contactDto();
+      user3CreateContact(toCreateDto);
+      contact = getContactFromDb(toCreateDto);
+      contactId = contact.getContactId();
+
+      createdDto = user3GetContact(contactId);
+      assertContact(contact, createdDto);
+      user1GetContactExpectNotFound(contactId);
+      user2GetContactExpectNotFound(contactId);
+   }
+
+   @Test
    void getContacts() {
       var contactsDto = user1GetContacts();
       assertThat(contactsDto).isEmpty();
@@ -80,11 +113,4 @@ public class ContactComponentTest extends ContactComponentTestBase {
       user2GetContactExpectNotFound(contactId);
    }
 
-   @Test
-   void createContact() {
-      var dto = contactDto();
-      user1CreateContact(dto);
-      var contact = getContactFromDb(dto);
-      assertContact(contact, dto);
-   }
 }
