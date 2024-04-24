@@ -34,30 +34,6 @@ public class ContactComponentTestBase extends ComponentTestBase {
       contactRepository.deleteAll();
    }
 
-   protected List<ContactDto> user1GetContacts() {
-      return getContacts(USER_1);
-   }
-
-   protected List<ContactDto> user2GetContacts() {
-      return getContacts(USER_2);
-   }
-
-   protected List<ContactDto> user3GetContacts() {
-      return getContacts(USER_3);
-   }
-
-   protected ContactDto user1GetContact(Long contactId) {
-      return getContact(contactId, USER_1);
-   }
-
-   protected ContactDto user2GetContact(Long contactId) {
-      return getContact(contactId, USER_2);
-   }
-
-   protected ContactDto user3GetContact(Long contactId) {
-      return getContact(contactId, USER_3);
-   }
-
    protected void user1CreateContact(ContactDto dto) {
       createContact(dto, USER_1);
    }
@@ -82,6 +58,52 @@ public class ContactComponentTestBase extends ComponentTestBase {
       updateContact(contactId, dto, USER_3);
    }
 
+   protected List<ContactDto> user1GetContacts() {
+      return getContacts(USER_1);
+   }
+
+   protected List<ContactDto> user2GetContacts() {
+      return getContacts(USER_2);
+   }
+
+   protected List<ContactDto> user3GetContacts() {
+      return getContacts(USER_3);
+   }
+
+   protected ContactDto user1GetContact(Long contactId) {
+      return getContact(contactId, USER_1);
+   }
+
+   protected ContactDto user2GetContact(Long contactId) {
+      return getContact(contactId, USER_2);
+   }
+
+   protected ContactDto user3GetContact(Long contactId) {
+      return getContact(contactId, USER_3);
+   }
+
+   protected void createContact(ContactDto dto, ComponentTestUser user) {
+      post(CONTACTS_URL, user, dto);
+   }
+
+   protected void updateContact(Long contactId, ContactDto dto, ComponentTestUser user) {
+      var url = format(CONTACT_URL, contactId);
+      put(url, user, dto);
+   }
+
+   protected List<ContactDto> getContacts(ComponentTestUser user) {
+      var typeRef = new TypeRef<List<ContactDto>>() {
+      };
+      return getMany(CONTACTS_URL, user, typeRef);
+   }
+
+   protected ContactDto getContact(Long contactId, ComponentTestUser user) {
+      var url = format(CONTACT_URL, contactId);
+      var typeRef = new TypeRef<ContactDto>() {
+      };
+      return getOne(url, user, typeRef);
+   }
+
    protected void user1UpdateContactExpectNotFound(Long contactId, ContactDto dto) {
       updateContactExpectNotFound(contactId, dto, USER_1);
    }
@@ -104,28 +126,6 @@ public class ContactComponentTestBase extends ComponentTestBase {
 
    protected void user3GetContactExpectNotFound(Long contactId) {
       getContactExpectNotFound(contactId, USER_3);
-   }
-
-   protected List<ContactDto> getContacts(ComponentTestUser user) {
-      var typeRef = new TypeRef<List<ContactDto>>() {
-      };
-      return getMany(CONTACTS_URL, user, typeRef);
-   }
-
-   protected ContactDto getContact(Long contactId, ComponentTestUser user) {
-      var url = format(CONTACT_URL, contactId);
-      var typeRef = new TypeRef<ContactDto>() {
-      };
-      return getOne(url, user, typeRef);
-   }
-
-   protected void createContact(ContactDto dto, ComponentTestUser user) {
-      post(CONTACTS_URL, user, dto);
-   }
-
-   protected void updateContact(Long contactId, ContactDto dto, ComponentTestUser user) {
-      var url = format(CONTACT_URL, contactId);
-      put(url, user, dto);
    }
 
    protected void updateContactExpectNotFound(Long contactId, ContactDto dto, ComponentTestUser user) {
