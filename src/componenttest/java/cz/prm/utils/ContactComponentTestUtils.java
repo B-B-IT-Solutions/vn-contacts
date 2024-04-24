@@ -1,7 +1,7 @@
 package cz.prm.utils;
 
 import static cz.prm.utils.ComponentTestUser.USER_1;
-import static cz.prm.utils.TestUtils.uuid;
+import static cz.prm.utils.ComponentTestUtils.uuid;
 
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.domain.contact.Contact;

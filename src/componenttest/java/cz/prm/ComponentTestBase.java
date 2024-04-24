@@ -68,6 +68,11 @@ public abstract class ComponentTestBase {
           .statusCode(OK.value());
    }
 
+   protected <T> void put(String url, ComponentTestUser user, T body) {
+      given().spec(putRequestSpec(body, user)).expect().log().ifError().when().put(url).then().assertThat()
+          .statusCode(OK.value());
+   }
+
    protected <T> T getOne(String url, ComponentTestUser user, TypeRef<T> type) {
       return given().spec(getRequestSpec(user)).expect().log().ifError().when().get(url).then().assertThat()
           .statusCode(OK.value())
@@ -82,8 +87,16 @@ public abstract class ComponentTestBase {
           .as(type);
    }
 
-   protected void getExpectNotFount(String url, ComponentTestUser user) {
+   protected <T> void putExpectNotFound(String url, ComponentTestUser user, T body) {
+      putExpectStatus(url, user, body, HttpStatus.NOT_FOUND);
+   }
+
+   protected void getExpectNotFound(String url, ComponentTestUser user) {
       getExpectStatus(url, user, HttpStatus.NOT_FOUND);
+   }
+
+   protected <T> void putExpectStatus(String url, ComponentTestUser user, T body, HttpStatus status) {
+      given().spec(putRequestSpec(body, user)).expect().when().put(url).then().statusCode(status.value());
    }
 
    protected void getExpectStatus(String url, ComponentTestUser user, HttpStatus status) {
@@ -91,6 +104,12 @@ public abstract class ComponentTestBase {
    }
 
    protected <T> RequestSpecification postRequestSpec(T body, ComponentTestUser user) {
+      var accessToken = getAccessToken(user);
+      return new RequestSpecBuilder().setAccept(ContentType.JSON).setContentType(ContentType.JSON).addHeader(AUTHORIZATION, accessToken).setBody(body)
+          .build();
+   }
+
+   protected <T> RequestSpecification putRequestSpec(T body, ComponentTestUser user) {
       var accessToken = getAccessToken(user);
       return new RequestSpecBuilder().setAccept(ContentType.JSON).setContentType(ContentType.JSON).addHeader(AUTHORIZATION, accessToken).setBody(body)
           .build();

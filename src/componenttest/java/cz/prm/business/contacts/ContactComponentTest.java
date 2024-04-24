@@ -4,6 +4,7 @@ import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
 import static cz.prm.utils.ContactComponentTestUtils.contactDto;
+import static cz.prm.utils.ComponentTestUtils.uuid;
 import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertContact;
 import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertContacts;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,6 +44,22 @@ public class ContactComponentTest extends ContactComponentTestBase {
       assertContact(contact, createdDto);
       user1GetContactExpectNotFound(contactId);
       user2GetContactExpectNotFound(contactId);
+   }
+
+   @Test
+   void updateContact() {
+      var contact = createContact(USER_1);
+      var contactId = contact.getContactId();
+      var updateDto = user1GetContact(contactId);
+
+      updateDto.setEmail(uuid());
+      updateDto.setFirstName(uuid());
+      user1UpdateContact(contactId, updateDto);
+      contact = getContactFromDb(updateDto);
+      assertContact(contact, updateDto);
+
+      user2UpdateContactExpectNotFound(contactId, updateDto);
+      user3UpdateContactExpectNotFound(contactId, updateDto);
    }
 
    @Test

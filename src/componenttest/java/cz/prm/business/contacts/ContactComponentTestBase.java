@@ -70,6 +70,30 @@ public class ContactComponentTestBase extends ComponentTestBase {
       createContact(dto, USER_3);
    }
 
+   protected void user1UpdateContact(Long contactId, ContactDto dto) {
+      updateContact(contactId, dto, USER_1);
+   }
+
+   protected void user2UpdateContact(Long contactId, ContactDto dto) {
+      updateContact(contactId, dto, USER_2);
+   }
+
+   protected void user3UpdateContact(Long contactId, ContactDto dto) {
+      updateContact(contactId, dto, USER_3);
+   }
+
+   protected void user1UpdateContactExpectNotFound(Long contactId, ContactDto dto) {
+      updateContactExpectNotFound(contactId, dto, USER_1);
+   }
+
+   protected void user2UpdateContactExpectNotFound(Long contactId, ContactDto dto) {
+      updateContactExpectNotFound(contactId, dto, USER_2);
+   }
+
+   protected void user3UpdateContactExpectNotFound(Long contactId, ContactDto dto) {
+      updateContactExpectNotFound(contactId, dto, USER_3);
+   }
+
    protected void user1GetContactExpectNotFound(Long contactId) {
       getContactExpectNotFound(contactId, USER_1);
    }
@@ -99,9 +123,19 @@ public class ContactComponentTestBase extends ComponentTestBase {
       post(CONTACTS_URL, user, dto);
    }
 
+   protected void updateContact(Long contactId, ContactDto dto, ComponentTestUser user) {
+      var url = format(CONTACT_URL, contactId);
+      put(url, user, dto);
+   }
+
+   protected void updateContactExpectNotFound(Long contactId, ContactDto dto, ComponentTestUser user) {
+      var url = format(CONTACT_URL, contactId);
+      putExpectNotFound(url, user, dto);
+   }
+
    protected void getContactExpectNotFound(Long contactId, ComponentTestUser user) {
       var url = format(CONTACT_URL, contactId);
-      getExpectNotFount(url, user);
+      getExpectNotFound(url, user);
    }
 
    protected List<Contact> createContacts(ComponentTestUser user) {
