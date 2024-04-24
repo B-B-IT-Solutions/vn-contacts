@@ -54,12 +54,41 @@ public class ContactComponentTest extends ContactComponentTestBase {
 
       updateDto.setEmail(uuid());
       updateDto.setFirstName(uuid());
+      updateDto.setLastName(uuid());
       user1UpdateContact(contactId, updateDto);
       contact = getContactFromDb(updateDto);
       assertContact(contact, updateDto);
 
       user2UpdateContactExpectNotFound(contactId, updateDto);
       user3UpdateContactExpectNotFound(contactId, updateDto);
+
+      contact = createContact(USER_2);
+      contactId = contact.getContactId();
+      updateDto = user2GetContact(contactId);
+
+      updateDto.setEmail(uuid());
+      updateDto.setFirstName(uuid());
+      updateDto.setLastName(uuid());
+      user2UpdateContact(contactId, updateDto);
+      contact = getContactFromDb(updateDto);
+      assertContact(contact, updateDto);
+
+      user1UpdateContactExpectNotFound(contactId, updateDto);
+      user3UpdateContactExpectNotFound(contactId, updateDto);
+
+      contact = createContact(USER_3);
+      contactId = contact.getContactId();
+      updateDto = user3GetContact(contactId);
+
+      updateDto.setEmail(uuid());
+      updateDto.setFirstName(uuid());
+      updateDto.setLastName(uuid());
+      user3UpdateContact(contactId, updateDto);
+      contact = getContactFromDb(updateDto);
+      assertContact(contact, updateDto);
+
+      user1UpdateContactExpectNotFound(contactId, updateDto);
+      user2UpdateContactExpectNotFound(contactId, updateDto);
    }
 
    @Test
