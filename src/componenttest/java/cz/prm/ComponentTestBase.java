@@ -64,24 +64,24 @@ public abstract class ComponentTestBase {
    }
 
    protected <T> void post(String url, ComponentTestUser user, T body) {
-      given().spec(postRequestSpec(body, user)).expect().log().ifError().when().post(url).then().assertThat()
+      given().spec(requestSpec(body, user)).expect().log().ifError().when().post(url).then().assertThat()
           .statusCode(OK.value());
    }
 
    protected <T> void put(String url, ComponentTestUser user, T body) {
-      given().spec(putRequestSpec(body, user)).expect().log().ifError().when().put(url).then().assertThat()
+      given().spec(requestSpec(body, user)).expect().log().ifError().when().put(url).then().assertThat()
           .statusCode(OK.value());
    }
 
    protected <T> T getOne(String url, ComponentTestUser user, TypeRef<T> type) {
-      return given().spec(getRequestSpec(user)).expect().log().ifError().when().get(url).then().assertThat()
+      return given().spec(requestSpec(user)).expect().log().ifError().when().get(url).then().assertThat()
           .statusCode(OK.value())
           .extract()
           .as(type);
    }
 
    protected <T> List<T> getMany(String url, ComponentTestUser user, TypeRef<List<T>> type) {
-      return given().spec(getRequestSpec(user)).expect().log().ifError().when().get(url).then().assertThat()
+      return given().spec(requestSpec(user)).expect().log().ifError().when().get(url).then().assertThat()
           .statusCode(OK.value())
           .extract()
           .as(type);
@@ -96,26 +96,20 @@ public abstract class ComponentTestBase {
    }
 
    protected <T> void putExpectStatus(String url, ComponentTestUser user, T body, HttpStatus status) {
-      given().spec(putRequestSpec(body, user)).expect().when().put(url).then().statusCode(status.value());
+      given().spec(requestSpec(body, user)).expect().when().put(url).then().statusCode(status.value());
    }
 
    protected void getExpectStatus(String url, ComponentTestUser user, HttpStatus status) {
-      given().spec(getRequestSpec(user)).expect().when().get(url).then().statusCode(status.value());
+      given().spec(requestSpec(user)).expect().when().get(url).then().statusCode(status.value());
    }
 
-   protected <T> RequestSpecification postRequestSpec(T body, ComponentTestUser user) {
+   protected <T> RequestSpecification requestSpec(T body, ComponentTestUser user) {
       var accessToken = getAccessToken(user);
       return new RequestSpecBuilder().setAccept(ContentType.JSON).setContentType(ContentType.JSON).addHeader(AUTHORIZATION, accessToken).setBody(body)
           .build();
    }
 
-   protected <T> RequestSpecification putRequestSpec(T body, ComponentTestUser user) {
-      var accessToken = getAccessToken(user);
-      return new RequestSpecBuilder().setAccept(ContentType.JSON).setContentType(ContentType.JSON).addHeader(AUTHORIZATION, accessToken).setBody(body)
-          .build();
-   }
-
-   protected RequestSpecification getRequestSpec(ComponentTestUser user) {
+   protected RequestSpecification requestSpec(ComponentTestUser user) {
       var accessToken = getAccessToken(user);
       return new RequestSpecBuilder().setAccept(ContentType.JSON).setContentType(ContentType.JSON).addHeader(AUTHORIZATION, accessToken).build();
    }
