@@ -12,15 +12,18 @@ import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED;
 import cz.prm.utils.ComponentTestUser;
 import dasniko.testcontainers.keycloak.KeycloakContainer;
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.common.mapper.TypeRef;
+import io.restassured.http.ContentType;
+import io.restassured.specification.RequestSpecification;
 import java.util.List;
-import java.util.Objects;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -60,20 +63,55 @@ public abstract class ComponentTestBase {
       registry.add("spring.security.oauth2.client.provider.keycloak.issuer-uri", () -> keycloak.getAuthServerUrl() + "/realms/prm");
    }
 
-   public <T> T getOne(String url, ComponentTestUser user, TypeRef<T> type) {
-      var accessToken = getAccessToken(user);
-      return given().header(AUTHORIZATION, accessToken).when().get(url).then().log().ifError().assertThat()
+   protected <T> void post(String url, ComponentTestUser user, T body) {
+      given().spec(requestSpec(body, user)).expect().log().ifError().when().post(url).then().assertThat()
+          .statusCode(OK.value());
+   }
+
+   protected <T> void put(String url, ComponentTestUser user, T body) {
+      given().spec(requestSpec(body, user)).expect().log().ifError().when().put(url).then().assertThat()
+          .statusCode(OK.value());
+   }
+
+   protected <T> T getOne(String url, ComponentTestUser user, TypeRef<T> type) {
+      return given().spec(requestSpec(user)).expect().log().ifError().when().get(url).then().assertThat()
           .statusCode(OK.value())
           .extract()
           .as(type);
    }
 
-   public <T> List<T> getMany(String url, ComponentTestUser user, TypeRef<List<T>> type) {
-      var accessToken = getAccessToken(user);
-      return given().header(AUTHORIZATION, accessToken).when().get(url).then().log().ifError().assertThat()
+   protected <T> List<T> getMany(String url, ComponentTestUser user, TypeRef<List<T>> type) {
+      return given().spec(requestSpec(user)).expect().log().ifError().when().get(url).then().assertThat()
           .statusCode(OK.value())
           .extract()
           .as(type);
+   }
+
+   protected <T> void putExpectNotFound(String url, ComponentTestUser user, T body) {
+      putExpectStatus(url, user, body, HttpStatus.NOT_FOUND);
+   }
+
+   protected void getExpectNotFound(String url, ComponentTestUser user) {
+      getExpectStatus(url, user, HttpStatus.NOT_FOUND);
+   }
+
+   protected <T> void putExpectStatus(String url, ComponentTestUser user, T body, HttpStatus status) {
+      given().spec(requestSpec(body, user)).expect().when().put(url).then().statusCode(status.value());
+   }
+
+   protected void getExpectStatus(String url, ComponentTestUser user, HttpStatus status) {
+      given().spec(requestSpec(user)).expect().when().get(url).then().statusCode(status.value());
+   }
+
+   protected <T> RequestSpecification requestSpec(T body, ComponentTestUser user) {
+      var accessToken = getAccessToken(user);
+      return new RequestSpecBuilder().setAccept(ContentType.JSON).setContentType(ContentType.JSON).addHeader(AUTHORIZATION, accessToken).setBody(body)
+          .build();
+   }
+
+   protected RequestSpecification requestSpec(ComponentTestUser user) {
+      var accessToken = getAccessToken(user);
+      return new RequestSpecBuilder().setAccept(ContentType.JSON).setContentType(ContentType.JSON).addHeader(AUTHORIZATION, accessToken).build();
    }
 
    protected String getAccessToken(ComponentTestUser user) {
@@ -92,7 +130,7 @@ public abstract class ComponentTestBase {
    private MultiValueMap<String, String> accessTokenFormData(ComponentTestUser user) {
       var formData = new LinkedMultiValueMap<String, String>();
       formData.put("grant_type", singletonList("password"));
-      formData.put("client_id", singletonList("prm"));
+      formData.put("client_id", singletonList("componenttest"));
       formData.put("username", singletonList(user.getUsername()));
       formData.put("password", singletonList(user.getPassword()));
       return formData;

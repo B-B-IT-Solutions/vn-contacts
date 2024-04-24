@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,10 +19,10 @@ import lombok.NoArgsConstructor;
 public class Contact {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_sequence")
-   @SequenceGenerator(name = "user_id_sequence", sequenceName = "user_id_sequence", allocationSize = 1)
-   @Column(name = "USER_ID")
-   private Long userId;
+   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_seq")
+   @SequenceGenerator(name = "contact_seq", sequenceName = "contact_seq", allocationSize = 1)
+   @Column(name = "CONTACT_ID")
+   private Long contactId;
 
    @Column(name = "FIRST_NAME")
    private String firstName;
@@ -34,10 +33,7 @@ public class Contact {
    @Column(name = "EMAIL")
    private String email;
 
-   @Column(name = "EMAIL_VERIFIED_AT")
-   private Instant emailVerifiedAt;
-
-   @Column(name = "PASSWORD")
-   private String password;
+   @Column(name = "OWNER")
+   private String owner;
 
 }

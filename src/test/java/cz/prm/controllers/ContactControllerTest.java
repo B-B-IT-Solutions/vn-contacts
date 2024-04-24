@@ -1,15 +1,23 @@
 package cz.prm.controllers;
 
+import static cz.prm.utils.ContactUtils.contact;
+import static cz.prm.utils.ContactUtils.contactDto;
 import static cz.prm.utils.ContactUtils.contacts;
-import static cz.prm.utils.assertions.UserAssertions.assertContactsDto;
+import static cz.prm.utils.assertions.ContactAssertions.assertContact;
+import static cz.prm.utils.assertions.ContactAssertions.assertContactsDto;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import cz.prm.controllers.mappers.ContactMapper;
-import cz.prm.services.contact.UserService;
+import cz.prm.domain.contact.Contact;
+import cz.prm.services.contact.ContactService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -17,22 +25,51 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class ContactControllerTest {
 
    @Mock
-   private UserService userService;
+   private ContactService contactService;
+   @Captor
+   private ArgumentCaptor<Contact> contactCapt;
    private ContactMapper mapper = MapperUtils.getContactMapper();
 
    private ContactController controller;
 
    @BeforeEach
    void setUp() {
-      controller = new ContactController(userService, mapper);
+      controller = new ContactController(contactService, mapper);
+   }
+
+   @Test
+   void createContact() {
+      var dto = contactDto();
+      controller.createContact(dto);
+      verify(contactService).createContact(contactCapt.capture());
+      var contact = contactCapt.getValue();
+      assertContact(contact, dto);
+   }
+
+   @Test
+   void updateContact() {
+      var dto = contactDto();
+      controller.updateContact(dto.getContactId(), dto);
+      verify(contactService).updateContact(eq(dto.getContactId()), contactCapt.capture());
+      var contact = contactCapt.getValue();
+      assertContact(contact, dto);
    }
 
    @Test
    void getContacts() {
-      var users = contacts();
-      when(userService.getContacts()).thenReturn(users);
+      var contacts = contacts();
+      when(contactService.getContacts()).thenReturn(contacts);
       var result = controller.getContacts();
-      assertContactsDto(users, result);
+      assertContactsDto(contacts, result);
+   }
+
+   @Test
+   void getContact() {
+      var contact = contact();
+      var contactId = contact.getContactId();
+      when(contactService.getContact(contactId)).thenReturn(contact);
+      var result = controller.getContact(contactId);
+      assertContact(contact, result);
    }
 
 }

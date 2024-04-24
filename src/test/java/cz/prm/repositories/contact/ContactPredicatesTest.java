@@ -4,8 +4,11 @@ import static cz.prm.utils.TestUtils.uuid;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.security.SecurityContextUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
 class ContactPredicatesTest {
 
@@ -17,16 +20,25 @@ class ContactPredicatesTest {
    }
 
    @Test
-   void byContactId() {
-      var query = predicates.byContactId(11L);
-      assertThat(query).hasToString("contact.userId = 11");
+   void contacts() {
+      try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
+         var username = uuid();
+         context.when(() -> SecurityContextUtils.getUsername()).thenReturn(username);
+         var query = predicates.contacts();
+         var expectedString = format("contact.owner = %s", username);
+         assertThat(query).hasToString(expectedString);
+      }
    }
 
    @Test
-   void byEmail() {
-      var email = uuid();
-      var query = predicates.byEmail(email);
-      var expectedString = format("contact.email = %s", email);
-      assertThat(query).hasToString(expectedString);
+   void byContactId() {
+      try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
+         var username = uuid();
+         context.when(() -> SecurityContextUtils.getUsername()).thenReturn(username);
+         var query = predicates.byContactId(11L);
+         var expectedString = format("contact.owner = %s && contact.contactId = 11", username);
+         assertThat(query).hasToString(expectedString);
+      }
    }
+
 }
