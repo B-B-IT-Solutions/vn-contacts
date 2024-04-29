@@ -94,23 +94,23 @@ public class ContactComponentTest extends ContactComponentTestBase {
    @Test
    void getContacts() {
       var contactsDto = user1GetContacts();
-      assertThat(contactsDto).isEmpty();
+      assertThat(contactsDto.getContent()).isEmpty();
 
       contactsDto = user2GetContacts();
-      assertThat(contactsDto).isEmpty();
+      assertThat(contactsDto.getContent()).isEmpty();
 
       contactsDto = user3GetContacts();
-      assertThat(contactsDto).isEmpty();
+      assertThat(contactsDto.getContent()).isEmpty();
 
       var user1Contacts = createContacts(USER_1);
       contactsDto = user1GetContacts();
       assertContacts(user1Contacts, contactsDto);
 
       contactsDto = user2GetContacts();
-      assertThat(contactsDto).isEmpty();
+      assertThat(contactsDto.getContent()).isEmpty();
 
       contactsDto = user3GetContacts();
-      assertThat(contactsDto).isEmpty();
+      assertThat(contactsDto.getContent()).isEmpty();
 
       var user2Contacts = createContacts(USER_2);
       contactsDto = user2GetContacts();
@@ -120,7 +120,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
       assertContacts(user1Contacts, contactsDto);
 
       contactsDto = user3GetContacts();
-      assertThat(contactsDto).isEmpty();
+      assertThat(contactsDto.getContent()).isEmpty();
 
       var user3Contacts = createContacts(USER_3);
       contactsDto = user3GetContacts();

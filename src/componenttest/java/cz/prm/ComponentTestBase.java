@@ -9,6 +9,7 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED;
 
+import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.utils.ComponentTestUser;
 import dasniko.testcontainers.keycloak.KeycloakContainer;
 import io.restassured.RestAssured;
@@ -16,7 +17,6 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -79,7 +79,7 @@ public abstract class ComponentTestBase {
           .as(type);
    }
 
-   protected <T> List<T> getMany(String url, ComponentTestUser user, TypeRef<List<T>> type) {
+   protected <T> PageDto<T> getPage(String url, ComponentTestUser user, TypeRef<PageDto<T>> type) {
       return given().spec(requestSpec(user)).expect().log().ifError().when().get(url).then().assertThat()
           .statusCode(OK.value())
           .extract()
