@@ -2,12 +2,17 @@ package cz.prm.utils.assertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.domain.contact.Contact;
 import java.util.List;
 import java.util.Objects;
 
 public class ContractComponentTestAssertions {
+
+   public static void assertContacts(List<Contact> contacts, PageDto<ContactDto> pageDto) {
+      assertContacts(contacts, pageDto.getContent());
+   }
 
    public static void assertContacts(List<Contact> contacts, List<ContactDto> dtos) {
       assertThat(contacts).isNotEmpty().hasSameSizeAs(dtos);

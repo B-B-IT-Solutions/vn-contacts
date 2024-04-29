@@ -1,13 +1,47 @@
 package cz.prm.utils.assertions;
 
+import static cz.prm.utils.assertions.CommonAssertions.assertPagination;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
+import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
+import cz.prm.domain.common.Page;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.query.ContactsFilter;
+import cz.prm.domain.contact.query.ContactsQuery;
 import java.util.List;
 import java.util.Objects;
+import org.springframework.data.domain.PageImpl;
 
 public class ContactAssertions {
+
+   public static void assertPage(Page<Contact> page, PageDto<ContactDto> pageDto) {
+      assertThat(page.getTotalPages()).isEqualTo(pageDto.getTotalPages());
+      assertThat(page.getNumberOfElements()).isEqualTo(pageDto.getNumberOfElements());
+      assertThat(page.getTotalElements()).isEqualTo(pageDto.getTotalElements());
+      assertThat(page.getPageSize()).isEqualTo(pageDto.getPageSize());
+      assertThat(page.getPageNumber()).isEqualTo(pageDto.getPageNumber());
+      assertThat(page.getContent()).isNotEmpty().hasSameSizeAs(pageDto.getContent());
+      page.getContent().forEach(contact -> {
+         var dto = pageDto.getContent().stream().filter(c -> Objects.equals(contact.getContactId(), c.getContactId())).findFirst().get();
+         assertContact(contact, dto);
+      });
+   }
+
+   public static void assertPage(Page<Contact> page1, PageImpl<Contact> page2) {
+      assertThat(page1.getTotalPages()).isEqualTo(page2.getTotalPages());
+      assertThat(page1.getNumberOfElements()).isEqualTo(page2.getNumberOfElements());
+      assertThat(page1.getTotalElements()).isEqualTo(page2.getTotalElements());
+      assertThat(page1.getPageSize()).isEqualTo(page2.getSize());
+      assertThat(page1.getPageNumber()).isEqualTo(page2.getNumber());
+      assertThat(page1.getContent()).isNotEmpty().hasSameSizeAs(page2.getContent());
+      page1.getContent().forEach(contact1 -> {
+         var contact2 = page2.getContent().stream().filter(c -> Objects.equals(contact1.getContactId(), c.getContactId())).findFirst().get();
+         assertContact(contact1, contact2);
+      });
+   }
 
    public static void assertContacts(List<Contact> contacts1, List<Contact> contacts2) {
       assertThat(contacts1).isNotEmpty().hasSameSizeAs(contacts2);
@@ -38,6 +72,17 @@ public class ContactAssertions {
       assertThat(contact.getFirstName()).isEqualTo(dto.getFirstName());
       assertThat(contact.getLastName()).isEqualTo(dto.getLastName());
       assertThat(contact.getEmail()).isEqualTo(dto.getEmail());
+   }
+
+   public static void assertContactQuery(ContactsQuery query, ContactsQueryDto dto) {
+      assertPagination(query.getPagination(), dto.getPagination());
+      assertContactFilter(query.getFilter(), dto.getFilter());
+   }
+
+   public static void assertContactFilter(ContactsFilter filter, ContactsFilterDto dto) {
+      assertThat(filter.getFirstName()).isEqualTo(dto.getFirstName());
+      assertThat(filter.getLastName()).isEqualTo(dto.getLastName());
+      assertThat(filter.getEmail()).isEqualTo(dto.getEmail());
    }
 
 }

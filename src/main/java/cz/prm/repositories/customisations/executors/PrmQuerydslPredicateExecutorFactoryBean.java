@@ -10,7 +10,6 @@ public class PrmQuerydslPredicateExecutorFactoryBean<T extends RevisionRepositor
 
    public PrmQuerydslPredicateExecutorFactoryBean(Class<? extends T> repositoryInterface) {
       super(repositoryInterface);
-
    }
 
    @Override

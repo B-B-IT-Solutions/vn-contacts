@@ -13,6 +13,10 @@ public class TestUtils {
       return abs(random.nextLong());
    }
 
+   public static Integer randomInt() {
+      return abs(random.nextInt());
+   }
+
    public static String uuid() {
       return UUID.randomUUID().toString();
    }

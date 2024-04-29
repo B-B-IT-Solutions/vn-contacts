@@ -1,9 +1,10 @@
 package cz.prm.controllers;
 
+import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.controllers.mappers.ContactMapper;
 import cz.prm.services.contact.ContactService;
-import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,9 +38,10 @@ public class ContactController {
    }
 
    @GetMapping
-   public List<ContactDto> getContacts() {
-      var contacts = contactService.getContacts();
-      return mapper.toContactsDto(contacts);
+   public PageDto<ContactDto> getContacts(ContactsQueryDto queryDto) {
+      var query = mapper.toNullSafeContactsQuery(queryDto);
+      var contacts = contactService.getContacts(query);
+      return mapper.toPageDto(contacts);
    }
 
    @GetMapping("/{contactId}")

@@ -2,13 +2,16 @@ package cz.prm.services.contact;
 
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contacts;
+import static cz.prm.utils.ContactUtils.contactsQuery;
 import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
-import static cz.prm.utils.assertions.ContactAssertions.assertContacts;
+import static cz.prm.utils.assertions.ContactAssertions.assertPage;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -27,6 +30,8 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 @ExtendWith(MockitoExtension.class)
 class ContactServiceTest {
@@ -86,12 +91,15 @@ class ContactServiceTest {
 
    @Test
    void getContacts() {
-      var users = contacts();
+      var contacts = contacts();
+      var page = new PageImpl(contacts);
+      var query = contactsQuery();
       var predicate = new BooleanBuilder();
+
       when(predicates.contacts()).thenReturn(predicate);
-      when(repository.findAll(predicate)).thenReturn(users);
-      var result = contactService.getContacts();
-      assertContacts(result, users);
+      when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
+      var result = contactService.getContacts(query);
+      assertPage(result, page);
    }
 
    @Test

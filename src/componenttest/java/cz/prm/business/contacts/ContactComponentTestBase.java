@@ -8,6 +8,7 @@ import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
 import cz.prm.ComponentTestBase;
+import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.custom.ComponentTestContactRepository;
 import cz.prm.domain.contact.Contact;
@@ -58,15 +59,15 @@ public class ContactComponentTestBase extends ComponentTestBase {
       updateContact(contactId, dto, USER_3);
    }
 
-   protected List<ContactDto> user1GetContacts() {
+   protected PageDto<ContactDto> user1GetContacts() {
       return getContacts(USER_1);
    }
 
-   protected List<ContactDto> user2GetContacts() {
+   protected PageDto<ContactDto> user2GetContacts() {
       return getContacts(USER_2);
    }
 
-   protected List<ContactDto> user3GetContacts() {
+   protected PageDto<ContactDto> user3GetContacts() {
       return getContacts(USER_3);
    }
 
@@ -91,10 +92,10 @@ public class ContactComponentTestBase extends ComponentTestBase {
       put(url, user, dto);
    }
 
-   protected List<ContactDto> getContacts(ComponentTestUser user) {
-      var typeRef = new TypeRef<List<ContactDto>>() {
+   protected PageDto<ContactDto> getContacts(ComponentTestUser user) {
+      var typeRef = new TypeRef<PageDto<ContactDto>>() {
       };
-      return getMany(CONTACTS_URL, user, typeRef);
+      return getPage(CONTACTS_URL, user, typeRef);
    }
 
    protected ContactDto getContact(Long contactId, ComponentTestUser user) {

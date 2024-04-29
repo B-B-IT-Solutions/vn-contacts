@@ -1,14 +1,15 @@
 package cz.prm.services.contact;
 
-import static com.google.common.collect.Lists.newArrayList;
+import static cz.prm.domain.common.PageRequests.getPageRequest;
 import static cz.prm.security.SecurityContextUtils.getUsername;
 import static java.lang.String.format;
 
+import cz.prm.domain.common.Page;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
 import jakarta.persistence.EntityNotFoundException;
-import java.util.List;
 import java.util.function.Supplier;
 import org.springframework.stereotype.Service;
 
@@ -35,9 +36,11 @@ public class ContactService {
       repository.save(savedContact);
    }
 
-   public List<Contact> getContacts() {
+   public Page<Contact> getContacts(ContactsQuery query) {
+      var pageRequest = getPageRequest(query.getPagination());
       var predicate = predicates.contacts();
-      return newArrayList(repository.findAll(predicate));
+      var page = repository.findAll(predicate, pageRequest);
+      return new Page<>(page);
    }
 
    public Contact getContact(Long contactId) {
