@@ -10,6 +10,7 @@ public class Pagination {
    private static final int DEFAULT_PAGE_SIZE = 50;
 
    private int pageNumber;
+
    private int pageSize;
 
    public Pagination() {
