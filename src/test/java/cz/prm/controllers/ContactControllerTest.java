@@ -1,10 +1,11 @@
 package cz.prm.controllers;
 
+import static cz.prm.utils.CommonUtils.page;
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contactDto;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
-import static cz.prm.utils.assertions.ContactAssertions.assertContactsDto;
+import static cz.prm.utils.assertions.ContactAssertions.assertContacts;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -57,10 +58,10 @@ class ContactControllerTest {
 
    @Test
    void getContacts() {
-      var contacts = contacts();
-      when(contactService.getContacts()).thenReturn(contacts);
+      var page = page(contacts());
+      when(contactService.getContacts(null)).thenReturn(page);
       var result = controller.getContacts();
-      assertContactsDto(contacts, result);
+      assertContacts(page, result);
    }
 
    @Test

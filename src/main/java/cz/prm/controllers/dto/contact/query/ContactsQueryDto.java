@@ -13,4 +13,5 @@ public class ContactsQueryDto {
    private ContactsFilterDto filter;
 
    private PaginationDto pagination;
+
 }

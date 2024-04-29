@@ -18,7 +18,7 @@ class PageTest {
    private org.springframework.data.domain.Page springDataPage;
 
    @Test
-   void newInstance() {
+   void newInstanceSpringData() {
       var totalPages = randomInt();
       var totalElements = randomLong();
       var pageNumber = randomInt();
@@ -40,5 +40,17 @@ class PageTest {
       assertThat(page.getPageSize()).isEqualTo(springDataPage.getSize());
       assertThat(page.getNumberOfElements()).isEqualTo(springDataPage.getNumberOfElements());
       assertThat(page.getContent()).isEqualTo(springDataPage.getContent());
+   }
+
+   @Test
+   void newInstanceCollection() {
+      var contacts = contacts();
+      var page = new Page(contacts);
+      assertThat(page.getTotalPages()).isEqualTo(1);
+      assertThat(page.getPageNumber()).isEqualTo(1);
+      assertThat(page.getTotalElements()).isEqualTo(contacts.size());
+      assertThat(page.getPageSize()).isEqualTo(contacts.size());
+      assertThat(page.getNumberOfElements()).isEqualTo(contacts.size());
+      assertThat(page.getContent()).isNotEmpty().isEqualTo(contacts);
    }
 }

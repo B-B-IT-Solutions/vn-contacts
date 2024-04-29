@@ -18,7 +18,6 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpEntity;
@@ -38,8 +37,8 @@ import org.springframework.web.client.RestTemplate;
 public abstract class ComponentTestBase {
 
    protected static KeycloakContainer keycloak;
-   @Autowired
-   protected RestTemplate restTemplate;
+
+   protected RestTemplate restTemplate = new RestTemplate();
 
    protected JacksonJsonParser jsonParser = new JacksonJsonParser();
 

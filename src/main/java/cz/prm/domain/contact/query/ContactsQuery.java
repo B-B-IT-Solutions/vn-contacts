@@ -1,16 +1,19 @@
 package cz.prm.domain.contact.query;
 
-import cz.prm.controllers.dto.common.PaginationDto;
+import cz.prm.domain.common.Pagination;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class ContactsQuery {
 
    private ContactsFilter filter;
 
-   private PaginationDto pagination;
+   private Pagination pagination;
+
+   public ContactsQuery() {
+      this.filter = new ContactsFilter();
+      this.pagination = new Pagination();
+   }
 }

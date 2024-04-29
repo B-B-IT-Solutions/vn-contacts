@@ -28,4 +28,13 @@ public class Page<T> {
       this.numberOfElements = page.getNumberOfElements();
       this.content = page.getContent();
    }
+
+   public Page(List<T> content) {
+      this.totalPages = 1;
+      this.pageNumber = 1;
+      this.totalElements = content.size();
+      this.pageSize = content.size();
+      this.numberOfElements = content.size();
+      this.content = content;
+   }
 }
