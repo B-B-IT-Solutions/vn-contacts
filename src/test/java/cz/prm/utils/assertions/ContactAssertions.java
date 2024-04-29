@@ -1,11 +1,16 @@
 package cz.prm.utils.assertions;
 
+import static cz.prm.utils.assertions.CommonAssertions.assertPagination;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
+import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.common.Page;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.query.ContactsFilter;
+import cz.prm.domain.contact.query.ContactsQuery;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.data.domain.PageImpl;
@@ -67,6 +72,17 @@ public class ContactAssertions {
       assertThat(contact.getFirstName()).isEqualTo(dto.getFirstName());
       assertThat(contact.getLastName()).isEqualTo(dto.getLastName());
       assertThat(contact.getEmail()).isEqualTo(dto.getEmail());
+   }
+
+   public static void assertContactQuery(ContactsQuery query, ContactsQueryDto dto) {
+      assertPagination(query.getPagination(), dto.getPagination());
+      assertContactFilter(query.getFilter(), dto.getFilter());
+   }
+
+   public static void assertContactFilter(ContactsFilter filter, ContactsFilterDto dto) {
+      assertThat(filter.getFirstName()).isEqualTo(dto.getFirstName());
+      assertThat(filter.getLastName()).isEqualTo(dto.getLastName());
+      assertThat(filter.getEmail()).isEqualTo(dto.getEmail());
    }
 
 }

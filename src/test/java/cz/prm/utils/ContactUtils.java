@@ -1,10 +1,13 @@
 package cz.prm.utils;
 
 import static cz.prm.utils.CommonUtils.pagination;
+import static cz.prm.utils.CommonUtils.paginationDto;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
+import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsFilter;
 import cz.prm.domain.contact.query.ContactsQuery;
@@ -43,8 +46,23 @@ public class ContactUtils {
       return query;
    }
 
+   public static ContactsQueryDto contactsQueryDto() {
+      var query = new ContactsQueryDto();
+      query.setPagination(paginationDto());
+      query.setFilter(contactsFilterDto());
+      return query;
+   }
+
    public static ContactsFilter contactsFilter() {
       var filter = new ContactsFilter();
+      filter.setFirstName(uuid());
+      filter.setLastName(uuid());
+      filter.setEmail(uuid());
+      return filter;
+   }
+
+   public static ContactsFilterDto contactsFilterDto() {
+      var filter = new ContactsFilterDto();
       filter.setFirstName(uuid());
       filter.setLastName(uuid());
       filter.setEmail(uuid());

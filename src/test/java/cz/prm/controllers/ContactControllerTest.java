@@ -4,6 +4,7 @@ import static cz.prm.utils.CommonUtils.page;
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contactDto;
 import static cz.prm.utils.ContactUtils.contacts;
+import static cz.prm.utils.ContactUtils.contactsQueryDto;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertContacts;
 import static org.mockito.ArgumentMatchers.eq;
@@ -59,8 +60,9 @@ class ContactControllerTest {
    @Test
    void getContacts() {
       var page = page(contacts());
+      var query = contactsQueryDto();
       when(contactService.getContacts(null)).thenReturn(page);
-      var result = controller.getContacts();
+      var result = controller.getContacts(query);
       assertContacts(page, result);
    }
 

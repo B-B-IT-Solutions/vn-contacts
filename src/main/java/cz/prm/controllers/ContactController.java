@@ -2,6 +2,7 @@ package cz.prm.controllers;
 
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.controllers.mappers.ContactMapper;
 import cz.prm.services.contact.ContactService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,8 @@ public class ContactController {
    }
 
    @GetMapping
-   public PageDto<ContactDto> getContacts() {
+   public PageDto<ContactDto> getContacts(ContactsQueryDto queryDto) {
+      var query = queryDto;
       var contacts = contactService.getContacts(null);
       return mapper.toPageDto(contacts);
    }
