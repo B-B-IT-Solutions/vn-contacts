@@ -6,13 +6,16 @@ import static cz.prm.utils.ContactUtils.contactDto;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsQueryDto;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
-import static cz.prm.utils.assertions.ContactAssertions.assertContacts;
+import static cz.prm.utils.assertions.ContactAssertions.assertContactQuery;
+import static cz.prm.utils.assertions.ContactAssertions.assertPage;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import cz.prm.controllers.mappers.ContactMapper;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.services.contact.ContactService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,6 +33,8 @@ class ContactControllerTest {
    private ContactService contactService;
    @Captor
    private ArgumentCaptor<Contact> contactCapt;
+   @Captor
+   private ArgumentCaptor<ContactsQuery> cQueryCapt;
    private ContactMapper mapper = MapperUtils.getContactMapper();
 
    private ContactController controller;
@@ -60,10 +65,14 @@ class ContactControllerTest {
    @Test
    void getContacts() {
       var page = page(contacts());
-      var query = contactsQueryDto();
-      when(contactService.getContacts(null)).thenReturn(page);
-      var result = controller.getContacts(query);
-      assertContacts(page, result);
+      var queryDto = contactsQueryDto();
+      when(contactService.getContacts(any(ContactsQuery.class))).thenReturn(page);
+
+      var result = controller.getContacts(queryDto);
+      assertPage(page, result);
+      verify(contactService).getContacts(cQueryCapt.capture());
+      var query = cQueryCapt.getValue();
+      assertContactQuery(query, queryDto);
    }
 
    @Test

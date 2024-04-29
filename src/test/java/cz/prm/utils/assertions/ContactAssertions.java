@@ -17,7 +17,7 @@ import org.springframework.data.domain.PageImpl;
 
 public class ContactAssertions {
 
-   public static void assertContacts(Page<Contact> page, PageDto<ContactDto> pageDto) {
+   public static void assertPage(Page<Contact> page, PageDto<ContactDto> pageDto) {
       assertThat(page.getTotalPages()).isEqualTo(pageDto.getTotalPages());
       assertThat(page.getNumberOfElements()).isEqualTo(pageDto.getNumberOfElements());
       assertThat(page.getTotalElements()).isEqualTo(pageDto.getTotalElements());
@@ -30,7 +30,7 @@ public class ContactAssertions {
       });
    }
 
-   public static void assertContacts(Page<Contact> page1, PageImpl<Contact> page2) {
+   public static void assertPage(Page<Contact> page1, PageImpl<Contact> page2) {
       assertThat(page1.getTotalPages()).isEqualTo(page2.getTotalPages());
       assertThat(page1.getNumberOfElements()).isEqualTo(page2.getNumberOfElements());
       assertThat(page1.getTotalElements()).isEqualTo(page2.getTotalElements());

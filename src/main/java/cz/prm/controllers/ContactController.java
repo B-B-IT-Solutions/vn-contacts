@@ -39,8 +39,8 @@ public class ContactController {
 
    @GetMapping
    public PageDto<ContactDto> getContacts(ContactsQueryDto queryDto) {
-      var query = queryDto;
-      var contacts = contactService.getContacts(null);
+      var query = mapper.toNullSafeContactsQuery(queryDto);
+      var contacts = contactService.getContacts(query);
       return mapper.toPageDto(contacts);
    }
 

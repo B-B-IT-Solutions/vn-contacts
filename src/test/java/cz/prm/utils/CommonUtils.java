@@ -9,6 +9,8 @@ import java.util.List;
 
 public class CommonUtils {
 
+   public static final int DEFAULT_PAGE_SIZE = 50;
+
    public static <T> Page<T> page(List<T> content) {
       var page = new Page<T>();
       page.setContent(content);

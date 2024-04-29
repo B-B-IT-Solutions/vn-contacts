@@ -5,7 +5,7 @@ import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsQuery;
 import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
-import static cz.prm.utils.assertions.ContactAssertions.assertContacts;
+import static cz.prm.utils.assertions.ContactAssertions.assertPage;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -99,7 +99,7 @@ class ContactServiceTest {
       when(predicates.contacts()).thenReturn(predicate);
       when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
       var result = contactService.getContacts(query);
-      assertContacts(result, page);
+      assertPage(result, page);
    }
 
    @Test
