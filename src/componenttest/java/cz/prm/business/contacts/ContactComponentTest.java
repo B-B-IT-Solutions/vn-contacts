@@ -9,6 +9,7 @@ import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertCont
 import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertContacts;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import org.junit.jupiter.api.Test;
 
 public class ContactComponentTest extends ContactComponentTestBase {
@@ -93,43 +94,44 @@ public class ContactComponentTest extends ContactComponentTestBase {
 
    @Test
    void getContacts() {
-      var contactsDto = user1GetContacts();
+      var queryDto = new ContactsQueryDto();
+      var contactsDto = user1GetContacts(queryDto);
       assertThat(contactsDto.getContent()).isEmpty();
 
-      contactsDto = user2GetContacts();
+      contactsDto = user2GetContacts(queryDto);
       assertThat(contactsDto.getContent()).isEmpty();
 
-      contactsDto = user3GetContacts();
+      contactsDto = user3GetContacts(queryDto);
       assertThat(contactsDto.getContent()).isEmpty();
 
       var user1Contacts = createContacts(USER_1);
-      contactsDto = user1GetContacts();
+      contactsDto = user1GetContacts(queryDto);
       assertContacts(user1Contacts, contactsDto);
 
-      contactsDto = user2GetContacts();
+      contactsDto = user2GetContacts(queryDto);
       assertThat(contactsDto.getContent()).isEmpty();
 
-      contactsDto = user3GetContacts();
+      contactsDto = user3GetContacts(queryDto);
       assertThat(contactsDto.getContent()).isEmpty();
 
       var user2Contacts = createContacts(USER_2);
-      contactsDto = user2GetContacts();
+      contactsDto = user2GetContacts(queryDto);
       assertContacts(user2Contacts, contactsDto);
 
-      contactsDto = user1GetContacts();
+      contactsDto = user1GetContacts(queryDto);
       assertContacts(user1Contacts, contactsDto);
 
-      contactsDto = user3GetContacts();
+      contactsDto = user3GetContacts(queryDto);
       assertThat(contactsDto.getContent()).isEmpty();
 
       var user3Contacts = createContacts(USER_3);
-      contactsDto = user3GetContacts();
+      contactsDto = user3GetContacts(queryDto);
       assertContacts(user3Contacts, contactsDto);
 
-      contactsDto = user1GetContacts();
+      contactsDto = user1GetContacts(queryDto);
       assertContacts(user1Contacts, contactsDto);
 
-      contactsDto = user2GetContacts();
+      contactsDto = user2GetContacts(queryDto);
       assertContacts(user2Contacts, contactsDto);
 
    }

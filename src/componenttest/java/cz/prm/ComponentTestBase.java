@@ -4,12 +4,14 @@ import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.DEFINED_PORT;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED;
 
 import cz.prm.controllers.dto.common.PageDto;
+import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.utils.ComponentTestUser;
 import dasniko.testcontainers.keycloak.KeycloakContainer;
 import io.restassured.RestAssured;
@@ -148,6 +150,23 @@ public abstract class ComponentTestBase {
    protected String toBearerToken(String tokenResponse) {
       var accessToken = jsonParser.parseMap(tokenResponse).get("access_token").toString();
       return format("Bearer %s", accessToken);
+   }
+
+   protected String toUrlPaginationParams(PaginationDto pg) {
+      var sb = new StringBuilder();
+      if (nonNull(pg)) {
+         if (pg.getPageNumber() > 0) {
+            sb.append("pagination.pageNumber=");
+            sb.append(pg.getPageNumber());
+            sb.append("&");
+         }
+         if (pg.getPageSize() > 0) {
+            sb.append("pagination.pageSize=");
+            sb.append(pg.getPageSize());
+            sb.append("&");
+         }
+      }
+      return sb.toString();
    }
 
 }
