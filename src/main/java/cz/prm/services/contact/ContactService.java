@@ -38,7 +38,7 @@ public class ContactService {
 
    public Page<Contact> getContacts(ContactsQuery query) {
       var pageRequest = getPageRequest(query.getPagination());
-      var predicate = predicates.contacts();
+      var predicate = predicates.contacts(query.getFilter());
       var page = repository.findAll(predicate, pageRequest);
       return new Page<>(page);
    }

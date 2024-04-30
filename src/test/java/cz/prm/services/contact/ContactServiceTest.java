@@ -96,7 +96,7 @@ class ContactServiceTest {
       var query = contactsQuery();
       var predicate = new BooleanBuilder();
 
-      when(predicates.contacts()).thenReturn(predicate);
+      when(predicates.contacts(query.getFilter())).thenReturn(predicate);
       when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
       var result = contactService.getContacts(query);
       assertPage(result, page);
