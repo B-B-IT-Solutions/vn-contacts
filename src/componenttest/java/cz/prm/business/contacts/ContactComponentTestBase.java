@@ -17,7 +17,6 @@ import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.custom.ComponentTestContactRepository;
 import cz.prm.domain.contact.Contact;
-import cz.prm.services.contact.ContactService;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 import java.util.List;
@@ -32,8 +31,6 @@ public class ContactComponentTestBase extends ComponentTestBase {
 
    @Autowired
    protected ComponentTestContactRepository contactRepository;
-   @Autowired
-   protected ContactService contactService;
 
    @BeforeEach
    void setUp() {
