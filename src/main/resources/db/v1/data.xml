@@ -91,6 +91,23 @@
 				 <column name="email" value="test11@gmail.com"/>
 				 <column name="owner" value="bobuskysergej"/>
 			</insert>
+		 
+		 
+			<insert tableName="contact">
+				 <column name="contact_id" value="12"/>
+				 <column name="first_name" value="test 12"/>
+				 <column name="last_name" value="test 12"/>
+				 <column name="email" value="test12@gmail.com"/>
+				 <column name="owner" value="bobuskaviktoria"/>
+			</insert>
+		 
+			<insert tableName="contact">
+				 <column name="contact_id" value="13"/>
+				 <column name="first_name" value="test 13"/>
+				 <column name="last_name" value="test 13"/>
+				 <column name="email" value="test13@gmail.com"/>
+				 <column name="owner" value="bobuskaviktoria"/>
+			</insert>
 	 
 	 </changeSet>
 </databaseChangeLog>
