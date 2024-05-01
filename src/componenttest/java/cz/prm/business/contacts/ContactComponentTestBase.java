@@ -170,7 +170,7 @@ public class ContactComponentTestBase extends ComponentTestBase {
          }
          if (isNotEmpty(filterDto.getEmail())) {
             sb.append("filter.email=");
-            sb.append(filterDto.getLastName());
+            sb.append(filterDto.getEmail());
             sb.append("&");
          }
       }

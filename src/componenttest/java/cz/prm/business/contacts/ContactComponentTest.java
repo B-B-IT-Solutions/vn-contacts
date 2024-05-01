@@ -177,6 +177,36 @@ public class ContactComponentTest extends ContactComponentTestBase {
    }
 
    @Test
+   void getContactsFilters() {
+      var queryDto = contactsQueryDto();
+      var pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).isEmpty();
+
+      var contactsDto = createContacts(USER_1, 21);
+      var contactDto = contactsDto.get(0);
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).hasSize(21);
+
+      queryDto = contactsQueryDto();
+      var filter = queryDto.getFilter();
+
+      filter.setFirstName(contactDto.getFirstName());
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).hasSize(1);
+
+      queryDto = contactsQueryDto();
+      filter = queryDto.getFilter();
+
+      filter.setLastName(contactDto.getLastName());
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).hasSize(1);
+
+      filter.setEmail(contactDto.getEmail());
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).hasSize(1);
+   }
+
+   @Test
    void getContact() {
       var contact = createContact(USER_1);
       var contactId = contact.getContactId();
