@@ -2,6 +2,7 @@ package cz.prm.utils;
 
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUtils.uuid;
+import static java.lang.String.format;
 
 import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.controllers.dto.contact.ContactDto;
@@ -23,9 +24,9 @@ public class ContactComponentTestUtils {
 
    public static Contact contact(ComponentTestUser user) {
       var contact = new Contact();
-      contact.setFirstName(uuid());
-      contact.setLastName(uuid());
-      contact.setEmail(uuid());
+      contact.setFirstName(format("First%s", uuid()));
+      contact.setLastName(format("Last%s", uuid()));
+      contact.setEmail(format("email%s", uuid()));
       contact.setOwner(user.getUsername());
       return contact;
    }

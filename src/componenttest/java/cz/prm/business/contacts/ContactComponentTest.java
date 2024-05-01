@@ -3,6 +3,9 @@ package cz.prm.business.contacts;
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
+import static cz.prm.utils.ComponentTestUtils.containsFilter;
+import static cz.prm.utils.ComponentTestUtils.containsNotContainsFilter;
+import static cz.prm.utils.ComponentTestUtils.notContainsFilter;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static cz.prm.utils.ContactComponentTestUtils.contactDto;
 import static cz.prm.utils.ContactComponentTestUtils.contactsQueryDto;
@@ -183,27 +186,79 @@ public class ContactComponentTest extends ContactComponentTestBase {
       assertThat(pageDto.getContent()).isEmpty();
 
       var contactsDto = createContacts(USER_1, 21);
-      var contactDto = contactsDto.get(0);
+      var contactDto1 = contactsDto.get(0);
       pageDto = user1GetContacts(queryDto);
       assertThat(pageDto.getContent()).hasSize(21);
 
       queryDto = contactsQueryDto();
       var filter = queryDto.getFilter();
 
-      filter.setFirstName(contactDto.getFirstName());
+      filter.setFirstName(contactDto1.getFirstName());
       pageDto = user1GetContacts(queryDto);
       assertThat(pageDto.getContent()).hasSize(1);
+
+      filter.setFirstName(containsFilter(contactDto1.getFirstName()));
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).hasSize(1);
+
+      filter.setFirstName(notContainsFilter(contactDto1.getFirstName()));
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).hasSize(20);
+
+      var contactDto2 = contactsDto.get(1);
+      filter.setFirstName(containsNotContainsFilter(contactDto1.getFirstName(), contactDto2.getFirstName()));
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).hasSize(1);
+
+      filter.setFirstName(notContainsFilter("First"));
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).isEmpty();
 
       queryDto = contactsQueryDto();
       filter = queryDto.getFilter();
 
-      filter.setLastName(contactDto.getLastName());
+      filter.setLastName(contactDto1.getLastName());
       pageDto = user1GetContacts(queryDto);
       assertThat(pageDto.getContent()).hasSize(1);
 
-      filter.setEmail(contactDto.getEmail());
+      filter.setLastName(containsFilter(contactDto1.getLastName()));
       pageDto = user1GetContacts(queryDto);
       assertThat(pageDto.getContent()).hasSize(1);
+
+      filter.setLastName(notContainsFilter(contactDto1.getLastName()));
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).hasSize(20);
+
+      filter.setLastName(containsNotContainsFilter(contactDto1.getLastName(), contactDto2.getLastName()));
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).hasSize(1);
+
+      filter.setLastName(notContainsFilter("Last"));
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).isEmpty();
+
+      queryDto = contactsQueryDto();
+      filter = queryDto.getFilter();
+
+      filter.setEmail(contactDto1.getEmail());
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).hasSize(1);
+
+      filter.setEmail(containsFilter(contactDto1.getEmail()));
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).hasSize(1);
+
+      filter.setEmail(notContainsFilter(contactDto1.getEmail()));
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).hasSize(20);
+
+      filter.setEmail(containsNotContainsFilter(contactDto1.getEmail(), contactDto2.getEmail()));
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).hasSize(1);
+
+      filter.setEmail(notContainsFilter("email"));
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).isEmpty();
    }
 
    @Test
@@ -230,5 +285,4 @@ public class ContactComponentTest extends ContactComponentTestBase {
       user1GetContactExpectNotFound(contactId);
       user2GetContactExpectNotFound(contactId);
    }
-
 }

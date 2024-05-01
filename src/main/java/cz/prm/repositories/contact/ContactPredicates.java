@@ -1,6 +1,7 @@
 package cz.prm.repositories.contact;
 
 import static cz.prm.domain.contact.querydsl.QContact.contact;
+import static cz.prm.repositories.common.query.PredicateCriteriaUtils.applyCriteria;
 import static cz.prm.security.SecurityContextUtils.getUsername;
 
 import com.querydsl.core.BooleanBuilder;
@@ -30,16 +31,14 @@ public class ContactPredicates {
    private BooleanBuilder filterPredicates(ContactsFilter filter) {
       var predicate = new BooleanBuilder();
       if (filter.isFirstName()) {
-         predicate.and(contact.firstName.containsIgnoreCase(filter.getFirstName()));
+         predicate.and(applyCriteria(predicate, contact.firstName, filter.getFirstName()));
       }
       if (filter.isLastName()) {
-         predicate.and(contact.lastName.containsIgnoreCase(filter.getLastName()));
+         predicate.and(applyCriteria(predicate, contact.lastName, filter.getLastName()));
       }
       if (filter.isEmail()) {
-         predicate.and(contact.email.containsIgnoreCase(filter.getEmail()));
+         predicate.and(applyCriteria(predicate, contact.email, filter.getEmail()));
       }
       return predicate;
-
    }
-
 }

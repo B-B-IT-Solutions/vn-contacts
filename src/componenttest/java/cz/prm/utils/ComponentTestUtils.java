@@ -20,6 +20,10 @@ public class ComponentTestUtils {
       return randomUUID().toString();
    }
 
+   public static String containsNotContainsFilter(String filter1, String fitler2) {
+      return format("%s+%s", containsFilter(filter1), notContainsFilter(fitler2));
+   }
+
    public static String containsFilter(String... filters) {
       var filter = Stream.of(filters).collect(joining(","));
       return containsFilter(filter);
