@@ -1,6 +1,8 @@
 name: CI/CD Pipeline
 
 on:
+  pull_request:
+    types: [ review_requested ]
   pull_request_review:
     types: [ submitted ]
 
@@ -40,3 +42,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 100
           min-coverage-changed-files: 100
+          title: Code Coverage
+          update-comment: true
