@@ -13,15 +13,22 @@ import org.junit.jupiter.api.Test;
 class QueryTest {
 
    @Test
+   void newInstance() {
+      var query = new Query();
+      assertThat(query.getSort()).isNull();
+      assertThat(query.getPagination()).isNotNull();
+   }
+
+   @Test
    void resolveSortNoSort() {
-      var q1 = new Query(null);
+      var q1 = new Query(null, null);
       assertThat(q1.resolveSort()).isEqualTo(unsorted());
 
-      var q2 = new Query("");
+      var q2 = new Query("", null);
       assertThat(q2.resolveSort()).isEqualTo(unsorted());
 
       var value = uuid();
-      var q3 = new Query(value);
+      var q3 = new Query(value, null);
       assertThat(q3.resolveSort()).isEqualTo(by(value));
    }
 
@@ -30,7 +37,7 @@ class QueryTest {
       var direction = uuid().replace("-", "");
       var value = uuid();
       var sort = format("%s(%s)", direction, value);
-      var q = new Query(sort);
+      var q = new Query(sort, null);
       assertThat(q.resolveSort()).isEqualTo(by(sort));
    }
 
@@ -38,7 +45,7 @@ class QueryTest {
    void resolveSortAscSort() {
       var value = uuid();
       var sort = format("asc(%s)", value);
-      var q = new Query(sort);
+      var q = new Query(sort, null);
       assertThat(q.resolveSort()).isEqualTo(by(ASC, value));
    }
 
@@ -46,7 +53,7 @@ class QueryTest {
    void resolveSortDescSort() {
       var value = uuid();
       var sort = format("desc(%s)", value);
-      var q = new Query(sort);
+      var q = new Query(sort, null);
       assertThat(q.resolveSort()).isEqualTo(by(DESC, value));
    }
 
@@ -57,7 +64,7 @@ class QueryTest {
       var value3 = uuid();
       var values = format("%s,%s,%s", value1, value2, value3);
       var sort = format("asc(%s)", values);
-      var q = new Query(sort);
+      var q = new Query(sort, null);
       assertThat(q.resolveSort()).isEqualTo(by(ASC, value1, value2, value3));
    }
 
@@ -68,7 +75,7 @@ class QueryTest {
       var value3 = uuid();
       var values = format("%s,%s,%s", value1, value2, value3);
       var sort = format("desc(%s)", values);
-      var q = new Query(sort);
+      var q = new Query(sort, null);
       assertThat(q.resolveSort()).isEqualTo(by(DESC, value1, value2, value3));
    }
 }

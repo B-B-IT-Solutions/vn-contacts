@@ -7,20 +7,24 @@ import static org.springframework.data.domain.Sort.by;
 import static org.springframework.data.domain.Sort.unsorted;
 
 import java.util.regex.Pattern;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.domain.Sort;
 
 @Data
+@AllArgsConstructor
 public class Query {
 
    private static final String PROPERTIES_SEPARATOR = ",";
    private static final String SORT_REGEX = "^(\\w+)\\((.+)\\)$";
    private static final Pattern SORT_PATTERN = Pattern.compile(SORT_REGEX);
 
-   private String sort;
+   protected String sort;
 
-   public Query(String sort) {
-      this.sort = sort;
+   protected Pagination pagination;
+
+   public Query() {
+      this.pagination = new Pagination();
    }
 
    public Sort resolveSort() {

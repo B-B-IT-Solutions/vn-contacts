@@ -79,7 +79,9 @@ class ContactMapperTest {
 
    @Test
    void afterContactsQuery() {
-      var target = new ContactsQuery(null, null);
+      var target = new ContactsQuery();
+      target.setPagination(null);
+      target.setFilter(null);
       mapper.afterContactsQuery(null, target);
       assertNullSafeContactQuery(target);
    }
