@@ -5,11 +5,11 @@ import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static cz.prm.utils.ContactComponentTestUtils.contactDto;
+import static cz.prm.utils.ContactComponentTestUtils.contactsQueryDto;
 import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertContact;
 import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertContacts;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import org.junit.jupiter.api.Test;
 
 public class ContactComponentTest extends ContactComponentTestBase {
@@ -93,47 +93,87 @@ public class ContactComponentTest extends ContactComponentTestBase {
    }
 
    @Test
-   void getContacts() {
-      var queryDto = new ContactsQueryDto();
-      var contactsDto = user1GetContacts(queryDto);
-      assertThat(contactsDto.getContent()).isEmpty();
+   void getContactsDataAccess() {
+      var queryDto = contactsQueryDto();
+      var pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).isEmpty();
 
-      contactsDto = user2GetContacts(queryDto);
-      assertThat(contactsDto.getContent()).isEmpty();
+      pageDto = user2GetContacts(queryDto);
+      assertThat(pageDto.getContent()).isEmpty();
 
-      contactsDto = user3GetContacts(queryDto);
-      assertThat(contactsDto.getContent()).isEmpty();
+      pageDto = user3GetContacts(queryDto);
+      assertThat(pageDto.getContent()).isEmpty();
 
       var user1Contacts = createContacts(USER_1);
-      contactsDto = user1GetContacts(queryDto);
-      assertContacts(user1Contacts, contactsDto);
+      pageDto = user1GetContacts(queryDto);
+      assertContacts(user1Contacts, pageDto);
 
-      contactsDto = user2GetContacts(queryDto);
-      assertThat(contactsDto.getContent()).isEmpty();
+      pageDto = user2GetContacts(queryDto);
+      assertThat(pageDto.getContent()).isEmpty();
 
-      contactsDto = user3GetContacts(queryDto);
-      assertThat(contactsDto.getContent()).isEmpty();
+      pageDto = user3GetContacts(queryDto);
+      assertThat(pageDto.getContent()).isEmpty();
 
       var user2Contacts = createContacts(USER_2);
-      contactsDto = user2GetContacts(queryDto);
-      assertContacts(user2Contacts, contactsDto);
+      pageDto = user2GetContacts(queryDto);
+      assertContacts(user2Contacts, pageDto);
 
-      contactsDto = user1GetContacts(queryDto);
-      assertContacts(user1Contacts, contactsDto);
+      pageDto = user1GetContacts(queryDto);
+      assertContacts(user1Contacts, pageDto);
 
-      contactsDto = user3GetContacts(queryDto);
-      assertThat(contactsDto.getContent()).isEmpty();
+      pageDto = user3GetContacts(queryDto);
+      assertThat(pageDto.getContent()).isEmpty();
 
       var user3Contacts = createContacts(USER_3);
-      contactsDto = user3GetContacts(queryDto);
-      assertContacts(user3Contacts, contactsDto);
+      pageDto = user3GetContacts(queryDto);
+      assertContacts(user3Contacts, pageDto);
 
-      contactsDto = user1GetContacts(queryDto);
-      assertContacts(user1Contacts, contactsDto);
+      pageDto = user1GetContacts(queryDto);
+      assertContacts(user1Contacts, pageDto);
 
-      contactsDto = user2GetContacts(queryDto);
-      assertContacts(user2Contacts, contactsDto);
+      pageDto = user2GetContacts(queryDto);
+      assertContacts(user2Contacts, pageDto);
+   }
 
+   @Test
+   void getContactsPagination() {
+      var queryDto = contactsQueryDto();
+      var pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getTotalPages()).isZero();
+      assertThat(pageDto.getTotalElements()).isZero();
+      assertThat(pageDto.getPageSize()).isEqualTo(50);
+      assertThat(pageDto.getContent()).isEmpty();
+
+      createContacts(USER_1, 21);
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getTotalPages()).isEqualTo(1);
+      assertThat(pageDto.getTotalElements()).isEqualTo(21);
+      assertThat(pageDto.getPageSize()).isEqualTo(50);
+      assertThat(pageDto.getContent()).hasSize(21);
+
+      var pagination = queryDto.getPagination();
+      pagination.setPageSize(5);
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getTotalPages()).isEqualTo(5);
+      assertThat(pageDto.getTotalElements()).isEqualTo(21);
+      assertThat(pageDto.getPageSize()).isEqualTo(5);
+      assertThat(pageDto.getContent()).hasSize(5);
+
+      pagination.setPageNumber(1);
+      pagination.setPageSize(10);
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getTotalPages()).isEqualTo(3);
+      assertThat(pageDto.getTotalElements()).isEqualTo(21);
+      assertThat(pageDto.getPageSize()).isEqualTo(10);
+      assertThat(pageDto.getContent()).hasSize(10);
+
+      pagination.setPageNumber(2);
+      pagination.setPageSize(10);
+      pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getTotalPages()).isEqualTo(3);
+      assertThat(pageDto.getTotalElements()).isEqualTo(21);
+      assertThat(pageDto.getPageSize()).isEqualTo(10);
+      assertThat(pageDto.getContent()).hasSize(1);
    }
 
    @Test

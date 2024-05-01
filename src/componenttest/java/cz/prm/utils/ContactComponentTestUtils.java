@@ -3,7 +3,10 @@ package cz.prm.utils;
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 
+import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
+import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.Contact;
 import java.util.List;
 import org.assertj.core.util.Lists;
@@ -33,5 +36,12 @@ public class ContactComponentTestUtils {
       dto.setLastName(uuid());
       dto.setEmail(uuid());
       return dto;
+   }
+
+   public static ContactsQueryDto contactsQueryDto() {
+      var query = new ContactsQueryDto();
+      query.setFilter(new ContactsFilterDto());
+      query.setPagination(new PaginationDto());
+      return query;
    }
 }
