@@ -33,29 +33,86 @@ class ContactPredicatesTest {
    }
 
    @Test
-   void contacts() {
+   void contactsNoFilterOperation() {
       try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
          var username = "username_1";
          var filter = new ContactsFilter();
          context.when(() -> SecurityContextUtils.getUsername()).thenReturn(username);
-         var query = predicates.contacts(filter);
+         var predicate = predicates.contacts(filter);
          var expectedString = "contact.owner = username_1";
-         assertThat(query).hasToString(expectedString);
+         assertThat(predicate).hasToString(expectedString);
 
          filter.setFirstName("firstName_01");
-         query = predicates.contacts(filter);
+         predicate = predicates.contacts(filter);
          expectedString = "contact.owner = username_1 && containsIc(contact.firstName,firstName_01)";
-         assertThat(query).hasToString(expectedString);
+         assertThat(predicate).hasToString(expectedString);
 
          filter.setLastName("lastName_01");
-         query = predicates.contacts(filter);
+         predicate = predicates.contacts(filter);
          expectedString = "contact.owner = username_1 && containsIc(contact.firstName,firstName_01) && containsIc(contact.lastName,lastName_01)";
-         assertThat(query).hasToString(expectedString);
+         assertThat(predicate).hasToString(expectedString);
 
          filter.setEmail("email_01");
-         query = predicates.contacts(filter);
-         expectedString = "contact.owner = username_1 && containsIc(contact.firstName,firstName_01) && containsIc(contact.lastName,lastName_01) && containsIc(contact.email,email_01)";
-         assertThat(query).hasToString(expectedString);
+         predicate = predicates.contacts(filter);
+         expectedString = "contact.owner = username_1 && containsIc(contact.firstName,firstName_01) && containsIc(contact.lastName,lastName_01) && "
+             + "containsIc(contact.email,email_01)";
+         assertThat(predicate).hasToString(expectedString);
+      }
+   }
+
+   @Test
+   void contactsContainsFilterOperation() {
+      try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
+         var username = "username_1";
+         var filter = new ContactsFilter();
+         context.when(() -> SecurityContextUtils.getUsername()).thenReturn(username);
+         var predicate = predicates.contacts(filter);
+         var expectedString = "contact.owner = username_1";
+         assertThat(predicate).hasToString(expectedString);
+
+         filter.setFirstName("contains(firstName_01)");
+         predicate = predicates.contacts(filter);
+         expectedString = "contact.owner = username_1 && containsIc(contact.firstName,firstName_01)";
+         assertThat(predicate).hasToString(expectedString);
+
+         filter.setLastName("contains(lastName_01)");
+         predicate = predicates.contacts(filter);
+         expectedString = "contact.owner = username_1 && containsIc(contact.firstName,firstName_01) && containsIc(contact.lastName,lastName_01)";
+         assertThat(predicate).hasToString(expectedString);
+
+         filter.setEmail("contains(email_01)");
+         predicate = predicates.contacts(filter);
+         expectedString = "contact.owner = username_1 && containsIc(contact.firstName,firstName_01) && containsIc(contact.lastName,lastName_01) && "
+             + "containsIc(contact.email,email_01)";
+         assertThat(predicate).hasToString(expectedString);
+      }
+   }
+
+   @Test
+   void contactsNotContainsFilterOperation() {
+      try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
+         var username = "username_1";
+         var filter = new ContactsFilter();
+         context.when(() -> SecurityContextUtils.getUsername()).thenReturn(username);
+         var predicate = predicates.contacts(filter);
+         var expectedString = "contact.owner = username_1";
+         assertThat(predicate).hasToString(expectedString);
+
+         filter.setFirstName("notContains(firstName_01)");
+         predicate = predicates.contacts(filter);
+         expectedString = "contact.owner = username_1 && !containsIc(contact.firstName,firstName_01)";
+         assertThat(predicate).hasToString(expectedString);
+
+         filter.setLastName("notContains(lastName_01)");
+         predicate = predicates.contacts(filter);
+         expectedString = "contact.owner = username_1 && !containsIc(contact.firstName,firstName_01) && !containsIc(contact.lastName,lastName_01)";
+         assertThat(predicate).hasToString(expectedString);
+
+         filter.setEmail("notContains(email_01)");
+         predicate = predicates.contacts(filter);
+         expectedString = "contact.owner = username_1 && !containsIc(contact.firstName,firstName_01) && !containsIc(contact.lastName,lastName_01) && "
+             + "!containsIc(contact.email,email_01)";
+         assertThat(predicate).hasToString(expectedString);
       }
    }
 
@@ -69,5 +126,4 @@ class ContactPredicatesTest {
          assertThat(query).hasToString(expectedString);
       }
    }
-
 }

@@ -32,5 +32,4 @@ public class PredicateCriteriaUtils {
       }
       return predicate;
    }
-
 }

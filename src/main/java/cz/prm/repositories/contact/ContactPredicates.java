@@ -31,13 +31,13 @@ public class ContactPredicates {
    private BooleanBuilder filterPredicates(ContactsFilter filter) {
       var predicate = new BooleanBuilder();
       if (filter.isFirstName()) {
-         predicate.and(applyCriteria(predicate, contact.firstName, filter.getFirstName()));
+         applyCriteria(predicate, contact.firstName, filter.getFirstName());
       }
       if (filter.isLastName()) {
-         predicate.and(applyCriteria(predicate, contact.lastName, filter.getLastName()));
+         applyCriteria(predicate, contact.lastName, filter.getLastName());
       }
       if (filter.isEmail()) {
-         predicate.and(applyCriteria(predicate, contact.email, filter.getEmail()));
+         applyCriteria(predicate, contact.email, filter.getEmail());
       }
       return predicate;
    }
