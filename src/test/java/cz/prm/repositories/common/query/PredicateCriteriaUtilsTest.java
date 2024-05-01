@@ -108,4 +108,23 @@ class PredicateCriteriaUtilsTest {
           + "email_003)";
       assertThat(predicate).hasToString(queryPattern);
    }
+
+   @Test
+   void containsAndNotContainsOperationFilter() {
+      var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.firstName,
+          "contains(firstName_001)+notContains(firstName_002)");
+      var queryPattern = "containsIc(contact.firstName,firstName_001) && !containsIc(contact.firstName,firstName_002)";
+      assertThat(predicate).hasToString(queryPattern);
+
+      predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.lastName, "contains(lastName_001)+notContains(lastName_002)");
+      queryPattern = "containsIc(contact.firstName,firstName_001) && !containsIc(contact.firstName,firstName_002) && containsIc(contact.lastName,"
+          + "lastName_001) && !containsIc(contact.lastName,lastName_002)";
+      assertThat(predicate).hasToString(queryPattern);
+
+      predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.email, "contains(email_001)+notContains(email_002)");
+      queryPattern = "containsIc(contact.firstName,firstName_001) && !containsIc(contact.firstName,firstName_002) && containsIc(contact.lastName,"
+          + "lastName_001) && !containsIc(contact.lastName,lastName_002) && containsIc(contact.email,email_001) && !containsIc(contact"
+          + ".email,email_002)";
+      assertThat(predicate).hasToString(queryPattern);
+   }
 }
