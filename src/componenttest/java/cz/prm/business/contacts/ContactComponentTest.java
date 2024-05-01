@@ -184,7 +184,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
    }
 
    @Test
-   void getContactsSort() {
+   void getContactsSorting() {
       var queryDto = contactsQueryDto();
       queryDto.setSort("asc(firstName)");
       var pageDto = user1GetContacts(queryDto);
