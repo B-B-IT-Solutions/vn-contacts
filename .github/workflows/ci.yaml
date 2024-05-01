@@ -6,6 +6,10 @@ on:
   pull_request_review:
     types: [ submitted ]
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,7 +38,7 @@ jobs:
           cache: 'maven'
       - name: Run Tests
         run: mvn clean compile verify
-      - name: Add coverage to PR
+      - name: JaCoCo Report
         id: jacoco
         uses: madrapps/jacoco-report@v1.6.1
         with:
