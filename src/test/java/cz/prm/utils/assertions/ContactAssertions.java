@@ -1,6 +1,6 @@
 package cz.prm.utils.assertions;
 
-import static cz.prm.utils.assertions.CommonAssertions.assertPagination;
+import static cz.prm.utils.assertions.CommonAssertions.assertQuery;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
@@ -75,7 +75,7 @@ public class ContactAssertions {
    }
 
    public static void assertContactQuery(ContactsQuery query, ContactsQueryDto dto) {
-      assertPagination(query.getPagination(), dto.getPagination());
+      assertQuery(query, dto);
       assertContactFilter(query.getFilter(), dto.getFilter());
    }
 
@@ -84,5 +84,4 @@ public class ContactAssertions {
       assertThat(filter.getLastName()).isEqualTo(dto.getLastName());
       assertThat(filter.getEmail()).isEqualTo(dto.getEmail());
    }
-
 }
