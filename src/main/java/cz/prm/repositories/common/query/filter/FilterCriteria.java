@@ -18,7 +18,6 @@ public class FilterCriteria {
 
    public FilterCriteria(String filter) {
       parse(filter);
-
    }
 
    private void parse(String filter) {

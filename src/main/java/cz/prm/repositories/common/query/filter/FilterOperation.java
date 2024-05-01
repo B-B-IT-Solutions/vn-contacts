@@ -4,7 +4,6 @@ import lombok.Getter;
 
 @Getter
 public enum FilterOperation {
-
    CONTAINS("contains"),
    NOT_CONTAINS("notContains");
 
