@@ -43,6 +43,7 @@ public class ContactUtils {
       var query = new ContactsQuery();
       query.setPagination(pagination());
       query.setFilter(contactsFilter());
+      query.setSort(uuid());
       return query;
    }
 
@@ -50,6 +51,7 @@ public class ContactUtils {
       var query = new ContactsQueryDto();
       query.setPagination(paginationDto());
       query.setFilter(contactsFilterDto());
+      query.setSort(uuid());
       return query;
    }
 
@@ -68,5 +70,4 @@ public class ContactUtils {
       filter.setEmail(uuid());
       return filter;
    }
-
 }

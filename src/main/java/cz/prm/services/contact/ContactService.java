@@ -37,7 +37,7 @@ public class ContactService {
    }
 
    public Page<Contact> getContacts(ContactsQuery query) {
-      var pageRequest = getPageRequest(query.getPagination());
+      var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
       var predicate = predicates.contacts(query.getFilter());
       var page = repository.findAll(predicate, pageRequest);
       return new Page<>(page);
@@ -62,5 +62,4 @@ public class ContactService {
    private Supplier<EntityNotFoundException> entityNotFoundSupplier(Long userId) {
       return () -> new EntityNotFoundException(format("Contact for given id=[%s] not found!", userId));
    }
-
 }

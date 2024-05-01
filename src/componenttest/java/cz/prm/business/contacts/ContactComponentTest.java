@@ -1,5 +1,6 @@
 package cz.prm.business.contacts;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
@@ -11,8 +12,11 @@ import static cz.prm.utils.ContactComponentTestUtils.contactDto;
 import static cz.prm.utils.ContactComponentTestUtils.contactsQueryDto;
 import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertContact;
 import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertContacts;
+import static java.util.Collections.sort;
+import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.contact.ContactDto;
 import org.junit.jupiter.api.Test;
 
 public class ContactComponentTest extends ContactComponentTestBase {
@@ -177,6 +181,58 @@ public class ContactComponentTest extends ContactComponentTestBase {
       assertThat(pageDto.getTotalElements()).isEqualTo(21);
       assertThat(pageDto.getPageSize()).isEqualTo(10);
       assertThat(pageDto.getContent()).hasSize(1);
+   }
+
+   @Test
+   void getContactsSorting() {
+      var queryDto = contactsQueryDto();
+      queryDto.setSort("asc(firstName)");
+      var pageDto = user1GetContacts(queryDto);
+      assertThat(pageDto.getContent()).isEmpty();
+
+      createContacts(USER_1, 21);
+      queryDto = contactsQueryDto();
+      queryDto.setSort("asc(firstName)");
+      pageDto = user1GetContacts(queryDto);
+      var actual = pageDto.getContent();
+      var expected = newArrayList(actual);
+      sort(expected, comparing(ContactDto::getFirstName));
+      assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+      queryDto.setSort("desc(firstName)");
+      pageDto = user1GetContacts(queryDto);
+      actual = pageDto.getContent();
+      expected = newArrayList(actual);
+      sort(expected, comparing(ContactDto::getFirstName).reversed());
+      assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+      queryDto.setSort("asc(lastName)");
+      pageDto = user1GetContacts(queryDto);
+      actual = pageDto.getContent();
+      expected = newArrayList(actual);
+      sort(expected, comparing(ContactDto::getLastName));
+      assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+      queryDto.setSort("desc(lastName)");
+      pageDto = user1GetContacts(queryDto);
+      actual = pageDto.getContent();
+      expected = newArrayList(actual);
+      sort(expected, comparing(ContactDto::getLastName).reversed());
+      assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+      queryDto.setSort("asc(email)");
+      pageDto = user1GetContacts(queryDto);
+      actual = pageDto.getContent();
+      expected = newArrayList(actual);
+      sort(expected, comparing(ContactDto::getEmail));
+      assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+      queryDto.setSort("desc(email)");
+      pageDto = user1GetContacts(queryDto);
+      actual = pageDto.getContent();
+      expected = newArrayList(actual);
+      sort(expected, comparing(ContactDto::getEmail).reversed());
+      assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
    }
 
    @Test

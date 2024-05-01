@@ -146,11 +146,13 @@ public class ContactComponentTestBase extends ComponentTestBase {
       var sb = new StringBuilder(url);
       var filters = toUrlFilterParams(queryDto.getFilter());
       var pagination = toUrlPaginationParams(queryDto.getPagination());
+      var sort = toUrlSortParams(queryDto.getSort());
 
-      if (isNotBlank(filters) || isNotBlank(pagination)) {
+      if (isNotBlank(filters) || isNotBlank(pagination) || isNotBlank(sort)) {
          sb.append("?");
          sb.append(filters);
          sb.append(pagination);
+         sb.append(sort);
       }
       return sb.toString();
    }

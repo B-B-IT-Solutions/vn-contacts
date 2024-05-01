@@ -3,6 +3,7 @@ package cz.prm.utils;
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static java.lang.String.format;
+import static org.assertj.core.util.Lists.newArrayList;
 
 import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.controllers.dto.contact.ContactDto;
@@ -10,7 +11,6 @@ import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.Contact;
 import java.util.List;
-import org.assertj.core.util.Lists;
 
 public class ContactComponentTestUtils {
 
@@ -19,7 +19,7 @@ public class ContactComponentTestUtils {
    }
 
    public static List<Contact> contacts(ComponentTestUser user) {
-      return Lists.newArrayList(contact(user), contact(user), contact(user));
+      return newArrayList(contact(user), contact(user), contact(user));
    }
 
    public static Contact contact(ComponentTestUser user) {

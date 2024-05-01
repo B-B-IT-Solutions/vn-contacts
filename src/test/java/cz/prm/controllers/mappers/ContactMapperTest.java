@@ -10,12 +10,12 @@ import static cz.prm.utils.ContactUtils.contactsQueryDto;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactFilter;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactQuery;
+import static cz.prm.utils.assertions.ContactAssertions.assertPage;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.utils.MapperUtils;
-import cz.prm.utils.assertions.ContactAssertions;
 import org.junit.jupiter.api.Test;
 
 class ContactMapperTest {
@@ -26,7 +26,7 @@ class ContactMapperTest {
    void toPageDto() {
       var page = page(contacts());
       var dtos = mapper.toPageDto(page);
-      ContactAssertions.assertPage(page, dtos);
+      assertPage(page, dtos);
    }
 
    @Test
@@ -72,14 +72,18 @@ class ContactMapperTest {
 
    @Test
    void toNullSafeContactsQueryNullFiltersPagination() {
-      var dto = new ContactsQueryDto(null, null);
+      var dto = new ContactsQueryDto();
+      dto.setPagination(null);
+      dto.setFilter(null);
       var query = mapper.toNullSafeContactsQuery(dto);
       assertNullSafeContactQuery(query);
    }
 
    @Test
    void afterContactsQuery() {
-      var target = new ContactsQuery(null, null);
+      var target = new ContactsQuery();
+      target.setPagination(null);
+      target.setFilter(null);
       mapper.afterContactsQuery(null, target);
       assertNullSafeContactQuery(target);
    }
@@ -87,6 +91,7 @@ class ContactMapperTest {
    private void assertNullSafeContactQuery(ContactsQuery query) {
       assertThat(query.getPagination()).isNotNull();
       assertThat(query.getFilter()).isNotNull();
+      assertThat(query.getSort()).isNull();
       var pagination = query.getPagination();
       assertThat(pagination.getPageNumber()).isZero();
       assertThat(pagination.getPageSize()).isEqualTo(DEFAULT_PAGE_SIZE);
