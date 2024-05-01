@@ -65,27 +65,19 @@ public abstract class ComponentTestBase {
    }
 
    protected <T> void post(String url, ComponentTestUser user, T body) {
-      given().spec(requestSpec(body, user)).expect().log().ifError().when().post(url).then().assertThat()
-          .statusCode(OK.value());
+      given().spec(requestSpec(body, user)).expect().log().ifError().when().post(url).then().assertThat().statusCode(OK.value());
    }
 
    protected <T> void put(String url, ComponentTestUser user, T body) {
-      given().spec(requestSpec(body, user)).expect().log().ifError().when().put(url).then().assertThat()
-          .statusCode(OK.value());
+      given().spec(requestSpec(body, user)).expect().log().ifError().when().put(url).then().assertThat().statusCode(OK.value());
    }
 
    protected <T> T getOne(String url, ComponentTestUser user, TypeRef<T> type) {
-      return given().spec(requestSpec(user)).expect().log().ifError().when().get(url).then().assertThat()
-          .statusCode(OK.value())
-          .extract()
-          .as(type);
+      return given().spec(requestSpec(user)).expect().log().ifError().when().get(url).then().assertThat().statusCode(OK.value()).extract().as(type);
    }
 
    protected <T> PageDto<T> getPage(String url, ComponentTestUser user, TypeRef<PageDto<T>> type) {
-      return given().spec(requestSpec(user)).expect().log().ifError().when().get(url).then().assertThat()
-          .statusCode(OK.value())
-          .extract()
-          .as(type);
+      return given().spec(requestSpec(user)).expect().log().ifError().when().get(url).then().assertThat().statusCode(OK.value()).extract().as(type);
    }
 
    protected <T> void putExpectNotFound(String url, ComponentTestUser user, T body) {
@@ -169,4 +161,13 @@ public abstract class ComponentTestBase {
       return sb.toString();
    }
 
+   protected String toUrlSortParams(String sort) {
+      var sb = new StringBuilder();
+      if (nonNull(sort)) {
+         sb.append("sort=");
+         sb.append(sort);
+         sb.append("&");
+      }
+      return sb.toString();
+   }
 }
