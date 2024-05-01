@@ -2,7 +2,7 @@ name: CI/CD Pipeline
 
 on:
   pull_request:
-    types: [ review_requested ]
+    types: [ opened, reopened ]
   pull_request_review:
     types: [ submitted ]
 
