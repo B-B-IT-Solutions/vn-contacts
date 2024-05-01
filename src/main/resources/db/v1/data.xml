@@ -19,5 +19,95 @@
 				 <column name="email" value="bobuskaviktoria@gmail.com"/>
 				 <column name="owner" value="bobuskysergej"/>
 			</insert>
+			
+			<insert tableName="contact">
+				 <column name="contact_id" value="3"/>
+				 <column name="first_name" value="test 3"/>
+				 <column name="last_name" value="test 3"/>
+				 <column name="email" value="test3@gmail.com"/>
+				 <column name="owner" value="bobuskysergej"/>
+			</insert>
+			
+			<insert tableName="contact">
+				 <column name="contact_id" value="4"/>
+				 <column name="first_name" value="test 4"/>
+				 <column name="last_name" value="test 4"/>
+				 <column name="email" value="test4@gmail.com"/>
+				 <column name="owner" value="bobuskysergej"/>
+			</insert>
+			
+			<insert tableName="contact">
+				 <column name="contact_id" value="5"/>
+				 <column name="first_name" value="test 5"/>
+				 <column name="last_name" value="test 5"/>
+				 <column name="email" value="test5@gmail.com"/>
+				 <column name="owner" value="bobuskysergej"/>
+			</insert>
+			
+			<insert tableName="contact">
+				 <column name="contact_id" value="6"/>
+				 <column name="first_name" value="test 6"/>
+				 <column name="last_name" value="test 6"/>
+				 <column name="email" value="test6@gmail.com"/>
+				 <column name="owner" value="bobuskysergej"/>
+			</insert>
+			
+			<insert tableName="contact">
+				 <column name="contact_id" value="7"/>
+				 <column name="first_name" value="test 7"/>
+				 <column name="last_name" value="test 7"/>
+				 <column name="email" value="test7@gmail.com"/>
+				 <column name="owner" value="bobuskysergej"/>
+			</insert>
+			
+			<insert tableName="contact">
+				 <column name="contact_id" value="8"/>
+				 <column name="first_name" value="test 8"/>
+				 <column name="last_name" value="test 8"/>
+				 <column name="email" value="test8@gmail.com"/>
+				 <column name="owner" value="bobuskysergej"/>
+			</insert>
+		 
+			<insert tableName="contact">
+				 <column name="contact_id" value="9"/>
+				 <column name="first_name" value="test 9"/>
+				 <column name="last_name" value="test 9"/>
+				 <column name="email" value="test9@gmail.com"/>
+				 <column name="owner" value="bobuskysergej"/>
+			</insert>
+		 
+			<insert tableName="contact">
+				 <column name="contact_id" value="10"/>
+				 <column name="first_name" value="test 10"/>
+				 <column name="last_name" value="test 10"/>
+				 <column name="email" value="test10@gmail.com"/>
+				 <column name="owner" value="bobuskysergej"/>
+			</insert>
+		 
+			<insert tableName="contact">
+				 <column name="contact_id" value="11"/>
+				 <column name="first_name" value="test 11"/>
+				 <column name="last_name" value="test 11"/>
+				 <column name="email" value="test11@gmail.com"/>
+				 <column name="owner" value="bobuskysergej"/>
+			</insert>
+		 
+		 
+			<insert tableName="contact">
+				 <column name="contact_id" value="12"/>
+				 <column name="first_name" value="test 12"/>
+				 <column name="last_name" value="test 12"/>
+				 <column name="email" value="test12@gmail.com"/>
+				 <column name="owner" value="bobuskaviktoria"/>
+			</insert>
+		 
+			<insert tableName="contact">
+				 <column name="contact_id" value="13"/>
+				 <column name="first_name" value="test 13"/>
+				 <column name="last_name" value="test 13"/>
+				 <column name="email" value="test13@gmail.com"/>
+				 <column name="owner" value="bobuskaviktoria"/>
+			</insert>
+	 
 	 </changeSet>
 </databaseChangeLog>

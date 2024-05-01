@@ -1,8 +1,12 @@
 name: CI/CD Pipeline
 
 on:
-  pull_request_review:
-    types: [submitted]
+  pull_request:
+    types: [ opened, reopened ]
+    
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
   build:
@@ -32,3 +36,13 @@ jobs:
           cache: 'maven'
       - name: Run Tests
         run: mvn clean compile verify
+      - name: JaCoCo Report
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.6.1
+        with:
+          paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 100
+          min-coverage-changed-files: 100
+          title: Code Coverage
+          update-comment: true
