@@ -1,14 +1,15 @@
 package cz.prm.repositories.common.query.filter;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.regex.Pattern;
+import lombok.Getter;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
 public class FilterCriteria {
 
+   private static final String VALUE_SEPARATOR = ",";
+   private static final String FILTER_CRITERIA_REGEX = "^(\\w+)\\((.+)\\)$";
+   private static final Pattern FILTER_CRITERIA_PATTERN = Pattern.compile(FILTER_CRITERIA_REGEX);
+
    private String field;
-   private String value;
+   private String[] values;
 }
