@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   pull_request:
     types: [ opened, reopened ]
-    
+
 permissions:
   contents: read
   pull-requests: write
@@ -46,3 +46,4 @@ jobs:
           min-coverage-changed-files: 100
           title: Code Coverage
           update-comment: true
+          continue-on-error: false
