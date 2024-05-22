@@ -27,7 +27,7 @@
 			<rest-assured.version>5.4.0</rest-assured.version>
 			<maven-surefire.version>3.1.2</maven-surefire.version>
 			<maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
-			<jacoco.exclusions>**/querydsl/Q**.class,**/mappers/*MapperImpl.class</jacoco.exclusions>
+			<jacoco.exclusions>**/querydsl/Q**.class,**/mappers/**/*MapperImpl.class</jacoco.exclusions>
 			<jacoco.line.coverage>0.99</jacoco.line.coverage>
 			<jacoco.branch.coverage>0.99</jacoco.branch.coverage>
 			<jacoco.version>0.8.11</jacoco.version>
@@ -251,11 +251,22 @@
 						<groupId>org.jacoco</groupId>
 						<artifactId>jacoco-maven-plugin</artifactId>
 						<version>${jacoco.version}</version>
+						<configuration>
+							 <excludes>
+									<exclude>${jacoco.exclusions}</exclude>
+							 </excludes>
+						</configuration>
 						<executions>
 							 <execution>
 									<id>prepare-agent</id>
 									<goals>
 										 <goal>prepare-agent</goal>
+									</goals>
+							 </execution>
+							 <execution>
+									<id>report</id>
+									<goals>
+										 <goal>report</goal>
 									</goals>
 							 </execution>
 							 <execution>
@@ -265,9 +276,6 @@
 										 <goal>check</goal>
 									</goals>
 									<configuration>
-										 <excludes>
-												<exclude>${jacoco.exclusions}</exclude>
-										 </excludes>
 										 <rules>
 												<rule>
 													 <element>CLASS</element>
@@ -283,9 +291,6 @@
 																 <minimum>${jacoco.branch.coverage}</minimum>
 															</limit>
 													 </limits>
-													 <excludes>
-															<exclude>com.abc.ClassName</exclude>
-													 </excludes>
 												</rule>
 										 </rules>
 									</configuration>
@@ -362,7 +367,7 @@
 							 <logViolationsToConsole>true</logViolationsToConsole>
 							 <includeTestSourceDirectory>true</includeTestSourceDirectory>
 							 <testSourceDirectories>${basedir}/src/test,${basedir}/scr/componenttest</testSourceDirectories>
-							 <excludes>**/querydsl/Q**.java,**/mappers/*MapperImpl.java</excludes>
+							 <excludes>**/querydsl/Q**.java,**/mappers/**/*MapperImpl.java</excludes>
 						</configuration>
 						<executions>
 							 <execution>
