@@ -10,16 +10,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ContactDto {
 
-   @JsonProperty("contactId")
-   private Long contactId;
+    @JsonProperty("contactId")
+    private Long contactId;
 
-   @JsonProperty("firstName")
-   private String firstName;
+    @JsonProperty("firstName")
+    private String firstName;
 
-   @JsonProperty("lastName")
-   private String lastName;
+    @JsonProperty("middleName")
+    private String middleName;
 
-   @JsonProperty("email")
-   private String email;
+    @JsonProperty("lastName")
+    private String lastName;
 
+    @JsonProperty("nickName")
+    private String nickName;
+
+    @JsonProperty("email")
+    private String email;
 }

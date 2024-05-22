@@ -7,5 +7,5 @@ import org.springframework.data.repository.NoRepositoryBean;
 @NoRepositoryBean
 public interface RefreshAwareRepository<T, ID extends Serializable> extends JpaRepository<T, ID> {
 
-   void refresh(T t);
+    void refresh(T t);
 }

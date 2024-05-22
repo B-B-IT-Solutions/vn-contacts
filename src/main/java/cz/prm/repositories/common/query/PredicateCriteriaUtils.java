@@ -15,21 +15,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = PRIVATE)
 public class PredicateCriteriaUtils {
 
-   public static Predicate applyCriteria(BooleanBuilder predicate, StringPath field, String filter) {
-      var fcs = new FilterCriterias(filter);
-      fcs.getCriterias().forEach(fc -> predicate.and(apply(field, fc)));
-      return predicate;
-   }
+    public static Predicate applyCriteria(BooleanBuilder predicate, StringPath field, String filter) {
+        var fcs = new FilterCriterias(filter);
+        fcs.getCriterias().forEach(fc -> predicate.and(apply(field, fc)));
+        return predicate;
+    }
 
-   private static Predicate apply(StringPath field, FilterCriteria fc) {
-      var predicate = new BooleanBuilder();
-      if (CONTAINS.isOperation(fc)) {
-         of(fc.getValues()).forEach(value -> predicate.or(field.containsIgnoreCase(value)));
-      } else if (NOT_CONTAINS.isOperation(fc)) {
-         of(fc.getValues()).forEach(value -> predicate.andNot(field.containsIgnoreCase(value)));
-      } else {
-         of(fc.getValues()).forEach(value -> predicate.or(field.containsIgnoreCase(value)));
-      }
-      return predicate;
-   }
+    private static Predicate apply(StringPath field, FilterCriteria fc) {
+        var predicate = new BooleanBuilder();
+        if (CONTAINS.isOperation(fc)) {
+            of(fc.getValues()).forEach(value -> predicate.or(field.containsIgnoreCase(value)));
+        } else if (NOT_CONTAINS.isOperation(fc)) {
+            of(fc.getValues()).forEach(value -> predicate.andNot(field.containsIgnoreCase(value)));
+        } else {
+            of(fc.getValues()).forEach(value -> predicate.or(field.containsIgnoreCase(value)));
+        }
+        return predicate;
+    }
 }

@@ -8,9 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @NoArgsConstructor(access = PRIVATE)
 public class SecurityContextUtils {
 
-   public static String getUsername() {
-      var authentication = SecurityContextHolder.getContext().getAuthentication();
-      return authentication.getName();
-   }
-
+    public static String getUsername() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
+    }
 }

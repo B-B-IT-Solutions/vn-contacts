@@ -18,31 +18,30 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public interface ContactMapper {
 
-   PageDto<ContactDto> toPageDto(Page<Contact> contacts);
+    PageDto<ContactDto> toPageDto(Page<Contact> contacts);
 
-   ContactDto toContactDto(Contact contact);
+    ContactDto toContactDto(Contact contact);
 
-   Contact toContact(ContactDto dto);
+    Contact toContact(ContactDto dto);
 
-   ContactsQuery toContactsQuery(ContactsQueryDto dto);
+    ContactsQuery toContactsQuery(ContactsQueryDto dto);
 
-   ContactsFilter toContactsFilter(ContactsFilterDto dto);
+    ContactsFilter toContactsFilter(ContactsFilterDto dto);
 
-   default ContactsQuery toNullSafeContactsQuery(ContactsQueryDto dto) {
-      if (isNull(dto)) {
-         return new ContactsQuery();
-      }
-      return toContactsQuery(dto);
-   }
+    default ContactsQuery toNullSafeContactsQuery(ContactsQueryDto dto) {
+        if (isNull(dto)) {
+            return new ContactsQuery();
+        }
+        return toContactsQuery(dto);
+    }
 
-   @AfterMapping
-   default void afterContactsQuery(ContactsQueryDto source, @MappingTarget ContactsQuery target) {
-      if (isNull(target.getPagination())) {
-         target.setPagination(new Pagination());
-      }
-      if (isNull(target.getFilter())) {
-         target.setFilter(new ContactsFilter());
-      }
-   }
-
+    @AfterMapping
+    default void afterContactsQuery(ContactsQueryDto source, @MappingTarget ContactsQuery target) {
+        if (isNull(target.getPagination())) {
+            target.setPagination(new Pagination());
+        }
+        if (isNull(target.getFilter())) {
+            target.setFilter(new ContactsFilter());
+        }
+    }
 }

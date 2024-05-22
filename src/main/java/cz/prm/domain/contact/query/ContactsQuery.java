@@ -8,9 +8,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class ContactsQuery extends Query {
 
-   private ContactsFilter filter;
+    private ContactsFilter filter;
 
-   public ContactsQuery() {
-      this.filter = new ContactsFilter();
-   }
+    public ContactsQuery() {
+        this.filter = new ContactsFilter();
+    }
 }

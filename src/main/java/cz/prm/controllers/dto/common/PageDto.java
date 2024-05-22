@@ -9,21 +9,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PageDto<T> {
 
-   @JsonProperty("totalPages")
-   private int totalPages;
+    @JsonProperty("totalPages")
+    private int totalPages;
 
-   @JsonProperty("totalElements")
-   private long totalElements;
+    @JsonProperty("totalElements")
+    private long totalElements;
 
-   @JsonProperty("pageNumber")
-   private int pageNumber;
+    @JsonProperty("pageNumber")
+    private int pageNumber;
 
-   @JsonProperty("pageSize")
-   private int pageSize;
+    @JsonProperty("pageSize")
+    private int pageSize;
 
-   @JsonProperty("numberOfElements")
-   private int numberOfElements;
+    @JsonProperty("numberOfElements")
+    private int numberOfElements;
 
-   @JsonProperty("content")
-   private List<T> content;
+    @JsonProperty("content")
+    private List<T> content;
 }

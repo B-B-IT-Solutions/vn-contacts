@@ -9,21 +9,33 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ContactsFilter {
 
-   private String firstName;
+    private String firstName;
 
-   private String lastName;
+    private String middleName;
 
-   private String email;
+    private String lastName;
 
-   public boolean isFirstName() {
-      return isNotBlank(firstName);
-   }
+    private String nickName;
 
-   public boolean isLastName() {
-      return isNotBlank(lastName);
-   }
+    private String email;
 
-   public boolean isEmail() {
-      return isNotBlank(email);
-   }
+    public boolean isFirstName() {
+        return isNotBlank(firstName);
+    }
+
+    public boolean isMiddleName() {
+        return isNotBlank(middleName);
+    }
+
+    public boolean isLastName() {
+        return isNotBlank(lastName);
+    }
+
+    public boolean isNickName() {
+        return isNotBlank(nickName);
+    }
+
+    public boolean isEmail() {
+        return isNotBlank(email);
+    }
 }

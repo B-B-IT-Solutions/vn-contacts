@@ -18,28 +18,25 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 @EnableWebSecurity
 public class SecurityConfig {
 
-   @Bean
-   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-      http.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
-          .oauth2ResourceServer((oauth2) -> oauth2.jwt(withDefaults()))
-          .csrf(csrf -> csrf.disable())
-          .sessionManagement(session -> session.sessionCreationPolicy(STATELESS));
-      return http.build();
-   }
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated()).oauth2ResourceServer((oauth2) -> oauth2.jwt(withDefaults()))
+            .csrf(csrf -> csrf.disable()).sessionManagement(session -> session.sessionCreationPolicy(STATELESS));
+        return http.build();
+    }
 
-   @Bean
-   public SessionRegistry sessionRegistry() {
-      return new SessionRegistryImpl();
-   }
+    @Bean
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
 
-   @Bean
-   protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
-      return new RegisterSessionAuthenticationStrategy(sessionRegistry());
-   }
+    @Bean
+    protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
+        return new RegisterSessionAuthenticationStrategy(sessionRegistry());
+    }
 
-   @Bean
-   public HttpSessionEventPublisher httpSessionEventPublisher() {
-      return new HttpSessionEventPublisher();
-   }
-
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
+    }
 }

@@ -32,76 +32,75 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 @ExtendWith(MockitoExtension.class)
 class SecurityConfigTest {
 
-   @Mock
-   private ObjectPostProcessor objectPostProcessor;
-   @Mock
-   private AuthenticationManager authenticationManager;
-   @Mock
-   private AuthenticationManagerBuilder authenticationManagerBuilder;
-   @Mock
-   private ApplicationContext applicationContext;
-   @Mock
-   private AuthorizeHttpRequestsConfigurer authorizeHttpRequestsConfigurer;
-   @Mock
-   private OAuth2ResourceServerConfigurer resourceServerConfigurer;
-   @Mock
-   private SessionManagementConfigurer sessionManagementConfigurer;
-   @Mock
-   private CsrfConfigurer csrfConfigurer;
-   @Mock
-   private AuthorizationManagerRequestMatcherRegistry requestMatcherRegistry;
-   @Mock
-   private AuthorizedUrl authorizedUrl;
-   @Mock
-   private Customizer dummyCustomize;
+    @Mock
+    private ObjectPostProcessor objectPostProcessor;
+    @Mock
+    private AuthenticationManager authenticationManager;
+    @Mock
+    private AuthenticationManagerBuilder authenticationManagerBuilder;
+    @Mock
+    private ApplicationContext applicationContext;
+    @Mock
+    private AuthorizeHttpRequestsConfigurer authorizeHttpRequestsConfigurer;
+    @Mock
+    private OAuth2ResourceServerConfigurer resourceServerConfigurer;
+    @Mock
+    private SessionManagementConfigurer sessionManagementConfigurer;
+    @Mock
+    private CsrfConfigurer csrfConfigurer;
+    @Mock
+    private AuthorizationManagerRequestMatcherRegistry requestMatcherRegistry;
+    @Mock
+    private AuthorizedUrl authorizedUrl;
+    @Mock
+    private Customizer dummyCustomize;
 
-   private Map<Class<?>, Object> sharedObjects;
-   private HttpSecurity httpSecurity;
-   private SecurityConfig securityConfig;
+    private Map<Class<?>, Object> sharedObjects;
+    private HttpSecurity httpSecurity;
+    private SecurityConfig securityConfig;
 
-   @BeforeEach
-   void setUp() throws Exception {
-      sharedObjects = newHashMap();
-      sharedObjects.put(ApplicationContext.class, applicationContext);
-      httpSecurity = new HttpSecurity(objectPostProcessor, authenticationManagerBuilder, sharedObjects);
-      httpSecurity.with(authorizeHttpRequestsConfigurer, dummyCustomize);
-      httpSecurity.with(resourceServerConfigurer, dummyCustomize);
-      httpSecurity.with(sessionManagementConfigurer, dummyCustomize);
-      httpSecurity.with(csrfConfigurer, dummyCustomize);
+    @BeforeEach
+    void setUp() throws Exception {
+        sharedObjects = newHashMap();
+        sharedObjects.put(ApplicationContext.class, applicationContext);
+        httpSecurity = new HttpSecurity(objectPostProcessor, authenticationManagerBuilder, sharedObjects);
+        httpSecurity.with(authorizeHttpRequestsConfigurer, dummyCustomize);
+        httpSecurity.with(resourceServerConfigurer, dummyCustomize);
+        httpSecurity.with(sessionManagementConfigurer, dummyCustomize);
+        httpSecurity.with(csrfConfigurer, dummyCustomize);
 
-      securityConfig = new SecurityConfig();
-   }
+        securityConfig = new SecurityConfig();
+    }
 
-   @Test
-   void filterChain() throws Exception {
-      when(objectPostProcessor.postProcess(any())).thenAnswer((arg) -> arg.getArgument(0));
-      when(authenticationManagerBuilder.build()).thenReturn(authenticationManager);
-      when(applicationContext.getBeanNamesForType(any(Class.class))).thenReturn(new String[0]);
-      when(authorizeHttpRequestsConfigurer.getRegistry()).thenReturn(requestMatcherRegistry);
-      when(requestMatcherRegistry.anyRequest()).thenReturn(authorizedUrl);
-      when(authorizedUrl.authenticated()).thenReturn(requestMatcherRegistry);
+    @Test
+    void filterChain() throws Exception {
+        when(objectPostProcessor.postProcess(any())).thenAnswer((arg) -> arg.getArgument(0));
+        when(authenticationManagerBuilder.build()).thenReturn(authenticationManager);
+        when(applicationContext.getBeanNamesForType(any(Class.class))).thenReturn(new String[0]);
+        when(authorizeHttpRequestsConfigurer.getRegistry()).thenReturn(requestMatcherRegistry);
+        when(requestMatcherRegistry.anyRequest()).thenReturn(authorizedUrl);
+        when(authorizedUrl.authenticated()).thenReturn(requestMatcherRegistry);
 
-      securityConfig.filterChain(httpSecurity);
-      verify(sessionManagementConfigurer).sessionCreationPolicy(STATELESS);
-      verify(csrfConfigurer).disable();
-   }
+        securityConfig.filterChain(httpSecurity);
+        verify(sessionManagementConfigurer).sessionCreationPolicy(STATELESS);
+        verify(csrfConfigurer).disable();
+    }
 
-   @Test
-   void sessionRegistry() {
-      var result = securityConfig.sessionRegistry();
-      assertThat(result).isNotNull().isInstanceOf(SessionRegistryImpl.class);
-   }
+    @Test
+    void sessionRegistry() {
+        var result = securityConfig.sessionRegistry();
+        assertThat(result).isNotNull().isInstanceOf(SessionRegistryImpl.class);
+    }
 
-   @Test
-   void sessionAuthenticationStrategy() {
-      var result = securityConfig.sessionAuthenticationStrategy();
-      assertThat(result).isNotNull().isInstanceOf(RegisterSessionAuthenticationStrategy.class);
-   }
+    @Test
+    void sessionAuthenticationStrategy() {
+        var result = securityConfig.sessionAuthenticationStrategy();
+        assertThat(result).isNotNull().isInstanceOf(RegisterSessionAuthenticationStrategy.class);
+    }
 
-   @Test
-   void httpSessionEventPublisher() {
-      var result = securityConfig.httpSessionEventPublisher();
-      assertThat(result).isNotNull().isInstanceOf(HttpSessionEventPublisher.class);
-   }
-
+    @Test
+    void httpSessionEventPublisher() {
+        var result = securityConfig.httpSessionEventPublisher();
+        assertThat(result).isNotNull().isInstanceOf(HttpSessionEventPublisher.class);
+    }
 }

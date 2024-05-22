@@ -18,22 +18,27 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Contact {
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_seq")
-   @SequenceGenerator(name = "contact_seq", sequenceName = "contact_seq", allocationSize = 1)
-   @Column(name = "CONTACT_ID")
-   private Long contactId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_seq")
+    @SequenceGenerator(name = "contact_seq", sequenceName = "contact_seq", allocationSize = 1)
+    @Column(name = "CONTACT_ID")
+    private Long contactId;
 
-   @Column(name = "FIRST_NAME")
-   private String firstName;
+    @Column(name = "FIRST_NAME")
+    private String firstName;
 
-   @Column(name = "LAST_NAME")
-   private String lastName;
+    @Column(name = "MIDDLE_NAME")
+    private String middleName;
 
-   @Column(name = "EMAIL")
-   private String email;
+    @Column(name = "LAST_NAME")
+    private String lastName;
 
-   @Column(name = "OWNER")
-   private String owner;
+    @Column(name = "NICK_NAME")
+    private String nickName;
 
+    @Column(name = "EMAIL")
+    private String email;
+
+    @Column(name = "OWNER")
+    private String owner;
 }

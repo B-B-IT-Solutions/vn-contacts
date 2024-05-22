@@ -10,11 +10,11 @@ import org.springframework.data.domain.Sort;
 @NoArgsConstructor(access = PRIVATE)
 public class PageRequests {
 
-   public static PageRequest getPageRequest(Pagination pagination) {
-      return getPageRequest(pagination, unsorted());
-   }
+    public static PageRequest getPageRequest(Pagination pagination) {
+        return getPageRequest(pagination, unsorted());
+    }
 
-   public static PageRequest getPageRequest(Pagination pagination, Sort sort) {
-      return PageRequest.of(pagination.getPageNumber(), pagination.getPageSize(), sort);
-   }
+    public static PageRequest getPageRequest(Pagination pagination, Sort sort) {
+        return PageRequest.of(pagination.getPageNumber(), pagination.getPageSize(), sort);
+    }
 }

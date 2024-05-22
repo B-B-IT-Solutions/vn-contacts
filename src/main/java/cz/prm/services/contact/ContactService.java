@@ -16,50 +16,50 @@ import org.springframework.stereotype.Service;
 @Service
 public class ContactService {
 
-   private ContactRepository repository;
-   private ContactPredicates predicates;
+    private ContactRepository repository;
+    private ContactPredicates predicates;
 
-   public ContactService(ContactRepository repository, ContactPredicates predicates) {
-      this.repository = repository;
-      this.predicates = predicates;
-   }
+    public ContactService(ContactRepository repository, ContactPredicates predicates) {
+        this.repository = repository;
+        this.predicates = predicates;
+    }
 
-   public void createContact(Contact contact) {
-      var username = getUsername();
-      contact.setOwner(username);
-      repository.save(contact);
-   }
+    public void createContact(Contact contact) {
+        var username = getUsername();
+        contact.setOwner(username);
+        repository.save(contact);
+    }
 
-   public void updateContact(Long contactId, Contact updatedContact) {
-      var savedContact = getContactById(contactId);
-      updateContact(savedContact, updatedContact);
-      repository.save(savedContact);
-   }
+    public void updateContact(Long contactId, Contact updatedContact) {
+        var savedContact = getContactById(contactId);
+        updateContactFields(savedContact, updatedContact);
+        repository.save(savedContact);
+    }
 
-   public Page<Contact> getContacts(ContactsQuery query) {
-      var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
-      var predicate = predicates.contacts(query.getFilter());
-      var page = repository.findAll(predicate, pageRequest);
-      return new Page<>(page);
-   }
+    public Page<Contact> getContacts(ContactsQuery query) {
+        var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
+        var predicate = predicates.contacts(query.getFilter());
+        var page = repository.findAll(predicate, pageRequest);
+        return new Page<>(page);
+    }
 
-   public Contact getContact(Long contactId) {
-      return getContactById(contactId);
-   }
+    public Contact getContact(Long contactId) {
+        return getContactById(contactId);
+    }
 
-   private void updateContact(Contact savedContact, Contact updatedContact) {
-      savedContact.setFirstName(updatedContact.getFirstName());
-      savedContact.setLastName(updatedContact.getLastName());
-      savedContact.setEmail(updatedContact.getEmail());
-   }
+    private void updateContactFields(Contact savedContact, Contact updatedContact) {
+        savedContact.setFirstName(updatedContact.getFirstName());
+        savedContact.setLastName(updatedContact.getLastName());
+        savedContact.setEmail(updatedContact.getEmail());
+    }
 
-   private Contact getContactById(Long contactId) {
-      var predicate = predicates.byContactId(contactId);
-      var optional = repository.findOne(predicate);
-      return optional.orElseThrow(entityNotFoundSupplier(contactId));
-   }
+    private Contact getContactById(Long contactId) {
+        var predicate = predicates.byContactId(contactId);
+        var optional = repository.findOne(predicate);
+        return optional.orElseThrow(entityNotFoundSupplier(contactId));
+    }
 
-   private Supplier<EntityNotFoundException> entityNotFoundSupplier(Long userId) {
-      return () -> new EntityNotFoundException(format("Contact for given id=[%s] not found!", userId));
-   }
+    private Supplier<EntityNotFoundException> entityNotFoundSupplier(Long userId) {
+        return () -> new EntityNotFoundException(format("Contact for given id=[%s] not found!", userId));
+    }
 }

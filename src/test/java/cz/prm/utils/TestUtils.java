@@ -7,18 +7,17 @@ import java.util.UUID;
 
 public class TestUtils {
 
-   private static Random random = new Random();
+    private static Random random = new Random();
 
-   public static Long randomLong() {
-      return abs(random.nextLong());
-   }
+    public static Long randomLong() {
+        return abs(random.nextLong());
+    }
 
-   public static Integer randomInt() {
-      return abs(random.nextInt());
-   }
+    public static Integer randomInt() {
+        return abs(random.nextInt());
+    }
 
-   public static String uuid() {
-      return UUID.randomUUID().toString();
-   }
-
+    public static String uuid() {
+        return UUID.randomUUID().toString();
+    }
 }

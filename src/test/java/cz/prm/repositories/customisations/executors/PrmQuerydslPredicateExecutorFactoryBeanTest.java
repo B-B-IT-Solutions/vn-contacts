@@ -15,22 +15,22 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class PrmQuerydslPredicateExecutorFactoryBeanTest {
 
-   @Mock
-   private EntityManager entityManager;
-   @Mock
-   private SessionImpl hibernateSession;
+    @Mock
+    private EntityManager entityManager;
+    @Mock
+    private SessionImpl hibernateSession;
 
-   private PrmQuerydslPredicateExecutorFactoryBean factoryBean;
+    private PrmQuerydslPredicateExecutorFactoryBean factoryBean;
 
-   @BeforeEach
-   void setUp() {
-      when(entityManager.getDelegate()).thenReturn(hibernateSession);
-      factoryBean = new PrmQuerydslPredicateExecutorFactoryBean(Contact.class);
-   }
+    @BeforeEach
+    void setUp() {
+        when(entityManager.getDelegate()).thenReturn(hibernateSession);
+        factoryBean = new PrmQuerydslPredicateExecutorFactoryBean(Contact.class);
+    }
 
-   @Test
-   void getRepositoryFragmentsIsReactiveRepository() {
-      var factory = factoryBean.createRepositoryFactory(entityManager);
-      assertThat(factory).isNotNull().isInstanceOf(PrmQuerydslPredicateExecutorFactory.class);
-   }
+    @Test
+    void getRepositoryFragmentsIsReactiveRepository() {
+        var factory = factoryBean.createRepositoryFactory(entityManager);
+        assertThat(factory).isNotNull().isInstanceOf(PrmQuerydslPredicateExecutorFactory.class);
+    }
 }

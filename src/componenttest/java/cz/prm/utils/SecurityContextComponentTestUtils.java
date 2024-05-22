@@ -12,35 +12,35 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 
 public class SecurityContextComponentTestUtils {
 
-   public static void ensureUser1Context() {
-      ensureUserContext(USER_1);
-   }
+    public static void ensureUser1Context() {
+        ensureUserContext(USER_1);
+    }
 
-   public static void ensureUser2Context() {
-      ensureUserContext(USER_2);
-   }
+    public static void ensureUser2Context() {
+        ensureUserContext(USER_2);
+    }
 
-   public static void ensureUser3Context() {
-      ensureUserContext(USER_3);
-   }
+    public static void ensureUser3Context() {
+        ensureUserContext(USER_3);
+    }
 
-   public static void clearContext() {
-      var context = new SecurityContextImpl();
-      SecurityContextHolder.setContext(context);
-   }
+    public static void clearContext() {
+        var context = new SecurityContextImpl();
+        SecurityContextHolder.setContext(context);
+    }
 
-   private static void ensureUserContext(ComponentTestUser user) {
-      var jwt = jwt(user);
-      var token = new JwtAuthenticationToken(jwt);
-      var context = new SecurityContextImpl();
-      context.setAuthentication(token);
-      SecurityContextHolder.setContext(context);
-   }
+    private static void ensureUserContext(ComponentTestUser user) {
+        var jwt = jwt(user);
+        var token = new JwtAuthenticationToken(jwt);
+        var context = new SecurityContextImpl();
+        context.setAuthentication(token);
+        SecurityContextHolder.setContext(context);
+    }
 
-   private static Jwt jwt(ComponentTestUser user) {
-      var builder = withTokenValue("s");
-      builder.header("typ", "JWT");
-      builder.claim("sub", user.getUsername());
-      return builder.build();
-   }
+    private static Jwt jwt(ComponentTestUser user) {
+        var builder = withTokenValue("s");
+        builder.header("typ", "JWT");
+        builder.claim("sub", user.getUsername());
+        return builder.build();
+    }
 }

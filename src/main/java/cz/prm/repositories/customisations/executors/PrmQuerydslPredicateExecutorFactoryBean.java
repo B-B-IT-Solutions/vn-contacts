@@ -8,12 +8,12 @@ import org.springframework.data.repository.history.RevisionRepository;
 public class PrmQuerydslPredicateExecutorFactoryBean<T extends RevisionRepository<S, ID, N>, S, ID, N extends Number & Comparable<N>> extends
     JpaRepositoryFactoryBean<T, S, ID> {
 
-   public PrmQuerydslPredicateExecutorFactoryBean(Class<? extends T> repositoryInterface) {
-      super(repositoryInterface);
-   }
+    public PrmQuerydslPredicateExecutorFactoryBean(Class<? extends T> repositoryInterface) {
+        super(repositoryInterface);
+    }
 
-   @Override
-   protected RepositoryFactorySupport createRepositoryFactory(EntityManager entityManager) {
-      return new PrmQuerydslPredicateExecutorFactory(entityManager);
-   }
+    @Override
+    protected RepositoryFactorySupport createRepositoryFactory(EntityManager entityManager) {
+        return new PrmQuerydslPredicateExecutorFactory(entityManager);
+    }
 }

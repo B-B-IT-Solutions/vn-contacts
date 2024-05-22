@@ -12,14 +12,13 @@ import org.springframework.data.querydsl.EntityPathResolver;
 
 public class PrmQueryDslJpaPredicateExecutor<T> extends QuerydslJpaPredicateExecutor<T> implements PrmQuerydslPredicateExecutor<T> {
 
-   private final EntityPath<T> path;
-   private final Querydsl querydsl;
+    private final EntityPath<T> path;
+    private final Querydsl querydsl;
 
-   public PrmQueryDslJpaPredicateExecutor(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager, EntityPathResolver resolver,
-       @Nullable CrudMethodMetadata metadata) {
-      super(entityInformation, entityManager, resolver, metadata);
-      this.path = resolver.createPath(entityInformation.getJavaType());
-      this.querydsl = new Querydsl(entityManager, new PathBuilder<>(path.getType(), path.getMetadata()));
-   }
-
+    public PrmQueryDslJpaPredicateExecutor(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager, EntityPathResolver resolver,
+        @Nullable CrudMethodMetadata metadata) {
+        super(entityInformation, entityManager, resolver, metadata);
+        this.path = resolver.createPath(entityInformation.getJavaType());
+        this.querydsl = new Querydsl(entityManager, new PathBuilder<>(path.getType(), path.getMetadata()));
+    }
 }

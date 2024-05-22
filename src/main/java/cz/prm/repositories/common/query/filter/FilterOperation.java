@@ -4,16 +4,15 @@ import lombok.Getter;
 
 @Getter
 public enum FilterOperation {
-   CONTAINS("contains"),
-   NOT_CONTAINS("notContains");
+    CONTAINS("contains"), NOT_CONTAINS("notContains");
 
-   private final String name;
+    private final String name;
 
-   FilterOperation(String name) {
-      this.name = name;
-   }
+    FilterOperation(String name) {
+        this.name = name;
+    }
 
-   public boolean isOperation(FilterCriteria criteria) {
-      return this.name.equals(criteria.getOperation());
-   }
+    public boolean isOperation(FilterCriteria criteria) {
+        return this.name.equals(criteria.getOperation());
+    }
 }

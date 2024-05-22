@@ -9,27 +9,27 @@ import lombok.Getter;
 @Getter
 public class FilterCriteria {
 
-   private static final String VALUE_SEPARATOR = ",";
-   private static final String FILTER_CRITERIA_REGEX = "^(\\w+)\\((.+)\\)$";
-   private static final Pattern FILTER_CRITERIA_PATTERN = Pattern.compile(FILTER_CRITERIA_REGEX);
+    private static final String VALUE_SEPARATOR = ",";
+    private static final String FILTER_CRITERIA_REGEX = "^(\\w+)\\((.+)\\)$";
+    private static final Pattern FILTER_CRITERIA_PATTERN = Pattern.compile(FILTER_CRITERIA_REGEX);
 
-   private String operation;
-   private String[] values;
+    private String operation;
+    private String[] values;
 
-   public FilterCriteria(String filter) {
-      parse(filter);
-   }
+    public FilterCriteria(String filter) {
+        parse(filter);
+    }
 
-   private void parse(String filter) {
-      if (isNotBlank(filter)) {
-         var cMatcher = FILTER_CRITERIA_PATTERN.matcher(filter);
-         if (cMatcher.matches()) {
-            this.operation = cMatcher.group(1);
-            this.values = cMatcher.group(2).split(VALUE_SEPARATOR);
-            return;
-         }
-      }
-      this.operation = null;
-      this.values = nonNull(filter) ? new String[]{filter} : new String[0];
-   }
+    private void parse(String filter) {
+        if (isNotBlank(filter)) {
+            var cMatcher = FILTER_CRITERIA_PATTERN.matcher(filter);
+            if (cMatcher.matches()) {
+                this.operation = cMatcher.group(1);
+                this.values = cMatcher.group(2).split(VALUE_SEPARATOR);
+                return;
+            }
+        }
+        this.operation = null;
+        this.values = nonNull(filter) ? new String[]{filter} : new String[0];
+    }
 }

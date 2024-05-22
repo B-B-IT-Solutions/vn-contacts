@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ContactsQueryDto extends QueryDto {
 
-   private ContactsFilterDto filter;
+    private ContactsFilterDto filter;
 }

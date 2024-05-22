@@ -17,37 +17,36 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ContactController {
 
-   private ContactService contactService;
-   public ContactMapper mapper;
+    private ContactService contactService;
+    public ContactMapper mapper;
 
-   public ContactController(ContactService contactService, ContactMapper mapper) {
-      this.contactService = contactService;
-      this.mapper = mapper;
-   }
+    public ContactController(ContactService contactService, ContactMapper mapper) {
+        this.contactService = contactService;
+        this.mapper = mapper;
+    }
 
-   @PostMapping
-   public void createContact(@RequestBody ContactDto dto) {
-      var contact = mapper.toContact(dto);
-      contactService.createContact(contact);
-   }
+    @PostMapping
+    public void createContact(@RequestBody ContactDto dto) {
+        var contact = mapper.toContact(dto);
+        contactService.createContact(contact);
+    }
 
-   @PutMapping("/{contactId}")
-   public void updateContact(@PathVariable("contactId") Long contactId, @RequestBody ContactDto dto) {
-      var contact = mapper.toContact(dto);
-      contactService.updateContact(contactId, contact);
-   }
+    @PutMapping("/{contactId}")
+    public void updateContact(@PathVariable("contactId") Long contactId, @RequestBody ContactDto dto) {
+        var contact = mapper.toContact(dto);
+        contactService.updateContact(contactId, contact);
+    }
 
-   @GetMapping
-   public PageDto<ContactDto> getContacts(ContactsQueryDto queryDto) {
-      var query = mapper.toNullSafeContactsQuery(queryDto);
-      var contacts = contactService.getContacts(query);
-      return mapper.toPageDto(contacts);
-   }
+    @GetMapping
+    public PageDto<ContactDto> getContacts(ContactsQueryDto queryDto) {
+        var query = mapper.toNullSafeContactsQuery(queryDto);
+        var contacts = contactService.getContacts(query);
+        return mapper.toPageDto(contacts);
+    }
 
-   @GetMapping("/{contactId}")
-   public ContactDto getContact(@PathVariable("contactId") Long contactId) {
-      var contact = contactService.getContact(contactId);
-      return mapper.toContactDto(contact);
-   }
-
+    @GetMapping("/{contactId}")
+    public ContactDto getContact(@PathVariable("contactId") Long contactId) {
+        var contact = contactService.getContact(contactId);
+        return mapper.toContactDto(contact);
+    }
 }

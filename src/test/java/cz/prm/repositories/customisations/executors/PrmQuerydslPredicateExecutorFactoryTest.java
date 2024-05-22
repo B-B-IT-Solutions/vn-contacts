@@ -23,44 +23,43 @@ import org.springframework.data.repository.core.RepositoryMetadata;
 @ExtendWith(MockitoExtension.class)
 class PrmQuerydslPredicateExecutorFactoryTest {
 
-   @Mock
-   private EntityManagerFactory entityManagerFactory;
-   @Mock
-   private EntityManager entityManager;
-   @Mock
-   private PersistenceUnitUtil persistenceUnitUtil;
-   @Mock
-   private SessionImpl hibernateSession;
-   @Mock
-   private RepositoryMetadata metadata;
-   @Mock
-   private Metamodel metamodel;
-   @Mock
-   private IdentifiableType managedType;
+    @Mock
+    private EntityManagerFactory entityManagerFactory;
+    @Mock
+    private EntityManager entityManager;
+    @Mock
+    private PersistenceUnitUtil persistenceUnitUtil;
+    @Mock
+    private SessionImpl hibernateSession;
+    @Mock
+    private RepositoryMetadata metadata;
+    @Mock
+    private Metamodel metamodel;
+    @Mock
+    private IdentifiableType managedType;
 
-   private PrmQuerydslPredicateExecutorFactory factory;
+    private PrmQuerydslPredicateExecutorFactory factory;
 
-   @BeforeEach
-   void setUp() {
-      when(entityManager.getDelegate()).thenReturn(hibernateSession);
-      factory = new PrmQuerydslPredicateExecutorFactory(entityManager);
-   }
+    @BeforeEach
+    void setUp() {
+        when(entityManager.getDelegate()).thenReturn(hibernateSession);
+        factory = new PrmQuerydslPredicateExecutorFactory(entityManager);
+    }
 
-   @Test
-   void getRepositoryFragmentsIsReactiveRepository() {
-      when(metadata.isReactiveRepository()).thenReturn(true);
-      assertThrows(InvalidDataAccessApiUsageException.class, () -> factory.getRepositoryFragments(metadata));
-   }
+    @Test
+    void getRepositoryFragmentsIsReactiveRepository() {
+        when(metadata.isReactiveRepository()).thenReturn(true);
+        assertThrows(InvalidDataAccessApiUsageException.class, () -> factory.getRepositoryFragments(metadata));
+    }
 
-   @Test
-   void getRepositoryFragments() {
-      doReturn(Contact.class).when(metadata).getDomainType();
-      when(entityManager.getEntityManagerFactory()).thenReturn(entityManagerFactory);
-      when(entityManagerFactory.getPersistenceUnitUtil()).thenReturn(persistenceUnitUtil);
-      when(entityManager.getMetamodel()).thenReturn(metamodel);
-      when(metamodel.managedType(Contact.class)).thenReturn(managedType);
-      var result = factory.getRepositoryFragments(metadata);
-      assertThat(result).isNotEmpty();
-   }
-
+    @Test
+    void getRepositoryFragments() {
+        doReturn(Contact.class).when(metadata).getDomainType();
+        when(entityManager.getEntityManagerFactory()).thenReturn(entityManagerFactory);
+        when(entityManagerFactory.getPersistenceUnitUtil()).thenReturn(persistenceUnitUtil);
+        when(entityManager.getMetamodel()).thenReturn(metamodel);
+        when(metamodel.managedType(Contact.class)).thenReturn(managedType);
+        var result = factory.getRepositoryFragments(metadata);
+        assertThat(result).isNotEmpty();
+    }
 }
