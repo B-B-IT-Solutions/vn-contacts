@@ -9,7 +9,11 @@ public class ContactsFilterDto {
 
    private String firstName;
 
+   private String middleName;
+
    private String lastName;
+
+   private String nickName;
 
    private String email;
 }

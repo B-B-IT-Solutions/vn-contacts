@@ -165,9 +165,19 @@ public class ContactComponentTestBase extends ComponentTestBase {
             sb.append(filterDto.getFirstName());
             sb.append("&");
          }
+         if (isNotEmpty(filterDto.getMiddleName())) {
+            sb.append("filter.middleName=");
+            sb.append(filterDto.getMiddleName());
+            sb.append("&");
+         }
          if (isNotEmpty(filterDto.getLastName())) {
             sb.append("filter.lastName=");
             sb.append(filterDto.getLastName());
+            sb.append("&");
+         }
+         if (isNotEmpty(filterDto.getNickName())) {
+            sb.append("filter.nickName=");
+            sb.append(filterDto.getNickName());
             sb.append("&");
          }
          if (isNotEmpty(filterDto.getEmail())) {
