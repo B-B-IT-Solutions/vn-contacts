@@ -24,7 +24,9 @@ public class ContactUtils {
       var user = new Contact();
       user.setContactId(randomLong());
       user.setFirstName(uuid());
+      user.setMiddleName(uuid());
       user.setLastName(uuid());
+      user.setNickName(uuid());
       user.setEmail(uuid());
       user.setOwner(uuid());
       return user;
@@ -34,7 +36,9 @@ public class ContactUtils {
       var user = new ContactDto();
       user.setContactId(randomLong());
       user.setFirstName(uuid());
+      user.setMiddleName(uuid());
       user.setLastName(uuid());
+      user.setNickName(uuid());
       user.setEmail(uuid());
       return user;
    }

@@ -62,7 +62,9 @@ public class ContactAssertions {
    public static void assertContact(Contact contact1, Contact contact2) {
       assertThat(contact1.getContactId()).isEqualTo(contact2.getContactId());
       assertThat(contact1.getFirstName()).isEqualTo(contact2.getFirstName());
+      assertThat(contact1.getMiddleName()).isEqualTo(contact2.getMiddleName());
       assertThat(contact1.getLastName()).isEqualTo(contact2.getLastName());
+      assertThat(contact1.getNickName()).isEqualTo(contact2.getNickName());
       assertThat(contact1.getEmail()).isEqualTo(contact2.getEmail());
       assertThat(contact1.getOwner()).isEqualTo(contact2.getOwner());
    }
@@ -70,7 +72,9 @@ public class ContactAssertions {
    public static void assertContact(Contact contact, ContactDto dto) {
       assertThat(contact.getContactId()).isEqualTo(dto.getContactId());
       assertThat(contact.getFirstName()).isEqualTo(dto.getFirstName());
+      assertThat(contact.getMiddleName()).isEqualTo(dto.getMiddleName());
       assertThat(contact.getLastName()).isEqualTo(dto.getLastName());
+      assertThat(contact.getNickName()).isEqualTo(dto.getNickName());
       assertThat(contact.getEmail()).isEqualTo(dto.getEmail());
    }
 

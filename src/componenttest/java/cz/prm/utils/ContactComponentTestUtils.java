@@ -25,7 +25,9 @@ public class ContactComponentTestUtils {
    public static Contact contact(ComponentTestUser user) {
       var contact = new Contact();
       contact.setFirstName(format("First%s", uuid()));
+      contact.setMiddleName(format("Middle%s", uuid()));
       contact.setLastName(format("Last%s", uuid()));
+      contact.setNickName(format("Nick%s", uuid()));
       contact.setEmail(format("email%s", uuid()));
       contact.setOwner(user.getUsername());
       return contact;
@@ -34,7 +36,9 @@ public class ContactComponentTestUtils {
    public static ContactDto contactDto() {
       var dto = new ContactDto();
       dto.setFirstName(uuid());
+      dto.setMiddleName(uuid());
       dto.setLastName(uuid());
+      dto.setNickName(uuid());
       dto.setEmail(uuid());
       return dto;
    }

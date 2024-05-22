@@ -27,13 +27,18 @@ public class Contact {
    @Column(name = "FIRST_NAME")
    private String firstName;
 
+   @Column(name = "MIDDLE_NAME")
+   private String middleName;
+
    @Column(name = "LAST_NAME")
    private String lastName;
+
+   @Column(name = "NICK_NAME")
+   private String nickName;
 
    @Column(name = "EMAIL")
    private String email;
 
    @Column(name = "OWNER")
    private String owner;
-
 }

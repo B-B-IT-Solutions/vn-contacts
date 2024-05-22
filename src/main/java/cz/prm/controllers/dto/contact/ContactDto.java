@@ -16,10 +16,15 @@ public class ContactDto {
    @JsonProperty("firstName")
    private String firstName;
 
+   @JsonProperty("middleName")
+   private String middleName;
+
    @JsonProperty("lastName")
    private String lastName;
 
+   @JsonProperty("nickName")
+   private String nickName;
+
    @JsonProperty("email")
    private String email;
-
 }
