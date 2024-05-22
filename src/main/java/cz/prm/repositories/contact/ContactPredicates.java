@@ -33,8 +33,14 @@ public class ContactPredicates {
       if (filter.isFirstName()) {
          applyCriteria(predicate, contact.firstName, filter.getFirstName());
       }
+      if (filter.isMiddleName()) {
+         applyCriteria(predicate, contact.middleName, filter.getMiddleName());
+      }
       if (filter.isLastName()) {
          applyCriteria(predicate, contact.lastName, filter.getLastName());
+      }
+      if (filter.isNickName()) {
+         applyCriteria(predicate, contact.nickName, filter.getNickName());
       }
       if (filter.isEmail()) {
          applyCriteria(predicate, contact.email, filter.getEmail());

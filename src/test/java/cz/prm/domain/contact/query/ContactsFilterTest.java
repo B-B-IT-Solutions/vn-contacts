@@ -22,6 +22,20 @@ class ContactsFilterTest {
    }
 
    @Test
+   void isMiddleName() {
+      var filter = new ContactsFilter();
+      assertThat(filter.isMiddleName()).isFalse();
+      filter.setMiddleName(null);
+      assertThat(filter.isMiddleName()).isFalse();
+      filter.setMiddleName("");
+      assertThat(filter.isMiddleName()).isFalse();
+      filter.setMiddleName(" ");
+      assertThat(filter.isMiddleName()).isFalse();
+      filter.setMiddleName(uuid());
+      assertThat(filter.isMiddleName()).isTrue();
+   }
+
+   @Test
    void isLastName() {
       var filter = new ContactsFilter();
       assertThat(filter.isLastName()).isFalse();
@@ -33,6 +47,20 @@ class ContactsFilterTest {
       assertThat(filter.isLastName()).isFalse();
       filter.setLastName(uuid());
       assertThat(filter.isLastName()).isTrue();
+   }
+
+   @Test
+   void isNickName() {
+      var filter = new ContactsFilter();
+      assertThat(filter.isNickName()).isFalse();
+      filter.setNickName(null);
+      assertThat(filter.isNickName()).isFalse();
+      filter.setNickName("");
+      assertThat(filter.isNickName()).isFalse();
+      filter.setNickName(" ");
+      assertThat(filter.isNickName()).isFalse();
+      filter.setNickName(uuid());
+      assertThat(filter.isNickName()).isTrue();
    }
 
    @Test
