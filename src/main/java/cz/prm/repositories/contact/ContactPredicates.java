@@ -13,38 +13,38 @@ import org.springframework.stereotype.Component;
 @Component
 public class ContactPredicates {
 
-   public Predicate contacts(ContactsFilter filter) {
-      var predicate = dataAccessPredicate();
-      return predicate.and(filterPredicates(filter));
-   }
+    public Predicate contacts(ContactsFilter filter) {
+        var predicate = dataAccessPredicate();
+        return predicate.and(filterPredicates(filter));
+    }
 
-   public Predicate byContactId(Long userId) {
-      var predicate = dataAccessPredicate();
-      return predicate.and(contact.contactId.eq(userId));
-   }
+    public Predicate byContactId(Long userId) {
+        var predicate = dataAccessPredicate();
+        return predicate.and(contact.contactId.eq(userId));
+    }
 
-   private BooleanExpression dataAccessPredicate() {
-      var username = getUsername();
-      return contact.owner.eq(username);
-   }
+    private BooleanExpression dataAccessPredicate() {
+        var username = getUsername();
+        return contact.owner.eq(username);
+    }
 
-   private BooleanBuilder filterPredicates(ContactsFilter filter) {
-      var predicate = new BooleanBuilder();
-      if (filter.isFirstName()) {
-         applyCriteria(predicate, contact.firstName, filter.getFirstName());
-      }
-      if (filter.isMiddleName()) {
-         applyCriteria(predicate, contact.middleName, filter.getMiddleName());
-      }
-      if (filter.isLastName()) {
-         applyCriteria(predicate, contact.lastName, filter.getLastName());
-      }
-      if (filter.isNickName()) {
-         applyCriteria(predicate, contact.nickName, filter.getNickName());
-      }
-      if (filter.isEmail()) {
-         applyCriteria(predicate, contact.email, filter.getEmail());
-      }
-      return predicate;
-   }
+    private BooleanBuilder filterPredicates(ContactsFilter filter) {
+        var predicate = new BooleanBuilder();
+        if (filter.isFirstName()) {
+            applyCriteria(predicate, contact.firstName, filter.getFirstName());
+        }
+        if (filter.isMiddleName()) {
+            applyCriteria(predicate, contact.middleName, filter.getMiddleName());
+        }
+        if (filter.isLastName()) {
+            applyCriteria(predicate, contact.lastName, filter.getLastName());
+        }
+        if (filter.isNickName()) {
+            applyCriteria(predicate, contact.nickName, filter.getNickName());
+        }
+        if (filter.isEmail()) {
+            applyCriteria(predicate, contact.email, filter.getEmail());
+        }
+        return predicate;
+    }
 }

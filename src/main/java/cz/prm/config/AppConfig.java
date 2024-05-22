@@ -13,14 +13,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableJpaAuditing(auditorAwareRef = "auditProvider")
-@EnableJpaRepositories(basePackages = "cz.prm", repositoryBaseClass = RefreshAwareRepositoryImpl.class, repositoryFactoryBeanClass = PrmQuerydslPredicateExecutorFactoryBean.class)
+@EnableJpaRepositories(basePackages = "cz.prm", repositoryBaseClass = RefreshAwareRepositoryImpl.class, repositoryFactoryBeanClass =
+    PrmQuerydslPredicateExecutorFactoryBean.class)
 public class AppConfig {
 
-   @Bean
-   public AuditorAware<Contact> auditProvider() {
-      var user = new Contact();
-      user.setEmail("emai@email.com");
-      return () -> of(user);
-   }
-
+    @Bean
+    public AuditorAware<Contact> auditProvider() {
+        var user = new Contact();
+        user.setEmail("emai@email.com");
+        return () -> of(user);
+    }
 }

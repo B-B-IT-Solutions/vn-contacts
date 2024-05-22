@@ -29,59 +29,58 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class ContactControllerTest {
 
-   @Mock
-   private ContactService contactService;
-   @Captor
-   private ArgumentCaptor<Contact> contactCapt;
-   @Captor
-   private ArgumentCaptor<ContactsQuery> cQueryCapt;
-   private ContactMapper mapper = MapperUtils.getContactMapper();
+    @Mock
+    private ContactService contactService;
+    @Captor
+    private ArgumentCaptor<Contact> contactCapt;
+    @Captor
+    private ArgumentCaptor<ContactsQuery> cQueryCapt;
+    private ContactMapper mapper = MapperUtils.getContactMapper();
 
-   private ContactController controller;
+    private ContactController controller;
 
-   @BeforeEach
-   void setUp() {
-      controller = new ContactController(contactService, mapper);
-   }
+    @BeforeEach
+    void setUp() {
+        controller = new ContactController(contactService, mapper);
+    }
 
-   @Test
-   void createContact() {
-      var dto = contactDto();
-      controller.createContact(dto);
-      verify(contactService).createContact(contactCapt.capture());
-      var contact = contactCapt.getValue();
-      assertContact(contact, dto);
-   }
+    @Test
+    void createContact() {
+        var dto = contactDto();
+        controller.createContact(dto);
+        verify(contactService).createContact(contactCapt.capture());
+        var contact = contactCapt.getValue();
+        assertContact(contact, dto);
+    }
 
-   @Test
-   void updateContact() {
-      var dto = contactDto();
-      controller.updateContact(dto.getContactId(), dto);
-      verify(contactService).updateContact(eq(dto.getContactId()), contactCapt.capture());
-      var contact = contactCapt.getValue();
-      assertContact(contact, dto);
-   }
+    @Test
+    void updateContact() {
+        var dto = contactDto();
+        controller.updateContact(dto.getContactId(), dto);
+        verify(contactService).updateContact(eq(dto.getContactId()), contactCapt.capture());
+        var contact = contactCapt.getValue();
+        assertContact(contact, dto);
+    }
 
-   @Test
-   void getContacts() {
-      var page = page(contacts());
-      var queryDto = contactsQueryDto();
-      when(contactService.getContacts(any(ContactsQuery.class))).thenReturn(page);
+    @Test
+    void getContacts() {
+        var page = page(contacts());
+        var queryDto = contactsQueryDto();
+        when(contactService.getContacts(any(ContactsQuery.class))).thenReturn(page);
 
-      var result = controller.getContacts(queryDto);
-      assertPage(page, result);
-      verify(contactService).getContacts(cQueryCapt.capture());
-      var query = cQueryCapt.getValue();
-      assertContactQuery(query, queryDto);
-   }
+        var result = controller.getContacts(queryDto);
+        assertPage(page, result);
+        verify(contactService).getContacts(cQueryCapt.capture());
+        var query = cQueryCapt.getValue();
+        assertContactQuery(query, queryDto);
+    }
 
-   @Test
-   void getContact() {
-      var contact = contact();
-      var contactId = contact.getContactId();
-      when(contactService.getContact(contactId)).thenReturn(contact);
-      var result = controller.getContact(contactId);
-      assertContact(contact, result);
-   }
-
+    @Test
+    void getContact() {
+        var contact = contact();
+        var contactId = contact.getContactId();
+        when(contactService.getContact(contactId)).thenReturn(contact);
+        var result = controller.getContact(contactId);
+        assertContact(contact, result);
+    }
 }

@@ -16,37 +16,37 @@ import org.springframework.data.repository.history.support.RevisionEntityInforma
 
 public class PrmQuerydslPredicateExecutorFactory extends JpaRepositoryFactory {
 
-   private static final String QUERYDSL_PACKAGE_SUFFIX = ".querydsl";
+    private static final String QUERYDSL_PACKAGE_SUFFIX = ".querydsl";
 
-   private EntityManager entityManager;
-   private SimpleEntityPathResolver entityPathResolver;
-   private RevisionEntityInformation revisionEntityInformation;
+    private EntityManager entityManager;
+    private SimpleEntityPathResolver entityPathResolver;
+    private RevisionEntityInformation revisionEntityInformation;
 
-   public PrmQuerydslPredicateExecutorFactory(EntityManager entityManager) {
-      super(entityManager);
-      this.entityManager = entityManager;
-      this.entityPathResolver = new SimpleEntityPathResolver(QUERYDSL_PACKAGE_SUFFIX);
-      this.revisionEntityInformation = new ReflectionRevisionEntityInformation(DefaultRevisionEntity.class);
-   }
+    public PrmQuerydslPredicateExecutorFactory(EntityManager entityManager) {
+        super(entityManager);
+        this.entityManager = entityManager;
+        this.entityPathResolver = new SimpleEntityPathResolver(QUERYDSL_PACKAGE_SUFFIX);
+        this.revisionEntityInformation = new ReflectionRevisionEntityInformation(DefaultRevisionEntity.class);
+    }
 
-   @Override
-   protected RepositoryComposition.RepositoryFragments getRepositoryFragments(RepositoryMetadata metadata) {
-      if (metadata.isReactiveRepository()) {
-         throw new InvalidDataAccessApiUsageException("Cannot combine Querydsl and reactive repository in a single interface!");
-      }
-      var entityInformation = getEntityInformation(metadata.getDomainType());
-      var querydslFragment = getPrmQuerydslTargetRepository(entityInformation);
-      var revisionsFragment = getRevisionsTargetRepository(entityInformation);
+    @Override
+    protected RepositoryComposition.RepositoryFragments getRepositoryFragments(RepositoryMetadata metadata) {
+        if (metadata.isReactiveRepository()) {
+            throw new InvalidDataAccessApiUsageException("Cannot combine Querydsl and reactive repository in a single interface!");
+        }
+        var entityInformation = getEntityInformation(metadata.getDomainType());
+        var querydslFragment = getPrmQuerydslTargetRepository(entityInformation);
+        var revisionsFragment = getRevisionsTargetRepository(entityInformation);
 
-      var fragments = RepositoryComposition.RepositoryFragments.empty();
-      return fragments.append(RepositoryFragments.just(querydslFragment)).append(RepositoryFragment.implemented(revisionsFragment));
-   }
+        var fragments = RepositoryComposition.RepositoryFragments.empty();
+        return fragments.append(RepositoryFragments.just(querydslFragment)).append(RepositoryFragment.implemented(revisionsFragment));
+    }
 
-   private Object getPrmQuerydslTargetRepository(JpaEntityInformation<?, Object> entityInformation) {
-      return getTargetRepositoryViaReflection(PrmQueryDslJpaPredicateExecutor.class, entityInformation, entityManager, entityPathResolver, null);
-   }
+    private Object getPrmQuerydslTargetRepository(JpaEntityInformation<?, Object> entityInformation) {
+        return getTargetRepositoryViaReflection(PrmQueryDslJpaPredicateExecutor.class, entityInformation, entityManager, entityPathResolver, null);
+    }
 
-   private Object getRevisionsTargetRepository(JpaEntityInformation<?, Object> entityInformation) {
-      return getTargetRepositoryViaReflection(EnversRevisionRepositoryImpl.class, entityInformation, revisionEntityInformation, entityManager);
-   }
+    private Object getRevisionsTargetRepository(JpaEntityInformation<?, Object> entityInformation) {
+        return getTargetRepositoryViaReflection(EnversRevisionRepositoryImpl.class, entityInformation, revisionEntityInformation, entityManager);
+    }
 }

@@ -16,62 +16,62 @@ import org.assertj.core.util.Lists;
 
 public class ContactUtils {
 
-   public static List<Contact> contacts() {
-      return Lists.newArrayList(contact(), contact(), contact());
-   }
+    public static List<Contact> contacts() {
+        return Lists.newArrayList(contact(), contact(), contact());
+    }
 
-   public static Contact contact() {
-      var user = new Contact();
-      user.setContactId(randomLong());
-      user.setFirstName(uuid());
-      user.setMiddleName(uuid());
-      user.setLastName(uuid());
-      user.setNickName(uuid());
-      user.setEmail(uuid());
-      user.setOwner(uuid());
-      return user;
-   }
+    public static Contact contact() {
+        var user = new Contact();
+        user.setContactId(randomLong());
+        user.setFirstName(uuid());
+        user.setMiddleName(uuid());
+        user.setLastName(uuid());
+        user.setNickName(uuid());
+        user.setEmail(uuid());
+        user.setOwner(uuid());
+        return user;
+    }
 
-   public static ContactDto contactDto() {
-      var user = new ContactDto();
-      user.setContactId(randomLong());
-      user.setFirstName(uuid());
-      user.setMiddleName(uuid());
-      user.setLastName(uuid());
-      user.setNickName(uuid());
-      user.setEmail(uuid());
-      return user;
-   }
+    public static ContactDto contactDto() {
+        var user = new ContactDto();
+        user.setContactId(randomLong());
+        user.setFirstName(uuid());
+        user.setMiddleName(uuid());
+        user.setLastName(uuid());
+        user.setNickName(uuid());
+        user.setEmail(uuid());
+        return user;
+    }
 
-   public static ContactsQuery contactsQuery() {
-      var query = new ContactsQuery();
-      query.setPagination(pagination());
-      query.setFilter(contactsFilter());
-      query.setSort(uuid());
-      return query;
-   }
+    public static ContactsQuery contactsQuery() {
+        var query = new ContactsQuery();
+        query.setPagination(pagination());
+        query.setFilter(contactsFilter());
+        query.setSort(uuid());
+        return query;
+    }
 
-   public static ContactsQueryDto contactsQueryDto() {
-      var query = new ContactsQueryDto();
-      query.setPagination(paginationDto());
-      query.setFilter(contactsFilterDto());
-      query.setSort(uuid());
-      return query;
-   }
+    public static ContactsQueryDto contactsQueryDto() {
+        var query = new ContactsQueryDto();
+        query.setPagination(paginationDto());
+        query.setFilter(contactsFilterDto());
+        query.setSort(uuid());
+        return query;
+    }
 
-   public static ContactsFilter contactsFilter() {
-      var filter = new ContactsFilter();
-      filter.setFirstName(uuid());
-      filter.setLastName(uuid());
-      filter.setEmail(uuid());
-      return filter;
-   }
+    public static ContactsFilter contactsFilter() {
+        var filter = new ContactsFilter();
+        filter.setFirstName(uuid());
+        filter.setLastName(uuid());
+        filter.setEmail(uuid());
+        return filter;
+    }
 
-   public static ContactsFilterDto contactsFilterDto() {
-      var filter = new ContactsFilterDto();
-      filter.setFirstName(uuid());
-      filter.setLastName(uuid());
-      filter.setEmail(uuid());
-      return filter;
-   }
+    public static ContactsFilterDto contactsFilterDto() {
+        var filter = new ContactsFilterDto();
+        filter.setFirstName(uuid());
+        filter.setLastName(uuid());
+        filter.setEmail(uuid());
+        return filter;
+    }
 }

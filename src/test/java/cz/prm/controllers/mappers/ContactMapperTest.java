@@ -20,80 +20,80 @@ import org.junit.jupiter.api.Test;
 
 class ContactMapperTest {
 
-   private ContactMapper mapper = MapperUtils.getContactMapper();
+    private ContactMapper mapper = MapperUtils.getContactMapper();
 
-   @Test
-   void toPageDto() {
-      var page = page(contacts());
-      var dtos = mapper.toPageDto(page);
-      assertPage(page, dtos);
-   }
+    @Test
+    void toPageDto() {
+        var page = page(contacts());
+        var dtos = mapper.toPageDto(page);
+        assertPage(page, dtos);
+    }
 
-   @Test
-   void toContactDto() {
-      var contact = contact();
-      var dto = mapper.toContactDto(contact);
-      assertContact(contact, dto);
-   }
+    @Test
+    void toContactDto() {
+        var contact = contact();
+        var dto = mapper.toContactDto(contact);
+        assertContact(contact, dto);
+    }
 
-   @Test
-   void toContact() {
-      var dto = contactDto();
-      var contact = mapper.toContact(dto);
-      assertContact(contact, dto);
-   }
+    @Test
+    void toContact() {
+        var dto = contactDto();
+        var contact = mapper.toContact(dto);
+        assertContact(contact, dto);
+    }
 
-   @Test
-   void toContactsQuery() {
-      var dto = contactsQueryDto();
-      var query = mapper.toContactsQuery(dto);
-      assertContactQuery(query, dto);
-   }
+    @Test
+    void toContactsQuery() {
+        var dto = contactsQueryDto();
+        var query = mapper.toContactsQuery(dto);
+        assertContactQuery(query, dto);
+    }
 
-   @Test
-   void toContactsFilter() {
-      var dto = contactsFilterDto();
-      var filter = mapper.toContactsFilter(dto);
-      assertContactFilter(filter, dto);
-   }
+    @Test
+    void toContactsFilter() {
+        var dto = contactsFilterDto();
+        var filter = mapper.toContactsFilter(dto);
+        assertContactFilter(filter, dto);
+    }
 
-   @Test
-   void toNullSafeContactsQueryNullQuery() {
-      var query = mapper.toNullSafeContactsQuery(null);
-      assertNullSafeContactQuery(query);
-   }
+    @Test
+    void toNullSafeContactsQueryNullQuery() {
+        var query = mapper.toNullSafeContactsQuery(null);
+        assertNullSafeContactQuery(query);
+    }
 
-   @Test
-   void toNullSafeContactsQueryNotNullQuery() {
-      var dto = contactsQueryDto();
-      var query = mapper.toNullSafeContactsQuery(dto);
-      assertContactQuery(query, dto);
-   }
+    @Test
+    void toNullSafeContactsQueryNotNullQuery() {
+        var dto = contactsQueryDto();
+        var query = mapper.toNullSafeContactsQuery(dto);
+        assertContactQuery(query, dto);
+    }
 
-   @Test
-   void toNullSafeContactsQueryNullFiltersPagination() {
-      var dto = new ContactsQueryDto();
-      dto.setPagination(null);
-      dto.setFilter(null);
-      var query = mapper.toNullSafeContactsQuery(dto);
-      assertNullSafeContactQuery(query);
-   }
+    @Test
+    void toNullSafeContactsQueryNullFiltersPagination() {
+        var dto = new ContactsQueryDto();
+        dto.setPagination(null);
+        dto.setFilter(null);
+        var query = mapper.toNullSafeContactsQuery(dto);
+        assertNullSafeContactQuery(query);
+    }
 
-   @Test
-   void afterContactsQuery() {
-      var target = new ContactsQuery();
-      target.setPagination(null);
-      target.setFilter(null);
-      mapper.afterContactsQuery(null, target);
-      assertNullSafeContactQuery(target);
-   }
+    @Test
+    void afterContactsQuery() {
+        var target = new ContactsQuery();
+        target.setPagination(null);
+        target.setFilter(null);
+        mapper.afterContactsQuery(null, target);
+        assertNullSafeContactQuery(target);
+    }
 
-   private void assertNullSafeContactQuery(ContactsQuery query) {
-      assertThat(query.getPagination()).isNotNull();
-      assertThat(query.getFilter()).isNotNull();
-      assertThat(query.getSort()).isNull();
-      var pagination = query.getPagination();
-      assertThat(pagination.getPageNumber()).isZero();
-      assertThat(pagination.getPageSize()).isEqualTo(DEFAULT_PAGE_SIZE);
-   }
+    private void assertNullSafeContactQuery(ContactsQuery query) {
+        assertThat(query.getPagination()).isNotNull();
+        assertThat(query.getFilter()).isNotNull();
+        assertThat(query.getSort()).isNull();
+        var pagination = query.getPagination();
+        assertThat(pagination.getPageNumber()).isZero();
+        assertThat(pagination.getPageSize()).isEqualTo(DEFAULT_PAGE_SIZE);
+    }
 }

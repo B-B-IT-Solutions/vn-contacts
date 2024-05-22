@@ -11,19 +11,19 @@ import org.springframework.data.domain.Sort;
 
 public class CommonAssertions {
 
-   public static void assertPageRequest(PageRequest pr, Pagination pagination, Sort sort) {
-      assertThat(pr.getPageNumber()).isNotZero().isEqualTo(pagination.getPageNumber());
-      assertThat(pr.getPageSize()).isNotZero().isEqualTo(pagination.getPageSize());
-      assertThat(pr.getSort()).isEqualTo(sort);
-   }
+    public static void assertPageRequest(PageRequest pr, Pagination pagination, Sort sort) {
+        assertThat(pr.getPageNumber()).isNotZero().isEqualTo(pagination.getPageNumber());
+        assertThat(pr.getPageSize()).isNotZero().isEqualTo(pagination.getPageSize());
+        assertThat(pr.getSort()).isEqualTo(sort);
+    }
 
-   public static void assertQuery(Query query, QueryDto dto) {
-      assertPagination(query.getPagination(), dto.getPagination());
-      assertThat(query.getSort()).isEqualTo(dto.getSort());
-   }
+    public static void assertQuery(Query query, QueryDto dto) {
+        assertPagination(query.getPagination(), dto.getPagination());
+        assertThat(query.getSort()).isEqualTo(dto.getSort());
+    }
 
-   public static void assertPagination(Pagination pagination, PaginationDto paginationDto) {
-      assertThat(pagination.getPageNumber()).isNotZero().isEqualTo(paginationDto.getPageNumber());
-      assertThat(pagination.getPageSize()).isNotZero().isEqualTo(paginationDto.getPageSize());
-   }
+    public static void assertPagination(Pagination pagination, PaginationDto paginationDto) {
+        assertThat(pagination.getPageNumber()).isNotZero().isEqualTo(paginationDto.getPageNumber());
+        assertThat(pagination.getPageSize()).isNotZero().isEqualTo(paginationDto.getPageSize());
+    }
 }

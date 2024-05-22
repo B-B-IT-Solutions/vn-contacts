@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 
 class ContactsQueryTest {
 
-   @Test
-   void newInstance() {
-      var query = new ContactsQuery();
-      assertThat(query.getFilter()).isNotNull();
-      assertThat(query.getPagination()).isNotNull();
-   }
+    @Test
+    void newInstance() {
+        var query = new ContactsQuery();
+        assertThat(query.getFilter()).isNotNull();
+        assertThat(query.getPagination()).isNotNull();
+    }
 }

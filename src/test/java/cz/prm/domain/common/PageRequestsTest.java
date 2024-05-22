@@ -10,18 +10,18 @@ import org.junit.jupiter.api.Test;
 
 class PageRequestsTest {
 
-   @Test
-   void getPageRequestUnsorted() {
-      var pagination = pagination();
-      var pr = PageRequests.getPageRequest(pagination);
-      assertPageRequest(pr, pagination, unsorted());
-   }
+    @Test
+    void getPageRequestUnsorted() {
+        var pagination = pagination();
+        var pr = PageRequests.getPageRequest(pagination);
+        assertPageRequest(pr, pagination, unsorted());
+    }
 
-   @Test
-   void getPageRequest() {
-      var pagination = pagination();
-      var sort = by(desc("prop1"));
-      var pr = PageRequests.getPageRequest(pagination, sort);
-      assertPageRequest(pr, pagination, sort);
-   }
+    @Test
+    void getPageRequest() {
+        var pagination = pagination();
+        var sort = by(desc("prop1"));
+        var pr = PageRequests.getPageRequest(pagination, sort);
+        assertPageRequest(pr, pagination, sort);
+    }
 }

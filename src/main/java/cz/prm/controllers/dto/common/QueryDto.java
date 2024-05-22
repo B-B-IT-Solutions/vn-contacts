@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class QueryDto {
 
-   protected String sort;
+    protected String sort;
 
-   protected PaginationDto pagination;
+    protected PaginationDto pagination;
 }

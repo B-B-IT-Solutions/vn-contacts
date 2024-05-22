@@ -10,22 +10,22 @@ import lombok.Getter;
 @Getter
 public class FilterCriterias {
 
-   private static final String FILTER_CRITERIA_SEPARATOR = "\\+";
-   private List<FilterCriteria> criterias = new ArrayList<>();
+    private static final String FILTER_CRITERIA_SEPARATOR = "\\+";
+    private List<FilterCriteria> criterias = new ArrayList<>();
 
-   public FilterCriterias(String filter) {
-      parse(filter);
-   }
+    public FilterCriterias(String filter) {
+        parse(filter);
+    }
 
-   private void parse(String filter) {
-      if (isNotBlank(filter)) {
-         var fcs = filter.split(FILTER_CRITERIA_SEPARATOR);
-         Stream.of(fcs).forEach(this::addFilterCriteria);
-      }
-   }
+    private void parse(String filter) {
+        if (isNotBlank(filter)) {
+            var fcs = filter.split(FILTER_CRITERIA_SEPARATOR);
+            Stream.of(fcs).forEach(this::addFilterCriteria);
+        }
+    }
 
-   private void addFilterCriteria(String filter) {
-      var fc = new FilterCriteria(filter);
-      criterias.add(fc);
-   }
+    private void addFilterCriteria(String filter) {
+        var fc = new FilterCriteria(filter);
+        criterias.add(fc);
+    }
 }

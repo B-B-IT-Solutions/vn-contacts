@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 
 class AppConfigTest {
 
-   private AppConfig appConfig = new AppConfig();
+    private AppConfig appConfig = new AppConfig();
 
-   @Test
-   void auditProvider() {
-      var provider = appConfig.auditProvider();
-      var optional = provider.getCurrentAuditor();
-      var auditor = optional.get();
-      assertThat(auditor.getEmail()).isEqualTo("emai@email.com");
-   }
+    @Test
+    void auditProvider() {
+        var provider = appConfig.auditProvider();
+        var optional = provider.getCurrentAuditor();
+        var auditor = optional.get();
+        assertThat(auditor.getEmail()).isEqualTo("emai@email.com");
+    }
 }

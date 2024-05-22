@@ -17,20 +17,20 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 @ExtendWith(MockitoExtension.class)
 class SecurityContextUtilsTest {
 
-   @Mock
-   private SecurityContext context;
-   @Mock
-   private JwtAuthenticationToken authentication;
+    @Mock
+    private SecurityContext context;
+    @Mock
+    private JwtAuthenticationToken authentication;
 
-   @Test
-   void getUsername() {
-      try (MockedStatic<SecurityContextHolder> contextHolder = Mockito.mockStatic(SecurityContextHolder.class)) {
-         var username = uuid();
-         when(authentication.getName()).thenReturn(username);
-         when(context.getAuthentication()).thenReturn(authentication);
-         contextHolder.when(() -> SecurityContextHolder.getContext()).thenReturn(context);
-         var result = SecurityContextUtils.getUsername();
-         assertThat(result).isEqualTo(username);
-      }
-   }
+    @Test
+    void getUsername() {
+        try (MockedStatic<SecurityContextHolder> contextHolder = Mockito.mockStatic(SecurityContextHolder.class)) {
+            var username = uuid();
+            when(authentication.getName()).thenReturn(username);
+            when(context.getAuthentication()).thenReturn(authentication);
+            contextHolder.when(() -> SecurityContextHolder.getContext()).thenReturn(context);
+            var result = SecurityContextUtils.getUsername();
+            assertThat(result).isEqualTo(username);
+        }
+    }
 }

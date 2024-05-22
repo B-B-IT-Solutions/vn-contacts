@@ -16,25 +16,25 @@ import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 @ExtendWith(MockitoExtension.class)
 class RefreshAwareRepositoryImplTest {
 
-   @Mock
-   private EntityManager entityManager;
-   @Mock
-   private JpaEntityInformation entityInformation;
-   @Mock
-   private SessionImpl hibernateSession;
+    @Mock
+    private EntityManager entityManager;
+    @Mock
+    private JpaEntityInformation entityInformation;
+    @Mock
+    private SessionImpl hibernateSession;
 
-   private RefreshAwareRepositoryImpl repository;
+    private RefreshAwareRepositoryImpl repository;
 
-   @BeforeEach
-   void setUp() {
-      when(entityManager.getDelegate()).thenReturn(hibernateSession);
-      repository = new RefreshAwareRepositoryImpl(entityInformation, entityManager);
-   }
+    @BeforeEach
+    void setUp() {
+        when(entityManager.getDelegate()).thenReturn(hibernateSession);
+        repository = new RefreshAwareRepositoryImpl(entityInformation, entityManager);
+    }
 
-   @Test
-   void refresh() {
-      var user = contact();
-      repository.refresh(user);
-      verify(entityManager).refresh(user);
-   }
+    @Test
+    void refresh() {
+        var user = contact();
+        repository.refresh(user);
+        verify(entityManager).refresh(user);
+    }
 }
