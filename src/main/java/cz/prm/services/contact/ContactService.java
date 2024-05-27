@@ -1,10 +1,9 @@
 package cz.prm.services.contact;
 
 import static cz.prm.domain.common.PageRequests.getPageRequest;
-import static cz.prm.security.SecurityContextUtils.getUsername;
 import static java.lang.String.format;
 
-import cz.prm.domain.common.Page;
+import cz.prm.domain.common.query.Page;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.repositories.contact.ContactPredicates;
@@ -25,8 +24,6 @@ public class ContactService {
     }
 
     public void createContact(Contact contact) {
-        var username = getUsername();
-        contact.setOwner(username);
         repository.save(contact);
     }
 

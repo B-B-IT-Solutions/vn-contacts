@@ -6,6 +6,7 @@ import static cz.prm.utils.TestUtils.randomLong;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import cz.prm.domain.common.query.Page;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

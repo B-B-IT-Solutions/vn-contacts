@@ -4,8 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.controllers.dto.common.QueryDto;
-import cz.prm.domain.common.Pagination;
-import cz.prm.domain.common.Query;
+import cz.prm.domain.common.User;
+import cz.prm.domain.common.query.Pagination;
+import cz.prm.domain.common.query.Query;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
@@ -25,5 +26,10 @@ public class CommonAssertions {
     public static void assertPagination(Pagination pagination, PaginationDto paginationDto) {
         assertThat(pagination.getPageNumber()).isNotZero().isEqualTo(paginationDto.getPageNumber());
         assertThat(pagination.getPageSize()).isNotZero().isEqualTo(paginationDto.getPageSize());
+    }
+
+    public static void assertUser(User user1, User user2) {
+        assertThat(user1.getUsername()).isEqualTo(user2.getUsername());
+        assertThat(user1.getEmail()).isEqualTo(user2.getEmail());
     }
 }

@@ -12,6 +12,9 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 
 public class SecurityContextComponentTestUtils {
 
+    private static final String SUB_CLAIM = "sub";
+    private static final String EMAIL_CLAIM = "email";
+
     public static void ensureUser1Context() {
         ensureUserContext(USER_1);
     }
@@ -24,12 +27,7 @@ public class SecurityContextComponentTestUtils {
         ensureUserContext(USER_3);
     }
 
-    public static void clearContext() {
-        var context = new SecurityContextImpl();
-        SecurityContextHolder.setContext(context);
-    }
-
-    private static void ensureUserContext(ComponentTestUser user) {
+    public static void ensureUserContext(ComponentTestUser user) {
         var jwt = jwt(user);
         var token = new JwtAuthenticationToken(jwt);
         var context = new SecurityContextImpl();
@@ -37,10 +35,16 @@ public class SecurityContextComponentTestUtils {
         SecurityContextHolder.setContext(context);
     }
 
+    public static void clearContext() {
+        var context = new SecurityContextImpl();
+        SecurityContextHolder.setContext(context);
+    }
+
     private static Jwt jwt(ComponentTestUser user) {
         var builder = withTokenValue("s");
         builder.header("typ", "JWT");
-        builder.claim("sub", user.getUsername());
+        builder.claim(SUB_CLAIM, user.getUsername());
+        builder.claim(EMAIL_CLAIM, user.getEmail());
         return builder.build();
     }
 }

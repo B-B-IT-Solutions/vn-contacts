@@ -2,7 +2,7 @@ package cz.prm.repositories.contact;
 
 import static cz.prm.domain.contact.querydsl.QContact.contact;
 import static cz.prm.repositories.common.query.PredicateCriteriaUtils.applyCriteria;
-import static cz.prm.security.SecurityContextUtils.getUsername;
+import static cz.prm.security.SecurityContextUtils.getUser;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
@@ -24,8 +24,8 @@ public class ContactPredicates {
     }
 
     private BooleanExpression dataAccessPredicate() {
-        var username = getUsername();
-        return contact.owner.eq(username);
+        var user = getUser();
+        return contact.owner.username.eq(user.getUsername());
     }
 
     private BooleanBuilder filterPredicates(ContactsFilter filter) {

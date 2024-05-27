@@ -1,6 +1,5 @@
 package cz.prm.utils;
 
-import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static java.lang.String.format;
 import static org.assertj.core.util.Lists.newArrayList;
@@ -15,21 +14,16 @@ import java.util.List;
 public class ContactComponentTestUtils {
 
     public static List<Contact> contacts() {
-        return contacts(USER_1);
+        return newArrayList(contact(), contact(), contact());
     }
 
-    public static List<Contact> contacts(ComponentTestUser user) {
-        return newArrayList(contact(user), contact(user), contact(user));
-    }
-
-    public static Contact contact(ComponentTestUser user) {
+    public static Contact contact() {
         var contact = new Contact();
         contact.setFirstName(format("First%s", uuid()));
         contact.setMiddleName(format("Middle%s", uuid()));
         contact.setLastName(format("Last%s", uuid()));
         contact.setNickName(format("Nick%s", uuid()));
         contact.setEmail(format("email%s", uuid()));
-        contact.setOwner(user.getUsername());
         return contact;
     }
 

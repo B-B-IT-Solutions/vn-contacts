@@ -1,0 +1,29 @@
+package cz.prm.domain.common;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.oauth2.jwt.Jwt;
+
+@Embeddable
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class User {
+
+    private static final String SUB_CLAIM = "sub";
+    private static final String EMAIL_CLAIM = "email";
+
+    @Column(name = "USERNAME")
+    private String username;
+
+    @Column(name = "EMAIL")
+    private String email;
+
+    public User(Jwt jwt) {
+        this.username = jwt.getClaimAsString(SUB_CLAIM);
+        this.email = jwt.getClaimAsString(EMAIL_CLAIM);
+    }
+}

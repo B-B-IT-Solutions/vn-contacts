@@ -10,42 +10,46 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-@Table(name = "CONTACT", schema = "public")
+@Table(name = "NOTE", schema = "public")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Contact {
+public class Note {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTACT_SEQ")
-    @SequenceGenerator(name = "CONTACT_SEQ", sequenceName = "CONTACT_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "NOTE_SEQ")
+    @SequenceGenerator(name = "NOTE_SEQ", sequenceName = "NOTE_SEQ", allocationSize = 1)
+    @Column(name = "NOTE_ID")
+    private Long noteId;
+
     @Column(name = "CONTACT_ID")
     private Long contactId;
 
-    @Column(name = "FIRST_NAME")
-    private String firstName;
+    @Lob
+    @Column(name = "TEXT")
+    private String text;
 
-    @Column(name = "MIDDLE_NAME")
-    private String middleName;
+    @LastModifiedDate
+    @Column(name = "LAST_EDIT_DATE")
+    private Instant lastEditDate;
 
-    @Column(name = "LAST_NAME")
-    private String lastName;
-
-    @Column(name = "NICK_NAME")
-    private String nickName;
-
-    @Column(name = "EMAIL")
-    private String email;
+    @CreatedDate
+    @Column(name = "CREATION_DATE")
+    private Instant creationDate;
 
     @CreatedBy
     @Embedded
