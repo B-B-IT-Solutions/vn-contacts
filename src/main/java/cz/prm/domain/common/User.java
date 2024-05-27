@@ -13,13 +13,13 @@ import org.springframework.security.oauth2.jwt.Jwt;
 @AllArgsConstructor
 public class User {
 
-    public static final String SUB_CLAIM = "sub";
-    public static final String EMAIL_CLAIM = "email";
+    private static final String SUB_CLAIM = "sub";
+    private static final String EMAIL_CLAIM = "email";
 
-    @Column(name = "USERNAME", insertable = false, updatable = false)
+    @Column(name = "USERNAME")
     private String username;
 
-    @Column(name = "EMAIL", insertable = false, updatable = false)
+    @Column(name = "EMAIL")
     private String email;
 
     public User(Jwt jwt) {
