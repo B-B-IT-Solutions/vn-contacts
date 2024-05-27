@@ -1,6 +1,6 @@
 package cz.prm.repositories.contact;
 
-import static cz.prm.utils.TestUtils.uuid;
+import static cz.prm.utils.CommonUtils.user;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,10 +22,10 @@ class NotePredicatesTest {
     @Test
     void notes() {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
-            var username = uuid();
-            context.when(() -> SecurityContextUtils.getUsername()).thenReturn(username);
+            var user = user();
+            context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
             var query = predicates.notes();
-            var expectedString = format("note.owner = %s", username);
+            var expectedString = format("note.owner.username = %s", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }
     }
@@ -33,10 +33,10 @@ class NotePredicatesTest {
     @Test
     void byContactId() {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
-            var username = uuid();
-            context.when(() -> SecurityContextUtils.getUsername()).thenReturn(username);
+            var user = user();
+            context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
             var query = predicates.byContactId(11L);
-            var expectedString = format("note.owner = %s && note.contactId = 11", username);
+            var expectedString = format("note.owner.username = %s && note.contactId = 11", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }
     }

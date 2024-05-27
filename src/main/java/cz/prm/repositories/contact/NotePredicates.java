@@ -1,7 +1,7 @@
 package cz.prm.repositories.contact;
 
 import static cz.prm.domain.contact.querydsl.QNote.note;
-import static cz.prm.security.SecurityContextUtils.getUsername;
+import static cz.prm.security.SecurityContextUtils.getUser;
 
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -20,7 +20,7 @@ public class NotePredicates {
     }
 
     private BooleanExpression dataAccessPredicate() {
-        var username = getUsername();
-        return note.owner.eq(username);
+        var user = getUser();
+        return note.owner.username.eq(user.getUsername());
     }
 }

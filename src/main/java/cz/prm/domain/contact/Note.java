@@ -1,6 +1,10 @@
 package cz.prm.domain.contact;
 
+import cz.prm.domain.common.User;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
@@ -48,6 +52,10 @@ public class Note {
     private Instant creationDate;
 
     @CreatedBy
-    @Column(name = "OWNER")
-    private String owner;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "username", column = @Column(name = "OWNER_USERNAME")),
+        @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))
+    })
+    private User owner;
 }
