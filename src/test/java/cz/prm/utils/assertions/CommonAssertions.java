@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.controllers.dto.common.QueryDto;
-import cz.prm.domain.common.Pagination;
-import cz.prm.domain.common.Query;
+import cz.prm.domain.common.query.Pagination;
+import cz.prm.domain.common.query.Query;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 

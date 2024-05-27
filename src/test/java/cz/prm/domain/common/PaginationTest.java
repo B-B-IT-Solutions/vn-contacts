@@ -2,6 +2,7 @@ package cz.prm.domain.common;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.domain.common.query.Pagination;
 import org.junit.jupiter.api.Test;
 
 class PaginationTest {

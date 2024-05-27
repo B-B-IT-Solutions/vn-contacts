@@ -1,4 +1,4 @@
-package cz.prm.domain.common;
+package cz.prm.domain.common.query;
 
 import static org.apache.logging.log4j.util.Strings.isNotBlank;
 import static org.apache.logging.log4j.util.Strings.isNotEmpty;

@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
 
 @Table(name = "CONTACT", schema = "public")
 @Entity
@@ -39,6 +40,7 @@ public class Contact {
     @Column(name = "EMAIL")
     private String email;
 
+    @CreatedBy
     @Column(name = "OWNER")
     private String owner;
 }

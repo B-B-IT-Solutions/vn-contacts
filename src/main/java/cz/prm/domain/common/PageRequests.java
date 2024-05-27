@@ -3,6 +3,7 @@ package cz.prm.domain.common;
 import static lombok.AccessLevel.PRIVATE;
 import static org.springframework.data.domain.Sort.unsorted;
 
+import cz.prm.domain.common.query.Pagination;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

@@ -4,7 +4,7 @@ import static cz.prm.domain.common.PageRequests.getPageRequest;
 import static cz.prm.security.SecurityContextUtils.getUsername;
 import static java.lang.String.format;
 
-import cz.prm.domain.common.Page;
+import cz.prm.domain.common.query.Page;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.repositories.contact.ContactPredicates;

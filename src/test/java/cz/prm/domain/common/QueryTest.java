@@ -8,6 +8,7 @@ import static org.springframework.data.domain.Sort.Direction.DESC;
 import static org.springframework.data.domain.Sort.by;
 import static org.springframework.data.domain.Sort.unsorted;
 
+import cz.prm.domain.common.query.Query;
 import org.junit.jupiter.api.Test;
 
 class QueryTest {

@@ -3,8 +3,8 @@ package cz.prm.utils;
 import static cz.prm.utils.TestUtils.randomInt;
 
 import cz.prm.controllers.dto.common.PaginationDto;
-import cz.prm.domain.common.Page;
-import cz.prm.domain.common.Pagination;
+import cz.prm.domain.common.query.Page;
+import cz.prm.domain.common.query.Pagination;
 import java.util.List;
 
 public class CommonUtils {

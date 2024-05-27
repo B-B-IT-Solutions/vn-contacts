@@ -1,4 +1,4 @@
-package cz.prm.domain.common;
+package cz.prm.domain.common.query;
 
 import java.util.List;
 import lombok.Data;

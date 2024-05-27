@@ -1,4 +1,4 @@
-package cz.prm.domain.common;
+package cz.prm.domain.common.query;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
