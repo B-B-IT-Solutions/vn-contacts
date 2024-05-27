@@ -45,4 +45,7 @@ public class Note {
     @CreatedDate
     @Column(name = "CREATION_DATE")
     private Instant creationDate;
+
+    @Column(name = "OWNER")
+    private String owner;
 }

@@ -35,6 +35,7 @@
 				 <column name="text" type="TEXT"/>
 				 <column name="last_edit_date" type="TIMESTAMP WITH TIME ZONE"/>
 				 <column name="creation_date" type="TIMESTAMP WITH TIME ZONE"/>
+				 <column name="owner" type="VARCHAR(255)"/>
 			</createTable>
 			
 			<addForeignKeyConstraint baseTableName="note" baseColumnNames="contact_id" constraintName="contact_id_fkey"
