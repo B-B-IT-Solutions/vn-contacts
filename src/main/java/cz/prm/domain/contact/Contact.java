@@ -47,8 +47,8 @@ public class Contact {
     @CreatedBy
     @Embedded
     @AttributeOverrides({
-        @AttributeOverride(name = "USERNAME", column = @Column(name = "OWNER_USERNAME")),
-        @AttributeOverride(name = "EMAIL", column = @Column(name = "OWNER_EMAIL"))
+        @AttributeOverride(name = "username", column = @Column(name = "OWNER_USERNAME")),
+        @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))
     })
     private User owner;
 }
