@@ -1,8 +1,10 @@
 package cz.prm.utils;
 
 import static cz.prm.utils.TestUtils.randomInt;
+import static cz.prm.utils.TestUtils.uuid;
 
 import cz.prm.controllers.dto.common.PaginationDto;
+import cz.prm.domain.common.User;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.common.query.Pagination;
 import java.util.List;
@@ -34,5 +36,12 @@ public class CommonUtils {
         pagination.setPageSize(randomInt());
         pagination.setPageNumber(randomInt());
         return pagination;
+    }
+
+    public static User user() {
+        var user = new User();
+        user.setUsername(uuid());
+        user.setEmail(uuid());
+        return user;
     }
 }

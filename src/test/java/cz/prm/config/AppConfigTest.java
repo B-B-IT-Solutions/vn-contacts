@@ -1,8 +1,12 @@
 package cz.prm.config;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static cz.prm.utils.CommonUtils.user;
+import static cz.prm.utils.assertions.CommonAssertions.assertUser;
 
+import cz.prm.security.SecurityContextUtils;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
 class AppConfigTest {
 
@@ -10,9 +14,13 @@ class AppConfigTest {
 
     @Test
     void auditProvider() {
-        var provider = appConfig.auditProvider();
-        var optional = provider.getCurrentAuditor();
-        var auditor = optional.get();
-        assertThat(auditor.getEmail()).isEqualTo("emai@email.com");
+        try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
+            var user = user();
+            context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
+            var provider = appConfig.auditProvider();
+            var optional = provider.getCurrentAuditor();
+            var auditor = optional.get();
+            assertUser(user, auditor);
+        }
     }
 }

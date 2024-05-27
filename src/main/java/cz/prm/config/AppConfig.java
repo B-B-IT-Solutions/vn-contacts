@@ -1,8 +1,9 @@
 package cz.prm.config;
 
+import static cz.prm.security.SecurityContextUtils.getUser;
 import static java.util.Optional.of;
 
-import cz.prm.domain.contact.Contact;
+import cz.prm.domain.common.User;
 import cz.prm.repositories.customisations.executors.PrmQuerydslPredicateExecutorFactoryBean;
 import cz.prm.repositories.customisations.repositories.RefreshAwareRepositoryImpl;
 import org.springframework.context.annotation.Bean;
@@ -18,9 +19,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class AppConfig {
 
     @Bean
-    public AuditorAware<Contact> auditProvider() {
-        var user = new Contact();
-        user.setEmail("emai@email.com");
-        return () -> of(user);
+    public AuditorAware<User> auditProvider() {
+        return () -> of(getUser());
     }
 }
