@@ -2,6 +2,7 @@ package cz.prm.utils;
 
 import static cz.prm.utils.CommonUtils.pagination;
 import static cz.prm.utils.CommonUtils.paginationDto;
+import static cz.prm.utils.CommonUtils.user;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 
@@ -28,7 +29,7 @@ public class ContactUtils {
         user.setLastName(uuid());
         user.setNickName(uuid());
         user.setEmail(uuid());
-        user.setOwner(uuid());
+        user.setOwner(user());
         return user;
     }
 

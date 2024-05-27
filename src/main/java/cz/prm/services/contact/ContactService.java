@@ -25,8 +25,8 @@ public class ContactService {
     }
 
     public void createContact(Contact contact) {
-        var username = getUsername();
-        contact.setOwner(username);
+//        var username = getUsername();
+//        contact.setOwner(username);
         repository.save(contact);
     }
 

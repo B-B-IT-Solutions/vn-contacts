@@ -19,7 +19,8 @@
 				 <column name="last_name" type="VARCHAR(255)"/>
 				 <column name="nick_name" type="VARCHAR(255)"/>
 				 <column name="email" type="VARCHAR(255)"/>
-				 <column name="owner" type="VARCHAR(255)"/>
+				 <column name="owner_username" type="VARCHAR(255)"/>
+				 <column name="owner_email" type="VARCHAR(255)"/>
 			</createTable>
 	 </changeSet>
 	 

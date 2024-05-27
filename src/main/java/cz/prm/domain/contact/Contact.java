@@ -1,6 +1,10 @@
 package cz.prm.domain.contact;
 
+import cz.prm.domain.common.User;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,6 +45,8 @@ public class Contact {
     private String email;
 
     @CreatedBy
-    @Column(name = "OWNER")
-    private String owner;
+    @Embedded
+    @AttributeOverrides({@AttributeOverride(name = "USERNAME", column = @Column(name = "OWNER_USERNAME")),
+        @AttributeOverride(name = "EMAIL", column = @Column(name = "OWNER_EMAIL"))})
+    private User owner;
 }

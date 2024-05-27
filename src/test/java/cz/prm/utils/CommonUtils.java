@@ -39,8 +39,12 @@ public class CommonUtils {
     }
 
     public static User user() {
+        return user(uuid());
+    }
+
+    public static User user(String username) {
         var user = new User();
-        user.setUsername(uuid());
+        user.setUsername(username);
         user.setEmail(uuid());
         return user;
     }

@@ -29,7 +29,7 @@ public class ContactComponentTestUtils {
         contact.setLastName(format("Last%s", uuid()));
         contact.setNickName(format("Nick%s", uuid()));
         contact.setEmail(format("email%s", uuid()));
-        contact.setOwner(user.getUsername());
+        contact.setOwner(user.toUser());
         return contact;
     }
 

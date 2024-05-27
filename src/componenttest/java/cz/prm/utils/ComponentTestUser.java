@@ -1,5 +1,8 @@
 package cz.prm.utils;
 
+import static cz.prm.utils.ComponentTestUtils.uuid;
+
+import cz.prm.domain.common.User;
 import lombok.Getter;
 
 @Getter
@@ -13,5 +16,9 @@ public enum ComponentTestUser {
     ComponentTestUser(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public User toUser() {
+        return new User(username, uuid());
     }
 }

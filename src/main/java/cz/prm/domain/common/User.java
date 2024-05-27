@@ -15,10 +15,11 @@ public class User {
 
     public static final String SUB_CLAIM = "sub";
     public static final String EMAIL_CLAIM = "email";
-    @Column(name = "USERNAME")
+
+    @Column(name = "USERNAME", insertable = false, updatable = false)
     private String username;
 
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", insertable = false, updatable = false)
     private String email;
 
     public User(Jwt jwt) {
