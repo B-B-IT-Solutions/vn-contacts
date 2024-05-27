@@ -4,6 +4,8 @@ import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
 import static cz.prm.utils.ContactComponentTestUtils.contact;
+import static cz.prm.utils.SecurityContextComponentTestUtils.clearContext;
+import static cz.prm.utils.SecurityContextComponentTestUtils.ensureUserContext;
 import static java.lang.String.format;
 import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
@@ -198,8 +200,11 @@ public class ContactComponentTestBase extends ComponentTestBase {
     }
 
     protected Contact createContact(ComponentTestUser user) {
-        var contact = contact(user);
-        return contactRepository.save(contact);
+        ensureUserContext(user);
+        var contact = contact();
+        var savedContact = contactRepository.save(contact);
+        clearContext();
+        return savedContact;
     }
 
     protected Contact getContactFromDb(ContactDto dto) {
