@@ -35,8 +35,8 @@ class ContactControllerTest {
     private ArgumentCaptor<Contact> contactCapt;
     @Captor
     private ArgumentCaptor<ContactsQuery> cQueryCapt;
-    private ContactMapper mapper = MapperUtils.getContactMapper();
 
+    private ContactMapper mapper = MapperUtils.getContactMapper();
     private ContactController controller;
 
     @BeforeEach

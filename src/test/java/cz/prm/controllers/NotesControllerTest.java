@@ -36,8 +36,8 @@ class NotesControllerTest {
     private ArgumentCaptor<Note> noteCapt;
     @Captor
     private ArgumentCaptor<NotesQuery> cQueryCapt;
-    private NoteMapper mapper = MapperUtils.getNoteMapper();
 
+    private NoteMapper mapper = MapperUtils.getNoteMapper();
     private NotesController controller;
 
     @BeforeEach
