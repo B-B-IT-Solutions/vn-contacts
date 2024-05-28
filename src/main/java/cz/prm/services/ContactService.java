@@ -9,10 +9,12 @@ import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import java.util.function.Supplier;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class ContactService {
 
     private ContactRepository repository;

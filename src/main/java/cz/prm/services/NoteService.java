@@ -9,10 +9,12 @@ import cz.prm.domain.note.query.NotesQuery;
 import cz.prm.repositories.contact.NotePredicates;
 import cz.prm.repositories.contact.NoteRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import java.util.function.Supplier;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class NoteService {
 
     private NoteRepository repository;
