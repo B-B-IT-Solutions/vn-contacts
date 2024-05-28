@@ -13,12 +13,12 @@ import java.util.function.Supplier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class NotesService {
+public class NoteService {
 
     private NoteRepository repository;
     private NotePredicates predicates;
 
-    public NotesService(NoteRepository repository, NotePredicates predicates) {
+    public NoteService(NoteRepository repository, NotePredicates predicates) {
         this.repository = repository;
         this.predicates = predicates;
     }

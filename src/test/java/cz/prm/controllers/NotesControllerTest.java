@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 import cz.prm.controllers.mappers.NoteMapper;
 import cz.prm.domain.note.Note;
 import cz.prm.domain.note.query.NotesQuery;
-import cz.prm.services.contact.NotesService;
+import cz.prm.services.contact.NoteService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class NotesControllerTest {
 
     @Mock
-    private NotesService notesService;
+    private NoteService noteService;
     @Captor
     private ArgumentCaptor<Note> noteCapt;
     @Captor
@@ -42,7 +42,7 @@ class NotesControllerTest {
 
     @BeforeEach
     void setUp() {
-        controller = new NotesController(notesService, mapper);
+        controller = new NotesController(noteService, mapper);
     }
 
     @Test
@@ -50,11 +50,11 @@ class NotesControllerTest {
         var page = page(notes());
         var queryDto = notesQueryDto();
         var contactId = randomLong();
-        when(notesService.getNotes(eq(contactId), any(NotesQuery.class))).thenReturn(page);
+        when(noteService.getNotes(eq(contactId), any(NotesQuery.class))).thenReturn(page);
 
         var result = controller.getNotes(contactId, queryDto);
         assertPage(page, result);
-        verify(notesService).getNotes(eq(contactId), cQueryCapt.capture());
+        verify(noteService).getNotes(eq(contactId), cQueryCapt.capture());
         var query = cQueryCapt.getValue();
         assertNotesQuery(query, queryDto);
     }
@@ -63,7 +63,7 @@ class NotesControllerTest {
     void getNote() {
         var note = note();
         var noteId = note.getNoteId();
-        when(notesService.getNote(noteId)).thenReturn(note);
+        when(noteService.getNote(noteId)).thenReturn(note);
         var result = controller.getNote(noteId);
         assertNote(note, result);
     }
@@ -72,7 +72,7 @@ class NotesControllerTest {
     void createNote() {
         var dto = noteDto();
         controller.createNote(dto);
-        verify(notesService).createNote(noteCapt.capture());
+        verify(noteService).createNote(noteCapt.capture());
         var note = noteCapt.getValue();
         assertNote(note, dto);
     }
@@ -81,7 +81,7 @@ class NotesControllerTest {
     void updateNote() {
         var dto = noteDto();
         controller.updateNote(dto.getNoteId(), dto);
-        verify(notesService).updateNote(eq(dto.getNoteId()), noteCapt.capture());
+        verify(noteService).updateNote(eq(dto.getNoteId()), noteCapt.capture());
         var note = noteCapt.getValue();
         assertNote(note, dto);
     }

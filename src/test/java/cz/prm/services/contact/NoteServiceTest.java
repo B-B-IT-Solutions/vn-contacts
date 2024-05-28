@@ -31,7 +31,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 @ExtendWith(MockitoExtension.class)
-class NotesServiceTest {
+class NoteServiceTest {
 
     @Mock
     private NoteRepository repository;
@@ -40,11 +40,11 @@ class NotesServiceTest {
     @Captor
     private ArgumentCaptor<Note> noteCapt;
 
-    private NotesService notesService;
+    private NoteService noteService;
 
     @BeforeEach
     void setUp() {
-        notesService = new NotesService(repository, predicates);
+        noteService = new NoteService(repository, predicates);
     }
 
     @Test
@@ -57,7 +57,7 @@ class NotesServiceTest {
 
         when(predicates.byContactId(contactId)).thenReturn(predicate);
         when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
-        var result = notesService.getNotes(contactId, query);
+        var result = noteService.getNotes(contactId, query);
         assertPage(result, page);
     }
 
@@ -67,7 +67,7 @@ class NotesServiceTest {
         var predicate = new BooleanBuilder();
         when(predicates.byNoteId(note.getNoteId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(of(note));
-        var result = notesService.getNote(note.getNoteId());
+        var result = noteService.getNote(note.getNoteId());
         assertNote(result, note);
     }
 
@@ -77,13 +77,13 @@ class NotesServiceTest {
         var predicate = new BooleanBuilder();
         when(predicates.byNoteId(note.getNoteId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(empty());
-        assertThrows(EntityNotFoundException.class, () -> notesService.getNote(note.getNoteId()));
+        assertThrows(EntityNotFoundException.class, () -> noteService.getNote(note.getNoteId()));
     }
 
     @Test
     void createNote() {
         var note = note();
-        notesService.createNote(note);
+        noteService.createNote(note);
         verify(repository).save(note);
     }
 
@@ -95,7 +95,7 @@ class NotesServiceTest {
         when(predicates.byNoteId(noteIdDb.getNoteId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(of(noteIdDb));
 
-        notesService.updateNote(noteIdDb.getNoteId(), updatedNote);
+        noteService.updateNote(noteIdDb.getNoteId(), updatedNote);
         verify(repository).save(noteCapt.capture());
         var savedNote = noteCapt.getValue();
         assertFieldsUpdated(noteIdDb, updatedNote, savedNote);
@@ -108,7 +108,7 @@ class NotesServiceTest {
         var predicate = new BooleanBuilder();
         when(predicates.byNoteId(noteIdDb.getNoteId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(empty());
-        assertThrows(EntityNotFoundException.class, () -> notesService.updateNote(noteIdDb.getNoteId(), updatedNote));
+        assertThrows(EntityNotFoundException.class, () -> noteService.updateNote(noteIdDb.getNoteId(), updatedNote));
     }
 
     private static void assertFieldsUpdated(Note noteIdDb, Note updatedNote, Note savedNote) {
