@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("notes")
 @RestController
-public class NotesController {
+public class NoteController {
 
     private NoteService noteService;
     public NoteMapper mapper;
 
-    public NotesController(NoteService noteService, NoteMapper mapper) {
+    public NoteController(NoteService noteService, NoteMapper mapper) {
         this.noteService = noteService;
         this.mapper = mapper;
     }

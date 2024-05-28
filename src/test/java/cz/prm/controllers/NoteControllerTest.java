@@ -28,7 +28,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class NotesControllerTest {
+class NoteControllerTest {
 
     @Mock
     private NoteService noteService;
@@ -38,11 +38,11 @@ class NotesControllerTest {
     private ArgumentCaptor<NotesQuery> cQueryCapt;
 
     private NoteMapper mapper = MapperUtils.getNoteMapper();
-    private NotesController controller;
+    private NoteController controller;
 
     @BeforeEach
     void setUp() {
-        controller = new NotesController(noteService, mapper);
+        controller = new NoteController(noteService, mapper);
     }
 
     @Test
