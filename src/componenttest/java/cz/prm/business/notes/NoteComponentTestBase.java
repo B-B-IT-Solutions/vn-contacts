@@ -1,0 +1,178 @@
+package cz.prm.business.notes;
+
+import static cz.prm.utils.ComponentTestUser.USER_1;
+import static cz.prm.utils.ComponentTestUser.USER_2;
+import static cz.prm.utils.ComponentTestUser.USER_3;
+import static cz.prm.utils.NoteComponentTestUtils.note;
+import static cz.prm.utils.SecurityContextComponentTestUtils.clearContext;
+import static cz.prm.utils.SecurityContextComponentTestUtils.ensureUserContext;
+import static java.lang.String.format;
+import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
+import cz.prm.ComponentTestBase;
+import cz.prm.controllers.dto.common.PageDto;
+import cz.prm.controllers.dto.note.NoteDto;
+import cz.prm.controllers.dto.note.query.NotesQueryDto;
+import cz.prm.custom.ComponentTestNoteRepository;
+import cz.prm.domain.note.Note;
+import cz.prm.utils.ComponentTestUser;
+import io.restassured.common.mapper.TypeRef;
+import java.util.List;
+import java.util.stream.IntStream;
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class NoteComponentTestBase extends ComponentTestBase {
+
+    protected static String NOTES_URL = "notes";
+    protected static String CONTACT_NOTES_URL = NOTES_URL + "contact/%s";
+    protected static String NOTE_URL = NOTES_URL + "/%s";
+
+    @Autowired
+    protected ComponentTestNoteRepository noteRepository;
+
+    @BeforeEach
+    void setUp() {
+        noteRepository.deleteAll();
+    }
+
+    protected void user1CreateNote(NoteDto dto) {
+        createNote(dto, USER_1);
+    }
+
+    protected void user2CreateNote(NoteDto dto) {
+        createNote(dto, USER_2);
+    }
+
+    protected void user3CreateNote(NoteDto dto) {
+        createNote(dto, USER_3);
+    }
+
+    protected void user1UpdateNote(Long noteId, NoteDto dto) {
+        updateNote(noteId, dto, USER_1);
+    }
+
+    protected void user2UpdateNote(Long noteId, NoteDto dto) {
+        updateNote(noteId, dto, USER_2);
+    }
+
+    protected void user3UpdateNote(Long noteId, NoteDto dto) {
+        updateNote(noteId, dto, USER_3);
+    }
+
+    protected PageDto<NoteDto> user1GetNotes(Long contactId, NotesQueryDto queryDto) {
+        return getNotesPage(contactId, queryDto, USER_1);
+    }
+
+    protected PageDto<NoteDto> user2GetNotes(Long contactId, NotesQueryDto queryDto) {
+        return getNotesPage(contactId, queryDto, USER_2);
+    }
+
+    protected PageDto<NoteDto> user3GetNotes(Long contactId, NotesQueryDto queryDto) {
+        return getNotesPage(contactId, queryDto, USER_3);
+    }
+
+    protected NoteDto user1GetNote(Long noteId) {
+        return getNote(noteId, USER_1);
+    }
+
+    protected NoteDto user2GetNote(Long noteId) {
+        return getNote(noteId, USER_2);
+    }
+
+    protected NoteDto user3GetNote(Long noteId) {
+        return getNote(noteId, USER_3);
+    }
+
+    protected void createNote(NoteDto dto, ComponentTestUser user) {
+        post(NOTES_URL, user, dto);
+    }
+
+    protected void updateNote(Long noteId, NoteDto dto, ComponentTestUser user) {
+        var url = format(NOTE_URL, noteId);
+        put(url, user, dto);
+    }
+
+    protected PageDto<NoteDto> getNotesPage(Long contactId, NotesQueryDto queryDto, ComponentTestUser user) {
+        var baseURl = format(NOTES_URL, contactId);
+        var url = appendQueryToUrl(baseURl, queryDto);
+        var typeRef = new TypeRef<PageDto<NoteDto>>() {
+        };
+        return getPage(url, user, typeRef);
+    }
+
+    protected NoteDto getNote(Long noteId, ComponentTestUser user) {
+        var url = format(NOTE_URL, noteId);
+        var typeRef = new TypeRef<NoteDto>() {
+        };
+        return getOne(url, user, typeRef);
+    }
+
+    protected void user1UpdateNoteExpectNotFound(Long noteId, NoteDto dto) {
+        updateNoteExpectNotFound(noteId, dto, USER_1);
+    }
+
+    protected void user2UpdateNoteExpectNotFound(Long noteId, NoteDto dto) {
+        updateNoteExpectNotFound(noteId, dto, USER_2);
+    }
+
+    protected void user3UpdateNoteExpectNotFound(Long noteId, NoteDto dto) {
+        updateNoteExpectNotFound(noteId, dto, USER_3);
+    }
+
+    protected void user1GetNoteExpectNotFound(Long noteId) {
+        getNoteExpectNotFound(noteId, USER_1);
+    }
+
+    protected void user2GetNoteExpectNotFound(Long noteId) {
+        getNoteExpectNotFound(noteId, USER_2);
+    }
+
+    protected void user3GetNoteExpectNotFound(Long noteId) {
+        getNoteExpectNotFound(noteId, USER_3);
+    }
+
+    protected void updateNoteExpectNotFound(Long noteId, NoteDto dto, ComponentTestUser user) {
+        var url = format(NOTE_URL, noteId);
+        putExpectNotFound(url, user, dto);
+    }
+
+    protected void getNoteExpectNotFound(Long noteId, ComponentTestUser user) {
+        var url = format(NOTE_URL, noteId);
+        getExpectNotFound(url, user);
+    }
+
+    protected String appendQueryToUrl(String url, NotesQueryDto queryDto) {
+        var sb = new StringBuilder(url);
+        var pagination = toUrlPaginationParams(queryDto.getPagination());
+        var sort = toUrlSortParams(queryDto.getSort());
+
+        if (isNotBlank(pagination) || isNotBlank(sort)) {
+            sb.append("?");
+            sb.append(pagination);
+            sb.append(sort);
+        }
+        return sb.toString();
+    }
+
+    protected List<Note> createNotes(ComponentTestUser user) {
+        return createNotes(user, 3);
+    }
+
+    protected List<Note> createNotes(ComponentTestUser user, int numOfNotes) {
+        return IntStream.range(0, numOfNotes).mapToObj((i) -> createNote(user)).collect(toList());
+    }
+
+    protected Note createNote(ComponentTestUser user) {
+        ensureUserContext(user);
+        var note = note();
+        var savedNote = noteRepository.save(note);
+        clearContext();
+        return savedNote;
+    }
+
+    protected Note getNoteFromDb(NoteDto dto) {
+        return noteRepository.getByText(dto.getText());
+    }
+}
