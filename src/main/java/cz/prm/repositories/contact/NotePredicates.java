@@ -1,6 +1,6 @@
 package cz.prm.repositories.contact;
 
-import static cz.prm.domain.contact.querydsl.QNote.note;
+import static cz.prm.domain.note.querydsl.QNote.note;
 import static cz.prm.security.SecurityContextUtils.getUser;
 
 import com.querydsl.core.types.Predicate;

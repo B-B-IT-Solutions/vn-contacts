@@ -13,6 +13,7 @@ import cz.prm.domain.contact.query.ContactsFilter;
 import cz.prm.domain.contact.query.ContactsQuery;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
@@ -22,6 +23,7 @@ public interface ContactMapper {
 
     ContactDto toContactDto(Contact contact);
 
+    @Mapping(target = "owner", ignore = true)
     Contact toContact(ContactDto dto);
 
     ContactsQuery toContactsQuery(ContactsQueryDto dto);
