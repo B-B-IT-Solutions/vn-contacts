@@ -1,4 +1,4 @@
-package cz.prm.domain.contact;
+package cz.prm.domain.note;
 
 import cz.prm.domain.common.User;
 import jakarta.persistence.AttributeOverride;

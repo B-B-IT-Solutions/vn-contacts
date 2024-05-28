@@ -14,9 +14,14 @@ public class NotePredicates {
         return dataAccessPredicate();
     }
 
-    public Predicate byContactId(Long userId) {
+    public Predicate byNoteId(Long noteId) {
         var predicate = dataAccessPredicate();
-        return predicate.and(note.contactId.eq(userId));
+        return predicate.and(note.noteId.eq(noteId));
+    }
+
+    public Predicate byContactId(Long contactId) {
+        var predicate = dataAccessPredicate();
+        return predicate.and(note.contactId.eq(contactId));
     }
 
     private BooleanExpression dataAccessPredicate() {

@@ -31,6 +31,17 @@ class NotePredicatesTest {
     }
 
     @Test
+    void byNoteId() {
+        try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
+            var user = user();
+            context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
+            var query = predicates.byNoteId(10L);
+            var expectedString = format("note.owner.username = %s && note.noteId = 10", user.getUsername());
+            assertThat(query).hasToString(expectedString);
+        }
+    }
+
+    @Test
     void byContactId() {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
             var user = user();
