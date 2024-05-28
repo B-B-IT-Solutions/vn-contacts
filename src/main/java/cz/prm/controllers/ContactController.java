@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ContactController {
 
     private ContactService contactService;
-    public ContactMapper mapper;
+    private ContactMapper mapper;
 
     public ContactController(ContactService contactService, ContactMapper mapper) {
         this.contactService = contactService;

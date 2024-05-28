@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class NoteController {
 
     private NoteService noteService;
-    public NoteMapper mapper;
+    private NoteMapper mapper;
 
     public NoteController(NoteService noteService, NoteMapper mapper) {
         this.noteService = noteService;
