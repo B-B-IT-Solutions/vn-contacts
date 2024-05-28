@@ -9,5 +9,5 @@ import org.springframework.context.annotation.Primary;
 @Transactional
 public interface ComponentTestNoteRepository extends NoteRepository {
 
-    Note getByTextContaining(String text);
+    Note getByText(String text);
 }

@@ -173,6 +173,6 @@ public class NoteComponentTestBase extends ComponentTestBase {
     }
 
     protected Note getNoteFromDb(NoteDto dto) {
-        return noteRepository.getByTextContaining(dto.getText());
+        return noteRepository.getByText(dto.getText());
     }
 }

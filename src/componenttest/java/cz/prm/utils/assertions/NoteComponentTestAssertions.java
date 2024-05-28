@@ -22,11 +22,11 @@ public class NoteComponentTestAssertions {
         });
     }
 
-    public static void assertNote(Note contact, NoteDto contactDto) {
-        assertThat(contact.getNoteId()).isEqualTo(contactDto.getNoteId());
-//        assertThat(contact.getContactId()).isEqualTo(contactDto.getContactId());
-        assertThat(contact.getText()).isEqualTo(contactDto.getText());
-        assertThat(contact.getLastEditDate()).isEqualTo(contactDto.getLastEditDate());
-        assertThat(contact.getLastEditDate()).isEqualTo(contactDto.getCreationDate());
+    public static void assertNote(Note note, NoteDto noteDto) {
+        assertThat(note.getNoteId()).isEqualTo(noteDto.getNoteId());
+        assertThat(note.getContactId()).isEqualTo(noteDto.getContactId());
+        assertThat(note.getText()).isEqualTo(noteDto.getText());
+        assertThat(note.getLastEditDate()).isEqualTo(noteDto.getLastEditDate());
+        assertThat(note.getCreationDate()).isEqualTo(noteDto.getCreationDate());
     }
 }
