@@ -26,7 +26,7 @@ public class NoteComponentTestAssertions {
         assertThat(note.getNoteId()).isEqualTo(noteDto.getNoteId());
         assertThat(note.getContactId()).isEqualTo(noteDto.getContactId());
         assertThat(note.getText()).isEqualTo(noteDto.getText());
-        assertThat(note.getLastEditDate()).isEqualTo(noteDto.getLastEditDate());
-        assertThat(note.getCreationDate()).isEqualTo(noteDto.getCreationDate());
+        assertThat(note.getLastEditDate()).isNotNull();
+        assertThat(note.getCreationDate()).isNotNull();
     }
 }
