@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 import cz.prm.controllers.mappers.NoteMapper;
 import cz.prm.domain.note.Note;
 import cz.prm.domain.note.query.NotesQuery;
-import cz.prm.services.contact.NoteService;
+import cz.prm.services.NoteService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

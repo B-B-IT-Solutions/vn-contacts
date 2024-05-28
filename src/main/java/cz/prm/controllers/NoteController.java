@@ -4,7 +4,7 @@ import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.note.NoteDto;
 import cz.prm.controllers.dto.note.query.NotesQueryDto;
 import cz.prm.controllers.mappers.NoteMapper;
-import cz.prm.services.contact.NoteService;
+import cz.prm.services.NoteService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
