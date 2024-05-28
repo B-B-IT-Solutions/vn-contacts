@@ -23,16 +23,6 @@ public class ContactService {
         this.predicates = predicates;
     }
 
-    public void createContact(Contact contact) {
-        repository.save(contact);
-    }
-
-    public void updateContact(Long contactId, Contact updatedContact) {
-        var savedContact = getContactById(contactId);
-        updateContactFields(savedContact, updatedContact);
-        repository.save(savedContact);
-    }
-
     public Page<Contact> getContacts(ContactsQuery query) {
         var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
         var predicate = predicates.contacts(query.getFilter());
@@ -42,6 +32,16 @@ public class ContactService {
 
     public Contact getContact(Long contactId) {
         return getContactById(contactId);
+    }
+
+    public void createContact(Contact contact) {
+        repository.save(contact);
+    }
+
+    public void updateContact(Long contactId, Contact updatedContact) {
+        var savedContact = getContactById(contactId);
+        updateContactFields(savedContact, updatedContact);
+        repository.save(savedContact);
     }
 
     private void updateContactFields(Contact savedContact, Contact updatedContact) {
