@@ -362,6 +362,7 @@
 						<version>${maven-checkstyle-plugin.version}</version>
 						<configuration>
 							 <configLocation>.github/checkstyle/checkstyle-google-code-style.xml</configLocation>
+							 <inputEncoding>UTF-8</inputEncoding>
 							 <failOnViolation>true</failOnViolation>
 							 <violationSeverity>warning</violationSeverity>
 							 <logViolationsToConsole>true</logViolationsToConsole>
