@@ -137,6 +137,4 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
         }
         return sb.toString();
     }
-
-
 }
