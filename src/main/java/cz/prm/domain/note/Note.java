@@ -51,7 +51,9 @@ public class Note {
 
     @CreatedBy
     @Embedded
-    @AttributeOverrides({@AttributeOverride(name = "username", column = @Column(name = "OWNER_USERNAME")),
-        @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))})
+    @AttributeOverrides({
+        @AttributeOverride(name = "username", column = @Column(name = "OWNER_USERNAME")),
+        @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))
+    })
     private User owner;
 }
