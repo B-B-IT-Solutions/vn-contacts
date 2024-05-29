@@ -69,6 +69,51 @@ public class NoteComponentTest extends NoteComponentTestBase {
     }
 
     @Test
+    void getNotesPagination() {
+        var queryDto = notesQueryDto();
+        var contactId = randomLong();
+        var pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getTotalPages()).isZero();
+        assertThat(pageDto.getTotalElements()).isZero();
+        assertThat(pageDto.getPageSize()).isEqualTo(50);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        var user1Notes = createNotes(USER_1, 21);
+        var userNote = user1Notes.get(0);
+        contactId = userNote.getContactId();
+
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getTotalPages()).isEqualTo(1);
+        assertThat(pageDto.getTotalElements()).isEqualTo(21);
+        assertThat(pageDto.getPageSize()).isEqualTo(50);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        var pagination = queryDto.getPagination();
+        pagination.setPageSize(5);
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getTotalPages()).isEqualTo(5);
+        assertThat(pageDto.getTotalElements()).isEqualTo(21);
+        assertThat(pageDto.getPageSize()).isEqualTo(5);
+        assertThat(pageDto.getContent()).hasSize(5);
+
+        pagination.setPageNumber(1);
+        pagination.setPageSize(10);
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getTotalPages()).isEqualTo(3);
+        assertThat(pageDto.getTotalElements()).isEqualTo(21);
+        assertThat(pageDto.getPageSize()).isEqualTo(10);
+        assertThat(pageDto.getContent()).hasSize(10);
+
+        pagination.setPageNumber(2);
+        pagination.setPageSize(10);
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getTotalPages()).isEqualTo(3);
+        assertThat(pageDto.getTotalElements()).isEqualTo(21);
+        assertThat(pageDto.getPageSize()).isEqualTo(10);
+        assertThat(pageDto.getContent()).hasSize(1);
+    }
+
+    @Test
     void getNote() {
         var note = createNote(USER_1);
         var noteId = note.getNoteId();
