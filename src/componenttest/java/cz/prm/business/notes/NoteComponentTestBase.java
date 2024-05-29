@@ -27,7 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class NoteComponentTestBase extends ComponentTestBase {
 
     protected static String NOTES_URL = "notes";
-    protected static String CONTACT_NOTES_URL = NOTES_URL + "contact/%s";
+    protected static String CONTACT_NOTES_URL = NOTES_URL + "/contact/%s";
     protected static String NOTE_URL = NOTES_URL + "/%s";
 
     @Autowired
