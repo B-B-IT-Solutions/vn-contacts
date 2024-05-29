@@ -3,23 +3,15 @@ package cz.prm.business.notes;
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
-import static cz.prm.utils.ComponentTestUtils.randomLong;
-import static cz.prm.utils.NoteComponentTestUtils.note;
-import static cz.prm.utils.SecurityContextComponentTestUtils.clearContext;
-import static cz.prm.utils.SecurityContextComponentTestUtils.ensureUserContext;
 import static java.lang.String.format;
-import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import cz.prm.business.BusinessComponentTestBase;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.note.NoteDto;
 import cz.prm.controllers.dto.note.query.NotesQueryDto;
-import cz.prm.domain.note.Note;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
-import java.util.List;
-import java.util.stream.IntStream;
 
 public class NoteComponentTestBase extends BusinessComponentTestBase {
 
