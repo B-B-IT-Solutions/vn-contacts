@@ -32,19 +32,19 @@ public class NoteController {
         return mapper.toPageDto(contacts);
     }
 
-    @GetMapping("/{noteId}")
+    @GetMapping("/note/{noteId}")
     public NoteDto getNote(@PathVariable("noteId") Long noteId) {
         var contact = noteService.getNote(noteId);
         return mapper.toContactDto(contact);
     }
 
-    @PostMapping
+    @PostMapping("/note")
     public void createNote(@RequestBody NoteDto dto) {
         var contact = mapper.toNote(dto);
         noteService.createNote(contact);
     }
 
-    @PutMapping("/{noteId}")
+    @PutMapping("/note/{noteId}")
     public void updateNote(@PathVariable("noteId") Long noteId, @RequestBody NoteDto dto) {
         var contact = mapper.toNote(dto);
         noteService.updateNote(noteId, contact);

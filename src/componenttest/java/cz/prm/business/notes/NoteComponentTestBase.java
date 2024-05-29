@@ -15,9 +15,10 @@ import io.restassured.common.mapper.TypeRef;
 
 public class NoteComponentTestBase extends BusinessComponentTestBase {
 
-    protected static String NOTES_URL = "notes";
-    protected static String CONTACT_NOTES_URL = NOTES_URL + "/contact/%s";
-    protected static String NOTE_URL = NOTES_URL + "/%s";
+    protected static String NOTES_BASE_URL = "notes";
+    protected static String CONTACT_NOTES_URL = NOTES_BASE_URL + "/contact/%s";
+    protected static String NOTE_URL = NOTES_BASE_URL + "/note";
+    protected static String NOTE_BY_ID_URL = NOTE_URL + "/%s";
 
     protected void user1CreateNote(NoteDto dto) {
         createNote(dto, USER_1);
@@ -68,11 +69,11 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
     }
 
     protected void createNote(NoteDto dto, ComponentTestUser user) {
-        post(NOTES_URL, user, dto);
+        post(NOTE_URL, user, dto);
     }
 
     protected void updateNote(Long noteId, NoteDto dto, ComponentTestUser user) {
-        var url = format(NOTE_URL, noteId);
+        var url = format(NOTE_BY_ID_URL, noteId);
         put(url, user, dto);
     }
 
@@ -85,7 +86,7 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
     }
 
     protected NoteDto getNote(Long noteId, ComponentTestUser user) {
-        var url = format(NOTE_URL, noteId);
+        var url = format(NOTE_BY_ID_URL, noteId);
         var typeRef = new TypeRef<NoteDto>() {
         };
         return getOne(url, user, typeRef);
@@ -116,12 +117,12 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
     }
 
     protected void updateNoteExpectNotFound(Long noteId, NoteDto dto, ComponentTestUser user) {
-        var url = format(NOTE_URL, noteId);
+        var url = format(NOTE_BY_ID_URL, noteId);
         putExpectNotFound(url, user, dto);
     }
 
     protected void getNoteExpectNotFound(Long noteId, ComponentTestUser user) {
-        var url = format(NOTE_URL, noteId);
+        var url = format(NOTE_BY_ID_URL, noteId);
         getExpectNotFound(url, user);
     }
 
