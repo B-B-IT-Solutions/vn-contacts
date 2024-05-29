@@ -11,32 +11,21 @@ import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-import cz.prm.ComponentTestBase;
+import cz.prm.business.BusinessComponentTestBase;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.note.NoteDto;
 import cz.prm.controllers.dto.note.query.NotesQueryDto;
-import cz.prm.custom.ComponentTestNoteRepository;
 import cz.prm.domain.note.Note;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 import java.util.List;
 import java.util.stream.IntStream;
-import org.junit.jupiter.api.BeforeEach;
-import org.springframework.beans.factory.annotation.Autowired;
 
-public class NoteComponentTestBase extends ComponentTestBase {
+public class NoteComponentTestBase extends BusinessComponentTestBase {
 
     protected static String NOTES_URL = "notes";
     protected static String CONTACT_NOTES_URL = NOTES_URL + "/contact/%s";
     protected static String NOTE_URL = NOTES_URL + "/%s";
-
-    @Autowired
-    protected ComponentTestNoteRepository noteRepository;
-
-    @BeforeEach
-    void setUp() {
-        noteRepository.deleteAll();
-    }
 
     protected void user1CreateNote(NoteDto dto) {
         createNote(dto, USER_1);
@@ -157,31 +146,5 @@ public class NoteComponentTestBase extends ComponentTestBase {
         return sb.toString();
     }
 
-    protected List<Note> createNotes(ComponentTestUser user) {
-        return createNotes(user, randomLong());
-    }
 
-    protected List<Note> createNotes(ComponentTestUser user, long contactId) {
-        return createNotes(user, contactId, 3);
-    }
-
-    protected List<Note> createNotes(ComponentTestUser user, long contactId, int numOfNotes) {
-        return IntStream.range(0, numOfNotes).mapToObj((i) -> createNote(user, contactId)).collect(toList());
-    }
-
-    protected Note createNote(ComponentTestUser user) {
-        return createNote(user, randomLong());
-    }
-
-    protected Note createNote(ComponentTestUser user, long contactId) {
-        ensureUserContext(user);
-        var note = note(contactId);
-        var savedNote = noteRepository.save(note);
-        clearContext();
-        return savedNote;
-    }
-
-    protected Note getNoteFromDb(NoteDto dto) {
-        return noteRepository.getByText(dto.getText());
-    }
 }

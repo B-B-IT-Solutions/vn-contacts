@@ -12,32 +12,21 @@ import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-import cz.prm.ComponentTestBase;
+import cz.prm.business.BusinessComponentTestBase;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
-import cz.prm.custom.ComponentTestContactRepository;
 import cz.prm.domain.contact.Contact;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 import java.util.List;
 import java.util.stream.IntStream;
-import org.junit.jupiter.api.BeforeEach;
-import org.springframework.beans.factory.annotation.Autowired;
 
-public class ContactComponentTestBase extends ComponentTestBase {
+public class ContactComponentTestBase extends BusinessComponentTestBase {
 
     protected static String CONTACTS_URL = "contacts";
     protected static String CONTACT_URL = CONTACTS_URL + "/%s";
-
-    @Autowired
-    protected ComponentTestContactRepository contactRepository;
-
-    @BeforeEach
-    void setUp() {
-        contactRepository.deleteAll();
-    }
 
     protected void user1CreateContact(ContactDto dto) {
         createContact(dto, USER_1);

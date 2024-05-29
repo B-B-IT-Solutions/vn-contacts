@@ -28,8 +28,10 @@ public class NoteComponentTest extends NoteComponentTestBase {
         pageDto = user3GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        contactId = randomLong();
-        var user1Notes = createNotes(USER_1, contactId);
+        var user1Notes = createNotes(USER_1);
+        var userNote = user1Notes.get(0);
+        contactId = userNote.getContactId();
+
         pageDto = user1GetNotes(contactId, queryDto);
         assertNotes(user1Notes, pageDto);
 
@@ -39,27 +41,31 @@ public class NoteComponentTest extends NoteComponentTestBase {
         pageDto = user3GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        contactId = randomLong();
-        var user2Notes = createNotes(USER_2, contactId);
+        var user2Notes = createNotes(USER_2);
+        userNote = user2Notes.get(0);
+        contactId = userNote.getContactId();
+
         pageDto = user2GetNotes(contactId, queryDto);
         assertNotes(user2Notes, pageDto);
 
         pageDto = user1GetNotes(contactId, queryDto);
-        assertNotes(user1Notes, pageDto);
+        assertThat(pageDto.getContent()).isEmpty();
 
         pageDto = user3GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        contactId = randomLong();
-        var user3Notes = createNotes(USER_3, contactId);
+        var user3Notes = createNotes(USER_3);
+        userNote = user3Notes.get(0);
+        contactId = userNote.getContactId();
+
         pageDto = user3GetNotes(contactId, queryDto);
         assertNotes(user3Notes, pageDto);
 
         pageDto = user1GetNotes(contactId, queryDto);
-        assertNotes(user1Notes, pageDto);
+        assertThat(pageDto.getContent()).isEmpty();
 
         pageDto = user2GetNotes(contactId, queryDto);
-        assertNotes(user2Notes, pageDto);
+        assertThat(pageDto.getContent()).isEmpty();
     }
 
     @Test

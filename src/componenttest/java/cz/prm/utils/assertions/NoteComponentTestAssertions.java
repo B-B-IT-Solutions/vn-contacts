@@ -16,9 +16,9 @@ public class NoteComponentTestAssertions {
 
     public static void assertNotes(List<Note> notes, List<NoteDto> dtos) {
         assertThat(notes).isNotEmpty().hasSameSizeAs(dtos);
-        notes.forEach(u1 -> {
-            var u2 = dtos.stream().filter(u -> Objects.equals(u1.getContactId(), u.getContactId())).findFirst().get();
-            assertNote(u1, u2);
+        notes.forEach(n1 -> {
+            var n2 = dtos.stream().filter(n -> Objects.equals(n1.getNoteId(), n.getNoteId())).findFirst().get();
+            assertNote(n1, n2);
         });
     }
 
