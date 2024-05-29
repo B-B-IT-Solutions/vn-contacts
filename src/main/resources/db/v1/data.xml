@@ -103,7 +103,6 @@
 				 <column name="owner_email" value="bobuskysergej"/>
 			</insert>
 			
-			
 			<insert tableName="contact">
 				 <column name="contact_id" value="12"/>
 				 <column name="first_name" value="test 12"/>
@@ -120,6 +119,88 @@
 				 <column name="email" value="test13@gmail.com"/>
 				 <column name="owner_username" value="bobuskaviktoria"/>
 				 <column name="owner_email" value="bobuskaviktoria"/>
+			</insert>
+	 </changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.2">
+			<insert tableName="note">
+				 <column name="note_id" value="1"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 1"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="2"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 2"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="3"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 3"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="4"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 4"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="5"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 5"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="6"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 6"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="7"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 7"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="8"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 8"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="9"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 9"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="10"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 10"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
 			</insert>
 	 </changeSet>
 </databaseChangeLog>
