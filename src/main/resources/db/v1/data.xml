@@ -129,6 +129,8 @@
 				 <column name="text" value="text 1"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
 				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
 			</insert>
 			
 			<insert tableName="note">
@@ -137,6 +139,8 @@
 				 <column name="text" value="text 2"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
 				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
 			</insert>
 			
 			<insert tableName="note">
@@ -145,6 +149,8 @@
 				 <column name="text" value="text 3"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
 				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
 			</insert>
 			
 			<insert tableName="note">
@@ -153,6 +159,8 @@
 				 <column name="text" value="text 4"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
 				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
 			</insert>
 			
 			<insert tableName="note">
@@ -161,6 +169,8 @@
 				 <column name="text" value="text 5"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
 				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
 			</insert>
 			
 			<insert tableName="note">
@@ -169,6 +179,8 @@
 				 <column name="text" value="text 6"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
 				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
 			</insert>
 			
 			<insert tableName="note">
@@ -177,6 +189,8 @@
 				 <column name="text" value="text 7"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
 				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
 			</insert>
 			
 			<insert tableName="note">
@@ -185,6 +199,8 @@
 				 <column name="text" value="text 8"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
 				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
 			</insert>
 			
 			<insert tableName="note">
@@ -193,6 +209,8 @@
 				 <column name="text" value="text 9"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
 				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
 			</insert>
 			
 			<insert tableName="note">
@@ -201,6 +219,8 @@
 				 <column name="text" value="text 10"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
 				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
 			</insert>
 	 </changeSet>
 </databaseChangeLog>
