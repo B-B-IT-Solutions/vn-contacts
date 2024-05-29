@@ -1,5 +1,6 @@
 package cz.prm.business.notes;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
@@ -9,8 +10,11 @@ import static cz.prm.utils.NoteComponentTestUtils.noteDto;
 import static cz.prm.utils.NoteComponentTestUtils.notesQueryDto;
 import static cz.prm.utils.assertions.NoteComponentTestAssertions.assertNote;
 import static cz.prm.utils.assertions.NoteComponentTestAssertions.assertNotes;
+import static java.util.Collections.sort;
+import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.note.NoteDto;
 import org.junit.jupiter.api.Test;
 
 public class NoteComponentTest extends NoteComponentTestBase {
@@ -111,6 +115,62 @@ public class NoteComponentTest extends NoteComponentTestBase {
         assertThat(pageDto.getTotalElements()).isEqualTo(21);
         assertThat(pageDto.getPageSize()).isEqualTo(10);
         assertThat(pageDto.getContent()).hasSize(1);
+    }
+
+    @Test
+    void getNotesSorting() {
+        var queryDto = notesQueryDto();
+        queryDto.setSort("asc(lastEditDate)");
+        var contactId = randomLong();
+        var pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        var user1Notes = createNotes(USER_1, 21);
+        var userNote = user1Notes.get(0);
+        contactId = userNote.getContactId();
+
+        queryDto = notesQueryDto();
+        queryDto.setSort("asc(lastEditDate)");
+        pageDto = user1GetNotes(contactId, queryDto);
+        var actual = pageDto.getContent();
+        var expected = newArrayList(actual);
+        sort(expected, comparing(NoteDto::getLastEditDate));
+        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+        queryDto.setSort("desc(lastEditDate)");
+        pageDto = user1GetNotes(contactId, queryDto);
+        actual = pageDto.getContent();
+        expected = newArrayList(actual);
+        sort(expected, comparing(NoteDto::getLastEditDate).reversed());
+        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+        queryDto.setSort("asc(creationDate)");
+        pageDto = user1GetNotes(contactId, queryDto);
+        actual = pageDto.getContent();
+        expected = newArrayList(actual);
+        sort(expected, comparing(NoteDto::getCreationDate));
+        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+        queryDto.setSort("desc(creationDate)");
+        pageDto = user1GetNotes(contactId, queryDto);
+        actual = pageDto.getContent();
+        expected = newArrayList(actual);
+        sort(expected, comparing(NoteDto::getCreationDate).reversed());
+        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+        queryDto.setSort("asc(contactId)");
+        pageDto = user1GetNotes(contactId, queryDto);
+        actual = pageDto.getContent();
+        expected = newArrayList(actual);
+        sort(expected, comparing(NoteDto::getContactId));
+        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+        queryDto.setSort("desc(contactId)");
+        pageDto = user1GetNotes(contactId, queryDto);
+        actual = pageDto.getContent();
+        expected = newArrayList(actual);
+        sort(expected, comparing(NoteDto::getContactId).reversed());
+        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
     }
 
     @Test
