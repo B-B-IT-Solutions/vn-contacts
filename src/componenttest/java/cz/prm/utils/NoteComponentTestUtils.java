@@ -1,5 +1,6 @@
 package cz.prm.utils;
 
+import static cz.prm.utils.ComponentTestUtils.randomLong;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static java.lang.String.format;
 import static org.assertj.core.util.Lists.newArrayList;
@@ -17,7 +18,12 @@ public class NoteComponentTestUtils {
     }
 
     public static Note note() {
+        return note(randomLong());
+    }
+
+    public static Note note(long contactId) {
         var contact = new Note();
+        contact.setContactId(contactId);
         contact.setText(format("Text%s", uuid()));
         return contact;
     }

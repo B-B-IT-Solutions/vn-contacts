@@ -3,6 +3,7 @@ package cz.prm.business.notes;
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
+import static cz.prm.utils.ComponentTestUtils.randomLong;
 import static cz.prm.utils.NoteComponentTestUtils.note;
 import static cz.prm.utils.SecurityContextComponentTestUtils.clearContext;
 import static cz.prm.utils.SecurityContextComponentTestUtils.ensureUserContext;
@@ -95,7 +96,7 @@ public class NoteComponentTestBase extends ComponentTestBase {
     }
 
     protected PageDto<NoteDto> getNotesPage(Long contactId, NotesQueryDto queryDto, ComponentTestUser user) {
-        var baseURl = format(NOTES_URL, contactId);
+        var baseURl = format(CONTACT_NOTES_URL, contactId);
         var url = appendQueryToUrl(baseURl, queryDto);
         var typeRef = new TypeRef<PageDto<NoteDto>>() {
         };
@@ -157,16 +158,24 @@ public class NoteComponentTestBase extends ComponentTestBase {
     }
 
     protected List<Note> createNotes(ComponentTestUser user) {
-        return createNotes(user, 3);
+        return createNotes(user, randomLong());
     }
 
-    protected List<Note> createNotes(ComponentTestUser user, int numOfNotes) {
-        return IntStream.range(0, numOfNotes).mapToObj((i) -> createNote(user)).collect(toList());
+    protected List<Note> createNotes(ComponentTestUser user, long contactId) {
+        return createNotes(user, contactId, 3);
+    }
+
+    protected List<Note> createNotes(ComponentTestUser user, long contactId, int numOfNotes) {
+        return IntStream.range(0, numOfNotes).mapToObj((i) -> createNote(user, contactId)).collect(toList());
     }
 
     protected Note createNote(ComponentTestUser user) {
+        return createNote(user, randomLong());
+    }
+
+    protected Note createNote(ComponentTestUser user, long contactId) {
         ensureUserContext(user);
-        var note = note();
+        var note = note(contactId);
         var savedNote = noteRepository.save(note);
         clearContext();
         return savedNote;
