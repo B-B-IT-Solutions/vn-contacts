@@ -1,4 +1,4 @@
-package cz.prm.services.contact;
+package cz.prm.services;
 
 import static cz.prm.domain.common.PageRequests.getPageRequest;
 import static java.lang.String.format;
@@ -9,10 +9,12 @@ import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import java.util.function.Supplier;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class ContactService {
 
     private ContactRepository repository;
@@ -21,16 +23,6 @@ public class ContactService {
     public ContactService(ContactRepository repository, ContactPredicates predicates) {
         this.repository = repository;
         this.predicates = predicates;
-    }
-
-    public void createContact(Contact contact) {
-        repository.save(contact);
-    }
-
-    public void updateContact(Long contactId, Contact updatedContact) {
-        var savedContact = getContactById(contactId);
-        updateContactFields(savedContact, updatedContact);
-        repository.save(savedContact);
     }
 
     public Page<Contact> getContacts(ContactsQuery query) {
@@ -42,6 +34,16 @@ public class ContactService {
 
     public Contact getContact(Long contactId) {
         return getContactById(contactId);
+    }
+
+    public void createContact(Contact contact) {
+        repository.save(contact);
+    }
+
+    public void updateContact(Long contactId, Contact updatedContact) {
+        var savedContact = getContactById(contactId);
+        updateContactFields(savedContact, updatedContact);
+        repository.save(savedContact);
     }
 
     private void updateContactFields(Contact savedContact, Contact updatedContact) {

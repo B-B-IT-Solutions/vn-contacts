@@ -1,16 +1,13 @@
-package cz.prm.controllers.dto.contact.query;
+package cz.prm.controllers.dto.note.query;
 
 import cz.prm.controllers.dto.common.QueryDto;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor
 @NoArgsConstructor
-public class ContactsQueryDto extends QueryDto {
+public class NotesQueryDto extends QueryDto {
 
-    private ContactsFilterDto filter;
 }

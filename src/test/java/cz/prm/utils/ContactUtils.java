@@ -5,6 +5,7 @@ import static cz.prm.utils.CommonUtils.paginationDto;
 import static cz.prm.utils.CommonUtils.user;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
+import static org.assertj.core.util.Lists.newArrayList;
 
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
@@ -13,35 +14,34 @@ import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsFilter;
 import cz.prm.domain.contact.query.ContactsQuery;
 import java.util.List;
-import org.assertj.core.util.Lists;
 
 public class ContactUtils {
 
     public static List<Contact> contacts() {
-        return Lists.newArrayList(contact(), contact(), contact());
+        return newArrayList(contact(), contact(), contact());
     }
 
     public static Contact contact() {
-        var user = new Contact();
-        user.setContactId(randomLong());
-        user.setFirstName(uuid());
-        user.setMiddleName(uuid());
-        user.setLastName(uuid());
-        user.setNickName(uuid());
-        user.setEmail(uuid());
-        user.setOwner(user());
-        return user;
+        var contact = new Contact();
+        contact.setContactId(randomLong());
+        contact.setFirstName(uuid());
+        contact.setMiddleName(uuid());
+        contact.setLastName(uuid());
+        contact.setNickName(uuid());
+        contact.setEmail(uuid());
+        contact.setOwner(user());
+        return contact;
     }
 
     public static ContactDto contactDto() {
-        var user = new ContactDto();
-        user.setContactId(randomLong());
-        user.setFirstName(uuid());
-        user.setMiddleName(uuid());
-        user.setLastName(uuid());
-        user.setNickName(uuid());
-        user.setEmail(uuid());
-        return user;
+        var contact = new ContactDto();
+        contact.setContactId(randomLong());
+        contact.setFirstName(uuid());
+        contact.setMiddleName(uuid());
+        contact.setLastName(uuid());
+        contact.setNickName(uuid());
+        contact.setEmail(uuid());
+        return contact;
     }
 
     public static ContactsQuery contactsQuery() {

@@ -4,7 +4,7 @@ import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.controllers.mappers.ContactMapper;
-import cz.prm.services.contact.ContactService;
+import cz.prm.services.ContactService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ContactController {
 
     private ContactService contactService;
-    public ContactMapper mapper;
+    private ContactMapper mapper;
 
     public ContactController(ContactService contactService, ContactMapper mapper) {
         this.contactService = contactService;

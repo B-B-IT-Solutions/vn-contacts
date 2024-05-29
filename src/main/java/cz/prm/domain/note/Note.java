@@ -1,4 +1,4 @@
-package cz.prm.domain.contact;
+package cz.prm.domain.note;
 
 import cz.prm.domain.common.User;
 import jakarta.persistence.AttributeOverride;
@@ -10,7 +10,6 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.time.Instant;
@@ -39,8 +38,7 @@ public class Note {
     @Column(name = "CONTACT_ID")
     private Long contactId;
 
-    @Lob
-    @Column(name = "TEXT")
+    @Column(name = "TEXT", columnDefinition = "TEXT")
     private String text;
 
     @LastModifiedDate

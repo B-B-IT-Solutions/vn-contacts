@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 import cz.prm.controllers.mappers.ContactMapper;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsQuery;
-import cz.prm.services.contact.ContactService;
+import cz.prm.services.ContactService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,8 +35,8 @@ class ContactControllerTest {
     private ArgumentCaptor<Contact> contactCapt;
     @Captor
     private ArgumentCaptor<ContactsQuery> cQueryCapt;
-    private ContactMapper mapper = MapperUtils.getContactMapper();
 
+    private ContactMapper mapper = MapperUtils.getContactMapper();
     private ContactController controller;
 
     @BeforeEach

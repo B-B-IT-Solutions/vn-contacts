@@ -3,8 +3,10 @@ package cz.prm.domain.contact.query;
 import cz.prm.domain.common.query.Query;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 public class ContactsQuery extends Query {
 

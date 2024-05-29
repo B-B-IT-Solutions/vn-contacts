@@ -1,4 +1,4 @@
-package cz.prm.services.contact;
+package cz.prm.services;
 
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contacts;
@@ -47,37 +47,6 @@ class ContactServiceTest {
     }
 
     @Test
-    void createContact() {
-        var contact = contact();
-        contactService.createContact(contact);
-        verify(repository).save(contact);
-    }
-
-    @Test
-    void updateContact() {
-        var contactIdDb = contact();
-        var updatedContact = contact();
-        var predicate = new BooleanBuilder();
-        when(predicates.byContactId(contactIdDb.getContactId())).thenReturn(predicate);
-        when(repository.findOne(predicate)).thenReturn(of(contactIdDb));
-
-        contactService.updateContact(contactIdDb.getContactId(), updatedContact);
-        verify(repository).save(contactCapt.capture());
-        var savedContact = contactCapt.getValue();
-        assertFieldsUpdated(contactIdDb, updatedContact, savedContact);
-    }
-
-    @Test
-    void updateContact_EntityNotFound() {
-        var contactIdDb = contact();
-        var updatedContact = contact();
-        var predicate = new BooleanBuilder();
-        when(predicates.byContactId(contactIdDb.getContactId())).thenReturn(predicate);
-        when(repository.findOne(predicate)).thenReturn(empty());
-        assertThrows(EntityNotFoundException.class, () -> contactService.updateContact(contactIdDb.getContactId(), updatedContact));
-    }
-
-    @Test
     void getContacts() {
         var contacts = contacts();
         var page = new PageImpl(contacts);
@@ -107,6 +76,37 @@ class ContactServiceTest {
         when(predicates.byContactId(contact.getContactId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(empty());
         assertThrows(EntityNotFoundException.class, () -> contactService.getContact(contact.getContactId()));
+    }
+
+    @Test
+    void createContact() {
+        var contact = contact();
+        contactService.createContact(contact);
+        verify(repository).save(contact);
+    }
+
+    @Test
+    void updateContact() {
+        var contactIdDb = contact();
+        var updatedContact = contact();
+        var predicate = new BooleanBuilder();
+        when(predicates.byContactId(contactIdDb.getContactId())).thenReturn(predicate);
+        when(repository.findOne(predicate)).thenReturn(of(contactIdDb));
+
+        contactService.updateContact(contactIdDb.getContactId(), updatedContact);
+        verify(repository).save(contactCapt.capture());
+        var savedContact = contactCapt.getValue();
+        assertFieldsUpdated(contactIdDb, updatedContact, savedContact);
+    }
+
+    @Test
+    void updateContact_EntityNotFound() {
+        var contactIdDb = contact();
+        var updatedContact = contact();
+        var predicate = new BooleanBuilder();
+        when(predicates.byContactId(contactIdDb.getContactId())).thenReturn(predicate);
+        when(repository.findOne(predicate)).thenReturn(empty());
+        assertThrows(EntityNotFoundException.class, () -> contactService.updateContact(contactIdDb.getContactId(), updatedContact));
     }
 
     private static void assertFieldsUpdated(Contact contactIdDb, Contact updatedContact, Contact savedContact) {
