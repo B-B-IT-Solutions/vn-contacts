@@ -133,95 +133,126 @@
 				 <column name="owner_email" value="bobuskysergej"/>
 			</insert>
 			
-<!--			<insert tableName="note">-->
-<!--				 <column name="note_id" value="2"/>-->
-<!--				 <column name="contact_id" value="1"/>-->
-<!--				 <column name="text" value="text 2"/>-->
+			<insert tableName="note">
+				 <column name="note_id" value="2"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 2"/>
 
-<!--				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="owner_username" value="bobuskysergej"/>-->
-<!--				 <column name="owner_email" value="bobuskysergej"/>-->
-<!--			</insert>-->
-<!--			-->
-<!--			<insert tableName="note">-->
-<!--				 <column name="note_id" value="3"/>-->
-<!--				 <column name="contact_id" value="1"/>-->
-<!--				 <column name="text" value="text 3"/>-->
-<!--				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="owner_username" value="bobuskysergej"/>-->
-<!--				 <column name="owner_email" value="bobuskysergej"/>-->
-<!--			</insert>-->
-<!--			-->
-<!--			<insert tableName="note">-->
-<!--				 <column name="note_id" value="4"/>-->
-<!--				 <column name="contact_id" value="1"/>-->
-<!--				 <column name="text" value="text 4"/>-->
-<!--				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="owner_username" value="bobuskysergej"/>-->
-<!--				 <column name="owner_email" value="bobuskysergej"/>-->
-<!--			</insert>-->
-<!--			-->
-<!--			<insert tableName="note">-->
-<!--				 <column name="note_id" value="5"/>-->
-<!--				 <column name="contact_id" value="1"/>-->
-<!--				 <column name="text" value="text 5"/>-->
-<!--				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="owner_username" value="bobuskysergej"/>-->
-<!--				 <column name="owner_email" value="bobuskysergej"/>-->
-<!--			</insert>-->
-<!--			-->
-<!--			<insert tableName="note">-->
-<!--				 <column name="note_id" value="6"/>-->
-<!--				 <column name="contact_id" value="1"/>-->
-<!--				 <column name="text" value="text 6"/>-->
-<!--				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="owner_username" value="bobuskysergej"/>-->
-<!--				 <column name="owner_email" value="bobuskysergej"/>-->
-<!--			</insert>-->
-<!--			-->
-<!--			<insert tableName="note">-->
-<!--				 <column name="note_id" value="7"/>-->
-<!--				 <column name="contact_id" value="1"/>-->
-<!--				 <column name="text" value="text 7"/>-->
-<!--				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="owner_username" value="bobuskysergej"/>-->
-<!--				 <column name="owner_email" value="bobuskysergej"/>-->
-<!--			</insert>-->
-<!--			-->
-<!--			<insert tableName="note">-->
-<!--				 <column name="note_id" value="8"/>-->
-<!--				 <column name="contact_id" value="1"/>-->
-<!--				 <column name="text" value="text 8"/>-->
-<!--				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="owner_username" value="bobuskysergej"/>-->
-<!--				 <column name="owner_email" value="bobuskysergej"/>-->
-<!--			</insert>-->
-<!--			-->
-<!--			<insert tableName="note">-->
-<!--				 <column name="note_id" value="9"/>-->
-<!--				 <column name="contact_id" value="1"/>-->
-<!--				 <column name="text" value="text 9"/>-->
-<!--				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="owner_username" value="bobuskysergej"/>-->
-<!--				 <column name="owner_email" value="bobuskysergej"/>-->
-<!--			</insert>-->
-<!--			-->
-<!--			<insert tableName="note">-->
-<!--				 <column name="note_id" value="10"/>-->
-<!--				 <column name="contact_id" value="1"/>-->
-<!--				 <column name="text" value="text 10"/>-->
-<!--				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>-->
-<!--				 <column name="owner_username" value="bobuskysergej"/>-->
-<!--				 <column name="owner_email" value="bobuskysergej"/>-->
-<!--			</insert>-->
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="3"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 3"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="4"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 4"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="5"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 5"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="6"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 6"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="7"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 7"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="8"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 8"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="9"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 9"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
+			</insert>
+			
+			<insert tableName="note">
+				 <column name="note_id" value="10"/>
+				 <column name="contact_id" value="1"/>
+				 <column name="text" value="text 10"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
+			</insert>
+		 
+			<insert tableName="note">
+				 <column name="note_id" value="11"/>
+				 <column name="contact_id" value="2"/>
+				 <column name="text" value="&lt;h1&gt;Headings. Helpers and nodes config&lt;/h1&gt;&lt;p&gt;What if you do not have a registered &lt;code&gt;&lt;strong&gt;lexical&lt;/strong&gt;&lt;/code&gt; command? Let's try to convert the paragraph element (lexical's default node) into the Header Node without using the&lt;/p&gt;&lt;p&gt;There are no pre-defined commands for converting some Node to the Heading Node, so here we:&lt;/p&gt;&lt;ol&gt;&lt;li&gt;Calling &lt;code&gt;editor.update&lt;/code&gt; function that expects a callback as an argument;&lt;/li&gt;&lt;li&gt;Using &lt;code&gt;$getSelection&lt;/code&gt; helper for getting selected node;&lt;/li&gt;&lt;li&gt;Checking that it is a &lt;code&gt;RangeSelection&lt;/code&gt; type by using &lt;code&gt;$isRangeSelection&lt;/code&gt;&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;4. &lt;code&gt;$setBlocksType&lt;/code&gt; as new &lt;code&gt;$createHeadingNode&lt;/code&gt; (h1,h2,h3);&lt;/p&gt;"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
+			</insert>
+		 
+			<insert tableName="note">
+				 <column name="note_id" value="12"/>
+				 <column name="contact_id" value="2"/>
+				 <column name="text" value="text 2"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
+			</insert>
+		 
+			<insert tableName="note">
+				 <column name="note_id" value="13"/>
+				 <column name="contact_id" value="2"/>
+				 <column name="text" value="text 3"/>
+				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+				 <column name="owner_username" value="bobuskysergej"/>
+				 <column name="owner_email" value="bobuskysergej"/>
+			</insert>
+			
 	 </changeSet>
 </databaseChangeLog>
