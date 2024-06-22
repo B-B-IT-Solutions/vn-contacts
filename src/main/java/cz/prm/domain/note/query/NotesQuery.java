@@ -7,7 +7,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 public class NotesQuery extends Query {
 
+    public static final String DEFAULT_NOTES_SORT = "asc(displayOrder)";
+
+    public NotesQuery() {
+        this.sort = DEFAULT_NOTES_SORT;
+    }
 }

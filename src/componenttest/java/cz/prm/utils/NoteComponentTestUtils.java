@@ -22,14 +22,16 @@ public class NoteComponentTestUtils {
     }
 
     public static Note note(long contactId) {
-        var contact = new Note();
-        contact.setContactId(contactId);
-        contact.setText(format("Text%s", uuid()));
-        return contact;
+        var note = new Note();
+        note.setContactId(contactId);
+        note.setText(format("Text%s", uuid()));
+        note.setDisplayOrder(randomLong());
+        return note;
     }
 
-    public static NoteDto noteDto() {
+    public static NoteDto noteDto(long contactId) {
         var dto = new NoteDto();
+        dto.setContactId(contactId);
         dto.setText(uuid());
         return dto;
     }
