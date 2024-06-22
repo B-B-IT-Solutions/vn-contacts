@@ -9,6 +9,7 @@ class NotesQueryTest {
     @Test
     void newInstance() {
         var query = new NotesQuery();
+        assertThat(query.getSort()).isEqualTo("asc(displayOrder)");
         assertThat(query.getPagination()).isNotNull();
     }
 }
