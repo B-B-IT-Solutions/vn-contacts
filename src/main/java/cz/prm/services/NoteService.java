@@ -48,6 +48,7 @@ public class NoteService {
 
     private void updateNoteFields(Note savedNote, Note updatedNote) {
         savedNote.setText(updatedNote.getText());
+        savedNote.setOrder(updatedNote.getOrder());
     }
 
     private Note getNoteById(Long noteId) {
