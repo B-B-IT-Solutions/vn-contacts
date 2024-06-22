@@ -125,7 +125,7 @@
 	 <changeSet author="sergej" id="1.0.2">
 			<insert tableName="note">
 				 <column name="note_id" value="1"/>
-				 <column name="order" value="1"/>
+				 <column name="display_order" value="1"/>
 				 <column name="contact_id" value="1"/>
 				 <column name="text" value="&lt;h1 class=&quot;editor-heading-h1&quot; dir=&quot;ltr&quot;&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;Welcome to the playground&lt;/span&gt;&lt;/h1&gt;&lt;blockquote class=&quot;editor-quote&quot; dir=&quot;ltr&quot;&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;In case you were wondering what the black box at the bottom is - it's the debug view, showing the current state of the editor. You can disable it by pressing on the settings control in the bottom-left of your screen and toggling the debug view setting.&lt;/span&gt;&lt;/blockquote&gt;&lt;p class=&quot;editor-paragraph&quot; dir=&quot;ltr&quot;&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;The playground is a demo environment built with &lt;/span&gt;&lt;code spellcheck=&quot;false&quot; style=&quot;white-space: pre-wrap;&quot;&gt;&lt;span&gt;@lexical/react&lt;/span&gt;&lt;/code&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;. Try typing in &lt;/span&gt;&lt;b&gt;&lt;strong class=&quot;editor-text-bold&quot; style=&quot;white-space: pre-wrap;&quot;&gt;some text&lt;/strong&gt;&lt;/b&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt; with &lt;/span&gt;&lt;i&gt;&lt;em class=&quot;editor-text-italic&quot; style=&quot;white-space: pre-wrap;&quot;&gt;different&lt;/em&gt;&lt;/i&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt; formats.&lt;/span&gt;&lt;/p&gt;&lt;p class=&quot;editor-paragraph&quot; dir=&quot;ltr&quot;&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;Make sure to check out the various plugins in the toolbar. You can also use #hashtags or @-mentions too!&lt;/span&gt;&lt;/p&gt;&lt;p class=&quot;editor-paragraph&quot; dir=&quot;ltr&quot;&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;If you'd like to find out more about Lexical, you can:&lt;/span&gt;&lt;/p&gt;&lt;ul class=&quot;editor-list-ul&quot;&gt;&lt;li value=&quot;1&quot; class=&quot;editor-listitem&quot;&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;Visit the &lt;/span&gt;&lt;a href=&quot;https://lexical.dev/&quot; class=&quot;editor-link&quot;&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;Lexical website&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt; for documentation and more information.&lt;/span&gt;&lt;/li&gt;&lt;li value=&quot;2&quot; class=&quot;editor-listitem&quot;&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;Check out the code on our &lt;/span&gt;&lt;a href=&quot;https://github.com/facebook/lexical&quot; class=&quot;editor-link&quot;&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;GitHub repository&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;.&lt;/span&gt;&lt;/li&gt;&lt;li value=&quot;3&quot; class=&quot;editor-listitem&quot;&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;Playground code can be found &lt;/span&gt;&lt;a href=&quot;https://github.com/facebook/lexical/tree/main/packages/lexical-playground&quot; class=&quot;editor-link&quot;&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;.&lt;/span&gt;&lt;/li&gt;&lt;li value=&quot;4&quot; class=&quot;editor-listitem&quot;&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;Join our &lt;/span&gt;&lt;a href=&quot;https://discord.com/invite/KmG4wQnnD9&quot; class=&quot;editor-link&quot;&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;Discord Server&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt; and chat with the team.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p class=&quot;editor-paragraph&quot; dir=&quot;ltr&quot;&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;Lastly, we're constantly adding cool new features to this playground. So make sure you check back here when you next get a chance 🙂.&lt;/span&gt;&lt;/p&gt;&lt;p class=&quot;editor-paragraph&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p class=&quot;editor-paragraph&quot; dir=&quot;ltr&quot;&gt;&lt;span style=&quot;white-space: pre-wrap;&quot;&gt;text added at the end of the copy pasted nodes.&lt;/span&gt;&lt;/p&gt;"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
@@ -136,7 +136,7 @@
 			
 			<insert tableName="note">
 				 <column name="note_id" value="2"/>
-				 <column name="order" value="2"/>
+				 <column name="display_order" value="2"/>
 				 <column name="contact_id" value="1"/>
 				 <column name="text" value="text 2"/>
 
@@ -148,7 +148,7 @@
 			
 			<insert tableName="note">
 				 <column name="note_id" value="3"/>
-				 <column name="order" value="3"/>
+				 <column name="display_order" value="3"/>
 				 <column name="contact_id" value="1"/>
 				 <column name="text" value="text 3"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
@@ -159,7 +159,7 @@
 			
 <!--			<insert tableName="note">-->
 <!--				 <column name="note_id" value="4"/>-->
-<!--				 <column name="order" value="4"/>-->
+<!--				 <column name="display_order" value="4"/>-->
 <!--				 <column name="contact_id" value="1"/>-->
 <!--				 <column name="text" value="text 4"/>-->
 <!--				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>-->
@@ -170,7 +170,7 @@
 <!--			-->
 <!--			<insert tableName="note">-->
 <!--				 <column name="note_id" value="5"/>-->
-<!--				 <column name="order" value="5"/>-->
+<!--				 <column name="display_order" value="5"/>-->
 <!--				 <column name="contact_id" value="1"/>-->
 <!--				 <column name="text" value="text 5"/>-->
 <!--				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>-->
@@ -181,7 +181,7 @@
 <!--			-->
 <!--			<insert tableName="note">-->
 <!--				 <column name="note_id" value="6"/>-->
-<!--				 <column name="order" value="6"/>-->
+<!--				 <column name="display_order" value="6"/>-->
 <!--				 <column name="contact_id" value="1"/>-->
 <!--				 <column name="text" value="text 6"/>-->
 <!--				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>-->
@@ -192,7 +192,7 @@
 <!--			-->
 <!--			<insert tableName="note">-->
 <!--				 <column name="note_id" value="7"/>-->
-<!--				 <column name="order" value="7"/>-->
+<!--				 <column name="display_order" value="7"/>-->
 <!--				 <column name="contact_id" value="1"/>-->
 <!--				 <column name="text" value="text 7"/>-->
 <!--				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>-->
@@ -203,7 +203,7 @@
 <!--			-->
 <!--			<insert tableName="note">-->
 <!--				 <column name="note_id" value="8"/>-->
-<!--				 <column name="order" value="8"/>-->
+<!--				 <column name="display_order" value="8"/>-->
 <!--				 <column name="contact_id" value="1"/>-->
 <!--				 <column name="text" value="text 8"/>-->
 <!--				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>-->
@@ -214,7 +214,7 @@
 <!--			-->
 <!--			<insert tableName="note">-->
 <!--				 <column name="note_id" value="9"/>-->
-<!--				 <column name="order" value="9"/>-->
+<!--				 <column name="display_order" value="9"/>-->
 <!--				 <column name="contact_id" value="1"/>-->
 <!--				 <column name="text" value="text 9"/>-->
 <!--				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>-->
@@ -225,7 +225,7 @@
 <!--			-->
 <!--			<insert tableName="note">-->
 <!--				 <column name="note_id" value="10"/>-->
-<!--				 <column name="order" value="10"/>-->
+<!--				 <column name="display_order" value="10"/>-->
 <!--				 <column name="contact_id" value="1"/>-->
 <!--				 <column name="text" value="text 10"/>-->
 <!--				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>-->
@@ -236,7 +236,7 @@
 		 
 			<insert tableName="note">
 				 <column name="note_id" value="11"/>
-				 <column name="order" value="11"/>
+				 <column name="display_order" value="11"/>
 				 <column name="contact_id" value="2"/>
 				 <column name="text" value="&lt;h1&gt;Headings. Helpers and nodes config&lt;/h1&gt;&lt;p&gt;What if you do not have a registered &lt;code&gt;&lt;strong&gt;lexical&lt;/strong&gt;&lt;/code&gt; command? Let's try to convert the paragraph element (lexical's default node) into the Header Node without using the&lt;/p&gt;&lt;p&gt;There are no pre-defined commands for converting some Node to the Heading Node, so here we:&lt;/p&gt;&lt;ol&gt;&lt;li&gt;Calling &lt;code&gt;editor.update&lt;/code&gt; function that expects a callback as an argument;&lt;/li&gt;&lt;li&gt;Using &lt;code&gt;$getSelection&lt;/code&gt; helper for getting selected node;&lt;/li&gt;&lt;li&gt;Checking that it is a &lt;code&gt;RangeSelection&lt;/code&gt; type by using &lt;code&gt;$isRangeSelection&lt;/code&gt;&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;4. &lt;code&gt;$setBlocksType&lt;/code&gt; as new &lt;code&gt;$createHeadingNode&lt;/code&gt; (h1,h2,h3);&lt;/p&gt;"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
@@ -247,7 +247,7 @@
 		 
 			<insert tableName="note">
 				 <column name="note_id" value="12"/>
-				 <column name="order" value="12"/>
+				 <column name="display_order" value="12"/>
 				 <column name="contact_id" value="2"/>
 				 <column name="text" value="text 2"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
@@ -258,7 +258,7 @@
 		 
 			<insert tableName="note">
 				 <column name="note_id" value="13"/>
-				 <column name="order" value="13"/>
+				 <column name="display_order" value="13"/>
 				 <column name="contact_id" value="2"/>
 				 <column name="text" value="text 3"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>

@@ -41,7 +41,7 @@ public class Note {
     @Column(name = "TEXT", columnDefinition = "TEXT")
     private String text;
 
-    @Column(name = "ORDER")
+    @Column(name = "DISPLAY_ORDER")
     private Long order;
 
     @LastModifiedDate

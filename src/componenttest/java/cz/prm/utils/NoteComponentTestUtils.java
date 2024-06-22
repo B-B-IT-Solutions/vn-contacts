@@ -25,6 +25,7 @@ public class NoteComponentTestUtils {
         var contact = new Note();
         contact.setContactId(contactId);
         contact.setText(format("Text%s", uuid()));
+        contact.setOrder(randomLong());
         return contact;
     }
 

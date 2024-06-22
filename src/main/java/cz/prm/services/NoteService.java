@@ -37,6 +37,8 @@ public class NoteService {
     }
 
     public void createNote(Note note) {
+        var order = getNoteOrder(note.getContactId());
+        note.setOrder(order);
         repository.save(note);
     }
 
@@ -55,6 +57,12 @@ public class NoteService {
         var predicate = predicates.byNoteId(noteId);
         var optional = repository.findOne(predicate);
         return optional.orElseThrow(entityNotFoundSupplier(noteId));
+    }
+
+    private long getNoteOrder(Long contactId) {
+        var predicate = predicates.byContactId(contactId);
+        var notesCount = repository.count(predicate);
+        return notesCount + 1;
     }
 
     private Supplier<EntityNotFoundException> entityNotFoundSupplier(Long userId) {
