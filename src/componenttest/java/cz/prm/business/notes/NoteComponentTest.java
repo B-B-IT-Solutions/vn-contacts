@@ -120,7 +120,6 @@ public class NoteComponentTest extends NoteComponentTestBase {
     @Test
     void getNotesSorting() {
         var queryDto = notesQueryDto();
-        queryDto.setSort("asc(lastEditDate)");
         var contactId = randomLong();
         var pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
@@ -130,10 +129,18 @@ public class NoteComponentTest extends NoteComponentTestBase {
         contactId = userNote.getContactId();
 
         queryDto = notesQueryDto();
-        queryDto.setSort("asc(lastEditDate)");
+        queryDto.setSort(null);
         pageDto = user1GetNotes(contactId, queryDto);
         var actual = pageDto.getContent();
         var expected = newArrayList(actual);
+        sort(expected, comparing(NoteDto::getDisplayOrder));
+        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+        queryDto = notesQueryDto();
+        queryDto.setSort("asc(lastEditDate)");
+        pageDto = user1GetNotes(contactId, queryDto);
+        actual = pageDto.getContent();
+        expected = newArrayList(actual);
         sort(expected, comparing(NoteDto::getLastEditDate));
         assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
 
