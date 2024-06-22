@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class NotesQuery extends Query {
 
+    public static final String DEFAULT_NOTES_SORT = "asc(displayOrder)";
+
     public NotesQuery() {
-        this.sort = "asc(displayOrder)";
+        this.sort = DEFAULT_NOTES_SORT;
     }
 }
