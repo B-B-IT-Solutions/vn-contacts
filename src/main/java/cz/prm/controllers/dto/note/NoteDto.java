@@ -20,6 +20,9 @@ public class NoteDto {
     @JsonProperty("text")
     private String text;
 
+    @JsonProperty("order")
+    private Long order;
+
     @JsonProperty("lastEditDate")
     private Instant lastEditDate;
 

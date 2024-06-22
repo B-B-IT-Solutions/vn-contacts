@@ -41,6 +41,9 @@ public class Note {
     @Column(name = "TEXT", columnDefinition = "TEXT")
     private String text;
 
+    @Column(name = "ORDER")
+    private Long order;
+
     @LastModifiedDate
     @Column(name = "LAST_EDIT_DATE")
     private Instant lastEditDate;
