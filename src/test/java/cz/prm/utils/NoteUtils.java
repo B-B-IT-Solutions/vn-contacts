@@ -25,7 +25,7 @@ public class NoteUtils {
         note.setNoteId(randomLong());
         note.setContactId(randomLong());
         note.setText(uuid());
-        note.setOrder(randomLong());
+        note.setDisplayOrder(randomLong());
         note.setLastEditDate(now());
         note.setCreationDate(now());
         note.setOwner(user());
@@ -37,7 +37,7 @@ public class NoteUtils {
         note.setNoteId(randomLong());
         note.setContactId(randomLong());
         note.setText(uuid());
-        note.setOrder(randomLong());
+        note.setDisplayOrder(randomLong());
         note.setLastEditDate(now());
         note.setCreationDate(now());
         return note;

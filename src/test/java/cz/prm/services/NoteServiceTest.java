@@ -117,6 +117,6 @@ class NoteServiceTest {
         assertThat(noteIdDb.getOwner()).isEqualTo(savedNote.getOwner());
         assertThat(noteIdDb.getCreationDate()).isEqualTo(savedNote.getCreationDate());
         assertThat(savedNote.getText()).isEqualTo(updatedNote.getText());
-        assertThat(savedNote.getOrder()).isEqualTo(updatedNote.getOrder());
+        assertThat(savedNote.getDisplayOrder()).isEqualTo(updatedNote.getDisplayOrder());
     }
 }

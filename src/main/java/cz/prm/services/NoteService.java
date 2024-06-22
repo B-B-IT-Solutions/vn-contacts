@@ -38,7 +38,7 @@ public class NoteService {
 
     public void createNote(Note note) {
         var order = getNoteOrder(note.getContactId());
-        note.setOrder(order);
+        note.setDisplayOrder(order);
         repository.save(note);
     }
 
@@ -50,7 +50,7 @@ public class NoteService {
 
     private void updateNoteFields(Note savedNote, Note updatedNote) {
         savedNote.setText(updatedNote.getText());
-        savedNote.setOrder(updatedNote.getOrder());
+        savedNote.setDisplayOrder(updatedNote.getDisplayOrder());
     }
 
     private Note getNoteById(Long noteId) {
