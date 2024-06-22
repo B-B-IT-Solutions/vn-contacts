@@ -37,7 +37,7 @@ public class NoteService {
     }
 
     public void createNote(Note note) {
-        var order = getNoteOrder(note.getContactId());
+        var order = generateDisplayOrder(note.getContactId());
         note.setDisplayOrder(order);
         repository.save(note);
     }
@@ -59,7 +59,7 @@ public class NoteService {
         return optional.orElseThrow(entityNotFoundSupplier(noteId));
     }
 
-    private long getNoteOrder(Long contactId) {
+    private long generateDisplayOrder(Long contactId) {
         var predicate = predicates.byContactId(contactId);
         var notesCount = repository.count(predicate);
         return notesCount + 1;
