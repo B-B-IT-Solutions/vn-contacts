@@ -279,4 +279,37 @@ public class NoteComponentTest extends NoteComponentTestBase {
         user1UpdateNoteExpectNotFound(noteId, updateDto);
         user2UpdateNoteExpectNotFound(noteId, updateDto);
     }
+
+    @Test
+    void deleteNote() {
+        var note = createNote(USER_1);
+        var noteId = note.getNoteId();
+        var noteDto = user1GetNote(noteId);
+        assertNote(note, noteDto);
+
+        user2DeleteNoteExpectNotFound(noteId);
+        user3DeleteNoteExpectNotFound(noteId);
+        user1DeleteNote(noteId);
+        user1GetNoteExpectNotFound(noteId);
+
+        note = createNote(USER_2);
+        noteId = note.getNoteId();
+        noteDto = user2GetNote(noteId);
+        assertNote(note, noteDto);
+
+        user1DeleteNoteExpectNotFound(noteId);
+        user3DeleteNoteExpectNotFound(noteId);
+        user2DeleteNote(noteId);
+        user2GetNoteExpectNotFound(noteId);
+
+        note = createNote(USER_3);
+        noteId = note.getNoteId();
+        noteDto = user3GetNote(noteId);
+        assertNote(note, noteDto);
+
+        user1DeleteNoteExpectNotFound(noteId);
+        user2DeleteNoteExpectNotFound(noteId);
+        user3DeleteNote(noteId);
+        user3GetNoteExpectNotFound(noteId);
+    }
 }

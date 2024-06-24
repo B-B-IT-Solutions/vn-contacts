@@ -120,6 +120,28 @@ class NoteServiceTest {
         assertThrows(EntityNotFoundException.class, () -> noteService.updateNote(noteIdDb.getNoteId(), updatedNote));
     }
 
+    @Test
+    void deleteNote() {
+        var noteIdDb = note();
+        var noteId = noteIdDb.getNoteId();
+        var predicate = new BooleanBuilder();
+        when(predicates.byNoteId(noteId)).thenReturn(predicate);
+        when(repository.findOne(predicate)).thenReturn(of(noteIdDb));
+
+        noteService.deleteNote(noteId);
+        verify(repository).deleteById(noteId);
+    }
+
+    @Test
+    void deleteNote_EntityNotFound() {
+        var noteIdDb = note();
+        var noteId = noteIdDb.getNoteId();
+        var predicate = new BooleanBuilder();
+        when(predicates.byNoteId(noteId)).thenReturn(predicate);
+        when(repository.findOne(predicate)).thenReturn(empty());
+        assertThrows(EntityNotFoundException.class, () -> noteService.deleteNote(noteId));
+    }
+
     private static void assertFieldsUpdated(Note noteIdDb, Note updatedNote, Note savedNote) {
         assertThat(noteIdDb.getNoteId()).isEqualTo(savedNote.getNoteId());
         assertThat(noteIdDb.getContactId()).isEqualTo(savedNote.getContactId());

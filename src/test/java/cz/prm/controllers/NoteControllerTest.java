@@ -85,4 +85,11 @@ class NoteControllerTest {
         var note = noteCapt.getValue();
         assertNote(note, dto);
     }
+
+    @Test
+    void deleteNote() {
+        var noteId = randomLong();
+        controller.deleteNote(noteId);
+        verify(noteService).deleteNote(noteId);
+    }
 }
