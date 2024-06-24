@@ -28,25 +28,30 @@ public class NoteController {
     @GetMapping("/contact/{contactId}")
     public PageDto<NoteDto> getNotes(@PathVariable("contactId") Long contactId, NotesQueryDto queryDto) {
         var query = mapper.toNullSafeNotesQuery(queryDto);
-        var contacts = noteService.getNotes(contactId, query);
-        return mapper.toPageDto(contacts);
+        var notes = noteService.getNotes(contactId, query);
+        return mapper.toPageDto(notes);
     }
 
     @GetMapping("/note/{noteId}")
     public NoteDto getNote(@PathVariable("noteId") Long noteId) {
-        var contact = noteService.getNote(noteId);
-        return mapper.toContactDto(contact);
+        var note = noteService.getNote(noteId);
+        return mapper.toContactDto(note);
     }
 
     @PostMapping("/note")
     public void createNote(@RequestBody NoteDto dto) {
-        var contact = mapper.toNote(dto);
-        noteService.createNote(contact);
+        var note = mapper.toNote(dto);
+        noteService.createNote(note);
     }
 
     @PutMapping("/note/{noteId}")
     public void updateNote(@PathVariable("noteId") Long noteId, @RequestBody NoteDto dto) {
-        var contact = mapper.toNote(dto);
-        noteService.updateNote(noteId, contact);
+        var note = mapper.toNote(dto);
+        noteService.updateNote(noteId, note);
+    }
+
+    @PutMapping("/note/{noteId}")
+    public void deleteNote(@PathVariable("noteId") Long noteId) {
+        noteService.deleteNote(noteId);
     }
 }

@@ -48,6 +48,11 @@ public class NoteService {
         repository.save(savedNote);
     }
 
+    public void deleteNote(Long noteId) {
+        var savedNote = getNoteById(noteId);
+        repository.deleteById(savedNote.getNoteId());
+    }
+
     private void updateNoteFields(Note savedNote, Note updatedNote) {
         savedNote.setText(updatedNote.getText());
         savedNote.setDisplayOrder(updatedNote.getDisplayOrder());
