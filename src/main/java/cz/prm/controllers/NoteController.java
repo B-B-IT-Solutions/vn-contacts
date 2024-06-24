@@ -5,6 +5,7 @@ import cz.prm.controllers.dto.note.NoteDto;
 import cz.prm.controllers.dto.note.query.NotesQueryDto;
 import cz.prm.controllers.mappers.NoteMapper;
 import cz.prm.services.NoteService;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,7 +51,7 @@ public class NoteController {
         noteService.updateNote(noteId, note);
     }
 
-    @PutMapping("/note/{noteId}")
+    @DeleteMapping("/note/{noteId}")
     public void deleteNote(@PathVariable("noteId") Long noteId) {
         noteService.deleteNote(noteId);
     }

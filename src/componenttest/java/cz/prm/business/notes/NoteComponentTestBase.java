@@ -44,6 +44,18 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
         updateNote(noteId, dto, USER_3);
     }
 
+    protected void user1DeleteNote(Long noteId) {
+        deleteNote(noteId, USER_1);
+    }
+
+    protected void user2DeleteNote(Long noteId) {
+        deleteNote(noteId, USER_2);
+    }
+
+    protected void user3DeleteNote(Long noteId) {
+        deleteNote(noteId, USER_3);
+    }
+
     protected PageDto<NoteDto> user1GetNotes(Long contactId, NotesQueryDto queryDto) {
         return getNotesPage(contactId, queryDto, USER_1);
     }
@@ -77,6 +89,11 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
         put(url, user, dto);
     }
 
+    protected void deleteNote(Long noteId, ComponentTestUser user) {
+        var url = format(NOTE_BY_ID_URL, noteId);
+        delete(url, user);
+    }
+
     protected PageDto<NoteDto> getNotesPage(Long contactId, NotesQueryDto queryDto, ComponentTestUser user) {
         var baseURl = format(CONTACT_NOTES_URL, contactId);
         var url = appendQueryToUrl(baseURl, queryDto);
@@ -104,6 +121,18 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
         updateNoteExpectNotFound(noteId, dto, USER_3);
     }
 
+    protected void user1DeleteNoteExpectNotFound(Long noteId) {
+        deleteNoteExpectNotFound(noteId, USER_1);
+    }
+
+    protected void user2DeleteNoteExpectNotFound(Long noteId) {
+        deleteNoteExpectNotFound(noteId, USER_2);
+    }
+
+    protected void user3DeleteNoteExpectNotFound(Long noteId) {
+        deleteNoteExpectNotFound(noteId, USER_3);
+    }
+
     protected void user1GetNoteExpectNotFound(Long noteId) {
         getNoteExpectNotFound(noteId, USER_1);
     }
@@ -119,6 +148,11 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
     protected void updateNoteExpectNotFound(Long noteId, NoteDto dto, ComponentTestUser user) {
         var url = format(NOTE_BY_ID_URL, noteId);
         putExpectNotFound(url, user, dto);
+    }
+
+    protected void deleteNoteExpectNotFound(Long noteId, ComponentTestUser user) {
+        var url = format(NOTE_BY_ID_URL, noteId);
+        deleteExpectNotFound(url, user);
     }
 
     protected void getNoteExpectNotFound(Long noteId, ComponentTestUser user) {

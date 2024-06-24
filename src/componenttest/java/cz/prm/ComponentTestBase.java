@@ -72,6 +72,10 @@ public abstract class ComponentTestBase {
         given().spec(requestSpec(body, user)).expect().log().ifError().when().put(url).then().assertThat().statusCode(OK.value());
     }
 
+    protected void delete(String url, ComponentTestUser user) {
+        given().spec(requestSpec(user)).expect().log().ifError().when().delete(url).then().assertThat().statusCode(OK.value());
+    }
+
     protected <T> T getOne(String url, ComponentTestUser user, TypeRef<T> type) {
         return given().spec(requestSpec(user)).expect().log().ifError().when().get(url).then().assertThat().statusCode(OK.value()).extract().as(type);
     }
@@ -84,12 +88,20 @@ public abstract class ComponentTestBase {
         putExpectStatus(url, user, body, HttpStatus.NOT_FOUND);
     }
 
+    protected void deleteExpectNotFound(String url, ComponentTestUser user) {
+        deleteExpectStatus(url, user, HttpStatus.NOT_FOUND);
+    }
+
     protected void getExpectNotFound(String url, ComponentTestUser user) {
         getExpectStatus(url, user, HttpStatus.NOT_FOUND);
     }
 
     protected <T> void putExpectStatus(String url, ComponentTestUser user, T body, HttpStatus status) {
         given().spec(requestSpec(body, user)).expect().when().put(url).then().statusCode(status.value());
+    }
+
+    protected void deleteExpectStatus(String url, ComponentTestUser user, HttpStatus status) {
+        given().spec(requestSpec(user)).expect().when().delete(url).then().statusCode(status.value());
     }
 
     protected void getExpectStatus(String url, ComponentTestUser user, HttpStatus status) {
