@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 class NotesQueryTest {
 
-    private static final String DEFAULT_NOTES_SORT = "asc(displayOrder)";
+    private static final String DEFAULT_NOTES_SORT = "desc(displayOrder)";
 
     @Test
     void newInstance() {

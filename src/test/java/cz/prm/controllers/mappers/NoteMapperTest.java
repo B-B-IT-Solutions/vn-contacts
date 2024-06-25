@@ -79,7 +79,7 @@ class NoteMapperTest {
 
     private void assertNullSafeNoteQuery(NotesQuery query) {
         assertThat(query.getPagination()).isNotNull();
-        assertThat(query.getSort()).isEqualTo("asc(displayOrder)");
+        assertThat(query.getSort()).isEqualTo("desc(displayOrder)");
         var pagination = query.getPagination();
         assertThat(pagination.getPageNumber()).isZero();
         assertThat(pagination.getPageSize()).isEqualTo(DEFAULT_PAGE_SIZE);
