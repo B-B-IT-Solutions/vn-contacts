@@ -12,10 +12,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @EntityListeners(AuditingEntityListener.class)
@@ -54,4 +57,12 @@ public class Contact {
         @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))
     })
     private User owner;
+
+    @LastModifiedDate
+    @Column(name = "LAST_EDIT_DATE")
+    private Instant lastEditDate;
+
+    @CreatedDate
+    @Column(name = "CREATION_DATE")
+    private Instant creationDate;
 }

@@ -5,6 +5,7 @@ import static cz.prm.utils.CommonUtils.paginationDto;
 import static cz.prm.utils.CommonUtils.user;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
+import static java.time.Instant.now;
 import static org.assertj.core.util.Lists.newArrayList;
 
 import cz.prm.controllers.dto.contact.ContactDto;
@@ -30,6 +31,8 @@ public class ContactUtils {
         contact.setNickName(uuid());
         contact.setEmail(uuid());
         contact.setOwner(user());
+        contact.setLastEditDate(now());
+        contact.setCreationDate(now());
         return contact;
     }
 
@@ -41,6 +44,8 @@ public class ContactUtils {
         contact.setLastName(uuid());
         contact.setNickName(uuid());
         contact.setEmail(uuid());
+        contact.setLastEditDate(now());
+        contact.setCreationDate(now());
         return contact;
     }
 
