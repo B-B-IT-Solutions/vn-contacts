@@ -83,17 +83,8 @@ class NoteServiceTest {
     @Test
     void createNote() {
         var note = note();
-        var notesCount = randomLong();
-        var predicate = new BooleanBuilder();
-
-        when(predicates.byContactId(note.getContactId())).thenReturn(predicate);
-        when(repository.count(predicate)).thenReturn(notesCount);
-
         noteService.createNote(note);
-        verify(repository).save(noteCapt.capture());
-        var createdNote = noteCapt.getValue();
-        var expectedDisplayOrder = notesCount + 1;
-        assertThat(createdNote.getDisplayOrder()).isEqualTo(expectedDisplayOrder);
+        verify(repository).save(note);
     }
 
     @Test
@@ -148,6 +139,5 @@ class NoteServiceTest {
         assertThat(noteIdDb.getOwner()).isEqualTo(savedNote.getOwner());
         assertThat(noteIdDb.getCreationDate()).isEqualTo(savedNote.getCreationDate());
         assertThat(savedNote.getText()).isEqualTo(updatedNote.getText());
-        assertThat(savedNote.getDisplayOrder()).isEqualTo(updatedNote.getDisplayOrder());
     }
 }
