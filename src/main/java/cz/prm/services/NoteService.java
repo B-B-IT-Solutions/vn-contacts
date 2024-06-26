@@ -37,8 +37,6 @@ public class NoteService {
     }
 
     public void createNote(Note note) {
-        var order = generateDisplayOrder(note.getContactId());
-        note.setDisplayOrder(order);
         repository.save(note);
     }
 
@@ -55,19 +53,12 @@ public class NoteService {
 
     private void updateNoteFields(Note savedNote, Note updatedNote) {
         savedNote.setText(updatedNote.getText());
-        savedNote.setDisplayOrder(updatedNote.getDisplayOrder());
     }
 
     private Note getNoteById(Long noteId) {
         var predicate = predicates.byNoteId(noteId);
         var optional = repository.findOne(predicate);
         return optional.orElseThrow(entityNotFoundSupplier(noteId));
-    }
-
-    private long generateDisplayOrder(Long contactId) {
-        var predicate = predicates.byContactId(contactId);
-        var notesCount = repository.count(predicate);
-        return notesCount + 1;
     }
 
     private Supplier<EntityNotFoundException> entityNotFoundSupplier(Long userId) {

@@ -133,7 +133,7 @@ public class NoteComponentTest extends NoteComponentTestBase {
         pageDto = user1GetNotes(contactId, queryDto);
         var actual = pageDto.getContent();
         var expected = newArrayList(actual);
-        sort(expected, comparing(NoteDto::getDisplayOrder));
+        sort(expected, comparing(NoteDto::getCreationDate).reversed());
         assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
 
         queryDto = notesQueryDto();
