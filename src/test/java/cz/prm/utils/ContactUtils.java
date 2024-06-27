@@ -5,6 +5,7 @@ import static cz.prm.utils.CommonUtils.paginationDto;
 import static cz.prm.utils.CommonUtils.user;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
+import static cz.prm.utils.TestUtils.uuids;
 import static java.time.Instant.now;
 import static org.assertj.core.util.Lists.newArrayList;
 
@@ -30,7 +31,11 @@ public class ContactUtils {
         contact.setLastName(uuid());
         contact.setNickName(uuid());
         contact.setEmail(uuid());
+        contact.setProfessions(uuid());
+        contact.setIndustries(uuid());
+        contact.setLabels(uuids());
         contact.setOwner(user());
+        contact.setDateOfBirth(now());
         contact.setLastEditDate(now());
         contact.setCreationDate(now());
         return contact;
@@ -44,6 +49,10 @@ public class ContactUtils {
         contact.setLastName(uuid());
         contact.setNickName(uuid());
         contact.setEmail(uuid());
+        contact.setProfessions(uuid());
+        contact.setIndustries(uuid());
+        contact.setLabels(uuids());
+        contact.setDateOfBirth(now());
         contact.setLastEditDate(now());
         contact.setCreationDate(now());
         return contact;

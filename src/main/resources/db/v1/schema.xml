@@ -19,10 +19,18 @@
 				 <column name="last_name" type="VARCHAR(255)"/>
 				 <column name="nick_name" type="VARCHAR(255)"/>
 				 <column name="email" type="VARCHAR(255)"/>
+				 <column name="professions" type="VARCHAR(1000)"/>
+				 <column name="industries" type="VARCHAR(1000)"/>
 				 <column name="owner_username" type="VARCHAR(255)"/>
 				 <column name="owner_email" type="VARCHAR(255)"/>
+				 <column name="date_of_birth" type="TIMESTAMP WITH TIME ZONE"/>
 				 <column name="last_edit_date" type="TIMESTAMP WITH TIME ZONE"/>
 				 <column name="creation_date" type="TIMESTAMP WITH TIME ZONE"/>
+			</createTable>
+			
+			<createTable tableName="contact_label">
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="LABEL" type="VARCHAR(250)"/>
 			</createTable>
 	 </changeSet>
 	 

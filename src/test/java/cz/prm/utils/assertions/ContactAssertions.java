@@ -23,11 +23,7 @@ public class ContactAssertions {
         assertThat(page.getTotalElements()).isEqualTo(pageDto.getTotalElements());
         assertThat(page.getPageSize()).isEqualTo(pageDto.getPageSize());
         assertThat(page.getPageNumber()).isEqualTo(pageDto.getPageNumber());
-        assertThat(page.getContent()).isNotEmpty().hasSameSizeAs(pageDto.getContent());
-        page.getContent().forEach(contact -> {
-            var dto = pageDto.getContent().stream().filter(c -> Objects.equals(contact.getContactId(), c.getContactId())).findFirst().get();
-            assertContact(contact, dto);
-        });
+        assertContactsDto(page.getContent(), pageDto.getContent());
     }
 
     public static void assertPage(Page<Contact> page1, PageImpl<Contact> page2) {
@@ -36,11 +32,7 @@ public class ContactAssertions {
         assertThat(page1.getTotalElements()).isEqualTo(page2.getTotalElements());
         assertThat(page1.getPageSize()).isEqualTo(page2.getSize());
         assertThat(page1.getPageNumber()).isEqualTo(page2.getNumber());
-        assertThat(page1.getContent()).isNotEmpty().hasSameSizeAs(page2.getContent());
-        page1.getContent().forEach(contact1 -> {
-            var contact2 = page2.getContent().stream().filter(c -> Objects.equals(contact1.getContactId(), c.getContactId())).findFirst().get();
-            assertContact(contact1, contact2);
-        });
+        assertContacts(page1.getContent(), page2.getContent());
     }
 
     public static void assertContacts(List<Contact> contacts1, List<Contact> contacts2) {
@@ -66,7 +58,11 @@ public class ContactAssertions {
         assertThat(contact1.getLastName()).isEqualTo(contact2.getLastName());
         assertThat(contact1.getNickName()).isEqualTo(contact2.getNickName());
         assertThat(contact1.getEmail()).isEqualTo(contact2.getEmail());
+        assertThat(contact1.getProfessions()).isEqualTo(contact2.getProfessions());
+        assertThat(contact1.getIndustries()).isEqualTo(contact2.getIndustries());
+        assertThat(contact1.getLabels()).containsExactlyElementsOf(contact2.getLabels());
         assertThat(contact1.getOwner()).isEqualTo(contact2.getOwner());
+        assertThat(contact1.getDateOfBirth()).isEqualTo(contact2.getDateOfBirth());
         assertThat(contact1.getLastEditDate()).isEqualTo(contact2.getLastEditDate());
         assertThat(contact1.getCreationDate()).isEqualTo(contact2.getCreationDate());
     }
@@ -78,6 +74,10 @@ public class ContactAssertions {
         assertThat(contact.getLastName()).isEqualTo(dto.getLastName());
         assertThat(contact.getNickName()).isEqualTo(dto.getNickName());
         assertThat(contact.getEmail()).isEqualTo(dto.getEmail());
+        assertThat(contact.getProfessions()).isEqualTo(dto.getProfessions());
+        assertThat(contact.getIndustries()).isEqualTo(dto.getIndustries());
+        assertThat(contact.getLabels()).containsExactlyElementsOf(dto.getLabels());
+        assertThat(contact.getDateOfBirth()).isEqualTo(dto.getDateOfBirth());
         assertThat(contact.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(contact.getCreationDate()).isEqualTo(dto.getCreationDate());
     }

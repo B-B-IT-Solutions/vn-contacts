@@ -1,6 +1,8 @@
 package cz.prm.utils.assertions;
 
+import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.ContactDto;
@@ -24,11 +26,15 @@ public class ContractComponentTestAssertions {
 
     public static void assertContact(Contact contact, ContactDto contactDto) {
         assertThat(contact.getContactId()).isEqualTo(contactDto.getContactId());
-        assertThat(contact.getEmail()).isEqualTo(contactDto.getEmail());
         assertThat(contact.getFirstName()).isEqualTo(contactDto.getFirstName());
         assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
         assertThat(contact.getLastName()).isEqualTo(contactDto.getLastName());
         assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
+        assertThat(contact.getEmail()).isEqualTo(contactDto.getEmail());
+        assertThat(contact.getProfessions()).isEqualTo(contactDto.getProfessions());
+        assertThat(contact.getIndustries()).isEqualTo(contactDto.getIndustries());
+        assertThat(contact.getLabels()).containsExactlyElementsOf(contactDto.getLabels());
+        assertThat(contact.getDateOfBirth()).isCloseTo(contactDto.getDateOfBirth(), within(1, SECONDS));
         assertThat(contact.getLastEditDate()).isNotNull();
         assertThat(contact.getCreationDate()).isNotNull();
     }

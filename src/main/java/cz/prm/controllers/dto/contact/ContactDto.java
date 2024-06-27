@@ -2,6 +2,7 @@ package cz.prm.controllers.dto.contact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,18 @@ public class ContactDto {
 
     @JsonProperty("email")
     private String email;
+
+    @JsonProperty("professions")
+    private String professions;
+
+    @JsonProperty("industries")
+    private String industries;
+
+    @JsonProperty("labels")
+    private List<String> labels;
+
+    @JsonProperty("dateOfBirth")
+    private Instant dateOfBirth;
 
     @JsonProperty("lastEditDate")
     private Instant lastEditDate;

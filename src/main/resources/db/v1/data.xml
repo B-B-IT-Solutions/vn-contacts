@@ -9,10 +9,33 @@
 				 <column name="first_name" value="Sergej"/>
 				 <column name="last_name" value="Bobusky"/>
 				 <column name="email" value="bobuskysergej@gmail.com"/>
+				 <column name="professions" value="Entrepreneur, Software Engineer,Warrior"/>
+				 <column name="industries" value="IT,life,martial arts"/>
+				 <column name="date_of_birth" value="19 May 1989 00:00:00 GMT"/>
 				 <column name="owner_username" value="bobuskysergej"/>
 				 <column name="owner_email" value="bobuskysergej"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
 				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+			</insert>
+			
+			<insert tableName="contact_label">
+				 <column name="contact_id" value="1"/>
+				 <column name="label" value="warrior"/>
+			</insert>
+			
+			<insert tableName="contact_label">
+				 <column name="contact_id" value="1"/>
+				 <column name="label" value="lion"/>
+			</insert>
+			
+			<insert tableName="contact_label">
+				 <column name="contact_id" value="1"/>
+				 <column name="label" value="sheepdog"/>
+			</insert>
+			
+			<insert tableName="contact_label">
+				 <column name="contact_id" value="1"/>
+				 <column name="label" value="unbeatable"/>
 			</insert>
 			
 			<insert tableName="contact">

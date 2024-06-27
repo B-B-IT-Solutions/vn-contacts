@@ -1,18 +1,24 @@
 package cz.prm.domain.contact;
 
+import static jakarta.persistence.FetchType.EAGER;
+
 import cz.prm.domain.common.User;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.time.Instant;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,6 +55,20 @@ public class Contact {
 
     @Column(name = "EMAIL")
     private String email;
+
+    @Column(name = "PROFESSIONS")
+    private String professions;
+
+    @Column(name = "INDUSTRIES")
+    private String industries;
+
+    @ElementCollection(fetch = EAGER)
+    @CollectionTable(name = "CONTACT_LABEL", joinColumns = @JoinColumn(name = "CONTACT_ID"))
+    @Column(name = "LABEL")
+    private List<String> labels;
+
+    @Column(name = "DATE_OF_BIRTH")
+    private Instant dateOfBirth;
 
     @CreatedBy
     @Embedded
