@@ -50,8 +50,8 @@ public class Contact {
     @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "PROFESSION")
-    private String profession;
+    @Column(name = "PROFESSIONS")
+    private String professions;
 
     @CreatedBy
     @Embedded

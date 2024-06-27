@@ -29,7 +29,7 @@ public class ContractComponentTestAssertions {
         assertThat(contact.getLastName()).isEqualTo(contactDto.getLastName());
         assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
         assertThat(contact.getEmail()).isEqualTo(contactDto.getEmail());
-        assertThat(contact.getProfession()).isEqualTo(contactDto.getProfession());
+        assertThat(contact.getProfessions()).isEqualTo(contactDto.getProfessions());
         assertThat(contact.getLastEditDate()).isNotNull();
         assertThat(contact.getCreationDate()).isNotNull();
     }
