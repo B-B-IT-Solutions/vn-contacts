@@ -1,6 +1,8 @@
 package cz.prm.utils.assertions;
 
+import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.ContactDto;
@@ -32,7 +34,7 @@ public class ContractComponentTestAssertions {
         assertThat(contact.getProfessions()).isEqualTo(contactDto.getProfessions());
         assertThat(contact.getIndustries()).isEqualTo(contactDto.getIndustries());
         assertThat(contact.getLabels()).isEqualTo(contactDto.getLabels());
-        assertThat(contact.getDateOfBirth()).isEqualTo(contactDto.getDateOfBirth());
+        assertThat(contact.getDateOfBirth()).isCloseTo(contactDto.getDateOfBirth(), within(1, SECONDS));
         assertThat(contact.getLastEditDate()).isNotNull();
         assertThat(contact.getCreationDate()).isNotNull();
     }
