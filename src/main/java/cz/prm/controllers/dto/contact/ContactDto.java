@@ -29,6 +29,9 @@ public class ContactDto {
     @JsonProperty("email")
     private String email;
 
+    @JsonProperty("profession")
+    private String profession;
+
     @JsonProperty("lastEditDate")
     private Instant lastEditDate;
 

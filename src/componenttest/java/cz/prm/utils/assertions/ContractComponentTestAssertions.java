@@ -24,11 +24,12 @@ public class ContractComponentTestAssertions {
 
     public static void assertContact(Contact contact, ContactDto contactDto) {
         assertThat(contact.getContactId()).isEqualTo(contactDto.getContactId());
-        assertThat(contact.getEmail()).isEqualTo(contactDto.getEmail());
         assertThat(contact.getFirstName()).isEqualTo(contactDto.getFirstName());
         assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
         assertThat(contact.getLastName()).isEqualTo(contactDto.getLastName());
         assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
+        assertThat(contact.getEmail()).isEqualTo(contactDto.getEmail());
+        assertThat(contact.getProfession()).isEqualTo(contactDto.getProfession());
         assertThat(contact.getLastEditDate()).isNotNull();
         assertThat(contact.getCreationDate()).isNotNull();
     }

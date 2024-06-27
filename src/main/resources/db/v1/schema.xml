@@ -19,6 +19,7 @@
 				 <column name="last_name" type="VARCHAR(255)"/>
 				 <column name="nick_name" type="VARCHAR(255)"/>
 				 <column name="email" type="VARCHAR(255)"/>
+				 <column name="profession" type="VARCHAR(500)"/>
 				 <column name="owner_username" type="VARCHAR(255)"/>
 				 <column name="owner_email" type="VARCHAR(255)"/>
 				 <column name="last_edit_date" type="TIMESTAMP WITH TIME ZONE"/>
