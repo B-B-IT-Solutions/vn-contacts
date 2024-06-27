@@ -12,7 +12,7 @@
 				 <column name="professions" value="Entrepreneur, Software Engineer,Warrior"/>
 				 <column name="industries" value="IT,life,martial arts"/>
 				 <column name="labels" value="warrior,lion,sheepdog,unbeatable"/>
-				 <column name="dateOfBirth" value="19 May 1989 00:00:00 GMT"/>
+				 <column name="date_of_birth" value="19 May 1989 00:00:00 GMT"/>
 				 <column name="owner_username" value="bobuskysergej"/>
 				 <column name="owner_email" value="bobuskysergej"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
