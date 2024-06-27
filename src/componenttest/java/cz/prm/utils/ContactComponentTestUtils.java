@@ -25,6 +25,7 @@ public class ContactComponentTestUtils {
         contact.setNickName(format("Nick%s", uuid()));
         contact.setEmail(format("email%s", uuid()));
         contact.setProfessions(format("professions%s", uuid()));
+        contact.setIndustries(format("industries%s", uuid()));
         return contact;
     }
 
@@ -36,6 +37,7 @@ public class ContactComponentTestUtils {
         dto.setNickName(uuid());
         dto.setEmail(uuid());
         dto.setProfessions(uuid());
+        dto.setIndustries(uuid());
         return dto;
     }
 

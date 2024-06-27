@@ -67,6 +67,7 @@ public class ContactAssertions {
         assertThat(contact1.getNickName()).isEqualTo(contact2.getNickName());
         assertThat(contact1.getEmail()).isEqualTo(contact2.getEmail());
         assertThat(contact1.getProfessions()).isEqualTo(contact2.getProfessions());
+        assertThat(contact1.getIndustries()).isEqualTo(contact2.getIndustries());
         assertThat(contact1.getOwner()).isEqualTo(contact2.getOwner());
         assertThat(contact1.getLastEditDate()).isEqualTo(contact2.getLastEditDate());
         assertThat(contact1.getCreationDate()).isEqualTo(contact2.getCreationDate());
@@ -80,6 +81,7 @@ public class ContactAssertions {
         assertThat(contact.getNickName()).isEqualTo(dto.getNickName());
         assertThat(contact.getEmail()).isEqualTo(dto.getEmail());
         assertThat(contact.getProfessions()).isEqualTo(dto.getProfessions());
+        assertThat(contact.getIndustries()).isEqualTo(dto.getIndustries());
         assertThat(contact.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(contact.getCreationDate()).isEqualTo(dto.getCreationDate());
     }

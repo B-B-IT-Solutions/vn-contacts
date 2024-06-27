@@ -53,6 +53,9 @@ public class Contact {
     @Column(name = "PROFESSIONS")
     private String professions;
 
+    @Column(name = "INDUSTRIES")
+    private String industries;
+
     @CreatedBy
     @Embedded
     @AttributeOverrides({
