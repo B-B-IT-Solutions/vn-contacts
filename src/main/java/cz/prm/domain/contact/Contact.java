@@ -59,6 +59,9 @@ public class Contact {
     @Column(name = "LABELS")
     private String labels;
 
+    @Column(name = "DATE_OF_BIRTH")
+    private Instant dateOfBirth;
+
     @CreatedBy
     @Embedded
     @AttributeOverrides({

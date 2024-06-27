@@ -32,6 +32,7 @@ public class ContractComponentTestAssertions {
         assertThat(contact.getProfessions()).isEqualTo(contactDto.getProfessions());
         assertThat(contact.getIndustries()).isEqualTo(contactDto.getIndustries());
         assertThat(contact.getLabels()).isEqualTo(contactDto.getLabels());
+        assertThat(contact.getDateOfBirth()).isEqualTo(contactDto.getDateOfBirth());
         assertThat(contact.getLastEditDate()).isNotNull();
         assertThat(contact.getCreationDate()).isNotNull();
     }

@@ -38,6 +38,9 @@ public class ContactDto {
     @JsonProperty("labels")
     private String labels;
 
+    @JsonProperty("dateOfBirth")
+    private Instant dateOfBirth;
+
     @JsonProperty("lastEditDate")
     private Instant lastEditDate;
 
