@@ -35,6 +35,9 @@ public class ContactDto {
     @JsonProperty("industries")
     private String industries;
 
+    @JsonProperty("labels")
+    private String labels;
+
     @JsonProperty("lastEditDate")
     private Instant lastEditDate;
 

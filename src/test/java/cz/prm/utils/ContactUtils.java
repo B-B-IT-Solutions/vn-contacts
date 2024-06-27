@@ -32,6 +32,7 @@ public class ContactUtils {
         contact.setEmail(uuid());
         contact.setProfessions(uuid());
         contact.setIndustries(uuid());
+        contact.setLabels(uuid());
         contact.setOwner(user());
         contact.setLastEditDate(now());
         contact.setCreationDate(now());
@@ -48,6 +49,7 @@ public class ContactUtils {
         contact.setEmail(uuid());
         contact.setProfessions(uuid());
         contact.setIndustries(uuid());
+        contact.setLabels(uuid());
         contact.setLastEditDate(now());
         contact.setCreationDate(now());
         return contact;
