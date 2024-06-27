@@ -1,6 +1,7 @@
 package cz.prm.utils;
 
 import static cz.prm.utils.ComponentTestUtils.uuid;
+import static cz.prm.utils.ComponentTestUtils.uuids;
 import static java.lang.String.format;
 import static java.time.Instant.now;
 import static org.assertj.core.util.Lists.newArrayList;
@@ -10,7 +11,6 @@ import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.Contact;
-import java.time.Instant;
 import java.util.List;
 
 public class ContactComponentTestUtils {
@@ -28,7 +28,7 @@ public class ContactComponentTestUtils {
         contact.setEmail(format("email%s", uuid()));
         contact.setProfessions(format("professions%s", uuid()));
         contact.setIndustries(format("industries%s", uuid()));
-        contact.setLabels(format("labels%s", uuid()));
+        contact.setLabels(uuids());
         contact.setDateOfBirth(now());
         return contact;
     }
@@ -42,7 +42,7 @@ public class ContactComponentTestUtils {
         dto.setEmail(uuid());
         dto.setProfessions(uuid());
         dto.setIndustries(uuid());
-        dto.setLabels(uuid());
+        dto.setLabels(uuids());
         dto.setDateOfBirth(now());
         return dto;
     }

@@ -4,7 +4,10 @@ import static java.lang.Math.abs;
 import static java.lang.String.format;
 import static java.util.UUID.randomUUID;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.range;
 
+import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -14,6 +17,14 @@ public class ComponentTestUtils {
 
     public static Long randomLong() {
         return abs(random.nextLong());
+    }
+
+    public static List<String> uuids() {
+        return uuids(3);
+    }
+
+    public static List<String> uuids(int count) {
+        return range(0, count).mapToObj((i) -> uuid()).collect(toList());
     }
 
     public static String uuid() {
