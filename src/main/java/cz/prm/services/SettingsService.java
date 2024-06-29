@@ -27,7 +27,9 @@ public class SettingsService {
         var optional = repository.findOne(predicate);
         if (optional.isEmpty()) {
             var settings = new Settings();
-            return repository.saveAndFlush(settings);
+            var savedSettings = repository.saveAndFlush(settings);
+            repository.refresh(savedSettings);
+            return savedSettings;
         }
         return optional.get();
     }

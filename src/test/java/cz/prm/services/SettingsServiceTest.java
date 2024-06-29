@@ -6,6 +6,7 @@ import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
@@ -53,5 +54,6 @@ class SettingsServiceTest {
 
         var result = settingsService.getSettings();
         assertThat(result).isNotNull();
+        verify(repository).refresh(result);
     }
 }

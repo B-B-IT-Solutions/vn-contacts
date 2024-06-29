@@ -1,5 +1,7 @@
 package cz.prm.business.settings;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cz.prm.controllers.dto.settings.SettingsDto;
 import cz.prm.utils.assertions.SettingsComponentTestAssertions;
 import org.junit.jupiter.api.Test;
@@ -8,18 +10,24 @@ public class SettingsComponentTest extends SettingsComponentTestBase {
 
     @Test
     void getSettings() {
-        var settingsDto = user1GetSettings();
-        assertSettings(settingsDto);
+        var dto_1 = user1GetSettings();
+        assertSettings(dto_1);
+        var dto_2 = user1GetSettings();
+        assertThat(dto_1).isEqualTo(dto_2);
 
-        settingsDto = user2GetSettings();
-        assertSettings(settingsDto);
+        dto_1 = user2GetSettings();
+        assertSettings(dto_1);
+        dto_2 = user2GetSettings();
+        assertThat(dto_1).isEqualTo(dto_2);
 
-        settingsDto = user3GetSettings();
-        assertSettings(settingsDto);
+        dto_1 = user3GetSettings();
+        assertSettings(dto_1);
+        dto_2 = user3GetSettings();
+        assertThat(dto_1).isEqualTo(dto_2);
     }
 
     private void assertSettings(SettingsDto dto) {
-        var settings = settingsRepository.getById(dto.getSettingsId());
+        var settings = getSettingsFromDb(dto);
         SettingsComponentTestAssertions.assertSettings(settings, dto);
     }
 }
