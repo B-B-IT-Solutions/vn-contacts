@@ -311,7 +311,6 @@
 				 <column name="settings_id" value="1"/>
 				 <column name="owner_username" value="bobuskysergej"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
-				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
 			</insert>
 			
 			<insert tableName="settings_label">
