@@ -11,6 +11,7 @@ import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.note.NoteDto;
 import cz.prm.custom.ComponentTestContactRepository;
 import cz.prm.custom.ComponentTestNoteRepository;
+import cz.prm.custom.ComponentTestSettingsRepository;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.note.Note;
 import cz.prm.utils.ComponentTestUser;
@@ -25,11 +26,14 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     protected ComponentTestContactRepository contactRepository;
     @Autowired
     protected ComponentTestNoteRepository noteRepository;
+    @Autowired
+    protected ComponentTestSettingsRepository settingsRepository;
 
     @BeforeEach
     void setUp() {
         noteRepository.deleteAll();
         contactRepository.deleteAll();
+        settingsRepository.deleteAll();
     }
 
     protected List<Contact> createContacts(ComponentTestUser user) {
