@@ -3,7 +3,11 @@ package cz.prm.services;
 import cz.prm.domain.settings.Settings;
 import cz.prm.repositories.settings.SettingsPredicates;
 import cz.prm.repositories.settings.SettingsRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
+@Service
+@Transactional
 public class SettingsService {
 
     private SettingsRepository repository;
