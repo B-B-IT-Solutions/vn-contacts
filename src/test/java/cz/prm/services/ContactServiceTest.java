@@ -114,6 +114,12 @@ class ContactServiceTest {
         assertThat(contactIdDb.getOwner()).isEqualTo(savedContact.getOwner());
         assertThat(savedContact.getFirstName()).isEqualTo(updatedContact.getFirstName());
         assertThat(savedContact.getLastName()).isEqualTo(updatedContact.getLastName());
+        assertThat(savedContact.getMiddleName()).isEqualTo(updatedContact.getMiddleName());
+        assertThat(savedContact.getNickName()).isEqualTo(updatedContact.getNickName());
         assertThat(savedContact.getEmail()).isEqualTo(updatedContact.getEmail());
+        assertThat(savedContact.getDateOfBirth()).isEqualTo(updatedContact.getDateOfBirth());
+        assertThat(savedContact.getProfessions()).isEqualTo(updatedContact.getProfessions());
+        assertThat(savedContact.getIndustries()).isEqualTo(updatedContact.getIndustries());
+        assertThat(savedContact.getLabels()).isEqualTo(updatedContact.getLabels());
     }
 }
