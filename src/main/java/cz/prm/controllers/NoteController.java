@@ -36,7 +36,7 @@ public class NoteController {
     @GetMapping("/note/{noteId}")
     public NoteDto getNote(@PathVariable("noteId") Long noteId) {
         var note = noteService.getNote(noteId);
-        return mapper.toContactDto(note);
+        return mapper.toNoteDto(note);
     }
 
     @PostMapping("/note")

@@ -28,9 +28,9 @@ class NoteMapperTest {
     }
 
     @Test
-    void toContactDto() {
+    void toNoteDto() {
         var note = note();
-        var dto = mapper.toContactDto(note);
+        var dto = mapper.toNoteDto(note);
         assertNote(note, dto);
     }
 
