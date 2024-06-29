@@ -9,10 +9,13 @@ import static java.util.stream.Collectors.toList;
 import cz.prm.ComponentTestBase;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.note.NoteDto;
+import cz.prm.controllers.dto.settings.SettingsDto;
 import cz.prm.custom.ComponentTestContactRepository;
 import cz.prm.custom.ComponentTestNoteRepository;
+import cz.prm.custom.ComponentTestSettingsRepository;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.note.Note;
+import cz.prm.domain.settings.Settings;
 import cz.prm.utils.ComponentTestUser;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -25,11 +28,14 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     protected ComponentTestContactRepository contactRepository;
     @Autowired
     protected ComponentTestNoteRepository noteRepository;
+    @Autowired
+    protected ComponentTestSettingsRepository settingsRepository;
 
     @BeforeEach
     void setUp() {
         noteRepository.deleteAll();
         contactRepository.deleteAll();
+        settingsRepository.deleteAll();
     }
 
     protected List<Contact> createContacts(ComponentTestUser user) {
@@ -76,5 +82,9 @@ public class BusinessComponentTestBase extends ComponentTestBase {
 
     protected Note getNoteFromDb(NoteDto dto) {
         return noteRepository.getByText(dto.getText());
+    }
+
+    protected Settings getSettingsFromDb(SettingsDto dto) {
+        return settingsRepository.getReferenceById(dto.getSettingsId());
     }
 }

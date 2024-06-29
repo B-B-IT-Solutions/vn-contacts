@@ -1,4 +1,4 @@
-package cz.prm.repositories.contact;
+package cz.prm.repositories.note;
 
 import cz.prm.domain.note.Note;
 import cz.prm.repositories.customisations.executors.PrmQuerydslPredicateExecutor;

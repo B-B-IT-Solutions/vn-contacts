@@ -54,4 +54,24 @@
 															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
 															 referencedColumnNames="contact_id" validate="true"/>
 	 </changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.3">
+			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
+											sequenceName="settings_seq"/>
+			
+			<createTable tableName="settings">
+				 <column name="settings_id" type="BIGINT">
+						<constraints primaryKey="true" primaryKeyName="settings_pk" nullable="false"/>
+				 </column>
+				 <column name="owner_username" type="VARCHAR(255)"/>
+				 <column name="owner_email" type="VARCHAR(255)"/>
+				 <column name="last_edit_date" type="TIMESTAMP WITH TIME ZONE"/>
+			</createTable>
+			
+			<createTable tableName="settings_label">
+				 <column name="settings_id" type="BIGINT"/>
+				 <column name="value" type="VARCHAR(100)"/>
+				 <column name="color" type="VARCHAR(25)"/>
+			</createTable>
+	 </changeSet>
 </databaseChangeLog>

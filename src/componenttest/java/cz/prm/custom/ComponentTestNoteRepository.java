@@ -1,7 +1,7 @@
 package cz.prm.custom;
 
 import cz.prm.domain.note.Note;
-import cz.prm.repositories.contact.NoteRepository;
+import cz.prm.repositories.note.NoteRepository;
 import org.springframework.context.annotation.Primary;
 
 @Primary

@@ -49,7 +49,13 @@ public class ContactService {
     private void updateContactFields(Contact savedContact, Contact updatedContact) {
         savedContact.setFirstName(updatedContact.getFirstName());
         savedContact.setLastName(updatedContact.getLastName());
+        savedContact.setMiddleName(updatedContact.getMiddleName());
+        savedContact.setNickName(updatedContact.getNickName());
         savedContact.setEmail(updatedContact.getEmail());
+        savedContact.setDateOfBirth(updatedContact.getDateOfBirth());
+        savedContact.setProfessions(updatedContact.getProfessions());
+        savedContact.setIndustries(updatedContact.getIndustries());
+        savedContact.setLabels(updatedContact.getLabels());
     }
 
     private Contact getContactById(Long contactId) {

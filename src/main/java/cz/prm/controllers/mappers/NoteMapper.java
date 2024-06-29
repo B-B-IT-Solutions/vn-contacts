@@ -21,7 +21,7 @@ public interface NoteMapper {
 
     PageDto<NoteDto> toPageDto(Page<Note> notes);
 
-    NoteDto toContactDto(Note note);
+    NoteDto toNoteDto(Note note);
 
     @Mapping(target = "owner", ignore = true)
     Note toNote(NoteDto dto);
