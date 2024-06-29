@@ -1,4 +1,4 @@
-package cz.prm.repositories.contact;
+package cz.prm.repositories.note;
 
 import static cz.prm.domain.note.querydsl.QNote.note;
 import static cz.prm.security.SecurityContextUtils.getUser;

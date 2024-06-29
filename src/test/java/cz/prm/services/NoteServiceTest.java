@@ -17,8 +17,8 @@ import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.note.Note;
-import cz.prm.repositories.contact.NotePredicates;
-import cz.prm.repositories.contact.NoteRepository;
+import cz.prm.repositories.note.NotePredicates;
+import cz.prm.repositories.note.NoteRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

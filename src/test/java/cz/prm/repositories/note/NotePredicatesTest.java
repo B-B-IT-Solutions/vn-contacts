@@ -1,4 +1,4 @@
-package cz.prm.repositories.contact;
+package cz.prm.repositories.note;
 
 import static cz.prm.utils.CommonUtils.user;
 import static java.lang.String.format;
