@@ -309,16 +309,34 @@
 	 <changeSet author="sergej" id="1.0.3">
 			<insert tableName="settings">
 				 <column name="settings_id" value="1"/>
-				 <column name="first_name" value="Sergej"/>
-				 <column name="last_name" value="Bobusky"/>
-				 <column name="email" value="bobuskysergej@gmail.com"/>
-				 <column name="professions" value="Entrepreneur, Software Engineer,Warrior"/>
-				 <column name="industries" value="IT,life,martial arts"/>
-				 <column name="date_of_birth" value="19 May 1989 00:00:00 GMT"/>
 				 <column name="owner_username" value="bobuskysergej"/>
-				 <column name="owner_email" value="bobuskysergej"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
 				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
+			</insert>
+			
+			<insert tableName="settings_label">
+				 <column name="value" value="warrior"/>
+				 <column name="color" value="#f4e958"/>
+			</insert>
+			
+			<insert tableName="settings_label">
+				 <column name="value" value="lion"/>
+				 <column name="color" value="#00FF6C"/>
+			</insert>
+			
+			<insert tableName="settings_label">
+				 <column name="value" value="sheepdog"/>
+				 <column name="color" value="#00CCFF"/>
+			</insert>
+			
+			<insert tableName="settings_label">
+				 <column name="value" value="unbeatable"/>
+				 <column name="color" value="#ec2525"/>
+			</insert>
+			
+			<insert tableName="settings_label">
+				 <column name="value" value="entrepreneur"/>
+				 <column name="color"/>
 			</insert>
 	 </changeSet>
 </databaseChangeLog>
