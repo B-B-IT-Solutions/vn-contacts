@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 
 class ContactMapperTest {
 
-    public static final String DEFAULT_CONTACTS_SORT = "desc(firstName)";
+    public static final String DEFAULT_CONTACTS_SORT = "asc(firstName)";
 
     private ContactMapper mapper = MapperUtils.getContactMapper();
 
