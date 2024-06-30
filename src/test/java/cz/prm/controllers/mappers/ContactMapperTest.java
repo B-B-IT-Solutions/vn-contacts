@@ -20,6 +20,8 @@ import org.junit.jupiter.api.Test;
 
 class ContactMapperTest {
 
+    public static final String DEFAULT_CONTACTS_SORT = "desc(firstName)";
+
     private ContactMapper mapper = MapperUtils.getContactMapper();
 
     @Test
@@ -91,7 +93,7 @@ class ContactMapperTest {
     private void assertNullSafeContactQuery(ContactsQuery query) {
         assertThat(query.getPagination()).isNotNull();
         assertThat(query.getFilter()).isNotNull();
-        assertThat(query.getSort()).isNull();
+        assertThat(query.getSort()).isEqualTo(DEFAULT_CONTACTS_SORT);
         var pagination = query.getPagination();
         assertThat(pagination.getPageNumber()).isZero();
         assertThat(pagination.getPageSize()).isEqualTo(DEFAULT_PAGE_SIZE);

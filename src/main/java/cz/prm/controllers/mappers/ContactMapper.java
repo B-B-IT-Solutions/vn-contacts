@@ -1,6 +1,8 @@
 package cz.prm.controllers.mappers;
 
+import static cz.prm.domain.contact.query.ContactsQuery.DEFAULT_CONTACTS_SORT;
 import static java.util.Objects.isNull;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.ContactDto;
@@ -44,6 +46,9 @@ public interface ContactMapper {
         }
         if (isNull(target.getFilter())) {
             target.setFilter(new ContactsFilter());
+        }
+        if (isBlank(target.getSort())) {
+            target.setSort(DEFAULT_CONTACTS_SORT);
         }
     }
 }
