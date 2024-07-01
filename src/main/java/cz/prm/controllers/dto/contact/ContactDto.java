@@ -27,8 +27,14 @@ public class ContactDto {
     @JsonProperty("nickName")
     private String nickName;
 
-    @JsonProperty("email")
-    private String email;
+    @JsonProperty("telephones")
+    private List<ConnectionDto> telephones;
+
+    @JsonProperty("emails")
+    private List<ConnectionDto> emails;
+
+    @JsonProperty("urls")
+    private List<ConnectionDto> urls;
 
     @JsonProperty("professions")
     private String professions;

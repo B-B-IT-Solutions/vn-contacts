@@ -1,12 +1,12 @@
 package cz.prm.utils;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.CommonUtils.pagination;
 import static cz.prm.utils.CommonUtils.paginationDto;
 import static cz.prm.utils.CommonUtils.user;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static java.time.Instant.now;
-import static org.assertj.core.util.Lists.newArrayList;
 
 import cz.prm.controllers.dto.note.NoteDto;
 import cz.prm.controllers.dto.note.query.NotesQueryDto;

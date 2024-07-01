@@ -77,7 +77,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     }
 
     protected Contact getContactFromDb(ContactDto dto) {
-        return contactRepository.getByEmail(dto.getEmail());
+        return contactRepository.getByLastName(dto.getLastName());
     }
 
     protected Note getNoteFromDb(NoteDto dto) {

@@ -12,6 +12,7 @@ import static cz.prm.utils.ContactComponentTestUtils.contactDto;
 import static cz.prm.utils.ContactComponentTestUtils.contactsQueryDto;
 import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertContact;
 import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertContacts;
+import static java.time.Instant.now;
 import static java.util.Collections.sort;
 import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -142,18 +143,18 @@ public class ContactComponentTest extends ContactComponentTestBase {
         sort(expected, comparing(ContactDto::getLastName).reversed());
         assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
 
-        queryDto.setSort("asc(email)");
+        queryDto.setSort("asc(dateOfBirth)");
         pageDto = user1GetContacts(queryDto);
         actual = pageDto.getContent();
         expected = newArrayList(actual);
-        sort(expected, comparing(ContactDto::getEmail));
+        sort(expected, comparing(ContactDto::getDateOfBirth));
         assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
 
-        queryDto.setSort("desc(email)");
+        queryDto.setSort("desc(dateOfBirth)");
         pageDto = user1GetContacts(queryDto);
         actual = pageDto.getContent();
         expected = newArrayList(actual);
-        sort(expected, comparing(ContactDto::getEmail).reversed());
+        sort(expected, comparing(ContactDto::getDateOfBirth).reversed());
         assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
     }
 
@@ -264,23 +265,23 @@ public class ContactComponentTest extends ContactComponentTestBase {
         queryDto = contactsQueryDto();
         filter = queryDto.getFilter();
 
-        filter.setEmail(contactDto1.getEmail());
+        filter.setEmail(contactDto1.getEmails().get(0).getValue());
         pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setEmail(containsFilter(contactDto1.getEmail()));
+        filter.setEmail(containsFilter(contactDto1.getEmails().get(0).getValue()));
         pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setEmail(notContainsFilter(contactDto1.getEmail()));
+        filter.setEmail(notContainsFilter(contactDto1.getEmails().get(0).getValue()));
         pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).hasSize(20);
 
-        filter.setEmail(containsNotContainsFilter(contactDto1.getEmail(), contactDto2.getEmail()));
+        filter.setEmail(containsNotContainsFilter(contactDto1.getEmails().get(0).getValue(), contactDto2.getEmails().get(0).getValue()));
         pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setEmail(notContainsFilter("email"));
+        filter.setEmail(notContainsFilter("connection"));
         pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
     }
@@ -349,9 +350,9 @@ public class ContactComponentTest extends ContactComponentTestBase {
         var contactId = contact.getContactId();
         var updateDto = user1GetContact(contactId);
 
-        updateDto.setEmail(uuid());
         updateDto.setFirstName(uuid());
         updateDto.setLastName(uuid());
+        updateDto.setDateOfBirth(now());
         user1UpdateContact(contactId, updateDto);
         contact = getContactFromDb(updateDto);
         assertContact(contact, updateDto);
@@ -363,9 +364,9 @@ public class ContactComponentTest extends ContactComponentTestBase {
         contactId = contact.getContactId();
         updateDto = user2GetContact(contactId);
 
-        updateDto.setEmail(uuid());
         updateDto.setFirstName(uuid());
         updateDto.setLastName(uuid());
+        updateDto.setDateOfBirth(now());
         user2UpdateContact(contactId, updateDto);
         contact = getContactFromDb(updateDto);
         assertContact(contact, updateDto);
@@ -377,9 +378,9 @@ public class ContactComponentTest extends ContactComponentTestBase {
         contactId = contact.getContactId();
         updateDto = user3GetContact(contactId);
 
-        updateDto.setEmail(uuid());
         updateDto.setFirstName(uuid());
         updateDto.setLastName(uuid());
+        updateDto.setDateOfBirth(now());
         user3UpdateContact(contactId, updateDto);
         contact = getContactFromDb(updateDto);
         assertContact(contact, updateDto);

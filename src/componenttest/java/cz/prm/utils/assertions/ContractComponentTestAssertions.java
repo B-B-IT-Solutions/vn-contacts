@@ -5,7 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
 
 import cz.prm.controllers.dto.common.PageDto;
+import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
 import java.util.List;
 import java.util.Objects;
@@ -30,12 +32,27 @@ public class ContractComponentTestAssertions {
         assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
         assertThat(contact.getLastName()).isEqualTo(contactDto.getLastName());
         assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
-        assertThat(contact.getEmail()).isEqualTo(contactDto.getEmail());
         assertThat(contact.getProfessions()).isEqualTo(contactDto.getProfessions());
         assertThat(contact.getIndustries()).isEqualTo(contactDto.getIndustries());
         assertThat(contact.getLabels()).containsExactlyElementsOf(contactDto.getLabels());
         assertThat(contact.getDateOfBirth()).isCloseTo(contactDto.getDateOfBirth(), within(1, SECONDS));
         assertThat(contact.getLastEditDate()).isNotNull();
         assertThat(contact.getCreationDate()).isNotNull();
+        assertConnectionsDto(contact.getTelephones(), contactDto.getTelephones());
+        assertConnectionsDto(contact.getEmails(), contactDto.getEmails());
+        assertConnectionsDto(contact.getUrls(), contactDto.getUrls());
+    }
+
+    public static void assertConnectionsDto(List<Connection> cons, List<ConnectionDto> dtos) {
+        assertThat(cons).isNotEmpty().hasSameSizeAs(dtos);
+        cons.forEach(c1 -> {
+            var c2 = dtos.stream().filter(u -> Objects.equals(c1.getValue(), u.getValue())).findFirst().get();
+            assertConnectionDto(c1, c2);
+        });
+    }
+
+    public static void assertConnectionDto(Connection connection, ConnectionDto dto) {
+        assertThat(connection.getValue()).isEqualTo(dto.getValue());
+        assertThat(connection.getValue()).isEqualTo(dto.getValue());
     }
 }

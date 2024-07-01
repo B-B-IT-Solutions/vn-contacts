@@ -6,10 +6,13 @@ import static java.lang.String.format;
 import static java.time.Instant.now;
 import static org.assertj.core.util.Lists.newArrayList;
 
+import com.google.common.collect.Lists;
 import cz.prm.controllers.dto.common.PaginationDto;
+import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
+import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
 import java.util.List;
 
@@ -25,7 +28,9 @@ public class ContactComponentTestUtils {
         contact.setMiddleName(format("Middle%s", uuid()));
         contact.setLastName(format("Last%s", uuid()));
         contact.setNickName(format("Nick%s", uuid()));
-        contact.setEmail(format("email%s", uuid()));
+        contact.setTelephones(connections());
+        contact.setEmails(connections());
+        contact.setUrls(connections());
         contact.setProfessions(format("professions%s", uuid()));
         contact.setIndustries(format("industries%s", uuid()));
         contact.setLabels(uuids());
@@ -39,11 +44,35 @@ public class ContactComponentTestUtils {
         dto.setMiddleName(uuid());
         dto.setLastName(uuid());
         dto.setNickName(uuid());
-        dto.setEmail(uuid());
+        dto.setTelephones(connectionsDto());
+        dto.setEmails(connectionsDto());
+        dto.setUrls(connectionsDto());
         dto.setProfessions(uuid());
         dto.setIndustries(uuid());
         dto.setLabels(uuids());
         dto.setDateOfBirth(now());
+        return dto;
+    }
+
+    public static List<Connection> connections() {
+        return Lists.newArrayList(connection(), connection(), connection());
+    }
+
+    public static List<ConnectionDto> connectionsDto() {
+        return Lists.newArrayList(connectionDto(), connectionDto(), connectionDto());
+    }
+
+    public static Connection connection() {
+        var connection = new Connection();
+        connection.setValue(format("connection%s", uuid()));
+        connection.setType(uuid());
+        return connection;
+    }
+
+    public static ConnectionDto connectionDto() {
+        var dto = new ConnectionDto();
+        dto.setValue(uuid());
+        dto.setType(uuid());
         return dto;
     }
 
