@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 class ContactsQueryTest {
 
-    private static final String DEFAULT_CONTACTS_SORT = "asc(firstName)";
+    private static final String DEFAULT_CONTACTS_SORT = "asc(lastName)";
 
     @Test
     void newInstance() {

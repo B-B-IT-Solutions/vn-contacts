@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @AllArgsConstructor
 public class ContactsQuery extends Query {
 
-    public static final String DEFAULT_CONTACTS_SORT = "asc(firstName)";
+    public static final String DEFAULT_CONTACTS_SORT = "asc(lastName)";
     private ContactsFilter filter;
 
     public ContactsQuery() {
