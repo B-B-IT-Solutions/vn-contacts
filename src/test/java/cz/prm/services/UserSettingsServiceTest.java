@@ -11,6 +11,7 @@ import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.settings.UserSettings;
+import cz.prm.repositories.settings.GeneralSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
 import cz.prm.repositories.settings.UserSettingsRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +24,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class UserSettingsServiceTest {
 
     @Mock
-    private UserSettingsRepository repository;
+    private GeneralSettingsRepository generalSettingsRepository;
+    @Mock
+    private UserSettingsRepository userSettingsRepository;
     @Mock
     private SettingsPredicates predicates;
 
@@ -31,29 +34,29 @@ class UserSettingsServiceTest {
 
     @BeforeEach
     void setUp() {
-        settingsService = new SettingsService(repository, predicates);
+        settingsService = new SettingsService(generalSettingsRepository, userSettingsRepository, predicates);
     }
 
     @Test
-    void getSettings_SettingsExists() {
+    void getUserSettings_SettingsExists() {
         var settings = settings();
         var predicate = new BooleanBuilder();
         when(predicates.settings()).thenReturn(predicate);
-        when(repository.findOne(predicate)).thenReturn(of(settings));
+        when(userSettingsRepository.findOne(predicate)).thenReturn(of(settings));
 
-        var result = settingsService.getSettings();
+        var result = settingsService.getUserSettings();
         assertSettings(result, settings);
     }
 
     @Test
-    void getSettings_SettingsDoesntExist() {
+    void getUserSettings_SettingsDoesntExist() {
         var predicate = new BooleanBuilder();
         when(predicates.settings()).thenReturn(predicate);
-        when(repository.findOne(predicate)).thenReturn(empty());
-        when(repository.saveAndFlush(any(UserSettings.class))).thenAnswer((invocation -> invocation.getArgument(0)));
+        when(userSettingsRepository.findOne(predicate)).thenReturn(empty());
+        when(userSettingsRepository.saveAndFlush(any(UserSettings.class))).thenAnswer((invocation -> invocation.getArgument(0)));
 
-        var result = settingsService.getSettings();
+        var result = settingsService.getUserSettings();
         assertThat(result).isNotNull();
-        verify(repository).refresh(result);
+        verify(userSettingsRepository).refresh(result);
     }
 }

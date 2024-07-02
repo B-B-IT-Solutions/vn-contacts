@@ -28,10 +28,10 @@ class SettingsControllerTest {
     }
 
     @Test
-    void getSettings() {
+    void getUserSettings() {
         var settings = settings();
-        when(settingsService.getSettings()).thenReturn(settings);
-        var result = controller.getSettings();
+        when(settingsService.getUserSettings()).thenReturn(settings);
+        var result = controller.getUserSettings();
         assertSettings(settings, result);
     }
 }

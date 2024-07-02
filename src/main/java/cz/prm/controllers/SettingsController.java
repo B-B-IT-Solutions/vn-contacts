@@ -20,8 +20,8 @@ public class SettingsController {
     }
 
     @GetMapping
-    public SettingsDto getSettings() {
-        var settings = settingsService.getSettings();
+    public SettingsDto getUserSettings() {
+        var settings = settingsService.getUserSettings();
         return mapper.toSettingsDto(settings);
     }
 }
