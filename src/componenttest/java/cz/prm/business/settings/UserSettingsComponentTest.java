@@ -6,7 +6,7 @@ import cz.prm.controllers.dto.settings.SettingsDto;
 import cz.prm.utils.assertions.SettingsComponentTestAssertions;
 import org.junit.jupiter.api.Test;
 
-public class SettingsComponentTest extends SettingsComponentTestBase {
+public class UserSettingsComponentTest extends SettingsComponentTestBase {
 
     @Test
     void getSettings() {

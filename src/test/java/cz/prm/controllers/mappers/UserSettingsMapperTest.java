@@ -7,7 +7,7 @@ import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.Test;
 
-class SettingsMapperTest {
+class UserSettingsMapperTest {
 
     private SettingsMapper mapper = MapperUtils.getSettingsMapper();
 

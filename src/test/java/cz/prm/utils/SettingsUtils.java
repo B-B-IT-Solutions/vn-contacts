@@ -8,13 +8,13 @@ import static java.time.Instant.now;
 import cz.prm.controllers.dto.settings.LabelDto;
 import cz.prm.controllers.dto.settings.SettingsDto;
 import cz.prm.domain.settings.Label;
-import cz.prm.domain.settings.Settings;
+import cz.prm.domain.settings.UserSettings;
 import java.util.List;
 
 public class SettingsUtils {
 
-    public static Settings settings() {
-        var settings = new Settings();
+    public static UserSettings settings() {
+        var settings = new UserSettings();
         settings.setLabels(labels());
         settings.setLastEditDate(now());
         settings.setOwner(user());

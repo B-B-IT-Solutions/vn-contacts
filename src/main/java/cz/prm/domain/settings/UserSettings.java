@@ -32,7 +32,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Settings {
+public class UserSettings {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SETTINGS_SEQ")

@@ -10,9 +10,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
-import cz.prm.domain.settings.Settings;
+import cz.prm.domain.settings.UserSettings;
 import cz.prm.repositories.settings.SettingsPredicates;
-import cz.prm.repositories.settings.SettingsRepository;
+import cz.prm.repositories.settings.UserSettingsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,10 +20,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class SettingsServiceTest {
+class UserSettingsServiceTest {
 
     @Mock
-    private SettingsRepository repository;
+    private UserSettingsRepository repository;
     @Mock
     private SettingsPredicates predicates;
 
@@ -50,7 +50,7 @@ class SettingsServiceTest {
         var predicate = new BooleanBuilder();
         when(predicates.settings()).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(empty());
-        when(repository.saveAndFlush(any(Settings.class))).thenAnswer((invocation -> invocation.getArgument(0)));
+        when(repository.saveAndFlush(any(UserSettings.class))).thenAnswer((invocation -> invocation.getArgument(0)));
 
         var result = settingsService.getSettings();
         assertThat(result).isNotNull();
