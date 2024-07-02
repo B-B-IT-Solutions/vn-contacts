@@ -12,23 +12,23 @@ import io.restassured.common.mapper.TypeRef;
 public class SettingsComponentTestBase extends BusinessComponentTestBase {
 
     protected static String SETTINGS_BASE_URL = "settings";
-    protected static String SETTINGS_URL = SETTINGS_BASE_URL;
+    protected static String USER_SETTINGS_URL = SETTINGS_BASE_URL + "/user";
 
-    protected SettingsDto user1GetSettings() {
-        return getSettings(USER_1);
+    protected SettingsDto user1GetUserSettings() {
+        return getUserSettings(USER_1);
     }
 
-    protected SettingsDto user2GetSettings() {
-        return getSettings(USER_2);
+    protected SettingsDto user2GetUserSettings() {
+        return getUserSettings(USER_2);
     }
 
-    protected SettingsDto user3GetSettings() {
-        return getSettings(USER_3);
+    protected SettingsDto user3GetUserSettings() {
+        return getUserSettings(USER_3);
     }
 
-    protected SettingsDto getSettings(ComponentTestUser user) {
+    protected SettingsDto getUserSettings(ComponentTestUser user) {
         var typeRef = new TypeRef<SettingsDto>() {
         };
-        return getOne(SETTINGS_URL, user, typeRef);
+        return getOne(USER_SETTINGS_URL, user, typeRef);
     }
 }
