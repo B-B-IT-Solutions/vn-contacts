@@ -1,5 +1,6 @@
 package cz.prm.utils;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.CommonUtils.pagination;
 import static cz.prm.utils.CommonUtils.paginationDto;
 import static cz.prm.utils.CommonUtils.user;
@@ -7,11 +8,12 @@ import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.TestUtils.uuids;
 import static java.time.Instant.now;
-import static org.assertj.core.util.Lists.newArrayList;
 
+import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
+import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsFilter;
 import cz.prm.domain.contact.query.ContactsQuery;
@@ -30,7 +32,9 @@ public class ContactUtils {
         contact.setMiddleName(uuid());
         contact.setLastName(uuid());
         contact.setNickName(uuid());
-        contact.setEmail(uuid());
+        contact.setTelephones(connections());
+        contact.setEmails(connections());
+        contact.setUrls(connections());
         contact.setProfessions(uuid());
         contact.setIndustries(uuid());
         contact.setLabels(uuids());
@@ -48,7 +52,9 @@ public class ContactUtils {
         contact.setMiddleName(uuid());
         contact.setLastName(uuid());
         contact.setNickName(uuid());
-        contact.setEmail(uuid());
+        contact.setTelephones(connectionsDto());
+        contact.setEmails(connectionsDto());
+        contact.setUrls(connectionsDto());
         contact.setProfessions(uuid());
         contact.setIndustries(uuid());
         contact.setLabels(uuids());
@@ -56,6 +62,28 @@ public class ContactUtils {
         contact.setLastEditDate(now());
         contact.setCreationDate(now());
         return contact;
+    }
+
+    public static List<Connection> connections() {
+        return newArrayList(connection(), connection(), connection());
+    }
+
+    public static List<ConnectionDto> connectionsDto() {
+        return newArrayList(connectionDto(), connectionDto(), connectionDto());
+    }
+
+    public static Connection connection() {
+        var connection = new Connection();
+        connection.setValue(uuid());
+        connection.setType(uuid());
+        return connection;
+    }
+
+    public static ConnectionDto connectionDto() {
+        var dto = new ConnectionDto();
+        dto.setValue(uuid());
+        dto.setType(uuid());
+        return dto;
     }
 
     public static ContactsQuery contactsQuery() {

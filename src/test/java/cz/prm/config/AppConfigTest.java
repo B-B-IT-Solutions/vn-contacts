@@ -1,7 +1,9 @@
 package cz.prm.config;
 
+import static com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS;
 import static cz.prm.utils.CommonUtils.user;
 import static cz.prm.utils.assertions.CommonAssertions.assertUser;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.security.SecurityContextUtils;
 import org.junit.jupiter.api.Test;
@@ -22,5 +24,12 @@ class AppConfigTest {
             var auditor = optional.get();
             assertUser(user, auditor);
         }
+    }
+
+    @Test
+    void objectMapper() {
+        var mapper = appConfig.objectMapper();
+        assertThat(mapper.getRegisteredModuleIds()).containsExactly("jackson-datatype-jsr310");
+        assertThat(mapper.isEnabled(WRITE_DATES_AS_TIMESTAMPS)).isFalse();
     }
 }

@@ -28,6 +28,24 @@
 				 <column name="creation_date" type="TIMESTAMP WITH TIME ZONE"/>
 			</createTable>
 			
+			<createTable tableName="contact_telephone">
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="value" type="VARCHAR(100)"/>
+				 <column name="type" type="VARCHAR(100)"/>
+			</createTable>
+			
+			<createTable tableName="contact_email">
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="value" type="VARCHAR(100)"/>
+				 <column name="type" type="VARCHAR(100)"/>
+			</createTable>
+			
+			<createTable tableName="contact_url">
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="value" type="VARCHAR(100)"/>
+				 <column name="type" type="VARCHAR(100)"/>
+			</createTable>
+			
 			<createTable tableName="contact_label">
 				 <column name="contact_id" type="BIGINT"/>
 				 <column name="LABEL" type="VARCHAR(250)"/>
@@ -59,16 +77,28 @@
 			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
 											sequenceName="settings_seq"/>
 			
-			<createTable tableName="settings">
+			
+			<createTable tableName="general_settings">
 				 <column name="settings_id" type="BIGINT">
-						<constraints primaryKey="true" primaryKeyName="settings_pk" nullable="false"/>
+						<constraints primaryKey="true" primaryKeyName="general_settings_pk" nullable="false"/>
+				 </column>
+			</createTable>
+			
+			<createTable tableName="general_settings_industry">
+				 <column name="settings_id" type="BIGINT"/>
+				 <column name="industry" type="VARCHAR(250)"/>
+			</createTable>
+			
+			<createTable tableName="user_settings">
+				 <column name="settings_id" type="BIGINT">
+						<constraints primaryKey="true" primaryKeyName="user_settings_pk" nullable="false"/>
 				 </column>
 				 <column name="owner_username" type="VARCHAR(255)"/>
 				 <column name="owner_email" type="VARCHAR(255)"/>
 				 <column name="last_edit_date" type="TIMESTAMP WITH TIME ZONE"/>
 			</createTable>
 			
-			<createTable tableName="settings_label">
+			<createTable tableName="user_settings_label">
 				 <column name="settings_id" type="BIGINT"/>
 				 <column name="value" type="VARCHAR(100)"/>
 				 <column name="color" type="VARCHAR(25)"/>

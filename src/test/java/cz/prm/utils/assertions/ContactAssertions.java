@@ -4,10 +4,12 @@ import static cz.prm.utils.assertions.CommonAssertions.assertQuery;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
+import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.common.query.Page;
+import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsFilter;
 import cz.prm.domain.contact.query.ContactsQuery;
@@ -57,7 +59,6 @@ public class ContactAssertions {
         assertThat(contact1.getMiddleName()).isEqualTo(contact2.getMiddleName());
         assertThat(contact1.getLastName()).isEqualTo(contact2.getLastName());
         assertThat(contact1.getNickName()).isEqualTo(contact2.getNickName());
-        assertThat(contact1.getEmail()).isEqualTo(contact2.getEmail());
         assertThat(contact1.getProfessions()).isEqualTo(contact2.getProfessions());
         assertThat(contact1.getIndustries()).isEqualTo(contact2.getIndustries());
         assertThat(contact1.getLabels()).containsExactlyElementsOf(contact2.getLabels());
@@ -65,6 +66,9 @@ public class ContactAssertions {
         assertThat(contact1.getDateOfBirth()).isEqualTo(contact2.getDateOfBirth());
         assertThat(contact1.getLastEditDate()).isEqualTo(contact2.getLastEditDate());
         assertThat(contact1.getCreationDate()).isEqualTo(contact2.getCreationDate());
+        assertConnections(contact1.getTelephones(), contact2.getTelephones());
+        assertConnections(contact1.getEmails(), contact2.getEmails());
+        assertConnections(contact1.getUrls(), contact2.getUrls());
     }
 
     public static void assertContact(Contact contact, ContactDto dto) {
@@ -73,13 +77,41 @@ public class ContactAssertions {
         assertThat(contact.getMiddleName()).isEqualTo(dto.getMiddleName());
         assertThat(contact.getLastName()).isEqualTo(dto.getLastName());
         assertThat(contact.getNickName()).isEqualTo(dto.getNickName());
-        assertThat(contact.getEmail()).isEqualTo(dto.getEmail());
         assertThat(contact.getProfessions()).isEqualTo(dto.getProfessions());
         assertThat(contact.getIndustries()).isEqualTo(dto.getIndustries());
         assertThat(contact.getLabels()).containsExactlyElementsOf(dto.getLabels());
         assertThat(contact.getDateOfBirth()).isEqualTo(dto.getDateOfBirth());
         assertThat(contact.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(contact.getCreationDate()).isEqualTo(dto.getCreationDate());
+        assertConnectionsDto(contact.getTelephones(), dto.getTelephones());
+        assertConnectionsDto(contact.getEmails(), dto.getEmails());
+        assertConnectionsDto(contact.getUrls(), dto.getUrls());
+    }
+
+    public static void assertConnections(List<Connection> cons1, List<Connection> cons2) {
+        assertThat(cons1).isNotEmpty().hasSameSizeAs(cons2);
+        cons1.forEach(c1 -> {
+            var c2 = cons2.stream().filter(u -> Objects.equals(c1.getValue(), u.getValue())).findFirst().get();
+            assertConnection(c1, c2);
+        });
+    }
+
+    public static void assertConnectionsDto(List<Connection> cons, List<ConnectionDto> dtos) {
+        assertThat(cons).isNotEmpty().hasSameSizeAs(dtos);
+        cons.forEach(c1 -> {
+            var c2 = dtos.stream().filter(u -> Objects.equals(c1.getValue(), u.getValue())).findFirst().get();
+            assertConnectionDto(c1, c2);
+        });
+    }
+
+    public static void assertConnection(Connection con1, Connection con2) {
+        assertThat(con1.getValue()).isEqualTo(con2.getValue());
+        assertThat(con1.getValue()).isEqualTo(con2.getValue());
+    }
+
+    public static void assertConnectionDto(Connection connection, ConnectionDto dto) {
+        assertThat(connection.getValue()).isEqualTo(dto.getValue());
+        assertThat(connection.getValue()).isEqualTo(dto.getValue());
     }
 
     public static void assertContactQuery(ContactsQuery query, ContactsQueryDto dto) {

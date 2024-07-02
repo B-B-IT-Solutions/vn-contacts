@@ -9,13 +9,16 @@ import static java.util.stream.Collectors.toList;
 import cz.prm.ComponentTestBase;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.note.NoteDto;
-import cz.prm.controllers.dto.settings.SettingsDto;
+import cz.prm.controllers.dto.settings.GeneralSettingsDto;
+import cz.prm.controllers.dto.settings.UserSettingsDto;
 import cz.prm.custom.ComponentTestContactRepository;
+import cz.prm.custom.ComponentTestGeneralSettingsRepository;
 import cz.prm.custom.ComponentTestNoteRepository;
-import cz.prm.custom.ComponentTestSettingsRepository;
+import cz.prm.custom.ComponentTestUserSettingsRepository;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.note.Note;
-import cz.prm.domain.settings.Settings;
+import cz.prm.domain.settings.GeneralSettings;
+import cz.prm.domain.settings.UserSettings;
 import cz.prm.utils.ComponentTestUser;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -29,13 +32,15 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     @Autowired
     protected ComponentTestNoteRepository noteRepository;
     @Autowired
-    protected ComponentTestSettingsRepository settingsRepository;
+    protected ComponentTestGeneralSettingsRepository generalSettingsRepository;
+    @Autowired
+    protected ComponentTestUserSettingsRepository userSettingsRepository;
 
     @BeforeEach
     void setUp() {
         noteRepository.deleteAll();
         contactRepository.deleteAll();
-        settingsRepository.deleteAll();
+        userSettingsRepository.deleteAll();
     }
 
     protected List<Contact> createContacts(ComponentTestUser user) {
@@ -77,14 +82,18 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     }
 
     protected Contact getContactFromDb(ContactDto dto) {
-        return contactRepository.getByEmail(dto.getEmail());
+        return contactRepository.getByLastName(dto.getLastName());
     }
 
     protected Note getNoteFromDb(NoteDto dto) {
         return noteRepository.getByText(dto.getText());
     }
 
-    protected Settings getSettingsFromDb(SettingsDto dto) {
-        return settingsRepository.getReferenceById(dto.getSettingsId());
+    protected GeneralSettings getGeneralSettingsFromDb(GeneralSettingsDto dto) {
+        return generalSettingsRepository.getReferenceById(dto.getSettingsId());
+    }
+
+    protected UserSettings getUserSettingsFromDb(UserSettingsDto dto) {
+        return userSettingsRepository.getReferenceById(dto.getSettingsId());
     }
 }

@@ -53,8 +53,20 @@ public class Contact {
     @Column(name = "NICK_NAME")
     private String nickName;
 
+    @ElementCollection(fetch = EAGER)
+    @CollectionTable(name = "CONTACT_TELEPHONE", joinColumns = @JoinColumn(name = "CONTACT_ID"))
+    @Column(name = "TELEPHONE")
+    private List<Connection> telephones;
+
+    @ElementCollection(fetch = EAGER)
+    @CollectionTable(name = "CONTACT_EMAIL", joinColumns = @JoinColumn(name = "CONTACT_ID"))
     @Column(name = "EMAIL")
-    private String email;
+    private List<Connection> emails;
+
+    @ElementCollection(fetch = EAGER)
+    @CollectionTable(name = "CONTACT_URL", joinColumns = @JoinColumn(name = "CONTACT_ID"))
+    @Column(name = "URL")
+    private List<Connection> urls;
 
     @Column(name = "PROFESSIONS")
     private String professions;

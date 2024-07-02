@@ -195,8 +195,4 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         clearContext();
         return savedContact;
     }
-
-    protected Contact getContactFromDb(ContactDto dto) {
-        return contactRepository.getByEmail(dto.getEmail());
-    }
 }

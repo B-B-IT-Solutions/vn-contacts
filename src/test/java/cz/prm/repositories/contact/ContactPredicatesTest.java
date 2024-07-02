@@ -52,13 +52,6 @@ class ContactPredicatesTest {
             expectedString =
                 "contact.owner.username = username_1 && containsIc(contact.firstName,firstName_01) && containsIc(contact.lastName," + "lastName_01)";
             assertThat(predicate).hasToString(expectedString);
-
-            filter.setEmail("email_01");
-            predicate = predicates.contacts(filter);
-            expectedString =
-                "contact.owner.username = username_1 && containsIc(contact.firstName,firstName_01) && containsIc(contact.lastName,lastName_01) && "
-                    + "containsIc(contact.email,email_01)";
-            assertThat(predicate).hasToString(expectedString);
         }
     }
 
@@ -96,14 +89,6 @@ class ContactPredicatesTest {
                 "contact.owner.username = username_1 && containsIc(contact.firstName,firstName_01) && containsIc(contact.middleName,middleName_01)"
                     + " && containsIc(contact.lastName,lastName_01) && containsIc(contact.nickName,nickName_01)";
             assertThat(predicate).hasToString(expectedString);
-
-            filter.setEmail("contains(email_01)");
-            predicate = predicates.contacts(filter);
-            expectedString =
-                "contact.owner.username = username_1 && containsIc(contact.firstName,firstName_01) && containsIc(contact.middleName,middleName_01)"
-                    + " && containsIc(contact.lastName,lastName_01) && containsIc(contact.nickName,nickName_01) && containsIc(contact.email,"
-                    + "email_01)";
-            assertThat(predicate).hasToString(expectedString);
         }
     }
 
@@ -140,14 +125,6 @@ class ContactPredicatesTest {
             expectedString =
                 "contact.owner.username = username_1 && !containsIc(contact.firstName,firstName_01) && !containsIc(contact.middleName,middleName_01)"
                     + " && !containsIc(contact.lastName,lastName_01) && !containsIc(contact.nickName,nickName_01)";
-            assertThat(predicate).hasToString(expectedString);
-
-            filter.setEmail("notContains(email_01)");
-            predicate = predicates.contacts(filter);
-            expectedString =
-                "contact.owner.username = username_1 && !containsIc(contact.firstName,firstName_01) && !containsIc(contact.middleName,middleName_01)"
-                    + " && !containsIc(contact.lastName,lastName_01) && !containsIc(contact.nickName,nickName_01) && !containsIc(contact.email,"
-                    + "email_01)";
             assertThat(predicate).hasToString(expectedString);
         }
     }

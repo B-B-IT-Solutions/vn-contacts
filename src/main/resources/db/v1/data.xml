@@ -3,7 +3,594 @@
 									 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 									 xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 	 
+	 
 	 <changeSet author="sergej" id="1.0.1">
+			<insert tableName="general_settings">
+				 <column name="settings_id" value="1"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="warrior"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Accommodation"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Accommodation and Food Services"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Administrative and Support Services"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Administrative and Support and Waste Management and Remediation Services"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Agriculture, Forestry, Fishing and Hunting"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Air Transportation"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Ambulatory Health Care Services"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Amusement, Gambling, and Recreation Industries"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Animal Production"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Apparel Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Arts, Entertainment, and Recreation"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Beverage and Tobacco Product Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Broadcasting (except Internet)"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Building Material and Garden Equipment and Supplies Dealers"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Chemical Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Clothing and Clothing Accessories Stores"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Computer and Electronic Product Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Construction"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Construction of Buildings"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Couriers and Messengers"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Credit Intermediation and Related Activities"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Crop Production"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Data Processing, Hosting, and Related Services "/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Education and Health Services"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Educational Services"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Electrical Equipment, Appliance, and Component Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Electronics and Appliance Stores"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Fabricated Metal Product Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Finance and Insurance"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Financial Activities"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Fishing, Hunting and Trapping"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Food Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Food Services and Drinking Places"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Food and Beverage Stores"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Forestry and Logging"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Funds, Trusts, and Other Financial Vehicles"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Furniture and Home Furnishings Stores"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Furniture and Related Product Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Gasoline Stations "/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="General Merchandise Stores"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Goods-Producing Industries"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Health Care and Social Assistance "/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Health and Personal Care Stores"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Heavy and Civil Engineering Construction"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Hospitals"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Information"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Insurance Carriers and Related Activities"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Internet Publishing and Broadcasting"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Leather and Allied Product Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Leisure and Hospitality"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Lessors of Nonfinancial Intangible Assets (except Copyrighted Works)"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Machinery Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Management of Companies and Enterprises"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Merchant Wholesalers, Durable Goods"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Merchant Wholesalers, Nondurable Goods"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Mining (except Oil and Gas)"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Mining, Quarrying, and Oil and Gas Extraction"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Miscellaneous Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Miscellaneous Store Retailers"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Monetary Authorities - Central Bank"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Motion Picture and Sound Recording Industries"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Motor Vehicle and Parts Dealers"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Museums, Historical Sites, and Similar Institutions"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Natural Resources and Mining"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Nonmetallic Mineral Product Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Nonstore Retailers"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Nursing and Residential Care Facilities"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Oil and Gas Extraction"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Other Information Services"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Other Services (except Public Administration)"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Paper Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Performing Arts, Spectator Sports, and Related Industries"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Personal and Laundry Services"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Petroleum and Coal Products Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Pipeline Transportation"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Plastics and Rubber Products Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Postal Service"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Primary Metal Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Printing and Related Support Activities"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Private Households"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Professional and Business Services"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Professional, Scientific, and Technical Services"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Publishing Industries (except Internet)"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Rail Transportation"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Real Estate"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Real Estate and Rental and Leasing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Religious, Grantmaking, Civic, Professional, and Similar Organizations"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Rental and Leasing Services"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Repair and Maintenance"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Retail Trade"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Scenic and Sightseeing Transportation"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Securities, Commodity Contracts, and Other Financial Investments and Related Activities"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Service-Providing Industries"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Social Assistance"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Specialty Trade Contractors"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Sporting Goods, Hobby, Book, and Music Stores"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Support Activities for Agriculture and Forestry"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Support Activities for Mining"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Support Activities for Transportation"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Telecommunications"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Textile Mills"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Textile Product Mills"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Trade, Transportation, and Utilities"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Transit and Ground Passenger Transportation"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Transportation Equipment Manufacturing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Transportation and Warehousing"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Truck Transportation"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Utilities"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Warehousing and Storage"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Waste Management and Remediation Services"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Water Transportation"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Wholesale Electronic Markets and Agents and Brokers"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Wholesale Trade"/>
+			</insert>
+			
+			<insert tableName="general_settings_industry">
+				 <column name="settings_id" value="1"/>
+				 <column name="industry" value="Wood Product Manufacturing"/>
+			</insert>
+	 </changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.2">
 			<insert tableName="contact">
 				 <column name="contact_id" value="1"/>
 				 <column name="first_name" value="Sergej"/>
@@ -171,7 +758,7 @@
 			</insert>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.2">
+	 <changeSet author="sergej" id="1.0.3">
 			<insert tableName="note">
 				 <column name="note_id" value="1"/>
 				 <column name="contact_id" value="1"/>
@@ -303,37 +890,41 @@
 				 <column name="owner_username" value="bobuskysergej"/>
 				 <column name="owner_email" value="bobuskysergej"/>
 			</insert>
-	 
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.3">
-			<insert tableName="settings">
+	 <changeSet author="sergej" id="1.0.4">
+			<insert tableName="user_settings">
 				 <column name="settings_id" value="1"/>
 				 <column name="owner_username" value="bobuskysergej"/>
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
 			</insert>
 			
-			<insert tableName="settings_label">
+			<insert tableName="user_settings_label">
+				 <column name="settings_id" value="1"/>
 				 <column name="value" value="warrior"/>
 				 <column name="color" value="#f4e958"/>
 			</insert>
 			
-			<insert tableName="settings_label">
+			<insert tableName="user_settings_label">
+				 <column name="settings_id" value="1"/>
 				 <column name="value" value="lion"/>
 				 <column name="color" value="#00FF6C"/>
 			</insert>
 			
-			<insert tableName="settings_label">
+			<insert tableName="user_settings_label">
+				 <column name="settings_id" value="1"/>
 				 <column name="value" value="sheepdog"/>
 				 <column name="color" value="#00CCFF"/>
 			</insert>
 			
-			<insert tableName="settings_label">
+			<insert tableName="user_settings_label">
+				 <column name="settings_id" value="1"/>
 				 <column name="value" value="unbeatable"/>
 				 <column name="color" value="#ec2525"/>
 			</insert>
 			
-			<insert tableName="settings_label">
+			<insert tableName="user_settings_label">
+				 <column name="settings_id" value="1"/>
 				 <column name="value" value="entrepreneur"/>
 				 <column name="color"/>
 			</insert>

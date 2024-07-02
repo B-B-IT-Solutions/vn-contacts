@@ -42,9 +42,6 @@ public class ContactPredicates {
         if (filter.isNickName()) {
             applyCriteria(predicate, contact.nickName, filter.getNickName());
         }
-        if (filter.isEmail()) {
-            applyCriteria(predicate, contact.email, filter.getEmail());
-        }
         return predicate;
     }
 }

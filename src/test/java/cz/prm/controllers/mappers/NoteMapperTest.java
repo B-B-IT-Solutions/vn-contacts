@@ -18,6 +18,8 @@ import org.junit.jupiter.api.Test;
 
 class NoteMapperTest {
 
+    public static final String DEFAULT_NOTES_SORT = "desc(creationDate)";
+
     private NoteMapper mapper = MapperUtils.getNoteMapper();
 
     @Test
@@ -79,7 +81,7 @@ class NoteMapperTest {
 
     private void assertNullSafeNoteQuery(NotesQuery query) {
         assertThat(query.getPagination()).isNotNull();
-        assertThat(query.getSort()).isEqualTo("desc(creationDate)");
+        assertThat(query.getSort()).isEqualTo(DEFAULT_NOTES_SORT);
         var pagination = query.getPagination();
         assertThat(pagination.getPageNumber()).isZero();
         assertThat(pagination.getPageSize()).isEqualTo(DEFAULT_PAGE_SIZE);

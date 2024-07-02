@@ -1,36 +1,53 @@
 package cz.prm.services;
 
-import cz.prm.domain.settings.Settings;
+import cz.prm.domain.settings.GeneralSettings;
+import cz.prm.domain.settings.UserSettings;
+import cz.prm.repositories.settings.GeneralSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
-import cz.prm.repositories.settings.SettingsRepository;
+import cz.prm.repositories.settings.UserSettingsRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import java.util.function.Supplier;
 import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
 public class SettingsService {
 
-    private SettingsRepository repository;
+    private GeneralSettingsRepository generalSettingsRepository;
+    private UserSettingsRepository userSettingsRepository;
     private SettingsPredicates predicates;
 
-    public SettingsService(SettingsRepository repository, SettingsPredicates predicates) {
-        this.repository = repository;
+    public SettingsService(GeneralSettingsRepository generalSettingsRepository, UserSettingsRepository userSettingsRepository,
+        SettingsPredicates predicates) {
+        this.generalSettingsRepository = generalSettingsRepository;
+        this.userSettingsRepository = userSettingsRepository;
         this.predicates = predicates;
     }
 
-    public Settings getSettings() {
-        return getOrCreateSettings();
+    public GeneralSettings getGeneralSettings() {
+        var predicate = predicates.generalSettings();
+        var optional = generalSettingsRepository.findOne(predicate);
+        return optional.orElseThrow(generalSettingsNotFoundSupplier());
     }
 
-    private Settings getOrCreateSettings() {
-        var predicate = predicates.settings();
-        var optional = repository.findOne(predicate);
+    public UserSettings getUserSettings() {
+        return getOrCreateUserSettings();
+    }
+
+    private UserSettings getOrCreateUserSettings() {
+        var predicate = predicates.userSettings();
+        var optional = userSettingsRepository.findOne(predicate);
         if (optional.isEmpty()) {
-            var settings = new Settings();
-            var savedSettings = repository.saveAndFlush(settings);
-            repository.refresh(savedSettings);
+            var settings = new UserSettings();
+            var savedSettings = userSettingsRepository.saveAndFlush(settings);
+            userSettingsRepository.refresh(savedSettings);
             return savedSettings;
         }
         return optional.get();
+    }
+
+    private Supplier<EntityNotFoundException> generalSettingsNotFoundSupplier() {
+        return () -> new EntityNotFoundException("GeneralSettings not found!");
     }
 }

@@ -20,12 +20,19 @@ class SettingsPredicatesTest {
     }
 
     @Test
-    void byContactId() {
+    void generalSettings() {
+        var query = predicates.generalSettings();
+        var expectedString = format("generalSettings.settingsId = %s", 1);
+        assertThat(query).hasToString(expectedString);
+    }
+
+    @Test
+    void userSettings() {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
             var user = user();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
-            var query = predicates.settings();
-            var expectedString = format("settings.owner.username = %s", user.getUsername());
+            var query = predicates.userSettings();
+            var expectedString = format("userSettings.owner.username = %s", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }
     }

@@ -5,30 +5,50 @@ import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
 
 import cz.prm.business.BusinessComponentTestBase;
-import cz.prm.controllers.dto.settings.SettingsDto;
+import cz.prm.controllers.dto.settings.GeneralSettingsDto;
+import cz.prm.controllers.dto.settings.UserSettingsDto;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 
 public class SettingsComponentTestBase extends BusinessComponentTestBase {
 
     protected static String SETTINGS_BASE_URL = "settings";
-    protected static String SETTINGS_URL = SETTINGS_BASE_URL;
+    protected static String GENERAL_SETTINGS_URL = SETTINGS_BASE_URL + "/general";
+    protected static String USER_SETTINGS_URL = SETTINGS_BASE_URL + "/user";
 
-    protected SettingsDto user1GetSettings() {
-        return getSettings(USER_1);
+    protected GeneralSettingsDto user1GetGeneralSettings() {
+        return getGeneralSettings(USER_1);
     }
 
-    protected SettingsDto user2GetSettings() {
-        return getSettings(USER_2);
+    protected GeneralSettingsDto user2GetGeneralSettings() {
+        return getGeneralSettings(USER_2);
     }
 
-    protected SettingsDto user3GetSettings() {
-        return getSettings(USER_3);
+    protected GeneralSettingsDto user3GetGeneralSettings() {
+        return getGeneralSettings(USER_3);
     }
 
-    protected SettingsDto getSettings(ComponentTestUser user) {
-        var typeRef = new TypeRef<SettingsDto>() {
+    protected UserSettingsDto user1GetUserSettings() {
+        return getUserSettings(USER_1);
+    }
+
+    protected UserSettingsDto user2GetUserSettings() {
+        return getUserSettings(USER_2);
+    }
+
+    protected UserSettingsDto user3GetUserSettings() {
+        return getUserSettings(USER_3);
+    }
+
+    protected GeneralSettingsDto getGeneralSettings(ComponentTestUser user) {
+        var typeRef = new TypeRef<GeneralSettingsDto>() {
         };
-        return getOne(SETTINGS_URL, user, typeRef);
+        return getOne(GENERAL_SETTINGS_URL, user, typeRef);
+    }
+
+    protected UserSettingsDto getUserSettings(ComponentTestUser user) {
+        var typeRef = new TypeRef<UserSettingsDto>() {
+        };
+        return getOne(USER_SETTINGS_URL, user, typeRef);
     }
 }
