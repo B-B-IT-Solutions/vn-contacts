@@ -1,5 +1,6 @@
 package cz.prm.services;
 
+import cz.prm.domain.settings.GeneralSettings;
 import cz.prm.domain.settings.UserSettings;
 import cz.prm.repositories.settings.GeneralSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
@@ -22,12 +23,16 @@ public class SettingsService {
         this.predicates = predicates;
     }
 
+    public GeneralSettings getGeneralSettings() {
+        return generalSettingsRepository.getReferenceById(1L);
+    }
+
     public UserSettings getUserSettings() {
         return getOrCreateUserSettings();
     }
 
     private UserSettings getOrCreateUserSettings() {
-        var predicate = predicates.settings();
+        var predicate = predicates.userSettings();
         var optional = userSettingsRepository.findOne(predicate);
         if (optional.isEmpty()) {
             var settings = new UserSettings();

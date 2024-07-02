@@ -41,7 +41,7 @@ class UserSettingsServiceTest {
     void getUserSettings_SettingsExists() {
         var settings = settings();
         var predicate = new BooleanBuilder();
-        when(predicates.settings()).thenReturn(predicate);
+        when(predicates.userSettings()).thenReturn(predicate);
         when(userSettingsRepository.findOne(predicate)).thenReturn(of(settings));
 
         var result = settingsService.getUserSettings();
@@ -51,7 +51,7 @@ class UserSettingsServiceTest {
     @Test
     void getUserSettings_SettingsDoesntExist() {
         var predicate = new BooleanBuilder();
-        when(predicates.settings()).thenReturn(predicate);
+        when(predicates.userSettings()).thenReturn(predicate);
         when(userSettingsRepository.findOne(predicate)).thenReturn(empty());
         when(userSettingsRepository.saveAndFlush(any(UserSettings.class))).thenAnswer((invocation -> invocation.getArgument(0)));
 

@@ -24,8 +24,8 @@ class UserSettingsPredicatesTest {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
             var user = user();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
-            var query = predicates.settings();
-            var expectedString = format("settings.owner.username = %s", user.getUsername());
+            var query = predicates.userSettings();
+            var expectedString = format("userSettings.owner.username = %s", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }
     }
