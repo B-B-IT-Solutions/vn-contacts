@@ -20,6 +20,7 @@
 			<querydsl.version>5.0.0</querydsl.version>
 			<spring-data-envers.version>3.2.0</spring-data-envers.version>
 			<hibernate-envers.version>6.3.2.Final</hibernate-envers.version>
+			<jackson.version>2.15.4</jackson.version>
 			<maven-checkstyle-plugin.version>3.2.1</maven-checkstyle-plugin.version>
 			<junit-jupiter.version>5.10.2</junit-jupiter.version>
 			<assertj.version>3.25.3</assertj.version>
@@ -122,7 +123,12 @@
 			<dependency>
 				 <groupId>com.fasterxml.jackson.core</groupId>
 				 <artifactId>jackson-annotations</artifactId>
-				 <version>2.15.4</version>
+				 <version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				 <groupId>com.fasterxml.jackson.datatype</groupId>
+				 <artifactId>jackson-datatype-jsr310</artifactId>
+				 <version>${jackson.version}</version>
 			</dependency>
 			<dependency>
 				 <groupId>org.springframework.boot</groupId>
