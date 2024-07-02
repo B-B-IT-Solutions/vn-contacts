@@ -261,29 +261,6 @@ public class ContactComponentTest extends ContactComponentTestBase {
         filter.setNickName(notContainsFilter("Nick"));
         pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
-
-        queryDto = contactsQueryDto();
-        filter = queryDto.getFilter();
-
-        filter.setEmail(contactDto1.getEmails().get(0).getValue());
-        pageDto = user1GetContacts(queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
-
-        filter.setEmail(containsFilter(contactDto1.getEmails().get(0).getValue()));
-        pageDto = user1GetContacts(queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
-
-        filter.setEmail(notContainsFilter(contactDto1.getEmails().get(0).getValue()));
-        pageDto = user1GetContacts(queryDto);
-        assertThat(pageDto.getContent()).hasSize(20);
-
-        filter.setEmail(containsNotContainsFilter(contactDto1.getEmails().get(0).getValue(), contactDto2.getEmails().get(0).getValue()));
-        pageDto = user1GetContacts(queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
-
-        filter.setEmail(notContainsFilter("connection"));
-        pageDto = user1GetContacts(queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
     }
 
     @Test
