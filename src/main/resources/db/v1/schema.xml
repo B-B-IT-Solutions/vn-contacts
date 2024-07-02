@@ -27,6 +27,24 @@
 				 <column name="last_edit_date" type="TIMESTAMP WITH TIME ZONE"/>
 				 <column name="creation_date" type="TIMESTAMP WITH TIME ZONE"/>
 			</createTable>
+		 
+			<createTable tableName="contact_telephone">
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="value" type="VARCHAR(100)"/>
+				 <column name="type" type="VARCHAR(100)"/>
+			</createTable>
+		 
+			<createTable tableName="contact_email">
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="value" type="VARCHAR(100)"/>
+				 <column name="type" type="VARCHAR(100)"/>
+			</createTable>
+		 
+			<createTable tableName="contact_url">
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="value" type="VARCHAR(100)"/>
+				 <column name="type" type="VARCHAR(100)"/>
+			</createTable>
 			
 			<createTable tableName="contact_label">
 				 <column name="contact_id" type="BIGINT"/>
