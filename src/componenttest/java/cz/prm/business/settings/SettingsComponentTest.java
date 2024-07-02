@@ -2,11 +2,24 @@ package cz.prm.business.settings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.settings.GeneralSettingsDto;
 import cz.prm.controllers.dto.settings.UserSettingsDto;
 import cz.prm.utils.assertions.SettingsComponentTestAssertions;
 import org.junit.jupiter.api.Test;
 
-public class UserSettingsComponentTest extends SettingsComponentTestBase {
+public class SettingsComponentTest extends SettingsComponentTestBase {
+
+    @Test
+    void getGeneralSettings() {
+        var dto = user1GetGeneralSettings();
+        assertSettings(dto);
+
+        dto = user2GetGeneralSettings();
+        assertSettings(dto);
+
+        dto = user3GetGeneralSettings();
+        assertSettings(dto);
+    }
 
     @Test
     void getUserSettings() {
@@ -26,8 +39,13 @@ public class UserSettingsComponentTest extends SettingsComponentTestBase {
         assertSettings(dto_2);
     }
 
+    private void assertSettings(GeneralSettingsDto dto) {
+        var settings = getGeneralSettingsFromDb(dto);
+        SettingsComponentTestAssertions.assertSettings(settings, dto);
+    }
+
     private void assertSettings(UserSettingsDto dto) {
-        var settings = getSettingsFromDb(dto);
+        var settings = getUserSettingsFromDb(dto);
         SettingsComponentTestAssertions.assertSettings(settings, dto);
     }
 }

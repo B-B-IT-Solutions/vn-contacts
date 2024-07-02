@@ -82,9 +82,6 @@
 				 <column name="settings_id" type="BIGINT">
 						<constraints primaryKey="true" primaryKeyName="general_settings_pk" nullable="false"/>
 				 </column>
-				 <column name="owner_username" type="VARCHAR(255)"/>
-				 <column name="owner_email" type="VARCHAR(255)"/>
-				 <column name="last_edit_date" type="TIMESTAMP WITH TIME ZONE"/>
 			</createTable>
 			
 			<createTable tableName="general_settings_industry">

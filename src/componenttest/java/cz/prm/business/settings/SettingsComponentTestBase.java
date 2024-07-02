@@ -5,6 +5,7 @@ import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
 
 import cz.prm.business.BusinessComponentTestBase;
+import cz.prm.controllers.dto.settings.GeneralSettingsDto;
 import cz.prm.controllers.dto.settings.UserSettingsDto;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
@@ -12,7 +13,20 @@ import io.restassured.common.mapper.TypeRef;
 public class SettingsComponentTestBase extends BusinessComponentTestBase {
 
     protected static String SETTINGS_BASE_URL = "settings";
+    protected static String GENERAL_SETTINGS_URL = SETTINGS_BASE_URL + "/general";
     protected static String USER_SETTINGS_URL = SETTINGS_BASE_URL + "/user";
+
+    protected GeneralSettingsDto user1GetGeneralSettings() {
+        return getGeneralSettings(USER_1);
+    }
+
+    protected GeneralSettingsDto user2GetGeneralSettings() {
+        return getGeneralSettings(USER_2);
+    }
+
+    protected GeneralSettingsDto user3GetGeneralSettings() {
+        return getGeneralSettings(USER_3);
+    }
 
     protected UserSettingsDto user1GetUserSettings() {
         return getUserSettings(USER_1);
@@ -24,6 +38,12 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
 
     protected UserSettingsDto user3GetUserSettings() {
         return getUserSettings(USER_3);
+    }
+
+    protected GeneralSettingsDto getGeneralSettings(ComponentTestUser user) {
+        var typeRef = new TypeRef<GeneralSettingsDto>() {
+        };
+        return getOne(GENERAL_SETTINGS_URL, user, typeRef);
     }
 
     protected UserSettingsDto getUserSettings(ComponentTestUser user) {

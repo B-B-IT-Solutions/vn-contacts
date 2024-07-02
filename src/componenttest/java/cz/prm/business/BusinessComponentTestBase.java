@@ -9,12 +9,15 @@ import static java.util.stream.Collectors.toList;
 import cz.prm.ComponentTestBase;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.note.NoteDto;
+import cz.prm.controllers.dto.settings.GeneralSettingsDto;
 import cz.prm.controllers.dto.settings.UserSettingsDto;
 import cz.prm.custom.ComponentTestContactRepository;
+import cz.prm.custom.ComponentTestGeneralSettingsRepository;
 import cz.prm.custom.ComponentTestNoteRepository;
 import cz.prm.custom.ComponentTestUserSettingsRepository;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.note.Note;
+import cz.prm.domain.settings.GeneralSettings;
 import cz.prm.domain.settings.UserSettings;
 import cz.prm.utils.ComponentTestUser;
 import java.util.List;
@@ -29,13 +32,15 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     @Autowired
     protected ComponentTestNoteRepository noteRepository;
     @Autowired
-    protected ComponentTestUserSettingsRepository settingsRepository;
+    protected ComponentTestGeneralSettingsRepository generalSettingsRepository;
+    @Autowired
+    protected ComponentTestUserSettingsRepository userSettingsRepository;
 
     @BeforeEach
     void setUp() {
         noteRepository.deleteAll();
         contactRepository.deleteAll();
-        settingsRepository.deleteAll();
+        userSettingsRepository.deleteAll();
     }
 
     protected List<Contact> createContacts(ComponentTestUser user) {
@@ -84,7 +89,11 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         return noteRepository.getByText(dto.getText());
     }
 
-    protected UserSettings getSettingsFromDb(UserSettingsDto dto) {
-        return settingsRepository.getReferenceById(dto.getSettingsId());
+    protected GeneralSettings getGeneralSettingsFromDb(GeneralSettingsDto dto) {
+        return generalSettingsRepository.getReferenceById(dto.getSettingsId());
+    }
+
+    protected UserSettings getUserSettingsFromDb(UserSettingsDto dto) {
+        return userSettingsRepository.getReferenceById(dto.getSettingsId());
     }
 }
