@@ -80,7 +80,7 @@
 			
 			<createTable tableName="general_settings">
 				 <column name="settings_id" type="BIGINT">
-						<constraints primaryKey="true" primaryKeyName="settings_pk" nullable="false"/>
+						<constraints primaryKey="true" primaryKeyName="general_settings_pk" nullable="false"/>
 				 </column>
 				 <column name="owner_username" type="VARCHAR(255)"/>
 				 <column name="owner_email" type="VARCHAR(255)"/>
@@ -94,7 +94,7 @@
 			
 			<createTable tableName="user_settings">
 				 <column name="settings_id" type="BIGINT">
-						<constraints primaryKey="true" primaryKeyName="settings_pk" nullable="false"/>
+						<constraints primaryKey="true" primaryKeyName="user_settings_pk" nullable="false"/>
 				 </column>
 				 <column name="owner_username" type="VARCHAR(255)"/>
 				 <column name="owner_email" type="VARCHAR(255)"/>
