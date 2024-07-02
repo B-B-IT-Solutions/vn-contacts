@@ -4,12 +4,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.settings.LabelDto;
 import cz.prm.controllers.dto.settings.SettingsDto;
+import cz.prm.domain.settings.GeneralSettings;
 import cz.prm.domain.settings.Label;
 import cz.prm.domain.settings.UserSettings;
 import java.util.List;
 import java.util.Objects;
 
 public class SettingsAssertions {
+
+    public static void assertSettings(GeneralSettings settings1, GeneralSettings settings2) {
+        assertThat(settings1.getSettingsId()).isEqualTo(settings2.getSettingsId());
+        assertThat(settings1.getIndustries()).containsExactlyElementsOf(settings2.getIndustries());
+    }
 
     public static void assertSettings(UserSettings settings1, UserSettings settings2) {
         assertThat(settings1.getSettingsId()).isEqualTo(settings2.getSettingsId());

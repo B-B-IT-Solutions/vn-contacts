@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
-class UserSettingsPredicatesTest {
+class SettingsPredicatesTest {
 
     private SettingsPredicates predicates;
 
@@ -20,7 +20,14 @@ class UserSettingsPredicatesTest {
     }
 
     @Test
-    void byContactId() {
+    void generalSettings() {
+        var query = predicates.generalSettings();
+        var expectedString = format("generalSettings.settingsId = %s", 1);
+        assertThat(query).hasToString(expectedString);
+    }
+
+    @Test
+    void userSettings() {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
             var user = user();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);

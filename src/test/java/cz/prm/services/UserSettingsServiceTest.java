@@ -1,6 +1,7 @@
 package cz.prm.services;
 
-import static cz.prm.utils.SettingsUtils.settings;
+import static cz.prm.utils.SettingsUtils.generalSettings;
+import static cz.prm.utils.SettingsUtils.userSettings;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
@@ -38,8 +39,19 @@ class UserSettingsServiceTest {
     }
 
     @Test
+    void getGeneralSettings_SettingsExists() {
+        var settings = generalSettings();
+        var predicate = new BooleanBuilder();
+        when(predicates.generalSettings()).thenReturn(predicate);
+        when(generalSettingsRepository.findOne(predicate)).thenReturn(of(settings));
+
+        var result = settingsService.getGeneralSettings();
+        assertSettings(result, settings);
+    }
+
+    @Test
     void getUserSettings_SettingsExists() {
-        var settings = settings();
+        var settings = userSettings();
         var predicate = new BooleanBuilder();
         when(predicates.userSettings()).thenReturn(predicate);
         when(userSettingsRepository.findOne(predicate)).thenReturn(of(settings));

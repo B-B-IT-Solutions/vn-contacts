@@ -1,6 +1,6 @@
 package cz.prm.controllers;
 
-import static cz.prm.utils.SettingsUtils.settings;
+import static cz.prm.utils.SettingsUtils.userSettings;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
 import static org.mockito.Mockito.when;
 
@@ -29,7 +29,7 @@ class SettingsControllerTest {
 
     @Test
     void getUserSettings() {
-        var settings = settings();
+        var settings = userSettings();
         when(settingsService.getUserSettings()).thenReturn(settings);
         var result = controller.getUserSettings();
         assertSettings(settings, result);

@@ -5,7 +5,9 @@ import cz.prm.domain.settings.UserSettings;
 import cz.prm.repositories.settings.GeneralSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
 import cz.prm.repositories.settings.UserSettingsRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import java.util.function.Supplier;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,7 +26,9 @@ public class SettingsService {
     }
 
     public GeneralSettings getGeneralSettings() {
-        return generalSettingsRepository.getReferenceById(1L);
+        var predicate = predicates.generalSettings();
+        var optional = generalSettingsRepository.findOne(predicate);
+        return optional.orElseThrow(generalSettingsNotFoundSupplier());
     }
 
     public UserSettings getUserSettings() {
@@ -41,5 +45,9 @@ public class SettingsService {
             return savedSettings;
         }
         return optional.get();
+    }
+
+    private Supplier<EntityNotFoundException> generalSettingsNotFoundSupplier() {
+        return () -> new EntityNotFoundException("GeneralSettings not found!");
     }
 }
