@@ -2,7 +2,7 @@ package cz.prm.business.settings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.controllers.dto.settings.SettingsDto;
+import cz.prm.controllers.dto.settings.UserSettingsDto;
 import cz.prm.utils.assertions.SettingsComponentTestAssertions;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +26,7 @@ public class UserSettingsComponentTest extends SettingsComponentTestBase {
         assertSettings(dto_2);
     }
 
-    private void assertSettings(SettingsDto dto) {
+    private void assertSettings(UserSettingsDto dto) {
         var settings = getSettingsFromDb(dto);
         SettingsComponentTestAssertions.assertSettings(settings, dto);
     }

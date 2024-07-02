@@ -2,8 +2,9 @@ package cz.prm.utils.assertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.settings.GeneralSettingsDto;
 import cz.prm.controllers.dto.settings.LabelDto;
-import cz.prm.controllers.dto.settings.SettingsDto;
+import cz.prm.controllers.dto.settings.UserSettingsDto;
 import cz.prm.domain.settings.GeneralSettings;
 import cz.prm.domain.settings.Label;
 import cz.prm.domain.settings.UserSettings;
@@ -17,6 +18,11 @@ public class SettingsAssertions {
         assertThat(settings1.getIndustries()).containsExactlyElementsOf(settings2.getIndustries());
     }
 
+    public static void assertSettings(GeneralSettings settings, GeneralSettingsDto dto) {
+        assertThat(settings.getSettingsId()).isEqualTo(dto.getSettingsId());
+        assertThat(settings.getIndustries()).containsExactlyElementsOf(dto.getIndustries());
+    }
+
     public static void assertSettings(UserSettings settings1, UserSettings settings2) {
         assertThat(settings1.getSettingsId()).isEqualTo(settings2.getSettingsId());
         assertThat(settings1.getLabels()).containsExactlyElementsOf(settings2.getLabels());
@@ -24,7 +30,7 @@ public class SettingsAssertions {
         assertThat(settings1.getOwner()).isEqualTo(settings2.getOwner());
     }
 
-    public static void assertSettings(UserSettings settings, SettingsDto dto) {
+    public static void assertSettings(UserSettings settings, UserSettingsDto dto) {
         assertThat(settings.getSettingsId()).isEqualTo(dto.getSettingsId());
         assertThat(settings.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertLabels(settings.getLabels(), dto.getLabels());

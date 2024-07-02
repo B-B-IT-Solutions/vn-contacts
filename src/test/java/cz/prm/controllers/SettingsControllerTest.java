@@ -1,5 +1,6 @@
 package cz.prm.controllers;
 
+import static cz.prm.utils.SettingsUtils.generalSettings;
 import static cz.prm.utils.SettingsUtils.userSettings;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
 import static org.mockito.Mockito.when;
@@ -25,6 +26,14 @@ class SettingsControllerTest {
     @BeforeEach
     void setUp() {
         controller = new SettingsController(settingsService, mapper);
+    }
+
+    @Test
+    void getGeneralSettings() {
+        var settings = generalSettings();
+        when(settingsService.getGeneralSettings()).thenReturn(settings);
+        var result = controller.getGeneralSettings();
+        assertSettings(settings, result);
     }
 
     @Test

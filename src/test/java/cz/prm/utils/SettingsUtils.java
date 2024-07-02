@@ -7,7 +7,7 @@ import static cz.prm.utils.TestUtils.uuid;
 import static java.time.Instant.now;
 
 import cz.prm.controllers.dto.settings.LabelDto;
-import cz.prm.controllers.dto.settings.SettingsDto;
+import cz.prm.controllers.dto.settings.UserSettingsDto;
 import cz.prm.domain.settings.GeneralSettings;
 import cz.prm.domain.settings.Label;
 import cz.prm.domain.settings.UserSettings;
@@ -30,8 +30,8 @@ public class SettingsUtils {
         return settings;
     }
 
-    public static SettingsDto userSettingsDto() {
-        var settings = new SettingsDto();
+    public static UserSettingsDto userSettingsDto() {
+        var settings = new UserSettingsDto();
         settings.setLabels(labelsDto());
         settings.setLastEditDate(now());
         return settings;

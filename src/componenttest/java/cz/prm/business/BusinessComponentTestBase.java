@@ -9,7 +9,7 @@ import static java.util.stream.Collectors.toList;
 import cz.prm.ComponentTestBase;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.note.NoteDto;
-import cz.prm.controllers.dto.settings.SettingsDto;
+import cz.prm.controllers.dto.settings.UserSettingsDto;
 import cz.prm.custom.ComponentTestContactRepository;
 import cz.prm.custom.ComponentTestNoteRepository;
 import cz.prm.custom.ComponentTestUserSettingsRepository;
@@ -84,7 +84,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         return noteRepository.getByText(dto.getText());
     }
 
-    protected UserSettings getSettingsFromDb(SettingsDto dto) {
+    protected UserSettings getSettingsFromDb(UserSettingsDto dto) {
         return settingsRepository.getReferenceById(dto.getSettingsId());
     }
 }

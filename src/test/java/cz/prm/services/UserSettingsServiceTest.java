@@ -6,6 +6,7 @@ import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,6 +16,7 @@ import cz.prm.domain.settings.UserSettings;
 import cz.prm.repositories.settings.GeneralSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
 import cz.prm.repositories.settings.UserSettingsRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,7 +41,15 @@ class UserSettingsServiceTest {
     }
 
     @Test
-    void getGeneralSettings_SettingsExists() {
+    void getGeneralSettings() {
+        var predicate = new BooleanBuilder();
+        when(predicates.generalSettings()).thenReturn(predicate);
+        when(generalSettingsRepository.findOne(predicate)).thenReturn(empty());
+        assertThrows(EntityNotFoundException.class, () -> settingsService.getGeneralSettings());
+    }
+
+    @Test
+    void getGeneralSettings_SettingsNotFound() {
         var settings = generalSettings();
         var predicate = new BooleanBuilder();
         when(predicates.generalSettings()).thenReturn(predicate);
@@ -50,7 +60,7 @@ class UserSettingsServiceTest {
     }
 
     @Test
-    void getUserSettings_SettingsExists() {
+    void getUserSettings() {
         var settings = userSettings();
         var predicate = new BooleanBuilder();
         when(predicates.userSettings()).thenReturn(predicate);
@@ -61,7 +71,7 @@ class UserSettingsServiceTest {
     }
 
     @Test
-    void getUserSettings_SettingsDoesntExist() {
+    void getUserSettings_SettingsNotFound() {
         var predicate = new BooleanBuilder();
         when(predicates.userSettings()).thenReturn(predicate);
         when(userSettingsRepository.findOne(predicate)).thenReturn(empty());
