@@ -67,17 +67,17 @@ public class ContactUtils {
 
     public static Occupation occupation() {
         var occupation = new Occupation();
-        occupation.setJobTitle(format("jobTitle%s", ComponentTestUtils.uuid()));
-        occupation.setCompany(format("company%s", ComponentTestUtils.uuid()));
-        occupation.setIndustry(format("industry%s", ComponentTestUtils.uuid()));
+        occupation.setJobTitle(format("jobTitle%s", uuid()));
+        occupation.setCompany(format("company%s", uuid()));
+        occupation.setIndustry(format("industry%s", uuid()));
         return occupation;
     }
 
     public static OccupationDto occupationDto() {
         var occupation = new OccupationDto();
-        occupation.setJobTitle(format("jobTitle%s", ComponentTestUtils.uuid()));
-        occupation.setCompany(format("company%s", ComponentTestUtils.uuid()));
-        occupation.setIndustry(format("industry%s", ComponentTestUtils.uuid()));
+        occupation.setJobTitle(format("jobTitle%s", uuid()));
+        occupation.setCompany(format("company%s", uuid()));
+        occupation.setIndustry(format("industry%s", uuid()));
         return occupation;
     }
 
