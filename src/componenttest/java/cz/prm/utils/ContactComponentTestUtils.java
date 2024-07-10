@@ -31,7 +31,8 @@ public class ContactComponentTestUtils {
         contact.setTelephones(connections());
         contact.setEmails(connections());
         contact.setUrls(connections());
-        contact.setProfessions(format("professions%s", uuid()));
+        contact.setJobTitle(format("jobTitle%s", uuid()));
+        contact.setCompany(format("company%s", uuid()));
         contact.setIndustries(format("industries%s", uuid()));
         contact.setLabels(uuids());
         contact.setDateOfBirth(now());
@@ -47,7 +48,8 @@ public class ContactComponentTestUtils {
         dto.setTelephones(connectionsDto());
         dto.setEmails(connectionsDto());
         dto.setUrls(connectionsDto());
-        dto.setProfessions(uuid());
+        dto.setJobTitle(uuid());
+        dto.setCompany(uuid());
         dto.setIndustries(uuid());
         dto.setLabels(uuids());
         dto.setDateOfBirth(now());

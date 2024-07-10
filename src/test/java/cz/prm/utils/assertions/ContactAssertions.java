@@ -59,7 +59,8 @@ public class ContactAssertions {
         assertThat(contact1.getMiddleName()).isEqualTo(contact2.getMiddleName());
         assertThat(contact1.getLastName()).isEqualTo(contact2.getLastName());
         assertThat(contact1.getNickName()).isEqualTo(contact2.getNickName());
-        assertThat(contact1.getProfessions()).isEqualTo(contact2.getProfessions());
+        assertThat(contact1.getJobTitle()).isEqualTo(contact2.getJobTitle());
+        assertThat(contact1.getCompany()).isEqualTo(contact2.getCompany());
         assertThat(contact1.getIndustries()).isEqualTo(contact2.getIndustries());
         assertThat(contact1.getLabels()).containsExactlyElementsOf(contact2.getLabels());
         assertThat(contact1.getOwner()).isEqualTo(contact2.getOwner());
@@ -77,7 +78,8 @@ public class ContactAssertions {
         assertThat(contact.getMiddleName()).isEqualTo(dto.getMiddleName());
         assertThat(contact.getLastName()).isEqualTo(dto.getLastName());
         assertThat(contact.getNickName()).isEqualTo(dto.getNickName());
-        assertThat(contact.getProfessions()).isEqualTo(dto.getProfessions());
+        assertThat(contact.getJobTitle()).isEqualTo(dto.getJobTitle());
+        assertThat(contact.getCompany()).isEqualTo(dto.getCompany());
         assertThat(contact.getIndustries()).isEqualTo(dto.getIndustries());
         assertThat(contact.getLabels()).containsExactlyElementsOf(dto.getLabels());
         assertThat(contact.getDateOfBirth()).isEqualTo(dto.getDateOfBirth());

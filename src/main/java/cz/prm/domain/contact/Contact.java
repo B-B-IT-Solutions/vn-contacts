@@ -68,8 +68,11 @@ public class Contact {
     @Column(name = "URL")
     private List<Connection> urls;
 
-    @Column(name = "PROFESSIONS")
-    private String professions;
+    @Column(name = "JOB_TITLE")
+    private String jobTitle;
+
+    @Column(name = "COMPANY")
+    private String company;
 
     @Column(name = "INDUSTRIES")
     private String industries;

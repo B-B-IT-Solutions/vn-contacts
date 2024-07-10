@@ -32,7 +32,8 @@ public class ContractComponentTestAssertions {
         assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
         assertThat(contact.getLastName()).isEqualTo(contactDto.getLastName());
         assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
-        assertThat(contact.getProfessions()).isEqualTo(contactDto.getProfessions());
+        assertThat(contact.getJobTitle()).isEqualTo(contactDto.getJobTitle());
+        assertThat(contact.getCompany()).isEqualTo(contactDto.getCompany());
         assertThat(contact.getIndustries()).isEqualTo(contactDto.getIndustries());
         assertThat(contact.getLabels()).containsExactlyElementsOf(contactDto.getLabels());
         assertThat(contact.getDateOfBirth()).isCloseTo(contactDto.getDateOfBirth(), within(1, SECONDS));

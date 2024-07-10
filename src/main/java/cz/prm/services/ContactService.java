@@ -55,7 +55,7 @@ public class ContactService {
         savedContact.setEmails(updatedContact.getEmails());
         savedContact.setUrls(updatedContact.getUrls());
         savedContact.setDateOfBirth(updatedContact.getDateOfBirth());
-        savedContact.setProfessions(updatedContact.getProfessions());
+        savedContact.setJobTitle(updatedContact.getJobTitle());
         savedContact.setIndustries(updatedContact.getIndustries());
         savedContact.setLabels(updatedContact.getLabels());
     }

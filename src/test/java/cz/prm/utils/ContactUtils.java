@@ -35,7 +35,8 @@ public class ContactUtils {
         contact.setTelephones(connections());
         contact.setEmails(connections());
         contact.setUrls(connections());
-        contact.setProfessions(uuid());
+        contact.setJobTitle(uuid());
+        contact.setCompany(uuid());
         contact.setIndustries(uuid());
         contact.setLabels(uuids());
         contact.setOwner(user());
@@ -55,7 +56,8 @@ public class ContactUtils {
         contact.setTelephones(connectionsDto());
         contact.setEmails(connectionsDto());
         contact.setUrls(connectionsDto());
-        contact.setProfessions(uuid());
+        contact.setJobTitle(uuid());
+        contact.setCompany(uuid());
         contact.setIndustries(uuid());
         contact.setLabels(uuids());
         contact.setDateOfBirth(now());

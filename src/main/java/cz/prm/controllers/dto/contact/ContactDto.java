@@ -36,8 +36,11 @@ public class ContactDto {
     @JsonProperty("urls")
     private List<ConnectionDto> urls;
 
-    @JsonProperty("professions")
-    private String professions;
+    @JsonProperty("jobTitle")
+    private String jobTitle;
+
+    @JsonProperty("company")
+    private String company;
 
     @JsonProperty("industries")
     private String industries;
