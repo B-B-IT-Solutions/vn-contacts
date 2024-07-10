@@ -120,8 +120,7 @@ class ContactServiceTest {
         assertThat(savedContact.getEmails()).isEqualTo(updatedContact.getEmails());
         assertThat(savedContact.getUrls()).isEqualTo(updatedContact.getUrls());
         assertThat(savedContact.getDateOfBirth()).isEqualTo(updatedContact.getDateOfBirth());
-        assertThat(savedContact.getJobTitle()).isEqualTo(updatedContact.getJobTitle());
-        assertThat(savedContact.getIndustries()).isEqualTo(updatedContact.getIndustries());
+        assertThat(savedContact.getOccupation()).isEqualTo(updatedContact.getOccupation());
         assertThat(savedContact.getLabels()).isEqualTo(updatedContact.getLabels());
     }
 }

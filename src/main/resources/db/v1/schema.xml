@@ -21,7 +21,7 @@
 				 <column name="email" type="VARCHAR(255)"/>
 				 <column name="job_title" type="VARCHAR(500)"/>
 				 <column name="company" type="VARCHAR(500)"/>
-				 <column name="industries" type="VARCHAR(500)"/>
+				 <column name="industry" type="VARCHAR(500)"/>
 				 <column name="owner_username" type="VARCHAR(255)"/>
 				 <column name="owner_email" type="VARCHAR(255)"/>
 				 <column name="date_of_birth" type="TIMESTAMP WITH TIME ZONE"/>

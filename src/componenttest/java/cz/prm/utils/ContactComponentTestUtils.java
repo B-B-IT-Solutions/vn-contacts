@@ -10,10 +10,12 @@ import com.google.common.collect.Lists;
 import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.Occupation;
 import java.util.List;
 
 public class ContactComponentTestUtils {
@@ -31,9 +33,7 @@ public class ContactComponentTestUtils {
         contact.setTelephones(connections());
         contact.setEmails(connections());
         contact.setUrls(connections());
-        contact.setJobTitle(format("jobTitle%s", uuid()));
-        contact.setCompany(format("company%s", uuid()));
-        contact.setIndustries(format("industries%s", uuid()));
+        contact.setOccupation(occupation());
         contact.setLabels(uuids());
         contact.setDateOfBirth(now());
         return contact;
@@ -48,12 +48,26 @@ public class ContactComponentTestUtils {
         dto.setTelephones(connectionsDto());
         dto.setEmails(connectionsDto());
         dto.setUrls(connectionsDto());
-        dto.setJobTitle(uuid());
-        dto.setCompany(uuid());
-        dto.setIndustries(uuid());
+        dto.setOccupation(occupationDto());
         dto.setLabels(uuids());
         dto.setDateOfBirth(now());
         return dto;
+    }
+
+    public static Occupation occupation() {
+        var occupation = new Occupation();
+        occupation.setJobTitle(format("jobTitle%s", uuid()));
+        occupation.setCompany(format("company%s", uuid()));
+        occupation.setIndustry(format("industry%s", uuid()));
+        return occupation;
+    }
+
+    public static OccupationDto occupationDto() {
+        var occupation = new OccupationDto();
+        occupation.setJobTitle(format("jobTitle%s", uuid()));
+        occupation.setCompany(format("company%s", uuid()));
+        occupation.setIndustry(format("industry%s", uuid()));
+        return occupation;
     }
 
     public static List<Connection> connections() {

@@ -6,11 +6,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.Occupation;
 import cz.prm.domain.contact.query.ContactsFilter;
 import cz.prm.domain.contact.query.ContactsQuery;
 import java.util.List;
@@ -59,14 +61,12 @@ public class ContactAssertions {
         assertThat(contact1.getMiddleName()).isEqualTo(contact2.getMiddleName());
         assertThat(contact1.getLastName()).isEqualTo(contact2.getLastName());
         assertThat(contact1.getNickName()).isEqualTo(contact2.getNickName());
-        assertThat(contact1.getJobTitle()).isEqualTo(contact2.getJobTitle());
-        assertThat(contact1.getCompany()).isEqualTo(contact2.getCompany());
-        assertThat(contact1.getIndustries()).isEqualTo(contact2.getIndustries());
         assertThat(contact1.getLabels()).containsExactlyElementsOf(contact2.getLabels());
         assertThat(contact1.getOwner()).isEqualTo(contact2.getOwner());
         assertThat(contact1.getDateOfBirth()).isEqualTo(contact2.getDateOfBirth());
         assertThat(contact1.getLastEditDate()).isEqualTo(contact2.getLastEditDate());
         assertThat(contact1.getCreationDate()).isEqualTo(contact2.getCreationDate());
+        assertOccupation(contact1.getOccupation(), contact2.getOccupation());
         assertConnections(contact1.getTelephones(), contact2.getTelephones());
         assertConnections(contact1.getEmails(), contact2.getEmails());
         assertConnections(contact1.getUrls(), contact2.getUrls());
@@ -78,16 +78,26 @@ public class ContactAssertions {
         assertThat(contact.getMiddleName()).isEqualTo(dto.getMiddleName());
         assertThat(contact.getLastName()).isEqualTo(dto.getLastName());
         assertThat(contact.getNickName()).isEqualTo(dto.getNickName());
-        assertThat(contact.getJobTitle()).isEqualTo(dto.getJobTitle());
-        assertThat(contact.getCompany()).isEqualTo(dto.getCompany());
-        assertThat(contact.getIndustries()).isEqualTo(dto.getIndustries());
         assertThat(contact.getLabels()).containsExactlyElementsOf(dto.getLabels());
         assertThat(contact.getDateOfBirth()).isEqualTo(dto.getDateOfBirth());
         assertThat(contact.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(contact.getCreationDate()).isEqualTo(dto.getCreationDate());
+        assertOccupationDto(contact.getOccupation(), dto.getOccupation());
         assertConnectionsDto(contact.getTelephones(), dto.getTelephones());
         assertConnectionsDto(contact.getEmails(), dto.getEmails());
         assertConnectionsDto(contact.getUrls(), dto.getUrls());
+    }
+
+    public static void assertOccupation(Occupation occupation1, Occupation occupation2) {
+        assertThat(occupation1.getJobTitle()).isEqualTo(occupation2.getJobTitle());
+        assertThat(occupation1.getCompany()).isEqualTo(occupation2.getCompany());
+        assertThat(occupation1.getIndustry()).isEqualTo(occupation2.getIndustry());
+    }
+
+    public static void assertOccupationDto(Occupation occupation, OccupationDto dto) {
+        assertThat(occupation.getJobTitle()).isEqualTo(dto.getJobTitle());
+        assertThat(occupation.getCompany()).isEqualTo(dto.getCompany());
+        assertThat(occupation.getIndustry()).isEqualTo(dto.getIndustry());
     }
 
     public static void assertConnections(List<Connection> cons1, List<Connection> cons2) {

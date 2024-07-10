@@ -68,14 +68,8 @@ public class Contact {
     @Column(name = "URL")
     private List<Connection> urls;
 
-    @Column(name = "JOB_TITLE")
-    private String jobTitle;
-
-    @Column(name = "COMPANY")
-    private String company;
-
-    @Column(name = "INDUSTRIES")
-    private String industries;
+    @Embedded
+    private Occupation occupation;
 
     @ElementCollection(fetch = EAGER)
     @CollectionTable(name = "CONTACT_LABEL", joinColumns = @JoinColumn(name = "CONTACT_ID"))
