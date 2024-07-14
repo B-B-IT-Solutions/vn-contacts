@@ -11,11 +11,6 @@
 			
 			<insert tableName="general_settings_industry">
 				 <column name="settings_id" value="1"/>
-				 <column name="industry" value="warrior"/>
-			</insert>
-			
-			<insert tableName="general_settings_industry">
-				 <column name="settings_id" value="1"/>
 				 <column name="industry" value="Accommodation"/>
 			</insert>
 			
@@ -596,8 +591,9 @@
 				 <column name="first_name" value="Sergej"/>
 				 <column name="last_name" value="Bobusky"/>
 				 <column name="email" value="bobuskysergej@gmail.com"/>
-				 <column name="professions" value="Entrepreneur, Software Engineer,Warrior"/>
-				 <column name="industries" value="IT,life,martial arts"/>
+				 <column name="job_title" value="Entrepreneur"/>
+				 <column name="company" value="SB GmBH"/>
+				 <column name="industry" value="Information"/>
 				 <column name="date_of_birth" value="19 May 1989 00:00:00 GMT"/>
 				 <column name="owner_username" value="bobuskysergej"/>
 				 <column name="owner_email" value="bobuskysergej"/>

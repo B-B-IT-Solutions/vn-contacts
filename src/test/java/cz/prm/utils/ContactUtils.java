@@ -7,14 +7,17 @@ import static cz.prm.utils.CommonUtils.user;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.TestUtils.uuids;
+import static java.lang.String.format;
 import static java.time.Instant.now;
 
 import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.Occupation;
 import cz.prm.domain.contact.query.ContactsFilter;
 import cz.prm.domain.contact.query.ContactsQuery;
 import java.util.List;
@@ -35,8 +38,7 @@ public class ContactUtils {
         contact.setTelephones(connections());
         contact.setEmails(connections());
         contact.setUrls(connections());
-        contact.setProfessions(uuid());
-        contact.setIndustries(uuid());
+        contact.setOccupation(occupation());
         contact.setLabels(uuids());
         contact.setOwner(user());
         contact.setDateOfBirth(now());
@@ -55,13 +57,28 @@ public class ContactUtils {
         contact.setTelephones(connectionsDto());
         contact.setEmails(connectionsDto());
         contact.setUrls(connectionsDto());
-        contact.setProfessions(uuid());
-        contact.setIndustries(uuid());
+        contact.setOccupation(occupationDto());
         contact.setLabels(uuids());
         contact.setDateOfBirth(now());
         contact.setLastEditDate(now());
         contact.setCreationDate(now());
         return contact;
+    }
+
+    public static Occupation occupation() {
+        var occupation = new Occupation();
+        occupation.setJobTitle(format("jobTitle%s", uuid()));
+        occupation.setCompany(format("company%s", uuid()));
+        occupation.setIndustry(format("industry%s", uuid()));
+        return occupation;
+    }
+
+    public static OccupationDto occupationDto() {
+        var occupation = new OccupationDto();
+        occupation.setJobTitle(format("jobTitle%s", uuid()));
+        occupation.setCompany(format("company%s", uuid()));
+        occupation.setIndustry(format("industry%s", uuid()));
+        return occupation;
     }
 
     public static List<Connection> connections() {

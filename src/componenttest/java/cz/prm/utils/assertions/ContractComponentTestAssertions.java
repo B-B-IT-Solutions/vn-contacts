@@ -7,8 +7,10 @@ import static org.assertj.core.api.Assertions.within;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.Occupation;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,15 +34,20 @@ public class ContractComponentTestAssertions {
         assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
         assertThat(contact.getLastName()).isEqualTo(contactDto.getLastName());
         assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
-        assertThat(contact.getProfessions()).isEqualTo(contactDto.getProfessions());
-        assertThat(contact.getIndustries()).isEqualTo(contactDto.getIndustries());
         assertThat(contact.getLabels()).containsExactlyElementsOf(contactDto.getLabels());
         assertThat(contact.getDateOfBirth()).isCloseTo(contactDto.getDateOfBirth(), within(1, SECONDS));
         assertThat(contact.getLastEditDate()).isNotNull();
         assertThat(contact.getCreationDate()).isNotNull();
+        assertOccupationDto(contact.getOccupation(), contactDto.getOccupation());
         assertConnectionsDto(contact.getTelephones(), contactDto.getTelephones());
         assertConnectionsDto(contact.getEmails(), contactDto.getEmails());
         assertConnectionsDto(contact.getUrls(), contactDto.getUrls());
+    }
+
+    public static void assertOccupationDto(Occupation occupation, OccupationDto dto) {
+        assertThat(occupation.getJobTitle()).isEqualTo(dto.getJobTitle());
+        assertThat(occupation.getCompany()).isEqualTo(dto.getCompany());
+        assertThat(occupation.getIndustry()).isEqualTo(dto.getIndustry());
     }
 
     public static void assertConnectionsDto(List<Connection> cons, List<ConnectionDto> dtos) {
