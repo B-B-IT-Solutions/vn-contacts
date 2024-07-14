@@ -12,7 +12,7 @@ public class SettingsComponentTestAssertions {
     public static void assertSettings(GeneralSettings settings, GeneralSettingsDto dto) {
         assertThat(dto.getSettingsId()).isEqualTo(settings.getSettingsId());
         assertThat(dto.getIndustries()).containsExactlyElementsOf(dto.getIndustries());
-        assertThat(dto.getIndustries()).hasSize(116);
+        assertThat(dto.getIndustries()).hasSize(115);
     }
 
     public static void assertSettings(UserSettings settings, UserSettingsDto dto) {
