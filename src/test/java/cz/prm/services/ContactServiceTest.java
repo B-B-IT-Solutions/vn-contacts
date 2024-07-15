@@ -3,6 +3,7 @@ package cz.prm.services;
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsQuery;
+import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertPage;
 import static java.util.Optional.empty;
@@ -107,6 +108,13 @@ class ContactServiceTest {
         when(predicates.byContactId(contactIdDb.getContactId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(empty());
         assertThrows(EntityNotFoundException.class, () -> contactService.updateContact(contactIdDb.getContactId(), updatedContact));
+    }
+
+    @Test
+    void deleteContact() {
+        var contactId = randomLong();
+        contactService.deleteContact((contactId));
+        verify(repository).deleteById(contactId);
     }
 
     private static void assertFieldsUpdated(Contact contactIdDb, Contact updatedContact, Contact savedContact) {

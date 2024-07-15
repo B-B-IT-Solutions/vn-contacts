@@ -46,6 +46,10 @@ public class ContactService {
         repository.save(savedContact);
     }
 
+    public void deleteContact(Long contactId) {
+        repository.deleteById(contactId);
+    }
+
     private void updateContactFields(Contact savedContact, Contact updatedContact) {
         savedContact.setFirstName(updatedContact.getFirstName());
         savedContact.setLastName(updatedContact.getLastName());
