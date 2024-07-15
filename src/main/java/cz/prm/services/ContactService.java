@@ -47,7 +47,8 @@ public class ContactService {
     }
 
     public void deleteContact(Long contactId) {
-        repository.deleteById(contactId);
+        var contact = getContactById(contactId);
+        repository.delete(contact);
     }
 
     private void updateContactFields(Contact savedContact, Contact updatedContact) {

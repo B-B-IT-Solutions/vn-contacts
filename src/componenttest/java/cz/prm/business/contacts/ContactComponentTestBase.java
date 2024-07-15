@@ -52,6 +52,18 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         updateContact(contactId, dto, USER_3);
     }
 
+    protected void user1DeleteContact(Long contactId) {
+        deleteContact(contactId, USER_1);
+    }
+
+    protected void user2DeleteContact(Long contactId) {
+        deleteContact(contactId, USER_2);
+    }
+
+    protected void user3DeleteContact(Long contactId) {
+        deleteContact(contactId, USER_3);
+    }
+
     protected PageDto<ContactDto> user1GetContacts(ContactsQueryDto queryDto) {
         return getContactsPage(queryDto, USER_1);
     }
@@ -85,6 +97,11 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         put(url, user, dto);
     }
 
+    protected void deleteContact(Long contactId, ComponentTestUser user) {
+        var url = format(CONTACT_URL, contactId);
+        delete(url, user);
+    }
+
     protected PageDto<ContactDto> getContactsPage(ContactsQueryDto queryDto, ComponentTestUser user) {
         var url = appendQueryToUrl(CONTACTS_URL, queryDto);
         var typeRef = new TypeRef<PageDto<ContactDto>>() {
@@ -111,6 +128,18 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         updateContactExpectNotFound(contactId, dto, USER_3);
     }
 
+    protected void user1DeleteContactExpectNotFound(Long contactId) {
+        deleteContactExpectNotFound(contactId, USER_1);
+    }
+
+    protected void user2DeleteContactExpectNotFound(Long contactId) {
+        deleteContactExpectNotFound(contactId, USER_2);
+    }
+
+    protected void user3DeleteContactExpectNotFound(Long contactId) {
+        deleteContactExpectNotFound(contactId, USER_3);
+    }
+
     protected void user1GetContactExpectNotFound(Long contactId) {
         getContactExpectNotFound(contactId, USER_1);
     }
@@ -126,6 +155,11 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
     protected void updateContactExpectNotFound(Long contactId, ContactDto dto, ComponentTestUser user) {
         var url = format(CONTACT_URL, contactId);
         putExpectNotFound(url, user, dto);
+    }
+
+    protected void deleteContactExpectNotFound(Long contactId, ComponentTestUser user) {
+        var url = format(CONTACT_URL, contactId);
+        deleteExpectNotFound(url, user);
     }
 
     protected void getContactExpectNotFound(Long contactId, ComponentTestUser user) {

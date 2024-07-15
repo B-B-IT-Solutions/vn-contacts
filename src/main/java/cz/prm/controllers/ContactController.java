@@ -51,7 +51,7 @@ public class ContactController {
         contactService.updateContact(contactId, contact);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{contactId}")
     public void deleteContact(@PathVariable("contactId") Long contactId) {
         contactService.deleteContact(contactId);
     }

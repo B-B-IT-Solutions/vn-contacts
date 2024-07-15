@@ -112,9 +112,22 @@ class ContactServiceTest {
 
     @Test
     void deleteContact() {
-        var contactId = randomLong();
-        contactService.deleteContact((contactId));
-        verify(repository).deleteById(contactId);
+        var contactIdDb = contact();
+        var predicate = new BooleanBuilder();
+        when(predicates.byContactId(contactIdDb.getContactId())).thenReturn(predicate);
+        when(repository.findOne(predicate)).thenReturn(of(contactIdDb));
+
+        contactService.deleteContact(contactIdDb.getContactId());
+        verify(repository).delete(contactIdDb);
+    }
+
+    @Test
+    void deleteContact_EntityNotFound() {
+        var contactIdDb = contact();
+        var predicate = new BooleanBuilder();
+        when(predicates.byContactId(contactIdDb.getContactId())).thenReturn(predicate);
+        when(repository.findOne(predicate)).thenReturn(empty());
+        assertThrows(EntityNotFoundException.class, () -> contactService.deleteContact(contactIdDb.getContactId()));
     }
 
     private static void assertFieldsUpdated(Contact contactIdDb, Contact updatedContact, Contact savedContact) {
