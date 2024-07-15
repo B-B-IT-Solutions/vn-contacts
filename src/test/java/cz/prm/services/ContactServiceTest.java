@@ -3,7 +3,6 @@ package cz.prm.services;
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsQuery;
-import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertPage;
 import static java.util.Optional.empty;
@@ -12,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -19,6 +19,7 @@ import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.contact.Contact;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
+import cz.prm.repositories.note.NoteRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,6 +38,8 @@ class ContactServiceTest {
     private ContactRepository repository;
     @Mock
     private ContactPredicates predicates;
+    @Mock
+    private NoteRepository noteRepository;
     @Captor
     private ArgumentCaptor<Contact> contactCapt;
 
@@ -44,7 +47,7 @@ class ContactServiceTest {
 
     @BeforeEach
     void setUp() {
-        contactService = new ContactService(repository, predicates);
+        contactService = new ContactService(repository, predicates, noteRepository);
     }
 
     @Test
@@ -118,7 +121,8 @@ class ContactServiceTest {
         when(repository.findOne(predicate)).thenReturn(of(contactIdDb));
 
         contactService.deleteContact(contactIdDb.getContactId());
-        verify(repository).delete(contactIdDb);
+        verify(noteRepository).deleteByContactId(contactIdDb.getContactId());
+        verify(repository).deleteById(contactIdDb.getContactId());
     }
 
     @Test
@@ -128,6 +132,8 @@ class ContactServiceTest {
         when(predicates.byContactId(contactIdDb.getContactId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(empty());
         assertThrows(EntityNotFoundException.class, () -> contactService.deleteContact(contactIdDb.getContactId()));
+        verify(noteRepository, never()).deleteByContactId(any());
+        verify(repository, never()).deleteById(any());
     }
 
     private static void assertFieldsUpdated(Contact contactIdDb, Contact updatedContact, Contact savedContact) {

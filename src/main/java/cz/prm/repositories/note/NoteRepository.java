@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NoteRepository extends JpaRepository<Note, Long>, PrmQuerydslPredicateExecutor<Note> {
 
+    void deleteByContactId(Long contactId);
 }

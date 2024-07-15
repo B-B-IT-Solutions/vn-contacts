@@ -8,6 +8,7 @@ import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
+import cz.prm.repositories.note.NoteRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import java.util.function.Supplier;
@@ -19,10 +20,12 @@ public class ContactService {
 
     private ContactRepository repository;
     private ContactPredicates predicates;
+    private NoteRepository noteRepository;
 
-    public ContactService(ContactRepository repository, ContactPredicates predicates) {
+    public ContactService(ContactRepository repository, ContactPredicates predicates, NoteRepository noteRepository) {
         this.repository = repository;
         this.predicates = predicates;
+        this.noteRepository = noteRepository;
     }
 
     public Page<Contact> getContacts(ContactsQuery query) {
@@ -48,7 +51,8 @@ public class ContactService {
 
     public void deleteContact(Long contactId) {
         var contact = getContactById(contactId);
-        repository.delete(contact);
+        noteRepository.deleteByContactId(contact.getContactId());
+        repository.deleteById(contact.getContactId());
     }
 
     private void updateContactFields(Contact savedContact, Contact updatedContact) {
