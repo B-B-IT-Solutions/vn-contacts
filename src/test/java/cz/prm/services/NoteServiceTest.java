@@ -133,7 +133,7 @@ class NoteServiceTest {
         assertThrows(EntityNotFoundException.class, () -> noteService.deleteNote(noteId));
     }
 
-    private static void assertFieldsUpdated(Note noteIdDb, Note updatedNote, Note savedNote) {
+    private void assertFieldsUpdated(Note noteIdDb, Note updatedNote, Note savedNote) {
         assertThat(noteIdDb.getNoteId()).isEqualTo(savedNote.getNoteId());
         assertThat(noteIdDb.getContactId()).isEqualTo(savedNote.getContactId());
         assertThat(noteIdDb.getOwner()).isEqualTo(savedNote.getOwner());

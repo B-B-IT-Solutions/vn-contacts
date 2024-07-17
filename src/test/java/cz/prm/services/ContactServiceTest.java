@@ -136,7 +136,7 @@ class ContactServiceTest {
         verify(repository, never()).deleteById(any());
     }
 
-    private static void assertFieldsUpdated(Contact contactIdDb, Contact updatedContact, Contact savedContact) {
+    private void assertFieldsUpdated(Contact contactIdDb, Contact updatedContact, Contact savedContact) {
         assertThat(contactIdDb.getContactId()).isEqualTo(savedContact.getContactId());
         assertThat(contactIdDb.getOwner()).isEqualTo(savedContact.getOwner());
         assertThat(savedContact.getFirstName()).isEqualTo(updatedContact.getFirstName());
