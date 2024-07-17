@@ -101,8 +101,8 @@
 			
 			<createTable tableName="user_settings_label">
 				 <column name="settings_id" type="BIGINT"/>
-				 <column name="value" type="VARCHAR(100)"/>
-				 <column name="color" type="VARCHAR(25)"/>
+				 <column name="value" type="VARCHAR(250)"/>
+				 <column name="color" type="VARCHAR(50)"/>
 			</createTable>
 	 </changeSet>
 </databaseChangeLog>
