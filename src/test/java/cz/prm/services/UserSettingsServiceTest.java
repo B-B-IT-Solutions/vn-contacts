@@ -20,6 +20,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -32,6 +34,8 @@ class UserSettingsServiceTest {
     private UserSettingsRepository userSettingsRepository;
     @Mock
     private SettingsPredicates predicates;
+    @Captor
+    private ArgumentCaptor<UserSettings> userSettingsCapt;
 
     private SettingsService settingsService;
 
@@ -80,5 +84,25 @@ class UserSettingsServiceTest {
         var result = settingsService.getUserSettings();
         assertThat(result).isNotNull();
         verify(userSettingsRepository).refresh(result);
+    }
+
+    @Test
+    void updateUserSettings() {
+        var settingsInDb = userSettings();
+        var updatedSettings = userSettings();
+        var predicate = new BooleanBuilder();
+        when(predicates.userSettings()).thenReturn(predicate);
+        when(userSettingsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
+
+        settingsService.updateUserSettings(updatedSettings);
+        verify(userSettingsRepository).save(userSettingsCapt.capture());
+        var savedSettings = userSettingsCapt.getValue();
+        assertUserSettingFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
+    }
+
+    private static void assertUserSettingFieldsUpdated(UserSettings settingsInDb, UserSettings updatedSettings, UserSettings savedSettings) {
+        assertThat(settingsInDb.getSettingsId()).isEqualTo(savedSettings.getSettingsId());
+        assertThat(settingsInDb.getOwner()).isEqualTo(savedSettings.getOwner());
+        assertThat(savedSettings.getLabels()).isEqualTo(updatedSettings.getLabels());
     }
 }

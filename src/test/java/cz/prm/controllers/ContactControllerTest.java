@@ -5,6 +5,7 @@ import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contactDto;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsQueryDto;
+import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactQuery;
 import static cz.prm.utils.assertions.ContactAssertions.assertPage;
@@ -45,24 +46,6 @@ class ContactControllerTest {
     }
 
     @Test
-    void createContact() {
-        var dto = contactDto();
-        controller.createContact(dto);
-        verify(contactService).createContact(contactCapt.capture());
-        var contact = contactCapt.getValue();
-        assertContact(contact, dto);
-    }
-
-    @Test
-    void updateContact() {
-        var dto = contactDto();
-        controller.updateContact(dto.getContactId(), dto);
-        verify(contactService).updateContact(eq(dto.getContactId()), contactCapt.capture());
-        var contact = contactCapt.getValue();
-        assertContact(contact, dto);
-    }
-
-    @Test
     void getContacts() {
         var page = page(contacts());
         var queryDto = contactsQueryDto();
@@ -82,5 +65,30 @@ class ContactControllerTest {
         when(contactService.getContact(contactId)).thenReturn(contact);
         var result = controller.getContact(contactId);
         assertContact(contact, result);
+    }
+
+    @Test
+    void createContact() {
+        var dto = contactDto();
+        controller.createContact(dto);
+        verify(contactService).createContact(contactCapt.capture());
+        var contact = contactCapt.getValue();
+        assertContact(contact, dto);
+    }
+
+    @Test
+    void updateContact() {
+        var dto = contactDto();
+        controller.updateContact(dto.getContactId(), dto);
+        verify(contactService).updateContact(eq(dto.getContactId()), contactCapt.capture());
+        var contact = contactCapt.getValue();
+        assertContact(contact, dto);
+    }
+
+    @Test
+    void deleteContact() {
+        var contactId = randomLong();
+        controller.deleteContact(contactId);
+        verify(contactService).deleteContact(contactId);
     }
 }

@@ -28,6 +28,18 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
         return getGeneralSettings(USER_3);
     }
 
+    protected void user1UpdateUserSettings(UserSettingsDto dto) {
+        updateUserSettings(dto, USER_1);
+    }
+
+    protected void user2UpdateUserSettings(UserSettingsDto dto) {
+        updateUserSettings(dto, USER_2);
+    }
+
+    protected void user3UpdateUserSettings(UserSettingsDto dto) {
+        updateUserSettings(dto, USER_3);
+    }
+
     protected UserSettingsDto user1GetUserSettings() {
         return getUserSettings(USER_1);
     }
@@ -44,6 +56,10 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
         var typeRef = new TypeRef<GeneralSettingsDto>() {
         };
         return getOne(GENERAL_SETTINGS_URL, user, typeRef);
+    }
+
+    protected void updateUserSettings(UserSettingsDto dto, ComponentTestUser user) {
+        put(USER_SETTINGS_URL, user, dto);
     }
 
     protected UserSettingsDto getUserSettings(ComponentTestUser user) {

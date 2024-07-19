@@ -35,6 +35,12 @@ public class SettingsService {
         return getOrCreateUserSettings();
     }
 
+    public void updateUserSettings(UserSettings updatedSettings) {
+        var settings = getOrCreateUserSettings();
+        updateUserSettingFields(settings, updatedSettings);
+        userSettingsRepository.save(settings);
+    }
+
     private UserSettings getOrCreateUserSettings() {
         var predicate = predicates.userSettings();
         var optional = userSettingsRepository.findOne(predicate);
@@ -45,6 +51,10 @@ public class SettingsService {
             return savedSettings;
         }
         return optional.get();
+    }
+
+    private void updateUserSettingFields(UserSettings settings, UserSettings updatedSettings) {
+        settings.setLabels(updatedSettings.getLabels());
     }
 
     private Supplier<EntityNotFoundException> generalSettingsNotFoundSupplier() {

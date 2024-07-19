@@ -11,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -18,6 +19,7 @@ import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.contact.Contact;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
+import cz.prm.repositories.note.NoteRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,6 +38,8 @@ class ContactServiceTest {
     private ContactRepository repository;
     @Mock
     private ContactPredicates predicates;
+    @Mock
+    private NoteRepository noteRepository;
     @Captor
     private ArgumentCaptor<Contact> contactCapt;
 
@@ -43,7 +47,7 @@ class ContactServiceTest {
 
     @BeforeEach
     void setUp() {
-        contactService = new ContactService(repository, predicates);
+        contactService = new ContactService(repository, predicates, noteRepository);
     }
 
     @Test
@@ -109,7 +113,30 @@ class ContactServiceTest {
         assertThrows(EntityNotFoundException.class, () -> contactService.updateContact(contactIdDb.getContactId(), updatedContact));
     }
 
-    private static void assertFieldsUpdated(Contact contactIdDb, Contact updatedContact, Contact savedContact) {
+    @Test
+    void deleteContact() {
+        var contactIdDb = contact();
+        var predicate = new BooleanBuilder();
+        when(predicates.byContactId(contactIdDb.getContactId())).thenReturn(predicate);
+        when(repository.findOne(predicate)).thenReturn(of(contactIdDb));
+
+        contactService.deleteContact(contactIdDb.getContactId());
+        verify(noteRepository).deleteByContactId(contactIdDb.getContactId());
+        verify(repository).deleteById(contactIdDb.getContactId());
+    }
+
+    @Test
+    void deleteContact_EntityNotFound() {
+        var contactIdDb = contact();
+        var predicate = new BooleanBuilder();
+        when(predicates.byContactId(contactIdDb.getContactId())).thenReturn(predicate);
+        when(repository.findOne(predicate)).thenReturn(empty());
+        assertThrows(EntityNotFoundException.class, () -> contactService.deleteContact(contactIdDb.getContactId()));
+        verify(noteRepository, never()).deleteByContactId(any());
+        verify(repository, never()).deleteById(any());
+    }
+
+    private void assertFieldsUpdated(Contact contactIdDb, Contact updatedContact, Contact savedContact) {
         assertThat(contactIdDb.getContactId()).isEqualTo(savedContact.getContactId());
         assertThat(contactIdDb.getOwner()).isEqualTo(savedContact.getOwner());
         assertThat(savedContact.getFirstName()).isEqualTo(updatedContact.getFirstName());
