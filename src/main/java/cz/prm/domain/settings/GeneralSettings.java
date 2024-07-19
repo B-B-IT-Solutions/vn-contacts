@@ -27,6 +27,5 @@ public class GeneralSettings {
 
     @ElementCollection(fetch = EAGER)
     @CollectionTable(name = "GENERAL_SETTINGS_INDUSTRY", joinColumns = @JoinColumn(name = "SETTINGS_ID"))
-    @Column(name = "INDUSTRY")
-    private List<String> industries;
+    private List<Industry> industries;
 }

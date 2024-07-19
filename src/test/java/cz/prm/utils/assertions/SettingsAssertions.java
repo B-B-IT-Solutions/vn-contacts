@@ -3,9 +3,11 @@ package cz.prm.utils.assertions;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.settings.GeneralSettingsDto;
+import cz.prm.controllers.dto.settings.IndustryDto;
 import cz.prm.controllers.dto.settings.LabelDto;
 import cz.prm.controllers.dto.settings.UserSettingsDto;
 import cz.prm.domain.settings.GeneralSettings;
+import cz.prm.domain.settings.Industry;
 import cz.prm.domain.settings.Label;
 import cz.prm.domain.settings.UserSettings;
 import java.util.List;
@@ -20,7 +22,7 @@ public class SettingsAssertions {
 
     public static void assertSettings(GeneralSettings settings, GeneralSettingsDto dto) {
         assertThat(settings.getSettingsId()).isEqualTo(dto.getSettingsId());
-        assertThat(settings.getIndustries()).containsExactlyElementsOf(dto.getIndustries());
+        assertIndustries(settings.getIndustries(), dto.getIndustries());
     }
 
     public static void assertSettings(UserSettings settings1, UserSettings settings2) {
@@ -34,6 +36,19 @@ public class SettingsAssertions {
         assertThat(settings.getSettingsId()).isEqualTo(dto.getSettingsId());
         assertThat(settings.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertLabels(settings.getLabels(), dto.getLabels());
+    }
+
+    public static void assertIndustries(List<Industry> industries, List<IndustryDto> dtos) {
+        assertThat(industries).isNotEmpty().hasSameSizeAs(dtos);
+        industries.forEach(u1 -> {
+            var u2 = dtos.stream().filter(u -> Objects.equals(u1.getName(), u.getName())).findFirst().get();
+            assertIndustry(u1, u2);
+        });
+    }
+
+    public static void assertIndustry(Industry label, IndustryDto dto) {
+        assertThat(label.getName()).isEqualTo(dto.getName());
+        assertThat(label.isSystemDefined()).isEqualTo(dto.isSystemDefined());
     }
 
     public static void assertLabels(List<Label> labels, List<LabelDto> dtos) {

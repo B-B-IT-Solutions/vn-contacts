@@ -6,9 +6,11 @@ import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static java.time.Instant.now;
 
+import cz.prm.controllers.dto.settings.IndustryDto;
 import cz.prm.controllers.dto.settings.LabelDto;
 import cz.prm.controllers.dto.settings.UserSettingsDto;
 import cz.prm.domain.settings.GeneralSettings;
+import cz.prm.domain.settings.Industry;
 import cz.prm.domain.settings.Label;
 import cz.prm.domain.settings.UserSettings;
 import java.util.List;
@@ -18,8 +20,30 @@ public class SettingsUtils {
     public static GeneralSettings generalSettings() {
         var settings = new GeneralSettings();
         settings.setSettingsId(randomLong());
-        settings.setIndustries(newArrayList(uuid(), uuid(), uuid()));
+        settings.setIndustries(industries());
         return settings;
+    }
+
+    public static List<Industry> industries() {
+        return newArrayList(industry(), industry(), industry());
+    }
+
+    public static List<IndustryDto> industriesDto() {
+        return newArrayList(industryDto(), industryDto(), industryDto());
+    }
+
+    public static Industry industry() {
+        var industry = new Industry();
+        industry.setName(uuid());
+        industry.setSystemDefined(true);
+        return industry;
+    }
+
+    public static IndustryDto industryDto() {
+        var industry = new IndustryDto();
+        industry.setName(uuid());
+        industry.setSystemDefined(true);
+        return industry;
     }
 
     public static UserSettings userSettings() {

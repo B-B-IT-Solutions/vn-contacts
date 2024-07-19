@@ -1,7 +1,6 @@
 package cz.prm.controllers.dto.settings;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,11 +8,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GeneralSettingsDto {
+public class IndustryDto {
 
-    @JsonProperty("settingsId")
-    private Long settingsId;
+    @JsonProperty("name")
+    private String name;
 
-    @JsonProperty("industries")
-    private List<IndustryDto> industries;
+    @JsonProperty("systemDefined")
+    private boolean systemDefined;
 }

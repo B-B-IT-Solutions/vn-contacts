@@ -87,7 +87,8 @@
 			
 			<createTable tableName="general_settings_industry">
 				 <column name="settings_id" type="BIGINT"/>
-				 <column name="industry" type="VARCHAR(250)"/>
+				 <column name="name" type="VARCHAR(250)"/>
+				 <column name="system_defined" type="BOOLEAN"/>
 			</createTable>
 			
 			<createTable tableName="user_settings">
