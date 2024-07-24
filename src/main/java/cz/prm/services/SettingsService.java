@@ -55,6 +55,7 @@ public class SettingsService {
 
     private void updateUserSettingFields(UserSettings settings, UserSettings updatedSettings) {
         settings.setLabels(updatedSettings.getLabels());
+        settings.setIndustries(updatedSettings.getIndustries());
     }
 
     private Supplier<EntityNotFoundException> generalSettingsNotFoundSupplier() {

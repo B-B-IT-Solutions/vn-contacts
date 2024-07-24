@@ -104,5 +104,6 @@ class UserSettingsServiceTest {
         assertThat(settingsInDb.getSettingsId()).isEqualTo(savedSettings.getSettingsId());
         assertThat(settingsInDb.getOwner()).isEqualTo(savedSettings.getOwner());
         assertThat(savedSettings.getLabels()).isEqualTo(updatedSettings.getLabels());
+        assertThat(savedSettings.getIndustries()).isEqualTo(updatedSettings.getIndustries());
     }
 }
