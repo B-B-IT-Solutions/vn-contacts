@@ -28,6 +28,7 @@ public class SettingsAssertions {
     public static void assertSettings(UserSettings settings1, UserSettings settings2) {
         assertThat(settings1.getSettingsId()).isEqualTo(settings2.getSettingsId());
         assertThat(settings1.getLabels()).containsExactlyElementsOf(settings2.getLabels());
+        assertThat(settings1.getIndustries()).containsExactlyElementsOf(settings2.getIndustries());
         assertThat(settings1.getLastEditDate()).isEqualTo(settings2.getLastEditDate());
         assertThat(settings1.getOwner()).isEqualTo(settings2.getOwner());
     }
@@ -36,6 +37,7 @@ public class SettingsAssertions {
         assertThat(settings.getSettingsId()).isEqualTo(dto.getSettingsId());
         assertThat(settings.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertLabels(settings.getLabels(), dto.getLabels());
+        assertIndustries(settings.getIndustries(), dto.getIndustries());
     }
 
     public static void assertIndustries(List<Industry> industries, List<IndustryDto> dtos) {
@@ -46,9 +48,9 @@ public class SettingsAssertions {
         });
     }
 
-    public static void assertIndustry(Industry label, IndustryDto dto) {
-        assertThat(label.getName()).isEqualTo(dto.getName());
-        assertThat(label.isSystemDefined()).isEqualTo(dto.isSystemDefined());
+    public static void assertIndustry(Industry industry, IndustryDto dto) {
+        assertThat(industry.getName()).isEqualTo(dto.getName());
+        assertThat(industry.isSystemDefined()).isEqualTo(dto.isSystemDefined());
     }
 
     public static void assertLabels(List<Label> labels, List<LabelDto> dtos) {

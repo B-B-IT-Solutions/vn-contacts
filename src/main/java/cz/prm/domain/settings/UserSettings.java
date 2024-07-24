@@ -45,6 +45,11 @@ public class UserSettings {
     @Column(name = "LABEL")
     private List<Label> labels;
 
+    @ElementCollection(fetch = EAGER)
+    @CollectionTable(name = "USER_SETTINGS_INDUSTRY", joinColumns = @JoinColumn(name = "SETTINGS_ID"))
+    @Column(name = "INDUSTRIES")
+    private List<Industry> industries;
+
     @CreatedBy
     @Embedded
     @AttributeOverrides({@AttributeOverride(name = "username", column = @Column(name = "OWNER_USERNAME")),

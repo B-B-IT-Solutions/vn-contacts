@@ -18,6 +18,9 @@ public class UserSettingsDto {
     @JsonProperty("labels")
     private List<LabelDto> labels;
 
+    @JsonProperty("industries")
+    private List<IndustryDto> industries;
+
     @JsonProperty("lastEditDate")
     private Instant lastEditDate;
 }

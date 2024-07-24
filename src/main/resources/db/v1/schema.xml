@@ -105,5 +105,11 @@
 				 <column name="value" type="VARCHAR(250)"/>
 				 <column name="color" type="VARCHAR(50)"/>
 			</createTable>
+			
+			<createTable tableName="user_settings_industry">
+				 <column name="settings_id" type="BIGINT"/>
+				 <column name="name" type="VARCHAR(250)"/>
+				 <column name="system_defined" type="boolean"/>
+			</createTable>
 	 </changeSet>
 </databaseChangeLog>

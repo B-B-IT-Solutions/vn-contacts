@@ -3,6 +3,7 @@ package cz.prm.utils.assertions;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.settings.GeneralSettingsDto;
+import cz.prm.controllers.dto.settings.IndustryDto;
 import cz.prm.controllers.dto.settings.LabelDto;
 import cz.prm.controllers.dto.settings.UserSettingsDto;
 import cz.prm.domain.settings.GeneralSettings;
@@ -27,6 +28,7 @@ public class SettingsComponentTestAssertions {
     public static void assertSettings(UserSettingsDto dto1, UserSettingsDto dto2) {
         assertThat(dto1.getSettingsId()).isEqualTo(dto2.getSettingsId());
         assertLabelsDto(dto1.getLabels(), dto2.getLabels());
+        assertIndustriesDto(dto1.getIndustries(), dto2.getIndustries());
     }
 
     public static void assertLabelsDto(List<LabelDto> dtos1, List<LabelDto> dtos2) {
@@ -40,5 +42,18 @@ public class SettingsComponentTestAssertions {
     public static void assertLabelDto(LabelDto dto1, LabelDto dto2) {
         assertThat(dto1.getValue()).isEqualTo(dto2.getValue());
         assertThat(dto1.getColor()).isEqualTo(dto2.getColor());
+    }
+
+    public static void assertIndustriesDto(List<IndustryDto> dtos1, List<IndustryDto> dtos2) {
+        assertThat(dtos1).isNotEmpty().hasSameSizeAs(dtos2);
+        dtos1.forEach(u1 -> {
+            var u2 = dtos2.stream().filter(u -> Objects.equals(u1.getName(), u.getName())).findFirst().get();
+            assertIndustryDto(u1, u2);
+        });
+    }
+
+    public static void assertIndustryDto(IndustryDto dto1, IndustryDto dto2) {
+        assertThat(dto1.getName()).isEqualTo(dto2.getName());
+        assertThat(dto1.isSystemDefined()).isEqualTo(dto2.isSystemDefined());
     }
 }

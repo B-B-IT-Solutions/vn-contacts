@@ -24,31 +24,10 @@ public class SettingsUtils {
         return settings;
     }
 
-    public static List<Industry> industries() {
-        return newArrayList(industry(), industry(), industry());
-    }
-
-    public static List<IndustryDto> industriesDto() {
-        return newArrayList(industryDto(), industryDto(), industryDto());
-    }
-
-    public static Industry industry() {
-        var industry = new Industry();
-        industry.setName(uuid());
-        industry.setSystemDefined(true);
-        return industry;
-    }
-
-    public static IndustryDto industryDto() {
-        var industry = new IndustryDto();
-        industry.setName(uuid());
-        industry.setSystemDefined(true);
-        return industry;
-    }
-
     public static UserSettings userSettings() {
         var settings = new UserSettings();
         settings.setLabels(labels());
+        settings.setIndustries(industries());
         settings.setLastEditDate(now());
         settings.setOwner(user());
         return settings;
@@ -57,6 +36,7 @@ public class SettingsUtils {
     public static UserSettingsDto userSettingsDto() {
         var settings = new UserSettingsDto();
         settings.setLabels(labelsDto());
+        settings.setIndustries(industriesDto());
         settings.setLastEditDate(now());
         return settings;
     }
@@ -81,5 +61,27 @@ public class SettingsUtils {
         label.setValue(uuid());
         label.setColor(uuid());
         return label;
+    }
+
+    public static List<Industry> industries() {
+        return newArrayList(industry(), industry(), industry());
+    }
+
+    public static List<IndustryDto> industriesDto() {
+        return newArrayList(industryDto(), industryDto(), industryDto());
+    }
+
+    public static Industry industry() {
+        var industry = new Industry();
+        industry.setName(uuid());
+        industry.setSystemDefined(true);
+        return industry;
+    }
+
+    public static IndustryDto industryDto() {
+        var industry = new IndustryDto();
+        industry.setName(uuid());
+        industry.setSystemDefined(true);
+        return industry;
     }
 }
