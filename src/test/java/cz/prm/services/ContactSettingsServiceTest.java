@@ -13,9 +13,9 @@ import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.settings.ContactSettings;
-import cz.prm.repositories.settings.GeneralSettingsRepository;
+import cz.prm.repositories.settings.AccountSettingsRepository;
+import cz.prm.repositories.settings.ContactSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
-import cz.prm.repositories.settings.UserSettingsRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,9 +29,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class ContactSettingsServiceTest {
 
     @Mock
-    private GeneralSettingsRepository generalSettingsRepository;
+    private AccountSettingsRepository generalSettingsRepository;
     @Mock
-    private UserSettingsRepository userSettingsRepository;
+    private ContactSettingsRepository contactSettingsRepository;
     @Mock
     private SettingsPredicates predicates;
     @Captor
@@ -41,7 +41,7 @@ class ContactSettingsServiceTest {
 
     @BeforeEach
     void setUp() {
-        settingsService = new SettingsService(generalSettingsRepository, userSettingsRepository, predicates);
+        settingsService = new SettingsService(generalSettingsRepository, contactSettingsRepository, predicates);
     }
 
     @Test
@@ -68,7 +68,7 @@ class ContactSettingsServiceTest {
         var settings = contactSettings();
         var predicate = new BooleanBuilder();
         when(predicates.userSettings()).thenReturn(predicate);
-        when(userSettingsRepository.findOne(predicate)).thenReturn(of(settings));
+        when(contactSettingsRepository.findOne(predicate)).thenReturn(of(settings));
 
         var result = settingsService.getContactSettings();
         assertSettings(result, settings);
@@ -78,12 +78,12 @@ class ContactSettingsServiceTest {
     void getContactSettings_SettingsNotFound() {
         var predicate = new BooleanBuilder();
         when(predicates.userSettings()).thenReturn(predicate);
-        when(userSettingsRepository.findOne(predicate)).thenReturn(empty());
-        when(userSettingsRepository.saveAndFlush(any(ContactSettings.class))).thenAnswer((invocation -> invocation.getArgument(0)));
+        when(contactSettingsRepository.findOne(predicate)).thenReturn(empty());
+        when(contactSettingsRepository.saveAndFlush(any(ContactSettings.class))).thenAnswer((invocation -> invocation.getArgument(0)));
 
         var result = settingsService.getContactSettings();
         assertThat(result).isNotNull();
-        verify(userSettingsRepository).refresh(result);
+        verify(contactSettingsRepository).refresh(result);
     }
 
     @Test
@@ -92,10 +92,10 @@ class ContactSettingsServiceTest {
         var updatedSettings = contactSettings();
         var predicate = new BooleanBuilder();
         when(predicates.userSettings()).thenReturn(predicate);
-        when(userSettingsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
+        when(contactSettingsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
 
         settingsService.updateContactSettings(updatedSettings);
-        verify(userSettingsRepository).save(userSettingsCapt.capture());
+        verify(contactSettingsRepository).save(userSettingsCapt.capture());
         var savedSettings = userSettingsCapt.getValue();
         assertUserSettingFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
     }

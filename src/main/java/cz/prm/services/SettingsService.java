@@ -2,9 +2,9 @@ package cz.prm.services;
 
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.ContactSettings;
-import cz.prm.repositories.settings.GeneralSettingsRepository;
+import cz.prm.repositories.settings.AccountSettingsRepository;
+import cz.prm.repositories.settings.ContactSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
-import cz.prm.repositories.settings.UserSettingsRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import java.util.function.Supplier;
@@ -14,14 +14,14 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class SettingsService {
 
-    private GeneralSettingsRepository generalSettingsRepository;
-    private UserSettingsRepository userSettingsRepository;
+    private AccountSettingsRepository generalSettingsRepository;
+    private ContactSettingsRepository contactSettingsRepository;
     private SettingsPredicates predicates;
 
-    public SettingsService(GeneralSettingsRepository generalSettingsRepository, UserSettingsRepository userSettingsRepository,
+    public SettingsService(AccountSettingsRepository accountSettingsRepository, ContactSettingsRepository contactSettingsRepository,
         SettingsPredicates predicates) {
-        this.generalSettingsRepository = generalSettingsRepository;
-        this.userSettingsRepository = userSettingsRepository;
+        this.generalSettingsRepository = accountSettingsRepository;
+        this.contactSettingsRepository = contactSettingsRepository;
         this.predicates = predicates;
     }
 
@@ -38,16 +38,16 @@ public class SettingsService {
     public void updateContactSettings(ContactSettings updatedSettings) {
         var settings = getOrCreateContactSettings();
         updateUserSettingFields(settings, updatedSettings);
-        userSettingsRepository.save(settings);
+        contactSettingsRepository.save(settings);
     }
 
     private ContactSettings getOrCreateContactSettings() {
         var predicate = predicates.userSettings();
-        var optional = userSettingsRepository.findOne(predicate);
+        var optional = contactSettingsRepository.findOne(predicate);
         if (optional.isEmpty()) {
             var settings = new ContactSettings();
-            var savedSettings = userSettingsRepository.saveAndFlush(settings);
-            userSettingsRepository.refresh(savedSettings);
+            var savedSettings = contactSettingsRepository.saveAndFlush(settings);
+            contactSettingsRepository.refresh(savedSettings);
             return savedSettings;
         }
         return optional.get();

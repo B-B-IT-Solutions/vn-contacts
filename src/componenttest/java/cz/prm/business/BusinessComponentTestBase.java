@@ -11,10 +11,10 @@ import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.note.NoteDto;
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.ContactSettingsDto;
+import cz.prm.custom.ComponentTestAccountSettingsRepository;
 import cz.prm.custom.ComponentTestContactRepository;
-import cz.prm.custom.ComponentTestGeneralSettingsRepository;
+import cz.prm.custom.ComponentTestContactSettingsRepository;
 import cz.prm.custom.ComponentTestNoteRepository;
-import cz.prm.custom.ComponentTestUserSettingsRepository;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.note.Note;
 import cz.prm.domain.settings.AccountSettings;
@@ -32,9 +32,9 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     @Autowired
     protected ComponentTestNoteRepository noteRepository;
     @Autowired
-    protected ComponentTestGeneralSettingsRepository generalSettingsRepository;
+    protected ComponentTestAccountSettingsRepository generalSettingsRepository;
     @Autowired
-    protected ComponentTestUserSettingsRepository userSettingsRepository;
+    protected ComponentTestContactSettingsRepository userSettingsRepository;
 
     @BeforeEach
     void setUp() {
