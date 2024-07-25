@@ -14,20 +14,20 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class SettingsService {
 
-    private AccountSettingsRepository generalSettingsRepository;
+    private AccountSettingsRepository accountSettingsRepository;
     private ContactSettingsRepository contactSettingsRepository;
     private SettingsPredicates predicates;
 
     public SettingsService(AccountSettingsRepository accountSettingsRepository, ContactSettingsRepository contactSettingsRepository,
         SettingsPredicates predicates) {
-        this.generalSettingsRepository = accountSettingsRepository;
+        this.accountSettingsRepository = accountSettingsRepository;
         this.contactSettingsRepository = contactSettingsRepository;
         this.predicates = predicates;
     }
 
     public AccountSettings getAccountSettings() {
         var predicate = predicates.accountSettings();
-        var optional = generalSettingsRepository.findOne(predicate);
+        var optional = accountSettingsRepository.findOne(predicate);
         return optional.orElseThrow(generalSettingsNotFoundSupplier());
     }
 

@@ -26,29 +26,29 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class ContactSettingsServiceTest {
+class SettingsServiceTest {
 
     @Mock
-    private AccountSettingsRepository generalSettingsRepository;
+    private AccountSettingsRepository accountSettingsRepository;
     @Mock
     private ContactSettingsRepository contactSettingsRepository;
     @Mock
     private SettingsPredicates predicates;
     @Captor
-    private ArgumentCaptor<ContactSettings> userSettingsCapt;
+    private ArgumentCaptor<ContactSettings> contactSettingsCapt;
 
     private SettingsService settingsService;
 
     @BeforeEach
     void setUp() {
-        settingsService = new SettingsService(generalSettingsRepository, contactSettingsRepository, predicates);
+        settingsService = new SettingsService(accountSettingsRepository, contactSettingsRepository, predicates);
     }
 
     @Test
     void getAccountSettings() {
         var predicate = new BooleanBuilder();
         when(predicates.accountSettings()).thenReturn(predicate);
-        when(generalSettingsRepository.findOne(predicate)).thenReturn(empty());
+        when(accountSettingsRepository.findOne(predicate)).thenReturn(empty());
         assertThrows(EntityNotFoundException.class, () -> settingsService.getAccountSettings());
     }
 
@@ -57,7 +57,7 @@ class ContactSettingsServiceTest {
         var settings = accountSettings();
         var predicate = new BooleanBuilder();
         when(predicates.accountSettings()).thenReturn(predicate);
-        when(generalSettingsRepository.findOne(predicate)).thenReturn(of(settings));
+        when(accountSettingsRepository.findOne(predicate)).thenReturn(of(settings));
 
         var result = settingsService.getAccountSettings();
         assertSettings(result, settings);
@@ -95,8 +95,8 @@ class ContactSettingsServiceTest {
         when(contactSettingsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
 
         settingsService.updateContactSettings(updatedSettings);
-        verify(contactSettingsRepository).save(userSettingsCapt.capture());
-        var savedSettings = userSettingsCapt.getValue();
+        verify(contactSettingsRepository).save(contactSettingsCapt.capture());
+        var savedSettings = contactSettingsCapt.getValue();
         assertUserSettingFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
     }
 
