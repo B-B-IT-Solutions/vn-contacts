@@ -28,13 +28,13 @@ public class SettingsController {
         return mapper.toGeneralSettingsDto(settings);
     }
 
-    @GetMapping("/user")
+    @GetMapping("/contact")
     public ContactSettingsDto getContactSettings() {
         var settings = settingsService.getContactSettings();
         return mapper.toContactSettingsDto(settings);
     }
 
-    @PutMapping("/user")
+    @PutMapping("/contact")
     public void updateContactSettings(@RequestBody ContactSettingsDto dto) {
         var settings = mapper.toContactSettings(dto);
         settingsService.updateContactSettings(settings);

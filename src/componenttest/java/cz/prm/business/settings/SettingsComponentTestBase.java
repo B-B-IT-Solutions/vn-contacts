@@ -14,7 +14,7 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
 
     protected static String SETTINGS_BASE_URL = "settings";
     protected static String GENERAL_SETTINGS_URL = SETTINGS_BASE_URL + "/general";
-    protected static String USER_SETTINGS_URL = SETTINGS_BASE_URL + "/user";
+    protected static String CONTACT_SETTINGS_URL = SETTINGS_BASE_URL + "/contact";
 
     protected GeneralSettingsDto user1GetGeneralSettings() {
         return getGeneralSettings(USER_1);
@@ -59,12 +59,12 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
     }
 
     protected void updateContactSettings(ContactSettingsDto dto, ComponentTestUser user) {
-        put(USER_SETTINGS_URL, user, dto);
+        put(CONTACT_SETTINGS_URL, user, dto);
     }
 
     protected ContactSettingsDto getContactSettings(ComponentTestUser user) {
         var typeRef = new TypeRef<ContactSettingsDto>() {
         };
-        return getOne(USER_SETTINGS_URL, user, typeRef);
+        return getOne(CONTACT_SETTINGS_URL, user, typeRef);
     }
 }
