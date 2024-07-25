@@ -20,9 +20,9 @@ class SettingsPredicatesTest {
     }
 
     @Test
-    void generalSettings() {
-        var query = predicates.generalSettings();
-        var expectedString = format("generalSettings.settingsId = %s", 1);
+    void accountSettings() {
+        var query = predicates.accountSettings();
+        var expectedString = format("accountSettings.settingsId = %s", 1);
         assertThat(query).hasToString(expectedString);
     }
 
@@ -32,7 +32,7 @@ class SettingsPredicatesTest {
             var user = user();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
             var query = predicates.userSettings();
-            var expectedString = format("userSettings.owner.username = %s", user.getUsername());
+            var expectedString = format("contactSettings.owner.username = %s", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }
     }

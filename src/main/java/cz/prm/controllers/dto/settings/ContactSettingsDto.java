@@ -1,6 +1,7 @@
 package cz.prm.controllers.dto.settings;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.Instant;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,11 +10,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GeneralSettingsDto {
+public class ContactSettingsDto {
 
     @JsonProperty("settingsId")
     private Long settingsId;
 
+    @JsonProperty("labels")
+    private List<LabelDto> labels;
+
     @JsonProperty("industries")
-    private List<String> industries;
+    private List<IndustryDto> industries;
+
+    @JsonProperty("lastEditDate")
+    private Instant lastEditDate;
 }

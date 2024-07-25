@@ -78,16 +78,11 @@
 			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
 											sequenceName="settings_seq"/>
 			
-			
-			<createTable tableName="general_settings">
+			<createTable tableName="account_settings">
 				 <column name="settings_id" type="BIGINT">
 						<constraints primaryKey="true" primaryKeyName="general_settings_pk" nullable="false"/>
 				 </column>
-			</createTable>
-			
-			<createTable tableName="general_settings_industry">
-				 <column name="settings_id" type="BIGINT"/>
-				 <column name="industry" type="VARCHAR(250)"/>
+				 <column name="app_language" type="VARCHAR(255)"/>
 			</createTable>
 			
 			<createTable tableName="user_settings">
@@ -103,6 +98,12 @@
 				 <column name="settings_id" type="BIGINT"/>
 				 <column name="value" type="VARCHAR(250)"/>
 				 <column name="color" type="VARCHAR(50)"/>
+			</createTable>
+			
+			<createTable tableName="user_settings_industry">
+				 <column name="settings_id" type="BIGINT"/>
+				 <column name="name" type="VARCHAR(250)"/>
+				 <column name="system_defined" type="boolean"/>
 			</createTable>
 	 </changeSet>
 </databaseChangeLog>

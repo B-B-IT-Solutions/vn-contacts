@@ -9,16 +9,16 @@ import static java.util.stream.Collectors.toList;
 import cz.prm.ComponentTestBase;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.note.NoteDto;
-import cz.prm.controllers.dto.settings.GeneralSettingsDto;
-import cz.prm.controllers.dto.settings.UserSettingsDto;
+import cz.prm.controllers.dto.settings.AccountSettingsDto;
+import cz.prm.controllers.dto.settings.ContactSettingsDto;
+import cz.prm.custom.ComponentTestAccountSettingsRepository;
 import cz.prm.custom.ComponentTestContactRepository;
-import cz.prm.custom.ComponentTestGeneralSettingsRepository;
+import cz.prm.custom.ComponentTestContactSettingsRepository;
 import cz.prm.custom.ComponentTestNoteRepository;
-import cz.prm.custom.ComponentTestUserSettingsRepository;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.note.Note;
-import cz.prm.domain.settings.GeneralSettings;
-import cz.prm.domain.settings.UserSettings;
+import cz.prm.domain.settings.AccountSettings;
+import cz.prm.domain.settings.ContactSettings;
 import cz.prm.utils.ComponentTestUser;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -32,9 +32,9 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     @Autowired
     protected ComponentTestNoteRepository noteRepository;
     @Autowired
-    protected ComponentTestGeneralSettingsRepository generalSettingsRepository;
+    protected ComponentTestAccountSettingsRepository generalSettingsRepository;
     @Autowired
-    protected ComponentTestUserSettingsRepository userSettingsRepository;
+    protected ComponentTestContactSettingsRepository userSettingsRepository;
 
     @BeforeEach
     void setUp() {
@@ -89,11 +89,11 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         return noteRepository.getByText(dto.getText());
     }
 
-    protected GeneralSettings getGeneralSettingsFromDb(GeneralSettingsDto dto) {
+    protected AccountSettings getGeneralSettingsFromDb(AccountSettingsDto dto) {
         return generalSettingsRepository.getReferenceById(dto.getSettingsId());
     }
 
-    protected UserSettings getUserSettingsFromDb(UserSettingsDto dto) {
+    protected ContactSettings getUserSettingsFromDb(ContactSettingsDto dto) {
         return userSettingsRepository.getReferenceById(dto.getSettingsId());
     }
 }

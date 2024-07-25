@@ -1,14 +1,14 @@
 package cz.prm.controllers;
 
-import static cz.prm.utils.SettingsUtils.generalSettings;
-import static cz.prm.utils.SettingsUtils.userSettings;
-import static cz.prm.utils.SettingsUtils.userSettingsDto;
+import static cz.prm.utils.SettingsUtils.accountSettings;
+import static cz.prm.utils.SettingsUtils.contactSettings;
+import static cz.prm.utils.SettingsUtils.contactSettingsDto;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import cz.prm.controllers.mappers.SettingsMapper;
-import cz.prm.domain.settings.UserSettings;
+import cz.prm.domain.settings.ContactSettings;
 import cz.prm.services.SettingsService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +25,7 @@ class SettingsControllerTest {
     @Mock
     private SettingsService settingsService;
     @Captor
-    private ArgumentCaptor<UserSettings> userSettingsCapt;
+    private ArgumentCaptor<ContactSettings> userSettingsCapt;
 
     private SettingsMapper mapper = MapperUtils.getSettingsMapper();
     private SettingsController controller;
@@ -36,26 +36,26 @@ class SettingsControllerTest {
     }
 
     @Test
-    void getGeneralSettings() {
-        var settings = generalSettings();
-        when(settingsService.getGeneralSettings()).thenReturn(settings);
-        var result = controller.getGeneralSettings();
+    void getAccountSettings() {
+        var settings = accountSettings();
+        when(settingsService.getAccountSettings()).thenReturn(settings);
+        var result = controller.getAccountSettings();
         assertSettings(settings, result);
     }
 
     @Test
-    void getUserSettings() {
-        var settings = userSettings();
-        when(settingsService.getUserSettings()).thenReturn(settings);
-        var result = controller.getUserSettings();
+    void getContactSettings() {
+        var settings = contactSettings();
+        when(settingsService.getContactSettings()).thenReturn(settings);
+        var result = controller.getContactSettings();
         assertSettings(settings, result);
     }
 
     @Test
-    void updateUserSettings() {
-        var dto = userSettingsDto();
-        controller.updateUserSettings(dto);
-        verify(settingsService).updateUserSettings(userSettingsCapt.capture());
+    void updateContactSettings() {
+        var dto = contactSettingsDto();
+        controller.updateContactSettings(dto);
+        verify(settingsService).updateContactSettings(userSettingsCapt.capture());
         var settings = userSettingsCapt.getValue();
         assertSettings(settings, dto);
     }

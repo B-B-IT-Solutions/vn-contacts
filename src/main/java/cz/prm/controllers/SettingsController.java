@@ -1,7 +1,7 @@
 package cz.prm.controllers;
 
-import cz.prm.controllers.dto.settings.GeneralSettingsDto;
-import cz.prm.controllers.dto.settings.UserSettingsDto;
+import cz.prm.controllers.dto.settings.AccountSettingsDto;
+import cz.prm.controllers.dto.settings.ContactSettingsDto;
 import cz.prm.controllers.mappers.SettingsMapper;
 import cz.prm.services.SettingsService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,21 +22,21 @@ public class SettingsController {
         this.mapper = mapper;
     }
 
-    @GetMapping("/general")
-    public GeneralSettingsDto getGeneralSettings() {
-        var settings = settingsService.getGeneralSettings();
-        return mapper.toGeneralSettingsDto(settings);
+    @GetMapping("/account")
+    public AccountSettingsDto getAccountSettings() {
+        var settings = settingsService.getAccountSettings();
+        return mapper.toAccountSettingsDto(settings);
     }
 
-    @GetMapping("/user")
-    public UserSettingsDto getUserSettings() {
-        var settings = settingsService.getUserSettings();
-        return mapper.toUserSettingsDto(settings);
+    @GetMapping("/contact")
+    public ContactSettingsDto getContactSettings() {
+        var settings = settingsService.getContactSettings();
+        return mapper.toContactSettingsDto(settings);
     }
 
-    @PutMapping("/user")
-    public void updateUserSettings(@RequestBody UserSettingsDto dto) {
-        var settings = mapper.toUserSettings(dto);
-        settingsService.updateUserSettings(settings);
+    @PutMapping("/contact")
+    public void updateContactSettings(@RequestBody ContactSettingsDto dto) {
+        var settings = mapper.toContactSettings(dto);
+        settingsService.updateContactSettings(settings);
     }
 }

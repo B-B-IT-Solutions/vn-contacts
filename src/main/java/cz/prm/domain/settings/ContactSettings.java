@@ -32,7 +32,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserSettings {
+public class ContactSettings {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SETTINGS_SEQ")
@@ -44,6 +44,11 @@ public class UserSettings {
     @CollectionTable(name = "USER_SETTINGS_LABEL", joinColumns = @JoinColumn(name = "SETTINGS_ID"))
     @Column(name = "LABEL")
     private List<Label> labels;
+
+    @ElementCollection(fetch = EAGER)
+    @CollectionTable(name = "USER_SETTINGS_INDUSTRY", joinColumns = @JoinColumn(name = "SETTINGS_ID"))
+    @Column(name = "INDUSTRIES")
+    private List<Industry> industries;
 
     @CreatedBy
     @Embedded

@@ -1,10 +1,10 @@
 package cz.prm.services;
 
-import cz.prm.domain.settings.GeneralSettings;
-import cz.prm.domain.settings.UserSettings;
-import cz.prm.repositories.settings.GeneralSettingsRepository;
+import cz.prm.domain.settings.AccountSettings;
+import cz.prm.domain.settings.ContactSettings;
+import cz.prm.repositories.settings.AccountSettingsRepository;
+import cz.prm.repositories.settings.ContactSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
-import cz.prm.repositories.settings.UserSettingsRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import java.util.function.Supplier;
@@ -14,47 +14,48 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class SettingsService {
 
-    private GeneralSettingsRepository generalSettingsRepository;
-    private UserSettingsRepository userSettingsRepository;
+    private AccountSettingsRepository accountSettingsRepository;
+    private ContactSettingsRepository contactSettingsRepository;
     private SettingsPredicates predicates;
 
-    public SettingsService(GeneralSettingsRepository generalSettingsRepository, UserSettingsRepository userSettingsRepository,
+    public SettingsService(AccountSettingsRepository accountSettingsRepository, ContactSettingsRepository contactSettingsRepository,
         SettingsPredicates predicates) {
-        this.generalSettingsRepository = generalSettingsRepository;
-        this.userSettingsRepository = userSettingsRepository;
+        this.accountSettingsRepository = accountSettingsRepository;
+        this.contactSettingsRepository = contactSettingsRepository;
         this.predicates = predicates;
     }
 
-    public GeneralSettings getGeneralSettings() {
-        var predicate = predicates.generalSettings();
-        var optional = generalSettingsRepository.findOne(predicate);
+    public AccountSettings getAccountSettings() {
+        var predicate = predicates.accountSettings();
+        var optional = accountSettingsRepository.findOne(predicate);
         return optional.orElseThrow(generalSettingsNotFoundSupplier());
     }
 
-    public UserSettings getUserSettings() {
-        return getOrCreateUserSettings();
+    public ContactSettings getContactSettings() {
+        return getOrCreateContactSettings();
     }
 
-    public void updateUserSettings(UserSettings updatedSettings) {
-        var settings = getOrCreateUserSettings();
+    public void updateContactSettings(ContactSettings updatedSettings) {
+        var settings = getOrCreateContactSettings();
         updateUserSettingFields(settings, updatedSettings);
-        userSettingsRepository.save(settings);
+        contactSettingsRepository.save(settings);
     }
 
-    private UserSettings getOrCreateUserSettings() {
+    private ContactSettings getOrCreateContactSettings() {
         var predicate = predicates.userSettings();
-        var optional = userSettingsRepository.findOne(predicate);
+        var optional = contactSettingsRepository.findOne(predicate);
         if (optional.isEmpty()) {
-            var settings = new UserSettings();
-            var savedSettings = userSettingsRepository.saveAndFlush(settings);
-            userSettingsRepository.refresh(savedSettings);
+            var settings = new ContactSettings();
+            var savedSettings = contactSettingsRepository.saveAndFlush(settings);
+            contactSettingsRepository.refresh(savedSettings);
             return savedSettings;
         }
         return optional.get();
     }
 
-    private void updateUserSettingFields(UserSettings settings, UserSettings updatedSettings) {
+    private void updateUserSettingFields(ContactSettings settings, ContactSettings updatedSettings) {
         settings.setLabels(updatedSettings.getLabels());
+        settings.setIndustries(updatedSettings.getIndustries());
     }
 
     private Supplier<EntityNotFoundException> generalSettingsNotFoundSupplier() {

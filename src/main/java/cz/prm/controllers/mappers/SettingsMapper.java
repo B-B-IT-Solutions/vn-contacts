@@ -1,19 +1,19 @@
 package cz.prm.controllers.mappers;
 
-import cz.prm.controllers.dto.settings.GeneralSettingsDto;
-import cz.prm.controllers.dto.settings.UserSettingsDto;
-import cz.prm.domain.settings.GeneralSettings;
-import cz.prm.domain.settings.UserSettings;
+import cz.prm.controllers.dto.settings.AccountSettingsDto;
+import cz.prm.controllers.dto.settings.ContactSettingsDto;
+import cz.prm.domain.settings.AccountSettings;
+import cz.prm.domain.settings.ContactSettings;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface SettingsMapper {
 
-    GeneralSettingsDto toGeneralSettingsDto(GeneralSettings settings);
+    AccountSettingsDto toAccountSettingsDto(AccountSettings settings);
 
-    UserSettingsDto toUserSettingsDto(UserSettings settings);
+    ContactSettingsDto toContactSettingsDto(ContactSettings settings);
 
     @Mapping(target = "owner", ignore = true)
-    UserSettings toUserSettings(UserSettingsDto dto);
+    ContactSettings toContactSettings(ContactSettingsDto dto);
 }

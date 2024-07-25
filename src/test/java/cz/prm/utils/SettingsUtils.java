@@ -6,33 +6,37 @@ import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static java.time.Instant.now;
 
+import cz.prm.controllers.dto.settings.ContactSettingsDto;
+import cz.prm.controllers.dto.settings.IndustryDto;
 import cz.prm.controllers.dto.settings.LabelDto;
-import cz.prm.controllers.dto.settings.UserSettingsDto;
-import cz.prm.domain.settings.GeneralSettings;
+import cz.prm.domain.settings.AccountSettings;
+import cz.prm.domain.settings.ContactSettings;
+import cz.prm.domain.settings.Industry;
 import cz.prm.domain.settings.Label;
-import cz.prm.domain.settings.UserSettings;
 import java.util.List;
 
 public class SettingsUtils {
 
-    public static GeneralSettings generalSettings() {
-        var settings = new GeneralSettings();
+    public static AccountSettings accountSettings() {
+        var settings = new AccountSettings();
         settings.setSettingsId(randomLong());
-        settings.setIndustries(newArrayList(uuid(), uuid(), uuid()));
+        settings.setAppLanguage(uuid());
         return settings;
     }
 
-    public static UserSettings userSettings() {
-        var settings = new UserSettings();
+    public static ContactSettings contactSettings() {
+        var settings = new ContactSettings();
         settings.setLabels(labels());
+        settings.setIndustries(industries());
         settings.setLastEditDate(now());
         settings.setOwner(user());
         return settings;
     }
 
-    public static UserSettingsDto userSettingsDto() {
-        var settings = new UserSettingsDto();
+    public static ContactSettingsDto contactSettingsDto() {
+        var settings = new ContactSettingsDto();
         settings.setLabels(labelsDto());
+        settings.setIndustries(industriesDto());
         settings.setLastEditDate(now());
         return settings;
     }
@@ -57,5 +61,27 @@ public class SettingsUtils {
         label.setValue(uuid());
         label.setColor(uuid());
         return label;
+    }
+
+    public static List<Industry> industries() {
+        return newArrayList(industry(), industry(), industry());
+    }
+
+    public static List<IndustryDto> industriesDto() {
+        return newArrayList(industryDto(), industryDto(), industryDto());
+    }
+
+    public static Industry industry() {
+        var industry = new Industry();
+        industry.setName(uuid());
+        industry.setSystemDefined(true);
+        return industry;
+    }
+
+    public static IndustryDto industryDto() {
+        var industry = new IndustryDto();
+        industry.setName(uuid());
+        industry.setSystemDefined(true);
+        return industry;
     }
 }
