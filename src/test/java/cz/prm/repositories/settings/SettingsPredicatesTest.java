@@ -32,7 +32,7 @@ class SettingsPredicatesTest {
             var user = user();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
             var query = predicates.userSettings();
-            var expectedString = format("userSettings.owner.username = %s", user.getUsername());
+            var expectedString = format("contactSettings.owner.username = %s", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }
     }

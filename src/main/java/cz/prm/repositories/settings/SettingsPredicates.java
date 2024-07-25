@@ -1,7 +1,7 @@
 package cz.prm.repositories.settings;
 
+import static cz.prm.domain.settings.querydsl.QContactSettings.contactSettings;
 import static cz.prm.domain.settings.querydsl.QGeneralSettings.generalSettings;
-import static cz.prm.domain.settings.querydsl.QUserSettings.userSettings;
 import static cz.prm.security.SecurityContextUtils.getUser;
 
 import com.querydsl.core.types.Predicate;
@@ -18,6 +18,6 @@ public class SettingsPredicates {
 
     public Predicate userSettings() {
         var user = getUser();
-        return userSettings.owner.username.eq(user.getUsername());
+        return contactSettings.owner.username.eq(user.getUsername());
     }
 }
