@@ -47,7 +47,7 @@ class ContactSettingsServiceTest {
     @Test
     void getAccountSettings() {
         var predicate = new BooleanBuilder();
-        when(predicates.generalSettings()).thenReturn(predicate);
+        when(predicates.accountSettings()).thenReturn(predicate);
         when(generalSettingsRepository.findOne(predicate)).thenReturn(empty());
         assertThrows(EntityNotFoundException.class, () -> settingsService.getAccountSettings());
     }
@@ -56,7 +56,7 @@ class ContactSettingsServiceTest {
     void getAccountSettings_SettingsNotFound() {
         var settings = accountSettings();
         var predicate = new BooleanBuilder();
-        when(predicates.generalSettings()).thenReturn(predicate);
+        when(predicates.accountSettings()).thenReturn(predicate);
         when(generalSettingsRepository.findOne(predicate)).thenReturn(of(settings));
 
         var result = settingsService.getAccountSettings();

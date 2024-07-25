@@ -26,7 +26,7 @@ public class SettingsService {
     }
 
     public AccountSettings getAccountSettings() {
-        var predicate = predicates.generalSettings();
+        var predicate = predicates.accountSettings();
         var optional = generalSettingsRepository.findOne(predicate);
         return optional.orElseThrow(generalSettingsNotFoundSupplier());
     }

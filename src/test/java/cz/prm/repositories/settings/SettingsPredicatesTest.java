@@ -20,9 +20,9 @@ class SettingsPredicatesTest {
     }
 
     @Test
-    void generalSettings() {
-        var query = predicates.generalSettings();
-        var expectedString = format("generalSettings.settingsId = %s", 1);
+    void accountSettings() {
+        var query = predicates.accountSettings();
+        var expectedString = format("accountSettings.settingsId = %s", 1);
         assertThat(query).hasToString(expectedString);
     }
 
