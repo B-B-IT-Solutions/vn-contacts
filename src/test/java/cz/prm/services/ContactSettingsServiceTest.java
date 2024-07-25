@@ -1,7 +1,7 @@
 package cz.prm.services;
 
+import static cz.prm.utils.SettingsUtils.contactSettings;
 import static cz.prm.utils.SettingsUtils.generalSettings;
-import static cz.prm.utils.SettingsUtils.userSettings;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
@@ -65,7 +65,7 @@ class ContactSettingsServiceTest {
 
     @Test
     void getContactSettings() {
-        var settings = userSettings();
+        var settings = contactSettings();
         var predicate = new BooleanBuilder();
         when(predicates.userSettings()).thenReturn(predicate);
         when(userSettingsRepository.findOne(predicate)).thenReturn(of(settings));
@@ -88,8 +88,8 @@ class ContactSettingsServiceTest {
 
     @Test
     void updateContactSettings() {
-        var settingsInDb = userSettings();
-        var updatedSettings = userSettings();
+        var settingsInDb = contactSettings();
+        var updatedSettings = contactSettings();
         var predicate = new BooleanBuilder();
         when(predicates.userSettings()).thenReturn(predicate);
         when(userSettingsRepository.findOne(predicate)).thenReturn(of(settingsInDb));

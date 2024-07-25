@@ -1,8 +1,8 @@
 package cz.prm.controllers.mappers;
 
+import static cz.prm.utils.SettingsUtils.contactSettings;
+import static cz.prm.utils.SettingsUtils.contactSettingsDto;
 import static cz.prm.utils.SettingsUtils.generalSettings;
-import static cz.prm.utils.SettingsUtils.userSettings;
-import static cz.prm.utils.SettingsUtils.userSettingsDto;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
 
 import cz.prm.utils.MapperUtils;
@@ -21,14 +21,14 @@ class ContactSettingsMapperTest {
 
     @Test
     void toContactSettingsDto() {
-        var settings = userSettings();
+        var settings = contactSettings();
         var dto = mapper.toContactSettingsDto(settings);
         assertSettings(settings, dto);
     }
 
     @Test
     void toContactSettings() {
-        var dto = userSettingsDto();
+        var dto = contactSettingsDto();
         var settings = mapper.toContactSettings(dto);
         assertSettings(settings, dto);
     }

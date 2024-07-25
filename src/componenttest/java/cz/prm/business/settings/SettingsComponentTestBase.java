@@ -28,28 +28,28 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
         return getGeneralSettings(USER_3);
     }
 
-    protected void user1UpdateUserSettings(ContactSettingsDto dto) {
-        updateUserSettings(dto, USER_1);
+    protected void user1UpdateContactSettings(ContactSettingsDto dto) {
+        updateContactSettings(dto, USER_1);
     }
 
-    protected void user2UpdateUserSettings(ContactSettingsDto dto) {
-        updateUserSettings(dto, USER_2);
+    protected void user2UpdateContactSettings(ContactSettingsDto dto) {
+        updateContactSettings(dto, USER_2);
     }
 
-    protected void user3UpdateUserSettings(ContactSettingsDto dto) {
-        updateUserSettings(dto, USER_3);
+    protected void user3UpdateContactSettings(ContactSettingsDto dto) {
+        updateContactSettings(dto, USER_3);
     }
 
-    protected ContactSettingsDto user1GetUserSettings() {
-        return getUserSettings(USER_1);
+    protected ContactSettingsDto user1GetContactSettings() {
+        return getContactSettings(USER_1);
     }
 
-    protected ContactSettingsDto user2GetUserSettings() {
-        return getUserSettings(USER_2);
+    protected ContactSettingsDto user2GetContactSettings() {
+        return getContactSettings(USER_2);
     }
 
-    protected ContactSettingsDto user3GetUserSettings() {
-        return getUserSettings(USER_3);
+    protected ContactSettingsDto user3GetContactSettings() {
+        return getContactSettings(USER_3);
     }
 
     protected GeneralSettingsDto getGeneralSettings(ComponentTestUser user) {
@@ -58,11 +58,11 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
         return getOne(GENERAL_SETTINGS_URL, user, typeRef);
     }
 
-    protected void updateUserSettings(ContactSettingsDto dto, ComponentTestUser user) {
+    protected void updateContactSettings(ContactSettingsDto dto, ComponentTestUser user) {
         put(USER_SETTINGS_URL, user, dto);
     }
 
-    protected ContactSettingsDto getUserSettings(ComponentTestUser user) {
+    protected ContactSettingsDto getContactSettings(ComponentTestUser user) {
         var typeRef = new TypeRef<ContactSettingsDto>() {
         };
         return getOne(USER_SETTINGS_URL, user, typeRef);

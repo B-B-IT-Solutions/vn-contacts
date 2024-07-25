@@ -1,8 +1,8 @@
 package cz.prm.controllers;
 
+import static cz.prm.utils.SettingsUtils.contactSettings;
+import static cz.prm.utils.SettingsUtils.contactSettingsDto;
 import static cz.prm.utils.SettingsUtils.generalSettings;
-import static cz.prm.utils.SettingsUtils.userSettings;
-import static cz.prm.utils.SettingsUtils.userSettingsDto;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -45,7 +45,7 @@ class SettingsControllerTest {
 
     @Test
     void getContactSettings() {
-        var settings = userSettings();
+        var settings = contactSettings();
         when(settingsService.getContactSettings()).thenReturn(settings);
         var result = controller.getContactSettings();
         assertSettings(settings, result);
@@ -53,7 +53,7 @@ class SettingsControllerTest {
 
     @Test
     void updateContactSettings() {
-        var dto = userSettingsDto();
+        var dto = contactSettingsDto();
         controller.updateContactSettings(dto);
         verify(settingsService).updateContactSettings(userSettingsCapt.capture());
         var settings = userSettingsCapt.getValue();

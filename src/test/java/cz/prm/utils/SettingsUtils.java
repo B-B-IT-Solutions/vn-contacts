@@ -6,9 +6,9 @@ import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static java.time.Instant.now;
 
+import cz.prm.controllers.dto.settings.ContactSettingsDto;
 import cz.prm.controllers.dto.settings.IndustryDto;
 import cz.prm.controllers.dto.settings.LabelDto;
-import cz.prm.controllers.dto.settings.ContactSettingsDto;
 import cz.prm.domain.settings.ContactSettings;
 import cz.prm.domain.settings.GeneralSettings;
 import cz.prm.domain.settings.Industry;
@@ -24,7 +24,7 @@ public class SettingsUtils {
         return settings;
     }
 
-    public static ContactSettings userSettings() {
+    public static ContactSettings contactSettings() {
         var settings = new ContactSettings();
         settings.setLabels(labels());
         settings.setIndustries(industries());
@@ -33,7 +33,7 @@ public class SettingsUtils {
         return settings;
     }
 
-    public static ContactSettingsDto userSettingsDto() {
+    public static ContactSettingsDto contactSettingsDto() {
         var settings = new ContactSettingsDto();
         settings.setLabels(labelsDto());
         settings.setIndustries(industriesDto());

@@ -25,43 +25,43 @@ public class SettingsComponentTest extends SettingsComponentTestBase {
 
     @Test
     void getUserSettings() {
-        var dto1 = user1GetUserSettings();
-        var dto2 = user1GetUserSettings();
+        var dto1 = user1GetContactSettings();
+        var dto2 = user1GetContactSettings();
         assertThat(dto1).isEqualTo(dto2);
         assertSettings(dto2);
 
-        dto1 = user2GetUserSettings();
-        dto2 = user2GetUserSettings();
+        dto1 = user2GetContactSettings();
+        dto2 = user2GetContactSettings();
         assertThat(dto1).isEqualTo(dto2);
         assertSettings(dto2);
 
-        dto1 = user3GetUserSettings();
-        dto2 = user3GetUserSettings();
+        dto1 = user3GetContactSettings();
+        dto2 = user3GetContactSettings();
         assertThat(dto1).isEqualTo(dto2);
         assertSettings(dto2);
     }
 
     @Test
-    void updateUserSettings() {
-        var dto1 = user1GetUserSettings();
+    void updateContactSettings() {
+        var dto1 = user1GetContactSettings();
         dto1.setLabels(labelsDto());
         dto1.setIndustries(industriesDto());
-        user1UpdateUserSettings(dto1);
-        var dto2 = user1GetUserSettings();
+        user1UpdateContactSettings(dto1);
+        var dto2 = user1GetContactSettings();
         assertSettings(dto1, dto2);
 
-        dto1 = user2GetUserSettings();
+        dto1 = user2GetContactSettings();
         dto1.setLabels(labelsDto());
         dto1.setIndustries(industriesDto());
-        user2UpdateUserSettings(dto1);
-        dto2 = user2GetUserSettings();
+        user2UpdateContactSettings(dto1);
+        dto2 = user2GetContactSettings();
         assertSettings(dto1, dto2);
 
-        dto1 = user3GetUserSettings();
+        dto1 = user3GetContactSettings();
         dto1.setLabels(labelsDto());
         dto1.setIndustries(industriesDto());
-        user3UpdateUserSettings(dto1);
-        dto2 = user3GetUserSettings();
+        user3UpdateContactSettings(dto1);
+        dto2 = user3GetContactSettings();
         assertSettings(dto1, dto2);
     }
 
