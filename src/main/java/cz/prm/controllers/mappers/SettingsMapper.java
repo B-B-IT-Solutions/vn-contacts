@@ -1,9 +1,9 @@
 package cz.prm.controllers.mappers;
 
+import cz.prm.controllers.dto.settings.ContactSettingsDto;
 import cz.prm.controllers.dto.settings.GeneralSettingsDto;
-import cz.prm.controllers.dto.settings.UserSettingsDto;
+import cz.prm.domain.settings.ContactSettings;
 import cz.prm.domain.settings.GeneralSettings;
-import cz.prm.domain.settings.UserSettings;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -12,8 +12,8 @@ public interface SettingsMapper {
 
     GeneralSettingsDto toGeneralSettingsDto(GeneralSettings settings);
 
-    UserSettingsDto toUserSettingsDto(UserSettings settings);
+    ContactSettingsDto toContactSettingsDto(ContactSettings settings);
 
     @Mapping(target = "owner", ignore = true)
-    UserSettings toUserSettings(UserSettingsDto dto);
+    ContactSettings toContactSettings(ContactSettingsDto dto);
 }

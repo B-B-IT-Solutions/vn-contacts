@@ -4,8 +4,8 @@ import static cz.prm.utils.SettingsComponentTestUtils.industriesDto;
 import static cz.prm.utils.SettingsComponentTestUtils.labelsDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.settings.ContactSettingsDto;
 import cz.prm.controllers.dto.settings.GeneralSettingsDto;
-import cz.prm.controllers.dto.settings.UserSettingsDto;
 import cz.prm.utils.assertions.SettingsComponentTestAssertions;
 import org.junit.jupiter.api.Test;
 
@@ -70,12 +70,12 @@ public class SettingsComponentTest extends SettingsComponentTestBase {
         SettingsComponentTestAssertions.assertSettings(settings, dto);
     }
 
-    private void assertSettings(UserSettingsDto dto) {
+    private void assertSettings(ContactSettingsDto dto) {
         var settings = getUserSettingsFromDb(dto);
         SettingsComponentTestAssertions.assertSettings(settings, dto);
     }
 
-    private void assertSettings(UserSettingsDto dto1, UserSettingsDto dto2) {
+    private void assertSettings(ContactSettingsDto dto1, ContactSettingsDto dto2) {
         SettingsComponentTestAssertions.assertSettings(dto1, dto2);
     }
 }

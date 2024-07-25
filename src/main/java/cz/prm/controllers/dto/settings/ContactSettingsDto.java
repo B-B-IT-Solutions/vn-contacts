@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserSettingsDto {
+public class ContactSettingsDto {
 
     @JsonProperty("settingsId")
     private Long settingsId;

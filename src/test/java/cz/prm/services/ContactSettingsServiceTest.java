@@ -12,7 +12,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
-import cz.prm.domain.settings.UserSettings;
+import cz.prm.domain.settings.ContactSettings;
 import cz.prm.repositories.settings.GeneralSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
 import cz.prm.repositories.settings.UserSettingsRepository;
@@ -26,7 +26,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class UserSettingsServiceTest {
+class ContactSettingsServiceTest {
 
     @Mock
     private GeneralSettingsRepository generalSettingsRepository;
@@ -35,7 +35,7 @@ class UserSettingsServiceTest {
     @Mock
     private SettingsPredicates predicates;
     @Captor
-    private ArgumentCaptor<UserSettings> userSettingsCapt;
+    private ArgumentCaptor<ContactSettings> userSettingsCapt;
 
     private SettingsService settingsService;
 
@@ -64,43 +64,43 @@ class UserSettingsServiceTest {
     }
 
     @Test
-    void getUserSettings() {
+    void getContactSettings() {
         var settings = userSettings();
         var predicate = new BooleanBuilder();
         when(predicates.userSettings()).thenReturn(predicate);
         when(userSettingsRepository.findOne(predicate)).thenReturn(of(settings));
 
-        var result = settingsService.getUserSettings();
+        var result = settingsService.getContactSettings();
         assertSettings(result, settings);
     }
 
     @Test
-    void getUserSettings_SettingsNotFound() {
+    void getContactSettings_SettingsNotFound() {
         var predicate = new BooleanBuilder();
         when(predicates.userSettings()).thenReturn(predicate);
         when(userSettingsRepository.findOne(predicate)).thenReturn(empty());
-        when(userSettingsRepository.saveAndFlush(any(UserSettings.class))).thenAnswer((invocation -> invocation.getArgument(0)));
+        when(userSettingsRepository.saveAndFlush(any(ContactSettings.class))).thenAnswer((invocation -> invocation.getArgument(0)));
 
-        var result = settingsService.getUserSettings();
+        var result = settingsService.getContactSettings();
         assertThat(result).isNotNull();
         verify(userSettingsRepository).refresh(result);
     }
 
     @Test
-    void updateUserSettings() {
+    void updateContactSettings() {
         var settingsInDb = userSettings();
         var updatedSettings = userSettings();
         var predicate = new BooleanBuilder();
         when(predicates.userSettings()).thenReturn(predicate);
         when(userSettingsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
 
-        settingsService.updateUserSettings(updatedSettings);
+        settingsService.updateContactSettings(updatedSettings);
         verify(userSettingsRepository).save(userSettingsCapt.capture());
         var savedSettings = userSettingsCapt.getValue();
         assertUserSettingFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
     }
 
-    private static void assertUserSettingFieldsUpdated(UserSettings settingsInDb, UserSettings updatedSettings, UserSettings savedSettings) {
+    private static void assertUserSettingFieldsUpdated(ContactSettings settingsInDb, ContactSettings updatedSettings, ContactSettings savedSettings) {
         assertThat(settingsInDb.getSettingsId()).isEqualTo(savedSettings.getSettingsId());
         assertThat(settingsInDb.getOwner()).isEqualTo(savedSettings.getOwner());
         assertThat(savedSettings.getLabels()).isEqualTo(updatedSettings.getLabels());

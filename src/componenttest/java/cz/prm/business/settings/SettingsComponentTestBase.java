@@ -5,8 +5,8 @@ import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
 
 import cz.prm.business.BusinessComponentTestBase;
+import cz.prm.controllers.dto.settings.ContactSettingsDto;
 import cz.prm.controllers.dto.settings.GeneralSettingsDto;
-import cz.prm.controllers.dto.settings.UserSettingsDto;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 
@@ -28,27 +28,27 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
         return getGeneralSettings(USER_3);
     }
 
-    protected void user1UpdateUserSettings(UserSettingsDto dto) {
+    protected void user1UpdateUserSettings(ContactSettingsDto dto) {
         updateUserSettings(dto, USER_1);
     }
 
-    protected void user2UpdateUserSettings(UserSettingsDto dto) {
+    protected void user2UpdateUserSettings(ContactSettingsDto dto) {
         updateUserSettings(dto, USER_2);
     }
 
-    protected void user3UpdateUserSettings(UserSettingsDto dto) {
+    protected void user3UpdateUserSettings(ContactSettingsDto dto) {
         updateUserSettings(dto, USER_3);
     }
 
-    protected UserSettingsDto user1GetUserSettings() {
+    protected ContactSettingsDto user1GetUserSettings() {
         return getUserSettings(USER_1);
     }
 
-    protected UserSettingsDto user2GetUserSettings() {
+    protected ContactSettingsDto user2GetUserSettings() {
         return getUserSettings(USER_2);
     }
 
-    protected UserSettingsDto user3GetUserSettings() {
+    protected ContactSettingsDto user3GetUserSettings() {
         return getUserSettings(USER_3);
     }
 
@@ -58,12 +58,12 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
         return getOne(GENERAL_SETTINGS_URL, user, typeRef);
     }
 
-    protected void updateUserSettings(UserSettingsDto dto, ComponentTestUser user) {
+    protected void updateUserSettings(ContactSettingsDto dto, ComponentTestUser user) {
         put(USER_SETTINGS_URL, user, dto);
     }
 
-    protected UserSettingsDto getUserSettings(ComponentTestUser user) {
-        var typeRef = new TypeRef<UserSettingsDto>() {
+    protected ContactSettingsDto getUserSettings(ComponentTestUser user) {
+        var typeRef = new TypeRef<ContactSettingsDto>() {
         };
         return getOne(USER_SETTINGS_URL, user, typeRef);
     }

@@ -2,12 +2,12 @@ package cz.prm.utils.assertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.settings.ContactSettingsDto;
 import cz.prm.controllers.dto.settings.GeneralSettingsDto;
 import cz.prm.controllers.dto.settings.IndustryDto;
 import cz.prm.controllers.dto.settings.LabelDto;
-import cz.prm.controllers.dto.settings.UserSettingsDto;
+import cz.prm.domain.settings.ContactSettings;
 import cz.prm.domain.settings.GeneralSettings;
-import cz.prm.domain.settings.UserSettings;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,13 +19,13 @@ public class SettingsComponentTestAssertions {
         assertThat(dto.getIndustries()).hasSize(115);
     }
 
-    public static void assertSettings(UserSettings settings, UserSettingsDto dto) {
+    public static void assertSettings(ContactSettings settings, ContactSettingsDto dto) {
         assertThat(dto.getSettingsId()).isEqualTo(settings.getSettingsId());
         assertThat(dto.getLastEditDate()).isNotNull();
         assertThat(dto.getLabels()).isEmpty();
     }
 
-    public static void assertSettings(UserSettingsDto dto1, UserSettingsDto dto2) {
+    public static void assertSettings(ContactSettingsDto dto1, ContactSettingsDto dto2) {
         assertThat(dto1.getSettingsId()).isEqualTo(dto2.getSettingsId());
         assertLabelsDto(dto1.getLabels(), dto2.getLabels());
         assertIndustriesDto(dto1.getIndustries(), dto2.getIndustries());

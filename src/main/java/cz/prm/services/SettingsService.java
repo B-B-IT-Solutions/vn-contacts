@@ -1,7 +1,7 @@
 package cz.prm.services;
 
+import cz.prm.domain.settings.ContactSettings;
 import cz.prm.domain.settings.GeneralSettings;
-import cz.prm.domain.settings.UserSettings;
 import cz.prm.repositories.settings.GeneralSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
 import cz.prm.repositories.settings.UserSettingsRepository;
@@ -31,21 +31,21 @@ public class SettingsService {
         return optional.orElseThrow(generalSettingsNotFoundSupplier());
     }
 
-    public UserSettings getUserSettings() {
-        return getOrCreateUserSettings();
+    public ContactSettings getContactSettings() {
+        return getOrCreateContactSettings();
     }
 
-    public void updateUserSettings(UserSettings updatedSettings) {
-        var settings = getOrCreateUserSettings();
+    public void updateContactSettings(ContactSettings updatedSettings) {
+        var settings = getOrCreateContactSettings();
         updateUserSettingFields(settings, updatedSettings);
         userSettingsRepository.save(settings);
     }
 
-    private UserSettings getOrCreateUserSettings() {
+    private ContactSettings getOrCreateContactSettings() {
         var predicate = predicates.userSettings();
         var optional = userSettingsRepository.findOne(predicate);
         if (optional.isEmpty()) {
-            var settings = new UserSettings();
+            var settings = new ContactSettings();
             var savedSettings = userSettingsRepository.saveAndFlush(settings);
             userSettingsRepository.refresh(savedSettings);
             return savedSettings;
@@ -53,7 +53,7 @@ public class SettingsService {
         return optional.get();
     }
 
-    private void updateUserSettingFields(UserSettings settings, UserSettings updatedSettings) {
+    private void updateUserSettingFields(ContactSettings settings, ContactSettings updatedSettings) {
         settings.setLabels(updatedSettings.getLabels());
         settings.setIndustries(updatedSettings.getIndustries());
     }

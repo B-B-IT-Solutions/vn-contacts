@@ -8,7 +8,7 @@ import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.Test;
 
-class UserSettingsMapperTest {
+class ContactSettingsMapperTest {
 
     private SettingsMapper mapper = MapperUtils.getSettingsMapper();
 
@@ -20,16 +20,16 @@ class UserSettingsMapperTest {
     }
 
     @Test
-    void toUserSettingsDto() {
+    void toContactSettingsDto() {
         var settings = userSettings();
-        var dto = mapper.toUserSettingsDto(settings);
+        var dto = mapper.toContactSettingsDto(settings);
         assertSettings(settings, dto);
     }
 
     @Test
-    void toUserSettings() {
+    void toContactSettings() {
         var dto = userSettingsDto();
-        var settings = mapper.toUserSettings(dto);
+        var settings = mapper.toContactSettings(dto);
         assertSettings(settings, dto);
     }
 }

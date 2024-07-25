@@ -8,11 +8,11 @@ import static java.time.Instant.now;
 
 import cz.prm.controllers.dto.settings.IndustryDto;
 import cz.prm.controllers.dto.settings.LabelDto;
-import cz.prm.controllers.dto.settings.UserSettingsDto;
+import cz.prm.controllers.dto.settings.ContactSettingsDto;
+import cz.prm.domain.settings.ContactSettings;
 import cz.prm.domain.settings.GeneralSettings;
 import cz.prm.domain.settings.Industry;
 import cz.prm.domain.settings.Label;
-import cz.prm.domain.settings.UserSettings;
 import java.util.List;
 
 public class SettingsUtils {
@@ -24,8 +24,8 @@ public class SettingsUtils {
         return settings;
     }
 
-    public static UserSettings userSettings() {
-        var settings = new UserSettings();
+    public static ContactSettings userSettings() {
+        var settings = new ContactSettings();
         settings.setLabels(labels());
         settings.setIndustries(industries());
         settings.setLastEditDate(now());
@@ -33,8 +33,8 @@ public class SettingsUtils {
         return settings;
     }
 
-    public static UserSettingsDto userSettingsDto() {
-        var settings = new UserSettingsDto();
+    public static ContactSettingsDto userSettingsDto() {
+        var settings = new ContactSettingsDto();
         settings.setLabels(labelsDto());
         settings.setIndustries(industriesDto());
         settings.setLastEditDate(now());
