@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GeneralSettingsDto {
+public class AccountSettingsDto {
 
     @JsonProperty("settingsId")
     private Long settingsId;

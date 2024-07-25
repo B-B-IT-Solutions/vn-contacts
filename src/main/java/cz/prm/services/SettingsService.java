@@ -1,7 +1,7 @@
 package cz.prm.services;
 
+import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.ContactSettings;
-import cz.prm.domain.settings.GeneralSettings;
 import cz.prm.repositories.settings.GeneralSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
 import cz.prm.repositories.settings.UserSettingsRepository;
@@ -25,7 +25,7 @@ public class SettingsService {
         this.predicates = predicates;
     }
 
-    public GeneralSettings getGeneralSettings() {
+    public AccountSettings getAccountSettings() {
         var predicate = predicates.generalSettings();
         var optional = generalSettingsRepository.findOne(predicate);
         return optional.orElseThrow(generalSettingsNotFoundSupplier());

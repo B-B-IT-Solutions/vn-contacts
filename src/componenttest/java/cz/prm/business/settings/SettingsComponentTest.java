@@ -4,27 +4,27 @@ import static cz.prm.utils.SettingsComponentTestUtils.industriesDto;
 import static cz.prm.utils.SettingsComponentTestUtils.labelsDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.ContactSettingsDto;
-import cz.prm.controllers.dto.settings.GeneralSettingsDto;
 import cz.prm.utils.assertions.SettingsComponentTestAssertions;
 import org.junit.jupiter.api.Test;
 
 public class SettingsComponentTest extends SettingsComponentTestBase {
 
     @Test
-    void getGeneralSettings() {
-        var dto = user1GetGeneralSettings();
+    void getAccountSettings() {
+        var dto = user1GetAccountSettings();
         assertSettings(dto);
 
-        dto = user2GetGeneralSettings();
+        dto = user2GetAccountSettings();
         assertSettings(dto);
 
-        dto = user3GetGeneralSettings();
+        dto = user3GetAccountSettings();
         assertSettings(dto);
     }
 
     @Test
-    void getUserSettings() {
+    void getContactSettings() {
         var dto1 = user1GetContactSettings();
         var dto2 = user1GetContactSettings();
         assertThat(dto1).isEqualTo(dto2);
@@ -65,7 +65,7 @@ public class SettingsComponentTest extends SettingsComponentTestBase {
         assertSettings(dto1, dto2);
     }
 
-    private void assertSettings(GeneralSettingsDto dto) {
+    private void assertSettings(AccountSettingsDto dto) {
         var settings = getGeneralSettingsFromDb(dto);
         SettingsComponentTestAssertions.assertSettings(settings, dto);
     }

@@ -1,8 +1,8 @@
 package cz.prm.controllers;
 
+import static cz.prm.utils.SettingsUtils.accountSettings;
 import static cz.prm.utils.SettingsUtils.contactSettings;
 import static cz.prm.utils.SettingsUtils.contactSettingsDto;
-import static cz.prm.utils.SettingsUtils.generalSettings;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -36,10 +36,10 @@ class SettingsControllerTest {
     }
 
     @Test
-    void getGeneralSettings() {
-        var settings = generalSettings();
-        when(settingsService.getGeneralSettings()).thenReturn(settings);
-        var result = controller.getGeneralSettings();
+    void getAccountSettings() {
+        var settings = accountSettings();
+        when(settingsService.getAccountSettings()).thenReturn(settings);
+        var result = controller.getAccountSettings();
         assertSettings(settings, result);
     }
 

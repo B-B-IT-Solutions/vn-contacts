@@ -9,18 +9,18 @@ import static java.time.Instant.now;
 import cz.prm.controllers.dto.settings.ContactSettingsDto;
 import cz.prm.controllers.dto.settings.IndustryDto;
 import cz.prm.controllers.dto.settings.LabelDto;
+import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.ContactSettings;
-import cz.prm.domain.settings.GeneralSettings;
 import cz.prm.domain.settings.Industry;
 import cz.prm.domain.settings.Label;
 import java.util.List;
 
 public class SettingsUtils {
 
-    public static GeneralSettings generalSettings() {
-        var settings = new GeneralSettings();
+    public static AccountSettings accountSettings() {
+        var settings = new AccountSettings();
         settings.setSettingsId(randomLong());
-        settings.setIndustries(industries());
+        settings.setAppLanguage(uuid());
         return settings;
     }
 

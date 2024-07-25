@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GeneralSettings {
+public class AccountSettings {
 
     @Id
     @Column(name = "SETTINGS_ID")

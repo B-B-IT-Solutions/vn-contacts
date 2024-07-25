@@ -2,12 +2,12 @@ package cz.prm.utils.assertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.ContactSettingsDto;
-import cz.prm.controllers.dto.settings.GeneralSettingsDto;
 import cz.prm.controllers.dto.settings.IndustryDto;
 import cz.prm.controllers.dto.settings.LabelDto;
+import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.ContactSettings;
-import cz.prm.domain.settings.GeneralSettings;
 import cz.prm.domain.settings.Industry;
 import cz.prm.domain.settings.Label;
 import java.util.List;
@@ -15,14 +15,14 @@ import java.util.Objects;
 
 public class SettingsAssertions {
 
-    public static void assertSettings(GeneralSettings settings1, GeneralSettings settings2) {
+    public static void assertSettings(AccountSettings settings1, AccountSettings settings2) {
         assertThat(settings1.getSettingsId()).isEqualTo(settings2.getSettingsId());
-        assertThat(settings1.getIndustries()).containsExactlyElementsOf(settings2.getIndustries());
+        assertThat(settings1.getAppLanguage()).isEqualTo(settings2.getAppLanguage());
     }
 
-    public static void assertSettings(GeneralSettings settings, GeneralSettingsDto dto) {
+    public static void assertSettings(AccountSettings settings, AccountSettingsDto dto) {
         assertThat(settings.getSettingsId()).isEqualTo(dto.getSettingsId());
-        assertIndustries(settings.getIndustries(), dto.getIndustries());
+        assertThat(settings.getAppLanguage()).isEqualTo(dto.getAppLanguage());
     }
 
     public static void assertSettings(ContactSettings settings1, ContactSettings settings2) {

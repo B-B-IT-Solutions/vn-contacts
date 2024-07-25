@@ -1,7 +1,7 @@
 package cz.prm.controllers;
 
+import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.ContactSettingsDto;
-import cz.prm.controllers.dto.settings.GeneralSettingsDto;
 import cz.prm.controllers.mappers.SettingsMapper;
 import cz.prm.services.SettingsService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +22,10 @@ public class SettingsController {
         this.mapper = mapper;
     }
 
-    @GetMapping("/general")
-    public GeneralSettingsDto getGeneralSettings() {
-        var settings = settingsService.getGeneralSettings();
-        return mapper.toGeneralSettingsDto(settings);
+    @GetMapping("/account")
+    public AccountSettingsDto getAccountSettings() {
+        var settings = settingsService.getAccountSettings();
+        return mapper.toAccountSettingsDto(settings);
     }
 
     @GetMapping("/contact")

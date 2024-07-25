@@ -5,27 +5,27 @@ import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
 
 import cz.prm.business.BusinessComponentTestBase;
+import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.ContactSettingsDto;
-import cz.prm.controllers.dto.settings.GeneralSettingsDto;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 
 public class SettingsComponentTestBase extends BusinessComponentTestBase {
 
     protected static String SETTINGS_BASE_URL = "settings";
-    protected static String GENERAL_SETTINGS_URL = SETTINGS_BASE_URL + "/general";
+    protected static String ACCOUNT_SETTINGS_URL = SETTINGS_BASE_URL + "/account";
     protected static String CONTACT_SETTINGS_URL = SETTINGS_BASE_URL + "/contact";
 
-    protected GeneralSettingsDto user1GetGeneralSettings() {
-        return getGeneralSettings(USER_1);
+    protected AccountSettingsDto user1GetAccountSettings() {
+        return getAccountSettings(USER_1);
     }
 
-    protected GeneralSettingsDto user2GetGeneralSettings() {
-        return getGeneralSettings(USER_2);
+    protected AccountSettingsDto user2GetAccountSettings() {
+        return getAccountSettings(USER_2);
     }
 
-    protected GeneralSettingsDto user3GetGeneralSettings() {
-        return getGeneralSettings(USER_3);
+    protected AccountSettingsDto user3GetAccountSettings() {
+        return getAccountSettings(USER_3);
     }
 
     protected void user1UpdateContactSettings(ContactSettingsDto dto) {
@@ -52,10 +52,10 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
         return getContactSettings(USER_3);
     }
 
-    protected GeneralSettingsDto getGeneralSettings(ComponentTestUser user) {
-        var typeRef = new TypeRef<GeneralSettingsDto>() {
+    protected AccountSettingsDto getAccountSettings(ComponentTestUser user) {
+        var typeRef = new TypeRef<AccountSettingsDto>() {
         };
-        return getOne(GENERAL_SETTINGS_URL, user, typeRef);
+        return getOne(ACCOUNT_SETTINGS_URL, user, typeRef);
     }
 
     protected void updateContactSettings(ContactSettingsDto dto, ComponentTestUser user) {

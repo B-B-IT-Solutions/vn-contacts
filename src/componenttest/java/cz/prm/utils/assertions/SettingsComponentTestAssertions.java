@@ -2,21 +2,20 @@ package cz.prm.utils.assertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.ContactSettingsDto;
-import cz.prm.controllers.dto.settings.GeneralSettingsDto;
 import cz.prm.controllers.dto.settings.IndustryDto;
 import cz.prm.controllers.dto.settings.LabelDto;
+import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.ContactSettings;
-import cz.prm.domain.settings.GeneralSettings;
 import java.util.List;
 import java.util.Objects;
 
 public class SettingsComponentTestAssertions {
 
-    public static void assertSettings(GeneralSettings settings, GeneralSettingsDto dto) {
+    public static void assertSettings(AccountSettings settings, AccountSettingsDto dto) {
         assertThat(dto.getSettingsId()).isEqualTo(settings.getSettingsId());
-        assertThat(dto.getIndustries()).containsExactlyElementsOf(dto.getIndustries());
-        assertThat(dto.getIndustries()).hasSize(115);
+        assertThat(dto.getAppLanguage()).isEqualTo(dto.getAppLanguage());
     }
 
     public static void assertSettings(ContactSettings settings, ContactSettingsDto dto) {

@@ -1,8 +1,8 @@
 package cz.prm.controllers.mappers;
 
+import static cz.prm.utils.SettingsUtils.accountSettings;
 import static cz.prm.utils.SettingsUtils.contactSettings;
 import static cz.prm.utils.SettingsUtils.contactSettingsDto;
-import static cz.prm.utils.SettingsUtils.generalSettings;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
 
 import cz.prm.utils.MapperUtils;
@@ -13,9 +13,9 @@ class ContactSettingsMapperTest {
     private SettingsMapper mapper = MapperUtils.getSettingsMapper();
 
     @Test
-    void toGeneralSettingsDto() {
-        var settings = generalSettings();
-        var dto = mapper.toGeneralSettingsDto(settings);
+    void toAccountSettingsDto() {
+        var settings = accountSettings();
+        var dto = mapper.toAccountSettingsDto(settings);
         assertSettings(settings, dto);
     }
 

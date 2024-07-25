@@ -1,7 +1,7 @@
 package cz.prm.services;
 
+import static cz.prm.utils.SettingsUtils.accountSettings;
 import static cz.prm.utils.SettingsUtils.contactSettings;
-import static cz.prm.utils.SettingsUtils.generalSettings;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
@@ -45,21 +45,21 @@ class ContactSettingsServiceTest {
     }
 
     @Test
-    void getGeneralSettings() {
+    void getAccountSettings() {
         var predicate = new BooleanBuilder();
         when(predicates.generalSettings()).thenReturn(predicate);
         when(generalSettingsRepository.findOne(predicate)).thenReturn(empty());
-        assertThrows(EntityNotFoundException.class, () -> settingsService.getGeneralSettings());
+        assertThrows(EntityNotFoundException.class, () -> settingsService.getAccountSettings());
     }
 
     @Test
-    void getGeneralSettings_SettingsNotFound() {
-        var settings = generalSettings();
+    void getAccountSettings_SettingsNotFound() {
+        var settings = accountSettings();
         var predicate = new BooleanBuilder();
         when(predicates.generalSettings()).thenReturn(predicate);
         when(generalSettingsRepository.findOne(predicate)).thenReturn(of(settings));
 
-        var result = settingsService.getGeneralSettings();
+        var result = settingsService.getAccountSettings();
         assertSettings(result, settings);
     }
 
