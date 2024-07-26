@@ -30,7 +30,7 @@ public class SettingsService {
     public AccountSettings getAccountSettings() {
         var predicate = predicates.accountSettings();
         var optional = accountSettingsRepository.findOne(predicate);
-        return optional.orElseThrow(generalSettingsNotFoundSupplier());
+        return optional.orElseThrow(accountSettingsNotFoundSupplier());
     }
 
     public ContactSettings getContactSettings() {
@@ -61,7 +61,7 @@ public class SettingsService {
         settings.setIndustries(updatedSettings.getIndustries());
     }
 
-    private Supplier<EntityNotFoundException> generalSettingsNotFoundSupplier() {
+    private Supplier<EntityNotFoundException> accountSettingsNotFoundSupplier() {
         return () -> new EntityNotFoundException("GeneralSettings not found!");
     }
 }
