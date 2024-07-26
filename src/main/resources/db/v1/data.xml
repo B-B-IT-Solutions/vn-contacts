@@ -321,31 +321,31 @@
 				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
 			</insert>
 			
-			<insert tableName="user_settings_label">
+			<insert tableName="contact_settings_label">
 				 <column name="settings_id" value="1"/>
 				 <column name="value" value="warrior"/>
 				 <column name="color" value="#f4e958"/>
 			</insert>
 			
-			<insert tableName="user_settings_label">
+			<insert tableName="contact_settings_label">
 				 <column name="settings_id" value="1"/>
 				 <column name="value" value="lion"/>
 				 <column name="color" value="#00FF6C"/>
 			</insert>
 			
-			<insert tableName="user_settings_label">
+			<insert tableName="contact_settings_label">
 				 <column name="settings_id" value="1"/>
 				 <column name="value" value="sheepdog"/>
 				 <column name="color" value="#00CCFF"/>
 			</insert>
 			
-			<insert tableName="user_settings_label">
+			<insert tableName="contact_settings_label">
 				 <column name="settings_id" value="1"/>
 				 <column name="value" value="unbeatable"/>
 				 <column name="color" value="#ec2525"/>
 			</insert>
 			
-			<insert tableName="user_settings_label">
+			<insert tableName="contact_settings_label">
 				 <column name="settings_id" value="1"/>
 				 <column name="value" value="entrepreneur"/>
 				 <column name="color"/>
