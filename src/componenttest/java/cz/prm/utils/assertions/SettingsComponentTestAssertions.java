@@ -53,6 +53,5 @@ public class SettingsComponentTestAssertions {
 
     public static void assertIndustryDto(IndustryDto dto1, IndustryDto dto2) {
         assertThat(dto1.getName()).isEqualTo(dto2.getName());
-        assertThat(dto1.isSystemDefined()).isEqualTo(dto2.isSystemDefined());
     }
 }

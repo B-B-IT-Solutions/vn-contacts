@@ -26,8 +26,7 @@ public class SettingsComponentTestUtils {
 
     public static IndustryDto industryDto() {
         var industry = new IndustryDto();
-        industry.setName(TestUtils.uuid());
-        industry.setSystemDefined(true);
+        industry.setName(uuid());
         return industry;
     }
 }

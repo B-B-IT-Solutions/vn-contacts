@@ -50,7 +50,6 @@ public class SettingsAssertions {
 
     public static void assertIndustry(Industry industry, IndustryDto dto) {
         assertThat(industry.getName()).isEqualTo(dto.getName());
-        assertThat(industry.isSystemDefined()).isEqualTo(dto.isSystemDefined());
     }
 
     public static void assertLabels(List<Label> labels, List<LabelDto> dtos) {

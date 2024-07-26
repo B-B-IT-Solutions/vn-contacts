@@ -74,14 +74,12 @@ public class SettingsUtils {
     public static Industry industry() {
         var industry = new Industry();
         industry.setName(uuid());
-        industry.setSystemDefined(true);
         return industry;
     }
 
     public static IndustryDto industryDto() {
         var industry = new IndustryDto();
         industry.setName(uuid());
-        industry.setSystemDefined(true);
         return industry;
     }
 }

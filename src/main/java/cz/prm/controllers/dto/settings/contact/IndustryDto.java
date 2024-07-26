@@ -12,7 +12,4 @@ public class IndustryDto {
 
     @JsonProperty("name")
     private String name;
-
-    @JsonProperty("systemDefined")
-    private boolean systemDefined;
 }
