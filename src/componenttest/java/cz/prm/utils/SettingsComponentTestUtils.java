@@ -3,8 +3,8 @@ package cz.prm.utils;
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 
-import cz.prm.controllers.dto.settings.IndustryDto;
-import cz.prm.controllers.dto.settings.LabelDto;
+import cz.prm.controllers.dto.settings.contact.IndustryDto;
+import cz.prm.controllers.dto.settings.contact.LabelDto;
 import java.util.List;
 
 public class SettingsComponentTestUtils {

@@ -1,7 +1,7 @@
 package cz.prm.services;
 
 import cz.prm.domain.settings.AccountSettings;
-import cz.prm.domain.settings.ContactSettings;
+import cz.prm.domain.settings.contact.ContactSettings;
 import cz.prm.repositories.settings.AccountSettingsRepository;
 import cz.prm.repositories.settings.ContactSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;

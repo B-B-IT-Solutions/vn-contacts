@@ -1,4 +1,4 @@
-package cz.prm.domain.settings;
+package cz.prm.domain.settings.contact;
 
 import static jakarta.persistence.FetchType.EAGER;
 

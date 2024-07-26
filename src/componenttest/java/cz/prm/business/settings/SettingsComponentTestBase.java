@@ -6,7 +6,7 @@ import static cz.prm.utils.ComponentTestUser.USER_3;
 
 import cz.prm.business.BusinessComponentTestBase;
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
-import cz.prm.controllers.dto.settings.ContactSettingsDto;
+import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 

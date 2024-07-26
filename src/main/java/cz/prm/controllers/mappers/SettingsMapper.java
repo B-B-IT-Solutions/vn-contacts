@@ -1,9 +1,9 @@
 package cz.prm.controllers.mappers;
 
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
-import cz.prm.controllers.dto.settings.ContactSettingsDto;
+import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
 import cz.prm.domain.settings.AccountSettings;
-import cz.prm.domain.settings.ContactSettings;
+import cz.prm.domain.settings.contact.ContactSettings;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

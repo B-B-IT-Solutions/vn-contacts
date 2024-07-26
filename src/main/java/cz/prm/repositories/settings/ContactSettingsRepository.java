@@ -1,6 +1,6 @@
 package cz.prm.repositories.settings;
 
-import cz.prm.domain.settings.ContactSettings;
+import cz.prm.domain.settings.contact.ContactSettings;
 import cz.prm.repositories.customisations.executors.PrmQuerydslPredicateExecutor;
 import cz.prm.repositories.customisations.repositories.RefreshAwareRepository;
 
