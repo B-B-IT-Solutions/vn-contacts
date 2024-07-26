@@ -1,5 +1,7 @@
 package cz.prm.services;
 
+import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_INDUSTRIES;
+
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.contact.ContactSettings;
 import cz.prm.repositories.settings.AccountSettingsRepository;
@@ -46,6 +48,7 @@ public class SettingsService {
         var optional = contactSettingsRepository.findOne(predicate);
         if (optional.isEmpty()) {
             var settings = new ContactSettings();
+            settings.setIndustries(INITIAL_INDUSTRIES);
             var savedSettings = contactSettingsRepository.saveAndFlush(settings);
             contactSettingsRepository.refresh(savedSettings);
             return savedSettings;

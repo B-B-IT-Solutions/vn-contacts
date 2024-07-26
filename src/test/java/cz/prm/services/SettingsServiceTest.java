@@ -1,5 +1,6 @@
 package cz.prm.services;
 
+import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_INDUSTRIES;
 import static cz.prm.utils.SettingsUtils.accountSettings;
 import static cz.prm.utils.SettingsUtils.contactSettings;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
@@ -83,6 +84,7 @@ class SettingsServiceTest {
 
         var result = settingsService.getContactSettings();
         assertThat(result).isNotNull();
+        assertThat(result.getIndustries()).containsExactlyElementsOf(INITIAL_INDUSTRIES);
         verify(contactSettingsRepository).refresh(result);
     }
 
