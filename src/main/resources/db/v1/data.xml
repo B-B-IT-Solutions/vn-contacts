@@ -3,7 +3,6 @@
 									 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 									 xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 	 
-	 
 	 <changeSet author="sergej" id="1.0.1">
 			<insert tableName="account_settings">
 				 <column name="settings_id" value="1"/>
@@ -311,44 +310,6 @@
 				 <column name="creation_date" value="1 Jan 2024 00:00:00 GMT"/>
 				 <column name="owner_username" value="bobuskysergej"/>
 				 <column name="owner_email" value="bobuskysergej"/>
-			</insert>
-	 </changeSet>
-	 
-	 <changeSet author="sergej" id="1.0.4">
-			<insert tableName="user_settings">
-				 <column name="settings_id" value="1"/>
-				 <column name="owner_username" value="bobuskysergej"/>
-				 <column name="last_edit_date" value="1 Jan 2024 00:00:00 GMT"/>
-			</insert>
-			
-			<insert tableName="user_settings_label">
-				 <column name="settings_id" value="1"/>
-				 <column name="value" value="warrior"/>
-				 <column name="color" value="#f4e958"/>
-			</insert>
-			
-			<insert tableName="user_settings_label">
-				 <column name="settings_id" value="1"/>
-				 <column name="value" value="lion"/>
-				 <column name="color" value="#00FF6C"/>
-			</insert>
-			
-			<insert tableName="user_settings_label">
-				 <column name="settings_id" value="1"/>
-				 <column name="value" value="sheepdog"/>
-				 <column name="color" value="#00CCFF"/>
-			</insert>
-			
-			<insert tableName="user_settings_label">
-				 <column name="settings_id" value="1"/>
-				 <column name="value" value="unbeatable"/>
-				 <column name="color" value="#ec2525"/>
-			</insert>
-			
-			<insert tableName="user_settings_label">
-				 <column name="settings_id" value="1"/>
-				 <column name="value" value="entrepreneur"/>
-				 <column name="color"/>
 			</insert>
 	 </changeSet>
 </databaseChangeLog>

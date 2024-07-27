@@ -8,7 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import cz.prm.controllers.mappers.SettingsMapper;
-import cz.prm.domain.settings.ContactSettings;
+import cz.prm.domain.settings.contact.ContactSettings;
 import cz.prm.services.SettingsService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;

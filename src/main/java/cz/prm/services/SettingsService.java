@@ -1,7 +1,9 @@
 package cz.prm.services;
 
+import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_INDUSTRIES;
+
 import cz.prm.domain.settings.AccountSettings;
-import cz.prm.domain.settings.ContactSettings;
+import cz.prm.domain.settings.contact.ContactSettings;
 import cz.prm.repositories.settings.AccountSettingsRepository;
 import cz.prm.repositories.settings.ContactSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
@@ -28,7 +30,7 @@ public class SettingsService {
     public AccountSettings getAccountSettings() {
         var predicate = predicates.accountSettings();
         var optional = accountSettingsRepository.findOne(predicate);
-        return optional.orElseThrow(generalSettingsNotFoundSupplier());
+        return optional.orElseThrow(accountSettingsNotFoundSupplier());
     }
 
     public ContactSettings getContactSettings() {
@@ -46,6 +48,7 @@ public class SettingsService {
         var optional = contactSettingsRepository.findOne(predicate);
         if (optional.isEmpty()) {
             var settings = new ContactSettings();
+            settings.setIndustries(INITIAL_INDUSTRIES);
             var savedSettings = contactSettingsRepository.saveAndFlush(settings);
             contactSettingsRepository.refresh(savedSettings);
             return savedSettings;
@@ -58,7 +61,7 @@ public class SettingsService {
         settings.setIndustries(updatedSettings.getIndustries());
     }
 
-    private Supplier<EntityNotFoundException> generalSettingsNotFoundSupplier() {
+    private Supplier<EntityNotFoundException> accountSettingsNotFoundSupplier() {
         return () -> new EntityNotFoundException("GeneralSettings not found!");
     }
 }

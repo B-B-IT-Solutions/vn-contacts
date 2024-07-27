@@ -1,7 +1,7 @@
 package cz.prm.repositories.settings;
 
+import static cz.prm.domain.settings.contact.querydsl.QContactSettings.contactSettings;
 import static cz.prm.domain.settings.querydsl.QAccountSettings.accountSettings;
-import static cz.prm.domain.settings.querydsl.QContactSettings.contactSettings;
 import static cz.prm.security.SecurityContextUtils.getUser;
 
 import com.querydsl.core.types.Predicate;

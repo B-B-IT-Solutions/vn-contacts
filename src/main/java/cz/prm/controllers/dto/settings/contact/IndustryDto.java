@@ -1,4 +1,4 @@
-package cz.prm.controllers.dto.settings;
+package cz.prm.controllers.dto.settings.contact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,4 @@ public class IndustryDto {
 
     @JsonProperty("name")
     private String name;
-
-    @JsonProperty("systemDefined")
-    private boolean systemDefined;
 }

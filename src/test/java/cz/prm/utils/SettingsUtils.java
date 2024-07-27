@@ -6,13 +6,13 @@ import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static java.time.Instant.now;
 
-import cz.prm.controllers.dto.settings.ContactSettingsDto;
-import cz.prm.controllers.dto.settings.IndustryDto;
-import cz.prm.controllers.dto.settings.LabelDto;
+import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
+import cz.prm.controllers.dto.settings.contact.IndustryDto;
+import cz.prm.controllers.dto.settings.contact.LabelDto;
 import cz.prm.domain.settings.AccountSettings;
-import cz.prm.domain.settings.ContactSettings;
-import cz.prm.domain.settings.Industry;
-import cz.prm.domain.settings.Label;
+import cz.prm.domain.settings.contact.ContactSettings;
+import cz.prm.domain.settings.contact.Industry;
+import cz.prm.domain.settings.contact.Label;
 import java.util.List;
 
 public class SettingsUtils {
@@ -74,14 +74,12 @@ public class SettingsUtils {
     public static Industry industry() {
         var industry = new Industry();
         industry.setName(uuid());
-        industry.setSystemDefined(true);
         return industry;
     }
 
     public static IndustryDto industryDto() {
         var industry = new IndustryDto();
         industry.setName(uuid());
-        industry.setSystemDefined(true);
         return industry;
     }
 }

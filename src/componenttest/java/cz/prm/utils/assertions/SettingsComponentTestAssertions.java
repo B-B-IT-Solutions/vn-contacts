@@ -3,11 +3,11 @@ package cz.prm.utils.assertions;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
-import cz.prm.controllers.dto.settings.ContactSettingsDto;
-import cz.prm.controllers.dto.settings.IndustryDto;
-import cz.prm.controllers.dto.settings.LabelDto;
+import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
+import cz.prm.controllers.dto.settings.contact.IndustryDto;
+import cz.prm.controllers.dto.settings.contact.LabelDto;
 import cz.prm.domain.settings.AccountSettings;
-import cz.prm.domain.settings.ContactSettings;
+import cz.prm.domain.settings.contact.ContactSettings;
 import java.util.List;
 import java.util.Objects;
 
@@ -53,6 +53,5 @@ public class SettingsComponentTestAssertions {
 
     public static void assertIndustryDto(IndustryDto dto1, IndustryDto dto2) {
         assertThat(dto1.getName()).isEqualTo(dto2.getName());
-        assertThat(dto1.isSystemDefined()).isEqualTo(dto2.isSystemDefined());
     }
 }

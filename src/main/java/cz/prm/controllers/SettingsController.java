@@ -1,7 +1,7 @@
 package cz.prm.controllers;
 
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
-import cz.prm.controllers.dto.settings.ContactSettingsDto;
+import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
 import cz.prm.controllers.mappers.SettingsMapper;
 import cz.prm.services.SettingsService;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package cz.prm.domain.settings;
+package cz.prm.domain.settings.contact;
 
 import static jakarta.persistence.FetchType.EAGER;
 
@@ -41,12 +41,12 @@ public class ContactSettings {
     private Long settingsId;
 
     @ElementCollection(fetch = EAGER)
-    @CollectionTable(name = "USER_SETTINGS_LABEL", joinColumns = @JoinColumn(name = "SETTINGS_ID"))
+    @CollectionTable(name = "CONTACT_SETTINGS_LABEL", joinColumns = @JoinColumn(name = "SETTINGS_ID"))
     @Column(name = "LABEL")
     private List<Label> labels;
 
     @ElementCollection(fetch = EAGER)
-    @CollectionTable(name = "USER_SETTINGS_INDUSTRY", joinColumns = @JoinColumn(name = "SETTINGS_ID"))
+    @CollectionTable(name = "CONTACT_SETTINGS_INDUSTRY", joinColumns = @JoinColumn(name = "SETTINGS_ID"))
     @Column(name = "INDUSTRIES")
     private List<Industry> industries;
 

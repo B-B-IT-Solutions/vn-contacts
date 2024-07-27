@@ -1,4 +1,4 @@
-package cz.prm.controllers.dto.settings;
+package cz.prm.controllers.dto.settings.contact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;

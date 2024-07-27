@@ -5,7 +5,7 @@ import static cz.prm.utils.SettingsComponentTestUtils.labelsDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
-import cz.prm.controllers.dto.settings.ContactSettingsDto;
+import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
 import cz.prm.utils.assertions.SettingsComponentTestAssertions;
 import org.junit.jupiter.api.Test;
 
