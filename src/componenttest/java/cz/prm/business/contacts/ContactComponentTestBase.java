@@ -173,6 +173,18 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         getContactExpectNotFound(contactId, USER_3);
     }
 
+    protected void user1GetAboutExpectNotFound(Long contactId) {
+        getAboutExpectNotFound(contactId, USER_1);
+    }
+
+    protected void user2GetAboutExpectNotFound(Long contactId) {
+        getAboutExpectNotFound(contactId, USER_2);
+    }
+
+    protected void user3GetAboutExpectNotFound(Long contactId) {
+        getAboutExpectNotFound(contactId, USER_3);
+    }
+
     protected void updateContactExpectNotFound(Long contactId, ContactDto dto, ComponentTestUser user) {
         var url = format(CONTACT_URL, contactId);
         putExpectNotFound(url, user, dto);
@@ -185,6 +197,11 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
 
     protected void getContactExpectNotFound(Long contactId, ComponentTestUser user) {
         var url = format(CONTACT_URL, contactId);
+        getExpectNotFound(url, user);
+    }
+
+    protected void getAboutExpectNotFound(Long contactId, ComponentTestUser user) {
+        var url = format(ABOUT_URL, contactId);
         getExpectNotFound(url, user);
     }
 

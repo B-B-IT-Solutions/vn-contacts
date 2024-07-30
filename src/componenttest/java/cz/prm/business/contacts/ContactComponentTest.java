@@ -408,8 +408,8 @@ public class ContactComponentTest extends ContactComponentTestBase {
         var about = getAboutFromDb(contact);
         var aboutDto = user1GetAbout(contactId);
         assertAboutDto(about, aboutDto);
-        user2GetContactExpectNotFound(contactId);
-        user3GetContactExpectNotFound(contactId);
+        user2GetAboutExpectNotFound(contactId);
+        user3GetAboutExpectNotFound(contactId);
 
         contact = createContact(USER_2);
         contactId = contact.getContactId();
@@ -417,8 +417,8 @@ public class ContactComponentTest extends ContactComponentTestBase {
         about = getAboutFromDb(contact);
         aboutDto = user2GetAbout(contactId);
         assertAboutDto(about, aboutDto);
-        user1GetContactExpectNotFound(contactId);
-        user3GetContactExpectNotFound(contactId);
+        user1GetAboutExpectNotFound(contactId);
+        user3GetAboutExpectNotFound(contactId);
 
         contact = createContact(USER_3);
         contactId = contact.getContactId();
@@ -426,7 +426,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
         about = getAboutFromDb(contact);
         aboutDto = user3GetAbout(contactId);
         assertAboutDto(about, aboutDto);
-        user1GetContactExpectNotFound(contactId);
-        user2GetContactExpectNotFound(contactId);
+        user1GetAboutExpectNotFound(contactId);
+        user2GetAboutExpectNotFound(contactId);
     }
 }
