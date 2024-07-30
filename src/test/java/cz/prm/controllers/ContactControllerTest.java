@@ -1,11 +1,13 @@
 package cz.prm.controllers;
 
 import static cz.prm.utils.CommonUtils.page;
+import static cz.prm.utils.ContactUtils.about;
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contactDto;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsQueryDto;
 import static cz.prm.utils.TestUtils.randomLong;
+import static cz.prm.utils.assertions.ContactAssertions.assertAboutDto;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactQuery;
 import static cz.prm.utils.assertions.ContactAssertions.assertPage;
@@ -90,5 +92,14 @@ class ContactControllerTest {
         var contactId = randomLong();
         controller.deleteContact(contactId);
         verify(contactService).deleteContact(contactId);
+    }
+
+    @Test
+    void getAbout() {
+        var about = about();
+        var contactId = about.getContactId();
+        when(contactService.getAbout(contactId)).thenReturn(about);
+        var result = controller.getAbout(contactId);
+        assertAboutDto(about, result);
     }
 }

@@ -130,10 +130,12 @@ public class ContactAssertions {
 
     public static void assertAbout(About about1, About about2) {
         assertThat(about1.getDescription()).isEqualTo(about2.getDescription());
+        assertThat(about1.getContactId()).isEqualTo(about2.getContactId());
     }
 
     public static void assertAboutDto(About about, AboutDto dto) {
         assertThat(about.getDescription()).isEqualTo(dto.getDescription());
+        assertThat(about.getContactId()).isEqualTo(dto.getContactId());
     }
 
     public static void assertContactQuery(ContactsQuery query, ContactsQueryDto dto) {

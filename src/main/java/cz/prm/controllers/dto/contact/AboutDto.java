@@ -12,4 +12,7 @@ public class AboutDto {
 
     @JsonProperty("description")
     private String description;
+
+    @JsonProperty("contactId")
+    private Long contactId;
 }

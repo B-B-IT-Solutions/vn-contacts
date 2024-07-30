@@ -22,6 +22,9 @@ public class About {
     @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "CONTACT_ID")
+    private Long contactId;
+
     @CreatedBy
     @Embedded
     @AttributeOverrides({

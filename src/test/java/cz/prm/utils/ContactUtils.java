@@ -108,12 +108,15 @@ public class ContactUtils {
     public static About about() {
         var about = new About();
         about.setDescription(uuid());
+        about.setContactId(randomLong());
+        about.setOwner(user());
         return about;
     }
 
     public static AboutDto aboutDto() {
         var dto = new AboutDto();
         dto.setDescription(uuid());
+        dto.setContactId(randomLong());
         return dto;
     }
 
