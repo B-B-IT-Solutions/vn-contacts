@@ -32,4 +32,8 @@ public class About {
         @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))
     })
     private User owner;
+
+    public About(Long contactId) {
+        this.contactId = contactId;
+    }
 }
