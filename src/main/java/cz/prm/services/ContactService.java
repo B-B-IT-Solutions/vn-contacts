@@ -7,6 +7,7 @@ import cz.prm.domain.common.query.Page;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsQuery;
+import cz.prm.repositories.contact.AboutRepository;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
 import cz.prm.repositories.note.NoteRepository;
@@ -21,11 +22,14 @@ public class ContactService {
 
     private ContactRepository repository;
     private ContactPredicates predicates;
+    private AboutRepository aboutRepository;
     private NoteRepository noteRepository;
 
-    public ContactService(ContactRepository repository, ContactPredicates predicates, NoteRepository noteRepository) {
+    public ContactService(ContactRepository repository, ContactPredicates predicates, AboutRepository aboutRepository,
+        NoteRepository noteRepository) {
         this.repository = repository;
         this.predicates = predicates;
+        this.aboutRepository = aboutRepository;
         this.noteRepository = noteRepository;
     }
 
@@ -52,6 +56,7 @@ public class ContactService {
 
     public void deleteContact(Long contactId) {
         var contact = getContactById(contactId);
+        aboutRepository.deleteByContactId(contact.getContactId());
         noteRepository.deleteByContactId(contact.getContactId());
         repository.deleteById(contact.getContactId());
     }
