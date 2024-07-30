@@ -4,6 +4,7 @@ import static cz.prm.domain.common.PageRequests.getPageRequest;
 import static java.lang.String.format;
 
 import cz.prm.domain.common.query.Page;
+import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.repositories.contact.ContactPredicates;
@@ -53,6 +54,10 @@ public class ContactService {
         var contact = getContactById(contactId);
         noteRepository.deleteByContactId(contact.getContactId());
         repository.deleteById(contact.getContactId());
+    }
+
+    public About getAbout(Long contactId) {
+        return null;
     }
 
     private void updateContactFields(Contact savedContact, Contact updatedContact) {

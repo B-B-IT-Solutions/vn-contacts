@@ -5,11 +5,13 @@ import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import cz.prm.controllers.dto.common.PageDto;
+import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.common.query.Pagination;
+import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsFilter;
 import cz.prm.domain.contact.query.ContactsQuery;
@@ -27,6 +29,11 @@ public interface ContactMapper {
 
     @Mapping(target = "owner", ignore = true)
     Contact toContact(ContactDto dto);
+
+    AboutDto toAboutDto(About about);
+
+    @Mapping(target = "owner", ignore = true)
+    About toAbout(AboutDto dto);
 
     ContactsQuery toContactsQuery(ContactsQueryDto dto);
 

@@ -10,11 +10,13 @@ import static cz.prm.utils.TestUtils.uuids;
 import static java.lang.String.format;
 import static java.time.Instant.now;
 
+import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
+import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.Occupation;
@@ -100,6 +102,18 @@ public class ContactUtils {
         var dto = new ConnectionDto();
         dto.setValue(uuid());
         dto.setType(uuid());
+        return dto;
+    }
+
+    public static About about() {
+        var about = new About();
+        about.setDescription(uuid());
+        return about;
+    }
+
+    public static AboutDto aboutDto() {
+        var dto = new AboutDto();
+        dto.setDescription(uuid());
         return dto;
     }
 

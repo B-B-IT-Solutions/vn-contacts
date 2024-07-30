@@ -1,6 +1,7 @@
 package cz.prm.controllers;
 
 import cz.prm.controllers.dto.common.PageDto;
+import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.controllers.mappers.ContactMapper;
@@ -54,5 +55,11 @@ public class ContactController {
     @DeleteMapping("/{contactId}")
     public void deleteContact(@PathVariable("contactId") Long contactId) {
         contactService.deleteContact(contactId);
+    }
+
+    @GetMapping("/{contactId}/about")
+    public AboutDto getAbout(@PathVariable("contactId") Long contactId) {
+        var about = contactService.getAbout(contactId);
+        return mapper.toAboutDto(about);
     }
 }
