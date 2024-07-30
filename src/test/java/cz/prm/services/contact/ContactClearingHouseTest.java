@@ -69,6 +69,13 @@ class ContactClearingHouseTest {
     }
 
     @Test
+    void deleteContact() {
+        var contact = contact();
+        clearingHouse.deleteContact(contact.getContactId());
+        verify(contactService).deleteContact(contact.getContactId());
+    }
+
+    @Test
     void getAbout() {
         var about = about();
         when(aboutService.getAbout(about.getContactId())).thenReturn(about);

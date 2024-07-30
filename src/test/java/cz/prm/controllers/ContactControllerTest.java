@@ -21,8 +21,7 @@ import cz.prm.controllers.mappers.ContactMapper;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsQuery;
-import cz.prm.services.contact.data.AboutService;
-import cz.prm.services.contact.data.ContactService;
+import cz.prm.services.contact.ContactClearingHouse;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,9 +35,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class ContactControllerTest {
 
     @Mock
-    private ContactService contactService;
-    @Mock
-    private AboutService aboutService;
+    private ContactClearingHouse clearingHouse;
     @Captor
     private ArgumentCaptor<Contact> contactCapt;
     @Captor
@@ -51,18 +48,18 @@ class ContactControllerTest {
 
     @BeforeEach
     void setUp() {
-        controller = new ContactController(contactService, aboutService, mapper);
+        controller = new ContactController(clearingHouse, mapper);
     }
 
     @Test
     void getContacts() {
         var page = page(contacts());
         var queryDto = contactsQueryDto();
-        when(contactService.getContacts(any(ContactsQuery.class))).thenReturn(page);
+        when(clearingHouse.getContacts(any(ContactsQuery.class))).thenReturn(page);
 
         var result = controller.getContacts(queryDto);
         assertPage(page, result);
-        verify(contactService).getContacts(cQueryCapt.capture());
+        verify(clearingHouse).getContacts(cQueryCapt.capture());
         var query = cQueryCapt.getValue();
         assertContactQuery(query, queryDto);
     }
@@ -71,7 +68,7 @@ class ContactControllerTest {
     void getContact() {
         var contact = contact();
         var contactId = contact.getContactId();
-        when(contactService.getContact(contactId)).thenReturn(contact);
+        when(clearingHouse.getContact(contactId)).thenReturn(contact);
         var result = controller.getContact(contactId);
         assertContact(contact, result);
     }
@@ -80,7 +77,7 @@ class ContactControllerTest {
     void createContact() {
         var dto = contactDto();
         controller.createContact(dto);
-        verify(contactService).createContact(contactCapt.capture());
+        verify(clearingHouse).createContact(contactCapt.capture());
         var contact = contactCapt.getValue();
         assertContact(contact, dto);
     }
@@ -89,7 +86,7 @@ class ContactControllerTest {
     void updateContact() {
         var dto = contactDto();
         controller.updateContact(dto.getContactId(), dto);
-        verify(contactService).updateContact(eq(dto.getContactId()), contactCapt.capture());
+        verify(clearingHouse).updateContact(eq(dto.getContactId()), contactCapt.capture());
         var contact = contactCapt.getValue();
         assertContact(contact, dto);
     }
@@ -98,14 +95,14 @@ class ContactControllerTest {
     void deleteContact() {
         var contactId = randomLong();
         controller.deleteContact(contactId);
-        verify(contactService).deleteContact(contactId);
+        verify(clearingHouse).deleteContact(contactId);
     }
 
     @Test
     void getAbout() {
         var about = about();
         var contactId = about.getContactId();
-        when(aboutService.getAbout(contactId)).thenReturn(about);
+        when(clearingHouse.getAbout(contactId)).thenReturn(about);
         var result = controller.getAbout(contactId);
         assertAboutDto(about, result);
     }
@@ -114,7 +111,7 @@ class ContactControllerTest {
     void updateAbout() {
         var dto = aboutDto();
         controller.updateAbout(dto.getContactId(), dto);
-        verify(aboutService).updateAbout(eq(dto.getContactId()), aboutCapt.capture());
+        verify(clearingHouse).updateAbout(eq(dto.getContactId()), aboutCapt.capture());
         var about = aboutCapt.getValue();
         assertAboutDto(about, dto);
     }

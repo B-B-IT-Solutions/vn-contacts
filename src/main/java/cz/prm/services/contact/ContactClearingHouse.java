@@ -41,6 +41,10 @@ public class ContactClearingHouse {
         contactService.updateContact(contactId, updatedContact);
     }
 
+    public void deleteContact(Long contactId) {
+        contactService.deleteContact(contactId);
+    }
+
     public About getAbout(Long contactId) {
         return aboutService.getAbout(contactId);
     }
