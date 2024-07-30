@@ -1,4 +1,4 @@
-package cz.prm.services;
+package cz.prm.services.contact.data;
 
 import static cz.prm.domain.common.PageRequests.getPageRequest;
 import static java.lang.String.format;
@@ -13,6 +13,7 @@ import cz.prm.repositories.note.NoteRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import java.util.function.Supplier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,6 +25,7 @@ public class ContactService {
     private AboutRepository aboutRepository;
     private NoteRepository noteRepository;
 
+    @Autowired
     public ContactService(ContactRepository repository, ContactPredicates predicates, AboutRepository aboutRepository,
         NoteRepository noteRepository) {
         this.repository = repository;

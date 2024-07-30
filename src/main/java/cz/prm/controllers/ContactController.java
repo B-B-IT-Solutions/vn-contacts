@@ -5,8 +5,9 @@ import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.controllers.mappers.ContactMapper;
-import cz.prm.services.AboutService;
-import cz.prm.services.ContactService;
+import cz.prm.services.contact.data.AboutService;
+import cz.prm.services.contact.data.ContactService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ public class ContactController {
     private AboutService aboutService;
     private ContactMapper mapper;
 
+    @Autowired
     public ContactController(ContactService contactService, AboutService aboutService, ContactMapper mapper) {
         this.contactService = contactService;
         this.aboutService = aboutService;

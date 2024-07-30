@@ -1,7 +1,6 @@
-package cz.prm.services;
+package cz.prm.services.contact.data;
 
 import static cz.prm.utils.ContactUtils.about;
-import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.ContactAssertions.assertAbout;
 import static java.util.Optional.empty;
@@ -13,7 +12,6 @@ import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.contact.About;
-import cz.prm.domain.contact.Contact;
 import cz.prm.repositories.contact.AboutPredicates;
 import cz.prm.repositories.contact.AboutRepository;
 import jakarta.persistence.EntityNotFoundException;

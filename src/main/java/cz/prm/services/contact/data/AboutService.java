@@ -1,4 +1,4 @@
-package cz.prm.services;
+package cz.prm.services.contact.data;
 
 import static java.lang.String.format;
 
@@ -8,6 +8,7 @@ import cz.prm.repositories.contact.AboutRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import java.util.function.Supplier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +18,7 @@ public class AboutService {
     private AboutRepository repository;
     private AboutPredicates predicates;
 
+    @Autowired
     public AboutService(AboutRepository repository, AboutPredicates predicates) {
         this.repository = repository;
         this.predicates = predicates;

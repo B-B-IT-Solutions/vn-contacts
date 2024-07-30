@@ -1,4 +1,4 @@
-package cz.prm.services;
+package cz.prm.services.contact.data;
 
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contacts;
