@@ -45,8 +45,8 @@ public class ContactService {
         return getContactById(contactId);
     }
 
-    public void createContact(Contact contact) {
-        repository.save(contact);
+    public Contact createContact(Contact contact) {
+        return repository.save(contact);
     }
 
     public void updateContact(Long contactId, Contact updatedContact) {
