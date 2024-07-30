@@ -14,6 +14,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import cz.prm.business.BusinessComponentTestBase;
 import cz.prm.controllers.dto.common.PageDto;
+import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
@@ -27,6 +28,7 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
 
     protected static String CONTACTS_URL = "contacts";
     protected static String CONTACT_URL = CONTACTS_URL + "/%s";
+    protected static String ABOUT_URL = CONTACTS_URL + "/%s/about";
 
     protected void user1CreateContact(ContactDto dto) {
         createContact(dto, USER_1);
@@ -88,6 +90,30 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         return getContact(contactId, USER_3);
     }
 
+    protected void user1UpdateAbout(Long contactId, AboutDto dto) {
+        updateAbout(contactId, dto, USER_1);
+    }
+
+    protected void user2UpdateAbout(Long contactId, AboutDto dto) {
+        updateAbout(contactId, dto, USER_2);
+    }
+
+    protected void user3UpdateAbout(Long contactId, AboutDto dto) {
+        updateAbout(contactId, dto, USER_3);
+    }
+
+    protected AboutDto user1GetAbout(Long contactId) {
+        return getAbout(contactId, USER_1);
+    }
+
+    protected AboutDto user2GetAbout(Long contactId) {
+        return getAbout(contactId, USER_2);
+    }
+
+    protected AboutDto user3GetAbout(Long contactId) {
+        return getAbout(contactId, USER_3);
+    }
+
     protected void createContact(ContactDto dto, ComponentTestUser user) {
         post(CONTACTS_URL, user, dto);
     }
@@ -112,6 +138,18 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
     protected ContactDto getContact(Long contactId, ComponentTestUser user) {
         var url = format(CONTACT_URL, contactId);
         var typeRef = new TypeRef<ContactDto>() {
+        };
+        return getOne(url, user, typeRef);
+    }
+
+    protected void updateAbout(Long contactId, AboutDto dto, ComponentTestUser user) {
+        var url = format(ABOUT_URL, contactId);
+        put(url, user, dto);
+    }
+
+    protected AboutDto getAbout(Long contactId, ComponentTestUser user) {
+        var url = format(ABOUT_URL, contactId);
+        var typeRef = new TypeRef<AboutDto>() {
         };
         return getOne(url, user, typeRef);
     }
@@ -152,6 +190,30 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         getContactExpectNotFound(contactId, USER_3);
     }
 
+    protected void user1UpdateAboutExpectNotFound(Long contactId, AboutDto dto) {
+        updateAboutExpectNotFound(contactId, dto, USER_1);
+    }
+
+    protected void user2UpdateAboutExpectNotFound(Long contactId, AboutDto dto) {
+        updateAboutExpectNotFound(contactId, dto, USER_2);
+    }
+
+    protected void user3UpdateAboutExpectNotFound(Long contactId, AboutDto dto) {
+        updateAboutExpectNotFound(contactId, dto, USER_3);
+    }
+
+    protected void user1GetAboutExpectNotFound(Long contactId) {
+        getAboutExpectNotFound(contactId, USER_1);
+    }
+
+    protected void user2GetAboutExpectNotFound(Long contactId) {
+        getAboutExpectNotFound(contactId, USER_2);
+    }
+
+    protected void user3GetAboutExpectNotFound(Long contactId) {
+        getAboutExpectNotFound(contactId, USER_3);
+    }
+
     protected void updateContactExpectNotFound(Long contactId, ContactDto dto, ComponentTestUser user) {
         var url = format(CONTACT_URL, contactId);
         putExpectNotFound(url, user, dto);
@@ -164,6 +226,16 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
 
     protected void getContactExpectNotFound(Long contactId, ComponentTestUser user) {
         var url = format(CONTACT_URL, contactId);
+        getExpectNotFound(url, user);
+    }
+
+    protected void updateAboutExpectNotFound(Long contactId, AboutDto dto, ComponentTestUser user) {
+        var url = format(ABOUT_URL, contactId);
+        putExpectNotFound(url, user, dto);
+    }
+
+    protected void getAboutExpectNotFound(Long contactId, ComponentTestUser user) {
+        var url = format(ABOUT_URL, contactId);
         getExpectNotFound(url, user);
     }
 
@@ -220,13 +292,5 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
 
     protected List<Contact> createContacts(ComponentTestUser user, int numOfContacts) {
         return IntStream.range(0, numOfContacts).mapToObj((i) -> createContact(user)).collect(toList());
-    }
-
-    protected Contact createContact(ComponentTestUser user) {
-        ensureUserContext(user);
-        var contact = contact();
-        var savedContact = contactRepository.save(contact);
-        clearContext();
-        return savedContact;
     }
 }

@@ -4,12 +4,14 @@ import static cz.prm.utils.assertions.CommonAssertions.assertQuery;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
+import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.common.query.Page;
+import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.Occupation;
@@ -124,6 +126,16 @@ public class ContactAssertions {
     public static void assertConnectionDto(Connection connection, ConnectionDto dto) {
         assertThat(connection.getValue()).isEqualTo(dto.getValue());
         assertThat(connection.getValue()).isEqualTo(dto.getValue());
+    }
+
+    public static void assertAbout(About about1, About about2) {
+        assertThat(about1.getDescription()).isEqualTo(about2.getDescription());
+        assertThat(about1.getContactId()).isEqualTo(about2.getContactId());
+    }
+
+    public static void assertAboutDto(About about, AboutDto dto) {
+        assertThat(about.getDescription()).isEqualTo(dto.getDescription());
+        assertThat(about.getContactId()).isEqualTo(dto.getContactId());
     }
 
     public static void assertContactQuery(ContactsQuery query, ContactsQueryDto dto) {

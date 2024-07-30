@@ -2,11 +2,14 @@ package cz.prm.controllers.mappers;
 
 import static cz.prm.utils.CommonUtils.DEFAULT_PAGE_SIZE;
 import static cz.prm.utils.CommonUtils.page;
+import static cz.prm.utils.ContactUtils.about;
+import static cz.prm.utils.ContactUtils.aboutDto;
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contactDto;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsFilterDto;
 import static cz.prm.utils.ContactUtils.contactsQueryDto;
+import static cz.prm.utils.assertions.ContactAssertions.assertAboutDto;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactFilter;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactQuery;
@@ -43,6 +46,20 @@ class ContactMapperTest {
         var dto = contactDto();
         var contact = mapper.toContact(dto);
         assertContact(contact, dto);
+    }
+
+    @Test
+    void toAboutDto() {
+        var about = about();
+        var dto = mapper.toAboutDto(about);
+        assertAboutDto(about, dto);
+    }
+
+    @Test
+    void toAbout() {
+        var dto = aboutDto();
+        var about = mapper.toAbout(dto);
+        assertAboutDto(about, dto);
     }
 
     @Test

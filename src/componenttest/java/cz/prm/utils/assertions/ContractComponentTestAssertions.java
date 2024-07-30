@@ -5,9 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
 
 import cz.prm.controllers.dto.common.PageDto;
+import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
+import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.Occupation;
@@ -61,5 +63,10 @@ public class ContractComponentTestAssertions {
     public static void assertConnectionDto(Connection connection, ConnectionDto dto) {
         assertThat(connection.getValue()).isEqualTo(dto.getValue());
         assertThat(connection.getValue()).isEqualTo(dto.getValue());
+    }
+
+    public static void assertAboutDto(About about, AboutDto dto) {
+        assertThat(about.getDescription()).isEqualTo(dto.getDescription());
+        assertThat(about.getContactId()).isEqualTo(dto.getContactId());
     }
 }

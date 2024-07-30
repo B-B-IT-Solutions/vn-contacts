@@ -51,6 +51,19 @@
 				 <column name="contact_id" type="BIGINT"/>
 				 <column name="LABEL" type="VARCHAR(250)"/>
 			</createTable>
+			
+			<createTable tableName="about">
+				 <column name="contact_id" type="BIGINT">
+						<constraints primaryKey="true" primaryKeyName="about_pk" nullable="false"/>
+				 </column>
+				 <column name="description" type="TEXT"/>
+				 <column name="owner_username" type="VARCHAR(255)"/>
+				 <column name="owner_email" type="VARCHAR(255)"/>
+			</createTable>
+			
+			<addForeignKeyConstraint baseTableName="about" baseColumnNames="contact_id" constraintName="about_contact_id_fkey"
+															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
+															 referencedColumnNames="contact_id" validate="true"/>
 	 </changeSet>
 	 
 	 <changeSet author="sergej" id="1.0.2">
@@ -69,7 +82,7 @@
 				 <column name="owner_email" type="VARCHAR(255)"/>
 			</createTable>
 			
-			<addForeignKeyConstraint baseTableName="note" baseColumnNames="contact_id" constraintName="contact_id_fkey"
+			<addForeignKeyConstraint baseTableName="note" baseColumnNames="contact_id" constraintName="note_contact_id_fkey"
 															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
 															 referencedColumnNames="contact_id" validate="true"/>
 	 </changeSet>
