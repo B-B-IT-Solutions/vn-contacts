@@ -17,7 +17,6 @@ import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.contact.Contact;
-import cz.prm.repositories.contact.AboutRepository;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
 import cz.prm.repositories.note.NoteRepository;
@@ -40,8 +39,6 @@ class ContactServiceTest {
     @Mock
     private ContactPredicates predicates;
     @Mock
-    private AboutRepository aboutRepository;
-    @Mock
     private NoteRepository noteRepository;
     @Captor
     private ArgumentCaptor<Contact> contactCapt;
@@ -50,7 +47,7 @@ class ContactServiceTest {
 
     @BeforeEach
     void setUp() {
-        contactService = new ContactService(repository, predicates, aboutRepository, noteRepository);
+        contactService = new ContactService(repository, predicates, noteRepository);
     }
 
     @Test
@@ -124,7 +121,6 @@ class ContactServiceTest {
         when(repository.findOne(predicate)).thenReturn(of(contactIdDb));
 
         contactService.deleteContact(contactIdDb.getContactId());
-        verify(aboutRepository).deleteByContactId(contactIdDb.getContactId());
         verify(noteRepository).deleteByContactId(contactIdDb.getContactId());
         verify(repository).deleteById(contactIdDb.getContactId());
     }
@@ -136,7 +132,6 @@ class ContactServiceTest {
         when(predicates.byContactId(contactIdDb.getContactId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(empty());
         assertThrows(EntityNotFoundException.class, () -> contactService.deleteContact(contactIdDb.getContactId()));
-        verify(aboutRepository, never()).deleteByContactId(any());
         verify(noteRepository, never()).deleteByContactId(any());
         verify(repository, never()).deleteById(any());
     }

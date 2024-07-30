@@ -39,6 +39,11 @@ public class AboutService {
         repository.save(savedAbout);
     }
 
+    public void deleteAbout(Long contactId) {
+        var about = getByContactId(contactId);
+        repository.deleteById(about.getContactId());
+    }
+
     private void updateAboutFields(About savedAbout, About updatedAbout) {
         savedAbout.setDescription(updatedAbout.getDescription());
     }
