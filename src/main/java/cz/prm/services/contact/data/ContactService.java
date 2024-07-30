@@ -1,4 +1,4 @@
-package cz.prm.services;
+package cz.prm.services.contact.data;
 
 import static cz.prm.domain.common.PageRequests.getPageRequest;
 import static java.lang.String.format;
@@ -13,6 +13,7 @@ import cz.prm.repositories.note.NoteRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import java.util.function.Supplier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,14 +22,12 @@ public class ContactService {
 
     private ContactRepository repository;
     private ContactPredicates predicates;
-    private AboutRepository aboutRepository;
     private NoteRepository noteRepository;
 
-    public ContactService(ContactRepository repository, ContactPredicates predicates, AboutRepository aboutRepository,
-        NoteRepository noteRepository) {
+    @Autowired
+    public ContactService(ContactRepository repository, ContactPredicates predicates, NoteRepository noteRepository) {
         this.repository = repository;
         this.predicates = predicates;
-        this.aboutRepository = aboutRepository;
         this.noteRepository = noteRepository;
     }
 
@@ -43,8 +42,8 @@ public class ContactService {
         return getContactById(contactId);
     }
 
-    public void createContact(Contact contact) {
-        repository.save(contact);
+    public Contact createContact(Contact contact) {
+        return repository.save(contact);
     }
 
     public void updateContact(Long contactId, Contact updatedContact) {
@@ -55,7 +54,6 @@ public class ContactService {
 
     public void deleteContact(Long contactId) {
         var contact = getContactById(contactId);
-        aboutRepository.deleteByContactId(contact.getContactId());
         noteRepository.deleteByContactId(contact.getContactId());
         repository.deleteById(contact.getContactId());
     }
