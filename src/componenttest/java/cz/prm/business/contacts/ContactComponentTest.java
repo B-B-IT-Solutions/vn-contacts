@@ -10,6 +10,7 @@ import static cz.prm.utils.ComponentTestUtils.notContainsFilter;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static cz.prm.utils.ContactComponentTestUtils.contactDto;
 import static cz.prm.utils.ContactComponentTestUtils.contactsQueryDto;
+import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertAboutDto;
 import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertContact;
 import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertContacts;
 import static java.time.Instant.now;
@@ -397,5 +398,35 @@ public class ContactComponentTest extends ContactComponentTestBase {
         user2DeleteContactExpectNotFound(contactId);
         user3DeleteContact(contactId);
         user3GetContactExpectNotFound(contactId);
+    }
+
+    @Test
+    void getAbout() {
+        var contact = createContact(USER_1);
+        var contactId = contact.getContactId();
+
+        var about = getAboutFromDb(contact);
+        var aboutDto = user1GetAbout(contactId);
+        assertAboutDto(about, aboutDto);
+        user2GetContactExpectNotFound(contactId);
+        user3GetContactExpectNotFound(contactId);
+
+        contact = createContact(USER_2);
+        contactId = contact.getContactId();
+
+        about = getAboutFromDb(contact);
+        aboutDto = user2GetAbout(contactId);
+        assertAboutDto(about, aboutDto);
+        user1GetContactExpectNotFound(contactId);
+        user3GetContactExpectNotFound(contactId);
+
+        contact = createContact(USER_3);
+        contactId = contact.getContactId();
+
+        about = getAboutFromDb(contact);
+        aboutDto = user3GetAbout(contactId);
+        assertAboutDto(about, aboutDto);
+        user1GetContactExpectNotFound(contactId);
+        user2GetContactExpectNotFound(contactId);
     }
 }

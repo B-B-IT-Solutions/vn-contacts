@@ -19,6 +19,7 @@ import static org.mockito.Mockito.when;
 import cz.prm.controllers.mappers.ContactMapper;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsQuery;
+import cz.prm.services.AboutService;
 import cz.prm.services.ContactService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,6 +35,8 @@ class ContactControllerTest {
 
     @Mock
     private ContactService contactService;
+    @Mock
+    private AboutService aboutService;
     @Captor
     private ArgumentCaptor<Contact> contactCapt;
     @Captor
@@ -44,7 +47,7 @@ class ContactControllerTest {
 
     @BeforeEach
     void setUp() {
-        controller = new ContactController(contactService, mapper);
+        controller = new ContactController(contactService, aboutService, mapper);
     }
 
     @Test
@@ -98,7 +101,7 @@ class ContactControllerTest {
     void getAbout() {
         var about = about();
         var contactId = about.getContactId();
-        when(contactService.getAbout(contactId)).thenReturn(about);
+        when(aboutService.getAbout(contactId)).thenReturn(about);
         var result = controller.getAbout(contactId);
         assertAboutDto(about, result);
     }

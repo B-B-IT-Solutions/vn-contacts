@@ -1,5 +1,6 @@
 package cz.prm.business;
 
+import static cz.prm.utils.ContactComponentTestUtils.about;
 import static cz.prm.utils.ContactComponentTestUtils.contact;
 import static cz.prm.utils.NoteComponentTestUtils.note;
 import static cz.prm.utils.SecurityContextComponentTestUtils.clearContext;
@@ -11,10 +12,12 @@ import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.note.NoteDto;
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
+import cz.prm.custom.ComponentTestAboutRepository;
 import cz.prm.custom.ComponentTestAccountSettingsRepository;
 import cz.prm.custom.ComponentTestContactRepository;
 import cz.prm.custom.ComponentTestContactSettingsRepository;
 import cz.prm.custom.ComponentTestNoteRepository;
+import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.note.Note;
 import cz.prm.domain.settings.AccountSettings;
@@ -29,6 +32,8 @@ public class BusinessComponentTestBase extends ComponentTestBase {
 
     @Autowired
     protected ComponentTestContactRepository contactRepository;
+    @Autowired
+    protected ComponentTestAboutRepository aboutRepository;
     @Autowired
     protected ComponentTestNoteRepository noteRepository;
     @Autowired
@@ -55,6 +60,8 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         ensureUserContext(user);
         var contact = contact();
         var savedContact = contactRepository.save(contact);
+        var about = about(savedContact);
+        aboutRepository.save(about);
         clearContext();
         return savedContact;
     }
@@ -83,6 +90,10 @@ public class BusinessComponentTestBase extends ComponentTestBase {
 
     protected Contact getContactFromDb(ContactDto dto) {
         return contactRepository.getByLastName(dto.getLastName());
+    }
+
+    protected About getAboutFromDb(Contact contact) {
+        return aboutRepository.getByContactId(contact.getContactId());
     }
 
     protected Note getNoteFromDb(NoteDto dto) {

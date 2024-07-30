@@ -53,10 +53,9 @@
 			</createTable>
 			
 			<createTable tableName="about">
-				 <column name="about_id" type="BIGINT">
+				 <column name="contact_id" type="BIGINT">
 						<constraints primaryKey="true" primaryKeyName="about_pk" nullable="false"/>
 				 </column>
-				 <column name="contact_id" type="BIGINT"/>
 				 <column name="description" type="TEXT"/>
 				 <column name="owner_username" type="VARCHAR(255)"/>
 				 <column name="owner_email" type="VARCHAR(255)"/>

@@ -5,6 +5,7 @@ import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.controllers.mappers.ContactMapper;
+import cz.prm.services.AboutService;
 import cz.prm.services.ContactService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class ContactController {
 
     private ContactService contactService;
+    private AboutService aboutService;
     private ContactMapper mapper;
 
-    public ContactController(ContactService contactService, ContactMapper mapper) {
+    public ContactController(ContactService contactService, AboutService aboutService, ContactMapper mapper) {
         this.contactService = contactService;
+        this.aboutService = aboutService;
         this.mapper = mapper;
     }
 
@@ -59,7 +62,7 @@ public class ContactController {
 
     @GetMapping("/{contactId}/about")
     public AboutDto getAbout(@PathVariable("contactId") Long contactId) {
-        var about = contactService.getAbout(contactId);
+        var about = aboutService.getAbout(contactId);
         return mapper.toAboutDto(about);
     }
 }

@@ -13,6 +13,7 @@ import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
+import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.Occupation;
@@ -90,6 +91,12 @@ public class ContactComponentTestUtils {
         dto.setValue(uuid());
         dto.setType(uuid());
         return dto;
+    }
+
+    public static About about(Contact contact) {
+        var about = new About(contact.getContactId());
+        about.setDescription(format("description%s", uuid()));
+        return about;
     }
 
     public static ContactsQueryDto contactsQueryDto() {

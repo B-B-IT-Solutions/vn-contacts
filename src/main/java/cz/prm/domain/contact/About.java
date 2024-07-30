@@ -6,12 +6,16 @@ import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 @Table(name = "ABOUT", schema = "public")
 @Data
@@ -19,11 +23,12 @@ import org.springframework.data.annotation.CreatedBy;
 @AllArgsConstructor
 public class About {
 
-    @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
-    private String description;
-
+    @Id
     @Column(name = "CONTACT_ID")
     private Long contactId;
+
+    @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
+    private String description;
 
     @CreatedBy
     @Embedded
