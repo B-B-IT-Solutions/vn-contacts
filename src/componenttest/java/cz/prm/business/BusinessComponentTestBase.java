@@ -44,6 +44,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     @BeforeEach
     void setUp() {
         noteRepository.deleteAll();
+        aboutRepository.deleteAll();
         contactRepository.deleteAll();
         userSettingsRepository.deleteAll();
     }
