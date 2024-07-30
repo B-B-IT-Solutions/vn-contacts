@@ -90,6 +90,18 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         return getContact(contactId, USER_3);
     }
 
+    protected void user1UpdateAbout(Long contactId, AboutDto dto) {
+        updateAbout(contactId, dto, USER_1);
+    }
+
+    protected void user2UpdateAbout(Long contactId, AboutDto dto) {
+        updateAbout(contactId, dto, USER_2);
+    }
+
+    protected void user3UpdateAbout(Long contactId, AboutDto dto) {
+        updateAbout(contactId, dto, USER_3);
+    }
+
     protected AboutDto user1GetAbout(Long contactId) {
         return getAbout(contactId, USER_1);
     }
@@ -128,6 +140,11 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         var typeRef = new TypeRef<ContactDto>() {
         };
         return getOne(url, user, typeRef);
+    }
+
+    protected void updateAbout(Long contactId, AboutDto dto, ComponentTestUser user) {
+        var url = format(ABOUT_URL, contactId);
+        put(url, user, dto);
     }
 
     protected AboutDto getAbout(Long contactId, ComponentTestUser user) {
@@ -173,6 +190,18 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         getContactExpectNotFound(contactId, USER_3);
     }
 
+    protected void user1UpdateAboutExpectNotFound(Long contactId, AboutDto dto) {
+        updateAboutExpectNotFound(contactId, dto, USER_1);
+    }
+
+    protected void user2UpdateAboutExpectNotFound(Long contactId, AboutDto dto) {
+        updateAboutExpectNotFound(contactId, dto, USER_2);
+    }
+
+    protected void user3UpdateAboutExpectNotFound(Long contactId, AboutDto dto) {
+        updateAboutExpectNotFound(contactId, dto, USER_3);
+    }
+
     protected void user1GetAboutExpectNotFound(Long contactId) {
         getAboutExpectNotFound(contactId, USER_1);
     }
@@ -198,6 +227,11 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
     protected void getContactExpectNotFound(Long contactId, ComponentTestUser user) {
         var url = format(CONTACT_URL, contactId);
         getExpectNotFound(url, user);
+    }
+
+    protected void updateAboutExpectNotFound(Long contactId, AboutDto dto, ComponentTestUser user) {
+        var url = format(ABOUT_URL, contactId);
+        putExpectNotFound(url, user, dto);
     }
 
     protected void getAboutExpectNotFound(Long contactId, ComponentTestUser user) {

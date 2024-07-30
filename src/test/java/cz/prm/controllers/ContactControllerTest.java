@@ -2,6 +2,7 @@ package cz.prm.controllers;
 
 import static cz.prm.utils.CommonUtils.page;
 import static cz.prm.utils.ContactUtils.about;
+import static cz.prm.utils.ContactUtils.aboutDto;
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contactDto;
 import static cz.prm.utils.ContactUtils.contacts;
@@ -17,6 +18,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import cz.prm.controllers.mappers.ContactMapper;
+import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.services.AboutService;
@@ -39,6 +41,8 @@ class ContactControllerTest {
     private AboutService aboutService;
     @Captor
     private ArgumentCaptor<Contact> contactCapt;
+    @Captor
+    private ArgumentCaptor<About> aboutCapt;
     @Captor
     private ArgumentCaptor<ContactsQuery> cQueryCapt;
 
@@ -104,5 +108,14 @@ class ContactControllerTest {
         when(aboutService.getAbout(contactId)).thenReturn(about);
         var result = controller.getAbout(contactId);
         assertAboutDto(about, result);
+    }
+
+    @Test
+    void updateAbout() {
+        var dto = aboutDto();
+        controller.updateAbout(dto.getContactId(), dto);
+        verify(aboutService).updateAbout(eq(dto.getContactId()), aboutCapt.capture());
+        var about = aboutCapt.getValue();
+        assertAboutDto(about, dto);
     }
 }

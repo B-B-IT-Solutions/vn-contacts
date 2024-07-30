@@ -429,4 +429,43 @@ public class ContactComponentTest extends ContactComponentTestBase {
         user1GetAboutExpectNotFound(contactId);
         user2GetAboutExpectNotFound(contactId);
     }
+
+    @Test
+    void updateAbout() {
+        var contact = createContact(USER_1);
+        var contactId = contact.getContactId();
+        var updateDto = user1GetAbout(contactId);
+
+        updateDto.setDescription(uuid());
+        user1UpdateAbout(contactId, updateDto);
+        var about = getAboutFromDb(contact);
+        assertAboutDto(about, updateDto);
+
+        user2UpdateAboutExpectNotFound(contactId, updateDto);
+        user3UpdateAboutExpectNotFound(contactId, updateDto);
+
+        contact = createContact(USER_2);
+        contactId = contact.getContactId();
+        updateDto = user2GetAbout(contactId);
+
+        updateDto.setDescription(uuid());
+        user2UpdateAbout(contactId, updateDto);
+        about = getAboutFromDb(contact);
+        assertAboutDto(about, updateDto);
+
+        user1UpdateAboutExpectNotFound(contactId, updateDto);
+        user3UpdateAboutExpectNotFound(contactId, updateDto);
+
+        contact = createContact(USER_3);
+        contactId = contact.getContactId();
+        updateDto = user3GetAbout(contactId);
+
+        updateDto.setDescription(uuid());
+        user3UpdateAbout(contactId, updateDto);
+        about = getAboutFromDb(contact);
+        assertAboutDto(about, updateDto);
+
+        user1UpdateAboutExpectNotFound(contactId, updateDto);
+        user2UpdateAboutExpectNotFound(contactId, updateDto);
+    }
 }

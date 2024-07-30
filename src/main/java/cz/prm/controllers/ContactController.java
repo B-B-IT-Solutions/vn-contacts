@@ -65,4 +65,10 @@ public class ContactController {
         var about = aboutService.getAbout(contactId);
         return mapper.toAboutDto(about);
     }
+
+    @PutMapping("/{contactId}/about")
+    public void updateAbout(@PathVariable("contactId") Long contactId, @RequestBody AboutDto dto) {
+        var about = mapper.toAbout(dto);
+        aboutService.updateAbout(contactId, about);
+    }
 }
