@@ -13,12 +13,14 @@ import static java.time.Instant.now;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.MeetingDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.Meeting;
 import cz.prm.domain.contact.Occupation;
 import cz.prm.domain.contact.query.ContactsFilter;
 import cz.prm.domain.contact.query.ContactsQuery;
@@ -110,6 +112,7 @@ public class ContactUtils {
         about.setDescription(uuid());
         about.setContactId(randomLong());
         about.setOwner(user());
+        about.setFirstMeeting(meeting());
         return about;
     }
 
@@ -117,6 +120,23 @@ public class ContactUtils {
         var dto = new AboutDto();
         dto.setDescription(uuid());
         dto.setContactId(randomLong());
+        dto.setFirstMeeting(meetingDto());
+        return dto;
+    }
+
+    public static Meeting meeting() {
+        var meeting = new Meeting();
+        meeting.setOccurrenceDate(now());
+        meeting.setLocation(uuid());
+        meeting.setComment(uuid());
+        return meeting;
+    }
+
+    public static MeetingDto meetingDto() {
+        var dto = new MeetingDto();
+        dto.setOccurrenceDate(now());
+        dto.setLocation(uuid());
+        dto.setComment(uuid());
         return dto;
     }
 

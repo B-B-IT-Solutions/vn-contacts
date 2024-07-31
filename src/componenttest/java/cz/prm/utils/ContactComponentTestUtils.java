@@ -16,6 +16,7 @@ import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.Meeting;
 import cz.prm.domain.contact.Occupation;
 import java.util.List;
 
@@ -96,7 +97,16 @@ public class ContactComponentTestUtils {
     public static About about(Contact contact) {
         var about = new About(contact.getContactId());
         about.setDescription(format("description%s", uuid()));
+        about.setFirstMeeting(meeting());
         return about;
+    }
+
+    public static Meeting meeting() {
+        var meeting = new Meeting();
+        meeting.setOccurrenceDate(now());
+        meeting.setLocation(format("location%s", uuid()));
+        meeting.setComment(format("comment%s", uuid()));
+        return meeting;
     }
 
     public static ContactsQueryDto contactsQueryDto() {

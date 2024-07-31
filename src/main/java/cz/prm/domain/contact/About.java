@@ -30,6 +30,14 @@ public class About {
     @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
     private String description;
 
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "occurrenceDate", column = @Column(name = "FIRST_MEETING_OCCURRENCE_DATE")),
+        @AttributeOverride(name = "location", column = @Column(name = "FIRST_MEETING_LOCATION")),
+        @AttributeOverride(name = "comment", column = @Column(name = "FIRST_MEETING_COMMENT"))
+    })
+    private Meeting firstMeeting;
+
     @CreatedBy
     @Embedded
     @AttributeOverrides({
