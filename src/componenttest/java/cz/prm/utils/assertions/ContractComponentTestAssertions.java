@@ -8,10 +8,12 @@ import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.MeetingDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.Meeting;
 import cz.prm.domain.contact.Occupation;
 import java.util.List;
 import java.util.Objects;
@@ -68,5 +70,12 @@ public class ContractComponentTestAssertions {
     public static void assertAboutDto(About about, AboutDto dto) {
         assertThat(about.getDescription()).isEqualTo(dto.getDescription());
         assertThat(about.getContactId()).isEqualTo(dto.getContactId());
+        assertMeetingDto(about.getFirstMeeting(), dto.getFirstMeeting());
+    }
+
+    public static void assertMeetingDto(Meeting meeting, MeetingDto dto) {
+        assertThat(meeting.getOccurrenceDate()).isEqualTo(dto.getOccurrenceDate());
+        assertThat(meeting.getLocation()).isEqualTo(dto.getLocation());
+        assertThat(meeting.getComment()).isEqualTo(dto.getComment());
     }
 }

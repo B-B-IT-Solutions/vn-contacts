@@ -13,6 +13,9 @@ public class AboutDto {
     @JsonProperty("description")
     private String description;
 
+    @JsonProperty("firstMeeting")
+    private MeetingDto firstMeeting;
+
     @JsonProperty("contactId")
     private Long contactId;
 }
