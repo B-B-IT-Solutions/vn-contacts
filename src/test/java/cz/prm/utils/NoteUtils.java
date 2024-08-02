@@ -24,6 +24,7 @@ public class NoteUtils {
         var note = new Note();
         note.setNoteId(randomLong());
         note.setContactId(randomLong());
+        note.setTitle(uuid());
         note.setText(uuid());
         note.setLastEditDate(now());
         note.setCreationDate(now());
@@ -35,6 +36,7 @@ public class NoteUtils {
         var note = new NoteDto();
         note.setNoteId(randomLong());
         note.setContactId(randomLong());
+        note.setTitle(uuid());
         note.setText(uuid());
         note.setLastEditDate(now());
         note.setCreationDate(now());
