@@ -16,6 +16,7 @@ import static cz.prm.utils.assertions.ContactAssertions.assertContactQuery;
 import static cz.prm.utils.assertions.ContactAssertions.assertPage;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.utils.MapperUtils;
@@ -96,6 +97,15 @@ class ContactMapperTest {
         dto.setFilter(null);
         var query = mapper.toNullSafeContactsQuery(dto);
         assertNullSafeContactQuery(query);
+    }
+
+    @Test
+    void afterAboutDto() {
+        var target = new AboutDto();
+        target.setFirstMeeting(null);
+        assertThat(target.getFirstMeeting()).isNull();
+        mapper.afterAboutDto(null, target);
+        assertThat(target.getFirstMeeting()).isNotNull();
     }
 
     @Test
