@@ -48,5 +48,6 @@ public class About {
 
     public About(Long contactId) {
         this.contactId = contactId;
+        this.firstMeeting = new Meeting();
     }
 }
