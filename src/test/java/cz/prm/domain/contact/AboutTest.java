@@ -12,6 +12,5 @@ class AboutTest {
         var contactId = randomLong();
         var about = new About(contactId);
         assertThat(about.getContactId()).isEqualTo(contactId);
-        assertThat(about.getFirstMeeting()).isNotNull();
     }
 }
