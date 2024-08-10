@@ -1,5 +1,6 @@
 package cz.prm.domain.contact;
 
+import static cz.prm.utils.ContactUtils.meeting;
 import static cz.prm.utils.TestUtils.randomLong;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,5 +13,17 @@ class AboutTest {
         var contactId = randomLong();
         var about = new About(contactId);
         assertThat(about.getContactId()).isEqualTo(contactId);
+    }
+
+    @Test
+    void getFirstMeeting() {
+        var about = new About();
+        assertThat(about.getFirstMeeting()).isNotNull();
+        about.setFirstMeeting(null);
+        assertThat(about.getFirstMeeting()).isNotNull();
+
+        var meeting = meeting();
+        about.setFirstMeeting(meeting);
+        assertThat(about.getFirstMeeting()).isEqualTo(meeting);
     }
 }
