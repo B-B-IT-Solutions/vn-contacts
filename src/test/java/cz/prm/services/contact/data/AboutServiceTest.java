@@ -14,6 +14,7 @@ import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.contact.About;
+import cz.prm.domain.contact.Meeting;
 import cz.prm.repositories.contact.AboutPredicates;
 import cz.prm.repositories.contact.AboutRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -118,5 +119,12 @@ class AboutServiceTest {
         assertThat(aboutIdDb.getContactId()).isEqualTo(savedAbout.getContactId());
         assertThat(aboutIdDb.getOwner()).isEqualTo(savedAbout.getOwner());
         assertThat(savedAbout.getDescription()).isEqualTo(updatedAbout.getDescription());
+        assertMeetingFieldsUpdated(updatedAbout.getFirstMeeting(), savedAbout.getFirstMeeting());
+    }
+
+    private void assertMeetingFieldsUpdated(Meeting updatedAbout, Meeting savedAbout) {
+        assertThat(savedAbout.getOccurrenceDate()).isEqualTo(updatedAbout.getOccurrenceDate());
+        assertThat(savedAbout.getLocation()).isEqualTo(updatedAbout.getLocation());
+        assertThat(savedAbout.getComment()).isEqualTo(updatedAbout.getComment());
     }
 }
