@@ -1,6 +1,6 @@
 {
-  "id": "prm",
-  "realm": "prm",
+  "id": "vision-notes",
+  "realm": "vision-notes",
   "sslRequired": "none",
   "enabled": true,
   "registrationAllowed": true,
@@ -14,11 +14,11 @@
   "roles": {
     "realm": [
       {
-        "id": "prm-user",
-        "name": "prm-user",
-        "description": "Default role for PRM users",
+        "id": "vision-notes-user",
+        "name": "vision-notes-user",
+        "description": "Default role for vision-notes users",
         "clientRole": false,
-        "containerId": "prm",
+        "containerId": "vision-notes",
         "composite": true,
         "composites": {
           "realm": [
@@ -39,7 +39,7 @@
         "description": "${role_uma_authorization}",
         "composite": false,
         "clientRole": false,
-        "containerId": "prm",
+        "containerId": "vision-notes",
         "attributes": {}
       },
       {
@@ -48,7 +48,7 @@
         "description": "${role_offline-access}",
         "composite": false,
         "clientRole": false,
-        "containerId": "prm",
+        "containerId": "vision-notes",
         "attributes": {}
       }
     ]
@@ -56,8 +56,8 @@
   "clients": [
     {
       "id": "cecf820e-8623-4276-b154-1cb170de7eba",
-      "clientId": "prm-ui",
-      "name": "PRM UI Application",
+      "clientId": "vision-notes-ui",
+      "name": "vision-notes UI Application",
       "enabled": true,
       "publicClient": true,
       "rootUrl": "http://localhost:3000/",
@@ -103,7 +103,7 @@
         }
       ],
       "realmRoles": [
-        "prm-user"
+        "vision-notes-user"
       ],
       "groups": []
     },
@@ -123,7 +123,7 @@
         }
       ],
       "realmRoles": [
-        "prm-user"
+        "vision-notes-user"
       ],
       "groups": []
     }

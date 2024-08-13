@@ -3,6 +3,7 @@ package cz.prm.services.contact.data;
 import static java.lang.String.format;
 
 import cz.prm.domain.contact.About;
+import cz.prm.domain.contact.Meeting;
 import cz.prm.repositories.contact.AboutPredicates;
 import cz.prm.repositories.contact.AboutRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -46,6 +47,13 @@ public class AboutService {
 
     private void updateAboutFields(About savedAbout, About updatedAbout) {
         savedAbout.setDescription(updatedAbout.getDescription());
+        updateFirstMeetingFields(savedAbout.getFirstMeeting(), updatedAbout.getFirstMeeting());
+    }
+
+    private void updateFirstMeetingFields(Meeting savedMeeting, Meeting updatedMeeting) {
+        savedMeeting.setOccurrenceDate(updatedMeeting.getOccurrenceDate());
+        savedMeeting.setLocation(updatedMeeting.getLocation());
+        savedMeeting.setComment(updatedMeeting.getComment());
     }
 
     private About getByContactId(Long contactId) {

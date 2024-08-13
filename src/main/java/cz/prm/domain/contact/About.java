@@ -1,5 +1,7 @@
 package cz.prm.domain.contact;
 
+import static java.util.Objects.isNull;
+
 import cz.prm.domain.common.User;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -48,5 +50,12 @@ public class About {
 
     public About(Long contactId) {
         this.contactId = contactId;
+    }
+
+    public Meeting getFirstMeeting() {
+        if (isNull(firstMeeting)) {
+            firstMeeting = new Meeting();
+        }
+        return firstMeeting;
     }
 }
