@@ -5,6 +5,7 @@ import cz.prm.controllers.dto.task.TaskDto;
 import cz.prm.controllers.dto.task.query.TasksQueryDto;
 import cz.prm.controllers.mappers.TaskMapper;
 import cz.prm.services.TaskService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ public class TaskController {
     private TaskService taskService;
     private TaskMapper mapper;
 
+    @Autowired
     public TaskController(TaskService taskService, TaskMapper mapper) {
         this.taskService = taskService;
         this.mapper = mapper;
