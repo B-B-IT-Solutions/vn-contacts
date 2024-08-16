@@ -63,6 +63,6 @@ public class NoteService {
     }
 
     private Supplier<EntityNotFoundException> entityNotFoundSupplier(Long userId) {
-        return () -> new EntityNotFoundException(format("Contact for given id=[%s] not found!", userId));
+        return () -> new EntityNotFoundException(format("Note for given id=[%s] not found!", userId));
     }
 }
