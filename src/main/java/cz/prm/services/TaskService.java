@@ -36,8 +36,8 @@ public class TaskService {
         return getTaskById(taskId);
     }
 
-    public void createTask(Task Task) {
-        repository.save(Task);
+    public void createTask(Task task) {
+        repository.save(task);
     }
 
     public void updateTask(Long taskId, Task updatedTask) {
