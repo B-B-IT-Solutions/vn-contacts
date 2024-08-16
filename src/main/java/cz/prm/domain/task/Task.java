@@ -41,7 +41,7 @@ public class Task {
     @Column(name = "TITLE")
     private String title;
 
-    @Column(name = "TEXT", columnDefinition = "TEXT")
+    @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
     private String description;
 
     @LastModifiedDate
