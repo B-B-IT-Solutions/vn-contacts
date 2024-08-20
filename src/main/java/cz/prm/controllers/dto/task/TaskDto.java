@@ -23,6 +23,9 @@ public class TaskDto {
     @JsonProperty("description")
     private String description;
 
+    @JsonProperty("completed")
+    private boolean completed;
+
     @JsonProperty("lastEditDate")
     private Instant lastEditDate;
 

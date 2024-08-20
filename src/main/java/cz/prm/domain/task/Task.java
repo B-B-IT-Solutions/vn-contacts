@@ -44,6 +44,9 @@ public class Task {
     @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "COMPLETED")
+    private boolean completed;
+
     @LastModifiedDate
     @Column(name = "LAST_EDIT_DATE")
     private Instant lastEditDate;
