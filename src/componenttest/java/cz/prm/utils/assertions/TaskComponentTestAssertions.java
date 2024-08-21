@@ -27,6 +27,7 @@ public class TaskComponentTestAssertions {
         assertThat(task.getContactId()).isEqualTo(taskDto.getContactId());
         assertThat(task.getTitle()).isEqualTo(taskDto.getTitle());
         assertThat(task.getDescription()).isEqualTo(taskDto.getDescription());
+        assertThat(task.isCompleted()).isEqualTo(taskDto.isCompleted());
         assertThat(task.getLastEditDate()).isNotNull();
         assertThat(task.getCreationDate()).isNotNull();
     }

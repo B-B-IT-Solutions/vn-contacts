@@ -26,6 +26,7 @@ public class TaskComponentTestUtils {
         task.setContactId(contactId);
         task.setTitle(format("Title%s", uuid()));
         task.setDescription(format("Text%s", uuid()));
+        task.setCompleted(true);
         return task;
     }
 
@@ -34,6 +35,7 @@ public class TaskComponentTestUtils {
         dto.setContactId(contactId);
         dto.setTitle(uuid());
         dto.setDescription(uuid());
+        dto.setCompleted(true);
         return dto;
     }
 
