@@ -54,6 +54,7 @@ public class TaskService {
     private void updateTaskFields(Task savedTask, Task updatedTask) {
         savedTask.setTitle(updatedTask.getTitle());
         savedTask.setDescription(updatedTask.getDescription());
+        savedTask.setCompleted(updatedTask.isCompleted());
     }
 
     private Task getTaskById(Long taskId) {

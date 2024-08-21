@@ -26,6 +26,7 @@ public class TaskUtils {
         task.setContactId(randomLong());
         task.setTitle(uuid());
         task.setDescription(uuid());
+        task.setCompleted(true);
         task.setLastEditDate(now());
         task.setCreationDate(now());
         task.setOwner(user());
@@ -38,6 +39,7 @@ public class TaskUtils {
         task.setContactId(randomLong());
         task.setTitle(uuid());
         task.setDescription(uuid());
+        task.setCompleted(true);
         task.setLastEditDate(now());
         task.setCreationDate(now());
         return task;
