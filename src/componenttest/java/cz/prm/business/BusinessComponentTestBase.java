@@ -3,6 +3,7 @@ package cz.prm.business;
 import static cz.prm.utils.ContactComponentTestUtils.about;
 import static cz.prm.utils.ContactComponentTestUtils.contact;
 import static cz.prm.utils.NoteComponentTestUtils.note;
+import static cz.prm.utils.ReminderComponentTestUtils.reminder;
 import static cz.prm.utils.SecurityContextComponentTestUtils.clearContext;
 import static cz.prm.utils.SecurityContextComponentTestUtils.ensureUserContext;
 import static cz.prm.utils.TaskComponentTestUtils.task;
@@ -11,6 +12,7 @@ import static java.util.stream.Collectors.toList;
 import cz.prm.ComponentTestBase;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.note.NoteDto;
+import cz.prm.controllers.dto.reminder.ReminderDto;
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
 import cz.prm.controllers.dto.task.TaskDto;
@@ -19,10 +21,12 @@ import cz.prm.custom.ComponentTestAccountSettingsRepository;
 import cz.prm.custom.ComponentTestContactRepository;
 import cz.prm.custom.ComponentTestContactSettingsRepository;
 import cz.prm.custom.ComponentTestNoteRepository;
+import cz.prm.custom.ComponentTestReminderRepository;
 import cz.prm.custom.ComponentTestTaskRepository;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.note.Note;
+import cz.prm.domain.reminder.Reminder;
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.contact.ContactSettings;
 import cz.prm.domain.task.Task;
@@ -41,6 +45,8 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     @Autowired
     protected ComponentTestNoteRepository noteRepository;
     @Autowired
+    protected ComponentTestReminderRepository reminderRepository;
+    @Autowired
     protected ComponentTestTaskRepository taskRepository;
     @Autowired
     protected ComponentTestAccountSettingsRepository generalSettingsRepository;
@@ -50,6 +56,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     @BeforeEach
     void setUp() {
         noteRepository.deleteAll();
+        reminderRepository.deleteAll();
         taskRepository.deleteAll();
         aboutRepository.deleteAll();
         contactRepository.deleteAll();
@@ -96,6 +103,28 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         return savedNote;
     }
 
+    protected List<Reminder> createReminders(ComponentTestUser user) {
+        return createReminders(user, 3);
+    }
+
+    protected List<Reminder> createReminders(ComponentTestUser user, int numOfTasks) {
+        var contact = createContact(user);
+        return IntStream.range(0, numOfTasks).mapToObj((i) -> createReminder(user, contact)).collect(toList());
+    }
+
+    protected Reminder createReminder(ComponentTestUser user) {
+        var contact = createContact(user);
+        return createReminder(user, contact);
+    }
+
+    protected Reminder createReminder(ComponentTestUser user, Contact contact) {
+        ensureUserContext(user);
+        var reminder = reminder(contact.getContactId());
+        var savedReminder = reminderRepository.save(reminder);
+        clearContext();
+        return savedReminder;
+    }
+
     protected List<Task> createTasks(ComponentTestUser user) {
         return createTasks(user, 3);
     }
@@ -128,6 +157,10 @@ public class BusinessComponentTestBase extends ComponentTestBase {
 
     protected Note getNoteFromDb(NoteDto dto) {
         return noteRepository.getByText(dto.getText());
+    }
+
+    protected Reminder getReminderFromDb(ReminderDto dto) {
+        return reminderRepository.getByDescription(dto.getDescription());
     }
 
     protected Task getTaskFromDb(TaskDto dto) {
