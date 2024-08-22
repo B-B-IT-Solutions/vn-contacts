@@ -32,12 +32,12 @@ public class ReminderComponentTest extends ReminderComponentTestBase {
         pageDto = user3GetReminders(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var user1Reminders = createReminders(USER_1);
-        var userReminder = user1Reminders.get(0);
-        contactId = userReminder.getContactId();
+        var reminders = createReminders(USER_1);
+        var reminder = reminders.get(0);
+        contactId = reminder.getContactId();
 
         pageDto = user1GetReminders(contactId, queryDto);
-        assertReminders(user1Reminders, pageDto);
+        assertReminders(reminders, pageDto);
 
         pageDto = user2GetReminders(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
@@ -46,8 +46,8 @@ public class ReminderComponentTest extends ReminderComponentTestBase {
         assertThat(pageDto.getContent()).isEmpty();
 
         var user2Reminders = createReminders(USER_2);
-        userReminder = user2Reminders.get(0);
-        contactId = userReminder.getContactId();
+        reminder = user2Reminders.get(0);
+        contactId = reminder.getContactId();
 
         pageDto = user2GetReminders(contactId, queryDto);
         assertReminders(user2Reminders, pageDto);
@@ -59,8 +59,8 @@ public class ReminderComponentTest extends ReminderComponentTestBase {
         assertThat(pageDto.getContent()).isEmpty();
 
         var user3Reminders = createReminders(USER_3);
-        userReminder = user3Reminders.get(0);
-        contactId = userReminder.getContactId();
+        reminder = user3Reminders.get(0);
+        contactId = reminder.getContactId();
 
         pageDto = user3GetReminders(contactId, queryDto);
         assertReminders(user3Reminders, pageDto);
@@ -82,9 +82,9 @@ public class ReminderComponentTest extends ReminderComponentTestBase {
         assertThat(pageDto.getPageSize()).isEqualTo(50);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var user1Reminders = createReminders(USER_1, 21);
-        var userReminder = user1Reminders.get(0);
-        contactId = userReminder.getContactId();
+        var reminders = createReminders(USER_1, 21);
+        var reminder = reminders.get(0);
+        contactId = reminder.getContactId();
 
         pageDto = user1GetReminders(contactId, queryDto);
         assertThat(pageDto.getTotalPages()).isEqualTo(1);
@@ -124,9 +124,9 @@ public class ReminderComponentTest extends ReminderComponentTestBase {
         var pageDto = user1GetReminders(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var user1Reminders = createReminders(USER_1, 21);
-        var userReminder = user1Reminders.get(0);
-        contactId = userReminder.getContactId();
+        var reminders = createReminders(USER_1, 21);
+        var reminder = reminders.get(0);
+        contactId = reminder.getContactId();
 
         queryDto = remindersQueryDto();
         queryDto.setSort(null);
