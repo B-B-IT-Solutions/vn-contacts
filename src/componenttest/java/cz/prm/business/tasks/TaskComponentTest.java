@@ -32,12 +32,12 @@ public class TaskComponentTest extends TaskComponentTestBase {
         pageDto = user3GetTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var user1Tasks = createTasks(USER_1);
-        var userTask = user1Tasks.get(0);
-        contactId = userTask.getContactId();
+        var tasks = createTasks(USER_1);
+        var task = tasks.get(0);
+        contactId = task.getContactId();
 
         pageDto = user1GetTasks(contactId, queryDto);
-        assertTasks(user1Tasks, pageDto);
+        assertTasks(tasks, pageDto);
 
         pageDto = user2GetTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
@@ -46,8 +46,8 @@ public class TaskComponentTest extends TaskComponentTestBase {
         assertThat(pageDto.getContent()).isEmpty();
 
         var user2Tasks = createTasks(USER_2);
-        userTask = user2Tasks.get(0);
-        contactId = userTask.getContactId();
+        task = user2Tasks.get(0);
+        contactId = task.getContactId();
 
         pageDto = user2GetTasks(contactId, queryDto);
         assertTasks(user2Tasks, pageDto);
@@ -59,8 +59,8 @@ public class TaskComponentTest extends TaskComponentTestBase {
         assertThat(pageDto.getContent()).isEmpty();
 
         var user3Tasks = createTasks(USER_3);
-        userTask = user3Tasks.get(0);
-        contactId = userTask.getContactId();
+        task = user3Tasks.get(0);
+        contactId = task.getContactId();
 
         pageDto = user3GetTasks(contactId, queryDto);
         assertTasks(user3Tasks, pageDto);
@@ -82,9 +82,9 @@ public class TaskComponentTest extends TaskComponentTestBase {
         assertThat(pageDto.getPageSize()).isEqualTo(50);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var user1Tasks = createTasks(USER_1, 21);
-        var userTask = user1Tasks.get(0);
-        contactId = userTask.getContactId();
+        var tasks = createTasks(USER_1, 21);
+        var task = tasks.get(0);
+        contactId = task.getContactId();
 
         pageDto = user1GetTasks(contactId, queryDto);
         assertThat(pageDto.getTotalPages()).isEqualTo(1);
@@ -124,9 +124,9 @@ public class TaskComponentTest extends TaskComponentTestBase {
         var pageDto = user1GetTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var user1Tasks = createTasks(USER_1, 21);
-        var userTask = user1Tasks.get(0);
-        contactId = userTask.getContactId();
+        var tasks = createTasks(USER_1, 21);
+        var task = tasks.get(0);
+        contactId = task.getContactId();
 
         queryDto = tasksQueryDto();
         queryDto.setSort(null);
