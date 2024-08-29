@@ -23,6 +23,9 @@ public class ReminderDto {
     @JsonProperty("description")
     private String description;
 
+    @JsonProperty("recurrence")
+    private String recurrence;
+
     @JsonProperty("lastEditDate")
     private Instant lastEditDate;
 

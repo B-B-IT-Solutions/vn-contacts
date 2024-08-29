@@ -25,7 +25,8 @@ public class ReminderComponentTestUtils {
         var reminder = new Reminder();
         reminder.setContactId(contactId);
         reminder.setTitle(format("Title%s", uuid()));
-        reminder.setDescription(format("Text%s", uuid()));
+        reminder.setDescription(format("Description%s", uuid()));
+        reminder.setRecurrence(format("Recurrence%s", uuid()));
         return reminder;
     }
 
@@ -34,6 +35,7 @@ public class ReminderComponentTestUtils {
         dto.setContactId(contactId);
         dto.setTitle(uuid());
         dto.setDescription(uuid());
+        dto.setRecurrence(uuid());
         return dto;
     }
 

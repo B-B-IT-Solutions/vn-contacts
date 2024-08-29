@@ -61,6 +61,7 @@ public class ReminderAssertions {
         assertThat(reminder1.getReminderId()).isEqualTo(reminder2.getReminderId());
         assertThat(reminder1.getContactId()).isEqualTo(reminder2.getContactId());
         assertThat(reminder1.getDescription()).isEqualTo(reminder2.getDescription());
+        assertThat(reminder1.getRecurrence()).isEqualTo(reminder2.getRecurrence());
         assertThat(reminder1.getLastEditDate()).isEqualTo(reminder2.getLastEditDate());
         assertThat(reminder1.getCreationDate()).isEqualTo(reminder2.getCreationDate());
         assertThat(reminder1.getOwner()).isEqualTo(reminder2.getOwner());
@@ -71,6 +72,7 @@ public class ReminderAssertions {
         assertThat(reminder.getContactId()).isEqualTo(dto.getContactId());
         assertThat(reminder.getTitle()).isEqualTo(dto.getTitle());
         assertThat(reminder.getDescription()).isEqualTo(dto.getDescription());
+        assertThat(reminder.getRecurrence()).isEqualTo(dto.getRecurrence());
         assertThat(reminder.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(reminder.getCreationDate()).isEqualTo(dto.getCreationDate());
     }

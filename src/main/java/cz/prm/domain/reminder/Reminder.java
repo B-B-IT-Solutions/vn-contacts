@@ -44,6 +44,9 @@ public class Reminder {
     @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "RECURRENCE")
+    private String recurrence;
+
     @LastModifiedDate
     @Column(name = "LAST_EDIT_DATE")
     private Instant lastEditDate;
