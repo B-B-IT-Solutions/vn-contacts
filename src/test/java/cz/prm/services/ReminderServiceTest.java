@@ -140,5 +140,6 @@ class ReminderServiceTest {
         assertThat(reminderIdDb.getCreationDate()).isEqualTo(savedReminder.getCreationDate());
         assertThat(savedReminder.getTitle()).isEqualTo(updatedReminder.getTitle());
         assertThat(savedReminder.getDescription()).isEqualTo(updatedReminder.getDescription());
+        assertThat(savedReminder.getRecurrence()).isEqualTo(updatedReminder.getRecurrence());
     }
 }
