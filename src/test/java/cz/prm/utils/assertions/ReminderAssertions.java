@@ -35,9 +35,9 @@ public class ReminderAssertions {
         assertThat(page1.getPageSize()).isEqualTo(page2.getSize());
         assertThat(page1.getPageNumber()).isEqualTo(page2.getNumber());
         assertThat(page1.getContent()).isNotEmpty().hasSameSizeAs(page2.getContent());
-        page1.getContent().forEach(contact1 -> {
-            var contact2 = page2.getContent().stream().filter(c -> Objects.equals(contact1.getContactId(), c.getContactId())).findFirst().get();
-            assertReminder(contact1, contact2);
+        page1.getContent().forEach(reminder1 -> {
+            var reminder2 = page2.getContent().stream().filter(c -> Objects.equals(reminder1.getContactId(), c.getContactId())).findFirst().get();
+            assertReminder(reminder1, reminder2);
         });
     }
 
