@@ -43,6 +43,7 @@ jobs:
         run: mvn clean compile verify --no-transfer-progress -DskipTests
       - name: JaCoCo Report
         id: jacoco
+        if: ${{ github.event_name != 'release' }}
         uses: madrapps/jacoco-report@v1.6.1
         with:
           paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
