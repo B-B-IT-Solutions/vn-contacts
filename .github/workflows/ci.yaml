@@ -40,7 +40,7 @@ jobs:
           distribution: 'adopt'
           cache: 'maven'
       - name: Run Tests
-        run: mvn clean compile verify --no-transfer-progress -DskipTests
+        run: mvn clean compile verify --no-transfer-progress
       - name: JaCoCo Report
         id: jacoco
         if: ${{ github.event_name != 'release' }}
