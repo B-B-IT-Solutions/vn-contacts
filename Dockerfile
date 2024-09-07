@@ -1,4 +1,4 @@
-FROM openjdk:22-jdk-oracle
+FROM openjdk:19-jdk-oracle
 
 WORKDIR /usr/app
 
