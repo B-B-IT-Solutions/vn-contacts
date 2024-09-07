@@ -54,6 +54,7 @@ public class ReminderService {
     private void updateReminderFields(Reminder savedReminder, Reminder updatedReminder) {
         savedReminder.setTitle(updatedReminder.getTitle());
         savedReminder.setDescription(updatedReminder.getDescription());
+        savedReminder.setRecurrence(updatedReminder.getRecurrence());
     }
 
     private Reminder getReminderById(Long reminderId) {

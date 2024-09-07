@@ -26,6 +26,7 @@ public class ReminderUtils {
         reminder.setContactId(randomLong());
         reminder.setTitle(uuid());
         reminder.setDescription(uuid());
+        reminder.setRecurrence(uuid());
         reminder.setLastEditDate(now());
         reminder.setCreationDate(now());
         reminder.setOwner(user());
@@ -38,6 +39,7 @@ public class ReminderUtils {
         reminder.setContactId(randomLong());
         reminder.setTitle(uuid());
         reminder.setDescription(uuid());
+        reminder.setRecurrence(uuid());
         reminder.setLastEditDate(now());
         reminder.setCreationDate(now());
         return reminder;
