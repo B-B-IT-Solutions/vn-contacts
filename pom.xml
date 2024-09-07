@@ -5,7 +5,7 @@
 	 <modelVersion>4.0.0</modelVersion>
 	 
 	 <groupId>cz.prm</groupId>
-	 <artifactId>prm</artifactId>
+	 <artifactId>vison-notes</artifactId>
 	 <version>0.0.1-SNAPSHOT</version>
 	 <name>Personal Relationship Management</name>
 	 
@@ -193,7 +193,7 @@
 	 </dependencies>
 	 
 	 <build>
-			<finalName>prm</finalName>
+			<finalName>vision-notes</finalName>
 			<plugins>
 				 <plugin>
 						<groupId>org.springframework.boot</groupId>
