@@ -41,17 +41,17 @@ jobs:
           cache: 'maven'
       - name: Run Tests
         run: mvn clean compile verify --no-transfer-progress -DskipTests
-#      - name: JaCoCo Report
-#        id: jacoco
-#        uses: madrapps/jacoco-report@v1.6.1
-#        with:
-#          paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          min-coverage-overall: 100
-#          min-coverage-changed-files: 100
-#          title: Code Coverage
-#          update-comment: true
-#          continue-on-error: false
+      - name: JaCoCo Report
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.6.1
+        with:
+          paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 100
+          min-coverage-changed-files: 100
+          title: Code Coverage
+          update-comment: true
+          continue-on-error: false
       - name: Upload Jar File
         uses: actions/upload-artifact@v4
         with:
@@ -60,7 +60,7 @@ jobs:
 
   build-and-push-image:
     needs: run-tests
-#    if: ${{ github.event_name == 'release' }}
+    if: ${{ github.event_name == 'release' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -80,7 +80,7 @@ jobs:
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
-          registry: ghcr.io
+          registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -95,7 +95,7 @@ jobs:
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         with:
           context: .
-#          push: ${{ github.event_name == 'release' }}
+          push: ${{ github.event_name == 'release' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
