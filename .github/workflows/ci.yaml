@@ -52,6 +52,11 @@ jobs:
           title: Code Coverage
           update-comment: true
           continue-on-error: false
+      - name: Upload Jar File
+        uses: actions/upload-artifact@v4
+        with:
+          name: vision-notes.jar
+          path: target/vision-notes.jar
 
   build-and-push-image:
     needs: run-tests
@@ -65,6 +70,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Download Jar File
+        uses: actions/download-artifact@v4
+        with:
+          name: vision-notes.jar
+          path: target/vision-notes.jar
 
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
