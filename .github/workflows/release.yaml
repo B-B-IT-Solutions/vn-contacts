@@ -12,7 +12,6 @@ env:
 
 jobs:
   build-and-push-image:
-    if: ${{ github.event_name == 'release' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
