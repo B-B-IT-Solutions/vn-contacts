@@ -24,10 +24,11 @@ services:
       KEYCLOAK_LOG_LEVEL: INFO
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: test
+      KEYCLOAK_EXTRA_ARGS: --import-realm
     ports:
       - 8090:8080
     volumes:
-      - ./keycloak/realm.json:/opt/keycloak/data/import/realm.json:ro
+      - ./keycloak/realm.json:/opt/bitnami/keycloak/data/import/realm.json:ro
     depends_on:
       - postgres
 volumes:
