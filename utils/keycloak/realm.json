@@ -57,7 +57,7 @@
     {
       "id": "cecf820e-8623-4276-b154-1cb170de7eba",
       "clientId": "vision-notes-ui",
-      "name": "vision-notes UI Application",
+      "name": "Vision-notes UI Application",
       "enabled": true,
       "publicClient": true,
       "rootUrl": "http://localhost:3000/",

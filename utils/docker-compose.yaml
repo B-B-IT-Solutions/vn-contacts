@@ -12,17 +12,16 @@ services:
     volumes:
       - prm_data:/var/lib/postgresql/data
   keycloak:
-    image: quay.io/keycloak/keycloak:24.0.2
-    command: [ "start-dev", "--import-realm" ]
+    image: docker.io/bitnami/keycloak:25.0.5-debian-12-r0
+#    command: [ "start-dev", "--import-realm" ]
     restart: unless-stopped
     environment:
-      KC_DB: postgres
-      KC_DB_USERNAME: postgres
-      KC_DB_PASSWORD: test
-      KC_DB_URL: "jdbc:postgresql://postgres:5432/prm"
-      KC_METRICS_ENABLED: true
-      KC_LOG_LEVEL: INFO
-      KC_REALM_NAME: prm
+      KEYCLOAK_DATABASE_NAME: prm
+      KEYCLOAK_DATABASE_USER: postgres
+      KEYCLOAK_DATABASE_PASSWORD: test
+      KEYCLOAK_DATABASE_HOST: "postgres"
+      KEYCLOAK_ENABLE_STATISTICS: true
+      KEYCLOAK_LOG_LEVEL: INFO
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: test
     ports:
