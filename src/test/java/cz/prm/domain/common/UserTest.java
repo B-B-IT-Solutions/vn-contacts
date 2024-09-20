@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 @ExtendWith(MockitoExtension.class)
 class UserTest {
 
-    private static final String SUB_CLAIM = "sub";
+    private static final String UPN_CLAIM = "upn";
     private static final String EMAIL_CLAIM = "email";
 
     @Mock
@@ -23,7 +23,7 @@ class UserTest {
     void newInstance() {
         var username = uuid();
         var email = uuid();
-        when(jwt.getClaimAsString(SUB_CLAIM)).thenReturn(username);
+        when(jwt.getClaimAsString(UPN_CLAIM)).thenReturn(username);
         when(jwt.getClaimAsString(EMAIL_CLAIM)).thenReturn(email);
 
         var user = new User(jwt);

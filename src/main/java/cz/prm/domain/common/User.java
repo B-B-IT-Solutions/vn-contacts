@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 @AllArgsConstructor
 public class User {
 
-    private static final String SUB_CLAIM = "sub";
+    private static final String UPN_CLAIM = "upn";
     private static final String EMAIL_CLAIM = "email";
 
     @Column(name = "USERNAME")
@@ -23,7 +23,7 @@ public class User {
     private String email;
 
     public User(Jwt jwt) {
-        this.username = jwt.getClaimAsString(SUB_CLAIM);
+        this.username = jwt.getClaimAsString(UPN_CLAIM);
         this.email = jwt.getClaimAsString(EMAIL_CLAIM);
     }
 }
