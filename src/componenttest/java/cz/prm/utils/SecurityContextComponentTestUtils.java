@@ -12,7 +12,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 
 public class SecurityContextComponentTestUtils {
 
-    private static final String SUB_CLAIM = "sub";
+    private static final String UPN_CLAIM = "upn";
     private static final String EMAIL_CLAIM = "email";
 
     public static void ensureUser1Context() {
@@ -43,7 +43,7 @@ public class SecurityContextComponentTestUtils {
     private static Jwt jwt(ComponentTestUser user) {
         var builder = withTokenValue("s");
         builder.header("typ", "JWT");
-        builder.claim(SUB_CLAIM, user.getUsername());
+        builder.claim(UPN_CLAIM, user.getUsername());
         builder.claim(EMAIL_CLAIM, user.getEmail());
         return builder.build();
     }

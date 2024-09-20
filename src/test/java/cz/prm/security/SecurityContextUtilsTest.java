@@ -18,7 +18,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 @ExtendWith(MockitoExtension.class)
 class SecurityContextUtilsTest {
 
-    private static final String SUB_CLAIM = "sub";
+    private static final String UPN_CLAIM = "upn";
     private static final String EMAIL_CLAIM = "email";
 
     @Mock
@@ -34,7 +34,7 @@ class SecurityContextUtilsTest {
             var username = uuid();
             var email = uuid();
 
-            when(jwt.getClaimAsString(SUB_CLAIM)).thenReturn(username);
+            when(jwt.getClaimAsString(UPN_CLAIM)).thenReturn(username);
             when(jwt.getClaimAsString(EMAIL_CLAIM)).thenReturn(email);
             when(context.getAuthentication()).thenReturn(authentication);
             when(authentication.getPrincipal()).thenReturn(jwt);
