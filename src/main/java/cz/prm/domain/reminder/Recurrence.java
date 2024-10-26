@@ -26,7 +26,7 @@ import org.dmfs.rfc5545.recurrenceset.OfRule;
 
 @Slf4j
 @Entity
-@Table(name = "REMINDER", schema = "public")
+@Table(name = "RECURRENCE", schema = "public")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
