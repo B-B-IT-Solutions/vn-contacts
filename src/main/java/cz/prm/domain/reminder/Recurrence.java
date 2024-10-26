@@ -4,6 +4,7 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static java.util.stream.Stream.of;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.dmfs.rfc5545.DateTime.parse;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,15 +14,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.dmfs.rfc5545.DateTime;
 import org.dmfs.rfc5545.recur.RecurrenceRule;
+import org.dmfs.rfc5545.recurrenceset.OfRule;
 
 @Slf4j
 @Entity
@@ -31,8 +31,6 @@ import org.dmfs.rfc5545.recur.RecurrenceRule;
 @AllArgsConstructor
 public class Recurrence {
 
-    private static final String DATE_FORMAT_PATTERN = "yyyyMMdd";
-    private static final DateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT_PATTERN);
     private static final String PARTS_DELIMITER = "\n";
     private static final String KEY_VALUE_DELIMITER = ":";
     private static final String START_DATE_KEY = "DTSTART";
@@ -51,7 +49,7 @@ public class Recurrence {
     private RecurrenceRule recurrenceRule;
 
     @Transient
-    private Instant startDate;
+    private DateTime startDate;
 
     public Recurrence(String value) {
         this.value = value;
@@ -75,12 +73,12 @@ public class Recurrence {
         return recurrenceRule;
     }
 
-    public Instant getStartDate() {
+    public DateTime getStartDate() {
         if (isNull(startDate)) {
             var optional = getRecurrencePart(START_DATE_KEY);
             if (optional.isPresent()) {
                 try {
-                    startDate = DATE_FORMATTER.parse(optional.get()).toInstant();
+                    startDate = parse(optional.get());
                 } catch (Exception e) {
                     log.warn("StartDate is invalid!", e);
                 }
@@ -89,7 +87,12 @@ public class Recurrence {
         return startDate;
     }
 
-    public Optional<String> getRecurrencePart(String partKey) {
+    public boolean isDue() {
+        var occurrences = new OfRule(getRecurrenceRule(), getStartDate());
+        return false;
+    }
+
+    private Optional<String> getRecurrencePart(String partKey) {
         if (isNotBlank(value)) {
             var parts = value.split(PARTS_DELIMITER);
             var optional = of(parts).filter(p -> p.startsWith(partKey)).findFirst();

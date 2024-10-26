@@ -1,8 +1,8 @@
 package cz.prm.domain.reminder;
 
 import static cz.prm.utils.TestUtils.uuid;
-import static java.time.Instant.parse;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.dmfs.rfc5545.DateTime.parse;
 
 import org.junit.jupiter.api.Test;
 
@@ -55,7 +55,7 @@ class RecurrenceTest {
 
         r.setValue("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
         assertThat(r.getStartDate()).isNotNull();
-        assertThat(r.getStartDate()).isEqualTo(parse("2024-10-26T22:00:00Z"));
+        assertThat(r.getStartDate()).isEqualTo(parse("20241027T104500Z"));
     }
 
     @Test

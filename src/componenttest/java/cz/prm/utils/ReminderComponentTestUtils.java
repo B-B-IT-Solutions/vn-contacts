@@ -11,18 +11,13 @@ import cz.prm.controllers.dto.reminder.ReminderDto;
 import cz.prm.controllers.dto.reminder.query.RemindersQueryDto;
 import cz.prm.domain.reminder.Recurrence;
 import cz.prm.domain.reminder.Reminder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
+import org.dmfs.rfc5545.DateTime;
 import org.dmfs.rfc5545.recur.Freq;
 import org.dmfs.rfc5545.recur.RecurrenceRule;
 import org.dmfs.rfc5545.recur.RecurrenceRule.Part;
 
 public class ReminderComponentTestUtils {
-
-    private static final String DATE_FORMAT_PATTERN = "yyyyMMdd";
-
-    private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT_PATTERN);
 
     public static List<Reminder> reminders() {
         return newArrayList(reminder(), reminder(), reminder());
@@ -52,7 +47,7 @@ public class ReminderComponentTestUtils {
 
     public static Recurrence recurrence() {
         var rrule = recurrenceRule();
-        var startDate = DATE_FORMATTER.format(new Date());
+        var startDate = DateTime.now();
         var value = format("DTSTART:%s\nRRULE:%s", startDate, rrule);
         return new Recurrence(value);
     }
