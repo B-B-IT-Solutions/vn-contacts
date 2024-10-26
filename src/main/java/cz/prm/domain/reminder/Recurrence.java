@@ -19,6 +19,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.dmfs.jems2.iterable.First;
 import org.dmfs.rfc5545.DateTime;
 import org.dmfs.rfc5545.recur.RecurrenceRule;
 import org.dmfs.rfc5545.recurrenceset.OfRule;
@@ -44,6 +45,9 @@ public class Recurrence {
 
     @Column(name = "VALUE")
     private String value;
+
+//    @Column(name = "VALUE")
+//    private DateTime nextOccurrence;
 
     @Transient
     private RecurrenceRule recurrenceRule;
@@ -88,7 +92,12 @@ public class Recurrence {
     }
 
     public boolean isDue() {
-        var occurrences = new OfRule(getRecurrenceRule(), getStartDate());
+        if (hasActiveRecurrence()) {
+            var occurrences = new First<>(100, new OfRule(getRecurrenceRule(), getStartDate()));
+            occurrences.forEach(dt -> {
+                log.info("occurrence: {}", dt);
+            });
+        }
         return false;
     }
 

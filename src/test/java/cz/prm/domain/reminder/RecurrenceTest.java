@@ -1,9 +1,11 @@
 package cz.prm.domain.reminder;
 
+import static cz.prm.utils.ReminderUtils.recurrenceRule;
 import static cz.prm.utils.TestUtils.uuid;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.dmfs.rfc5545.DateTime.parse;
 
+import org.dmfs.rfc5545.DateTime;
 import org.junit.jupiter.api.Test;
 
 class RecurrenceTest {
@@ -74,5 +76,15 @@ class RecurrenceTest {
 
         r.setValue("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
         assertThat(r.hasActiveRecurrence()).isTrue();
+    }
+
+    @Test
+    void isDue() {
+        var r = new Recurrence();
+        var rrule = recurrenceRule();
+        var startDate = DateTime.now();
+        var value = String.format("DTSTART:%s\nRRULE:%s", startDate, rrule);
+        r.setValue(value);
+        assertThat(r.isDue()).isFalse();
     }
 }
