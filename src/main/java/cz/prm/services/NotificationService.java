@@ -3,8 +3,6 @@ package cz.prm.services;
 import cz.prm.domain.reminder.query.RemindersQuery;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
-import org.dmfs.rfc5545.recur.InvalidRecurrenceRuleException;
-import org.dmfs.rfc5545.recur.RecurrenceRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +21,9 @@ public class NotificationService {
     public void getNotifications(Long contactId) {
         var reminders = reminderService.getReminders(contactId, new RemindersQuery());
 
-        reminders.getContent().forEach(r -> {
-
-            try {
-                var rule = new RecurrenceRule(r.getRecurrence());
-            } catch (InvalidRecurrenceRuleException e) {
-                log.error("recurrence rule exception", e);
-            }
+        reminders.getContent().stream().filter(r -> r.hasRecurrenceRule()).forEach(r -> {
+            var rule = r.getRecurrenceRule();
+//            new OfRule(rule);
         });
     }
 }

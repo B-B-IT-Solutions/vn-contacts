@@ -21,7 +21,7 @@ class ReminderTest {
         reminder.setRecurrence(uuid());
         assertThat(reminder.getRecurrenceRule()).isNull();
 
-        reminder.setRecurrence("FREQ=WEEKLY;BYWEEKNO=1,2,3,4;BYDAY=SU");
+        reminder.setRecurrence("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
         assertThat(reminder.getRecurrenceRule()).isNotNull();
     }
 
@@ -39,7 +39,7 @@ class ReminderTest {
         reminder.setRecurrence(uuid());
         assertThat(reminder.hasRecurrenceRule()).isFalse();
 
-        reminder.setRecurrence("FREQ=WEEKLY;BYWEEKNO=1,2,3,4;BYDAY=SU");
+        reminder.setRecurrence("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
         assertThat(reminder.hasRecurrenceRule()).isTrue();
     }
 }

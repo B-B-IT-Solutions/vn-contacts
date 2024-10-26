@@ -62,6 +62,10 @@ public class Reminder {
     @Transient
     private RecurrenceRule recurrenceRule;
 
+    @Setter(NONE)
+    @Transient
+    private Instant startDate;
+
     @LastModifiedDate
     @Column(name = "LAST_EDIT_DATE")
     private Instant lastEditDate;
@@ -91,8 +95,23 @@ public class Reminder {
     }
 
     private void createRecurrenceRule() {
-        if (isNotBlank(recurrence) && isNull(recurrenceRule)) {
+        var r = "DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1";
+
+        if (isNotBlank(recurrence)) {
             try {
+                var parts = r.split("\\n");
+                recurrenceRule = new RecurrenceRule(recurrence);
+            } catch (InvalidRecurrenceRuleException e) {
+                log.warn("RecurrenceRule is invalid!", e);
+            }
+        }
+    }
+
+    private void parseRecurrence() {
+        if (isNotBlank(recurrence)) {
+            try {
+                var parts = recurrence.split("\\n");
+
                 recurrenceRule = new RecurrenceRule(recurrence);
             } catch (InvalidRecurrenceRuleException e) {
                 log.warn("RecurrenceRule is invalid!", e);
