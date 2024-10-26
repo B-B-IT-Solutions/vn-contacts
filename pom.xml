@@ -16,6 +16,7 @@
 			<postgresql.version>42.7.3</postgresql.version>
 			<liquibase.version>4.27.0</liquibase.version>
 			<mapstruct.version>1.5.5.Final</mapstruct.version>
+			<lib-recur.version>0.17.1</lib-recur.version>
 			<build-helper-plugin.version>3.0.0</build-helper-plugin.version>
 			<querydsl.version>5.0.0</querydsl.version>
 			<spring-data-envers.version>3.2.0</spring-data-envers.version>
@@ -119,6 +120,11 @@
 				 <groupId>com.google.guava</groupId>
 				 <artifactId>guava</artifactId>
 				 <version>33.1.0-jre</version>
+			</dependency>
+			<dependency>
+				 <groupId>org.dmfs</groupId>
+				 <artifactId>lib-recur</artifactId>
+				 <version>${lib-recur.version}</version>
 			</dependency>
 			<dependency>
 				 <groupId>com.fasterxml.jackson.core</groupId>
