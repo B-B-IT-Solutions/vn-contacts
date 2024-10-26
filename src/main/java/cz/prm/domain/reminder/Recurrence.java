@@ -20,16 +20,21 @@ import org.dmfs.rfc5545.recur.RecurrenceRule;
 @AllArgsConstructor
 public class Recurrence {
 
-    private static final String START_DATE_PATTERN = "yyyyMMdd";
-    private static final String RECURRENCE_PARTS_DELIMITER = "\\n";
+    private static final String DATE_FORMAT_PATTERN = "yyyyMMdd";
+    private static final String PARTS_DELIMITER = "\n";
+    private static final String KEY_VALUE_DELIMITER = ":";
     private static final String START_DATE_KEY = "DTSTART";
     private static final String RRULE_KEY = "RRULE";
 
-    private String recurrence;
+    private String value;
 
     private RecurrenceRule recurrenceRule;
 
     private Instant startDate;
+
+    public Recurrence(String value) {
+        this.value = value;
+    }
 
     public boolean hasValidRecurrence() {
         return nonNull(getRecurrenceRule()) && nonNull(getStartDate());
@@ -54,7 +59,7 @@ public class Recurrence {
             var optional = getRecurrencePart(START_DATE_KEY);
             if (optional.isPresent()) {
                 try {
-                    var formatter = new SimpleDateFormat(START_DATE_PATTERN);
+                    var formatter = new SimpleDateFormat(DATE_FORMAT_PATTERN);
                     startDate = formatter.parse(optional.get()).toInstant();
                 } catch (Exception e) {
                     log.warn("StartDate is invalid!", e);
@@ -65,12 +70,12 @@ public class Recurrence {
     }
 
     public Optional<String> getRecurrencePart(String partKey) {
-        if (isNotBlank(recurrence)) {
-            var parts = recurrence.split(RECURRENCE_PARTS_DELIMITER);
+        if (isNotBlank(value)) {
+            var parts = value.split(PARTS_DELIMITER);
             var optional = of(parts).filter(p -> p.startsWith(partKey)).findFirst();
             if (optional.isPresent()) {
                 var part = optional.get();
-                var vk = part.split(":");
+                var vk = part.split(KEY_VALUE_DELIMITER);
                 if (vk.length == 2 && vk[0].equals(partKey)) {
                     return Optional.of(vk[1]);
                 }

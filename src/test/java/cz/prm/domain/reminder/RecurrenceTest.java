@@ -9,20 +9,33 @@ import org.junit.jupiter.api.Test;
 class RecurrenceTest {
 
     @Test
+    void newInstance() {
+        var value = uuid();
+        var r1 = new Recurrence(value);
+        assertThat(r1.getValue()).isEqualTo(value);
+
+        var r2 = new Recurrence();
+        assertThat(r2.getValue()).isNull();
+
+        r2.setValue(value);
+        assertThat(r1.getValue()).isEqualTo(value);
+    }
+
+    @Test
     void getRecurrenceRule() {
         var r = new Recurrence();
         assertThat(r.getRecurrenceRule()).isNull();
 
-        r.setRecurrence(null);
+        r.setValue(null);
         assertThat(r.getRecurrenceRule()).isNull();
 
-        r.setRecurrence("");
+        r.setValue("");
         assertThat(r.getRecurrenceRule()).isNull();
 
-        r.setRecurrence(uuid());
+        r.setValue(uuid());
         assertThat(r.getRecurrenceRule()).isNull();
 
-        r.setRecurrence("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
+        r.setValue("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
         assertThat(r.getRecurrenceRule()).isNotNull();
     }
 
@@ -31,16 +44,16 @@ class RecurrenceTest {
         var r = new Recurrence();
         assertThat(r.getStartDate()).isNull();
 
-        r.setRecurrence(null);
+        r.setValue(null);
         assertThat(r.getStartDate()).isNull();
 
-        r.setRecurrence("");
+        r.setValue("");
         assertThat(r.getStartDate()).isNull();
 
-        r.setRecurrence(uuid());
+        r.setValue(uuid());
         assertThat(r.getStartDate()).isNull();
 
-        r.setRecurrence("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
+        r.setValue("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
         assertThat(r.getStartDate()).isNotNull();
         assertThat(r.getStartDate()).isEqualTo(parse("2024-10-26T22:00:00Z"));
     }
@@ -50,16 +63,16 @@ class RecurrenceTest {
         var r = new Recurrence();
         assertThat(r.hasValidRecurrence()).isFalse();
 
-        r.setRecurrence(null);
+        r.setValue(null);
         assertThat(r.hasValidRecurrence()).isFalse();
 
-        r.setRecurrence("");
+        r.setValue("");
         assertThat(r.hasValidRecurrence()).isFalse();
 
-        r.setRecurrence(uuid());
+        r.setValue(uuid());
         assertThat(r.hasValidRecurrence()).isFalse();
 
-        r.setRecurrence("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
+        r.setValue("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
         assertThat(r.hasValidRecurrence()).isTrue();
     }
 }
