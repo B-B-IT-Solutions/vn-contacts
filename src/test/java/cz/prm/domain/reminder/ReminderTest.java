@@ -13,6 +13,9 @@ class ReminderTest {
         var reminder = new Reminder();
         assertThat(reminder.hasActiveRecurrence()).isFalse();
 
+        reminder.setRecurrence(null);
+        assertThat(reminder.hasActiveRecurrence()).isFalse();
+
         var recurrence = mock(Recurrence.class);
         when(recurrence.hasActiveRecurrence()).thenReturn(false);
 
