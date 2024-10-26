@@ -12,6 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Optional;
@@ -30,6 +32,7 @@ import org.dmfs.rfc5545.recur.RecurrenceRule;
 public class Recurrence {
 
     private static final String DATE_FORMAT_PATTERN = "yyyyMMdd";
+    private static final DateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT_PATTERN);
     private static final String PARTS_DELIMITER = "\n";
     private static final String KEY_VALUE_DELIMITER = ":";
     private static final String START_DATE_KEY = "DTSTART";
@@ -44,8 +47,10 @@ public class Recurrence {
     @Column(name = "VALUE")
     private String value;
 
+    @Transient
     private RecurrenceRule recurrenceRule;
 
+    @Transient
     private Instant startDate;
 
     public Recurrence(String value) {
@@ -75,8 +80,7 @@ public class Recurrence {
             var optional = getRecurrencePart(START_DATE_KEY);
             if (optional.isPresent()) {
                 try {
-                    var formatter = new SimpleDateFormat(DATE_FORMAT_PATTERN);
-                    startDate = formatter.parse(optional.get()).toInstant();
+                    startDate = DATE_FORMATTER.parse(optional.get()).toInstant();
                 } catch (Exception e) {
                     log.warn("StartDate is invalid!", e);
                 }
