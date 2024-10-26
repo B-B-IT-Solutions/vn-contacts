@@ -21,9 +21,8 @@ public class NotificationService {
     public void getNotifications(Long contactId) {
         var reminders = reminderService.getReminders(contactId, new RemindersQuery());
 
-//        reminders.getContent().stream().filter(r -> r.hasRecurrenceRule()).forEach(r -> {
-//            var rule = r.getRecurrenceRule();
-//            new OfRule(rule);
-//        });
+        reminders.getContent().stream().filter(r -> r.hasActiveRecurrence()).forEach(r -> {
+            var rule = r.getRecurrence();
+        });
     }
 }

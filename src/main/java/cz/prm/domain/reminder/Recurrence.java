@@ -57,7 +57,7 @@ public class Recurrence {
         this.value = value;
     }
 
-    public boolean hasValidRecurrence() {
+    public boolean hasActiveRecurrence() {
         return nonNull(getRecurrenceRule()) && nonNull(getStartDate());
     }
 

@@ -1,6 +1,7 @@
 package cz.prm.domain.reminder;
 
 import static jakarta.persistence.CascadeType.ALL;
+import static java.util.Objects.nonNull;
 
 import cz.prm.domain.common.User;
 import jakarta.persistence.AttributeOverride;
@@ -64,7 +65,16 @@ public class Reminder {
 
     @CreatedBy
     @Embedded
-    @AttributeOverrides({@AttributeOverride(name = "username", column = @Column(name = "OWNER_USERNAME")),
-        @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))})
+    @AttributeOverrides({
+        @AttributeOverride(name = "username", column = @Column(name = "OWNER_USERNAME")),
+        @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))
+    })
     private User owner;
+
+    public boolean hasActiveRecurrence() {
+        if (nonNull(recurrence)) {
+            return recurrence.hasActiveRecurrence();
+        }
+        return false;
+    }
 }

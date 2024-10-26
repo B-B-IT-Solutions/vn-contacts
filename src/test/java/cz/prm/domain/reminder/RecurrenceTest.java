@@ -59,20 +59,20 @@ class RecurrenceTest {
     }
 
     @Test
-    void hasValidRecurrence() {
+    void hasActiveRecurrence() {
         var r = new Recurrence();
-        assertThat(r.hasValidRecurrence()).isFalse();
+        assertThat(r.hasActiveRecurrence()).isFalse();
 
         r.setValue(null);
-        assertThat(r.hasValidRecurrence()).isFalse();
+        assertThat(r.hasActiveRecurrence()).isFalse();
 
         r.setValue("");
-        assertThat(r.hasValidRecurrence()).isFalse();
+        assertThat(r.hasActiveRecurrence()).isFalse();
 
         r.setValue(uuid());
-        assertThat(r.hasValidRecurrence()).isFalse();
+        assertThat(r.hasActiveRecurrence()).isFalse();
 
         r.setValue("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
-        assertThat(r.hasValidRecurrence()).isTrue();
+        assertThat(r.hasActiveRecurrence()).isTrue();
     }
 }
