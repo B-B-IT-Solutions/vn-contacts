@@ -37,6 +37,9 @@ class RecurrenceTest {
         r.setValue(uuid());
         assertThat(r.getRecurrenceRule()).isNull();
 
+        r.setValue("DTSTART:20241027T104500Z\nRRULE:invalid");
+        assertThat(r.getRecurrenceRule()).isNull();
+
         r.setValue("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
         assertThat(r.getRecurrenceRule()).isNotNull();
     }
@@ -52,7 +55,7 @@ class RecurrenceTest {
         r.setValue("");
         assertThat(r.getStartDate()).isNull();
 
-        r.setValue(uuid());
+        r.setValue("DTSTART:invalid\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
         assertThat(r.getStartDate()).isNull();
 
         r.setValue("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
