@@ -21,9 +21,10 @@ public interface ReminderMapper {
 
     PageDto<ReminderDto> toPageDto(Page<Reminder> reminders);
 
+    @Mapping(target = "recurrence", source = "recurrence.value")
     ReminderDto toReminderDto(Reminder reminder);
 
-    @Mapping(target = "owner", ignore = true)
+    @Mapping(target = "recurrence.value", source = "recurrence")
     Reminder toReminder(ReminderDto dto);
 
     RemindersQuery toRemindersQuery(RemindersQueryDto dto);

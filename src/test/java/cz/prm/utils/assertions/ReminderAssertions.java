@@ -72,7 +72,7 @@ public class ReminderAssertions {
         assertThat(reminder.getContactId()).isEqualTo(dto.getContactId());
         assertThat(reminder.getTitle()).isEqualTo(dto.getTitle());
         assertThat(reminder.getDescription()).isEqualTo(dto.getDescription());
-        assertThat(reminder.getRecurrence()).isEqualTo(dto.getRecurrence());
+        assertThat(reminder.getRecurrence().getValue()).isNotBlank().isEqualTo(dto.getRecurrence());
         assertThat(reminder.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(reminder.getCreationDate()).isEqualTo(dto.getCreationDate());
     }

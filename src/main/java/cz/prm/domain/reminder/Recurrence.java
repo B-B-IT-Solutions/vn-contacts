@@ -5,6 +5,13 @@ import static java.util.Objects.nonNull;
 import static java.util.stream.Stream.of;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Optional;
@@ -15,6 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.dmfs.rfc5545.recur.RecurrenceRule;
 
 @Slf4j
+@Entity
+@Table(name = "REMINDER", schema = "public")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,6 +35,13 @@ public class Recurrence {
     private static final String START_DATE_KEY = "DTSTART";
     private static final String RRULE_KEY = "RRULE";
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RECURRENCE_SEQ")
+    @SequenceGenerator(name = "RECURRENCE_SEQ", sequenceName = "RECURRENCE_SEQ", allocationSize = 1)
+    @Column(name = "RECURRENCE_ID")
+    private Long recurrenceId;
+
+    @Column(name = "VALUE")
     private String value;
 
     private RecurrenceRule recurrenceRule;

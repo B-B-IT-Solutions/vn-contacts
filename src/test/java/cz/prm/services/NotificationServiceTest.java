@@ -2,8 +2,8 @@ package cz.prm.services;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.CommonUtils.page;
+import static cz.prm.utils.ReminderUtils.recurrence;
 import static cz.prm.utils.ReminderUtils.reminder;
-import static cz.prm.utils.ReminderUtils.remindersQuery;
 import static cz.prm.utils.TestUtils.randomLong;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -33,7 +33,8 @@ class NotificationServiceTest {
     void getNotifications() {
         var contactId = randomLong();
         var reminder1 = reminder();
-        reminder1.setRecurrence("DTSTART:20241005T062200Z\\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1;UNTIL=20241024T062200");
+        var recurrence = recurrence();
+        reminder1.setRecurrence(recurrence);
         var reminder2 = reminder();
         var reminder3 = reminder();
         var reminders = newArrayList(reminder1, reminder2, reminder3);
