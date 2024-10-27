@@ -142,23 +142,23 @@ class RecurrenceTest {
         var r = new Recurrence();
         r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
         r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year + 1, 1, 1)));
+        assertThat(r.getNextOccurrence()).isEqualTo(parse(date(year + 1, 1, 1)));
 
         r.resetParsedRule();
         r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=MONTHLY");
         r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year, month, 27)));
+        assertThat(r.getNextOccurrence()).isEqualTo(parse(date(year, month, 27)));
 
         r.resetParsedRule();
         r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=DAILY");
         r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year, month, day)));
+        assertThat(r.getNextOccurrence()).isEqualTo(parse(date(year, month, day)));
 
         r.resetParsedRule();
         var rrule = rrule(year + 5, month, day, "RRULE:FREQ=DAILY");
         r.setValue(rrule);
         r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year + 5, month, day)));
+        assertThat(r.getNextOccurrence()).isEqualTo(parse(date(year + 5, month, day)));
         r.resetParsedRule();
     }
 
@@ -176,10 +176,10 @@ class RecurrenceTest {
         assertThat(r.getNextOccurrence()).isNull();
 
         r.resetParsedRule();
-        var rrule = rrule(year + 1, month, day, "RRULE:FREQ=YEARLY;BYMONTH=11;BYMONTHDAY=21;COUNT=3");
-        r.setValue(rrule);
+        var rule = rrule(year + 1, month, day, "RRULE:FREQ=YEARLY;BYMONTH=11;BYMONTHDAY=21;COUNT=3");
+        r.setValue(rule);
         r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year + 1, 11, 21)));
+        assertThat(r.getNextOccurrence()).isEqualTo(parse(date(year + 1, 11, 21)));
 
         r.resetParsedRule();
         r.setValue("DTSTART:20210721T104500Z\nRRULE:FREQ=MONTHLY;COUNT=30");
@@ -192,26 +192,18 @@ class RecurrenceTest {
         assertThat(r.getNextOccurrence()).isNull();
 
         r.resetParsedRule();
-        rrule = rrule(year, month, day, "RRULE:FREQ=DAILY;COUNT=300");
-        r.setValue(rrule);
+        rule = rrule(year, month, day, "RRULE:FREQ=DAILY;COUNT=300");
+        r.setValue(rule);
         r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year, month, day)));
+        assertThat(r.getNextOccurrence()).isEqualTo(parse(date(year, month, day)));
 
         r.resetParsedRule();
-        r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=DAILY;UNTIL=20251031T114700Z;");
+        var sd = dtstart(year - 3, 10, 27);
+        var until = date(year + 1, 10, 31);
+        var rrule = rrule(sd, "FREQ=DAILY;", until);
+        r.setValue(rrule);
         r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year, month, day)));
-    }
-
-    public String rrule(long year, int month, int day, String rule) {
-        var dt = dt(year, month, day);
-        return format("DTSTART:%s\n%s", dt, rule);
-    }
-
-    public String dt(long year, int month, int day) {
-        var sMonth = month < 10 ? "0" + month : month;
-        var sDay = day < 10 ? "0" + day : day;
-        return format("%s%s%sT000000Z", year, sMonth, sDay);
+        assertThat(r.getNextOccurrence()).isEqualTo(parse(date(year, month, day)));
     }
 
     @Test
@@ -222,5 +214,25 @@ class RecurrenceTest {
         var value = format("DTSTART:%s\nRRULE:%s", startDate, rrule);
         r.setValue(value);
         assertThat(r.isDue()).isFalse();
+    }
+
+    private String rrule(long year, int month, int day, String rule) {
+        var dt = date(year, month, day);
+        return format("DTSTART:%s\n%s", dt, rule);
+    }
+
+    private String rrule(String startDate, String rule, String until) {
+        return format("%s\nRRULE:%sUNTIL=%s;", startDate, rule, until);
+    }
+
+    private String dtstart(long year, int month, int day) {
+        var dt = date(year, month, day);
+        return format("DTSTART:%s", dt);
+    }
+
+    private String date(long year, int month, int day) {
+        var sMonth = month < 10 ? "0" + month : month;
+        var sDay = day < 10 ? "0" + day : day;
+        return format("%s%s%sT000000Z", year, sMonth, sDay);
     }
 }
