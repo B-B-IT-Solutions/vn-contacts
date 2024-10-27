@@ -27,7 +27,7 @@ public class ReminderComponentTestAssertions {
         assertThat(reminder.getContactId()).isEqualTo(reminderDto.getContactId());
         assertThat(reminder.getTitle()).isEqualTo(reminderDto.getTitle());
         assertThat(reminder.getDescription()).isEqualTo(reminderDto.getDescription());
-        assertThat(reminder.getRecurrence()).isEqualTo(reminderDto.getRecurrence());
+        assertThat(reminder.getRecurrence().getValue()).isEqualTo(reminderDto.getRecurrence());
         assertThat(reminder.getLastEditDate()).isNotNull();
         assertThat(reminder.getCreationDate()).isNotNull();
     }
