@@ -136,15 +136,15 @@ class RecurrenceTest {
 
     @Test
     void resolveNextOccurrenceInfinite() {
-        var now = DateTime.now();
-        var year = now.getYear();
-        var month = now.getMonth() + 1;
-        var day = now.getDayOfMonth();
-
         var r = new Recurrence();
         r.setValue(null);
         r.resolveNextOccurrence();
         assertThat(r.getNextOccurrence()).isNull();
+
+        var now = DateTime.now();
+        var year = now.getYear();
+        var month = now.getMonth() + 1;
+        var day = now.getDayOfMonth();
 
         r.resetParsedRule();
         r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
@@ -171,11 +171,6 @@ class RecurrenceTest {
 
     @Test
     void resolveNextOccurrenceFinite() {
-        var now = DateTime.now();
-        var year = now.getYear();
-        var month = now.getMonth() + 1;
-        var day = now.getDayOfMonth();
-
         var r = new Recurrence();
         r.setValue(null);
         r.resolveNextOccurrence();
@@ -185,6 +180,11 @@ class RecurrenceTest {
         r.setValue("DTSTART:20201027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1;COUNT=3");
         r.resolveNextOccurrence();
         assertThat(r.getNextOccurrence()).isNull();
+
+        var now = DateTime.now();
+        var year = now.getYear();
+        var month = now.getMonth() + 1;
+        var day = now.getDayOfMonth();
 
         r.resetParsedRule();
         var rule = rrule(year + 1, month, day, "RRULE:FREQ=YEARLY;BYMONTH=11;BYMONTHDAY=21;COUNT=3");
