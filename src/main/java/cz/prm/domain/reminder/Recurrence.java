@@ -111,7 +111,7 @@ public class Recurrence {
             var occurrences0 = new OfRule(getRecurrenceRule(), sd);
             if (occurrences0.isInfinite()) {
                 var it0 = occurrences0.iterator();
-                this.nextOccurrence = it0.hasNext() ? it0.next().startOfDay() : null;
+                this.nextOccurrence = it0.next().startOfDay();
             } else {
                 var occurrences1 = new First<>(2, new OfRule(getRecurrenceRule(), now()));
                 var it1 = occurrences1.iterator();

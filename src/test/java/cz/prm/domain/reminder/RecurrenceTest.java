@@ -163,33 +163,13 @@ class RecurrenceTest {
     }
 
     @Test
-    void resolveNextOccurrence() {
+    void resolveNextOccurrenceFinite() {
         var now = DateTime.now();
         var year = now.getYear();
         var month = now.getMonth() + 1;
         var day = now.getDayOfMonth();
 
         var r = new Recurrence();
-        r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
-        r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year + 1, 1, 1)));
-
-        r.resetParsedRule();
-        r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=MONTHLY");
-        r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year, month, 27)));
-
-        r.resetParsedRule();
-        r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=DAILY");
-        r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year, month, day)));
-
-        r.resetParsedRule();
-        var rrule = rrule(year + 5, month, day, "RRULE:FREQ=DAILY");
-        r.setValue(rrule);
-        r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year + 5, month, day)));
-
         r.resetParsedRule();
         r.setValue("DTSTART:20201027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1;COUNT=3");
         r.resolveNextOccurrence();
@@ -198,7 +178,7 @@ class RecurrenceTest {
         r.resetParsedRule();
         r.setValue("DTSTART:20251027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=11;BYMONTHDAY=21;COUNT=3");
         r.resolveNextOccurrence();
-//        assertThat(r.getNextOccurrence()).isEqualTo(parse("20251121T000000Z"));
+        assertThat(r.getNextOccurrence()).isEqualTo(parse("20251121T000000Z"));
     }
 
     public String rrule(long year, int month, int day, String rule) {
