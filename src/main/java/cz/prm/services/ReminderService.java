@@ -61,7 +61,7 @@ public class ReminderService {
 
     private void updateRecurrenceFields(Recurrence savedRecurrence, Recurrence updatedRecurrence) {
         savedRecurrence.setValue(updatedRecurrence.getValue());
-        savedRecurrence.resetRule();
+        savedRecurrence.resetParsedRule();
     }
 
     private Reminder getReminderById(Long reminderId) {

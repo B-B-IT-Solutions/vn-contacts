@@ -95,7 +95,7 @@ public class Recurrence {
         return startDate;
     }
 
-    public void resetRule() {
+    public void resetParsedRule() {
         this.startDate = null;
         this.recurrenceRule = null;
     }

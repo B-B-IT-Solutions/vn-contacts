@@ -4,6 +4,7 @@ import static cz.prm.utils.ReminderUtils.recurrenceRule;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.dmfs.rfc5545.DateTime.parse;
 import static org.mockito.ArgumentMatchers.anyString;
 
 import org.dmfs.rfc5545.DateTime;
@@ -40,7 +41,7 @@ class RecurrenceTest {
         r.setValue(uuid());
         assertThat(r.getRecurrenceRule()).isNull();
 
-        r.resetRule();
+        r.resetParsedRule();
         r.setValue("RRULEEE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1:FREQ=YEARLY");
         assertThat(r.getRecurrenceRule()).isNull();
 
@@ -67,24 +68,37 @@ class RecurrenceTest {
             r.setValue("");
             assertThat(r.getStartDate()).isEqualTo(dateTime1);
 
-            r.resetRule();
+            r.resetParsedRule();
             r.setValue("DTSTARTTT:invalid\nRRULEEE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
             assertThat(r.getStartDate()).isEqualTo(dateTime1);
 
-            r.resetRule();
+            r.resetParsedRule();
             r.setValue("DTSTARTTT:invalid:invalid\nRRULEEE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1:FREQ=YEARLY");
             assertThat(r.getStartDate()).isEqualTo(dateTime1);
 
-            dateTimeMock.when(() -> DateTime.parse(anyString())).thenThrow(IllegalArgumentException.class);
-            r.resetRule();
+            dateTimeMock.when(() -> parse(anyString())).thenThrow(IllegalArgumentException.class);
+            r.resetParsedRule();
             r.setValue("DTSTART:invalid\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
             assertThat(r.getStartDate()).isEqualTo(dateTime1);
 
-            dateTimeMock.when(() -> DateTime.parse(anyString())).thenReturn(dateTime2);
-            r.resetRule();
+            dateTimeMock.when(() -> parse(anyString())).thenReturn(dateTime2);
+            r.resetParsedRule();
             r.setValue("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
             assertThat(r.getStartDate()).isEqualTo(dateTime2);
         }
+    }
+
+    @Test
+    void resetParsedRule() {
+        var r = new Recurrence();
+        r.setValue("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
+        assertThat(r.getRecurrenceRule()).isNotNull();
+        assertThat(r.getStartDate()).isEqualTo(parse("20241027T104500Z"));
+
+        r.setValue(null);
+        r.resetParsedRule();
+        assertThat(r.getRecurrenceRule()).isNull();
+        assertThat(r.getStartDate()).isNotNull().isNotEqualTo(parse("20241027T104500Z"));
     }
 
     @Test
@@ -101,15 +115,15 @@ class RecurrenceTest {
         r.setValue(uuid());
         assertThat(r.hasActiveRecurrence()).isFalse();
 
-        r.resetRule();
+        r.resetParsedRule();
         r.setValue("DTSTART:20241027T104500Z");
         assertThat(r.hasActiveRecurrence()).isFalse();
 
-        r.resetRule();
+        r.resetParsedRule();
         r.setValue("RRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
         assertThat(r.hasActiveRecurrence()).isTrue();
 
-        r.resetRule();
+        r.resetParsedRule();
         r.setValue("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
         assertThat(r.hasActiveRecurrence()).isTrue();
     }
