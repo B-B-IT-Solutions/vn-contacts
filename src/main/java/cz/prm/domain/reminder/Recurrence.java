@@ -107,32 +107,38 @@ public class Recurrence {
 
     public void resolveNextOccurrence() {
         if (hasActiveRule()) {
-            var occurrences1 = new First<>(2, new OfRule(getRecurrenceRule(), now()));
-            var it1 = occurrences1.iterator();
-            var next1 = DateTime.now();
-            while (it1.hasNext()) {
-                next1 = it1.next().startOfDay();
+            var sd = getStartDate().after(now()) ? getStartDate() : now();
+            var occurrences0 = new OfRule(getRecurrenceRule(), sd);
+            if (occurrences0.isInfinite()) {
+                var it0 = occurrences0.iterator();
+                this.nextOccurrence = it0.hasNext() ? it0.next().startOfDay() : null;
+            } else {
+                var occurrences1 = new First<>(2, new OfRule(getRecurrenceRule(), now()));
+                var it1 = occurrences1.iterator();
+                var next1 = DateTime.now();
+                while (it1.hasNext()) {
+                    next1 = it1.next().startOfDay();
+                }
+                var secondFromToday = next1;
+
+                log.warn("secondFromToday - {}", secondFromToday);
+
+                var occurrences2 = new While<>((dt) -> secondFromToday.after(dt), new OfRule(getRecurrenceRule(), getStartDate()));
+                var it2 = occurrences2.iterator();
+
+                while (it2.hasNext()) {
+                    var next2 = it2.next().startOfDay();
+                    this.nextOccurrence = next2.after(now().startOfDay()) ? next2 : null;
+                }
+
+                occurrences2.forEach(dt -> log.warn("{}", dt));
             }
-            var secondFromToday = next1;
-
-            log.warn("secondFromToday - {}", secondFromToday);
-
-            var occurrences2 = new While<>((dt) -> secondFromToday.after(dt), new OfRule(getRecurrenceRule(), getStartDate()));
-            var it2 = occurrences2.iterator();
-
-            while (it2.hasNext()) {
-                var next2 = it2.next().startOfDay();
-                this.nextOccurrence = next2.after(now()) ? next2 : null;
-            }
-
-            occurrences2.forEach(dt -> log.warn("{}", dt));
         } else {
             this.nextOccurrence = null;
         }
     }
 
     public boolean isDue() {
-
         if (hasActiveRule()) {
             var occurrences = new First<>(100, new OfRule(getRecurrenceRule(), getStartDate()));
             occurrences.forEach(dt -> {

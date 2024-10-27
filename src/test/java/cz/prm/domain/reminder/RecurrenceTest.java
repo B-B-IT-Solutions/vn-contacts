@@ -3,6 +3,7 @@ package cz.prm.domain.reminder;
 import static cz.prm.utils.ReminderUtils.recurrenceRule;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
+import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.dmfs.rfc5545.DateTime.parse;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -133,15 +134,52 @@ class RecurrenceTest {
 
     @Test
     void resolveNextOccurrence() {
+        var now = DateTime.now();
+        var year = now.getYear();
+        var month = now.getMonth() + 1;
+        var day = now.getDayOfMonth();
+
         var r = new Recurrence();
         r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
         r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(parse("20250101T000000Z"));
+        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year + 1, 1, 1)));
+
+        r.resetParsedRule();
+        r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=MONTHLY");
+        r.resolveNextOccurrence();
+        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year, month, 27)));
+
+        r.resetParsedRule();
+        r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=DAILY");
+        r.resolveNextOccurrence();
+        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year, month, day)));
+
+        r.resetParsedRule();
+        var rrule = rrule(year + 5, month, day, "RRULE:FREQ=DAILY");
+        r.setValue(rrule);
+        r.resolveNextOccurrence();
+        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year + 5, month, day)));
 
         r.resetParsedRule();
         r.setValue("DTSTART:20201027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1;COUNT=3");
         r.resolveNextOccurrence();
         assertThat(r.getNextOccurrence()).isNull();
+
+        r.resetParsedRule();
+        r.setValue("DTSTART:20251027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=11;BYMONTHDAY=21;COUNT=3");
+        r.resolveNextOccurrence();
+//        assertThat(r.getNextOccurrence()).isEqualTo(parse("20251121T000000Z"));
+    }
+
+    public String rrule(long year, int month, int day, String rule) {
+        var dt = dt(year, month, day);
+        return format("DTSTART:%s\n%s", dt, rule);
+    }
+
+    public String dt(long year, int month, int day) {
+        var sMonth = month < 10 ? "0" + month : month;
+        var sDay = month < 10 ? "0" + day : day;
+        return format("%s%s%sT000000Z", year, sMonth, sDay);
     }
 
     @Test
@@ -149,7 +187,7 @@ class RecurrenceTest {
         var r = new Recurrence();
         var rrule = recurrenceRule();
         var startDate = DateTime.now();
-        var value = String.format("DTSTART:%s\nRRULE:%s", startDate, rrule);
+        var value = format("DTSTART:%s\nRRULE:%s", startDate, rrule);
         r.setValue(value);
         assertThat(r.isDue()).isFalse();
     }
