@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.dmfs.rfc5545.DateTime.parse;
 import static org.mockito.ArgumentMatchers.anyString;
 
+import java.time.Instant;
 import org.dmfs.rfc5545.DateTime;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
@@ -188,7 +189,10 @@ class RecurrenceTest {
         var rule = rrule(year + 1, month, day, "RRULE:FREQ=YEARLY;BYMONTH=11;BYMONTHDAY=21;COUNT=3");
         r.setValue(rule);
         r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(parse(date(year + 1, 11, 21)));
+
+        var edt = Instant.ofEpochMilli(parse(date(year + 1, 11, 21)).getTimestamp());
+
+        assertThat(r.getNextOccurrence()).isEqualTo(edt);
 
         r.resetParsedRule();
         r.setValue("DTSTART:20210721T104500Z\nRRULE:FREQ=MONTHLY;COUNT=30");
@@ -204,7 +208,9 @@ class RecurrenceTest {
         rule = rrule(year, month, day, "RRULE:FREQ=DAILY;COUNT=300");
         r.setValue(rule);
         r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(parse(date(year, month, day)));
+
+        edt = Instant.ofEpochMilli(parse(date(year, month, day)).getTimestamp());
+        assertThat(r.getNextOccurrence()).isEqualTo(edt);
 
         r.resetParsedRule();
         var startDate = dtstart(year - 3, 10, day);

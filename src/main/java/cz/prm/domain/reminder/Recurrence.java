@@ -1,6 +1,5 @@
 package cz.prm.domain.reminder;
 
-import static jakarta.persistence.TemporalType.TIMESTAMP;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static java.util.stream.Stream.of;
@@ -16,8 +15,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
 import jakarta.persistence.Transient;
+import java.time.Instant;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,8 +28,6 @@ import org.dmfs.rfc5545.DateTime;
 import org.dmfs.rfc5545.Duration;
 import org.dmfs.rfc5545.recur.RecurrenceRule;
 import org.dmfs.rfc5545.recurrenceset.OfRule;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 @Slf4j
 @Entity
@@ -54,10 +51,8 @@ public class Recurrence {
     @Column(name = "VALUE")
     private String value;
 
-    @Temporal(TIMESTAMP)
-    @JdbcTypeCode(SqlTypes.DATE)
     @Column(name = "NEXT_OCCURRENCE")
-    private DateTime nextOccurrence;
+    private Instant nextOccurrence;
 
     @Transient
     private RecurrenceRule recurrenceRule;
@@ -116,7 +111,7 @@ public class Recurrence {
             var occurrences0 = new OfRule(getRecurrenceRule(), sd);
             if (occurrences0.isInfinite()) {
                 var it0 = occurrences0.iterator();
-                this.nextOccurrence = it0.next().startOfDay();
+                this.nextOccurrence = Instant.ofEpochMilli(it0.next().startOfDay().getTimestamp());
             } else {
                 var occurrences1 = new First<>(2, new OfRule(getRecurrenceRule(), sd));
                 var it1 = occurrences1.iterator();
@@ -131,7 +126,7 @@ public class Recurrence {
                 while (it2.hasNext()) {
                     var next2 = it2.next().startOfDay();
                     var yesterday = today().addDuration(new Duration(-1, 1, 0));
-                    this.nextOccurrence = next2.after(yesterday) ? next2 : null;
+                    this.nextOccurrence = next2.after(yesterday) ? Instant.ofEpochMilli(next2.getTimestamp()) : null;
                 }
             }
         } else {
