@@ -1,5 +1,6 @@
 package cz.prm.domain.reminder;
 
+import static java.time.Instant.ofEpochMilli;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static java.util.stream.Stream.of;
@@ -111,7 +112,8 @@ public class Recurrence {
             var occurrences0 = new OfRule(getRecurrenceRule(), sd);
             if (occurrences0.isInfinite()) {
                 var it0 = occurrences0.iterator();
-                this.nextOccurrence = Instant.ofEpochMilli(it0.next().startOfDay().getTimestamp());
+                var next0 = it0.next().startOfDay();
+                this.nextOccurrence = toInstant(next0);
             } else {
                 var occurrences1 = new First<>(2, new OfRule(getRecurrenceRule(), sd));
                 var it1 = occurrences1.iterator();
@@ -126,7 +128,7 @@ public class Recurrence {
                 while (it2.hasNext()) {
                     var next2 = it2.next().startOfDay();
                     var yesterday = today().addDuration(new Duration(-1, 1, 0));
-                    this.nextOccurrence = next2.after(yesterday) ? Instant.ofEpochMilli(next2.getTimestamp()) : null;
+                    this.nextOccurrence = next2.after(yesterday) ? toInstant(next2) : null;
                 }
             }
         } else {
@@ -157,5 +159,9 @@ public class Recurrence {
             }
         }
         return Optional.empty();
+    }
+
+    private Instant toInstant(DateTime dt) {
+        return ofEpochMilli(dt.getTimestamp());
     }
 }
