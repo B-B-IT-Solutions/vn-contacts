@@ -1,5 +1,6 @@
 package cz.prm.domain.reminder;
 
+import static jakarta.persistence.TemporalType.TIMESTAMP;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static java.util.stream.Stream.of;
@@ -15,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
 import jakarta.persistence.Transient;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
@@ -27,6 +29,8 @@ import org.dmfs.rfc5545.DateTime;
 import org.dmfs.rfc5545.Duration;
 import org.dmfs.rfc5545.recur.RecurrenceRule;
 import org.dmfs.rfc5545.recurrenceset.OfRule;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Slf4j
 @Entity
@@ -50,11 +54,10 @@ public class Recurrence {
     @Column(name = "VALUE")
     private String value;
 
+    @Temporal(TIMESTAMP)
+    @JdbcTypeCode(SqlTypes.DATE)
     @Column(name = "NEXT_OCCURRENCE")
     private DateTime nextOccurrence;
-
-    @Column(name = "LAST_OCCURRENCE")
-    private DateTime lastOccurrence;
 
     @Transient
     private RecurrenceRule recurrenceRule;
@@ -123,15 +126,11 @@ public class Recurrence {
                 }
                 var secondFromToday = next1;
 
-                log.warn("secondFromToday - {}", secondFromToday);
-
                 var occurrences2 = new While<>((dt) -> secondFromToday.after(dt), new OfRule(getRecurrenceRule(), getStartDate()));
                 var it2 = occurrences2.iterator();
-
                 while (it2.hasNext()) {
                     var next2 = it2.next().startOfDay();
                     var yesterday = today().addDuration(new Duration(-1, 1, 0));
-                    log.warn("{}", next2);
                     this.nextOccurrence = next2.after(yesterday) ? next2 : null;
                 }
             }

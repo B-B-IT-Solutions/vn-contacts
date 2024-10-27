@@ -140,6 +140,11 @@ class RecurrenceTest {
         var day = now.getDayOfMonth();
 
         var r = new Recurrence();
+        r.setValue(null);
+        r.resolveNextOccurrence();
+        assertThat(r.getNextOccurrence()).isNull();
+
+        r.resetParsedRule();
         r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
         r.resolveNextOccurrence();
         assertThat(r.getNextOccurrence()).isEqualTo(parse(date(year + 1, 1, 1)));
@@ -170,6 +175,10 @@ class RecurrenceTest {
         var day = now.getDayOfMonth();
 
         var r = new Recurrence();
+        r.setValue(null);
+        r.resolveNextOccurrence();
+        assertThat(r.getNextOccurrence()).isNull();
+
         r.resetParsedRule();
         r.setValue("DTSTART:20201027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1;COUNT=3");
         r.resolveNextOccurrence();
