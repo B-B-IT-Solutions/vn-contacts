@@ -4,6 +4,7 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static java.util.stream.Stream.of;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.dmfs.rfc5545.DateTime.now;
 import static org.dmfs.rfc5545.DateTime.parse;
 
 import jakarta.persistence.Column;
@@ -60,7 +61,7 @@ public class Recurrence {
     }
 
     public boolean hasActiveRecurrence() {
-        return nonNull(getRecurrenceRule()) && nonNull(getStartDate());
+        return nonNull(getRecurrenceRule());
     }
 
     public RecurrenceRule getRecurrenceRule() {
@@ -85,10 +86,18 @@ public class Recurrence {
                     startDate = parse(optional.get());
                 } catch (Exception e) {
                     log.warn("StartDate is invalid!", e);
+                    startDate = now();
                 }
+            } else {
+                startDate = now();
             }
         }
         return startDate;
+    }
+
+    public void resetRule() {
+        this.startDate = null;
+        this.recurrenceRule = null;
     }
 
     public boolean isDue() {

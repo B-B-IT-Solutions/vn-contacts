@@ -4,6 +4,7 @@ import static cz.prm.domain.common.PageRequests.getPageRequest;
 import static java.lang.String.format;
 
 import cz.prm.domain.common.query.Page;
+import cz.prm.domain.reminder.Recurrence;
 import cz.prm.domain.reminder.Reminder;
 import cz.prm.domain.reminder.query.RemindersQuery;
 import cz.prm.repositories.reminder.ReminderPredicates;
@@ -55,6 +56,12 @@ public class ReminderService {
         savedReminder.setTitle(updatedReminder.getTitle());
         savedReminder.setDescription(updatedReminder.getDescription());
         savedReminder.setRecurrence(updatedReminder.getRecurrence());
+        updateRecurrenceFields(savedReminder.getRecurrence(), updatedReminder.getRecurrence());
+    }
+
+    private void updateRecurrenceFields(Recurrence savedRecurrence, Recurrence updatedRecurrence) {
+        savedRecurrence.setValue(updatedRecurrence.getValue());
+        savedRecurrence.resetRule();
     }
 
     private Reminder getReminderById(Long reminderId) {
