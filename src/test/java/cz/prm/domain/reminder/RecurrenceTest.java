@@ -92,40 +92,56 @@ class RecurrenceTest {
     void resetParsedRule() {
         var r = new Recurrence();
         r.setValue("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
-        assertThat(r.getRecurrenceRule()).isNotNull();
+        r.resolveNextOccurrence();
         assertThat(r.getStartDate()).isEqualTo(parse("20241027T104500Z"));
+        assertThat(r.getRecurrenceRule()).isNotNull();
+        assertThat(r.getNextOccurrence()).isNotNull();
 
         r.setValue(null);
         r.resetParsedRule();
-        assertThat(r.getRecurrenceRule()).isNull();
         assertThat(r.getStartDate()).isNotNull().isNotEqualTo(parse("20241027T104500Z"));
+        assertThat(r.getRecurrenceRule()).isNull();
+        assertThat(r.getNextOccurrence()).isNull();
     }
 
     @Test
-    void hasActiveRecurrence() {
+    void hasActiveRule() {
         var r = new Recurrence();
-        assertThat(r.hasActiveRecurrence()).isFalse();
+        assertThat(r.hasActiveRule()).isFalse();
 
         r.setValue(null);
-        assertThat(r.hasActiveRecurrence()).isFalse();
+        assertThat(r.hasActiveRule()).isFalse();
 
         r.setValue("");
-        assertThat(r.hasActiveRecurrence()).isFalse();
+        assertThat(r.hasActiveRule()).isFalse();
 
         r.setValue(uuid());
-        assertThat(r.hasActiveRecurrence()).isFalse();
+        assertThat(r.hasActiveRule()).isFalse();
 
         r.resetParsedRule();
         r.setValue("DTSTART:20241027T104500Z");
-        assertThat(r.hasActiveRecurrence()).isFalse();
+        assertThat(r.hasActiveRule()).isFalse();
 
         r.resetParsedRule();
         r.setValue("RRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
-        assertThat(r.hasActiveRecurrence()).isTrue();
+        assertThat(r.hasActiveRule()).isTrue();
 
         r.resetParsedRule();
         r.setValue("DTSTART:20241027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
-        assertThat(r.hasActiveRecurrence()).isTrue();
+        assertThat(r.hasActiveRule()).isTrue();
+    }
+
+    @Test
+    void resolveNextOccurrence() {
+        var r = new Recurrence();
+        r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
+        r.resolveNextOccurrence();
+        assertThat(r.getNextOccurrence()).isEqualTo(parse("20250101T000000Z"));
+
+        r.resetParsedRule();
+        r.setValue("DTSTART:20201027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1;COUNT=3");
+        r.resolveNextOccurrence();
+        assertThat(r.getNextOccurrence()).isNull();
     }
 
     @Test

@@ -21,6 +21,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dmfs.jems2.iterable.First;
+import org.dmfs.jems2.iterable.While;
 import org.dmfs.rfc5545.DateTime;
 import org.dmfs.rfc5545.recur.RecurrenceRule;
 import org.dmfs.rfc5545.recurrenceset.OfRule;
@@ -47,8 +48,11 @@ public class Recurrence {
     @Column(name = "VALUE")
     private String value;
 
-//    @Column(name = "VALUE")
-//    private DateTime nextOccurrence;
+    @Column(name = "NEXT_OCCURRENCE")
+    private DateTime nextOccurrence;
+
+    @Column(name = "LAST_OCCURRENCE")
+    private DateTime lastOccurrence;
 
     @Transient
     private RecurrenceRule recurrenceRule;
@@ -60,7 +64,7 @@ public class Recurrence {
         this.value = value;
     }
 
-    public boolean hasActiveRecurrence() {
+    public boolean hasActiveRule() {
         return nonNull(getRecurrenceRule());
     }
 
@@ -98,10 +102,38 @@ public class Recurrence {
     public void resetParsedRule() {
         this.startDate = null;
         this.recurrenceRule = null;
+        this.nextOccurrence = null;
+    }
+
+    public void resolveNextOccurrence() {
+        if (hasActiveRule()) {
+            var occurrences1 = new First<>(2, new OfRule(getRecurrenceRule(), now()));
+            var it1 = occurrences1.iterator();
+            var next1 = DateTime.now();
+            while (it1.hasNext()) {
+                next1 = it1.next().startOfDay();
+            }
+            var secondFromToday = next1;
+
+            log.warn("secondFromToday - {}", secondFromToday);
+
+            var occurrences2 = new While<>((dt) -> secondFromToday.after(dt), new OfRule(getRecurrenceRule(), getStartDate()));
+            var it2 = occurrences2.iterator();
+
+            while (it2.hasNext()) {
+                var next2 = it2.next().startOfDay();
+                this.nextOccurrence = next2.after(now()) ? next2 : null;
+            }
+
+            occurrences2.forEach(dt -> log.warn("{}", dt));
+        } else {
+            this.nextOccurrence = null;
+        }
     }
 
     public boolean isDue() {
-        if (hasActiveRecurrence()) {
+
+        if (hasActiveRule()) {
             var occurrences = new First<>(100, new OfRule(getRecurrenceRule(), getStartDate()));
             occurrences.forEach(dt -> {
                 log.info("occurrence: {}", dt);

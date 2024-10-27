@@ -17,12 +17,12 @@ class ReminderTest {
         assertThat(reminder.hasActiveRecurrence()).isFalse();
 
         var recurrence = mock(Recurrence.class);
-        when(recurrence.hasActiveRecurrence()).thenReturn(false);
+        when(recurrence.hasActiveRule()).thenReturn(false);
 
         reminder.setRecurrence(recurrence);
         assertThat(reminder.hasActiveRecurrence()).isFalse();
 
-        when(recurrence.hasActiveRecurrence()).thenReturn(true);
+        when(recurrence.hasActiveRule()).thenReturn(true);
         assertThat(reminder.hasActiveRecurrence()).isTrue();
     }
 }

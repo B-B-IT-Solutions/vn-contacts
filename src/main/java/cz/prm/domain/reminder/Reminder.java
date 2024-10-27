@@ -73,7 +73,7 @@ public class Reminder {
 
     public boolean hasActiveRecurrence() {
         if (nonNull(recurrence)) {
-            return recurrence.hasActiveRecurrence();
+            return recurrence.hasActiveRule();
         }
         return false;
     }
