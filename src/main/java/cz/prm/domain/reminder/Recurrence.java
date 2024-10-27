@@ -117,7 +117,7 @@ public class Recurrence {
             } else {
                 var occurrences1 = new First<>(2, new OfRule(getRecurrenceRule(), sd));
                 var it1 = occurrences1.iterator();
-                var next1 = DateTime.now();
+                var next1 = now();
                 while (it1.hasNext()) {
                     next1 = it1.next().startOfDay();
                 }
