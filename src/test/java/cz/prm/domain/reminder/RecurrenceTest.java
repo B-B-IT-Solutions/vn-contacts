@@ -143,19 +143,19 @@ class RecurrenceTest {
 
         var now = DateTime.now();
         var year = now.getYear();
-        var month = now.getMonth() + 1;
-        var day = now.getDayOfMonth();
 
         r.resetParsedRule();
         r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
         r.resolveNextOccurrence();
         assertThat(r.getNextOccurrence()).isEqualTo(toInstant(year + 1, 1, 1));
 
+        var month = now.getMonth() + 1;
         r.resetParsedRule();
         r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=MONTHLY");
         r.resolveNextOccurrence();
         assertThat(r.getNextOccurrence()).isEqualTo(toInstant(year, month, 27));
 
+        var day = now.getDayOfMonth();
         r.resetParsedRule();
         r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=DAILY");
         r.resolveNextOccurrence();
