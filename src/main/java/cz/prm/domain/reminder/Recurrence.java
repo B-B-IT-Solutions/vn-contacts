@@ -116,9 +116,9 @@ public class Recurrence {
             var optional = of(parts).filter(p -> p.startsWith(partKey)).findFirst();
             if (optional.isPresent()) {
                 var part = optional.get();
-                var vk = part.split(KEY_VALUE_DELIMITER);
-                if (vk.length == 2 && vk[0].equals(partKey)) {
-                    return Optional.of(vk[1]);
+                var kv = part.split(KEY_VALUE_DELIMITER);
+                if (kv.length == 2 && kv[0].equals(partKey)) {
+                    return Optional.of(kv[1]);
                 }
             }
         }
