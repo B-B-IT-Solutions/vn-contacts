@@ -136,16 +136,6 @@ public class Recurrence {
         }
     }
 
-    public boolean isDue() {
-        if (hasActiveRule()) {
-            var occurrences = new First<>(100, new OfRule(getRecurrenceRule(), getStartDate()));
-            occurrences.forEach(dt -> {
-                log.info("occurrence: {}", dt);
-            });
-        }
-        return false;
-    }
-
     private Optional<String> getRecurrencePart(String partKey) {
         if (isNotBlank(value)) {
             var parts = value.split(PARTS_DELIMITER);

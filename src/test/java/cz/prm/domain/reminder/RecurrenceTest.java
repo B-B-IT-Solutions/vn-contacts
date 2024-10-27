@@ -250,16 +250,6 @@ class RecurrenceTest {
         assertThat(r.getNextOccurrence()).isEqualTo(toInstant(year, eMonth, 15));
     }
 
-    @Test
-    void isDue() {
-        var r = new Recurrence();
-        var rrule = recurrenceRule();
-        var startDate = DateTime.now();
-        var value = format("DTSTART:%s\nRRULE:%s", startDate, rrule);
-        r.setValue(value);
-        assertThat(r.isDue()).isFalse();
-    }
-
     private String rrule(long year, int month, int day, String rule) {
         var dt = date(year, month, day);
         return format("DTSTART:%s\n%s", dt, rule);
