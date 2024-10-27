@@ -6,6 +6,7 @@ import static java.util.stream.Stream.of;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.dmfs.rfc5545.DateTime.now;
 import static org.dmfs.rfc5545.DateTime.parse;
+import static org.dmfs.rfc5545.DateTime.today;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.dmfs.jems2.iterable.First;
 import org.dmfs.jems2.iterable.While;
 import org.dmfs.rfc5545.DateTime;
+import org.dmfs.rfc5545.Duration;
 import org.dmfs.rfc5545.recur.RecurrenceRule;
 import org.dmfs.rfc5545.recurrenceset.OfRule;
 
@@ -113,7 +115,7 @@ public class Recurrence {
                 var it0 = occurrences0.iterator();
                 this.nextOccurrence = it0.next().startOfDay();
             } else {
-                var occurrences1 = new First<>(2, new OfRule(getRecurrenceRule(), now()));
+                var occurrences1 = new First<>(2, new OfRule(getRecurrenceRule(), sd));
                 var it1 = occurrences1.iterator();
                 var next1 = DateTime.now();
                 while (it1.hasNext()) {
@@ -123,15 +125,17 @@ public class Recurrence {
 
                 log.warn("secondFromToday - {}", secondFromToday);
 
-                var occurrences2 = new While<>((dt) -> secondFromToday.after(dt), new OfRule(getRecurrenceRule(), getStartDate()));
+                var occurrences2 = new While<>((dt) -> {
+                    return secondFromToday.after(dt);
+                }, new OfRule(getRecurrenceRule(), getStartDate()));
                 var it2 = occurrences2.iterator();
 
                 while (it2.hasNext()) {
                     var next2 = it2.next().startOfDay();
-                    this.nextOccurrence = next2.after(now().startOfDay()) ? next2 : null;
+                    var yesterday = today().addDuration(new Duration(-1, 1, 0));
+                    log.warn("{}", next2);
+                    this.nextOccurrence = next2.after(yesterday) ? next2 : null;
                 }
-
-                occurrences2.forEach(dt -> log.warn("{}", dt));
             }
         } else {
             this.nextOccurrence = null;
