@@ -198,12 +198,45 @@ class RecurrenceTest {
         assertThat(r.getNextOccurrence()).isEqualTo(parse(date(year, month, day)));
 
         r.resetParsedRule();
-        var sd = dtstart(year - 3, 10, 27);
+        var startDate = dtstart(year - 3, 10, day);
         var until = date(year + 1, 10, 31);
-        var rrule = rrule(sd, "FREQ=DAILY;", until);
+        var rrule = rrule(startDate, "FREQ=DAILY;", until);
+        r.setValue(rrule);
+        r.resolveNextOccurrence();
+        assertThat(r.getNextOccurrence()).isEqualTo(parse(date(year, 10, day)));
+
+        r.resetParsedRule();
+        startDate = dtstart(year - 3, month, day);
+        until = date(year + 1, month, 31);
+        rrule = rrule(startDate, "FREQ=DAILY;", until);
         r.setValue(rrule);
         r.resolveNextOccurrence();
         assertThat(r.getNextOccurrence()).isEqualTo(parse(date(year, month, day)));
+
+        r.resetParsedRule();
+        startDate = dtstart(year - 1, 10, day);
+        until = date(year + 1, 10, 31);
+        rrule = rrule(startDate, "FREQ=MONTHLY;", until);
+        r.setValue(rrule);
+        r.resolveNextOccurrence();
+        assertThat(r.getNextOccurrence()).isEqualTo(parse(date(year, 10, day)));
+
+        r.resetParsedRule();
+        startDate = dtstart(year - 1, month, day);
+        until = date(year + 1, month, 31);
+        rrule = rrule(startDate, "FREQ=MONTHLY;", until);
+        r.setValue(rrule);
+        r.resolveNextOccurrence();
+        assertThat(r.getNextOccurrence()).isEqualTo(parse(date(year, month, day)));
+
+        r.resetParsedRule();
+        startDate = dtstart(year - 1, month, 15);
+        until = date(year + 1, month, 31);
+        rrule = rrule(startDate, "FREQ=MONTHLY;", until);
+        r.setValue(rrule);
+        r.resolveNextOccurrence();
+        var eMonth = day > 15 ? month + 1 : month;
+        assertThat(r.getNextOccurrence()).isEqualTo(parse(date(year, eMonth, 15)));
     }
 
     @Test
