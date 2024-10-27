@@ -40,6 +40,10 @@ class RecurrenceTest {
         r.setValue(uuid());
         assertThat(r.getRecurrenceRule()).isNull();
 
+        r.resetRule();
+        r.setValue("RRULEEE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1:FREQ=YEARLY");
+        assertThat(r.getRecurrenceRule()).isNull();
+
         r.setValue("DTSTART:20241027T104500Z\nRRULE:invalid");
         assertThat(r.getRecurrenceRule()).isNull();
 
@@ -61,6 +65,14 @@ class RecurrenceTest {
             assertThat(r.getStartDate()).isEqualTo(dateTime1);
 
             r.setValue("");
+            assertThat(r.getStartDate()).isEqualTo(dateTime1);
+
+            r.resetRule();
+            r.setValue("DTSTARTTT:invalid\nRRULEEE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1");
+            assertThat(r.getStartDate()).isEqualTo(dateTime1);
+
+            r.resetRule();
+            r.setValue("DTSTARTTT:invalid:invalid\nRRULEEE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1:FREQ=YEARLY");
             assertThat(r.getStartDate()).isEqualTo(dateTime1);
 
             dateTimeMock.when(() -> DateTime.parse(anyString())).thenThrow(IllegalArgumentException.class);
@@ -86,7 +98,6 @@ class RecurrenceTest {
         r.setValue("");
         assertThat(r.hasActiveRecurrence()).isFalse();
 
-        r.resetRule();
         r.setValue(uuid());
         assertThat(r.hasActiveRecurrence()).isFalse();
 
