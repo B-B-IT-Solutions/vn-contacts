@@ -125,9 +125,7 @@ public class Recurrence {
 
                 log.warn("secondFromToday - {}", secondFromToday);
 
-                var occurrences2 = new While<>((dt) -> {
-                    return secondFromToday.after(dt);
-                }, new OfRule(getRecurrenceRule(), getStartDate()));
+                var occurrences2 = new While<>((dt) -> secondFromToday.after(dt), new OfRule(getRecurrenceRule(), getStartDate()));
                 var it2 = occurrences2.iterator();
 
                 while (it2.hasNext()) {

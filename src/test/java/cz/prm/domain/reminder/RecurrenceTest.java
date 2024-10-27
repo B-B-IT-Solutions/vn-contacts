@@ -197,10 +197,10 @@ class RecurrenceTest {
         r.resolveNextOccurrence();
         assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year, month, day)));
 
-//        r.resetParsedRule();
-//        r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=DAILY;UNTIL=20251031T114700Z;");
-//        r.resolveNextOccurrence();
-//        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year, month, day)));
+        r.resetParsedRule();
+        r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=DAILY;UNTIL=20251031T114700Z;");
+        r.resolveNextOccurrence();
+        assertThat(r.getNextOccurrence()).isEqualTo(parse(dt(year, month, day)));
     }
 
     public String rrule(long year, int month, int day, String rule) {
