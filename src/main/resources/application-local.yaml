@@ -1,7 +1,7 @@
 #DB
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/prm
+    url: jdbc:postgresql://localhost:5432/contacts
     username: postgres
     password: test
 
