@@ -1,6 +1,5 @@
 package cz.prm.domain.reminder;
 
-import static cz.prm.utils.ReminderUtils.recurrenceRule;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static java.lang.String.format;
@@ -150,12 +149,12 @@ class RecurrenceTest {
         assertThat(r.getNextOccurrence()).isEqualTo(toInstant(year + 1, 1, 1));
 
         var month = now.getMonth() + 1;
+        var day = now.getDayOfMonth();
         r.resetParsedRule();
         r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=MONTHLY");
         r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(toInstant(year, month, 27));
+        assertThat(r.getNextOccurrence()).isEqualTo(toInstant(year, month, day));
 
-        var day = now.getDayOfMonth();
         r.resetParsedRule();
         r.setValue("DTSTART:20211027T104500Z\nRRULE:FREQ=DAILY");
         r.resolveNextOccurrence();
@@ -214,7 +213,7 @@ class RecurrenceTest {
         var rrule = rrule(startDate, "FREQ=DAILY;", until);
         r.setValue(rrule);
         r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(toInstant(year, 10, day));
+        assertThat(r.getNextOccurrence()).isEqualTo(toInstant(year, month, day));
 
         r.resetParsedRule();
         startDate = dtstart(year - 3, month, day);
@@ -230,7 +229,7 @@ class RecurrenceTest {
         rrule = rrule(startDate, "FREQ=MONTHLY;", until);
         r.setValue(rrule);
         r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(toInstant(year, 10, day));
+        assertThat(r.getNextOccurrence()).isEqualTo(toInstant(year, month, day));
 
         r.resetParsedRule();
         startDate = dtstart(year - 1, month, day);

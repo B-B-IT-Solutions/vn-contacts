@@ -6,7 +6,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=test
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=prm
+      - POSTGRES_DB=contacts
     healthcheck:
       test: [ "CMD", "pg_isready", "-U", "postgres" ]
     volumes:
@@ -15,7 +15,7 @@ services:
     image: docker.io/bitnami/keycloak:25.0.5-debian-12-r0
     restart: unless-stopped
     environment:
-      KEYCLOAK_DATABASE_NAME: prm
+      KEYCLOAK_DATABASE_NAME: contacts
       KEYCLOAK_DATABASE_USER: postgres
       KEYCLOAK_DATABASE_PASSWORD: test
       KEYCLOAK_DATABASE_HOST: "postgres"
