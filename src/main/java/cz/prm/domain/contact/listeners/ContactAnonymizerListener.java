@@ -54,7 +54,9 @@ public class ContactAnonymizerListener {
             var lastNameLowerCase = lastName.toLowerCase();
             var anonymValue = "";
             if (containsIgnoreCase(initValueLowerCase, lastNameLowerCase)) {
-                anonymValue = initValue.replace(lastNameLowerCase, ANOMYSATION_STRING);
+                anonymValue = initValueLowerCase.replace(lastNameLowerCase, ANOMYSATION_STRING);
+            } else {
+
             }
             connection.setValue(anonymValue);
         }
