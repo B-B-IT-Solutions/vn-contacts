@@ -36,7 +36,7 @@ class ContactAnonymizerListenerTest {
     }
 
     @Test
-    void anonymizeOccupation() {
+    void anonymizeOccupation_CompanyNotBlank() {
         var initCompany = uuid();
         var occupation = new Occupation();
         occupation.setCompany(initCompany);
@@ -47,6 +47,18 @@ class ContactAnonymizerListenerTest {
         var firstLetter = initCompany.charAt(0);
         var expectedCompany = format("%s%s", firstLetter, ANOMYSATION_STRING);
         assertThat(occupation.getCompany()).isNotEqualTo(initCompany).isEqualTo(expectedCompany);
+    }
+
+    @Test
+    void anonymizeOccupation_CompanyBlank() {
+        var initCompany = "";
+        var occupation = new Occupation();
+        occupation.setCompany(initCompany);
+        contact.setOccupation(occupation);
+        assertThat(occupation.getCompany()).isEqualTo(initCompany);
+
+        listener.anonymize(contact);
+        assertThat(occupation.getCompany()).isEqualTo(initCompany);
     }
 
     @Test
@@ -97,7 +109,19 @@ class ContactAnonymizerListenerTest {
 
         listener.anonymize(contact);
 
-        var expectedEmail = initEmail;
-        assertThat(connection.getValue()).isEqualTo(expectedEmail);
+        assertThat(connection.getValue()).isEqualTo(initEmail);
+    }
+
+    @Test
+    void anonymizeEmail_EmailBlank() {
+        var initEmail = "";
+        var connection = new Connection();
+        connection.setValue(initEmail);
+        contact.setEmails(newArrayList(connection));
+        assertThat(connection.getValue()).isEqualTo(initEmail);
+
+        listener.anonymize(contact);
+
+        assertThat(connection.getValue()).isEqualTo(initEmail);
     }
 }
