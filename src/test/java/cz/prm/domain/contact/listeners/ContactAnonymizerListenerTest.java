@@ -84,4 +84,20 @@ class ContactAnonymizerListenerTest {
         var expectedEmail = ANOMYSATION_STRING + domain;
         assertThat(connection.getValue()).isNotEqualTo(initEmail).isEqualTo(expectedEmail);
     }
+
+    @Test
+    void anonymizeEmail_NotAnEmailAddress() {
+        var lastName = uuid();
+        var initEmail = uuid() + "gmail.com";
+        var connection = new Connection();
+        connection.setValue(initEmail);
+        contact.setLastName(lastName);
+        contact.setEmails(newArrayList(connection));
+        assertThat(connection.getValue()).isEqualTo(initEmail);
+
+        listener.anonymize(contact);
+
+        var expectedEmail = initEmail;
+        assertThat(connection.getValue()).isEqualTo(expectedEmail);
+    }
 }
