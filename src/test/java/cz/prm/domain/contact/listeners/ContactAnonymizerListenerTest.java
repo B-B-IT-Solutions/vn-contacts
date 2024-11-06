@@ -1,9 +1,12 @@
 package cz.prm.domain.contact.listeners;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.TestUtils.uuid;
 import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.Occupation;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,5 +47,23 @@ class ContactAnonymizerListenerTest {
         var firstLetter = initCompany.charAt(0);
         var expectedCompany = format("%s%s", firstLetter, ANOMYSATION_STRING);
         assertThat(occupation.getCompany()).isNotEqualTo(initCompany).isEqualTo(expectedCompany);
+    }
+
+    @Test
+    void anonymizeEmail() {
+        var lastName = "Bobusky";
+        var initEmail = "bobuskysergej@gmail.com";
+        var connection = new Connection();
+        connection.setValue(initEmail);
+        contact.setLastName(lastName);
+        contact.setEmails(newArrayList(connection));
+        assertThat(connection.getValue()).isEqualTo(initEmail);
+
+        listener.anonymize(contact);
+
+        var initEmailLowerCase = initEmail.toLowerCase();
+        var lastNameLowerCase = lastName.toLowerCase();
+        var expectedEmail = initEmailLowerCase.replace(lastNameLowerCase, ANOMYSATION_STRING);
+        assertThat(connection.getValue()).isNotEqualTo(initEmail).isEqualTo(expectedEmail);
     }
 }

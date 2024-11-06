@@ -48,11 +48,15 @@ public class ContactAnonymizerListener {
     }
 
     private void anonymizeConnection(Connection connection, String lastName) {
-        var value = connection.getValue();
-        if (isNotBlank(value)) {
-            if (containsIgnoreCase(value, lastName)) {
-
+        var initValue = connection.getValue();
+        if (isNotBlank(initValue)) {
+            var initValueLowerCase = initValue.toLowerCase();
+            var lastNameLowerCase = lastName.toLowerCase();
+            var anonymValue = "";
+            if (containsIgnoreCase(initValueLowerCase, lastNameLowerCase)) {
+                anonymValue = initValue.replace(lastNameLowerCase, ANOMYSATION_STRING);
             }
+            connection.setValue(anonymValue);
         }
     }
 }
