@@ -12,14 +12,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @ExtendWith(MockitoExtension.class)
-class PrmAppTest {
+class ContactsAppTest {
 
     @Mock
     private ConfigurableApplicationContext context;
 
     @Test
     void newInstance() {
-        var app = new PrmApp();
+        var app = new ContactsApp();
         assertThat(app).isNotNull();
     }
 
@@ -27,9 +27,9 @@ class PrmAppTest {
     void mainTest() {
         try (MockedStatic<SpringApplication> springApp = Mockito.mockStatic(SpringApplication.class)) {
             var args = new String[]{"arg1", "arg2", "arg3"};
-            springApp.when(() -> SpringApplication.run(PrmApp.class, args)).thenReturn(context);
-            PrmApp.main(args);
-            springApp.verify(() -> SpringApplication.run(PrmApp.class, args));
+            springApp.when(() -> SpringApplication.run(ContactsApp.class, args)).thenReturn(context);
+            ContactsApp.main(args);
+            springApp.verify(() -> SpringApplication.run(ContactsApp.class, args));
         }
     }
 }

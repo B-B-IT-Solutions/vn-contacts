@@ -7,5 +7,7 @@ import org.springframework.context.annotation.Primary;
 @Primary
 public interface ComponentTestContactRepository extends ContactRepository {
 
+    Contact getByFirstName(String firstName);
+
     Contact getByLastName(String lastName);
 }
