@@ -70,7 +70,7 @@ class ContactAnonymizerListenerTest {
     @Test
     void anonymizeEmail_EmailDoesnotContainLastName() {
         var lastName = uuid();
-        var initEmail = "bobuskysergej@gmail.com";
+        var initEmail = uuid() + "@gmail.com";
         var connection = new Connection();
         connection.setValue(initEmail);
         contact.setLastName(lastName);
@@ -80,8 +80,8 @@ class ContactAnonymizerListenerTest {
         listener.anonymize(contact);
 
         var initEmailLowerCase = initEmail.toLowerCase();
-        var lastNameLowerCase = lastName.toLowerCase();
-        var expectedEmail = initEmailLowerCase.replace(lastNameLowerCase, ANOMYSATION_STRING);
+        var domain = initEmailLowerCase.substring(initEmailLowerCase.indexOf("@"));
+        var expectedEmail = ANOMYSATION_STRING + domain;
         assertThat(connection.getValue()).isNotEqualTo(initEmail).isEqualTo(expectedEmail);
     }
 }
