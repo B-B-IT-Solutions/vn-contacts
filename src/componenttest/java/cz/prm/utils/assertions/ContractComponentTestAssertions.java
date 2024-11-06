@@ -1,5 +1,6 @@
 package cz.prm.utils.assertions;
 
+import static java.lang.String.format;
 import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
@@ -55,6 +56,10 @@ public class ContractComponentTestAssertions {
         assertThat(occupation.getJobTitle()).isEqualTo(dto.getJobTitle());
         assertThat(occupation.getCompany()).isEqualTo(dto.getCompany()).contains(ANOMYSATION_STRING);
         assertThat(occupation.getIndustry()).isEqualTo(dto.getIndustry());
+
+        var firstLetter = occupation.getCompany().charAt(0);
+        var anonymCompany = format("%s%s", firstLetter, ANOMYSATION_STRING);
+        assertThat(dto.getCompany()).isEqualTo(anonymCompany);
     }
 
     public static void assertConnectionsDto(List<Connection> cons, List<ConnectionDto> dtos) {

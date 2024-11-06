@@ -8,4 +8,6 @@ import org.springframework.context.annotation.Primary;
 public interface ComponentTestContactRepository extends ContactRepository {
 
     Contact getByFirstName(String firstName);
+
+    Contact getByLastName(String lastName);
 }
