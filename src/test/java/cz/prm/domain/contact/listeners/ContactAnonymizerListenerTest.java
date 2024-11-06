@@ -3,7 +3,6 @@ package cz.prm.domain.contact.listeners;
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.TestUtils.uuid;
 import static java.lang.String.format;
-import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.domain.contact.Connection;
@@ -15,6 +14,7 @@ import org.junit.jupiter.api.Test;
 class ContactAnonymizerListenerTest {
 
     private static final String ANOMYSATION_STRING = "*****";
+    private static final String AT_CHAR = "@";
 
     private ContactAnonymizerListener listener;
     private Contact contact;
@@ -80,7 +80,7 @@ class ContactAnonymizerListenerTest {
         listener.anonymize(contact);
 
         var initEmailLowerCase = initEmail.toLowerCase();
-        var domain = initEmailLowerCase.substring(initEmailLowerCase.indexOf("@"));
+        var domain = initEmailLowerCase.substring(initEmailLowerCase.indexOf(AT_CHAR));
         var expectedEmail = ANOMYSATION_STRING + domain;
         assertThat(connection.getValue()).isNotEqualTo(initEmail).isEqualTo(expectedEmail);
     }

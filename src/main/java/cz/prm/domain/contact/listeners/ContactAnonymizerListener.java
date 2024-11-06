@@ -14,6 +14,7 @@ import org.apache.commons.lang3.ObjectUtils;
 public class ContactAnonymizerListener {
 
     private static final String ANOMYSATION_STRING = "*****";
+    private static final String AT_CHAR = "@";
 
     @PrePersist
     @PreUpdate
@@ -55,11 +56,14 @@ public class ContactAnonymizerListener {
             var anonymValue = "";
             if (containsIgnoreCase(initValueLowerCase, lastNameLowerCase)) {
                 anonymValue = initValueLowerCase.replace(lastNameLowerCase, ANOMYSATION_STRING);
+                connection.setValue(anonymValue);
             } else {
-                var domain = initValueLowerCase.substring(initValueLowerCase.indexOf("@"));
-                anonymValue = ANOMYSATION_STRING + domain;
+                if (initValueLowerCase.contains(AT_CHAR)) {
+                    var domain = initValueLowerCase.substring(initValueLowerCase.indexOf(AT_CHAR));
+                    anonymValue = ANOMYSATION_STRING + domain;
+                    connection.setValue(anonymValue);
+                }
             }
-            connection.setValue(anonymValue);
         }
     }
 }

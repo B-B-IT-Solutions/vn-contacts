@@ -3,6 +3,7 @@ package cz.prm.domain.contact;
 import static jakarta.persistence.FetchType.EAGER;
 
 import cz.prm.domain.common.User;
+import cz.prm.domain.contact.listeners.ContactAnonymizerListener;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.CollectionTable;
@@ -27,7 +28,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-@EntityListeners(AuditingEntityListener.class)
+@EntityListeners({AuditingEntityListener.class, ContactAnonymizerListener.class})
 @Entity
 @Table(name = "CONTACT", schema = "public")
 @Data

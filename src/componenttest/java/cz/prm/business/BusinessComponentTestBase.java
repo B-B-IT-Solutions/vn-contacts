@@ -148,7 +148,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     }
 
     protected Contact getContactFromDb(ContactDto dto) {
-        return contactRepository.getByLastName(dto.getLastName());
+        return contactRepository.getByFirstName(dto.getFirstName());
     }
 
     protected About getAboutFromDb(Contact contact) {
