@@ -77,6 +77,11 @@ public class Contact {
     @Column(name = "LABEL")
     private List<String> labels;
 
+    @ElementCollection(fetch = EAGER)
+    @CollectionTable(name = "CONTACT_INDUSTRY", joinColumns = @JoinColumn(name = "CONTACT_ID"))
+    @Column(name = "INDUSTRY")
+    private List<String> industries;
+
     @Column(name = "DATE_OF_BIRTH")
     private Instant dateOfBirth;
 

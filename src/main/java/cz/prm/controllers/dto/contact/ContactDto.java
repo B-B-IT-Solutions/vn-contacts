@@ -42,6 +42,9 @@ public class ContactDto {
     @JsonProperty("labels")
     private List<String> labels;
 
+    @JsonProperty("industries")
+    private List<String> industries;
+
     @JsonProperty("dateOfBirth")
     private Instant dateOfBirth;
 

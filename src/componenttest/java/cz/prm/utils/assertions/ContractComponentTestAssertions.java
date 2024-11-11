@@ -43,6 +43,7 @@ public class ContractComponentTestAssertions {
         assertThat(contact.getLastName()).isEqualTo(ANOMYSATION_STRING);
         assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
         assertThat(contact.getLabels()).containsExactlyElementsOf(contactDto.getLabels());
+        assertThat(contact.getIndustries()).containsExactlyElementsOf(contactDto.getIndustries());
         assertThat(contact.getDateOfBirth()).isCloseTo(contactDto.getDateOfBirth(), within(1, SECONDS));
         assertThat(contact.getLastEditDate()).isNotNull();
         assertThat(contact.getCreationDate()).isNotNull();
