@@ -26,7 +26,8 @@ public class SettingsComponentTestUtils {
 
     public static IndustryDto industryDto() {
         var industry = new IndustryDto();
-        industry.setName(uuid());
+        industry.setValue(uuid());
+        industry.setColor(uuid());
         return industry;
     }
 }

@@ -6,7 +6,6 @@ import static java.lang.String.format;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsQuery;
-import cz.prm.repositories.contact.AboutRepository;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
 import cz.prm.repositories.note.NoteRepository;
@@ -69,6 +68,7 @@ public class ContactService {
         savedContact.setDateOfBirth(updatedContact.getDateOfBirth());
         savedContact.setOccupation(updatedContact.getOccupation());
         savedContact.setLabels(updatedContact.getLabels());
+        savedContact.setIndustries(updatedContact.getIndustries());
     }
 
     private Contact getContactById(Long contactId) {
