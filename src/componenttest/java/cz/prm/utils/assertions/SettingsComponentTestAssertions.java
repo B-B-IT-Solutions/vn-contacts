@@ -46,12 +46,13 @@ public class SettingsComponentTestAssertions {
     public static void assertIndustriesDto(List<IndustryDto> dtos1, List<IndustryDto> dtos2) {
         assertThat(dtos1).isNotEmpty().hasSameSizeAs(dtos2);
         dtos1.forEach(u1 -> {
-            var u2 = dtos2.stream().filter(u -> Objects.equals(u1.getName(), u.getName())).findFirst().get();
+            var u2 = dtos2.stream().filter(u -> Objects.equals(u1.getValue(), u.getValue())).findFirst().get();
             assertIndustryDto(u1, u2);
         });
     }
 
     public static void assertIndustryDto(IndustryDto dto1, IndustryDto dto2) {
-        assertThat(dto1.getName()).isEqualTo(dto2.getName());
+        assertThat(dto1.getValue()).isEqualTo(dto2.getValue());
+        assertThat(dto1.getColor()).isEqualTo(dto2.getColor());
     }
 }

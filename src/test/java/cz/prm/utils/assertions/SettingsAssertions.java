@@ -43,13 +43,14 @@ public class SettingsAssertions {
     public static void assertIndustries(List<Industry> industries, List<IndustryDto> dtos) {
         assertThat(industries).isNotEmpty().hasSameSizeAs(dtos);
         industries.forEach(u1 -> {
-            var u2 = dtos.stream().filter(u -> Objects.equals(u1.getName(), u.getName())).findFirst().get();
+            var u2 = dtos.stream().filter(u -> Objects.equals(u1.getValue(), u.getValue())).findFirst().get();
             assertIndustry(u1, u2);
         });
     }
 
     public static void assertIndustry(Industry industry, IndustryDto dto) {
-        assertThat(industry.getName()).isEqualTo(dto.getName());
+        assertThat(industry.getValue()).isEqualTo(dto.getValue());
+        assertThat(industry.getColor()).isEqualTo(dto.getColor());
     }
 
     public static void assertLabels(List<Label> labels, List<LabelDto> dtos) {

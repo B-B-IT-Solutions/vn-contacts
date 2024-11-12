@@ -12,6 +12,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Industry {
 
-    @Column(name = "NAME")
-    private String name;
+    @Column(name = "VALUE")
+    private String value;
+
+    @Column(name = "COLOR")
+    private String color;
+
+    public Industry(String value) {
+        this.value = value;
+    }
 }

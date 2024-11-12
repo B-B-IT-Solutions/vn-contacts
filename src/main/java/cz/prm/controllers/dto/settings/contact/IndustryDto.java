@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class IndustryDto {
 
-    @JsonProperty("name")
-    private String name;
+    @JsonProperty("value")
+    private String value;
+
+    @JsonProperty("color")
+    private String color;
 }

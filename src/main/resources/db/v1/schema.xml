@@ -194,4 +194,13 @@
 				 <column name="industry" type="VARCHAR(250)"/>
 			</createTable>
 	 </changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.7">
+			<renameColumn tableName="contact_settings_industry" newColumnName="value" oldColumnName="name"
+										columnDataType="VARCHAR(250)"/>
+			
+			<addColumn tableName="contact_settings_industry">
+				 <column name="color" type="varchar(255)"/>
+			</addColumn>
+	 </changeSet>
 </databaseChangeLog>
