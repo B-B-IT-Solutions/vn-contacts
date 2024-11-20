@@ -203,4 +203,11 @@
 				 <column name="color" type="varchar(255)"/>
 			</addColumn>
 	 </changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.8">
+			<addColumn tableName="about">
+				 <column name="contact_benefits" type="TEXT"/>
+				 <column name="my_benefits" type="TEXT"/>
+			</addColumn>
+	 </changeSet>
 </databaseChangeLog>

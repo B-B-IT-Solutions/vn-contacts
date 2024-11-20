@@ -32,6 +32,12 @@ public class About {
     @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "CONTACT_BENEFITS", columnDefinition = "TEXT")
+    private String contactBenefits;
+
+    @Column(name = "MY_BENEFITS", columnDefinition = "TEXT")
+    private String myBenefits;
+
     @Embedded
     @AttributeOverrides({
         @AttributeOverride(name = "occurrenceDate", column = @Column(name = "FIRST_MEETING_OCCURRENCE_DATE")),

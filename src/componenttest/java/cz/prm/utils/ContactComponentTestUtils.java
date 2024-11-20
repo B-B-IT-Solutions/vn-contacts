@@ -99,6 +99,8 @@ public class ContactComponentTestUtils {
     public static About about(Contact contact) {
         var about = new About(contact.getContactId());
         about.setDescription(format("description%s", uuid()));
+        about.setContactBenefits(format("contactBenefits%s", uuid()));
+        about.setMyBenefits(format("myBenefits%s", uuid()));
         about.setFirstMeeting(meeting());
         return about;
     }

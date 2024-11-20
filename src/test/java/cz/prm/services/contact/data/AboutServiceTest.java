@@ -119,6 +119,8 @@ class AboutServiceTest {
         assertThat(aboutIdDb.getContactId()).isEqualTo(savedAbout.getContactId());
         assertThat(aboutIdDb.getOwner()).isEqualTo(savedAbout.getOwner());
         assertThat(savedAbout.getDescription()).isEqualTo(updatedAbout.getDescription());
+        assertThat(savedAbout.getContactBenefits()).isEqualTo(updatedAbout.getContactBenefits());
+        assertThat(savedAbout.getMyBenefits()).isEqualTo(updatedAbout.getMyBenefits());
         assertMeetingFieldsUpdated(updatedAbout.getFirstMeeting(), savedAbout.getFirstMeeting());
     }
 
