@@ -47,6 +47,8 @@ public class AboutService {
 
     private void updateAboutFields(About savedAbout, About updatedAbout) {
         savedAbout.setDescription(updatedAbout.getDescription());
+        savedAbout.setContactBenefits(updatedAbout.getContactBenefits());
+        savedAbout.setMyBenefits(updatedAbout.getMyBenefits());
         updateFirstMeetingFields(savedAbout.getFirstMeeting(), updatedAbout.getFirstMeeting());
     }
 
