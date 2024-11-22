@@ -2,6 +2,7 @@ package cz.prm.utils;
 
 import static cz.prm.utils.ComponentTestUtils.randomLong;
 import static cz.prm.utils.ComponentTestUtils.uuid;
+import static cz.prm.utils.ComponentTestUtils.uuids;
 import static java.lang.String.format;
 import static org.assertj.core.util.Lists.newArrayList;
 
@@ -26,6 +27,7 @@ public class NoteComponentTestUtils {
         note.setContactId(contactId);
         note.setTitle(format("Title%s", uuid()));
         note.setText(format("Text%s", uuid()));
+        note.setCategories(uuids());
         return note;
     }
 
@@ -34,6 +36,7 @@ public class NoteComponentTestUtils {
         dto.setContactId(contactId);
         dto.setTitle(uuid());
         dto.setText(uuid());
+        dto.setCategories(uuids());
         return dto;
     }
 
