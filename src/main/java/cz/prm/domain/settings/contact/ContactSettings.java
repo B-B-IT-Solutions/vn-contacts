@@ -28,7 +28,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-@Table(name = "USER_SETTINGS", schema = "public")
+@Table(name = "CONTACT_SETTINGS", schema = "public")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -52,8 +52,10 @@ public class ContactSettings {
 
     @CreatedBy
     @Embedded
-    @AttributeOverrides({@AttributeOverride(name = "username", column = @Column(name = "OWNER_USERNAME")),
-        @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))})
+    @AttributeOverrides({
+        @AttributeOverride(name = "username", column = @Column(name = "OWNER_USERNAME")),
+        @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))
+    })
     private User owner;
 
     @LastModifiedDate

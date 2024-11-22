@@ -1,4 +1,4 @@
-package cz.prm.domain.note;
+package cz.prm.domain.settings.note;
 
 import static jakarta.persistence.FetchType.EAGER;
 
@@ -23,45 +23,27 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-@Table(name = "NOTE", schema = "public")
+@Table(name = "NOTE_SETTINGS", schema = "public")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Note {
+public class NoteSettings {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "NOTE_SEQ")
-    @SequenceGenerator(name = "NOTE_SEQ", sequenceName = "NOTE_SEQ", allocationSize = 1)
-    @Column(name = "NOTE_ID")
-    private Long noteId;
-
-    @Column(name = "CONTACT_ID")
-    private Long contactId;
-
-    @Column(name = "TITLE")
-    private String title;
-
-    @Column(name = "TEXT", columnDefinition = "TEXT")
-    private String text;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "NOTE_SETTINGS_SEQ")
+    @SequenceGenerator(name = "NOTE_SETTINGS_SEQ", sequenceName = "NOTE_SETTINGS_SEQ", allocationSize = 1)
+    @Column(name = "SETTINGS_ID")
+    private Long settingsId;
 
     @ElementCollection(fetch = EAGER)
-    @CollectionTable(name = "NOTE_CATEGORY", joinColumns = @JoinColumn(name = "NOTE_ID"))
+    @CollectionTable(name = "NOTE_SETTINGS_CATEGORY", joinColumns = @JoinColumn(name = "SETTINGS_ID"))
     @Column(name = "CATEGORY")
-    private List<String> categories;
-
-    @LastModifiedDate
-    @Column(name = "LAST_EDIT_DATE")
-    private Instant lastEditDate;
-
-    @CreatedDate
-    @Column(name = "CREATION_DATE")
-    private Instant creationDate;
+    private List<Category> categories;
 
     @CreatedBy
     @Embedded
@@ -70,4 +52,8 @@ public class Note {
         @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))
     })
     private User owner;
+
+    @LastModifiedDate
+    @Column(name = "LAST_EDIT_DATE")
+    private Instant lastEditDate;
 }

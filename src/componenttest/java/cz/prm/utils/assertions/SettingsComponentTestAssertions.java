@@ -6,8 +6,11 @@ import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
 import cz.prm.controllers.dto.settings.contact.IndustryDto;
 import cz.prm.controllers.dto.settings.contact.LabelDto;
+import cz.prm.controllers.dto.settings.note.CategoryDto;
+import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.contact.ContactSettings;
+import cz.prm.domain.settings.note.NoteSettings;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,6 +31,17 @@ public class SettingsComponentTestAssertions {
         assertThat(dto1.getSettingsId()).isEqualTo(dto2.getSettingsId());
         assertLabelsDto(dto1.getLabels(), dto2.getLabels());
         assertIndustriesDto(dto1.getIndustries(), dto2.getIndustries());
+    }
+
+    public static void assertSettings(NoteSettings settings, NoteSettingsDto dto) {
+        assertThat(dto.getSettingsId()).isEqualTo(settings.getSettingsId());
+        assertThat(dto.getLastEditDate()).isNotNull();
+        assertThat(dto.getCategories()).isEmpty();
+    }
+
+    public static void assertSettings(NoteSettingsDto dto1, NoteSettingsDto dto2) {
+        assertThat(dto1.getSettingsId()).isEqualTo(dto2.getSettingsId());
+        assertCategoriesDto(dto1.getCategories(), dto2.getCategories());
     }
 
     public static void assertLabelsDto(List<LabelDto> dtos1, List<LabelDto> dtos2) {
@@ -52,6 +66,19 @@ public class SettingsComponentTestAssertions {
     }
 
     public static void assertIndustryDto(IndustryDto dto1, IndustryDto dto2) {
+        assertThat(dto1.getValue()).isEqualTo(dto2.getValue());
+        assertThat(dto1.getColor()).isEqualTo(dto2.getColor());
+    }
+
+    public static void assertCategoriesDto(List<CategoryDto> dtos1, List<CategoryDto> dtos2) {
+        assertThat(dtos1).isNotEmpty().hasSameSizeAs(dtos2);
+        dtos1.forEach(u1 -> {
+            var u2 = dtos2.stream().filter(u -> Objects.equals(u1.getValue(), u.getValue())).findFirst().get();
+            assertCategoryDto(u1, u2);
+        });
+    }
+
+    public static void assertCategoryDto(CategoryDto dto1, CategoryDto dto2) {
         assertThat(dto1.getValue()).isEqualTo(dto2.getValue());
         assertThat(dto1.getColor()).isEqualTo(dto2.getColor());
     }

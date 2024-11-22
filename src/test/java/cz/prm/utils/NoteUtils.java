@@ -6,6 +6,7 @@ import static cz.prm.utils.CommonUtils.paginationDto;
 import static cz.prm.utils.CommonUtils.user;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
+import static cz.prm.utils.TestUtils.uuids;
 import static java.time.Instant.now;
 
 import cz.prm.controllers.dto.note.NoteDto;
@@ -26,6 +27,7 @@ public class NoteUtils {
         note.setContactId(randomLong());
         note.setTitle(uuid());
         note.setText(uuid());
+        note.setCategories(uuids());
         note.setLastEditDate(now());
         note.setCreationDate(now());
         note.setOwner(user());
@@ -38,6 +40,7 @@ public class NoteUtils {
         note.setContactId(randomLong());
         note.setTitle(uuid());
         note.setText(uuid());
+        note.setCategories(uuids());
         note.setLastEditDate(now());
         note.setCreationDate(now());
         return note;

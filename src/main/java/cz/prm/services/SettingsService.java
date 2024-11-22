@@ -4,8 +4,10 @@ import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_INDUSTR
 
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.contact.ContactSettings;
+import cz.prm.domain.settings.note.NoteSettings;
 import cz.prm.repositories.settings.AccountSettingsRepository;
 import cz.prm.repositories.settings.ContactSettingsRepository;
+import cz.prm.repositories.settings.NoteSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -18,12 +20,14 @@ public class SettingsService {
 
     private AccountSettingsRepository accountSettingsRepository;
     private ContactSettingsRepository contactSettingsRepository;
+    private NoteSettingsRepository noteSettingsRepository;
     private SettingsPredicates predicates;
 
     public SettingsService(AccountSettingsRepository accountSettingsRepository, ContactSettingsRepository contactSettingsRepository,
-        SettingsPredicates predicates) {
+        NoteSettingsRepository noteSettingsRepository, SettingsPredicates predicates) {
         this.accountSettingsRepository = accountSettingsRepository;
         this.contactSettingsRepository = contactSettingsRepository;
+        this.noteSettingsRepository = noteSettingsRepository;
         this.predicates = predicates;
     }
 
@@ -37,14 +41,24 @@ public class SettingsService {
         return getOrCreateContactSettings();
     }
 
+    public NoteSettings getNoteSettings() {
+        return getOrCreateNoteSettings();
+    }
+
     public void updateContactSettings(ContactSettings updatedSettings) {
         var settings = getOrCreateContactSettings();
-        updateUserSettingFields(settings, updatedSettings);
+        updateContactSettingFields(settings, updatedSettings);
         contactSettingsRepository.save(settings);
     }
 
+    public void updateNoteSettings(NoteSettings updatedSettings) {
+        var settings = getOrCreateNoteSettings();
+        updateNoteSettingFields(settings, updatedSettings);
+        noteSettingsRepository.save(settings);
+    }
+
     private ContactSettings getOrCreateContactSettings() {
-        var predicate = predicates.userSettings();
+        var predicate = predicates.contactSettings();
         var optional = contactSettingsRepository.findOne(predicate);
         if (optional.isEmpty()) {
             var settings = new ContactSettings();
@@ -56,9 +70,25 @@ public class SettingsService {
         return optional.get();
     }
 
-    private void updateUserSettingFields(ContactSettings settings, ContactSettings updatedSettings) {
+    private NoteSettings getOrCreateNoteSettings() {
+        var predicate = predicates.noteSettings();
+        var optional = noteSettingsRepository.findOne(predicate);
+        if (optional.isEmpty()) {
+            var settings = new NoteSettings();
+            var savedSettings = noteSettingsRepository.saveAndFlush(settings);
+            noteSettingsRepository.refresh(savedSettings);
+            return savedSettings;
+        }
+        return optional.get();
+    }
+
+    private void updateContactSettingFields(ContactSettings settings, ContactSettings updatedSettings) {
         settings.setLabels(updatedSettings.getLabels());
         settings.setIndustries(updatedSettings.getIndustries());
+    }
+
+    private void updateNoteSettingFields(NoteSettings settings, NoteSettings updatedSettings) {
+        settings.setCategories(updatedSettings.getCategories());
     }
 
     private Supplier<EntityNotFoundException> accountSettingsNotFoundSupplier() {
