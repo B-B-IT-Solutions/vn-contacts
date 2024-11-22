@@ -3,6 +3,7 @@ package cz.prm.services;
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_INDUSTRIES;
 import static cz.prm.utils.SettingsUtils.accountSettings;
 import static cz.prm.utils.SettingsUtils.contactSettings;
+import static cz.prm.utils.SettingsUtils.noteSettings;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
@@ -14,8 +15,10 @@ import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.settings.contact.ContactSettings;
+import cz.prm.domain.settings.note.NoteSettings;
 import cz.prm.repositories.settings.AccountSettingsRepository;
 import cz.prm.repositories.settings.ContactSettingsRepository;
+import cz.prm.repositories.settings.NoteSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,6 +37,8 @@ class SettingsServiceTest {
     @Mock
     private ContactSettingsRepository contactSettingsRepository;
     @Mock
+    private NoteSettingsRepository noteSettingsRepository;
+    @Mock
     private SettingsPredicates predicates;
     @Captor
     private ArgumentCaptor<ContactSettings> contactSettingsCapt;
@@ -42,7 +47,7 @@ class SettingsServiceTest {
 
     @BeforeEach
     void setUp() {
-        settingsService = new SettingsService(accountSettingsRepository, contactSettingsRepository, predicates);
+        settingsService = new SettingsService(accountSettingsRepository, contactSettingsRepository, noteSettingsRepository, predicates);
     }
 
     @Test
@@ -86,6 +91,29 @@ class SettingsServiceTest {
         assertThat(result).isNotNull();
         assertThat(result.getIndustries()).containsExactlyElementsOf(INITIAL_INDUSTRIES);
         verify(contactSettingsRepository).refresh(result);
+    }
+
+    @Test
+    void getNoteSettings() {
+        var settings = noteSettings();
+        var predicate = new BooleanBuilder();
+        when(predicates.userSettings()).thenReturn(predicate);
+        when(noteSettingsRepository.findOne(predicate)).thenReturn(of(settings));
+
+        var result = settingsService.getNoteSettings();
+        assertSettings(result, settings);
+    }
+
+    @Test
+    void getNoteSettings_SettingsNotFound() {
+        var predicate = new BooleanBuilder();
+        when(predicates.userSettings()).thenReturn(predicate);
+        when(noteSettingsRepository.findOne(predicate)).thenReturn(empty());
+        when(noteSettingsRepository.saveAndFlush(any(NoteSettings.class))).thenAnswer((invocation -> invocation.getArgument(0)));
+
+        var result = settingsService.getNoteSettings();
+        assertThat(result).isNotNull();
+        verify(noteSettingsRepository).refresh(result);
     }
 
     @Test

@@ -4,8 +4,10 @@ import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_INDUSTR
 
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.contact.ContactSettings;
+import cz.prm.domain.settings.note.NoteSettings;
 import cz.prm.repositories.settings.AccountSettingsRepository;
 import cz.prm.repositories.settings.ContactSettingsRepository;
+import cz.prm.repositories.settings.NoteSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -18,12 +20,14 @@ public class SettingsService {
 
     private AccountSettingsRepository accountSettingsRepository;
     private ContactSettingsRepository contactSettingsRepository;
+    private NoteSettingsRepository noteSettingsRepository;
     private SettingsPredicates predicates;
 
     public SettingsService(AccountSettingsRepository accountSettingsRepository, ContactSettingsRepository contactSettingsRepository,
-        SettingsPredicates predicates) {
+        NoteSettingsRepository noteSettingsRepository, SettingsPredicates predicates) {
         this.accountSettingsRepository = accountSettingsRepository;
         this.contactSettingsRepository = contactSettingsRepository;
+        this.noteSettingsRepository = noteSettingsRepository;
         this.predicates = predicates;
     }
 
@@ -35,6 +39,10 @@ public class SettingsService {
 
     public ContactSettings getContactSettings() {
         return getOrCreateContactSettings();
+    }
+
+    public NoteSettings getNoteSettings() {
+        return getOrCreateNoteSettings();
     }
 
     public void updateContactSettings(ContactSettings updatedSettings) {
@@ -51,6 +59,18 @@ public class SettingsService {
             settings.setIndustries(INITIAL_INDUSTRIES);
             var savedSettings = contactSettingsRepository.saveAndFlush(settings);
             contactSettingsRepository.refresh(savedSettings);
+            return savedSettings;
+        }
+        return optional.get();
+    }
+
+    private NoteSettings getOrCreateNoteSettings() {
+        var predicate = predicates.userSettings();
+        var optional = noteSettingsRepository.findOne(predicate);
+        if (optional.isEmpty()) {
+            var settings = new NoteSettings();
+            var savedSettings = noteSettingsRepository.saveAndFlush(settings);
+            noteSettingsRepository.refresh(savedSettings);
             return savedSettings;
         }
         return optional.get();
