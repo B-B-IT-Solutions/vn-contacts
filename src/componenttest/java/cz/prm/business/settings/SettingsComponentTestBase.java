@@ -30,18 +30,6 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
         return getAccountSettings(USER_3);
     }
 
-    protected void user1UpdateContactSettings(ContactSettingsDto dto) {
-        updateContactSettings(dto, USER_1);
-    }
-
-    protected void user2UpdateContactSettings(ContactSettingsDto dto) {
-        updateContactSettings(dto, USER_2);
-    }
-
-    protected void user3UpdateContactSettings(ContactSettingsDto dto) {
-        updateContactSettings(dto, USER_3);
-    }
-
     protected ContactSettingsDto user1GetContactSettings() {
         return getContactSettings(USER_1);
     }
@@ -66,14 +54,34 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
         return getNoteSettings(USER_3);
     }
 
+    protected void user1UpdateContactSettings(ContactSettingsDto dto) {
+        updateContactSettings(dto, USER_1);
+    }
+
+    protected void user2UpdateContactSettings(ContactSettingsDto dto) {
+        updateContactSettings(dto, USER_2);
+    }
+
+    protected void user3UpdateContactSettings(ContactSettingsDto dto) {
+        updateContactSettings(dto, USER_3);
+    }
+
+    protected void user1UpdateNoteSettings(NoteSettingsDto dto) {
+        updateNoteSettings(dto, USER_1);
+    }
+
+    protected void user2UpdateNoteSettings(NoteSettingsDto dto) {
+        updateNoteSettings(dto, USER_2);
+    }
+
+    protected void user3UpdateNoteSettings(NoteSettingsDto dto) {
+        updateNoteSettings(dto, USER_3);
+    }
+
     protected AccountSettingsDto getAccountSettings(ComponentTestUser user) {
         var typeRef = new TypeRef<AccountSettingsDto>() {
         };
         return getOne(ACCOUNT_SETTINGS_URL, user, typeRef);
-    }
-
-    protected void updateContactSettings(ContactSettingsDto dto, ComponentTestUser user) {
-        put(CONTACT_SETTINGS_URL, user, dto);
     }
 
     protected ContactSettingsDto getContactSettings(ComponentTestUser user) {
@@ -86,5 +94,13 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
         var typeRef = new TypeRef<NoteSettingsDto>() {
         };
         return getOne(NOTE_SETTINGS_URL, user, typeRef);
+    }
+
+    protected void updateContactSettings(ContactSettingsDto dto, ComponentTestUser user) {
+        put(CONTACT_SETTINGS_URL, user, dto);
+    }
+
+    protected void updateNoteSettings(NoteSettingsDto dto, ComponentTestUser user) {
+        put(NOTE_SETTINGS_URL, user, dto);
     }
 }

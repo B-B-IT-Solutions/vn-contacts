@@ -1,5 +1,6 @@
 package cz.prm.business.settings;
 
+import static cz.prm.utils.SettingsComponentTestUtils.categoriesDto;
 import static cz.prm.utils.SettingsComponentTestUtils.industriesDto;
 import static cz.prm.utils.SettingsComponentTestUtils.labelsDto;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -81,6 +82,27 @@ public class SettingsComponentTest extends SettingsComponentTestBase {
         dto1.setIndustries(industriesDto());
         user3UpdateContactSettings(dto1);
         dto2 = user3GetContactSettings();
+        assertSettings(dto1, dto2);
+    }
+
+    @Test
+    void updateNoteSettings() {
+        var dto1 = user1GetNoteSettings();
+        dto1.setCategories(categoriesDto());
+        user1UpdateNoteSettings(dto1);
+        var dto2 = user1GetNoteSettings();
+        assertSettings(dto1, dto2);
+
+        dto1 = user2GetNoteSettings();
+        dto1.setCategories(categoriesDto());
+        user2UpdateNoteSettings(dto1);
+        dto2 = user2GetNoteSettings();
+        assertSettings(dto1, dto2);
+
+        dto1 = user3GetNoteSettings();
+        dto1.setCategories(categoriesDto());
+        user3UpdateNoteSettings(dto1);
+        dto2 = user3GetNoteSettings();
         assertSettings(dto1, dto2);
     }
 
