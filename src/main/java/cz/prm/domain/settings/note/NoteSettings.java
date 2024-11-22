@@ -1,8 +1,10 @@
-package cz.prm.domain.settings.contact;
+package cz.prm.domain.settings.note;
 
 import static jakarta.persistence.FetchType.EAGER;
 
 import cz.prm.domain.common.User;
+import cz.prm.domain.settings.contact.Industry;
+import cz.prm.domain.settings.contact.Label;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.CollectionTable;
@@ -28,22 +30,17 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-@Table(name = "CONTACT_SETTINGS", schema = "public")
+@Table(name = "NOTE_SETTINGS", schema = "public")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContactSettings {
+public class NoteSettings {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SETTINGS_SEQ")
-    @SequenceGenerator(name = "SETTINGS_SEQ", sequenceName = "SETTINGS_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "NOTE_SETTINGS_SEQ")
+    @SequenceGenerator(name = "NOTE_SETTINGS_SEQ", sequenceName = "NOTE_SETTINGS_SEQ", allocationSize = 1)
     @Column(name = "SETTINGS_ID")
     private Long settingsId;
-
-    @ElementCollection(fetch = EAGER)
-    @CollectionTable(name = "CONTACT_SETTINGS_LABEL", joinColumns = @JoinColumn(name = "SETTINGS_ID"))
-    @Column(name = "LABEL")
-    private List<Label> labels;
 
     @ElementCollection(fetch = EAGER)
     @CollectionTable(name = "CONTACT_SETTINGS_INDUSTRY", joinColumns = @JoinColumn(name = "SETTINGS_ID"))
