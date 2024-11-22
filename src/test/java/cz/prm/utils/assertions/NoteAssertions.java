@@ -61,6 +61,7 @@ public class NoteAssertions {
         assertThat(note1.getNoteId()).isEqualTo(note2.getNoteId());
         assertThat(note1.getContactId()).isEqualTo(note2.getContactId());
         assertThat(note1.getText()).isEqualTo(note2.getText());
+        assertThat(note1.getCategories()).isEqualTo(note2.getCategories());
         assertThat(note1.getLastEditDate()).isEqualTo(note2.getLastEditDate());
         assertThat(note1.getCreationDate()).isEqualTo(note2.getCreationDate());
         assertThat(note1.getOwner()).isEqualTo(note2.getOwner());
@@ -71,6 +72,7 @@ public class NoteAssertions {
         assertThat(note.getContactId()).isEqualTo(dto.getContactId());
         assertThat(note.getTitle()).isEqualTo(dto.getTitle());
         assertThat(note.getText()).isEqualTo(dto.getText());
+        assertThat(note.getCategories()).isEqualTo(dto.getCategories());
         assertThat(note.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(note.getCreationDate()).isEqualTo(dto.getCreationDate());
     }

@@ -1,18 +1,24 @@
 package cz.prm.domain.note;
 
+import static jakarta.persistence.FetchType.EAGER;
+
 import cz.prm.domain.common.User;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.time.Instant;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,6 +49,11 @@ public class Note {
 
     @Column(name = "TEXT", columnDefinition = "TEXT")
     private String text;
+
+    @ElementCollection(fetch = EAGER)
+    @CollectionTable(name = "NOTE_CATEGORY", joinColumns = @JoinColumn(name = "NOTE_ID"))
+    @Column(name = "CATEGORY")
+    private List<String> categories;
 
     @LastModifiedDate
     @Column(name = "LAST_EDIT_DATE")

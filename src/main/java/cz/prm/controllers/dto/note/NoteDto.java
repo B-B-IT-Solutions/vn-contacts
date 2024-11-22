@@ -2,6 +2,7 @@ package cz.prm.controllers.dto.note;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,9 @@ public class NoteDto {
 
     @JsonProperty("text")
     private String text;
+
+    @JsonProperty("categories")
+    private List<String> categories;
 
     @JsonProperty("lastEditDate")
     private Instant lastEditDate;
