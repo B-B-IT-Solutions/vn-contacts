@@ -58,7 +58,7 @@ public class SettingsService {
     }
 
     private ContactSettings getOrCreateContactSettings() {
-        var predicate = predicates.userSettings();
+        var predicate = predicates.contactSettings();
         var optional = contactSettingsRepository.findOne(predicate);
         if (optional.isEmpty()) {
             var settings = new ContactSettings();
@@ -71,7 +71,7 @@ public class SettingsService {
     }
 
     private NoteSettings getOrCreateNoteSettings() {
-        var predicate = predicates.userSettings();
+        var predicate = predicates.noteSettings();
         var optional = noteSettingsRepository.findOne(predicate);
         if (optional.isEmpty()) {
             var settings = new NoteSettings();

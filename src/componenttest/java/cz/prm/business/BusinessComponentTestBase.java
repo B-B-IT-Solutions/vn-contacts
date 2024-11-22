@@ -15,12 +15,14 @@ import cz.prm.controllers.dto.note.NoteDto;
 import cz.prm.controllers.dto.reminder.ReminderDto;
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
+import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
 import cz.prm.controllers.dto.task.TaskDto;
 import cz.prm.custom.ComponentTestAboutRepository;
 import cz.prm.custom.ComponentTestAccountSettingsRepository;
 import cz.prm.custom.ComponentTestContactRepository;
 import cz.prm.custom.ComponentTestContactSettingsRepository;
 import cz.prm.custom.ComponentTestNoteRepository;
+import cz.prm.custom.ComponentTestNoteSettingsRepository;
 import cz.prm.custom.ComponentTestReminderRepository;
 import cz.prm.custom.ComponentTestTaskRepository;
 import cz.prm.domain.contact.About;
@@ -29,6 +31,7 @@ import cz.prm.domain.note.Note;
 import cz.prm.domain.reminder.Reminder;
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.contact.ContactSettings;
+import cz.prm.domain.settings.note.NoteSettings;
 import cz.prm.domain.task.Task;
 import cz.prm.utils.ComponentTestUser;
 import java.util.List;
@@ -51,7 +54,9 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     @Autowired
     protected ComponentTestAccountSettingsRepository generalSettingsRepository;
     @Autowired
-    protected ComponentTestContactSettingsRepository userSettingsRepository;
+    protected ComponentTestContactSettingsRepository contactSettingsRepository;
+    @Autowired
+    protected ComponentTestNoteSettingsRepository noteSettingsRepository;
 
     @BeforeEach
     void setUp() {
@@ -60,7 +65,8 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         taskRepository.deleteAll();
         aboutRepository.deleteAll();
         contactRepository.deleteAll();
-        userSettingsRepository.deleteAll();
+        contactSettingsRepository.deleteAll();
+        noteSettingsRepository.deleteAll();
     }
 
     protected List<Contact> createContacts(ComponentTestUser user) {
@@ -171,7 +177,11 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         return generalSettingsRepository.getReferenceById(dto.getSettingsId());
     }
 
-    protected ContactSettings getUserSettingsFromDb(ContactSettingsDto dto) {
-        return userSettingsRepository.getReferenceById(dto.getSettingsId());
+    protected ContactSettings getContactSettingsFromDb(ContactSettingsDto dto) {
+        return contactSettingsRepository.getReferenceById(dto.getSettingsId());
+    }
+
+    protected NoteSettings getNoteSettingsFromDb(NoteSettingsDto dto) {
+        return noteSettingsRepository.getReferenceById(dto.getSettingsId());
     }
 }

@@ -75,7 +75,7 @@ class SettingsServiceTest {
     void getContactSettings() {
         var settings = contactSettings();
         var predicate = new BooleanBuilder();
-        when(predicates.userSettings()).thenReturn(predicate);
+        when(predicates.contactSettings()).thenReturn(predicate);
         when(contactSettingsRepository.findOne(predicate)).thenReturn(of(settings));
 
         var result = settingsService.getContactSettings();
@@ -85,7 +85,7 @@ class SettingsServiceTest {
     @Test
     void getContactSettings_SettingsNotFound() {
         var predicate = new BooleanBuilder();
-        when(predicates.userSettings()).thenReturn(predicate);
+        when(predicates.contactSettings()).thenReturn(predicate);
         when(contactSettingsRepository.findOne(predicate)).thenReturn(empty());
         when(contactSettingsRepository.saveAndFlush(any(ContactSettings.class))).thenAnswer((invocation -> invocation.getArgument(0)));
 
@@ -99,7 +99,7 @@ class SettingsServiceTest {
     void getNoteSettings() {
         var settings = noteSettings();
         var predicate = new BooleanBuilder();
-        when(predicates.userSettings()).thenReturn(predicate);
+        when(predicates.noteSettings()).thenReturn(predicate);
         when(noteSettingsRepository.findOne(predicate)).thenReturn(of(settings));
 
         var result = settingsService.getNoteSettings();
@@ -109,7 +109,7 @@ class SettingsServiceTest {
     @Test
     void getNoteSettings_SettingsNotFound() {
         var predicate = new BooleanBuilder();
-        when(predicates.userSettings()).thenReturn(predicate);
+        when(predicates.noteSettings()).thenReturn(predicate);
         when(noteSettingsRepository.findOne(predicate)).thenReturn(empty());
         when(noteSettingsRepository.saveAndFlush(any(NoteSettings.class))).thenAnswer((invocation -> invocation.getArgument(0)));
 
@@ -123,7 +123,7 @@ class SettingsServiceTest {
         var settingsInDb = contactSettings();
         var updatedSettings = contactSettings();
         var predicate = new BooleanBuilder();
-        when(predicates.userSettings()).thenReturn(predicate);
+        when(predicates.contactSettings()).thenReturn(predicate);
         when(contactSettingsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
 
         settingsService.updateContactSettings(updatedSettings);
@@ -137,7 +137,7 @@ class SettingsServiceTest {
         var settingsInDb = noteSettings();
         var updatedSettings = noteSettings();
         var predicate = new BooleanBuilder();
-        when(predicates.userSettings()).thenReturn(predicate);
+        when(predicates.noteSettings()).thenReturn(predicate);
         when(noteSettingsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
 
         settingsService.updateNoteSettings(updatedSettings);

@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
+import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
 import cz.prm.utils.assertions.SettingsComponentTestAssertions;
 import org.junit.jupiter.api.Test;
 
@@ -42,6 +43,24 @@ public class SettingsComponentTest extends SettingsComponentTestBase {
     }
 
     @Test
+    void getNoteSettings() {
+        var dto1 = user1GetNoteSettings();
+        var dto2 = user1GetNoteSettings();
+        assertThat(dto1).isEqualTo(dto2);
+        assertSettings(dto2);
+
+        dto1 = user2GetNoteSettings();
+        dto2 = user2GetNoteSettings();
+        assertThat(dto1).isEqualTo(dto2);
+        assertSettings(dto2);
+
+        dto1 = user3GetNoteSettings();
+        dto2 = user3GetNoteSettings();
+        assertThat(dto1).isEqualTo(dto2);
+        assertSettings(dto2);
+    }
+
+    @Test
     void updateContactSettings() {
         var dto1 = user1GetContactSettings();
         dto1.setLabels(labelsDto());
@@ -71,11 +90,20 @@ public class SettingsComponentTest extends SettingsComponentTestBase {
     }
 
     private void assertSettings(ContactSettingsDto dto) {
-        var settings = getUserSettingsFromDb(dto);
+        var settings = getContactSettingsFromDb(dto);
         SettingsComponentTestAssertions.assertSettings(settings, dto);
     }
 
     private void assertSettings(ContactSettingsDto dto1, ContactSettingsDto dto2) {
+        SettingsComponentTestAssertions.assertSettings(dto1, dto2);
+    }
+
+    private void assertSettings(NoteSettingsDto dto) {
+        var settings = getNoteSettingsFromDb(dto);
+        SettingsComponentTestAssertions.assertSettings(settings, dto);
+    }
+
+    private void assertSettings(NoteSettingsDto dto1, NoteSettingsDto dto2) {
         SettingsComponentTestAssertions.assertSettings(dto1, dto2);
     }
 }
