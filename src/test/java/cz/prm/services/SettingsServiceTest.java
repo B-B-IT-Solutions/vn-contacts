@@ -42,6 +42,8 @@ class SettingsServiceTest {
     private SettingsPredicates predicates;
     @Captor
     private ArgumentCaptor<ContactSettings> contactSettingsCapt;
+    @Captor
+    private ArgumentCaptor<NoteSettings> noteSettingsCapt;
 
     private SettingsService settingsService;
 
@@ -127,13 +129,34 @@ class SettingsServiceTest {
         settingsService.updateContactSettings(updatedSettings);
         verify(contactSettingsRepository).save(contactSettingsCapt.capture());
         var savedSettings = contactSettingsCapt.getValue();
-        assertUserSettingFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
+        assertContactSettingFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
     }
 
-    private static void assertUserSettingFieldsUpdated(ContactSettings settingsInDb, ContactSettings updatedSettings, ContactSettings savedSettings) {
+    @Test
+    void updateNoteSettings() {
+        var settingsInDb = noteSettings();
+        var updatedSettings = noteSettings();
+        var predicate = new BooleanBuilder();
+        when(predicates.userSettings()).thenReturn(predicate);
+        when(noteSettingsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
+
+        settingsService.updateNoteSettings(updatedSettings);
+        verify(noteSettingsRepository).save(noteSettingsCapt.capture());
+        var savedSettings = noteSettingsCapt.getValue();
+        assertNoteSettingFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
+    }
+
+    private static void assertContactSettingFieldsUpdated(ContactSettings settingsInDb, ContactSettings updatedSettings,
+        ContactSettings savedSettings) {
         assertThat(settingsInDb.getSettingsId()).isEqualTo(savedSettings.getSettingsId());
         assertThat(settingsInDb.getOwner()).isEqualTo(savedSettings.getOwner());
         assertThat(savedSettings.getLabels()).isEqualTo(updatedSettings.getLabels());
         assertThat(savedSettings.getIndustries()).isEqualTo(updatedSettings.getIndustries());
+    }
+
+    private static void assertNoteSettingFieldsUpdated(NoteSettings settingsInDb, NoteSettings updatedSettings, NoteSettings savedSettings) {
+        assertThat(settingsInDb.getSettingsId()).isEqualTo(savedSettings.getSettingsId());
+        assertThat(settingsInDb.getOwner()).isEqualTo(savedSettings.getOwner());
+        assertThat(savedSettings.getCategories()).isEqualTo(updatedSettings.getCategories());
     }
 }

@@ -47,8 +47,14 @@ public class SettingsService {
 
     public void updateContactSettings(ContactSettings updatedSettings) {
         var settings = getOrCreateContactSettings();
-        updateUserSettingFields(settings, updatedSettings);
+        updateContactSettingFields(settings, updatedSettings);
         contactSettingsRepository.save(settings);
+    }
+
+    public void updateNoteSettings(NoteSettings updatedSettings) {
+        var settings = getOrCreateNoteSettings();
+        updateNoteSettingFields(settings, updatedSettings);
+        noteSettingsRepository.save(settings);
     }
 
     private ContactSettings getOrCreateContactSettings() {
@@ -76,9 +82,13 @@ public class SettingsService {
         return optional.get();
     }
 
-    private void updateUserSettingFields(ContactSettings settings, ContactSettings updatedSettings) {
+    private void updateContactSettingFields(ContactSettings settings, ContactSettings updatedSettings) {
         settings.setLabels(updatedSettings.getLabels());
         settings.setIndustries(updatedSettings.getIndustries());
+    }
+
+    private void updateNoteSettingFields(NoteSettings settings, NoteSettings updatedSettings) {
+        settings.setCategories(updatedSettings.getCategories());
     }
 
     private Supplier<EntityNotFoundException> accountSettingsNotFoundSupplier() {
