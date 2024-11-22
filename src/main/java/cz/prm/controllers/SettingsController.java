@@ -2,6 +2,7 @@ package cz.prm.controllers;
 
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
+import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
 import cz.prm.controllers.mappers.SettingsMapper;
 import cz.prm.services.SettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,17 @@ public class SettingsController {
     public void updateContactSettings(@RequestBody ContactSettingsDto dto) {
         var settings = mapper.toContactSettings(dto);
         settingsService.updateContactSettings(settings);
+    }
+
+    @GetMapping("/note")
+    public NoteSettingsDto getNoteSettings() {
+        var settings = settingsService.getNoteSettings();
+        return mapper.toNoteSettingsDto(settings);
+    }
+
+    @PutMapping("/note")
+    public void updateNoteSettings(@RequestBody NoteSettingsDto dto) {
+        var settings = mapper.toNoteSettings(dto);
+        settingsService.updateNoteSettings(settings);
     }
 }
