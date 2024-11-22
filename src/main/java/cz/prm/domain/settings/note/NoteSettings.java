@@ -3,8 +3,6 @@ package cz.prm.domain.settings.note;
 import static jakarta.persistence.FetchType.EAGER;
 
 import cz.prm.domain.common.User;
-import cz.prm.domain.settings.contact.Industry;
-import cz.prm.domain.settings.contact.Label;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.CollectionTable;
@@ -43,9 +41,9 @@ public class NoteSettings {
     private Long settingsId;
 
     @ElementCollection(fetch = EAGER)
-    @CollectionTable(name = "CONTACT_SETTINGS_INDUSTRY", joinColumns = @JoinColumn(name = "SETTINGS_ID"))
-    @Column(name = "INDUSTRIES")
-    private List<Industry> industries;
+    @CollectionTable(name = "NOTE_SETTINGS_CATEGORY", joinColumns = @JoinColumn(name = "SETTINGS_ID"))
+    @Column(name = "CATEGORY")
+    private List<Category> categories;
 
     @CreatedBy
     @Embedded
