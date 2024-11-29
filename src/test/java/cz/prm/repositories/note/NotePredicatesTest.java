@@ -4,6 +4,7 @@ import static cz.prm.utils.CommonUtils.user;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.domain.note.query.NotesFilter;
 import cz.prm.security.SecurityContextUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,17 +21,6 @@ class NotePredicatesTest {
     }
 
     @Test
-    void notes() {
-        try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
-            var user = user();
-            context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
-            var query = predicates.notes();
-            var expectedString = format("note.owner.username = %s", user.getUsername());
-            assertThat(query).hasToString(expectedString);
-        }
-    }
-
-    @Test
     void byNoteId() {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
             var user = user();
@@ -42,13 +32,38 @@ class NotePredicatesTest {
     }
 
     @Test
-    void byContactId() {
+    void byContactIdNoFilters() {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
             var user = user();
+            var filter = new NotesFilter();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
-            var query = predicates.byContactId(11L);
+            var query = predicates.byContactId(11L, filter);
             var expectedString = format("note.owner.username = %s && note.contactId = 11", user.getUsername());
             assertThat(query).hasToString(expectedString);
+        }
+    }
+
+    @Test
+    void byContactIdWithFilters() {
+        try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
+            var user = user();
+            var filter = new NotesFilter();
+            context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
+            var predicate = predicates.byContactId(15L, filter);
+            var expectedString = format("note.owner.username = %s && note.contactId = 15", user.getUsername());
+            assertThat(predicate).hasToString(expectedString);
+
+            filter.setSearchText("searchText_01");
+            predicate = predicates.byContactId(16L, filter);
+            expectedString = format("note.owner.username = %s && (containsIc(note.title,searchText_01) || containsIc"
+                + "(note.text,searchText_01)) && note.contactId = 16", user.getUsername());
+            assertThat(predicate).hasToString(expectedString);
+
+            filter.setSearchText("searchText_02");
+            predicate = predicates.byContactId(17L, filter);
+            expectedString = format("note.owner.username = %s && (containsIc(note.title,searchText_02) || containsIc"
+                + "(note.text,searchText_02)) && note.contactId = 17", user.getUsername());
+            assertThat(predicate).hasToString(expectedString);
         }
     }
 }

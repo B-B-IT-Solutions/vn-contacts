@@ -181,6 +181,43 @@ public class NoteComponentTest extends NoteComponentTestBase {
     }
 
     @Test
+    void getNotesFilters() {
+        var queryDto = notesQueryDto();
+        var contactId = randomLong();
+        var pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        var user1Notes = createNotes(USER_1, 21);
+        var userNote1 = user1Notes.get(0);
+        var userNote = user1Notes.get(0);
+        contactId = userNote.getContactId();
+
+        queryDto = notesQueryDto();
+        queryDto.setFilter(null);
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        queryDto = notesQueryDto();
+        var filter = queryDto.getFilter();
+
+        filter.setSearchText(userNote1.getTitle());
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setSearchText(userNote1.getText());
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setSearchText(userNote1.getText());
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setSearchText(uuid());
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+    }
+
+    @Test
     void getNote() {
         var note = createNote(USER_1);
         var noteId = note.getNoteId();

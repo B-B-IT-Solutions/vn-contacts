@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class NotesQueryDto extends QueryDto {
 
+    private NotesFilterDto filter;
 }

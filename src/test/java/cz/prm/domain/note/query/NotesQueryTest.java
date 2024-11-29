@@ -12,6 +12,7 @@ class NotesQueryTest {
     void newInstance() {
         var query = new NotesQuery();
         assertThat(query.getSort()).isEqualTo(DEFAULT_NOTES_SORT);
+        assertThat(query.getFilter()).isNotNull();
         assertThat(query.getPagination()).isNotNull();
     }
 }
