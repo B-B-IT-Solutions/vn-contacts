@@ -8,6 +8,7 @@ import static org.assertj.core.util.Lists.newArrayList;
 
 import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.controllers.dto.note.NoteDto;
+import cz.prm.controllers.dto.note.query.NotesFilterDto;
 import cz.prm.controllers.dto.note.query.NotesQueryDto;
 import cz.prm.domain.note.Note;
 import java.util.List;
@@ -43,6 +44,7 @@ public class NoteComponentTestUtils {
     public static NotesQueryDto notesQueryDto() {
         var query = new NotesQueryDto();
         query.setPagination(new PaginationDto());
+        query.setFilter(new NotesFilterDto());
         return query;
     }
 }
