@@ -70,7 +70,7 @@ class NotePredicatesTest {
             filter.setCategories(newArrayList("category_1", "category_2", "category_3"));
             predicate = predicates.byContactId(17L, filter);
             expectedString = format(
-                "note.owner.username = %s && category_1 in note.categories && category_2 in note.categories && category_3 in note.categories && "
+                "note.owner.username = %s && (category_1 in note.categories || category_2 in note.categories || category_3 in note.categories) && "
                     + "note.contactId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
         }
