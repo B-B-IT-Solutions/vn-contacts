@@ -12,11 +12,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class NotePredicates {
 
-    public BooleanExpression notes(NotesFilter filter) {
-        var predicate = dataAccessPredicate();
-        return predicate.and(filterPredicates(filter));
-    }
-
     public Predicate byNoteId(Long noteId) {
         var predicate = dataAccessPredicate();
         return predicate.and(note.noteId.eq(noteId));
@@ -25,6 +20,11 @@ public class NotePredicates {
     public Predicate byContactId(Long contactId, NotesFilter filter) {
         var predicate = notes(filter);
         return predicate.and(note.contactId.eq(contactId));
+    }
+
+    private BooleanExpression notes(NotesFilter filter) {
+        var predicate = dataAccessPredicate();
+        return predicate.and(filterPredicates(filter));
     }
 
     private BooleanExpression dataAccessPredicate() {
