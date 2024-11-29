@@ -1,5 +1,6 @@
 package cz.prm.controllers.dto.note.query;
 
+import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,4 +9,6 @@ import lombok.NoArgsConstructor;
 public class NotesFilterDto {
 
     private String searchText;
+
+    private List<String> categories;
 }

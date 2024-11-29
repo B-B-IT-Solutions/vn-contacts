@@ -215,6 +215,25 @@ public class NoteComponentTest extends NoteComponentTestBase {
         filter.setSearchText(uuid());
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
+
+        queryDto = notesQueryDto();
+        filter = queryDto.getFilter();
+
+        filter.setCategories(null);
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setCategories(userNote1.getCategories());
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setCategories(newArrayList(userNote1.getCategories().get(0)));
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setCategories(newArrayList(uuid()));
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
     }
 
     @Test

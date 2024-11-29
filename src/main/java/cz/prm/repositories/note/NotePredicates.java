@@ -38,6 +38,11 @@ public class NotePredicates {
             predicate.or(note.title.containsIgnoreCase(filter.getSearchText()));
             predicate.or(note.text.containsIgnoreCase(filter.getSearchText()));
         }
+        if (filter.isCategories()) {
+            filter.getCategories().forEach((c) -> {
+                predicate.or(note.categories.contains(c));
+            });
+        }
         return predicate;
     }
 }
