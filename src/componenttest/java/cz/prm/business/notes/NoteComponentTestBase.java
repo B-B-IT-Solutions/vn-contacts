@@ -186,6 +186,13 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
                 sb.append(filterDto.getSearchText());
                 sb.append("&");
             }
+            if (isNotEmpty(filterDto.getCategories())) {
+                filterDto.getCategories().forEach((c) -> {
+                    sb.append("filter.categories=");
+                    sb.append(c);
+                    sb.append("&");
+                });
+            }
         }
         return sb.toString();
     }
