@@ -1,5 +1,6 @@
 package cz.prm.repositories.note;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.CommonUtils.user;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -63,6 +64,14 @@ class NotePredicatesTest {
             predicate = predicates.byContactId(17L, filter);
             expectedString = format("note.owner.username = %s && (containsIc(note.title,searchText_02) || containsIc"
                 + "(note.text,searchText_02)) && note.contactId = 17", user.getUsername());
+            assertThat(predicate).hasToString(expectedString);
+
+            filter.setSearchText(null);
+            filter.setCategories(newArrayList("category_1", "category_2", "category_3"));
+            predicate = predicates.byContactId(17L, filter);
+            expectedString = format(
+                "note.owner.username = %s && category_1 in note.categories && category_2 in note.categories && category_3 in note.categories && "
+                    + "note.contactId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
         }
     }
