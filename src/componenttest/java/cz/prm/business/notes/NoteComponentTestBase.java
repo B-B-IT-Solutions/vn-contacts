@@ -4,11 +4,14 @@ import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
 import static java.lang.String.format;
+import static java.util.Objects.nonNull;
+import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import cz.prm.business.BusinessComponentTestBase;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.note.NoteDto;
+import cz.prm.controllers.dto.note.query.NotesFilterDto;
 import cz.prm.controllers.dto.note.query.NotesQueryDto;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
@@ -162,13 +165,27 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
 
     protected String appendQueryToUrl(String url, NotesQueryDto queryDto) {
         var sb = new StringBuilder(url);
+        var filters = toUrlFilterParams(queryDto.getFilter());
         var pagination = toUrlPaginationParams(queryDto.getPagination());
         var sort = toUrlSortParams(queryDto.getSort());
 
-        if (isNotBlank(pagination) || isNotBlank(sort)) {
+        if (isNotBlank(filters) || isNotBlank(pagination) || isNotBlank(sort)) {
             sb.append("?");
+            sb.append(filters);
             sb.append(pagination);
             sb.append(sort);
+        }
+        return sb.toString();
+    }
+
+    protected String toUrlFilterParams(NotesFilterDto filterDto) {
+        var sb = new StringBuilder();
+        if (nonNull(filterDto)) {
+            if (isNotEmpty(filterDto.getSearchText())) {
+                sb.append("filter.searchText=");
+                sb.append(filterDto.getSearchText());
+                sb.append("&");
+            }
         }
         return sb.toString();
     }

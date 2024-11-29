@@ -75,12 +75,14 @@ class NoteMapperTest {
     void afterNotesQuery() {
         var target = new NotesQuery();
         target.setPagination(null);
+        target.setFilter(null);
         mapper.afterNotesQuery(null, target);
         assertNullSafeNoteQuery(target);
     }
 
     private void assertNullSafeNoteQuery(NotesQuery query) {
         assertThat(query.getPagination()).isNotNull();
+        assertThat(query.getFilter()).isNotNull();
         assertThat(query.getSort()).isEqualTo(DEFAULT_NOTES_SORT);
         var pagination = query.getPagination();
         assertThat(pagination.getPageNumber()).isZero();

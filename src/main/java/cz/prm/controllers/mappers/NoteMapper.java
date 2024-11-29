@@ -10,6 +10,7 @@ import cz.prm.controllers.dto.note.query.NotesQueryDto;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.common.query.Pagination;
 import cz.prm.domain.note.Note;
+import cz.prm.domain.note.query.NotesFilter;
 import cz.prm.domain.note.query.NotesQuery;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
@@ -39,6 +40,9 @@ public interface NoteMapper {
     default void afterNotesQuery(NotesQueryDto source, @MappingTarget NotesQuery target) {
         if (isNull(target.getPagination())) {
             target.setPagination(new Pagination());
+        }
+        if (isNull(target.getFilter())) {
+            target.setFilter(new NotesFilter());
         }
         if (isBlank(target.getSort())) {
             target.setSort(DEFAULT_NOTES_SORT);
