@@ -55,7 +55,7 @@ class NoteServiceTest {
         var contactId = randomLong();
         var predicate = new BooleanBuilder();
 
-        when(predicates.byContactId(contactId)).thenReturn(predicate);
+        when(predicates.byContactId(contactId, query.getFilter())).thenReturn(predicate);
         when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
         var result = noteService.getNotes(contactId, query);
         assertPage(result, page);

@@ -27,7 +27,7 @@ public class NoteService {
 
     public Page<Note> getNotes(Long contactId, NotesQuery query) {
         var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
-        var predicate = predicates.byContactId(contactId);
+        var predicate = predicates.byContactId(contactId, query.getFilter());
         var page = repository.findAll(predicate, pageRequest);
         return new Page<>(page);
     }

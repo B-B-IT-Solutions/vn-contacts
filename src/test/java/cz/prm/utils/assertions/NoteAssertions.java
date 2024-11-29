@@ -5,9 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.note.NoteDto;
+import cz.prm.controllers.dto.note.query.NotesFilterDto;
 import cz.prm.controllers.dto.note.query.NotesQueryDto;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.note.Note;
+import cz.prm.domain.note.query.NotesFilter;
 import cz.prm.domain.note.query.NotesQuery;
 import java.util.List;
 import java.util.Objects;
@@ -79,5 +81,10 @@ public class NoteAssertions {
 
     public static void assertNotesQuery(NotesQuery query, NotesQueryDto dto) {
         assertQuery(query, dto);
+        assertNotesFilter(query.getFilter(), dto.getFilter());
+    }
+
+    public static void assertNotesFilter(NotesFilter filter, NotesFilterDto dto) {
+        assertThat(filter.getSearchText()).isEqualTo(dto.getSearchText());
     }
 }

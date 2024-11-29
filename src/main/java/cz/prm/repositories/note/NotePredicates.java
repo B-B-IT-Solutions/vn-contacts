@@ -3,15 +3,18 @@ package cz.prm.repositories.note;
 import static cz.prm.domain.note.querydsl.QNote.note;
 import static cz.prm.security.SecurityContextUtils.getUser;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import cz.prm.domain.note.query.NotesFilter;
 import org.springframework.stereotype.Component;
 
 @Component
 public class NotePredicates {
 
-    public Predicate notes() {
-        return dataAccessPredicate();
+    public BooleanExpression notes(NotesFilter filter) {
+        var predicate = dataAccessPredicate();
+        return predicate.and(filterPredicates(filter));
     }
 
     public Predicate byNoteId(Long noteId) {
@@ -19,13 +22,22 @@ public class NotePredicates {
         return predicate.and(note.noteId.eq(noteId));
     }
 
-    public Predicate byContactId(Long contactId) {
-        var predicate = dataAccessPredicate();
+    public Predicate byContactId(Long contactId, NotesFilter filter) {
+        var predicate = notes(filter);
         return predicate.and(note.contactId.eq(contactId));
     }
 
     private BooleanExpression dataAccessPredicate() {
         var user = getUser();
         return note.owner.username.eq(user.getUsername());
+    }
+
+    private BooleanBuilder filterPredicates(NotesFilter filter) {
+        var predicate = new BooleanBuilder();
+        if (filter.isSearchText()) {
+            predicate.or(note.title.containsIgnoreCase(filter.getSearchText()));
+            predicate.or(note.text.containsIgnoreCase(filter.getSearchText()));
+        }
+        return predicate;
     }
 }

@@ -4,6 +4,7 @@ import static cz.prm.utils.CommonUtils.user;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.domain.note.query.NotesFilter;
 import cz.prm.security.SecurityContextUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +24,9 @@ class NotePredicatesTest {
     void notes() {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
             var user = user();
+            var filter = new NotesFilter();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
-            var query = predicates.notes();
+            var query = predicates.notes(filter);
             var expectedString = format("note.owner.username = %s", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }
@@ -45,8 +47,9 @@ class NotePredicatesTest {
     void byContactId() {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
             var user = user();
+            var filter = new NotesFilter();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
-            var query = predicates.byContactId(11L);
+            var query = predicates.byContactId(11L, filter);
             var expectedString = format("note.owner.username = %s && note.contactId = 11", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }
