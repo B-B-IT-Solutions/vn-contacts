@@ -1,6 +1,5 @@
 package cz.prm.utils.assertions;
 
-import static java.lang.String.format;
 import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
@@ -21,8 +20,6 @@ import java.util.Objects;
 
 public class ContractComponentTestAssertions {
 
-    private static final String ANOMYSATION_STRING = "*****";
-
     public static void assertContacts(List<Contact> contacts, PageDto<ContactDto> pageDto) {
         assertContacts(contacts, pageDto.getContent());
     }
@@ -39,8 +36,7 @@ public class ContractComponentTestAssertions {
         assertThat(contact.getContactId()).isEqualTo(contactDto.getContactId());
         assertThat(contact.getFirstName()).isEqualTo(contactDto.getFirstName());
         assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
-//        assertThat(contact.getLastName()).isEqualTo(contactDto.getLastName());
-        assertThat(contact.getLastName()).isEqualTo(ANOMYSATION_STRING);
+        assertThat(contact.getLastName()).isEqualTo(contactDto.getLastName());
         assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
         assertThat(contact.getLabels()).isNotEmpty().containsExactlyElementsOf(contactDto.getLabels());
         assertThat(contact.getIndustries()).isNotEmpty().containsExactlyElementsOf(contactDto.getIndustries());
@@ -55,12 +51,8 @@ public class ContractComponentTestAssertions {
 
     public static void assertOccupationDto(Occupation occupation, OccupationDto dto) {
         assertThat(occupation.getJobTitle()).isEqualTo(dto.getJobTitle());
-        assertThat(occupation.getCompany()).isEqualTo(dto.getCompany()).contains(ANOMYSATION_STRING);
+        assertThat(occupation.getCompany()).isEqualTo(dto.getCompany());
         assertThat(occupation.getIndustry()).isEqualTo(dto.getIndustry());
-
-        var firstLetter = occupation.getCompany().charAt(0);
-        var anonymCompany = format("%s%s", firstLetter, ANOMYSATION_STRING);
-        assertThat(dto.getCompany()).isEqualTo(anonymCompany);
     }
 
     public static void assertConnectionsDto(List<Connection> cons, List<ConnectionDto> dtos) {
