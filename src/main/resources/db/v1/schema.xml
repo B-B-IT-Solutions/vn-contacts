@@ -57,9 +57,9 @@
 						<constraints primaryKey="true" primaryKeyName="about_pk" nullable="false"/>
 				 </column>
 				 <column name="description" type="TEXT"/>
-				 <column name="FIRST_MEETING_OCCURRENCE_DATE" type="TIMESTAMP WITH TIME ZONE"/>
-				 <column name="FIRST_MEETING_LOCATION" type="VARCHAR(500)"/>
-				 <column name="FIRST_MEETING_COMMENT" type="TEXT"/>
+				 <column name="first_meeting_occurrence_date" type="TIMESTAMP WITH TIME ZONE"/>
+				 <column name="first_meeting_location" type="VARCHAR(500)"/>
+				 <column name="first_meeting_comment" type="TEXT"/>
 				 <column name="owner_username" type="VARCHAR(255)"/>
 				 <column name="owner_email" type="VARCHAR(255)"/>
 			</createTable>
@@ -245,5 +245,14 @@
 															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 															 referencedTableName="note_settings"
 															 referencedColumnNames="settings_id" validate="true"/>
+	 </changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.11">
+			<renameColumn tableName="about" newColumnName="contact_goals" oldColumnName="contact_benefits"
+										columnDataType="VARCHAR(250)"/>
+			
+			<addColumn tableName="about">
+				 <column name="contact_challenges" type="TEXT"/>
+			</addColumn>
 	 </changeSet>
 </databaseChangeLog>

@@ -13,8 +13,11 @@ public class AboutDto {
     @JsonProperty("description")
     private String description;
 
-    @JsonProperty("contactBenefits")
-    private String contactBenefits;
+    @JsonProperty("contactGoals")
+    private String contactGoals;
+
+    @JsonProperty("contactChallenges")
+    private String contactChallenges;
 
     @JsonProperty("myBenefits")
     private String myBenefits;

@@ -112,7 +112,8 @@ public class ContactUtils {
     public static About about() {
         var about = new About();
         about.setDescription(uuid());
-        about.setContactBenefits(uuid());
+        about.setContactGoals(uuid());
+        about.setContactChallenges(uuid());
         about.setMyBenefits(uuid());
         about.setContactId(randomLong());
         about.setOwner(user());
@@ -123,7 +124,8 @@ public class ContactUtils {
     public static AboutDto aboutDto() {
         var dto = new AboutDto();
         dto.setDescription(uuid());
-        dto.setContactBenefits(uuid());
+        dto.setContactGoals(uuid());
+        dto.setContactChallenges(uuid());
         dto.setMyBenefits(uuid());
         dto.setContactId(randomLong());
         dto.setFirstMeeting(meetingDto());

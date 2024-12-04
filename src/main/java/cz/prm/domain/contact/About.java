@@ -32,8 +32,11 @@ public class About {
     @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "CONTACT_BENEFITS", columnDefinition = "TEXT")
-    private String contactBenefits;
+    @Column(name = "CONTACT_GOALS", columnDefinition = "TEXT")
+    private String contactGoals;
+
+    @Column(name = "CONTACT_CHALLENGES", columnDefinition = "TEXT")
+    private String contactChallenges;
 
     @Column(name = "MY_BENEFITS", columnDefinition = "TEXT")
     private String myBenefits;
