@@ -248,8 +248,7 @@
 	 </changeSet>
 	 
 	 <changeSet author="sergej" id="1.0.11">
-			<renameColumn tableName="about" newColumnName="contact_goals" oldColumnName="contact_benefits"
-										columnDataType="VARCHAR(250)"/>
+			<renameColumn tableName="about" newColumnName="contact_goals" oldColumnName="contact_benefits" columnDataType="TEXT"/>
 			
 			<addColumn tableName="about">
 				 <column name="contact_challenges" type="TEXT"/>
