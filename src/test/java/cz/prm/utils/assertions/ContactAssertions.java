@@ -134,7 +134,8 @@ public class ContactAssertions {
 
     public static void assertAbout(About about1, About about2) {
         assertThat(about1.getDescription()).isEqualTo(about2.getDescription());
-        assertThat(about1.getContactBenefits()).isEqualTo(about2.getContactBenefits());
+        assertThat(about1.getContactGoals()).isEqualTo(about2.getContactGoals());
+        assertThat(about1.getContactChallenges()).isEqualTo(about2.getContactChallenges());
         assertThat(about1.getMyBenefits()).isEqualTo(about2.getMyBenefits());
         assertThat(about1.getContactId()).isEqualTo(about2.getContactId());
         assertMeeting(about1.getFirstMeeting(), about2.getFirstMeeting());
@@ -142,7 +143,8 @@ public class ContactAssertions {
 
     public static void assertAboutDto(About about, AboutDto dto) {
         assertThat(about.getDescription()).isEqualTo(dto.getDescription());
-        assertThat(about.getContactBenefits()).isEqualTo(dto.getContactBenefits());
+        assertThat(about.getContactGoals()).isEqualTo(dto.getContactGoals());
+        assertThat(about.getContactChallenges()).isEqualTo(dto.getContactChallenges());
         assertThat(about.getMyBenefits()).isEqualTo(dto.getMyBenefits());
         assertThat(about.getContactId()).isEqualTo(dto.getContactId());
         assertMeetingDto(about.getFirstMeeting(), dto.getFirstMeeting());
