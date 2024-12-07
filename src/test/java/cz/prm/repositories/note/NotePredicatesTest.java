@@ -54,16 +54,16 @@ class NotePredicatesTest {
             var expectedString = format("note.owner.username = %s && note.contactId = 15", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setGlobalFilter("searchText_01");
+            filter.setGlobalFilter("globalFilter_01");
             predicate = predicates.byContactId(16L, filter);
-            expectedString = format("note.owner.username = %s && (containsIc(note.title,searchText_01) || containsIc"
-                + "(note.text,searchText_01)) && note.contactId = 16", user.getUsername());
+            expectedString = format("note.owner.username = %s && (containsIc(note.title,globalFilter_01) || containsIc"
+                + "(note.text,globalFilter_01)) && note.contactId = 16", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setGlobalFilter("searchText_02");
+            filter.setGlobalFilter("globalFilter_02");
             predicate = predicates.byContactId(17L, filter);
-            expectedString = format("note.owner.username = %s && (containsIc(note.title,searchText_02) || containsIc"
-                + "(note.text,searchText_02)) && note.contactId = 17", user.getUsername());
+            expectedString = format("note.owner.username = %s && (containsIc(note.title,globalFilter_02) || containsIc"
+                + "(note.text,globalFilter_02)) && note.contactId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setGlobalFilter(null);
