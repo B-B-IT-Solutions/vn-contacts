@@ -202,6 +202,42 @@ class PredicateCriteriaUtilsTest {
     }
 
     @Test
+    void applyCriteriaEqualsWithOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.firstName, "equals(firstName_001)");
+        var queryPattern = "eqIc(contact.firstName,firstName_001)";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.lastName, "equals(lastName_001)");
+        queryPattern = "eqIc(contact.firstName,firstName_001) && eqIc(contact.lastName,lastName_001)";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.nickName, "equals(nickName_001)");
+        queryPattern = "eqIc(contact.firstName,firstName_001) && eqIc(contact.lastName,lastName_001) && eqIc(contact.nickName,nickName_001)";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaEqualsWithOperationWithMultipleFilterValues() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.firstName,
+            "equals(firstName_001,firstName_002,firstName_003)");
+        var queryPattern = "eqIc(contact.firstName,firstName_001) || eqIc(contact.firstName,firstName_002) || eqIc(contact.firstName,firstName_003)";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.lastName, "equals(lastName_001,lastName_002,lastName_003)");
+        queryPattern =
+            "(eqIc(contact.firstName,firstName_001) || eqIc(contact.firstName,firstName_002) || eqIc(contact.firstName,firstName_003)) && (eqIc"
+                + "(contact.lastName,lastName_001) || eqIc(contact.lastName,lastName_002) || eqIc(contact.lastName,lastName_003))";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.nickName, "equals(nickName_001,nickName_002,nickName_003)");
+        queryPattern =
+            "(eqIc(contact.firstName,firstName_001) || eqIc(contact.firstName,firstName_002) || eqIc(contact.firstName,firstName_003)) && (eqIc"
+                + "(contact.lastName,lastName_001) || eqIc(contact.lastName,lastName_002) || eqIc(contact.lastName,lastName_003)) && (eqIc(contact"
+                + ".nickName,nickName_001) || eqIc(contact.nickName,nickName_002) || eqIc(contact.nickName,nickName_003))";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
     void containsAndNotContainsOperationFilter() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.firstName,
             "contains(firstName_001)+notContains(firstName_002)");
