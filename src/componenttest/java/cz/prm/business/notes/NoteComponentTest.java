@@ -200,19 +200,19 @@ public class NoteComponentTest extends NoteComponentTestBase {
         queryDto = notesQueryDto();
         var filter = queryDto.getFilter();
 
-        filter.setSearchText(userNote1.getTitle());
+        filter.setGlobalFilter(userNote1.getTitle());
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setSearchText(userNote1.getText());
+        filter.setGlobalFilter(userNote1.getText());
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setSearchText(userNote1.getText());
+        filter.setGlobalFilter(userNote1.getText());
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setSearchText(uuid());
+        filter.setGlobalFilter(uuid());
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 

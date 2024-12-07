@@ -85,7 +85,7 @@ public class NoteAssertions {
     }
 
     public static void assertNotesFilter(NotesFilter filter, NotesFilterDto dto) {
-        assertThat(filter.getSearchText()).isEqualTo(dto.getSearchText());
+        assertThat(filter.isGlobalFilter()).isEqualTo(dto.getGlobalFilter());
         assertThat(filter.getCategories()).isNotEmpty().containsExactlyElementsOf(dto.getCategories());
     }
 }

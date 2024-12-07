@@ -34,9 +34,9 @@ public class NotePredicates {
 
     private BooleanBuilder filterPredicates(NotesFilter filter) {
         var predicate = new BooleanBuilder();
-        if (filter.isSearchText()) {
-            predicate.or(note.title.containsIgnoreCase(filter.getSearchText()));
-            predicate.or(note.text.containsIgnoreCase(filter.getSearchText()));
+        if (filter.isGlobalFilter()) {
+            predicate.or(note.title.containsIgnoreCase(filter.getGlobalFilter()));
+            predicate.or(note.text.containsIgnoreCase(filter.getGlobalFilter()));
         }
         if (filter.isCategories()) {
             filter.getCategories().forEach((c) -> {

@@ -54,19 +54,19 @@ class NotePredicatesTest {
             var expectedString = format("note.owner.username = %s && note.contactId = 15", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setSearchText("searchText_01");
+            filter.setGlobalFilter("searchText_01");
             predicate = predicates.byContactId(16L, filter);
             expectedString = format("note.owner.username = %s && (containsIc(note.title,searchText_01) || containsIc"
                 + "(note.text,searchText_01)) && note.contactId = 16", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setSearchText("searchText_02");
+            filter.setGlobalFilter("searchText_02");
             predicate = predicates.byContactId(17L, filter);
             expectedString = format("note.owner.username = %s && (containsIc(note.title,searchText_02) || containsIc"
                 + "(note.text,searchText_02)) && note.contactId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setSearchText(null);
+            filter.setGlobalFilter(null);
             filter.setCategories(newArrayList("category_1", "category_2", "category_3"));
             predicate = predicates.byContactId(17L, filter);
             expectedString = format(
