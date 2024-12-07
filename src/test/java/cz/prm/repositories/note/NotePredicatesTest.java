@@ -67,6 +67,12 @@ class NotePredicatesTest {
             assertThat(predicate).hasToString(expectedString);
 
             filter.setGlobalFilter(null);
+            filter.setTitle("title_01");
+            predicate = predicates.byContactId(17L, filter);
+            expectedString = format("note.owner.username = %s && containsIc(note.title,title_01) && note.contactId = 17", user.getUsername());
+            assertThat(predicate).hasToString(expectedString);
+
+            filter.setTitle(null);
             filter.setCategories(newArrayList("category_1", "category_2", "category_3"));
             predicate = predicates.byContactId(17L, filter);
             expectedString = format(
