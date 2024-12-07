@@ -277,6 +277,36 @@ class PredicateCriteriaUtilsTest {
     }
 
     @Test
+    void applyCriteriaEmpyWithOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.firstName, "empty( )");
+        var queryPattern = "empty(contact.firstName)";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.lastName, "empty( )");
+        queryPattern = "empty(contact.firstName) && empty(contact.lastName)";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.nickName, "empty( )");
+        queryPattern = "empty(contact.firstName) && empty(contact.lastName) && empty(contact.nickName)";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaNotEmpyWithOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.firstName, "notEmpty( )");
+        var queryPattern = "!empty(contact.firstName)";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.lastName, "notEmpty( )");
+        queryPattern = "!empty(contact.firstName) && !empty(contact.lastName)";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.nickName, "notEmpty( )");
+        queryPattern = "!empty(contact.firstName) && !empty(contact.lastName) && !empty(contact.nickName)";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
     void containsAndNotContainsOperationFilter() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.firstName,
             "contains(firstName_001)+notContains(firstName_002)");

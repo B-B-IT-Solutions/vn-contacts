@@ -1,9 +1,11 @@
 package cz.prm.repositories.common.query;
 
 import static cz.prm.repositories.common.query.filter.FilterOperation.CONTAINS;
+import static cz.prm.repositories.common.query.filter.FilterOperation.EMPTY;
 import static cz.prm.repositories.common.query.filter.FilterOperation.ENDS_WITH;
 import static cz.prm.repositories.common.query.filter.FilterOperation.EQUALS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_CONTAINS;
+import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_EMPTY;
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_EQUALS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.STARTS_WITH;
 import static java.util.stream.Stream.of;
@@ -39,6 +41,10 @@ public class PredicateCriteriaUtils {
             of(fc.getValues()).forEach(value -> predicate.or(field.equalsIgnoreCase(value)));
         } else if (NOT_EQUALS.isOperation(fc)) {
             of(fc.getValues()).forEach(value -> predicate.andNot(field.equalsIgnoreCase(value)));
+        } else if (EMPTY.isOperation(fc)) {
+            of(fc.getValues()).forEach(value -> predicate.or(field.isEmpty()));
+        } else if (NOT_EMPTY.isOperation(fc)) {
+            of(fc.getValues()).forEach(value -> predicate.or(field.isNotEmpty()));
         } else {
             of(fc.getValues()).forEach(value -> predicate.or(field.containsIgnoreCase(value)));
         }
