@@ -1,6 +1,7 @@
 package cz.prm.repositories.note;
 
 import static cz.prm.domain.note.querydsl.QNote.note;
+import static cz.prm.repositories.common.query.PredicateCriteriaUtils.applyCriteria;
 import static cz.prm.security.SecurityContextUtils.getUser;
 
 import com.querydsl.core.BooleanBuilder;
@@ -34,9 +35,12 @@ public class NotePredicates {
 
     private BooleanBuilder filterPredicates(NotesFilter filter) {
         var predicate = new BooleanBuilder();
-        if (filter.isSearchText()) {
-            predicate.or(note.title.containsIgnoreCase(filter.getSearchText()));
-            predicate.or(note.text.containsIgnoreCase(filter.getSearchText()));
+        if (filter.isGlobalFilter()) {
+            predicate.or(note.title.containsIgnoreCase(filter.getGlobalFilter()));
+            predicate.or(note.text.containsIgnoreCase(filter.getGlobalFilter()));
+        }
+        if (filter.isTitle()) {
+            applyCriteria(predicate, note.title, filter.getTitle());
         }
         if (filter.isCategories()) {
             filter.getCategories().forEach((c) -> {

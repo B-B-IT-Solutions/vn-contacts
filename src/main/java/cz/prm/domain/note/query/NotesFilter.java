@@ -11,12 +11,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class NotesFilter {
 
-    private String searchText;
+    private String globalFilter;
+
+    private String title;
 
     private List<String> categories;
 
-    public boolean isSearchText() {
-        return isNotBlank(searchText);
+    public boolean isGlobalFilter() {
+        return isNotBlank(globalFilter);
+    }
+
+    public boolean isTitle() {
+        return isNotBlank(title);
     }
 
     public boolean isCategories() {

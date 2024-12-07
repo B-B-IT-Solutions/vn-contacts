@@ -9,17 +9,31 @@ import org.junit.jupiter.api.Test;
 class NotesFilterTest {
 
     @Test
-    void isSearchText() {
+    void isGlobalFilter() {
         var filter = new NotesFilter();
-        assertThat(filter.isSearchText()).isFalse();
-        filter.setSearchText(null);
-        assertThat(filter.isSearchText()).isFalse();
-        filter.setSearchText("");
-        assertThat(filter.isSearchText()).isFalse();
-        filter.setSearchText(" ");
-        assertThat(filter.isSearchText()).isFalse();
-        filter.setSearchText(uuid());
-        assertThat(filter.isSearchText()).isTrue();
+        assertThat(filter.isGlobalFilter()).isFalse();
+        filter.setGlobalFilter(null);
+        assertThat(filter.isGlobalFilter()).isFalse();
+        filter.setGlobalFilter("");
+        assertThat(filter.isGlobalFilter()).isFalse();
+        filter.setGlobalFilter(" ");
+        assertThat(filter.isGlobalFilter()).isFalse();
+        filter.setGlobalFilter(uuid());
+        assertThat(filter.isGlobalFilter()).isTrue();
+    }
+
+    @Test
+    void isTitle() {
+        var filter = new NotesFilter();
+        assertThat(filter.isTitle()).isFalse();
+        filter.setTitle(null);
+        assertThat(filter.isTitle()).isFalse();
+        filter.setTitle("");
+        assertThat(filter.isTitle()).isFalse();
+        filter.setTitle(" ");
+        assertThat(filter.isTitle()).isFalse();
+        filter.setTitle(uuid());
+        assertThat(filter.isTitle()).isTrue();
     }
 
     @Test

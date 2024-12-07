@@ -52,4 +52,38 @@ public class ComponentTestUtils {
     public static String notContainsFilter(String filter) {
         return format("notContains(%s)", filter);
     }
+
+    public static String startsWithFilter(String... filters) {
+        var filter = Stream.of(filters).collect(joining(","));
+        return containsFilter(filter);
+    }
+
+    public static String startsWithFilter(String filter) {
+        return format("startsWith(%s)", filter);
+    }
+
+    public static String endsWithFilter(String... filters) {
+        var filter = Stream.of(filters).collect(joining(","));
+        return notContainsFilter(filter);
+    }
+
+    public static String endsWithFilter(String filter) {
+        return format("endsWith(%s)", filter);
+    }
+
+    public static String equalsWithFilter(String filter) {
+        return format("equals(%s)", filter);
+    }
+
+    public static String notEqualsWithFilter(String filter) {
+        return format("notEquals(%s)", filter);
+    }
+
+    public static String emptyFilter() {
+        return format("empty( )");
+    }
+
+    public static String notEmptyFilter() {
+        return format("notEmpty( )");
+    }
 }

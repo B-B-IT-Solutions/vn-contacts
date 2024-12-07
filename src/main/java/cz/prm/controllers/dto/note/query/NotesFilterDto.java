@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class NotesFilterDto {
 
-    private String searchText;
+    private String globalFilter;
+
+    private String title;
 
     private List<String> categories;
 }
