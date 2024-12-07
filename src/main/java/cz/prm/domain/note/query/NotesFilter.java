@@ -13,10 +13,16 @@ public class NotesFilter {
 
     private String globalFilter;
 
+    private String title;
+
     private List<String> categories;
 
     public boolean isGlobalFilter() {
         return isNotBlank(globalFilter);
+    }
+
+    public boolean isTitle() {
+        return isNotBlank(title);
     }
 
     public boolean isCategories() {

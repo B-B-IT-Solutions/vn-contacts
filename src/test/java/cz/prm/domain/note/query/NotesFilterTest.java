@@ -23,6 +23,20 @@ class NotesFilterTest {
     }
 
     @Test
+    void isTitle() {
+        var filter = new NotesFilter();
+        assertThat(filter.isTitle()).isFalse();
+        filter.setTitle(null);
+        assertThat(filter.isTitle()).isFalse();
+        filter.setTitle("");
+        assertThat(filter.isTitle()).isFalse();
+        filter.setTitle(" ");
+        assertThat(filter.isTitle()).isFalse();
+        filter.setTitle(uuid());
+        assertThat(filter.isTitle()).isTrue();
+    }
+
+    @Test
     void isCategories() {
         var filter = new NotesFilter();
         assertThat(filter.isCategories()).isFalse();

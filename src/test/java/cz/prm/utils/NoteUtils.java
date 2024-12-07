@@ -67,6 +67,7 @@ public class NoteUtils {
     public static NotesFilter notesFilter() {
         var filter = new NotesFilter();
         filter.setGlobalFilter(uuid());
+        filter.setTitle(uuid());
         filter.setCategories(newArrayList(uuid(), uuid(), uuid()));
         return filter;
     }

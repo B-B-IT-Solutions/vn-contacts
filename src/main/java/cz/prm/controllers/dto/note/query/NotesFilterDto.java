@@ -10,5 +10,7 @@ public class NotesFilterDto {
 
     private String globalFilter;
 
+    private String title;
+
     private List<String> categories;
 }
