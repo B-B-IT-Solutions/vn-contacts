@@ -1,6 +1,7 @@
 package cz.prm.repositories.common.query;
 
 import static cz.prm.repositories.common.query.filter.FilterOperation.CONTAINS;
+import static cz.prm.repositories.common.query.filter.FilterOperation.ENDS_WITH;
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_CONTAINS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.STARTS_WITH;
 import static java.util.stream.Stream.of;
@@ -30,6 +31,8 @@ public class PredicateCriteriaUtils {
             of(fc.getValues()).forEach(value -> predicate.andNot(field.containsIgnoreCase(value)));
         } else if (STARTS_WITH.isOperation(fc)) {
             of(fc.getValues()).forEach(value -> predicate.or(field.startsWith(value)));
+        } else if (ENDS_WITH.isOperation(fc)) {
+            of(fc.getValues()).forEach(value -> predicate.or(field.endsWithIgnoreCase(value)));
         } else {
             of(fc.getValues()).forEach(value -> predicate.or(field.containsIgnoreCase(value)));
         }

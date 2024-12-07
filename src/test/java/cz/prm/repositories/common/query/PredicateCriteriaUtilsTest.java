@@ -155,6 +155,50 @@ class PredicateCriteriaUtilsTest {
     }
 
     @Test
+    void applyCriteriaEndsWithOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.firstName, "endsWith(firstName_001)");
+        var queryPattern = "endsWithIgnoreCase(contact.firstName,firstName_001)";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.lastName, "endsWith(lastName_001)");
+        queryPattern = "endsWithIgnoreCase(contact.firstName,firstName_001) && endsWithIgnoreCase(contact.lastName,lastName_001)";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.nickName, "endsWith(nickName_001)");
+        queryPattern =
+            "endsWithIgnoreCase(contact.firstName,firstName_001) && endsWithIgnoreCase(contact.lastName,lastName_001) && endsWithIgnoreCase(contact"
+                + ".nickName,nickName_001)";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaEndsWithOperationWithMultipleFilterValues() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.firstName,
+            "endsWith(firstName_001,firstName_002,firstName_003)");
+        var queryPattern =
+            "endsWithIgnoreCase(contact.firstName,firstName_001) || endsWithIgnoreCase(contact.firstName,firstName_002) || endsWithIgnoreCase(contact"
+                + ".firstName,firstName_003)";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.lastName,
+            "endsWith(lastName_001,lastName_002,lastName_003)");
+        queryPattern =
+            "(endsWithIgnoreCase(contact.firstName,firstName_001) || endsWithIgnoreCase(contact.firstName,firstName_002) || endsWithIgnoreCase"
+                + "(contact.firstName,firstName_003)) && (endsWithIgnoreCase(contact.lastName,lastName_001) || endsWithIgnoreCase(contact.lastName,"
+                + "lastName_002) || endsWithIgnoreCase(contact.lastName,lastName_003))";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.nickName,
+            "endsWith(nickName_001,nickName_002,nickName_003)");
+        queryPattern =
+            "(endsWithIgnoreCase(contact.firstName,firstName_001) || endsWithIgnoreCase(contact.firstName,firstName_002) || endsWithIgnoreCase"
+                + "(contact.firstName,firstName_003)) && (endsWithIgnoreCase(contact.lastName,lastName_001) || endsWithIgnoreCase(contact.lastName,"
+                + "lastName_002) || endsWithIgnoreCase(contact.lastName,lastName_003)) && (endsWithIgnoreCase(contact.nickName,nickName_001) || "
+                + "endsWithIgnoreCase(contact.nickName,nickName_002) || endsWithIgnoreCase(contact.nickName,nickName_003))";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
     void containsAndNotContainsOperationFilter() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.firstName,
             "contains(firstName_001)+notContains(firstName_002)");
