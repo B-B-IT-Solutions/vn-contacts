@@ -52,4 +52,22 @@ public class ComponentTestUtils {
     public static String notContainsFilter(String filter) {
         return format("notContains(%s)", filter);
     }
+
+    public static String startsWithFilter(String... filters) {
+        var filter = Stream.of(filters).collect(joining(","));
+        return containsFilter(filter);
+    }
+
+    public static String startsWithFilter(String filter) {
+        return format("contains(%s)", filter);
+    }
+
+    public static String endsWithFilter(String... filters) {
+        var filter = Stream.of(filters).collect(joining(","));
+        return notContainsFilter(filter);
+    }
+
+    public static String endsWithFilter(String filter) {
+        return format("notContains(%s)", filter);
+    }
 }

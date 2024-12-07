@@ -5,6 +5,7 @@ import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
 import static cz.prm.utils.ComponentTestUtils.randomLong;
+import static cz.prm.utils.ComponentTestUtils.startsWithFilter;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static cz.prm.utils.NoteComponentTestUtils.noteDto;
 import static cz.prm.utils.NoteComponentTestUtils.notesQueryDto;
@@ -213,6 +214,33 @@ public class NoteComponentTest extends NoteComponentTestBase {
         assertThat(pageDto.getContent()).hasSize(1);
 
         filter.setGlobalFilter(uuid());
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        queryDto = notesQueryDto();
+        filter = queryDto.getFilter();
+
+        filter.setTitle(userNote1.getTitle());
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setTitle(uuid());
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setTitle(startsWithFilter("Title"));
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setTitle(startsWithFilter(userNote1.getTitle()));
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setTitle(startsWithFilter("Q"));
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setTitle(startsWithFilter(uuid()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 

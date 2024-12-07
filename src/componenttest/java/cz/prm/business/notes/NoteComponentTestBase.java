@@ -182,8 +182,13 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
         var sb = new StringBuilder();
         if (nonNull(filterDto)) {
             if (isNotEmpty(filterDto.getGlobalFilter())) {
-                sb.append("filter.searchText=");
+                sb.append("filter.globalFilter=");
                 sb.append(filterDto.getGlobalFilter());
+                sb.append("&");
+            }
+            if (isNotEmpty(filterDto.getTitle())) {
+                sb.append("filter.title=");
+                sb.append(filterDto.getTitle());
                 sb.append("&");
             }
             if (isNotEmpty(filterDto.getCategories())) {
