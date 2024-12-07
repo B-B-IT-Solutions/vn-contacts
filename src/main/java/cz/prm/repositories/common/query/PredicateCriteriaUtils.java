@@ -30,7 +30,7 @@ public class PredicateCriteriaUtils {
         } else if (NOT_CONTAINS.isOperation(fc)) {
             of(fc.getValues()).forEach(value -> predicate.andNot(field.containsIgnoreCase(value)));
         } else if (STARTS_WITH.isOperation(fc)) {
-            of(fc.getValues()).forEach(value -> predicate.or(field.startsWith(value)));
+            of(fc.getValues()).forEach(value -> predicate.or(field.startsWithIgnoreCase(value)));
         } else if (ENDS_WITH.isOperation(fc)) {
             of(fc.getValues()).forEach(value -> predicate.or(field.endsWithIgnoreCase(value)));
         } else {

@@ -117,16 +117,17 @@ class PredicateCriteriaUtilsTest {
     @Test
     void applyCriteriaStartsWithOperation() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.firstName, "startsWith(firstName_001)");
-        var queryPattern = "startsWith(contact.firstName,firstName_001)";
+        var queryPattern = "startsWithIgnoreCase(contact.firstName,firstName_001)";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.lastName, "startsWith(lastName_001)");
-        queryPattern = "startsWith(contact.firstName,firstName_001) && startsWith(contact.lastName,lastName_001)";
+        queryPattern = "startsWithIgnoreCase(contact.firstName,firstName_001) && startsWithIgnoreCase(contact.lastName,lastName_001)";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.nickName, "startsWith(nickName_001)");
-        queryPattern = "startsWith(contact.firstName,firstName_001) && startsWith(contact.lastName,lastName_001) && startsWith(contact.nickName,"
-            + "nickName_001)";
+        queryPattern =
+            "startsWithIgnoreCase(contact.firstName,firstName_001) && startsWithIgnoreCase(contact.lastName,lastName_001) && startsWithIgnoreCase"
+                + "(contact.nickName,nickName_001)";
         assertThat(predicate).hasToString(queryPattern);
     }
 
@@ -134,23 +135,25 @@ class PredicateCriteriaUtilsTest {
     void applyCriteriaStartsWithOperationWithMultipleFilterValues() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.firstName,
             "startsWith(firstName_001,firstName_002,firstName_003)");
-        var queryPattern = "startsWith(contact.firstName,firstName_001) || startsWith(contact.firstName,firstName_002) || startsWith(contact"
-            + ".firstName,firstName_003)";
+        var queryPattern =
+            "startsWithIgnoreCase(contact.firstName,firstName_001) || startsWithIgnoreCase(contact.firstName,firstName_002) || startsWithIgnoreCase"
+                + "(contact.firstName,firstName_003)";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.lastName,
             "startsWith(lastName_001,lastName_002,lastName_003)");
-        queryPattern = "(startsWith(contact.firstName,firstName_001) || startsWith(contact.firstName,firstName_002) || startsWith(contact.firstName,"
-            + "firstName_003)) && (startsWith(contact.lastName,lastName_001) || startsWith(contact.lastName,lastName_002) || startsWith(contact"
-            + ".lastName,lastName_003))";
+        queryPattern = "(startsWithIgnoreCase(contact.firstName,firstName_001) || startsWithIgnoreCase(contact.firstName,firstName_002) || "
+            + "startsWithIgnoreCase(contact.firstName,firstName_003)) && (startsWithIgnoreCase(contact.lastName,lastName_001) || "
+            + "startsWithIgnoreCase(contact.lastName,lastName_002) || startsWithIgnoreCase(contact" + ".lastName,lastName_003))";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.nickName,
             "startsWith(nickName_001,nickName_002,nickName_003)");
-        queryPattern = "(startsWith(contact.firstName,firstName_001) || startsWith(contact.firstName,firstName_002) || startsWith(contact.firstName,"
-            + "firstName_003)) && (startsWith(contact.lastName,lastName_001) || startsWith(contact.lastName,lastName_002) || startsWith(contact"
-            + ".lastName,lastName_003)) && (startsWith(contact.nickName,nickName_001) || startsWith(contact.nickName,nickName_002) || "
-            + "startsWith(contact.nickName,nickName_003))";
+        queryPattern = "(startsWithIgnoreCase(contact.firstName,firstName_001) || startsWithIgnoreCase(contact.firstName,firstName_002) || "
+            + "startsWithIgnoreCase(contact.firstName,firstName_003)) && (startsWithIgnoreCase(contact.lastName,lastName_001) || "
+            + "startsWithIgnoreCase(contact.lastName,lastName_002) || startsWithIgnoreCase(contact.lastName,lastName_003)) && (startsWithIgnoreCase"
+            + "(contact.nickName,nickName_001) || startsWithIgnoreCase(contact.nickName,nickName_002) || startsWithIgnoreCase(contact.nickName,"
+            + "nickName_003))";
         assertThat(predicate).hasToString(queryPattern);
     }
 
