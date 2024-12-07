@@ -4,6 +4,7 @@ import static cz.prm.repositories.common.query.filter.FilterOperation.CONTAINS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.ENDS_WITH;
 import static cz.prm.repositories.common.query.filter.FilterOperation.EQUALS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_CONTAINS;
+import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_EQUALS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.STARTS_WITH;
 import static java.util.stream.Stream.of;
 import static lombok.AccessLevel.PRIVATE;
@@ -36,6 +37,8 @@ public class PredicateCriteriaUtils {
             of(fc.getValues()).forEach(value -> predicate.or(field.endsWithIgnoreCase(value)));
         } else if (EQUALS.isOperation(fc)) {
             of(fc.getValues()).forEach(value -> predicate.or(field.equalsIgnoreCase(value)));
+        } else if (NOT_EQUALS.isOperation(fc)) {
+            of(fc.getValues()).forEach(value -> predicate.andNot(field.equalsIgnoreCase(value)));
         } else {
             of(fc.getValues()).forEach(value -> predicate.or(field.containsIgnoreCase(value)));
         }
