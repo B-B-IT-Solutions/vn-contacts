@@ -71,12 +71,20 @@ public class ComponentTestUtils {
         return format("endsWith(%s)", filter);
     }
 
-    public static String equalsWithFilter(String filter) {
+    public static String equalsFilter(String filter) {
         return format("equals(%s)", filter);
     }
 
-    public static String notEqualsWithFilter(String filter) {
+    public static String notEqualsFilter(String filter) {
         return format("notEquals(%s)", filter);
+    }
+
+    public static String arrayIncludesFilter(List<String> filters) {
+        return format("arrIncludes(%s)", filters.stream().collect(joining(",")));
+    }
+
+    public static String arrayIncludesAllFilter(List<String> filters) {
+        return format("arrIncludesAll(%s)", filters.stream().collect(joining(",")));
     }
 
     public static String emptyFilter() {

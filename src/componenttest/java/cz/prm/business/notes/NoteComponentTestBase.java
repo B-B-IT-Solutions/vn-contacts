@@ -192,11 +192,9 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
                 sb.append("&");
             }
             if (isNotEmpty(filterDto.getCategories())) {
-                filterDto.getCategories().forEach((c) -> {
-                    sb.append("filter.categories=");
-                    sb.append(c);
-                    sb.append("&");
-                });
+                sb.append("filter.categories=");
+                sb.append(filterDto.getCategories());
+                sb.append("&");
             }
         }
         return sb.toString();

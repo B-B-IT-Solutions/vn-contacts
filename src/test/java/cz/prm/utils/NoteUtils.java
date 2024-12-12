@@ -68,14 +68,14 @@ public class NoteUtils {
         var filter = new NotesFilter();
         filter.setGlobalFilter(uuid());
         filter.setTitle(uuid());
-        filter.setCategories(newArrayList(uuid(), uuid(), uuid()));
+        filter.setCategories(uuid());
         return filter;
     }
 
     public static NotesFilterDto notesFilterDto() {
         var filter = new NotesFilterDto();
         filter.setGlobalFilter(uuid());
-        filter.setCategories(newArrayList(uuid(), uuid(), uuid()));
+        filter.setCategories(uuid());
         return filter;
     }
 }
