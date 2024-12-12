@@ -11,7 +11,9 @@ public enum FilterOperation {
     EQUALS("equals"),
     NOT_EQUALS("notEquals"),
     EMPTY("empty"),
-    NOT_EMPTY("notEmpty");
+    NOT_EMPTY("notEmpty"),
+    ARRAY_INCLUDES("arrIncludes"),
+    ARRAY_INCLUDES_ALL("arrIncludesAll");
 
     private final String name;
 

@@ -4,11 +4,13 @@ import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
+import static cz.prm.utils.ComponentTestUtils.arrayIncludesAllFilter;
+import static cz.prm.utils.ComponentTestUtils.arrayIncludesFilter;
 import static cz.prm.utils.ComponentTestUtils.emptyFilter;
 import static cz.prm.utils.ComponentTestUtils.endsWithFilter;
-import static cz.prm.utils.ComponentTestUtils.equalsWithFilter;
+import static cz.prm.utils.ComponentTestUtils.equalsFilter;
 import static cz.prm.utils.ComponentTestUtils.notEmptyFilter;
-import static cz.prm.utils.ComponentTestUtils.notEqualsWithFilter;
+import static cz.prm.utils.ComponentTestUtils.notEqualsFilter;
 import static cz.prm.utils.ComponentTestUtils.randomLong;
 import static cz.prm.utils.ComponentTestUtils.startsWithFilter;
 import static cz.prm.utils.ComponentTestUtils.uuid;
@@ -265,39 +267,39 @@ public class NoteComponentTest extends NoteComponentTestBase {
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(equalsWithFilter(userNote1.getTitle()));
+        filter.setTitle(equalsFilter(userNote1.getTitle()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setTitle(equalsWithFilter("Q"));
+        filter.setTitle(equalsFilter("Q"));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(equalsWithFilter(" "));
+        filter.setTitle(equalsFilter(" "));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(equalsWithFilter(uuid()));
+        filter.setTitle(equalsFilter(uuid()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(notEqualsWithFilter(userNote1.getTitle()));
+        filter.setTitle(notEqualsFilter(userNote1.getTitle()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(20);
 
-        filter.setTitle(notEqualsWithFilter("Q"));
+        filter.setTitle(notEqualsFilter("Q"));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(notEqualsWithFilter(uuid()));
+        filter.setTitle(notEqualsFilter(uuid()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(notEqualsWithFilter(" "));
+        filter.setTitle(notEqualsFilter(" "));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(notEqualsWithFilter(uuid()));
+        filter.setTitle(notEqualsFilter(uuid()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
@@ -316,17 +318,21 @@ public class NoteComponentTest extends NoteComponentTestBase {
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setCategories(userNote1.getCategories());
+        filter.setCategories(arrayIncludesFilter(userNote1.getCategories()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setCategories(newArrayList(userNote1.getCategories().get(0)));
+        filter.setCategories(arrayIncludesFilter(newArrayList(uuid())));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setCategories(newArrayList(uuid()));
+        filter.setCategories(arrayIncludesAllFilter(userNote1.getCategories()));
         pageDto = user1GetNotes(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setCategories(arrayIncludesAllFilter(newArrayList(uuid())));
+        pageDto = user1GetNotes(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
     }
 
     @Test

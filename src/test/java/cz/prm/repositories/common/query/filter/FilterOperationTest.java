@@ -1,5 +1,7 @@
 package cz.prm.repositories.common.query.filter;
 
+import static cz.prm.repositories.common.query.filter.FilterOperation.ARRAY_INCLUDES;
+import static cz.prm.repositories.common.query.filter.FilterOperation.ARRAY_INCLUDES_ALL;
 import static cz.prm.repositories.common.query.filter.FilterOperation.CONTAINS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.EMPTY;
 import static cz.prm.repositories.common.query.filter.FilterOperation.ENDS_WITH;
@@ -24,6 +26,8 @@ class FilterOperationTest {
     private static final FilterCriteria fcNotEquals = new FilterCriteria("notEquals(value6)");
     private static final FilterCriteria fcEmpty = new FilterCriteria("empty(value7)");
     private static final FilterCriteria fcNotEmpty = new FilterCriteria("notEmpty(value8)");
+    private static final FilterCriteria fcArrayIncludes = new FilterCriteria("arrIncludes(value9)");
+    private static final FilterCriteria fcArrayIncludesAll = new FilterCriteria("arrIncludesAll(value10)");
 
     @Test
     void getName() {
@@ -35,6 +39,8 @@ class FilterOperationTest {
         assertThat(FilterOperation.NOT_EQUALS.getName()).isEqualTo("notEquals");
         assertThat(FilterOperation.EMPTY.getName()).isEqualTo("empty");
         assertThat(NOT_EMPTY.getName()).isEqualTo("notEmpty");
+        assertThat(ARRAY_INCLUDES.getName()).isEqualTo("arrIncludes");
+        assertThat(ARRAY_INCLUDES_ALL.getName()).isEqualTo("arrIncludesAll");
     }
 
     @Test
@@ -47,6 +53,8 @@ class FilterOperationTest {
         assertThat(CONTAINS.isOperation(fcNotEquals)).isFalse();
         assertThat(CONTAINS.isOperation(fcEmpty)).isFalse();
         assertThat(CONTAINS.isOperation(fcNotEmpty)).isFalse();
+        assertThat(CONTAINS.isOperation(fcArrayIncludes)).isFalse();
+        assertThat(CONTAINS.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(CONTAINS.isOperation(fcRandom)).isFalse();
     }
 
@@ -60,6 +68,8 @@ class FilterOperationTest {
         assertThat(NOT_CONTAINS.isOperation(fcNotEquals)).isFalse();
         assertThat(NOT_CONTAINS.isOperation(fcEmpty)).isFalse();
         assertThat(NOT_CONTAINS.isOperation(fcNotEmpty)).isFalse();
+        assertThat(NOT_CONTAINS.isOperation(fcArrayIncludes)).isFalse();
+        assertThat(NOT_CONTAINS.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(NOT_CONTAINS.isOperation(fcRandom)).isFalse();
     }
 
@@ -73,6 +83,8 @@ class FilterOperationTest {
         assertThat(STARTS_WITH.isOperation(fcNotEquals)).isFalse();
         assertThat(STARTS_WITH.isOperation(fcEmpty)).isFalse();
         assertThat(STARTS_WITH.isOperation(fcNotEmpty)).isFalse();
+        assertThat(STARTS_WITH.isOperation(fcArrayIncludes)).isFalse();
+        assertThat(STARTS_WITH.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(STARTS_WITH.isOperation(fcRandom)).isFalse();
     }
 
@@ -86,6 +98,8 @@ class FilterOperationTest {
         assertThat(ENDS_WITH.isOperation(fcNotEquals)).isFalse();
         assertThat(ENDS_WITH.isOperation(fcEmpty)).isFalse();
         assertThat(ENDS_WITH.isOperation(fcNotEmpty)).isFalse();
+        assertThat(ENDS_WITH.isOperation(fcArrayIncludes)).isFalse();
+        assertThat(ENDS_WITH.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(ENDS_WITH.isOperation(fcRandom)).isFalse();
     }
 
@@ -99,6 +113,8 @@ class FilterOperationTest {
         assertThat(EQUALS.isOperation(fcNotContains)).isFalse();
         assertThat(EQUALS.isOperation(fcEmpty)).isFalse();
         assertThat(EQUALS.isOperation(fcNotEmpty)).isFalse();
+        assertThat(EQUALS.isOperation(fcArrayIncludes)).isFalse();
+        assertThat(EQUALS.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(EQUALS.isOperation(fcRandom)).isFalse();
     }
 
@@ -112,6 +128,8 @@ class FilterOperationTest {
         assertThat(NOT_EQUALS.isOperation(fcNotContains)).isFalse();
         assertThat(NOT_EQUALS.isOperation(fcEmpty)).isFalse();
         assertThat(NOT_EQUALS.isOperation(fcNotEmpty)).isFalse();
+        assertThat(NOT_EQUALS.isOperation(fcArrayIncludes)).isFalse();
+        assertThat(NOT_EQUALS.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(NOT_EQUALS.isOperation(fcRandom)).isFalse();
     }
 
@@ -123,8 +141,11 @@ class FilterOperationTest {
         assertThat(EMPTY.isOperation(fcStartsWith)).isFalse();
         assertThat(EMPTY.isOperation(fcContains)).isFalse();
         assertThat(EMPTY.isOperation(fcNotContains)).isFalse();
+        assertThat(EMPTY.isOperation(fcNotContains)).isFalse();
         assertThat(EMPTY.isOperation(fcEquals)).isFalse();
         assertThat(EMPTY.isOperation(fcNotEquals)).isFalse();
+        assertThat(EMPTY.isOperation(fcArrayIncludes)).isFalse();
+        assertThat(EMPTY.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(EMPTY.isOperation(fcRandom)).isFalse();
     }
 
@@ -138,6 +159,38 @@ class FilterOperationTest {
         assertThat(NOT_EMPTY.isOperation(fcNotContains)).isFalse();
         assertThat(NOT_EMPTY.isOperation(fcEquals)).isFalse();
         assertThat(NOT_EMPTY.isOperation(fcNotEquals)).isFalse();
+        assertThat(NOT_EMPTY.isOperation(fcArrayIncludes)).isFalse();
+        assertThat(NOT_EMPTY.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(NOT_EMPTY.isOperation(fcRandom)).isFalse();
+    }
+
+    @Test
+    void isOperationArrayIncludes() {
+        assertThat(ARRAY_INCLUDES.isOperation(fcArrayIncludes)).isTrue();
+        assertThat(ARRAY_INCLUDES.isOperation(fcArrayIncludesAll)).isFalse();
+        assertThat(ARRAY_INCLUDES.isOperation(fcNotEmpty)).isFalse();
+        assertThat(ARRAY_INCLUDES.isOperation(fcEmpty)).isFalse();
+        assertThat(ARRAY_INCLUDES.isOperation(fcEndsWith)).isFalse();
+        assertThat(ARRAY_INCLUDES.isOperation(fcStartsWith)).isFalse();
+        assertThat(ARRAY_INCLUDES.isOperation(fcContains)).isFalse();
+        assertThat(ARRAY_INCLUDES.isOperation(fcNotContains)).isFalse();
+        assertThat(ARRAY_INCLUDES.isOperation(fcEquals)).isFalse();
+        assertThat(ARRAY_INCLUDES.isOperation(fcNotEquals)).isFalse();
+        assertThat(ARRAY_INCLUDES.isOperation(fcRandom)).isFalse();
+    }
+
+    @Test
+    void isOperationArrayIncludesAll() {
+        assertThat(ARRAY_INCLUDES_ALL.isOperation(fcArrayIncludesAll)).isTrue();
+        assertThat(ARRAY_INCLUDES_ALL.isOperation(fcArrayIncludes)).isFalse();
+        assertThat(ARRAY_INCLUDES_ALL.isOperation(fcNotEmpty)).isFalse();
+        assertThat(ARRAY_INCLUDES_ALL.isOperation(fcEmpty)).isFalse();
+        assertThat(ARRAY_INCLUDES_ALL.isOperation(fcEndsWith)).isFalse();
+        assertThat(ARRAY_INCLUDES_ALL.isOperation(fcStartsWith)).isFalse();
+        assertThat(ARRAY_INCLUDES_ALL.isOperation(fcContains)).isFalse();
+        assertThat(ARRAY_INCLUDES_ALL.isOperation(fcNotContains)).isFalse();
+        assertThat(ARRAY_INCLUDES_ALL.isOperation(fcEquals)).isFalse();
+        assertThat(ARRAY_INCLUDES_ALL.isOperation(fcNotEquals)).isFalse();
+        assertThat(ARRAY_INCLUDES_ALL.isOperation(fcRandom)).isFalse();
     }
 }

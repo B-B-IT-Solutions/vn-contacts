@@ -43,9 +43,7 @@ public class NotePredicates {
             applyCriteria(predicate, note.title, filter.getTitle());
         }
         if (filter.isCategories()) {
-            filter.getCategories().forEach((c) -> {
-                predicate.or(note.categories.contains(c));
-            });
+            applyCriteria(predicate, note.categories, filter.getCategories());
         }
         return predicate;
     }
