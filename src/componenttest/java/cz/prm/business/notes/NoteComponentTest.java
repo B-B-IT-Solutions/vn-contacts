@@ -324,7 +324,7 @@ public class NoteComponentTest extends NoteComponentTestBase {
 
         filter.setCategories(arrayIncludesFilter(newArrayList(uuid())));
         pageDto = user1GetNotes(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
+        assertThat(pageDto.getContent()).isEmpty();
 
         filter.setCategories(arrayIncludesAllFilter(userNote1.getCategories()));
         pageDto = user1GetNotes(contactId, queryDto);
@@ -332,7 +332,7 @@ public class NoteComponentTest extends NoteComponentTestBase {
 
         filter.setCategories(arrayIncludesAllFilter(newArrayList(uuid())));
         pageDto = user1GetNotes(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
+        assertThat(pageDto.getContent()).isEmpty();
     }
 
     @Test
