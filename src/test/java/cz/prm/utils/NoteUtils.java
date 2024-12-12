@@ -75,6 +75,7 @@ public class NoteUtils {
     public static NotesFilterDto notesFilterDto() {
         var filter = new NotesFilterDto();
         filter.setGlobalFilter(uuid());
+        filter.setTitle(uuid());
         filter.setCategories(uuid());
         return filter;
     }
