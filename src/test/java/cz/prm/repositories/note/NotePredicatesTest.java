@@ -73,7 +73,7 @@ class NotePredicatesTest {
             assertThat(predicate).hasToString(expectedString);
 
             filter.setTitle(null);
-            filter.setCategories("category_1,category_2,category_3");
+            filter.setCategories("arrIncludes(category_1,category_2,category_3)");
             predicate = predicates.byContactId(17L, filter);
             expectedString = format(
                 "note.owner.username = %s && (category_1 in note.categories || category_2 in note.categories || category_3 in note.categories) && "
