@@ -13,5 +13,6 @@ class TasksQueryTest {
         var query = new TasksQuery();
         assertThat(query.getSort()).isEqualTo(DEFAULT_TASKS_SORT);
         assertThat(query.getPagination()).isNotNull();
+        assertThat(query.getFilter()).isNotNull();
     }
 }
