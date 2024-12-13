@@ -29,6 +29,7 @@ public class TaskUtils {
         task.setTitle(uuid());
         task.setDescription(uuid());
         task.setCompleted(true);
+        task.setDueDate(now());
         task.setLastEditDate(now());
         task.setCreationDate(now());
         task.setOwner(user());
@@ -42,6 +43,7 @@ public class TaskUtils {
         task.setTitle(uuid());
         task.setDescription(uuid());
         task.setCompleted(true);
+        task.setDueDate(now());
         task.setLastEditDate(now());
         task.setCreationDate(now());
         return task;

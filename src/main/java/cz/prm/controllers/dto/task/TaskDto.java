@@ -26,6 +26,9 @@ public class TaskDto {
     @JsonProperty("completed")
     private boolean completed;
 
+    @JsonProperty("dueDate")
+    private Instant dueDate;
+
     @JsonProperty("lastEditDate")
     private Instant lastEditDate;
 
