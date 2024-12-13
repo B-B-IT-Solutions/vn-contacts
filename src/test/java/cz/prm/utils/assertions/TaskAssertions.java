@@ -5,9 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.task.TaskDto;
+import cz.prm.controllers.dto.task.query.TasksFilterDto;
 import cz.prm.controllers.dto.task.query.TasksQueryDto;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.task.Task;
+import cz.prm.domain.task.query.TasksFilter;
 import cz.prm.domain.task.query.TasksQuery;
 import java.util.List;
 import java.util.Objects;
@@ -79,5 +81,12 @@ public class TaskAssertions {
 
     public static void assertTasksQuery(TasksQuery query, TasksQueryDto dto) {
         assertQuery(query, dto);
+        assertTasksFilter(query.getFilter(), dto.getFilter());
+    }
+
+    public static void assertTasksFilter(TasksFilter filter, TasksFilterDto dto) {
+        assertThat(filter.getGlobalFilter()).isEqualTo(dto.getGlobalFilter());
+        assertThat(filter.getTitle()).isEqualTo(dto.getTitle());
+        assertThat(filter.getCompleted()).isEqualTo(dto.getCompleted());
     }
 }

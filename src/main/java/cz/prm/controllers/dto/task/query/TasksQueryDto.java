@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TasksQueryDto extends QueryDto {
 
+    private TasksFilterDto filter;
 }

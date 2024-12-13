@@ -1,6 +1,5 @@
 package cz.prm.repositories.note;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.CommonUtils.user;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;

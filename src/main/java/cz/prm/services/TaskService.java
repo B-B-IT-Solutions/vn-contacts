@@ -27,7 +27,7 @@ public class TaskService {
 
     public Page<Task> getTasks(Long contactId, TasksQuery query) {
         var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
-        var predicate = predicates.byContactId(contactId);
+        var predicate = predicates.byContactId(contactId, query.getFilter());
         var page = repository.findAll(predicate, pageRequest);
         return new Page<>(page);
     }
