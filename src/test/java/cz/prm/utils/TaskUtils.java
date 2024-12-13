@@ -50,16 +50,16 @@ public class TaskUtils {
     public static TasksQuery tasksQuery() {
         var query = new TasksQuery();
         query.setPagination(pagination());
-        query.setSort(uuid());
         query.setFilter(tasksFilter());
+        query.setSort(uuid());
         return query;
     }
 
     public static TasksQueryDto tasksQueryDto() {
         var query = new TasksQueryDto();
         query.setPagination(paginationDto());
-        query.setSort(uuid());
         query.setFilter(tasksFilterDto());
+        query.setSort(uuid());
         return query;
     }
 

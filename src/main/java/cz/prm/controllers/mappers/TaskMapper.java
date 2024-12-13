@@ -10,6 +10,7 @@ import cz.prm.controllers.dto.task.query.TasksQueryDto;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.common.query.Pagination;
 import cz.prm.domain.task.Task;
+import cz.prm.domain.task.query.TasksFilter;
 import cz.prm.domain.task.query.TasksQuery;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
@@ -39,6 +40,9 @@ public interface TaskMapper {
     default void afterTasksQuery(TasksQueryDto source, @MappingTarget TasksQuery target) {
         if (isNull(target.getPagination())) {
             target.setPagination(new Pagination());
+        }
+        if (isNull(target.getFilter())) {
+            target.setFilter(new TasksFilter());
         }
         if (isBlank(target.getSort())) {
             target.setSort(DEFAULT_TASKS_SORT);
