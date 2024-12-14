@@ -153,6 +153,36 @@ class PredicateCriteriaUtilsTest {
     }
 
     @Test
+    void applyCriteriaDateGreaterThanOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "greaterThan(dueDate_001)");
+        var queryPattern = "task.dueDate > dueDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate, "greaterThan(lastEditDate_001)");
+        queryPattern = "task.dueDate > dueDate_001 && task.lastEditDate > lastEditDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate, "greaterThan(creationDate_001)");
+        queryPattern = "task.dueDate > dueDate_001 && task.lastEditDate > lastEditDate_001 && task.creationDate > creationDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaDateGreaterThanOrEqualsToOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "greaterThanOrEqualTo(dueDate_001)");
+        var queryPattern = "task.dueDate >= dueDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate, "greaterThanOrEqualTo(lastEditDate_001)");
+        queryPattern = "task.dueDate >= dueDate_001 && task.lastEditDate >= lastEditDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate, "greaterThanOrEqualTo(creationDate_001)");
+        queryPattern = "task.dueDate >= dueDate_001 && task.lastEditDate >= lastEditDate_001 && task.creationDate >= creationDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
     void applyCriteriaNoOperation() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.firstName, "firstName_001");
         var queryPattern = "containsIc(contact.firstName,firstName_001)";
