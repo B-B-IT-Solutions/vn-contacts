@@ -6,6 +6,7 @@ import static cz.prm.repositories.common.query.filter.FilterOperation.CONTAINS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.EMPTY;
 import static cz.prm.repositories.common.query.filter.FilterOperation.ENDS_WITH;
 import static cz.prm.repositories.common.query.filter.FilterOperation.EQUALS;
+import static cz.prm.repositories.common.query.filter.FilterOperation.GREATER_THAN;
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_CONTAINS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_EMPTY;
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_EQUALS;
@@ -57,10 +58,12 @@ public class PredicateCriteriaUtils {
 
     private static Predicate apply(DateTimePath field, FilterCriteria fc) {
         var predicate = new BooleanBuilder();
-        if (ARRAY_INCLUDES.isOperation(fc)) {
-            of(fc.getValues()).forEach(value -> predicate.or(field.gt(value)));
-        } else if (ARRAY_INCLUDES_ALL.isOperation(fc)) {
-            of(fc.getValues()).forEach(value -> predicate.and(field.goe(value)));
+        if (EQUALS.isOperation(fc)) {
+            of(fc.getValues()).forEach(value -> predicate.or(field.eq(value)));
+        } else if (NOT_EQUALS.isOperation(fc)) {
+            of(fc.getValues()).forEach(value -> predicate.or(field.ne(value)));
+        } else if (GREATER_THAN.isOperation(fc)) {
+            of(fc.getValues()).forEach(value -> predicate.and(field.gt(value)));
         } else {
             of(fc.getValues()).forEach(value -> predicate.or(field.eq(value)));
         }

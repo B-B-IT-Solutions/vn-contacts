@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.contact.querydsl.QContact;
 import cz.prm.domain.note.querydsl.QNote;
+import cz.prm.domain.task.querydsl.QTask;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ class PredicateCriteriaUtilsTest {
     }
 
     @Test
-    void applyCriteriaArrayIncludesWithOperation() {
+    void applyCriteriaArrayIncludesOperation() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001");
         var queryPattern = "label_001 in contact.labels";
         assertThat(predicate).hasToString(queryPattern);
@@ -33,7 +34,7 @@ class PredicateCriteriaUtilsTest {
     }
 
     @Test
-    void applyCriteriaArrayIncludesWithOperationWithMultipleFilterValues() {
+    void applyCriteriaArrayIncludesOperationWithMultipleFilterValues() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001,label_002,label_003");
         var queryPattern = "label_001,label_002,label_003 in contact.labels";
         assertThat(predicate).hasToString(queryPattern);
@@ -51,7 +52,7 @@ class PredicateCriteriaUtilsTest {
     }
 
     @Test
-    void applyCriteriaArrayIncludesAllWithOperation() {
+    void applyCriteriaArrayIncludesAllOperation() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001");
         var queryPattern = "label_001 in contact.labels";
         assertThat(predicate).hasToString(queryPattern);
@@ -66,7 +67,7 @@ class PredicateCriteriaUtilsTest {
     }
 
     @Test
-    void applyCriteriaArrayIncludesAllWithOperationWithMultipleFilterValues() {
+    void applyCriteriaArrayIncludesAllOperationWithMultipleFilterValues() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001,label_002,label_003");
         var queryPattern = "label_001,label_002,label_003 in contact.labels";
         assertThat(predicate).hasToString(queryPattern);
@@ -82,6 +83,72 @@ class PredicateCriteriaUtilsTest {
         queryPattern = "label_001,label_002,label_003 in contact.labels && category_001 in note.categories && category_002 in note.categories && "
             + "category_003 in note.categories && category_004 in note.categories && category_005 in note.categories && category_006 in note"
             + ".categories";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaDateEqualsOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "dueDate 1");
+        var queryPattern = "task.dueDate = dueDate 1";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate, "equals(lastEditDate_001)");
+        queryPattern = "task.dueDate = dueDate 1 && task.lastEditDate = lastEditDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate, "equals(creationDate_001)");
+        queryPattern = "task.dueDate = dueDate 1 && task.lastEditDate = lastEditDate_001 && task.creationDate = creationDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaDateEqualsOperationWithMultipleFilterValues() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "dueDate_001");
+        var queryPattern = "task.dueDate = dueDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate,
+            "equals(lastEditDate_002,lastEditDate_003,lastEditDate_004)");
+        queryPattern =
+            "task.dueDate = dueDate_001 && (task.lastEditDate = lastEditDate_002 || task.lastEditDate = lastEditDate_003 || task.lastEditDate = "
+                + "lastEditDate_004)";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate,
+            "equals(creationDate_005,creationDate_006,creationDate_007)");
+        queryPattern = "task.dueDate = dueDate_001 && (task.lastEditDate = lastEditDate_002 || task.lastEditDate = lastEditDate_003 || task"
+            + ".lastEditDate = lastEditDate_004) && (task.creationDate = creationDate_005 || task.creationDate = creationDate_006 || task"
+            + ".creationDate = creationDate_007)";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaDateNotEqualsOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "dueDate_001");
+        var queryPattern = "task.dueDate = dueDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate, "notEquals(lastEditDate_001)");
+        queryPattern = "task.dueDate = dueDate_001 && task.lastEditDate != lastEditDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate, "notEquals(creationDate_001)");
+        queryPattern = "task.dueDate = dueDate_001 && task.lastEditDate != lastEditDate_001 && task.creationDate != creationDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaDateNotEqualsOperationWithMultipleFilterValues() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate,
+            "notEquals(lastEditDate_002,lastEditDate_003,lastEditDate_004)");
+        var queryPattern = "task.lastEditDate != lastEditDate_002 || task.lastEditDate != lastEditDate_003 || task.lastEditDate != lastEditDate_004";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate,
+            "notEquals(creationDate_005,creationDate_006,creationDate_007)");
+        queryPattern = "(task.lastEditDate != lastEditDate_002 || task.lastEditDate != lastEditDate_003 || task"
+            + ".lastEditDate != lastEditDate_004) && (task.creationDate != creationDate_005 || task.creationDate != creationDate_006 || task"
+            + ".creationDate != creationDate_007)";
         assertThat(predicate).hasToString(queryPattern);
     }
 
