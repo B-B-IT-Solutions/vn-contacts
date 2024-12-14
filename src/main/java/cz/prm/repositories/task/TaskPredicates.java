@@ -46,7 +46,7 @@ public class TaskPredicates {
             predicate.or(task.completed.eq(filter.getCompleted()));
         }
         if (filter.isDueDate()) {
-//            applyCriteria(predicate, task.dueDate, filter.getDueDate());
+            applyCriteria(predicate, task.dueDate, filter.getDueDate());
         }
         return predicate;
     }
