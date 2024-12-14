@@ -4,7 +4,6 @@ import static cz.prm.utils.TestUtils.uuid;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Date;
 import org.junit.jupiter.api.Test;
 
 class FilterCriteriaTest {
