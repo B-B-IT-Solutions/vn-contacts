@@ -8,6 +8,8 @@ import static cz.prm.repositories.common.query.filter.FilterOperation.ENDS_WITH;
 import static cz.prm.repositories.common.query.filter.FilterOperation.EQUALS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.GREATER_THAN;
 import static cz.prm.repositories.common.query.filter.FilterOperation.GREATER_THAN_OR_EQUAL_TO;
+import static cz.prm.repositories.common.query.filter.FilterOperation.LESS_THAN;
+import static cz.prm.repositories.common.query.filter.FilterOperation.LESS_THAN_OR_EQUAL_TO;
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_CONTAINS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_EMPTY;
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_EQUALS;
@@ -67,6 +69,10 @@ public class PredicateCriteriaUtils {
             of(fc.getValues()).forEach(value -> predicate.or(field.gt(value)));
         } else if (GREATER_THAN_OR_EQUAL_TO.isOperation(fc)) {
             of(fc.getValues()).forEach(value -> predicate.or(field.goe(value)));
+        } else if (LESS_THAN.isOperation(fc)) {
+            of(fc.getValues()).forEach(value -> predicate.or(field.lt(value)));
+        } else if (LESS_THAN_OR_EQUAL_TO.isOperation(fc)) {
+            of(fc.getValues()).forEach(value -> predicate.or(field.loe(value)));
         } else {
             of(fc.getValues()).forEach(value -> predicate.or(field.eq(value)));
         }

@@ -183,6 +183,36 @@ class PredicateCriteriaUtilsTest {
     }
 
     @Test
+    void applyCriteriaDateLessThanOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "lessThan(dueDate_001)");
+        var queryPattern = "task.dueDate < dueDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate, "lessThan(lastEditDate_001)");
+        queryPattern = "task.dueDate < dueDate_001 && task.lastEditDate < lastEditDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate, "lessThan(creationDate_001)");
+        queryPattern = "task.dueDate < dueDate_001 && task.lastEditDate < lastEditDate_001 && task.creationDate < creationDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaDateLessThanOrEqualsToOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "lessThanOrEqualTo(dueDate_001)");
+        var queryPattern = "task.dueDate <= dueDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate, "lessThanOrEqualTo(lastEditDate_001)");
+        queryPattern = "task.dueDate <= dueDate_001 && task.lastEditDate <= lastEditDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate, "lessThanOrEqualTo(creationDate_001)");
+        queryPattern = "task.dueDate <= dueDate_001 && task.lastEditDate <= lastEditDate_001 && task.creationDate <= creationDate_001";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
     void applyCriteriaNoOperation() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.firstName, "firstName_001");
         var queryPattern = "containsIc(contact.firstName,firstName_001)";
