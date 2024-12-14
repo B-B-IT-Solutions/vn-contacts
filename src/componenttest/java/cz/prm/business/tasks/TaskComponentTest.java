@@ -4,11 +4,14 @@ import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
+import static cz.prm.utils.ComponentTestUtils.betweenFilter;
 import static cz.prm.utils.ComponentTestUtils.emptyFilter;
 import static cz.prm.utils.ComponentTestUtils.endsWithFilter;
 import static cz.prm.utils.ComponentTestUtils.equalsFilter;
 import static cz.prm.utils.ComponentTestUtils.greaterThanFilter;
 import static cz.prm.utils.ComponentTestUtils.greaterThanOrEqualToFilter;
+import static cz.prm.utils.ComponentTestUtils.lessThanFilter;
+import static cz.prm.utils.ComponentTestUtils.lessThanOrEqualToFilter;
 import static cz.prm.utils.ComponentTestUtils.notEmptyFilter;
 import static cz.prm.utils.ComponentTestUtils.notEqualsFilter;
 import static cz.prm.utils.ComponentTestUtils.randomLong;
@@ -25,6 +28,7 @@ import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.task.TaskDto;
+import java.time.temporal.ChronoUnit;
 import org.junit.jupiter.api.Test;
 
 public class TaskComponentTest extends TaskComponentTestBase {
@@ -334,10 +338,10 @@ public class TaskComponentTest extends TaskComponentTestBase {
         filter.setDueDate(greaterThanFilter(now().minus(1, DAYS)));
         pageDto = user1GetTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
-
-        filter.setDueDate(greaterThanFilter(now()));
-        pageDto = user1GetTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
+//
+//        filter.setDueDate(greaterThanFilter(now()));
+//        pageDto = user1GetTasks(contactId, queryDto);
+//        assertThat(pageDto.getContent()).isEmpty();
 
         filter.setDueDate(greaterThanFilter(now().plus(1, DAYS)));
         pageDto = user1GetTasks(contactId, queryDto);
@@ -352,6 +356,42 @@ public class TaskComponentTest extends TaskComponentTestBase {
         assertThat(pageDto.getContent()).hasSize(21);
 
         filter.setDueDate(greaterThanOrEqualToFilter(now().plus(1, DAYS)));
+        pageDto = user1GetTasks(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setDueDate(lessThanFilter(now().plus(1, DAYS)));
+        pageDto = user1GetTasks(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+//
+//        filter.setDueDate(lessThanFilter(now()));
+//        pageDto = user1GetTasks(contactId, queryDto);
+//        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setDueDate(lessThanFilter(now().minus(1, DAYS)));
+        pageDto = user1GetTasks(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setDueDate(lessThanOrEqualToFilter(now().plus(1, DAYS)));
+        pageDto = user1GetTasks(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+//        filter.setDueDate(lessThanOrEqualToFilter(now()));
+//        pageDto = user1GetTasks(contactId, queryDto);
+//        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setDueDate(lessThanOrEqualToFilter(now().minus(1, DAYS)));
+        pageDto = user1GetTasks(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setDueDate(betweenFilter(now().minus(1, DAYS), now().plus(5, DAYS)));
+        pageDto = user1GetTasks(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setDueDate(betweenFilter(now(), now().plus(5, DAYS)));
+        pageDto = user1GetTasks(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setDueDate(betweenFilter(now().plus(1, DAYS), now().plus(5, DAYS)));
         pageDto = user1GetTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
     }

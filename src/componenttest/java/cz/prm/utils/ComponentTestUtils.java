@@ -110,7 +110,7 @@ public class ComponentTestUtils {
     }
 
     public static String betweenFilter(Instant start, Instant end) {
-        return format("between(%s,%)", DATE_FORMATTER.format(start), DATE_FORMATTER.format(end));
+        return format("between(%s,%s)", DATE_FORMATTER.format(start), DATE_FORMATTER.format(end));
     }
 
     public static String emptyFilter() {
