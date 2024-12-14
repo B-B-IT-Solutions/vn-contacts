@@ -1,15 +1,13 @@
 package cz.prm.repositories.common.query;
 
+import static cz.prm.utils.TimeUtils.useMockTimeZone;
+import static cz.prm.utils.TimeUtils.useSystemDefaultTimeZone;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.contact.querydsl.QContact;
 import cz.prm.domain.note.querydsl.QNote;
 import cz.prm.domain.task.querydsl.QTask;
-import cz.prm.utils.TimeUtils;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.ZoneId;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,16 +18,13 @@ class PredicateCriteriaUtilsTest {
 
     @BeforeEach
     void setUp() {
+        useMockTimeZone();
         mockPredicate = new BooleanBuilder();
-
-        var currentDateTime = LocalDateTime.of(2024, Month.DECEMBER, 14, 12, 45);
-        var zoneId = ZoneId.of("Europe/Prague");
-        TimeUtils.useMockTime(currentDateTime, zoneId);
     }
 
     @AfterEach
     void tearDown() {
-        TimeUtils.useSystemDefaultZoneClock();
+        useSystemDefaultTimeZone();
     }
 
     @Test
