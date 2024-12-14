@@ -313,4 +313,88 @@ class FilterOperationTest {
         assertThat(BETWEEN_INCLUSIVE.isOperation(fcLessThanOrEqualTo)).isFalse();
         assertThat(BETWEEN_INCLUSIVE.isOperation(fcRandom)).isFalse();
     }
+
+    @Test
+    void isOperationGreaterThan() {
+        assertThat(GREATER_THAN.isOperation(fcGreaterThan)).isTrue();
+        assertThat(GREATER_THAN.isOperation(fcGreaterThanOrEqualTo)).isFalse();
+        assertThat(GREATER_THAN.isOperation(fcArrayIncludesAll)).isFalse();
+        assertThat(GREATER_THAN.isOperation(fcArrayIncludes)).isFalse();
+        assertThat(GREATER_THAN.isOperation(fcNotEmpty)).isFalse();
+        assertThat(GREATER_THAN.isOperation(fcEmpty)).isFalse();
+        assertThat(GREATER_THAN.isOperation(fcEndsWith)).isFalse();
+        assertThat(GREATER_THAN.isOperation(fcStartsWith)).isFalse();
+        assertThat(GREATER_THAN.isOperation(fcContains)).isFalse();
+        assertThat(GREATER_THAN.isOperation(fcNotContains)).isFalse();
+        assertThat(GREATER_THAN.isOperation(fcEquals)).isFalse();
+        assertThat(GREATER_THAN.isOperation(fcNotEquals)).isFalse();
+        assertThat(GREATER_THAN.isOperation(fcBetween)).isFalse();
+        assertThat(GREATER_THAN.isOperation(fcBetweenInclusive)).isFalse();
+        assertThat(GREATER_THAN.isOperation(fcLessThan)).isFalse();
+        assertThat(GREATER_THAN.isOperation(fcLessThanOrEqualTo)).isFalse();
+        assertThat(GREATER_THAN.isOperation(fcRandom)).isFalse();
+    }
+
+    @Test
+    void isOperationGreaterThanOrEqualTo() {
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcGreaterThanOrEqualTo)).isTrue();
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcGreaterThan)).isFalse();
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcArrayIncludesAll)).isFalse();
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcArrayIncludes)).isFalse();
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcNotEmpty)).isFalse();
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcEmpty)).isFalse();
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcEndsWith)).isFalse();
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcStartsWith)).isFalse();
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcContains)).isFalse();
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcNotContains)).isFalse();
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcEquals)).isFalse();
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcNotEquals)).isFalse();
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcBetween)).isFalse();
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcBetweenInclusive)).isFalse();
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcLessThan)).isFalse();
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcLessThanOrEqualTo)).isFalse();
+        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcRandom)).isFalse();
+    }
+
+    @Test
+    void isOperationLessThan() {
+        assertThat(LESS_THAN.isOperation(fcLessThan)).isTrue();
+        assertThat(LESS_THAN.isOperation(fcLessThanOrEqualTo)).isFalse();
+        assertThat(LESS_THAN.isOperation(fcArrayIncludesAll)).isFalse();
+        assertThat(LESS_THAN.isOperation(fcArrayIncludes)).isFalse();
+        assertThat(LESS_THAN.isOperation(fcNotEmpty)).isFalse();
+        assertThat(LESS_THAN.isOperation(fcEmpty)).isFalse();
+        assertThat(LESS_THAN.isOperation(fcEndsWith)).isFalse();
+        assertThat(LESS_THAN.isOperation(fcStartsWith)).isFalse();
+        assertThat(LESS_THAN.isOperation(fcContains)).isFalse();
+        assertThat(LESS_THAN.isOperation(fcNotContains)).isFalse();
+        assertThat(LESS_THAN.isOperation(fcEquals)).isFalse();
+        assertThat(LESS_THAN.isOperation(fcNotEquals)).isFalse();
+        assertThat(LESS_THAN.isOperation(fcBetween)).isFalse();
+        assertThat(LESS_THAN.isOperation(fcBetweenInclusive)).isFalse();
+        assertThat(LESS_THAN.isOperation(fcGreaterThan)).isFalse();
+        assertThat(LESS_THAN.isOperation(fcGreaterThanOrEqualTo)).isFalse();
+        assertThat(LESS_THAN.isOperation(fcRandom)).isFalse();
+    }
+
+    @Test
+    void isOperationLessThanOrEqualTo() {
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcLessThanOrEqualTo)).isTrue();
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcLessThan)).isFalse();
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcArrayIncludesAll)).isFalse();
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcArrayIncludes)).isFalse();
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcNotEmpty)).isFalse();
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcEmpty)).isFalse();
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcEndsWith)).isFalse();
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcStartsWith)).isFalse();
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcContains)).isFalse();
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcNotContains)).isFalse();
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcEquals)).isFalse();
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcNotEquals)).isFalse();
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcBetween)).isFalse();
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcBetweenInclusive)).isFalse();
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcGreaterThan)).isFalse();
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcGreaterThanOrEqualTo)).isFalse();
+        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcRandom)).isFalse();
+    }
 }
