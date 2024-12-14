@@ -1,8 +1,12 @@
 package cz.prm.repositories.common.query.filter;
 
 import static java.util.Objects.nonNull;
+import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.stream.Streams.of;
 import static org.apache.logging.log4j.util.Strings.isNotBlank;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.regex.Pattern;
 import lombok.Getter;
 
@@ -18,6 +22,11 @@ public class FilterCriteria {
 
     public FilterCriteria(String filter) {
         parse(filter);
+    }
+
+    public Instant[] getInstantValues() {
+        var instants = of(values).map(v -> new Date(v).toInstant()).collect(toList());
+        return instants.toArray(Instant[]::new);
     }
 
     private void parse(String filter) {

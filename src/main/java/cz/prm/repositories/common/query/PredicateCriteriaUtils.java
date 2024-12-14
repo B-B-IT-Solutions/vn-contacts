@@ -62,19 +62,19 @@ public class PredicateCriteriaUtils {
     private static Predicate apply(DateTimePath field, FilterCriteria fc) {
         var predicate = new BooleanBuilder();
         if (EQUALS.isOperation(fc)) {
-            of(fc.getValues()).forEach(value -> predicate.or(field.eq(value)));
+            of(fc.getInstantValues()).forEach(value -> predicate.or(field.eq(value)));
         } else if (NOT_EQUALS.isOperation(fc)) {
-            of(fc.getValues()).forEach(value -> predicate.or(field.ne(value)));
+            of(fc.getInstantValues()).forEach(value -> predicate.or(field.ne(value)));
         } else if (GREATER_THAN.isOperation(fc)) {
-            of(fc.getValues()).forEach(value -> predicate.or(field.gt(value)));
+            of(fc.getInstantValues()).forEach(value -> predicate.or(field.gt(value)));
         } else if (GREATER_THAN_OR_EQUAL_TO.isOperation(fc)) {
-            of(fc.getValues()).forEach(value -> predicate.or(field.goe(value)));
+            of(fc.getInstantValues()).forEach(value -> predicate.or(field.goe(value)));
         } else if (LESS_THAN.isOperation(fc)) {
-            of(fc.getValues()).forEach(value -> predicate.or(field.lt(value)));
+            of(fc.getInstantValues()).forEach(value -> predicate.or(field.lt(value)));
         } else if (LESS_THAN_OR_EQUAL_TO.isOperation(fc)) {
-            of(fc.getValues()).forEach(value -> predicate.or(field.loe(value)));
+            of(fc.getInstantValues()).forEach(value -> predicate.or(field.loe(value)));
         } else {
-            of(fc.getValues()).forEach(value -> predicate.or(field.eq(value)));
+            of(fc.getInstantValues()).forEach(value -> predicate.or(field.eq(value)));
         }
         return predicate;
     }

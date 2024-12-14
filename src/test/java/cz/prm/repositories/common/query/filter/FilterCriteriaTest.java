@@ -4,6 +4,7 @@ import static cz.prm.utils.TestUtils.uuid;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Date;
 import org.junit.jupiter.api.Test;
 
 class FilterCriteriaTest {
@@ -86,6 +87,22 @@ class FilterCriteriaTest {
         var filter = format("notContains(%s)", values);
         var fc = new FilterCriteria(filter);
         assertThat(fc.getOperation()).isEqualTo("notContains");
+        assertThat(fc.getValues()).containsExactly(value1, value2, value3);
+    }
+
+    @Test
+    void getInstantValues() {
+        var value1 = "15 Dec 2024";
+        var value2 = "17 Dec 2024";
+        var value3 = "19 Dec 2024";
+        var date1 = new Date("15 Dec 2024").toInstant();
+        var date2 = new Date("17 Dec 2024").toInstant();
+        var date3 = new Date("19 Dec 2024").toInstant();
+        var values = format("%s,%s,%s", value1, value2, value3);
+        var filter = format("greaterThan(%s)", values);
+        var fc = new FilterCriteria(filter);
+        assertThat(fc.getOperation()).isEqualTo("greaterThan");
+        assertThat(fc.getInstantValues()).containsExactly(date1, date2, date3);
         assertThat(fc.getValues()).containsExactly(value1, value2, value3);
     }
 }
