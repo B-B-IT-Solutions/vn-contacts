@@ -13,7 +13,12 @@ public enum FilterOperation {
     EMPTY("empty"),
     NOT_EMPTY("notEmpty"),
     ARRAY_INCLUDES("arrIncludes"),
-    ARRAY_INCLUDES_ALL("arrIncludesAll");
+    ARRAY_INCLUDES_ALL("arrIncludesAll"),
+    BETWEEN("between"),
+    GREATER_THAN("greaterThan"),
+    GREATER_THAN_OR_EQUAL_TO("greaterThanOrEqualTo"),
+    LESS_THAN("lessThan"),
+    LESS_THAN_OR_EQUAL_TO("lessThanOrEqualTo");
 
     private final String name;
 

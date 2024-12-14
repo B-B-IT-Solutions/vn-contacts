@@ -16,6 +16,8 @@ public class TasksFilter {
 
     private Boolean completed;
 
+    private String dueDate;
+
     public boolean isGlobalFilter() {
         return isNotBlank(globalFilter);
     }
@@ -26,5 +28,9 @@ public class TasksFilter {
 
     public boolean isCompleted() {
         return nonNull(completed);
+    }
+
+    public boolean isDueDate() {
+        return isNotBlank(dueDate);
     }
 }

@@ -1,6 +1,8 @@
 package cz.prm.utils.assertions;
 
+import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.task.TaskDto;
@@ -28,6 +30,7 @@ public class TaskComponentTestAssertions {
         assertThat(task.getTitle()).isEqualTo(taskDto.getTitle());
         assertThat(task.getDescription()).isEqualTo(taskDto.getDescription());
         assertThat(task.isCompleted()).isEqualTo(taskDto.isCompleted());
+        assertThat(task.getDueDate()).isCloseTo(taskDto.getDueDate(), within(1, SECONDS));
         assertThat(task.getLastEditDate()).isNotNull();
         assertThat(task.getCreationDate()).isNotNull();
     }

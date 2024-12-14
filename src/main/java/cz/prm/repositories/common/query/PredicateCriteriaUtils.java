@@ -2,10 +2,15 @@ package cz.prm.repositories.common.query;
 
 import static cz.prm.repositories.common.query.filter.FilterOperation.ARRAY_INCLUDES;
 import static cz.prm.repositories.common.query.filter.FilterOperation.ARRAY_INCLUDES_ALL;
+import static cz.prm.repositories.common.query.filter.FilterOperation.BETWEEN;
 import static cz.prm.repositories.common.query.filter.FilterOperation.CONTAINS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.EMPTY;
 import static cz.prm.repositories.common.query.filter.FilterOperation.ENDS_WITH;
 import static cz.prm.repositories.common.query.filter.FilterOperation.EQUALS;
+import static cz.prm.repositories.common.query.filter.FilterOperation.GREATER_THAN;
+import static cz.prm.repositories.common.query.filter.FilterOperation.GREATER_THAN_OR_EQUAL_TO;
+import static cz.prm.repositories.common.query.filter.FilterOperation.LESS_THAN;
+import static cz.prm.repositories.common.query.filter.FilterOperation.LESS_THAN_OR_EQUAL_TO;
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_CONTAINS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_EMPTY;
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_EQUALS;
@@ -15,6 +20,7 @@ import static lombok.AccessLevel.PRIVATE;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.DateTimePath;
 import com.querydsl.core.types.dsl.ListPath;
 import com.querydsl.core.types.dsl.StringPath;
 import cz.prm.repositories.common.query.filter.FilterCriteria;
@@ -25,6 +31,12 @@ import lombok.NoArgsConstructor;
 public class PredicateCriteriaUtils {
 
     public static Predicate applyCriteria(BooleanBuilder predicate, ListPath field, String filter) {
+        var fcs = new FilterCriterias(filter);
+        fcs.getCriterias().forEach(fc -> predicate.and(apply(field, fc)));
+        return predicate;
+    }
+
+    public static Predicate applyCriteria(BooleanBuilder predicate, DateTimePath field, String filter) {
         var fcs = new FilterCriterias(filter);
         fcs.getCriterias().forEach(fc -> predicate.and(apply(field, fc)));
         return predicate;
@@ -44,6 +56,32 @@ public class PredicateCriteriaUtils {
             of(fc.getValues()).forEach(value -> predicate.and(field.contains(value)));
         } else {
             of(fc.getValues()).forEach(value -> predicate.or(field.contains(value)));
+        }
+        return predicate;
+    }
+
+    private static Predicate apply(DateTimePath field, FilterCriteria fc) {
+        var predicate = new BooleanBuilder();
+        if (EQUALS.isOperation(fc)) {
+            of(fc.getDateValues()).forEach(value -> predicate.or(field.eq(value)));
+        } else if (NOT_EQUALS.isOperation(fc)) {
+            of(fc.getDateValues()).forEach(value -> predicate.or(field.ne(value)));
+        } else if (GREATER_THAN.isOperation(fc)) {
+            of(fc.getDateValues()).forEach(value -> predicate.or(field.gt(value)));
+        } else if (GREATER_THAN_OR_EQUAL_TO.isOperation(fc)) {
+            of(fc.getDateValues()).forEach(value -> predicate.or(field.goe(value)));
+        } else if (LESS_THAN.isOperation(fc)) {
+            of(fc.getDateValues()).forEach(value -> predicate.or(field.lt(value)));
+        } else if (LESS_THAN_OR_EQUAL_TO.isOperation(fc)) {
+            of(fc.getDateValues()).forEach(value -> predicate.or(field.loe(value)));
+        } else if (BETWEEN.isOperation(fc)) {
+            if (fc.hasBetweenDateValues()) {
+                var start = fc.getDateValues()[0];
+                var end = fc.getDateValues()[1];
+                predicate.or(field.between(start, end));
+            }
+        } else {
+            of(fc.getDateValues()).forEach(value -> predicate.or(field.eq(value)));
         }
         return predicate;
     }

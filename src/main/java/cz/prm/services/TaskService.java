@@ -55,6 +55,7 @@ public class TaskService {
         savedTask.setTitle(updatedTask.getTitle());
         savedTask.setDescription(updatedTask.getDescription());
         savedTask.setCompleted(updatedTask.isCompleted());
+        savedTask.setDueDate(updatedTask.getDueDate());
     }
 
     private Task getTaskById(Long taskId) {

@@ -47,6 +47,9 @@ public class Task {
     @Column(name = "COMPLETED")
     private boolean completed;
 
+    @Column(name = "DUE_DATE")
+    private Instant dueDate;
+
     @LastModifiedDate
     @Column(name = "LAST_EDIT_DATE")
     private Instant lastEditDate;

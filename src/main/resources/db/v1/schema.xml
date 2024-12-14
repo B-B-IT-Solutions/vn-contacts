@@ -254,4 +254,10 @@
 				 <column name="contact_challenges" type="TEXT"/>
 			</addColumn>
 	 </changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.12">
+			<addColumn tableName="task">
+				 <column name="due_date" type="TIMESTAMP WITH TIME ZONE"/>
+			</addColumn>
+	 </changeSet>
 </databaseChangeLog>

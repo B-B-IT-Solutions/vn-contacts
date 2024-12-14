@@ -141,5 +141,6 @@ class TaskServiceTest {
         assertThat(savedTask.getTitle()).isEqualTo(updatedTask.getTitle());
         assertThat(savedTask.getDescription()).isEqualTo(updatedTask.getDescription());
         assertThat(savedTask.isCompleted()).isEqualTo(updatedTask.isCompleted());
+        assertThat(savedTask.getDueDate()).isEqualTo(updatedTask.getDueDate());
     }
 }

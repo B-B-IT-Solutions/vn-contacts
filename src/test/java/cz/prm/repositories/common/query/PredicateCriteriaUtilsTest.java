@@ -1,10 +1,14 @@
 package cz.prm.repositories.common.query;
 
+import static cz.prm.utils.TimeUtils.useMockTimeZone;
+import static cz.prm.utils.TimeUtils.useSystemDefaultTimeZone;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.contact.querydsl.QContact;
 import cz.prm.domain.note.querydsl.QNote;
+import cz.prm.domain.task.querydsl.QTask;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,11 +18,17 @@ class PredicateCriteriaUtilsTest {
 
     @BeforeEach
     void setUp() {
+        useMockTimeZone();
         mockPredicate = new BooleanBuilder();
     }
 
+    @AfterEach
+    void tearDown() {
+        useSystemDefaultTimeZone();
+    }
+
     @Test
-    void applyCriteriaArrayIncludesWithOperation() {
+    void applyCriteriaArrayIncludesOperation() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001");
         var queryPattern = "label_001 in contact.labels";
         assertThat(predicate).hasToString(queryPattern);
@@ -33,7 +43,7 @@ class PredicateCriteriaUtilsTest {
     }
 
     @Test
-    void applyCriteriaArrayIncludesWithOperationWithMultipleFilterValues() {
+    void applyCriteriaArrayIncludesOperationWithMultipleFilterValues() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001,label_002,label_003");
         var queryPattern = "label_001,label_002,label_003 in contact.labels";
         assertThat(predicate).hasToString(queryPattern);
@@ -51,7 +61,7 @@ class PredicateCriteriaUtilsTest {
     }
 
     @Test
-    void applyCriteriaArrayIncludesAllWithOperation() {
+    void applyCriteriaArrayIncludesAllOperation() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001");
         var queryPattern = "label_001 in contact.labels";
         assertThat(predicate).hasToString(queryPattern);
@@ -66,7 +76,7 @@ class PredicateCriteriaUtilsTest {
     }
 
     @Test
-    void applyCriteriaArrayIncludesAllWithOperationWithMultipleFilterValues() {
+    void applyCriteriaArrayIncludesAllOperationWithMultipleFilterValues() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001,label_002,label_003");
         var queryPattern = "label_001,label_002,label_003 in contact.labels";
         assertThat(predicate).hasToString(queryPattern);
@@ -82,6 +92,166 @@ class PredicateCriteriaUtilsTest {
         queryPattern = "label_001,label_002,label_003 in contact.labels && category_001 in note.categories && category_002 in note.categories && "
             + "category_003 in note.categories && category_004 in note.categories && category_005 in note.categories && category_006 in note"
             + ".categories";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaDateEqualsOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "15 Dec 2024");
+        var queryPattern = "task.dueDate = 2024-12-14T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate, "equals(17 Dec 2024)");
+        queryPattern = "task.dueDate = 2024-12-14T23:00:00Z && task.lastEditDate = 2024-12-16T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate, "equals(19 Dec 2024)");
+        queryPattern = "task.dueDate = 2024-12-14T23:00:00Z && task.lastEditDate = 2024-12-16T23:00:00Z && task.creationDate = 2024-12-18T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaDateEqualsOperationWithMultipleFilterValues() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "15 Dec 2024");
+        var queryPattern = "task.dueDate = 2024-12-14T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate, "equals(10 Dec 2024,11 Dec 2024,12 Dec 2024)");
+        queryPattern = "task.dueDate = 2024-12-14T23:00:00Z && (task.lastEditDate = 2024-12-09T23:00:00Z || task.lastEditDate = "
+            + "2024-12-10T23:00:00Z || task.lastEditDate = 2024-12-11T23:00:00Z)";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate, "equals(21 Dec 2024,22 Dec 2024,23 Dec 2024)");
+        queryPattern =
+            "task.dueDate = 2024-12-14T23:00:00Z && (task.lastEditDate = 2024-12-09T23:00:00Z || task.lastEditDate = 2024-12-10T23:00:00Z || task"
+                + ".lastEditDate = 2024-12-11T23:00:00Z) && (task.creationDate = 2024-12-20T23:00:00Z || task.creationDate = 2024-12-21T23:00:00Z "
+                + "|| task.creationDate = 2024-12-22T23:00:00Z)";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaDateNotEqualsOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "15 Dec 2024");
+        var queryPattern = "task.dueDate = 2024-12-14T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate, "notEquals(17 Dec 2024)");
+        queryPattern = "task.dueDate = 2024-12-14T23:00:00Z && task.lastEditDate != 2024-12-16T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate, "notEquals(19 Dec 2024)");
+        queryPattern =
+            "task.dueDate = 2024-12-14T23:00:00Z && task.lastEditDate != 2024-12-16T23:00:00Z && task.creationDate != " + "2024-12-18T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaDateNotEqualsOperationWithMultipleFilterValues() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate,
+            "notEquals(10 Dec 2024,11 Dec 2024,12 Dec 2024)");
+        var queryPattern = "task.lastEditDate != 2024-12-09T23:00:00Z || task.lastEditDate != 2024-12-10T23:00:00Z || task.lastEditDate != "
+            + "2024-12-11T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate, "notEquals(21 Dec 2024,22 Dec 2024,23 Dec 2024)");
+        queryPattern = "(task.lastEditDate != 2024-12-09T23:00:00Z || task.lastEditDate != 2024-12-10T23:00:00Z || task.lastEditDate != "
+            + "2024-12-11T23:00:00Z) && (task.creationDate != 2024-12-20T23:00:00Z || task.creationDate != 2024-12-21T23:00:00Z || task"
+            + ".creationDate != 2024-12-22T23:00:00Z)";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaDateGreaterThanOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "greaterThan(15 Dec 2024)");
+        var queryPattern = "task.dueDate > 2024-12-14T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate, "greaterThan(17 Dec 2024)");
+        queryPattern = "task.dueDate > 2024-12-14T23:00:00Z && task.lastEditDate > 2024-12-16T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate, "greaterThan(19 Dec 2024)");
+        queryPattern = "task.dueDate > 2024-12-14T23:00:00Z && task.lastEditDate > 2024-12-16T23:00:00Z && task.creationDate > 2024-12-18T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaDateGreaterThanOrEqualsToOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "greaterThanOrEqualTo(15 Dec 2024)");
+        var queryPattern = "task.dueDate >= 2024-12-14T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate, "greaterThanOrEqualTo(17 Dec 2024)");
+        queryPattern = "task.dueDate >= 2024-12-14T23:00:00Z && task.lastEditDate >= 2024-12-16T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate, "greaterThanOrEqualTo(19 Dec 2024)");
+        queryPattern =
+            "task.dueDate >= 2024-12-14T23:00:00Z && task.lastEditDate >= 2024-12-16T23:00:00Z && task.creationDate >= " + "2024-12-18T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaDateLessThanOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "lessThan(15 Dec 2024)");
+        var queryPattern = "task.dueDate < 2024-12-14T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate, "lessThan(17 Dec 2024)");
+        queryPattern = "task.dueDate < 2024-12-14T23:00:00Z && task.lastEditDate < 2024-12-16T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate, "lessThan(19 Dec 2024)");
+        queryPattern = "task.dueDate < 2024-12-14T23:00:00Z && task.lastEditDate < 2024-12-16T23:00:00Z && task.creationDate < 2024-12-18T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaDateLessThanOrEqualsToOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "lessThanOrEqualTo(15 Dec 2024)");
+        var queryPattern = "task.dueDate <= 2024-12-14T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate, "lessThanOrEqualTo(17 Dec 2024)");
+        queryPattern = "task.dueDate <= 2024-12-14T23:00:00Z && task.lastEditDate <= 2024-12-16T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate, "lessThanOrEqualTo(19 Dec 2024)");
+        queryPattern =
+            "task.dueDate <= 2024-12-14T23:00:00Z && task.lastEditDate <= 2024-12-16T23:00:00Z && task.creationDate <= " + "2024-12-18T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+    @Test
+    void applyCriteriaDateBetweenOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "between()");
+        var queryPattern = "com.querydsl.core.BooleanBuilder@0";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "between(,)");
+        queryPattern = "com.querydsl.core.BooleanBuilder@0";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "between(15 Dec 2024)");
+        queryPattern = "com.querydsl.core.BooleanBuilder@0";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "between(15 Dec 2024,)");
+        queryPattern = "com.querydsl.core.BooleanBuilder@0";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "between(15 Dec 2024,17 Dec 2024)");
+        queryPattern = "task.dueDate between 2024-12-14T23:00:00Z and 2024-12-16T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate, "between(17 Dec 2024, 19 Dec 2024)");
+        queryPattern = "task.dueDate between 2024-12-14T23:00:00Z and 2024-12-16T23:00:00Z && task.lastEditDate between 2024-12-16T23:00:00Z and "
+            + "2024-12-18T23:00:00Z";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.creationDate, "between(11 Dec 2024, 15 Dec 2024)");
+        queryPattern = "task.dueDate between 2024-12-14T23:00:00Z and 2024-12-16T23:00:00Z && task.lastEditDate between 2024-12-16T23:00:00Z and "
+            + "2024-12-18T23:00:00Z && task.creationDate between 2024-12-10T23:00:00Z and 2024-12-14T23:00:00Z";
         assertThat(predicate).hasToString(queryPattern);
     }
 

@@ -2,17 +2,23 @@ package cz.prm.utils;
 
 import static java.lang.Math.abs;
 import static java.lang.String.format;
+import static java.time.ZoneId.systemDefault;
+import static java.time.format.DateTimeFormatter.ofPattern;
 import static java.util.UUID.randomUUID;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.range;
 
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
 public class ComponentTestUtils {
 
+    private static final String DATE_FORMAT = "dd MMM yyyy";
+    private static final DateTimeFormatter DATE_FORMATTER = ofPattern(DATE_FORMAT).withZone(systemDefault());
     private static Random random = new Random();
 
     public static Long randomLong() {
@@ -85,6 +91,26 @@ public class ComponentTestUtils {
 
     public static String arrayIncludesAllFilter(List<String> filters) {
         return format("arrIncludesAll(%s)", filters.stream().collect(joining(",")));
+    }
+
+    public static String greaterThanFilter(Instant instant) {
+        return format("greaterThan(%s)", DATE_FORMATTER.format(instant));
+    }
+
+    public static String greaterThanOrEqualToFilter(Instant instant) {
+        return format("greaterThanOrEqualTo(%s)", DATE_FORMATTER.format(instant));
+    }
+
+    public static String lessThanFilter(Instant instant) {
+        return format("lessThan(%s)", DATE_FORMATTER.format(instant));
+    }
+
+    public static String lessThanOrEqualToFilter(Instant instant) {
+        return format("lessThanOrEqualTo(%s)", DATE_FORMATTER.format(instant));
+    }
+
+    public static String betweenFilter(Instant start, Instant end) {
+        return format("between(%s,%s)", DATE_FORMATTER.format(start), DATE_FORMATTER.format(end));
     }
 
     public static String emptyFilter() {

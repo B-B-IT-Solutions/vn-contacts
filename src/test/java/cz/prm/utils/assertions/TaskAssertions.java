@@ -64,6 +64,7 @@ public class TaskAssertions {
         assertThat(task1.getContactId()).isEqualTo(task2.getContactId());
         assertThat(task1.getDescription()).isEqualTo(task2.getDescription());
         assertThat(task1.isCompleted()).isEqualTo(task2.isCompleted());
+        assertThat(task1.getDueDate()).isEqualTo(task2.getDueDate());
         assertThat(task1.getLastEditDate()).isEqualTo(task2.getLastEditDate());
         assertThat(task1.getCreationDate()).isEqualTo(task2.getCreationDate());
         assertThat(task1.getOwner()).isEqualTo(task2.getOwner());
@@ -75,6 +76,7 @@ public class TaskAssertions {
         assertThat(task.getTitle()).isEqualTo(dto.getTitle());
         assertThat(task.getDescription()).isEqualTo(dto.getDescription());
         assertThat(task.isCompleted()).isEqualTo(dto.isCompleted());
+        assertThat(task.getDueDate()).isEqualTo(dto.getDueDate());
         assertThat(task.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(task.getCreationDate()).isEqualTo(dto.getCreationDate());
     }
@@ -88,5 +90,6 @@ public class TaskAssertions {
         assertThat(filter.getGlobalFilter()).isEqualTo(dto.getGlobalFilter());
         assertThat(filter.getTitle()).isEqualTo(dto.getTitle());
         assertThat(filter.getCompleted()).isEqualTo(dto.getCompleted());
+        assertThat(filter.getDueDate()).isEqualTo(dto.getDueDate());
     }
 }

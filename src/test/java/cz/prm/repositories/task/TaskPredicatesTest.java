@@ -1,11 +1,14 @@
 package cz.prm.repositories.task;
 
 import static cz.prm.utils.CommonUtils.user;
+import static cz.prm.utils.TimeUtils.useMockTimeZone;
+import static cz.prm.utils.TimeUtils.useSystemDefaultTimeZone;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.domain.task.query.TasksFilter;
 import cz.prm.security.SecurityContextUtils;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
@@ -17,7 +20,13 @@ class TaskPredicatesTest {
 
     @BeforeEach
     void setUp() {
+        useMockTimeZone();
         predicates = new TaskPredicates();
+    }
+
+    @AfterEach
+    void tearDown() {
+        useSystemDefaultTimeZone();
     }
 
     @Test
@@ -71,15 +80,23 @@ class TaskPredicatesTest {
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.contactId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setTitle(null);
             filter.setCompleted(true);
             predicate = predicates.byContactId(17L, filter);
-            expectedString = format("task.owner.username = %s && task.completed = true && task.contactId = 17", user.getUsername());
+            expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.completed = true && task.contactId = 17",
+                user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setCompleted(false);
             predicate = predicates.byContactId(17L, filter);
-            expectedString = format("task.owner.username = %s && task.completed = false && task.contactId = 17", user.getUsername());
+            expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.completed = false && task.contactId = 17",
+                user.getUsername());
+            assertThat(predicate).hasToString(expectedString);
+
+            filter.setTitle(null);
+            filter.setCompleted(null);
+            filter.setDueDate("greaterThan(15 Dec 2024)");
+            predicate = predicates.byContactId(17L, filter);
+            expectedString = format("task.owner.username = %s && task.dueDate > 2024-12-14T23:00:00Z && task.contactId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
         }
     }
