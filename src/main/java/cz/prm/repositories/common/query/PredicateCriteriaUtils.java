@@ -2,6 +2,7 @@ package cz.prm.repositories.common.query;
 
 import static cz.prm.repositories.common.query.filter.FilterOperation.ARRAY_INCLUDES;
 import static cz.prm.repositories.common.query.filter.FilterOperation.ARRAY_INCLUDES_ALL;
+import static cz.prm.repositories.common.query.filter.FilterOperation.BETWEEN;
 import static cz.prm.repositories.common.query.filter.FilterOperation.CONTAINS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.EMPTY;
 import static cz.prm.repositories.common.query.filter.FilterOperation.ENDS_WITH;
@@ -73,6 +74,10 @@ public class PredicateCriteriaUtils {
             of(fc.getInstantValues()).forEach(value -> predicate.or(field.lt(value)));
         } else if (LESS_THAN_OR_EQUAL_TO.isOperation(fc)) {
             of(fc.getInstantValues()).forEach(value -> predicate.or(field.loe(value)));
+        } else if (BETWEEN.isOperation(fc)) {
+            var start = fc.getInstantValues()[0];
+            var end = fc.getInstantValues()[1];
+            predicate.or(field.between(start, end));
         } else {
             of(fc.getInstantValues()).forEach(value -> predicate.or(field.eq(value)));
         }

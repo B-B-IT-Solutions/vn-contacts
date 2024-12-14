@@ -15,7 +15,6 @@ public enum FilterOperation {
     ARRAY_INCLUDES("arrIncludes"),
     ARRAY_INCLUDES_ALL("arrIncludesAll"),
     BETWEEN("between"),
-    BETWEEN_INCLUSIVE("betweenInclusive"),
     GREATER_THAN("greaterThan"),
     GREATER_THAN_OR_EQUAL_TO("greaterThanOrEqualTo"),
     LESS_THAN("lessThan"),

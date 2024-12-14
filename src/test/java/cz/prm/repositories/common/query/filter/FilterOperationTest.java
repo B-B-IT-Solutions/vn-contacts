@@ -3,7 +3,6 @@ package cz.prm.repositories.common.query.filter;
 import static cz.prm.repositories.common.query.filter.FilterOperation.ARRAY_INCLUDES;
 import static cz.prm.repositories.common.query.filter.FilterOperation.ARRAY_INCLUDES_ALL;
 import static cz.prm.repositories.common.query.filter.FilterOperation.BETWEEN;
-import static cz.prm.repositories.common.query.filter.FilterOperation.BETWEEN_INCLUSIVE;
 import static cz.prm.repositories.common.query.filter.FilterOperation.CONTAINS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.EMPTY;
 import static cz.prm.repositories.common.query.filter.FilterOperation.ENDS_WITH;
@@ -35,7 +34,6 @@ class FilterOperationTest {
     private static final FilterCriteria fcArrayIncludes = new FilterCriteria("arrIncludes(value9)");
     private static final FilterCriteria fcArrayIncludesAll = new FilterCriteria("arrIncludesAll(value9)");
     private static final FilterCriteria fcBetween = new FilterCriteria("between(value10)");
-    private static final FilterCriteria fcBetweenInclusive = new FilterCriteria("betweenInclusive(value11)");
     private static final FilterCriteria fcGreaterThan = new FilterCriteria("greaterThan(value12)");
     private static final FilterCriteria fcGreaterThanOrEqualTo = new FilterCriteria("greaterThanOrEqualTo(value13)");
     private static final FilterCriteria fcLessThan = new FilterCriteria("lessThan(value14)");
@@ -54,7 +52,6 @@ class FilterOperationTest {
         assertThat(ARRAY_INCLUDES.getName()).isEqualTo("arrIncludes");
         assertThat(ARRAY_INCLUDES_ALL.getName()).isEqualTo("arrIncludesAll");
         assertThat(BETWEEN.getName()).isEqualTo("between");
-        assertThat(BETWEEN_INCLUSIVE.getName()).isEqualTo("betweenInclusive");
         assertThat(GREATER_THAN.getName()).isEqualTo("greaterThan");
         assertThat(GREATER_THAN_OR_EQUAL_TO.getName()).isEqualTo("greaterThanOrEqualTo");
         assertThat(LESS_THAN.getName()).isEqualTo("lessThan");
@@ -74,7 +71,6 @@ class FilterOperationTest {
         assertThat(CONTAINS.isOperation(fcArrayIncludes)).isFalse();
         assertThat(CONTAINS.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(CONTAINS.isOperation(fcBetween)).isFalse();
-        assertThat(CONTAINS.isOperation(fcBetweenInclusive)).isFalse();
         assertThat(CONTAINS.isOperation(fcGreaterThan)).isFalse();
         assertThat(CONTAINS.isOperation(fcGreaterThanOrEqualTo)).isFalse();
         assertThat(CONTAINS.isOperation(fcLessThan)).isFalse();
@@ -95,7 +91,6 @@ class FilterOperationTest {
         assertThat(NOT_CONTAINS.isOperation(fcArrayIncludes)).isFalse();
         assertThat(NOT_CONTAINS.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(NOT_CONTAINS.isOperation(fcBetween)).isFalse();
-        assertThat(NOT_CONTAINS.isOperation(fcBetweenInclusive)).isFalse();
         assertThat(NOT_CONTAINS.isOperation(fcGreaterThan)).isFalse();
         assertThat(NOT_CONTAINS.isOperation(fcGreaterThanOrEqualTo)).isFalse();
         assertThat(NOT_CONTAINS.isOperation(fcLessThan)).isFalse();
@@ -116,7 +111,6 @@ class FilterOperationTest {
         assertThat(STARTS_WITH.isOperation(fcArrayIncludes)).isFalse();
         assertThat(STARTS_WITH.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(STARTS_WITH.isOperation(fcBetween)).isFalse();
-        assertThat(STARTS_WITH.isOperation(fcBetweenInclusive)).isFalse();
         assertThat(STARTS_WITH.isOperation(fcGreaterThan)).isFalse();
         assertThat(STARTS_WITH.isOperation(fcGreaterThanOrEqualTo)).isFalse();
         assertThat(STARTS_WITH.isOperation(fcLessThan)).isFalse();
@@ -137,7 +131,6 @@ class FilterOperationTest {
         assertThat(ENDS_WITH.isOperation(fcArrayIncludes)).isFalse();
         assertThat(ENDS_WITH.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(ENDS_WITH.isOperation(fcBetween)).isFalse();
-        assertThat(ENDS_WITH.isOperation(fcBetweenInclusive)).isFalse();
         assertThat(ENDS_WITH.isOperation(fcGreaterThan)).isFalse();
         assertThat(ENDS_WITH.isOperation(fcGreaterThanOrEqualTo)).isFalse();
         assertThat(ENDS_WITH.isOperation(fcLessThan)).isFalse();
@@ -158,7 +151,6 @@ class FilterOperationTest {
         assertThat(EQUALS.isOperation(fcArrayIncludes)).isFalse();
         assertThat(EQUALS.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(EQUALS.isOperation(fcBetween)).isFalse();
-        assertThat(EQUALS.isOperation(fcBetweenInclusive)).isFalse();
         assertThat(EQUALS.isOperation(fcGreaterThan)).isFalse();
         assertThat(EQUALS.isOperation(fcGreaterThanOrEqualTo)).isFalse();
         assertThat(EQUALS.isOperation(fcLessThan)).isFalse();
@@ -179,7 +171,6 @@ class FilterOperationTest {
         assertThat(NOT_EQUALS.isOperation(fcArrayIncludes)).isFalse();
         assertThat(NOT_EQUALS.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(NOT_EQUALS.isOperation(fcBetween)).isFalse();
-        assertThat(NOT_EQUALS.isOperation(fcBetweenInclusive)).isFalse();
         assertThat(NOT_EQUALS.isOperation(fcGreaterThan)).isFalse();
         assertThat(NOT_EQUALS.isOperation(fcGreaterThanOrEqualTo)).isFalse();
         assertThat(NOT_EQUALS.isOperation(fcLessThan)).isFalse();
@@ -201,7 +192,6 @@ class FilterOperationTest {
         assertThat(EMPTY.isOperation(fcArrayIncludes)).isFalse();
         assertThat(EMPTY.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(EMPTY.isOperation(fcBetween)).isFalse();
-        assertThat(EMPTY.isOperation(fcBetweenInclusive)).isFalse();
         assertThat(EMPTY.isOperation(fcGreaterThan)).isFalse();
         assertThat(EMPTY.isOperation(fcGreaterThanOrEqualTo)).isFalse();
         assertThat(EMPTY.isOperation(fcLessThan)).isFalse();
@@ -222,7 +212,6 @@ class FilterOperationTest {
         assertThat(NOT_EMPTY.isOperation(fcArrayIncludes)).isFalse();
         assertThat(NOT_EMPTY.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(NOT_EMPTY.isOperation(fcBetween)).isFalse();
-        assertThat(NOT_EMPTY.isOperation(fcBetweenInclusive)).isFalse();
         assertThat(NOT_EMPTY.isOperation(fcGreaterThan)).isFalse();
         assertThat(NOT_EMPTY.isOperation(fcGreaterThanOrEqualTo)).isFalse();
         assertThat(NOT_EMPTY.isOperation(fcLessThan)).isFalse();
@@ -243,7 +232,6 @@ class FilterOperationTest {
         assertThat(ARRAY_INCLUDES.isOperation(fcEquals)).isFalse();
         assertThat(ARRAY_INCLUDES.isOperation(fcNotEquals)).isFalse();
         assertThat(ARRAY_INCLUDES.isOperation(fcBetween)).isFalse();
-        assertThat(ARRAY_INCLUDES.isOperation(fcBetweenInclusive)).isFalse();
         assertThat(ARRAY_INCLUDES.isOperation(fcGreaterThan)).isFalse();
         assertThat(ARRAY_INCLUDES.isOperation(fcGreaterThanOrEqualTo)).isFalse();
         assertThat(ARRAY_INCLUDES.isOperation(fcLessThan)).isFalse();
@@ -264,7 +252,6 @@ class FilterOperationTest {
         assertThat(ARRAY_INCLUDES_ALL.isOperation(fcEquals)).isFalse();
         assertThat(ARRAY_INCLUDES_ALL.isOperation(fcNotEquals)).isFalse();
         assertThat(ARRAY_INCLUDES_ALL.isOperation(fcBetween)).isFalse();
-        assertThat(ARRAY_INCLUDES_ALL.isOperation(fcBetweenInclusive)).isFalse();
         assertThat(ARRAY_INCLUDES_ALL.isOperation(fcGreaterThan)).isFalse();
         assertThat(ARRAY_INCLUDES_ALL.isOperation(fcGreaterThanOrEqualTo)).isFalse();
         assertThat(ARRAY_INCLUDES_ALL.isOperation(fcLessThan)).isFalse();
@@ -275,7 +262,6 @@ class FilterOperationTest {
     @Test
     void isOperationBetween() {
         assertThat(BETWEEN.isOperation(fcBetween)).isTrue();
-        assertThat(BETWEEN.isOperation(fcBetweenInclusive)).isFalse();
         assertThat(BETWEEN.isOperation(fcArrayIncludesAll)).isFalse();
         assertThat(BETWEEN.isOperation(fcArrayIncludes)).isFalse();
         assertThat(BETWEEN.isOperation(fcNotEmpty)).isFalse();
@@ -294,27 +280,6 @@ class FilterOperationTest {
     }
 
     @Test
-    void isOperationBetweenInclusive() {
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcBetweenInclusive)).isTrue();
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcBetween)).isFalse();
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcArrayIncludesAll)).isFalse();
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcArrayIncludes)).isFalse();
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcNotEmpty)).isFalse();
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcEmpty)).isFalse();
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcEndsWith)).isFalse();
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcStartsWith)).isFalse();
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcContains)).isFalse();
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcNotContains)).isFalse();
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcEquals)).isFalse();
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcNotEquals)).isFalse();
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcGreaterThan)).isFalse();
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcGreaterThanOrEqualTo)).isFalse();
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcLessThan)).isFalse();
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcLessThanOrEqualTo)).isFalse();
-        assertThat(BETWEEN_INCLUSIVE.isOperation(fcRandom)).isFalse();
-    }
-
-    @Test
     void isOperationGreaterThan() {
         assertThat(GREATER_THAN.isOperation(fcGreaterThan)).isTrue();
         assertThat(GREATER_THAN.isOperation(fcGreaterThanOrEqualTo)).isFalse();
@@ -329,7 +294,6 @@ class FilterOperationTest {
         assertThat(GREATER_THAN.isOperation(fcEquals)).isFalse();
         assertThat(GREATER_THAN.isOperation(fcNotEquals)).isFalse();
         assertThat(GREATER_THAN.isOperation(fcBetween)).isFalse();
-        assertThat(GREATER_THAN.isOperation(fcBetweenInclusive)).isFalse();
         assertThat(GREATER_THAN.isOperation(fcLessThan)).isFalse();
         assertThat(GREATER_THAN.isOperation(fcLessThanOrEqualTo)).isFalse();
         assertThat(GREATER_THAN.isOperation(fcRandom)).isFalse();
@@ -350,7 +314,6 @@ class FilterOperationTest {
         assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcEquals)).isFalse();
         assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcNotEquals)).isFalse();
         assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcBetween)).isFalse();
-        assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcBetweenInclusive)).isFalse();
         assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcLessThan)).isFalse();
         assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcLessThanOrEqualTo)).isFalse();
         assertThat(GREATER_THAN_OR_EQUAL_TO.isOperation(fcRandom)).isFalse();
@@ -371,7 +334,6 @@ class FilterOperationTest {
         assertThat(LESS_THAN.isOperation(fcEquals)).isFalse();
         assertThat(LESS_THAN.isOperation(fcNotEquals)).isFalse();
         assertThat(LESS_THAN.isOperation(fcBetween)).isFalse();
-        assertThat(LESS_THAN.isOperation(fcBetweenInclusive)).isFalse();
         assertThat(LESS_THAN.isOperation(fcGreaterThan)).isFalse();
         assertThat(LESS_THAN.isOperation(fcGreaterThanOrEqualTo)).isFalse();
         assertThat(LESS_THAN.isOperation(fcRandom)).isFalse();
@@ -392,7 +354,6 @@ class FilterOperationTest {
         assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcEquals)).isFalse();
         assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcNotEquals)).isFalse();
         assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcBetween)).isFalse();
-        assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcBetweenInclusive)).isFalse();
         assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcGreaterThan)).isFalse();
         assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcGreaterThanOrEqualTo)).isFalse();
         assertThat(LESS_THAN_OR_EQUAL_TO.isOperation(fcRandom)).isFalse();
