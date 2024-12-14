@@ -108,8 +108,6 @@ class FilterCriteriaTest {
         var value1 = "15 Dec 2024";
         var value2 = "17 Dec 2024";
         var value3 = "19 Dec 2024";
-        var date1 = new Date(value1).toInstant();
-        var date2 = new Date(value2).toInstant();
 
         values = format("%s,%s,%s", value1, value2, value3);
         filter = format("between(%s)", values);
@@ -118,6 +116,9 @@ class FilterCriteriaTest {
 
         values = format("%s,%s", value1, value2);
         filter = format("between(%s)", values);
+        var date1 = new Date(value1).toInstant();
+        var date2 = new Date(value2).toInstant();
+
         fc = new FilterCriteria(filter);
         assertThat(fc.hasBetweenDateValues()).isTrue();
         assertThat(fc.getDateValues()).containsExactly(date1, date2);
