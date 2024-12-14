@@ -70,6 +70,7 @@ public class TaskUtils {
         filter.setGlobalFilter(uuid());
         filter.setTitle(uuid());
         filter.setCompleted(true);
+        filter.setDueDate(uuid());
         return filter;
     }
 
@@ -78,6 +79,7 @@ public class TaskUtils {
         filter.setGlobalFilter(uuid());
         filter.setTitle(uuid());
         filter.setCompleted(true);
+        filter.setDueDate(uuid());
         return filter;
     }
 }

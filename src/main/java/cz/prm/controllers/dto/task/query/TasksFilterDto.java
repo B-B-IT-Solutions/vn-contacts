@@ -12,4 +12,6 @@ public class TasksFilterDto {
     private String title;
 
     private Boolean completed;
+
+    private String dueDate;
 }

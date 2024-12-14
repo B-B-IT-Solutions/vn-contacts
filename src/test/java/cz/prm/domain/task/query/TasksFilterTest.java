@@ -46,4 +46,18 @@ class TasksFilterTest {
         filter.setCompleted(true);
         assertThat(filter.isCompleted()).isTrue();
     }
+
+    @Test
+    void isDueDate() {
+        var filter = new TasksFilter();
+        assertThat(filter.isDueDate()).isFalse();
+        filter.setDueDate(null);
+        assertThat(filter.isDueDate()).isFalse();
+        filter.setDueDate("");
+        assertThat(filter.isDueDate()).isFalse();
+        filter.setDueDate(" ");
+        assertThat(filter.isDueDate()).isFalse();
+        filter.setDueDate(uuid());
+        assertThat(filter.isDueDate()).isTrue();
+    }
 }

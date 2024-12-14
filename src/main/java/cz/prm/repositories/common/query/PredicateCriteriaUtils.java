@@ -15,6 +15,7 @@ import static lombok.AccessLevel.PRIVATE;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.DateTimePath;
 import com.querydsl.core.types.dsl.ListPath;
 import com.querydsl.core.types.dsl.StringPath;
 import cz.prm.repositories.common.query.filter.FilterCriteria;
@@ -25,6 +26,12 @@ import lombok.NoArgsConstructor;
 public class PredicateCriteriaUtils {
 
     public static Predicate applyCriteria(BooleanBuilder predicate, ListPath field, String filter) {
+        var fcs = new FilterCriterias(filter);
+        fcs.getCriterias().forEach(fc -> predicate.and(apply(field, fc)));
+        return predicate;
+    }
+
+    public static Predicate applyCriteria(BooleanBuilder predicate, DateTimePath field, String filter) {
         var fcs = new FilterCriterias(filter);
         fcs.getCriterias().forEach(fc -> predicate.and(apply(field, fc)));
         return predicate;
@@ -44,6 +51,18 @@ public class PredicateCriteriaUtils {
             of(fc.getValues()).forEach(value -> predicate.and(field.contains(value)));
         } else {
             of(fc.getValues()).forEach(value -> predicate.or(field.contains(value)));
+        }
+        return predicate;
+    }
+
+    private static Predicate apply(DateTimePath field, FilterCriteria fc) {
+        var predicate = new BooleanBuilder();
+        if (ARRAY_INCLUDES.isOperation(fc)) {
+            of(fc.getValues()).forEach(value -> predicate.or(field.gt(value)));
+        } else if (ARRAY_INCLUDES_ALL.isOperation(fc)) {
+            of(fc.getValues()).forEach(value -> predicate.and(field.goe(value)));
+        } else {
+            of(fc.getValues()).forEach(value -> predicate.or(field.eq(value)));
         }
         return predicate;
     }

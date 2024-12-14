@@ -90,5 +90,6 @@ public class TaskAssertions {
         assertThat(filter.getGlobalFilter()).isEqualTo(dto.getGlobalFilter());
         assertThat(filter.getTitle()).isEqualTo(dto.getTitle());
         assertThat(filter.getCompleted()).isEqualTo(dto.getCompleted());
+        assertThat(filter.getDueDate()).isEqualTo(dto.getDueDate());
     }
 }
