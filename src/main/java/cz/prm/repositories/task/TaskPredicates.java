@@ -43,7 +43,7 @@ public class TaskPredicates {
             applyCriteria(predicate, task.title, filter.getTitle());
         }
         if (filter.isCompleted()) {
-            predicate.or(task.completed.eq(filter.getCompleted()));
+            predicate.and(task.completed.eq(filter.getCompleted()));
         }
         if (filter.isDueDate()) {
             applyCriteria(predicate, task.dueDate, filter.getDueDate());

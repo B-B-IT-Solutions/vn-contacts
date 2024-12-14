@@ -71,17 +71,19 @@ class TaskPredicatesTest {
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.contactId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setTitle(null);
             filter.setCompleted(true);
             predicate = predicates.byContactId(17L, filter);
-            expectedString = format("task.owner.username = %s && task.completed = true && task.contactId = 17", user.getUsername());
+            expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.completed = true && task.contactId = 17",
+                user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setCompleted(false);
             predicate = predicates.byContactId(17L, filter);
-            expectedString = format("task.owner.username = %s && task.completed = false && task.contactId = 17", user.getUsername());
+            expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.completed = false && task.contactId = 17",
+                user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
+            filter.setTitle(null);
             filter.setCompleted(null);
             filter.setDueDate("greaterThan(15 Dec 2024)");
             predicate = predicates.byContactId(17L, filter);
