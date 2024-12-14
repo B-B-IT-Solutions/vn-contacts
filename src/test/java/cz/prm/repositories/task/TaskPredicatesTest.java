@@ -85,7 +85,7 @@ class TaskPredicatesTest {
             filter.setCompleted(null);
             filter.setDueDate("greaterThan(15 Dec 2024)");
             predicate = predicates.byContactId(17L, filter);
-            expectedString = format("task.owner.username = %s && task.dueDate > 15 Dec 2024 && task.contactId = 17", user.getUsername());
+            expectedString = format("task.owner.username = %s && task.dueDate > 2024-12-14T23:00:00Z && task.contactId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
         }
     }
