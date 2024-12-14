@@ -63,23 +63,25 @@ public class PredicateCriteriaUtils {
     private static Predicate apply(DateTimePath field, FilterCriteria fc) {
         var predicate = new BooleanBuilder();
         if (EQUALS.isOperation(fc)) {
-            of(fc.getInstantValues()).forEach(value -> predicate.or(field.eq(value)));
+            of(fc.getDateValues()).forEach(value -> predicate.or(field.eq(value)));
         } else if (NOT_EQUALS.isOperation(fc)) {
-            of(fc.getInstantValues()).forEach(value -> predicate.or(field.ne(value)));
+            of(fc.getDateValues()).forEach(value -> predicate.or(field.ne(value)));
         } else if (GREATER_THAN.isOperation(fc)) {
-            of(fc.getInstantValues()).forEach(value -> predicate.or(field.gt(value)));
+            of(fc.getDateValues()).forEach(value -> predicate.or(field.gt(value)));
         } else if (GREATER_THAN_OR_EQUAL_TO.isOperation(fc)) {
-            of(fc.getInstantValues()).forEach(value -> predicate.or(field.goe(value)));
+            of(fc.getDateValues()).forEach(value -> predicate.or(field.goe(value)));
         } else if (LESS_THAN.isOperation(fc)) {
-            of(fc.getInstantValues()).forEach(value -> predicate.or(field.lt(value)));
+            of(fc.getDateValues()).forEach(value -> predicate.or(field.lt(value)));
         } else if (LESS_THAN_OR_EQUAL_TO.isOperation(fc)) {
-            of(fc.getInstantValues()).forEach(value -> predicate.or(field.loe(value)));
+            of(fc.getDateValues()).forEach(value -> predicate.or(field.loe(value)));
         } else if (BETWEEN.isOperation(fc)) {
-            var start = fc.getInstantValues()[0];
-            var end = fc.getInstantValues()[1];
-            predicate.or(field.between(start, end));
+            if (fc.hasBetweenDateValues()) {
+                var start = fc.getDateValues()[0];
+                var end = fc.getDateValues()[1];
+                predicate.or(field.between(start, end));
+            }
         } else {
-            of(fc.getInstantValues()).forEach(value -> predicate.or(field.eq(value)));
+            of(fc.getDateValues()).forEach(value -> predicate.or(field.eq(value)));
         }
         return predicate;
     }

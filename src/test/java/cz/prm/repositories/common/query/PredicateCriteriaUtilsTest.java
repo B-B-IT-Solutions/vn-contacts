@@ -215,8 +215,24 @@ class PredicateCriteriaUtilsTest {
 
     @Test
     void applyCriteriaDateBetweenOperation() {
-        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "between(15 Dec 2024,17 Dec 2024)");
-        var queryPattern = "task.dueDate between 2024-12-14T23:00:00Z and 2024-12-16T23:00:00Z";
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "between()");
+        var queryPattern = "com.querydsl.core.BooleanBuilder@0";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "between(,)");
+        queryPattern = "com.querydsl.core.BooleanBuilder@0";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "between(15 Dec 2024)");
+        queryPattern = "com.querydsl.core.BooleanBuilder@0";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "between(15 Dec 2024,)");
+        queryPattern = "com.querydsl.core.BooleanBuilder@0";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.dueDate, "between(15 Dec 2024,17 Dec 2024)");
+        queryPattern = "task.dueDate between 2024-12-14T23:00:00Z and 2024-12-16T23:00:00Z";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.lastEditDate, "between(17 Dec 2024, 19 Dec 2024)");

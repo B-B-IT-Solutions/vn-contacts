@@ -91,18 +91,52 @@ class FilterCriteriaTest {
     }
 
     @Test
-    void getInstantValues() {
+    void hasBetweenDateValues() {
+        var filter = "between()";
+        var fc = new FilterCriteria(filter);
+        assertThat(fc.hasBetweenDateValues()).isFalse();
+
+        filter = "between(,)";
+        fc = new FilterCriteria(filter);
+        assertThat(fc.hasBetweenDateValues()).isFalse();
+
+        var values = format("%s,%s", uuid(), uuid());
+        filter = format("between(%s)", values);
+        fc = new FilterCriteria(filter);
+        assertThat(fc.hasBetweenDateValues()).isFalse();
+
         var value1 = "15 Dec 2024";
         var value2 = "17 Dec 2024";
         var value3 = "19 Dec 2024";
-        var date1 = new Date("15 Dec 2024").toInstant();
-        var date2 = new Date("17 Dec 2024").toInstant();
-        var date3 = new Date("19 Dec 2024").toInstant();
+        var date1 = new Date(value1).toInstant();
+        var date2 = new Date(value2).toInstant();
+
+        values = format("%s,%s,%s", value1, value2, value3);
+        filter = format("between(%s)", values);
+        fc = new FilterCriteria(filter);
+        assertThat(fc.hasBetweenDateValues()).isFalse();
+
+        values = format("%s,%s", value1, value2);
+        filter = format("between(%s)", values);
+        fc = new FilterCriteria(filter);
+        assertThat(fc.hasBetweenDateValues()).isTrue();
+        assertThat(fc.getDateValues()).containsExactly(date1, date2);
+        assertThat(fc.getValues()).containsExactly(value1, value2);
+    }
+
+    @Test
+    void getDateValues() {
+        var value1 = "15 Dec 2024";
+        var value2 = "17 Dec 2024";
+        var value3 = "19 Dec 2024";
+        var date1 = new Date(value1).toInstant();
+        var date2 = new Date(value2).toInstant();
+        var date3 = new Date(value3).toInstant();
         var values = format("%s,%s,%s", value1, value2, value3);
         var filter = format("greaterThan(%s)", values);
         var fc = new FilterCriteria(filter);
         assertThat(fc.getOperation()).isEqualTo("greaterThan");
-        assertThat(fc.getInstantValues()).containsExactly(date1, date2, date3);
+        assertThat(fc.getDateValues()).containsExactly(date1, date2, date3);
         assertThat(fc.getValues()).containsExactly(value1, value2, value3);
     }
 }
