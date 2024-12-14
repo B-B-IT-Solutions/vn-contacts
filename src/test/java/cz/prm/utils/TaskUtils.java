@@ -14,6 +14,8 @@ import cz.prm.controllers.dto.task.query.TasksQueryDto;
 import cz.prm.domain.task.Task;
 import cz.prm.domain.task.query.TasksFilter;
 import cz.prm.domain.task.query.TasksQuery;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class TaskUtils {
@@ -29,7 +31,7 @@ public class TaskUtils {
         task.setTitle(uuid());
         task.setDescription(uuid());
         task.setCompleted(true);
-        task.setDueDate(now());
+        task.setDueDate(LocalDateTime.now());
         task.setLastEditDate(now());
         task.setCreationDate(now());
         task.setOwner(user());
@@ -43,7 +45,7 @@ public class TaskUtils {
         task.setTitle(uuid());
         task.setDescription(uuid());
         task.setCompleted(true);
-        task.setDueDate(now());
+        task.setDueDate(LocalDateTime.now());
         task.setLastEditDate(now());
         task.setCreationDate(now());
         return task;
