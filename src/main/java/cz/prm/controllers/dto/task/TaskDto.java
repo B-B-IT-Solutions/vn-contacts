@@ -2,7 +2,7 @@ package cz.prm.controllers.dto.task;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,7 +28,7 @@ public class TaskDto {
     private boolean completed;
 
     @JsonProperty("dueDate")
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
 
     @JsonProperty("lastEditDate")
     private Instant lastEditDate;

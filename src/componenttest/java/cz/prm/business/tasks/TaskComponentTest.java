@@ -338,10 +338,10 @@ public class TaskComponentTest extends TaskComponentTestBase {
         filter.setDueDate(greaterThanFilter(now().minus(1, DAYS)));
         pageDto = user1GetTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
-//
-//        filter.setDueDate(greaterThanFilter(now()));
-//        pageDto = user1GetTasks(contactId, queryDto);
-//        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setDueDate(greaterThanFilter(now()));
+        pageDto = user1GetTasks(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
 
         filter.setDueDate(greaterThanFilter(now().plus(1, DAYS)));
         pageDto = user1GetTasks(contactId, queryDto);
@@ -362,10 +362,10 @@ public class TaskComponentTest extends TaskComponentTestBase {
         filter.setDueDate(lessThanFilter(now().plus(1, DAYS)));
         pageDto = user1GetTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
-//
-//        filter.setDueDate(lessThanFilter(now()));
-//        pageDto = user1GetTasks(contactId, queryDto);
-//        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setDueDate(lessThanFilter(now()));
+        pageDto = user1GetTasks(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
 
         filter.setDueDate(lessThanFilter(now().minus(1, DAYS)));
         pageDto = user1GetTasks(contactId, queryDto);
@@ -375,9 +375,9 @@ public class TaskComponentTest extends TaskComponentTestBase {
         pageDto = user1GetTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-//        filter.setDueDate(lessThanOrEqualToFilter(now()));
-//        pageDto = user1GetTasks(contactId, queryDto);
-//        assertThat(pageDto.getContent()).hasSize(21);
+        filter.setDueDate(lessThanOrEqualToFilter(now()));
+        pageDto = user1GetTasks(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
 
         filter.setDueDate(lessThanOrEqualToFilter(now().minus(1, DAYS)));
         pageDto = user1GetTasks(contactId, queryDto);
