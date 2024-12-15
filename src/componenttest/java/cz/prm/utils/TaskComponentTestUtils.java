@@ -2,8 +2,8 @@ package cz.prm.utils;
 
 import static cz.prm.utils.ComponentTestUtils.randomLong;
 import static cz.prm.utils.ComponentTestUtils.uuid;
+import static cz.prm.utils.TimeComponentTestUtils.todayStartOfDay;
 import static java.lang.String.format;
-import static java.time.Instant.now;
 import static org.assertj.core.util.Lists.newArrayList;
 
 import cz.prm.controllers.dto.common.PaginationDto;
@@ -29,7 +29,7 @@ public class TaskComponentTestUtils {
         task.setTitle(format("Title-%s-End", uuid()));
         task.setDescription(format("Text%s", uuid()));
         task.setCompleted(true);
-        task.setDueDate(now());
+        task.setDueDate(todayStartOfDay());
         return task;
     }
 
@@ -39,7 +39,7 @@ public class TaskComponentTestUtils {
         dto.setTitle(uuid());
         dto.setDescription(uuid());
         dto.setCompleted(true);
-        dto.setDueDate(now());
+        dto.setDueDate(todayStartOfDay());
         return dto;
     }
 
