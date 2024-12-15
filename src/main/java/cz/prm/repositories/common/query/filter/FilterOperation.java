@@ -26,7 +26,7 @@ public enum FilterOperation {
         this.name = name;
     }
 
-    public boolean isOperation(FilterCriteria criteria) {
+    public boolean isOperation(AbstractFilterCriteria criteria) {
         return this.name.equals(criteria.getOperation());
     }
 }

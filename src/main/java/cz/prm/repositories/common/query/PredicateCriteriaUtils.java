@@ -20,11 +20,14 @@ import static lombok.AccessLevel.PRIVATE;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.dsl.DateTimePath;
 import com.querydsl.core.types.dsl.ListPath;
 import com.querydsl.core.types.dsl.StringPath;
+import com.querydsl.core.types.dsl.TemporalExpression;
 import cz.prm.repositories.common.query.filter.FilterCriteria;
 import cz.prm.repositories.common.query.filter.FilterCriterias;
+import cz.prm.repositories.common.query.filter.TemporalFilterCriteria;
+import cz.prm.repositories.common.query.filter.TemporalFilterCriterias;
+import java.time.temporal.Temporal;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = PRIVATE)
@@ -36,8 +39,8 @@ public class PredicateCriteriaUtils {
         return predicate;
     }
 
-    public static Predicate applyCriteria(BooleanBuilder predicate, DateTimePath field, String filter) {
-        var fcs = new FilterCriterias(filter);
+    public static Predicate applyCriteria(BooleanBuilder predicate, TemporalExpression field, String filter, Class<? extends Temporal> filterType) {
+        var fcs = new TemporalFilterCriterias(filter, filterType);
         fcs.getCriterias().forEach(fc -> predicate.and(apply(field, fc)));
         return predicate;
     }
@@ -60,28 +63,28 @@ public class PredicateCriteriaUtils {
         return predicate;
     }
 
-    private static Predicate apply(DateTimePath field, FilterCriteria fc) {
+    private static Predicate apply(TemporalExpression field, TemporalFilterCriteria fc) {
         var predicate = new BooleanBuilder();
         if (EQUALS.isOperation(fc)) {
-            of(fc.getDateValues()).forEach(value -> predicate.or(field.eq(value)));
+            fc.getDateValues().forEach(value -> predicate.or(field.eq(value)));
         } else if (NOT_EQUALS.isOperation(fc)) {
-            of(fc.getDateValues()).forEach(value -> predicate.or(field.ne(value)));
+            fc.getDateValues().forEach(value -> predicate.or(field.ne(value)));
         } else if (GREATER_THAN.isOperation(fc)) {
-            of(fc.getDateValues()).forEach(value -> predicate.or(field.gt(value)));
+            fc.getDateValues().forEach(value -> predicate.or(field.gt(value)));
         } else if (GREATER_THAN_OR_EQUAL_TO.isOperation(fc)) {
-            of(fc.getDateValues()).forEach(value -> predicate.or(field.goe(value)));
+            fc.getDateValues().forEach(value -> predicate.or(field.goe(value)));
         } else if (LESS_THAN.isOperation(fc)) {
-            of(fc.getDateValues()).forEach(value -> predicate.or(field.lt(value)));
+            fc.getDateValues().forEach(value -> predicate.or(field.lt(value)));
         } else if (LESS_THAN_OR_EQUAL_TO.isOperation(fc)) {
-            of(fc.getDateValues()).forEach(value -> predicate.or(field.loe(value)));
+            fc.getDateValues().forEach(value -> predicate.or(field.loe(value)));
         } else if (BETWEEN.isOperation(fc)) {
             if (fc.hasBetweenDateValues()) {
-                var start = fc.getDateValues()[0];
-                var end = fc.getDateValues()[1];
+                var start = fc.getDateValues().get(0);
+                var end = fc.getDateValues().get(1);
                 predicate.or(field.between(start, end));
             }
         } else {
-            of(fc.getDateValues()).forEach(value -> predicate.or(field.eq(value)));
+            fc.getDateValues().forEach(value -> predicate.or(field.eq(value)));
         }
         return predicate;
     }
