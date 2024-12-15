@@ -3,7 +3,7 @@ package cz.prm.utils;
 import static cz.prm.utils.ComponentTestUtils.randomLong;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static java.lang.String.format;
-import static java.time.LocalDate.now;
+import static java.time.Instant.now;
 import static org.assertj.core.util.Lists.newArrayList;
 
 import cz.prm.controllers.dto.common.PaginationDto;

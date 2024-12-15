@@ -13,7 +13,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.time.Instant;
-import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,7 +48,7 @@ public class Task {
     private boolean completed;
 
     @Column(name = "DUE_DATE")
-    private LocalDate dueDate;
+    private Instant dueDate;
 
     @LastModifiedDate
     @Column(name = "LAST_EDIT_DATE")
