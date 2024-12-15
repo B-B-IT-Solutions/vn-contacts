@@ -1,10 +1,13 @@
 package cz.prm.repositories.common.query.filter;
 
 import java.time.Instant;
+import java.time.temporal.Temporal;
 
 public class DateTimeFilterCriterias extends AbstractFilterCriterias<DateTimeFilterCriteria> {
 
-    public DateTimeFilterCriterias(String filter) {
+    private Class<? extends Temporal> dateClass;
+
+    public DateTimeFilterCriterias(String filter, Class<? extends Temporal> dateClass) {
         super(filter);
     }
 

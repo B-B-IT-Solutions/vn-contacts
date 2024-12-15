@@ -40,7 +40,7 @@ public class PredicateCriteriaUtils {
     }
 
     public static Predicate applyCriteria(BooleanBuilder predicate, DateTimePath field, String filter) {
-        var fcs = new DateTimeFilterCriterias(filter);
+        var fcs = new DateTimeFilterCriterias(filter, Instant.class);
         fcs.getCriterias().forEach(fc -> predicate.and(apply(field, fc)));
         return predicate;
     }
