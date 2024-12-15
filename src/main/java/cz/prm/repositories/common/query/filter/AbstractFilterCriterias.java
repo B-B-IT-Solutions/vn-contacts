@@ -12,8 +12,14 @@ public abstract class AbstractFilterCriterias<T> {
 
     protected static final String FILTER_CRITERIA_SEPARATOR = "\\+";
     protected List<T> criterias = new ArrayList<>();
+    protected Class<?> filterType;
 
     public AbstractFilterCriterias(String filter) {
+        this(filter, null);
+    }
+
+    public AbstractFilterCriterias(String filter, Class<?> filterType) {
+        this.filterType = filterType;
         parse(filter);
     }
 

@@ -5,6 +5,8 @@ import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 class DateTimeFilterCriteriasTest {
@@ -14,14 +16,15 @@ class DateTimeFilterCriteriasTest {
         var fcs1 = new DateTimeFilterCriterias(null, Instant.class);
         assertThat(fcs1.getCriterias()).isEmpty();
 
-        var fcs2 = new DateTimeFilterCriterias("", Instant.class);
+        var fcs2 = new DateTimeFilterCriterias("", LocalDate.class);
         assertThat(fcs2.getCriterias()).isEmpty();
 
         var value = uuid();
-        var fcs3 = new DateTimeFilterCriterias(value, Instant.class);
+        var fcs3 = new DateTimeFilterCriterias(value, LocalDateTime.class);
         assertThat(fcs3.getCriterias()).isNotEmpty().hasSize(1);
 
         var fc3 = fcs3.getCriterias().get(0);
+        assertThat(fc3.getFilterType()).isEqualTo(LocalDateTime.class);
         assertThat(fc3.getOperation()).isNull();
         assertThat(fc3.getValues()).containsExactly(value);
     }
@@ -35,6 +38,7 @@ class DateTimeFilterCriteriasTest {
         assertThat(fcs.getCriterias()).isNotEmpty().hasSize(1);
 
         var fc = fcs.getCriterias().get(0);
+        assertThat(fc.getFilterType()).isEqualTo(Instant.class);
         assertThat(fc.getOperation()).isEqualTo(operation);
         assertThat(fc.getValues()).containsExactly(value);
     }
@@ -43,10 +47,11 @@ class DateTimeFilterCriteriasTest {
     void oneFilterGreaterThanOperation() {
         var value = uuid();
         var filter = format("greaterThan(%s)", value);
-        var fcs = new DateTimeFilterCriterias(filter, Instant.class);
+        var fcs = new DateTimeFilterCriterias(filter, LocalDate.class);
         assertThat(fcs.getCriterias()).isNotEmpty().hasSize(1);
 
         var fc = fcs.getCriterias().get(0);
+        assertThat(fc.getFilterType()).isEqualTo(LocalDate.class);
         assertThat(fc.getOperation()).isEqualTo("greaterThan");
         assertThat(fc.getValues()).containsExactly(value);
     }
@@ -55,10 +60,11 @@ class DateTimeFilterCriteriasTest {
     void oneFilterLessThanOperation() {
         var value = uuid();
         var filter = format("lessThan(%s)", value);
-        var fcs = new DateTimeFilterCriterias(filter, Instant.class);
+        var fcs = new DateTimeFilterCriterias(filter, LocalDateTime.class);
         assertThat(fcs.getCriterias()).isNotEmpty().hasSize(1);
 
         var fc = fcs.getCriterias().get(0);
+        assertThat(fc.getFilterType()).isEqualTo(LocalDateTime.class);
         assertThat(fc.getOperation()).isEqualTo("lessThan");
         assertThat(fc.getValues()).containsExactly(value);
     }
@@ -79,14 +85,17 @@ class DateTimeFilterCriteriasTest {
         assertThat(fcs.getCriterias()).isNotEmpty().hasSize(3);
 
         var fc1 = fcs.getCriterias().get(0);
+        assertThat(fc1.getFilterType()).isEqualTo(Instant.class);
         assertThat(fc1.getOperation()).isEqualTo(operation1);
         assertThat(fc1.getValues()).containsExactly(value1);
 
         var fc2 = fcs.getCriterias().get(1);
+        assertThat(fc2.getFilterType()).isEqualTo(Instant.class);
         assertThat(fc2.getOperation()).isEqualTo(operation2);
         assertThat(fc2.getValues()).containsExactly(value2);
 
         var fc3 = fcs.getCriterias().get(2);
+        assertThat(fc3.getFilterType()).isEqualTo(Instant.class);
         assertThat(fc3.getOperation()).isEqualTo(operation3);
         assertThat(fc3.getValues()).containsExactly(value3);
     }
@@ -100,18 +109,21 @@ class DateTimeFilterCriteriasTest {
         var filter2 = format("greaterThan(%s)", value2);
         var filter3 = format("greaterThan(%s)", value3);
         var filter = format("%s+%s+%s", filter1, filter2, filter3);
-        var fcs = new DateTimeFilterCriterias(filter, Instant.class);
+        var fcs = new DateTimeFilterCriterias(filter, LocalDate.class);
         assertThat(fcs.getCriterias()).isNotEmpty().hasSize(3);
 
         var fc1 = fcs.getCriterias().get(0);
+        assertThat(fc1.getFilterType()).isEqualTo(LocalDate.class);
         assertThat(fc1.getOperation()).isEqualTo("greaterThan");
         assertThat(fc1.getValues()).containsExactly(value1);
 
         var fc2 = fcs.getCriterias().get(1);
+        assertThat(fc2.getFilterType()).isEqualTo(LocalDate.class);
         assertThat(fc2.getOperation()).isEqualTo("greaterThan");
         assertThat(fc2.getValues()).containsExactly(value2);
 
         var fc3 = fcs.getCriterias().get(2);
+        assertThat(fc3.getFilterType()).isEqualTo(LocalDate.class);
         assertThat(fc3.getOperation()).isEqualTo("greaterThan");
         assertThat(fc3.getValues()).containsExactly(value3);
     }
@@ -125,18 +137,21 @@ class DateTimeFilterCriteriasTest {
         var filter2 = format("lessThan(%s)", value2);
         var filter3 = format("lessThan(%s)", value3);
         var filter = format("%s+%s+%s", filter1, filter2, filter3);
-        var fcs = new DateTimeFilterCriterias(filter, Instant.class);
+        var fcs = new DateTimeFilterCriterias(filter, LocalDateTime.class);
         assertThat(fcs.getCriterias()).isNotEmpty().hasSize(3);
 
         var fc1 = fcs.getCriterias().get(0);
+        assertThat(fc1.getFilterType()).isEqualTo(LocalDateTime.class);
         assertThat(fc1.getOperation()).isEqualTo("lessThan");
         assertThat(fc1.getValues()).containsExactly(value1);
 
         var fc2 = fcs.getCriterias().get(1);
+        assertThat(fc2.getFilterType()).isEqualTo(LocalDateTime.class);
         assertThat(fc2.getOperation()).isEqualTo("lessThan");
         assertThat(fc2.getValues()).containsExactly(value2);
 
         var fc3 = fcs.getCriterias().get(2);
+        assertThat(fc3.getFilterType()).isEqualTo(LocalDateTime.class);
         assertThat(fc3.getOperation()).isEqualTo("lessThan");
         assertThat(fc3.getValues()).containsExactly(value3);
     }

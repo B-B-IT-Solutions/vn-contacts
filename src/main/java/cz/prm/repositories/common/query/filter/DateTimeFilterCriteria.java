@@ -18,11 +18,11 @@ public class DateTimeFilterCriteria extends AbstractFilterCriteria {
 
     private static final String DATE_FORMAT = "dd MMM yyyy";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
-    private Class<?> dateClass;
+    private Class<?> filterType;
 
-    public DateTimeFilterCriteria(String filter, Class<?> dateClass) {
+    public DateTimeFilterCriteria(String filter, Class<?> filterType) {
         super(filter);
-        this.dateClass = dateClass;
+        this.filterType = filterType;
     }
 
     public boolean hasBetweenDateValues() {
@@ -35,11 +35,11 @@ public class DateTimeFilterCriteria extends AbstractFilterCriteria {
 
     private Comparable fromValue(String value) {
         var date = new Date(value);
-        if (dateClass == Instant.class) {
+        if (filterType == Instant.class) {
             return date.toInstant();
-        } else if (dateClass == LocalDate.class) {
+        } else if (filterType == LocalDate.class) {
             return LocalDate.ofInstant(date.toInstant(), systemDefault());
-        } else if (dateClass == LocalDateTime.class) {
+        } else if (filterType == LocalDateTime.class) {
             return LocalDateTime.ofInstant(date.toInstant(), systemDefault());
         }
         throw new IllegalArgumentException("Unrecognized date type!");
