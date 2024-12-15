@@ -14,21 +14,21 @@ import java.time.OffsetDateTime;
 import java.util.Date;
 import org.junit.jupiter.api.Test;
 
-class DateTimeFilterCriteriaTest {
+class TemporalFilterCriteriaTest {
 
     @Test
     void hasBetweenDateValues_Instant() {
         var filter = "between()";
-        var fc = new DateTimeFilterCriteria(filter, Instant.class);
+        var fc = new TemporalFilterCriteria(filter, Instant.class);
         assertThat(fc.hasBetweenDateValues()).isFalse();
 
         filter = "between(,)";
-        fc = new DateTimeFilterCriteria(filter, Instant.class);
+        fc = new TemporalFilterCriteria(filter, Instant.class);
         assertThat(fc.hasBetweenDateValues()).isFalse();
 
         var values = format("%s,%s", uuid(), uuid());
         filter = format("between(%s)", values);
-        fc = new DateTimeFilterCriteria(filter, Instant.class);
+        fc = new TemporalFilterCriteria(filter, Instant.class);
         assertThat(fc.hasBetweenDateValues()).isFalse();
 
         var value1 = "15 Dec 2024";
@@ -37,7 +37,7 @@ class DateTimeFilterCriteriaTest {
 
         values = format("%s,%s,%s", value1, value2, value3);
         filter = format("between(%s)", values);
-        fc = new DateTimeFilterCriteria(filter, Instant.class);
+        fc = new TemporalFilterCriteria(filter, Instant.class);
         assertThat(fc.hasBetweenDateValues()).isFalse();
 
         values = format("%s,%s", value1, value2);
@@ -45,7 +45,7 @@ class DateTimeFilterCriteriaTest {
         var date1 = new Date(value1).toInstant();
         var date2 = new Date(value2).toInstant();
 
-        fc = new DateTimeFilterCriteria(filter, Instant.class);
+        fc = new TemporalFilterCriteria(filter, Instant.class);
         assertThat(fc.hasBetweenDateValues()).isTrue();
         assertThat(fc.getDateValues()).containsExactly(date1, date2);
         assertThat(fc.getValues()).containsExactly(value1, value2);
@@ -54,16 +54,16 @@ class DateTimeFilterCriteriaTest {
     @Test
     void hasBetweenDateValues_LocalDate() {
         var filter = "between()";
-        var fc = new DateTimeFilterCriteria(filter, LocalDate.class);
+        var fc = new TemporalFilterCriteria(filter, LocalDate.class);
         assertThat(fc.hasBetweenDateValues()).isFalse();
 
         filter = "between(,)";
-        fc = new DateTimeFilterCriteria(filter, LocalDate.class);
+        fc = new TemporalFilterCriteria(filter, LocalDate.class);
         assertThat(fc.hasBetweenDateValues()).isFalse();
 
         var values = format("%s,%s", uuid(), uuid());
         filter = format("between(%s)", values);
-        fc = new DateTimeFilterCriteria(filter, LocalDate.class);
+        fc = new TemporalFilterCriteria(filter, LocalDate.class);
         assertThat(fc.hasBetweenDateValues()).isFalse();
 
         var value1 = "15 Dec 2024";
@@ -72,7 +72,7 @@ class DateTimeFilterCriteriaTest {
 
         values = format("%s,%s,%s", value1, value2, value3);
         filter = format("between(%s)", values);
-        fc = new DateTimeFilterCriteria(filter, LocalDate.class);
+        fc = new TemporalFilterCriteria(filter, LocalDate.class);
         assertThat(fc.hasBetweenDateValues()).isFalse();
 
         values = format("%s,%s", value1, value2);
@@ -80,7 +80,7 @@ class DateTimeFilterCriteriaTest {
         var date1 = toLocalDate(value1);
         var date2 = toLocalDate(value2);
 
-        fc = new DateTimeFilterCriteria(filter, LocalDate.class);
+        fc = new TemporalFilterCriteria(filter, LocalDate.class);
         assertThat(fc.hasBetweenDateValues()).isTrue();
         assertThat(fc.getDateValues()).containsExactly(date1, date2);
         assertThat(fc.getValues()).containsExactly(value1, value2);
@@ -89,16 +89,16 @@ class DateTimeFilterCriteriaTest {
     @Test
     void hasBetweenDateValues_LocalDateTime() {
         var filter = "between()";
-        var fc = new DateTimeFilterCriteria(filter, LocalDateTime.class);
+        var fc = new TemporalFilterCriteria(filter, LocalDateTime.class);
         assertThat(fc.hasBetweenDateValues()).isFalse();
 
         filter = "between(,)";
-        fc = new DateTimeFilterCriteria(filter, LocalDateTime.class);
+        fc = new TemporalFilterCriteria(filter, LocalDateTime.class);
         assertThat(fc.hasBetweenDateValues()).isFalse();
 
         var values = format("%s,%s", uuid(), uuid());
         filter = format("between(%s)", values);
-        fc = new DateTimeFilterCriteria(filter, LocalDateTime.class);
+        fc = new TemporalFilterCriteria(filter, LocalDateTime.class);
         assertThat(fc.hasBetweenDateValues()).isFalse();
 
         var value1 = "15 Dec 2024";
@@ -107,7 +107,7 @@ class DateTimeFilterCriteriaTest {
 
         values = format("%s,%s,%s", value1, value2, value3);
         filter = format("between(%s)", values);
-        fc = new DateTimeFilterCriteria(filter, LocalDateTime.class);
+        fc = new TemporalFilterCriteria(filter, LocalDateTime.class);
         assertThat(fc.hasBetweenDateValues()).isFalse();
 
         values = format("%s,%s", value1, value2);
@@ -115,7 +115,7 @@ class DateTimeFilterCriteriaTest {
         var date1 = toLocalDateTime(value1);
         var date2 = toLocalDateTime(value2);
 
-        fc = new DateTimeFilterCriteria(filter, LocalDateTime.class);
+        fc = new TemporalFilterCriteria(filter, LocalDateTime.class);
         assertThat(fc.hasBetweenDateValues()).isTrue();
         assertThat(fc.getDateValues()).containsExactly(date1, date2);
         assertThat(fc.getValues()).containsExactly(value1, value2);
@@ -131,7 +131,7 @@ class DateTimeFilterCriteriaTest {
         var date3 = new Date(value3).toInstant();
         var values = format("%s,%s,%s", value1, value2, value3);
         var filter = format("greaterThan(%s)", values);
-        var fc = new DateTimeFilterCriteria(filter, Instant.class);
+        var fc = new TemporalFilterCriteria(filter, Instant.class);
         assertThat(fc.getOperation()).isEqualTo("greaterThan");
         assertThat(fc.getDateValues()).containsExactly(date1, date2, date3);
         assertThat(fc.getValues()).containsExactly(value1, value2, value3);
@@ -147,7 +147,7 @@ class DateTimeFilterCriteriaTest {
         var date3 = toLocalDate(value3);
         var values = format("%s,%s,%s", value1, value2, value3);
         var filter = format("greaterThan(%s)", values);
-        var fc = new DateTimeFilterCriteria(filter, LocalDate.class);
+        var fc = new TemporalFilterCriteria(filter, LocalDate.class);
         assertThat(fc.getOperation()).isEqualTo("greaterThan");
         assertThat(fc.getDateValues()).containsExactly(date1, date2, date3);
         assertThat(fc.getValues()).containsExactly(value1, value2, value3);
@@ -163,7 +163,7 @@ class DateTimeFilterCriteriaTest {
         var date3 = toLocalDateTime(value3);
         var values = format("%s,%s,%s", value1, value2, value3);
         var filter = format("greaterThan(%s)", values);
-        var fc = new DateTimeFilterCriteria(filter, LocalDateTime.class);
+        var fc = new TemporalFilterCriteria(filter, LocalDateTime.class);
         assertThat(fc.getOperation()).isEqualTo("greaterThan");
         assertThat(fc.getDateValues()).containsExactly(date1, date2, date3);
         assertThat(fc.getValues()).containsExactly(value1, value2, value3);
@@ -176,7 +176,7 @@ class DateTimeFilterCriteriaTest {
         var value3 = "19 Dec 2024";
         var values = format("%s,%s,%s", value1, value2, value3);
         var filter = format("greaterThan(%s)", values);
-        var fc = new DateTimeFilterCriteria(filter, OffsetDateTime.class);
+        var fc = new TemporalFilterCriteria(filter, OffsetDateTime.class);
         assertThrows(IllegalArgumentException.class, () -> fc.getDateValues());
     }
 }

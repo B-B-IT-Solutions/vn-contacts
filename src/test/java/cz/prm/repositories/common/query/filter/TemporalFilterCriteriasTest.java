@@ -9,18 +9,18 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
-class DateTimeFilterCriteriasTest {
+class TemporalFilterCriteriasTest {
 
     @Test
     void filtersWithoutOperation() {
-        var fcs1 = new DateTimeFilterCriterias(null, Instant.class);
+        var fcs1 = new TemporalFilterCriterias(null, Instant.class);
         assertThat(fcs1.getCriterias()).isEmpty();
 
-        var fcs2 = new DateTimeFilterCriterias("", LocalDate.class);
+        var fcs2 = new TemporalFilterCriterias("", LocalDate.class);
         assertThat(fcs2.getCriterias()).isEmpty();
 
         var value = uuid();
-        var fcs3 = new DateTimeFilterCriterias(value, LocalDateTime.class);
+        var fcs3 = new TemporalFilterCriterias(value, LocalDateTime.class);
         assertThat(fcs3.getCriterias()).isNotEmpty().hasSize(1);
 
         var fc3 = fcs3.getCriterias().get(0);
@@ -34,7 +34,7 @@ class DateTimeFilterCriteriasTest {
         var operation = uuid().replace("-", "");
         var value = uuid();
         var filter = format("%s(%s)", operation, value);
-        var fcs = new DateTimeFilterCriterias(filter, Instant.class);
+        var fcs = new TemporalFilterCriterias(filter, Instant.class);
         assertThat(fcs.getCriterias()).isNotEmpty().hasSize(1);
 
         var fc = fcs.getCriterias().get(0);
@@ -47,7 +47,7 @@ class DateTimeFilterCriteriasTest {
     void oneFilterGreaterThanOperation() {
         var value = uuid();
         var filter = format("greaterThan(%s)", value);
-        var fcs = new DateTimeFilterCriterias(filter, LocalDate.class);
+        var fcs = new TemporalFilterCriterias(filter, LocalDate.class);
         assertThat(fcs.getCriterias()).isNotEmpty().hasSize(1);
 
         var fc = fcs.getCriterias().get(0);
@@ -60,7 +60,7 @@ class DateTimeFilterCriteriasTest {
     void oneFilterLessThanOperation() {
         var value = uuid();
         var filter = format("lessThan(%s)", value);
-        var fcs = new DateTimeFilterCriterias(filter, LocalDateTime.class);
+        var fcs = new TemporalFilterCriterias(filter, LocalDateTime.class);
         assertThat(fcs.getCriterias()).isNotEmpty().hasSize(1);
 
         var fc = fcs.getCriterias().get(0);
@@ -81,7 +81,7 @@ class DateTimeFilterCriteriasTest {
         var filter2 = format("%s(%s)", operation2, value2);
         var filter3 = format("%s(%s)", operation3, value3);
         var filter = format("%s+%s+%s", filter1, filter2, filter3);
-        var fcs = new DateTimeFilterCriterias(filter, Instant.class);
+        var fcs = new TemporalFilterCriterias(filter, Instant.class);
         assertThat(fcs.getCriterias()).isNotEmpty().hasSize(3);
 
         var fc1 = fcs.getCriterias().get(0);
@@ -109,7 +109,7 @@ class DateTimeFilterCriteriasTest {
         var filter2 = format("greaterThan(%s)", value2);
         var filter3 = format("greaterThan(%s)", value3);
         var filter = format("%s+%s+%s", filter1, filter2, filter3);
-        var fcs = new DateTimeFilterCriterias(filter, LocalDate.class);
+        var fcs = new TemporalFilterCriterias(filter, LocalDate.class);
         assertThat(fcs.getCriterias()).isNotEmpty().hasSize(3);
 
         var fc1 = fcs.getCriterias().get(0);
@@ -137,7 +137,7 @@ class DateTimeFilterCriteriasTest {
         var filter2 = format("lessThan(%s)", value2);
         var filter3 = format("lessThan(%s)", value3);
         var filter = format("%s+%s+%s", filter1, filter2, filter3);
-        var fcs = new DateTimeFilterCriterias(filter, LocalDateTime.class);
+        var fcs = new TemporalFilterCriterias(filter, LocalDateTime.class);
         assertThat(fcs.getCriterias()).isNotEmpty().hasSize(3);
 
         var fc1 = fcs.getCriterias().get(0);

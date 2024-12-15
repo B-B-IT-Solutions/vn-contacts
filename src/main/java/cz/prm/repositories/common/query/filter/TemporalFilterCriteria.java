@@ -14,13 +14,13 @@ import java.util.List;
 import lombok.Getter;
 
 @Getter
-public class DateTimeFilterCriteria extends AbstractFilterCriteria {
+public class TemporalFilterCriteria extends AbstractFilterCriteria {
 
     private static final String DATE_FORMAT = "dd MMM yyyy";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
     private Class<?> filterType;
 
-    public DateTimeFilterCriteria(String filter, Class<?> filterType) {
+    public TemporalFilterCriteria(String filter, Class<?> filterType) {
         super(filter);
         this.filterType = filterType;
     }
