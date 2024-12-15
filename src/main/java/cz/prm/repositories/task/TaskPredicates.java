@@ -8,6 +8,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import cz.prm.domain.task.query.TasksFilter;
+import java.time.Instant;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -46,7 +47,7 @@ public class TaskPredicates {
             predicate.and(task.completed.eq(filter.getCompleted()));
         }
         if (filter.isDueDate()) {
-            applyCriteria(predicate, task.dueDate, filter.getDueDate());
+            applyCriteria(predicate, task.dueDate, filter.getDueDate(), Instant.class);
         }
         return predicate;
     }

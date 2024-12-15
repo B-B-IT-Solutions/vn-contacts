@@ -27,7 +27,7 @@ import cz.prm.repositories.common.query.filter.DateTimeFilterCriteria;
 import cz.prm.repositories.common.query.filter.DateTimeFilterCriterias;
 import cz.prm.repositories.common.query.filter.FilterCriteria;
 import cz.prm.repositories.common.query.filter.FilterCriterias;
-import java.time.Instant;
+import java.time.temporal.Temporal;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = PRIVATE)
@@ -39,8 +39,8 @@ public class PredicateCriteriaUtils {
         return predicate;
     }
 
-    public static Predicate applyCriteria(BooleanBuilder predicate, DateTimePath field, String filter) {
-        var fcs = new DateTimeFilterCriterias(filter, Instant.class);
+    public static Predicate applyCriteria(BooleanBuilder predicate, DateTimePath field, String filter, Class<? extends Temporal> filterType) {
+        var fcs = new DateTimeFilterCriterias(filter, filterType);
         fcs.getCriterias().forEach(fc -> predicate.and(apply(field, fc)));
         return predicate;
     }
