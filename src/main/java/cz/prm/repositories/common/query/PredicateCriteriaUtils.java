@@ -23,10 +23,10 @@ import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.ListPath;
 import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.core.types.dsl.TemporalExpression;
-import cz.prm.repositories.common.query.filter.TemporalFilterCriteria;
-import cz.prm.repositories.common.query.filter.TemporalFilterCriterias;
 import cz.prm.repositories.common.query.filter.FilterCriteria;
 import cz.prm.repositories.common.query.filter.FilterCriterias;
+import cz.prm.repositories.common.query.filter.TemporalFilterCriteria;
+import cz.prm.repositories.common.query.filter.TemporalFilterCriterias;
 import java.time.temporal.Temporal;
 import lombok.NoArgsConstructor;
 
