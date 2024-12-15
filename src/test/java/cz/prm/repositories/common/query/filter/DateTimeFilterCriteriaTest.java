@@ -1,17 +1,21 @@
 package cz.prm.repositories.common.query.filter;
 
 import static cz.prm.utils.TestUtils.uuid;
+import static cz.prm.utils.TimeUtils.toLocalDate;
+import static cz.prm.utils.TimeUtils.toLocalDateTime;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import org.junit.jupiter.api.Test;
 
 class DateTimeFilterCriteriaTest {
 
     @Test
-    void hasBetweenDateValues() {
+    void hasBetweenDateValues_Instant() {
         var filter = "between()";
         var fc = new DateTimeFilterCriteria(filter, Instant.class);
         assertThat(fc.hasBetweenDateValues()).isFalse();
@@ -46,7 +50,77 @@ class DateTimeFilterCriteriaTest {
     }
 
     @Test
-    void getDateValues() {
+    void hasBetweenDateValues_LocalDate() {
+        var filter = "between()";
+        var fc = new DateTimeFilterCriteria(filter, LocalDate.class);
+        assertThat(fc.hasBetweenDateValues()).isFalse();
+
+        filter = "between(,)";
+        fc = new DateTimeFilterCriteria(filter, LocalDate.class);
+        assertThat(fc.hasBetweenDateValues()).isFalse();
+
+        var values = format("%s,%s", uuid(), uuid());
+        filter = format("between(%s)", values);
+        fc = new DateTimeFilterCriteria(filter, LocalDate.class);
+        assertThat(fc.hasBetweenDateValues()).isFalse();
+
+        var value1 = "15 Dec 2024";
+        var value2 = "17 Dec 2024";
+        var value3 = "19 Dec 2024";
+
+        values = format("%s,%s,%s", value1, value2, value3);
+        filter = format("between(%s)", values);
+        fc = new DateTimeFilterCriteria(filter, LocalDate.class);
+        assertThat(fc.hasBetweenDateValues()).isFalse();
+
+        values = format("%s,%s", value1, value2);
+        filter = format("between(%s)", values);
+        var date1 = toLocalDate(value1);
+        var date2 = toLocalDate(value2);
+
+        fc = new DateTimeFilterCriteria(filter, LocalDate.class);
+        assertThat(fc.hasBetweenDateValues()).isTrue();
+        assertThat(fc.getDateValues()).containsExactly(date1, date2);
+        assertThat(fc.getValues()).containsExactly(value1, value2);
+    }
+
+    @Test
+    void hasBetweenDateValues_LocalDateTime() {
+        var filter = "between()";
+        var fc = new DateTimeFilterCriteria(filter, LocalDateTime.class);
+        assertThat(fc.hasBetweenDateValues()).isFalse();
+
+        filter = "between(,)";
+        fc = new DateTimeFilterCriteria(filter, LocalDateTime.class);
+        assertThat(fc.hasBetweenDateValues()).isFalse();
+
+        var values = format("%s,%s", uuid(), uuid());
+        filter = format("between(%s)", values);
+        fc = new DateTimeFilterCriteria(filter, LocalDateTime.class);
+        assertThat(fc.hasBetweenDateValues()).isFalse();
+
+        var value1 = "15 Dec 2024";
+        var value2 = "17 Dec 2024";
+        var value3 = "19 Dec 2024";
+
+        values = format("%s,%s,%s", value1, value2, value3);
+        filter = format("between(%s)", values);
+        fc = new DateTimeFilterCriteria(filter, LocalDateTime.class);
+        assertThat(fc.hasBetweenDateValues()).isFalse();
+
+        values = format("%s,%s", value1, value2);
+        filter = format("between(%s)", values);
+        var date1 = toLocalDateTime(value1);
+        var date2 = toLocalDateTime(value2);
+
+        fc = new DateTimeFilterCriteria(filter, LocalDateTime.class);
+        assertThat(fc.hasBetweenDateValues()).isTrue();
+        assertThat(fc.getDateValues()).containsExactly(date1, date2);
+        assertThat(fc.getValues()).containsExactly(value1, value2);
+    }
+
+    @Test
+    void getDateValues_Instant() {
         var value1 = "15 Dec 2024";
         var value2 = "17 Dec 2024";
         var value3 = "19 Dec 2024";
@@ -56,6 +130,38 @@ class DateTimeFilterCriteriaTest {
         var values = format("%s,%s,%s", value1, value2, value3);
         var filter = format("greaterThan(%s)", values);
         var fc = new DateTimeFilterCriteria(filter, Instant.class);
+        assertThat(fc.getOperation()).isEqualTo("greaterThan");
+        assertThat(fc.getDateValues()).containsExactly(date1, date2, date3);
+        assertThat(fc.getValues()).containsExactly(value1, value2, value3);
+    }
+
+    @Test
+    void getDateValues_LocalDate() {
+        var value1 = "15 Dec 2024";
+        var value2 = "17 Dec 2024";
+        var value3 = "19 Dec 2024";
+        var date1 = toLocalDate(value1);
+        var date2 = toLocalDate(value2);
+        var date3 = toLocalDate(value3);
+        var values = format("%s,%s,%s", value1, value2, value3);
+        var filter = format("greaterThan(%s)", values);
+        var fc = new DateTimeFilterCriteria(filter, LocalDate.class);
+        assertThat(fc.getOperation()).isEqualTo("greaterThan");
+        assertThat(fc.getDateValues()).containsExactly(date1, date2, date3);
+        assertThat(fc.getValues()).containsExactly(value1, value2, value3);
+    }
+
+    @Test
+    void getDateValues_LocalDateTime() {
+        var value1 = "15 Dec 2024";
+        var value2 = "17 Dec 2024";
+        var value3 = "19 Dec 2024";
+        var date1 = toLocalDateTime(value1);
+        var date2 = toLocalDateTime(value2);
+        var date3 = toLocalDateTime(value3);
+        var values = format("%s,%s,%s", value1, value2, value3);
+        var filter = format("greaterThan(%s)", values);
+        var fc = new DateTimeFilterCriteria(filter, LocalDateTime.class);
         assertThat(fc.getOperation()).isEqualTo("greaterThan");
         assertThat(fc.getDateValues()).containsExactly(date1, date2, date3);
         assertThat(fc.getValues()).containsExactly(value1, value2, value3);

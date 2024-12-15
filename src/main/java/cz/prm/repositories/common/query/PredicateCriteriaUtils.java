@@ -63,7 +63,7 @@ public class PredicateCriteriaUtils {
         return predicate;
     }
 
-    private static Predicate apply(DateTimePath field, DateTimeFilterCriteria<Instant> fc) {
+    private static Predicate apply(DateTimePath field, DateTimeFilterCriteria fc) {
         var predicate = new BooleanBuilder();
         if (EQUALS.isOperation(fc)) {
             fc.getDateValues().forEach(value -> predicate.or(field.eq(value)));
