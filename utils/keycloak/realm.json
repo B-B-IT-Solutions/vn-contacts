@@ -35,10 +35,6 @@
         "containerId": "vision-notes",
         "composite": true,
         "composites": {
-          "realm": [
-            "offline_access",
-            "uma_authorization"
-          ],
           "client": {
             "account": [
               "manage-account",
@@ -46,24 +42,6 @@
             ]
           }
         }
-      },
-      {
-        "id": "108eef4c-3c47-42ea-830a-a9b0a8afdaa2",
-        "name": "uma_authorization",
-        "description": "${role_uma_authorization}",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "vision-notes",
-        "attributes": {}
-      },
-      {
-        "id": "9eff1975-7839-477b-9fb4-cdfe166e51da",
-        "name": "offline_access",
-        "description": "${role_offline-access}",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "vision-notes",
-        "attributes": {}
       }
     ]
   },
@@ -102,9 +80,9 @@
   ],
   "users": [
     {
-      "id": "bobuskysergej",
+      "id": "bobuskysergej@gmail.com",
       "email": "bobuskysergej@gmail.com",
-      "username": "bobuskysergej",
+      "username": "bobuskysergej@gmail.com",
       "firstName": "Sergej",
       "lastName": "Bobusky",
       "enabled": true,
@@ -122,11 +100,11 @@
       "groups": []
     },
     {
-      "id": "bobuskaviktoria",
-      "email": "bobuskaviktoria@gmail.com",
-      "username": "bobuskaviktoria",
-      "firstName": "Viktoria",
-      "lastName": "Bobuska",
+      "id": "boeningkatja@gmail.com",
+      "email": "boeningkatja@gmail.com",
+      "username": "boeningkatja@gmail.com",
+      "firstName": "Katja",
+      "lastName": "Boening",
       "enabled": true,
       "emailVerified": true,
       "credentials": [
