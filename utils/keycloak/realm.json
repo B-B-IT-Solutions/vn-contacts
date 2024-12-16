@@ -1,12 +1,12 @@
 {
   "id": "vision-notes",
   "realm": "vision-notes",
-  "sslRequired": "none",
+  "sslRequired": "external",
   "enabled": true,
   "registrationAllowed": true,
   "registrationEmailAsUsername": true,
   "rememberMe": true,
-  "verifyEmail": false,
+  "verifyEmail": true,
   "loginWithEmailAllowed": true,
   "duplicateEmailsAllowed": false,
   "resetPasswordAllowed": true,
@@ -52,7 +52,7 @@
       "name": "Vision-notes UI Application",
       "enabled": true,
       "publicClient": true,
-      "rootUrl": "http://localhost:3000/",
+      "rootUrl": "http://keycloak.internal",
       "adminUrl": "http://localhost:3000",
       "baseUrl": "http://localhost:3000",
       "redirectUris": [
