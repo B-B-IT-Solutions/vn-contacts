@@ -11,6 +11,20 @@
   "duplicateEmailsAllowed": false,
   "resetPasswordAllowed": true,
   "editUsernameAllowed": false,
+  "smtpServer": {
+    "starttls": "false",
+    "auth": "true",
+    "envelopeFrom": "",
+    "ssl": "false",
+    "user": "noreply@vision-notes.com",
+    "password": "**********",
+    "port": "587",
+    "host": "mail.infomaniak.ch",
+    "from": "noreply@vision-notes.com",
+    "fromDisplayName": "VisionNotes",
+    "replyTo": "noreply@vision-notes.com",
+    "replyToDisplayName": "VisionNotes"
+  },
   "roles": {
     "realm": [
       {
