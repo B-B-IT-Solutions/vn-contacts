@@ -72,6 +72,13 @@
     "replyTo": "noreply@vision-notes.com",
     "replyToDisplayName": "Vision Notes"
   },
+  "internationalizationEnabled": true,
+  "supportedLocales": [
+    "cs",
+    "de",
+    "en"
+  ],
+  "defaultLocale": "en",
   "roles": {
     "realm": [
       {
