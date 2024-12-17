@@ -26,9 +26,9 @@
     "port": "587",
     "host": "mail.infomaniak.ch",
     "from": "noreply@vision-notes.com",
-    "fromDisplayName": "VisionNotes",
+    "fromDisplayName": "Vision Notes",
     "replyTo": "noreply@vision-notes.com",
-    "replyToDisplayName": "VisionNotes"
+    "replyToDisplayName": "Vision Notes"
   },
   "roles": {
     "realm": [
