@@ -79,6 +79,31 @@
     "en"
   ],
   "defaultLocale": "en",
+  "localizationTexts": {
+    "cs": {
+      "profile.attributes.jobTitle": "Profese"
+    },
+    "de": {
+      "profile.attributes.jobTitle": "Beruf"
+    },
+    "en": {
+      "profile.attributes.jobTitle": "Job Title"
+    }
+  },
+  "components": {
+    "org.keycloak.userprofile.UserProfileProvider": [
+      {
+        "id": "bdc1c931-691b-4d65-a247-68ebdc44843c",
+        "providerId": "declarative-user-profile",
+        "subComponents": {},
+        "config": {
+          "kc.user.profile.config": [
+            "{\"attributes\":[{\"name\":\"username\",\"displayName\":\"${username}\",\"validations\":{\"length\":{\"min\":3,\"max\":255},\"username-prohibited-characters\":{},\"up-username-not-idn-homograph\":{}},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"email\",\"displayName\":\"${email}\",\"validations\":{\"email\":{},\"length\":{\"max\":255}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"firstName\",\"displayName\":\"${firstName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"lastName\",\"displayName\":\"${lastName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"jobTitle\",\"displayName\":\"${profile.attributes.jobTitle}\",\"validations\":{},\"annotations\":{\"inputType\":\"text\"},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false}],\"groups\":[{\"name\":\"user-metadata\",\"displayHeader\":\"User metadata\",\"displayDescription\":\"Attributes, which refer to user metadata\"}]}"
+          ]
+        }
+      }
+    ]
+  },
   "roles": {
     "realm": [
       {
@@ -106,7 +131,7 @@
       "name": "Vision-notes UI Application",
       "enabled": true,
       "publicClient": true,
-      "rootUrl": "http://keycloak.internal",
+      "rootUrl": "http://localhost:3000",
       "adminUrl": "http://localhost:3000",
       "baseUrl": "http://localhost:3000",
       "redirectUris": [
@@ -174,4 +199,4 @@
       "groups": []
     }
   ]
-}
+},
