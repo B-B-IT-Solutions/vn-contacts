@@ -2,6 +2,7 @@
   "id": "vision-notes",
   "realm": "vision-notes",
   "displayName": "Vision Notes",
+  "notBefore": 0,
   "defaultSignatureAlgorithm": "RS256",
   "revokeRefreshToken": false,
   "refreshTokenMaxReuse": 0,
@@ -802,8 +803,7 @@
       ],
       "optionalClientScopes": [
         "address",
-        "phone",
-        "offline_access"
+        "phone"
       ]
     }
   ],
