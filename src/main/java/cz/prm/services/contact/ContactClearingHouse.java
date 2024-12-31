@@ -52,10 +52,10 @@ public class ContactClearingHouse {
     }
 
     public void deleteContact(Long contactId) {
-        aboutService.deleteAbout(contactId);
         noteService.deleteByContactId(contactId);
         taskService.deleteByContactId(contactId);
         reminderService.deleteByContactId(contactId);
+        aboutService.deleteAbout(contactId);
         contactService.deleteContact(contactId);
     }
 
