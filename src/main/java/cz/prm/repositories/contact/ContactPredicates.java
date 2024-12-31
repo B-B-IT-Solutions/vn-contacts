@@ -42,6 +42,12 @@ public class ContactPredicates {
         if (filter.isNickName()) {
             applyCriteria(predicate, contact.nickName, filter.getNickName());
         }
+        if (filter.isLabels()) {
+            applyCriteria(predicate, contact.labels, filter.getLabels());
+        }
+        if (filter.isIndustries()) {
+            applyCriteria(predicate, contact.industries, filter.getIndustries());
+        }
         return predicate;
     }
 }
