@@ -53,6 +53,14 @@ class ContactPredicatesTest {
             var expectedString = format("contact.owner.username = %s", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
+            filter.setGlobalFilter("global_filter_01");
+            predicate = predicates.contacts(filter);
+            expectedString = format("contact.owner.username = %s && (containsIc(contact.firstName,global_filter_01) || containsIc"
+                + "(contact.middleName,global_filter_01) || containsIc(contact.lastName,global_filter_01) || containsIc(contact.nickName,"
+                + "global_filter_01) || global_filter_01 in contact.labels || global_filter_01 in contact.industries)", user.getUsername());
+            assertThat(predicate).hasToString(expectedString);
+
+            filter.setGlobalFilter(null);
             filter.setFirstName("firstName_01");
             predicate = predicates.contacts(filter);
             expectedString = format("contact.owner.username = %s && containsIc(contact.firstName,firstName_01)", user.getUsername());
