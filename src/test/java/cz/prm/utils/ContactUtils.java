@@ -166,6 +166,7 @@ public class ContactUtils {
 
     public static ContactsFilter contactsFilter() {
         var filter = new ContactsFilter();
+        filter.setGlobalFilter(uuid());
         filter.setFirstName(uuid());
         filter.setLastName(uuid());
         filter.setLabels(uuid());
@@ -175,6 +176,7 @@ public class ContactUtils {
 
     public static ContactsFilterDto contactsFilterDto() {
         var filter = new ContactsFilterDto();
+        filter.setGlobalFilter(uuid());
         filter.setFirstName(uuid());
         filter.setLastName(uuid());
         filter.setLabels(uuid());

@@ -8,6 +8,20 @@ import org.junit.jupiter.api.Test;
 class ContactsFilterTest {
 
     @Test
+    void isGlobalFilter() {
+        var filter = new ContactsFilter();
+        assertThat(filter.isGlobalFilter()).isFalse();
+        filter.setGlobalFilter(null);
+        assertThat(filter.isGlobalFilter()).isFalse();
+        filter.setGlobalFilter("");
+        assertThat(filter.isGlobalFilter()).isFalse();
+        filter.setGlobalFilter(" ");
+        assertThat(filter.isGlobalFilter()).isFalse();
+        filter.setGlobalFilter(uuid());
+        assertThat(filter.isGlobalFilter()).isTrue();
+    }
+
+    @Test
     void isFirstName() {
         var filter = new ContactsFilter();
         assertThat(filter.isFirstName()).isFalse();

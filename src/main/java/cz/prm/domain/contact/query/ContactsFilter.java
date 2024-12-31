@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ContactsFilter {
 
+    private String globalFilter;
+
     private String firstName;
 
     private String middleName;
@@ -20,6 +22,10 @@ public class ContactsFilter {
     private String labels;
 
     private String industries;
+
+    public boolean isGlobalFilter() {
+        return isNotBlank(globalFilter);
+    }
 
     public boolean isFirstName() {
         return isNotBlank(firstName);

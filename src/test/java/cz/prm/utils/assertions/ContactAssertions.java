@@ -168,8 +168,11 @@ public class ContactAssertions {
     }
 
     public static void assertContactFilter(ContactsFilter filter, ContactsFilterDto dto) {
+        assertThat(filter.getGlobalFilter()).isEqualTo(dto.getGlobalFilter());
         assertThat(filter.getFirstName()).isEqualTo(dto.getFirstName());
         assertThat(filter.getLastName()).isEqualTo(dto.getLastName());
+        assertThat(filter.getMiddleName()).isEqualTo(dto.getMiddleName());
+        assertThat(filter.getNickName()).isEqualTo(dto.getNickName());
         assertThat(filter.getLabels()).isEqualTo(dto.getLabels());
         assertThat(filter.getIndustries()).isEqualTo(dto.getIndustries());
     }
