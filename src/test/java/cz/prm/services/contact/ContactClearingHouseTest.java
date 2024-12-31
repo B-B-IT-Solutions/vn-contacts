@@ -82,6 +82,9 @@ class ContactClearingHouseTest {
         var contact = contact();
         clearingHouse.deleteContact(contact.getContactId());
         verify(aboutService).deleteAbout(contact.getContactId());
+        verify(noteService).deleteByContactId(contact.getContactId());
+        verify(taskService).deleteByContactId(contact.getContactId());
+        verify(reminderService).deleteByContactId(contact.getContactId());
         verify(contactService).deleteContact(contact.getContactId());
     }
 
