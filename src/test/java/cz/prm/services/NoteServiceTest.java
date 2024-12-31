@@ -17,6 +17,7 @@ import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.note.Note;
+import cz.prm.domain.note.query.NotesFilter;
 import cz.prm.repositories.note.NotePredicates;
 import cz.prm.repositories.note.NoteRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -131,6 +132,18 @@ class NoteServiceTest {
         when(predicates.byNoteId(noteId)).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(empty());
         assertThrows(EntityNotFoundException.class, () -> noteService.deleteNote(noteId));
+    }
+
+    @Test
+    void deleteByContactId() {
+        var notes = notes();
+        var contactId = randomLong();
+        var predicate = new BooleanBuilder();
+        when(predicates.byContactId(eq(contactId), any(NotesFilter.class))).thenReturn(predicate);
+        when(repository.findAll(predicate)).thenReturn(notes);
+
+        noteService.deleteByContactId(contactId);
+        verify(repository).deleteAll(notes);
     }
 
     private void assertFieldsUpdated(Note noteIdDb, Note updatedNote, Note savedNote) {

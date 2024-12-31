@@ -17,6 +17,7 @@ import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.task.Task;
+import cz.prm.domain.task.query.TasksFilter;
 import cz.prm.repositories.task.TaskPredicates;
 import cz.prm.repositories.task.TaskRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -131,6 +132,18 @@ class TaskServiceTest {
         when(predicates.byTaskId(taskId)).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(empty());
         assertThrows(EntityNotFoundException.class, () -> taskService.deleteTask(taskId));
+    }
+
+    @Test
+    void deleteByContactId() {
+        var tasks = tasks();
+        var contactId = randomLong();
+        var predicate = new BooleanBuilder();
+        when(predicates.byContactId(eq(contactId), any(TasksFilter.class))).thenReturn(predicate);
+        when(repository.findAll(predicate)).thenReturn(tasks);
+
+        taskService.deleteByContactId(contactId);
+        verify(repository).deleteAll(tasks);
     }
 
     private void assertFieldsUpdated(Task taskIdDb, Task updatedTask, Task savedTask) {

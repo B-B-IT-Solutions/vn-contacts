@@ -52,6 +52,12 @@ public class ReminderService {
         repository.deleteById(savedReminder.getReminderId());
     }
 
+    public void deleteByContactId(Long contactId) {
+        var predicate = predicates.byContactId(contactId);
+        var notes = repository.findAll(predicate);
+        repository.deleteAll(notes);
+    }
+
     private void updateReminderFields(Reminder savedReminder, Reminder updatedReminder) {
         savedReminder.setTitle(updatedReminder.getTitle());
         savedReminder.setDescription(updatedReminder.getDescription());
