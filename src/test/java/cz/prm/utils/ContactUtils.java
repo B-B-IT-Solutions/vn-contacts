@@ -168,7 +168,8 @@ public class ContactUtils {
         var filter = new ContactsFilter();
         filter.setFirstName(uuid());
         filter.setLastName(uuid());
-        filter.setEmail(uuid());
+        filter.setLabels(uuid());
+        filter.setIndustries(uuid());
         return filter;
     }
 
@@ -176,7 +177,8 @@ public class ContactUtils {
         var filter = new ContactsFilterDto();
         filter.setFirstName(uuid());
         filter.setLastName(uuid());
-        filter.setEmail(uuid());
+        filter.setLabels(uuid());
+        filter.setIndustries(uuid());
         return filter;
     }
 }

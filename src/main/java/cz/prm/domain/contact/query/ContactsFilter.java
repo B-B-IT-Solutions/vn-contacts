@@ -17,7 +17,9 @@ public class ContactsFilter {
 
     private String nickName;
 
-    private String email;
+    private String labels;
+
+    private String industries;
 
     public boolean isFirstName() {
         return isNotBlank(firstName);
@@ -35,7 +37,11 @@ public class ContactsFilter {
         return isNotBlank(nickName);
     }
 
-    public boolean isEmail() {
-        return isNotBlank(email);
+    public boolean isLabels() {
+        return isNotBlank(labels);
+    }
+
+    public boolean isIndustries() {
+        return isNotBlank(industries);
     }
 }

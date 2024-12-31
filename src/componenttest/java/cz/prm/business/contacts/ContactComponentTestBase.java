@@ -3,9 +3,6 @@ package cz.prm.business.contacts;
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
-import static cz.prm.utils.ContactComponentTestUtils.contact;
-import static cz.prm.utils.SecurityContextComponentTestUtils.clearContext;
-import static cz.prm.utils.SecurityContextComponentTestUtils.ensureUserContext;
 import static java.lang.String.format;
 import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
@@ -277,9 +274,14 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
                 sb.append(filterDto.getNickName());
                 sb.append("&");
             }
-            if (isNotEmpty(filterDto.getEmail())) {
-                sb.append("filter.email=");
-                sb.append(filterDto.getEmail());
+            if (isNotEmpty(filterDto.getLabels())) {
+                sb.append("filter.labels=");
+                sb.append(filterDto.getLabels());
+                sb.append("&");
+            }
+            if (isNotEmpty(filterDto.getIndustries())) {
+                sb.append("filter.industries=");
+                sb.append(filterDto.getIndustries());
                 sb.append("&");
             }
         }

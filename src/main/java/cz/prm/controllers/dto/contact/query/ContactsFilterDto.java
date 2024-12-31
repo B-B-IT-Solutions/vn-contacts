@@ -15,5 +15,7 @@ public class ContactsFilterDto {
 
     private String nickName;
 
-    private String email;
+    private String labels;
+
+    private String industries;
 }
