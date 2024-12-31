@@ -5,6 +5,7 @@ import static java.lang.String.format;
 
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.note.Note;
+import cz.prm.domain.note.query.NotesFilter;
 import cz.prm.domain.note.query.NotesQuery;
 import cz.prm.repositories.note.NotePredicates;
 import cz.prm.repositories.note.NoteRepository;
@@ -49,6 +50,12 @@ public class NoteService {
     public void deleteNote(Long noteId) {
         var savedNote = getNoteById(noteId);
         repository.deleteById(savedNote.getNoteId());
+    }
+
+    public void deleteByContactId(Long contactId) {
+        var predicate = predicates.byContactId(contactId, new NotesFilter());
+        var notes = repository.findAll(predicate);
+        repository.deleteAll(notes);
     }
 
     private void updateNoteFields(Note savedNote, Note updatedNote) {

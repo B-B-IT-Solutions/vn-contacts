@@ -4,6 +4,8 @@ import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
+import static cz.prm.utils.ComponentTestUtils.arrayIncludesAllFilter;
+import static cz.prm.utils.ComponentTestUtils.arrayIncludesFilter;
 import static cz.prm.utils.ComponentTestUtils.containsFilter;
 import static cz.prm.utils.ComponentTestUtils.containsNotContainsFilter;
 import static cz.prm.utils.ComponentTestUtils.notContainsFilter;
@@ -260,6 +262,52 @@ public class ContactComponentTest extends ContactComponentTestBase {
         assertThat(pageDto.getContent()).hasSize(1);
 
         filter.setNickName(notContainsFilter("Nick"));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        queryDto = contactsQueryDto();
+        filter = queryDto.getFilter();
+
+        filter.setLabels(null);
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setLabels(arrayIncludesFilter(contactDto1.getLabels()));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setLabels(arrayIncludesFilter(newArrayList(uuid())));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setLabels(arrayIncludesAllFilter(contactDto1.getLabels()));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setLabels(arrayIncludesAllFilter(newArrayList(uuid())));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        queryDto = contactsQueryDto();
+        filter = queryDto.getFilter();
+
+        filter.setIndustries(null);
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setIndustries(arrayIncludesFilter(contactDto1.getIndustries()));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setIndustries(arrayIncludesFilter(newArrayList(uuid())));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setIndustries(arrayIncludesAllFilter(contactDto1.getIndustries()));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setIndustries(arrayIncludesAllFilter(newArrayList(uuid())));
         pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
     }

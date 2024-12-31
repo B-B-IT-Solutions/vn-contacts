@@ -8,6 +8,20 @@ import org.junit.jupiter.api.Test;
 class ContactsFilterTest {
 
     @Test
+    void isGlobalFilter() {
+        var filter = new ContactsFilter();
+        assertThat(filter.isGlobalFilter()).isFalse();
+        filter.setGlobalFilter(null);
+        assertThat(filter.isGlobalFilter()).isFalse();
+        filter.setGlobalFilter("");
+        assertThat(filter.isGlobalFilter()).isFalse();
+        filter.setGlobalFilter(" ");
+        assertThat(filter.isGlobalFilter()).isFalse();
+        filter.setGlobalFilter(uuid());
+        assertThat(filter.isGlobalFilter()).isTrue();
+    }
+
+    @Test
     void isFirstName() {
         var filter = new ContactsFilter();
         assertThat(filter.isFirstName()).isFalse();
@@ -64,16 +78,30 @@ class ContactsFilterTest {
     }
 
     @Test
-    void isEmail() {
+    void isLabels() {
         var filter = new ContactsFilter();
-        assertThat(filter.isEmail()).isFalse();
-        filter.setEmail(null);
-        assertThat(filter.isEmail()).isFalse();
-        filter.setEmail("");
-        assertThat(filter.isEmail()).isFalse();
-        filter.setEmail(" ");
-        assertThat(filter.isEmail()).isFalse();
-        filter.setEmail(uuid());
-        assertThat(filter.isEmail()).isTrue();
+        assertThat(filter.isLabels()).isFalse();
+        filter.setLabels(null);
+        assertThat(filter.isLabels()).isFalse();
+        filter.setLabels("");
+        assertThat(filter.isLabels()).isFalse();
+        filter.setLabels(" ");
+        assertThat(filter.isLabels()).isFalse();
+        filter.setLabels(uuid());
+        assertThat(filter.isLabels()).isTrue();
+    }
+
+    @Test
+    void isIndustries() {
+        var filter = new ContactsFilter();
+        assertThat(filter.isIndustries()).isFalse();
+        filter.setIndustries(null);
+        assertThat(filter.isIndustries()).isFalse();
+        filter.setIndustries("");
+        assertThat(filter.isIndustries()).isFalse();
+        filter.setIndustries(" ");
+        assertThat(filter.isIndustries()).isFalse();
+        filter.setIndustries(uuid());
+        assertThat(filter.isIndustries()).isTrue();
     }
 }

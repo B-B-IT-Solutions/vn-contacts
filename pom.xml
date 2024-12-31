@@ -20,7 +20,7 @@
 			<commons-validator.version>1.9.0</commons-validator.version>
 			<lib-recur.version>0.17.1</lib-recur.version>
 			<build-helper-plugin.version>3.0.0</build-helper-plugin.version>
-			<querydsl.version>5.0.0</querydsl.version>
+			<querydsl.version>5.1.0</querydsl.version>
 			<spring-data-envers.version>3.2.0</spring-data-envers.version>
 			<hibernate-envers.version>6.3.2.Final</hibernate-envers.version>
 			<jackson.version>2.15.4</jackson.version>

@@ -166,17 +166,21 @@ public class ContactUtils {
 
     public static ContactsFilter contactsFilter() {
         var filter = new ContactsFilter();
+        filter.setGlobalFilter(uuid());
         filter.setFirstName(uuid());
         filter.setLastName(uuid());
-        filter.setEmail(uuid());
+        filter.setLabels(uuid());
+        filter.setIndustries(uuid());
         return filter;
     }
 
     public static ContactsFilterDto contactsFilterDto() {
         var filter = new ContactsFilterDto();
+        filter.setGlobalFilter(uuid());
         filter.setFirstName(uuid());
         filter.setLastName(uuid());
-        filter.setEmail(uuid());
+        filter.setLabels(uuid());
+        filter.setIndustries(uuid());
         return filter;
     }
 }

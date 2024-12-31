@@ -11,6 +11,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import cz.prm.services.NoteService;
+import cz.prm.services.ReminderService;
+import cz.prm.services.TaskService;
 import cz.prm.services.contact.data.AboutService;
 import cz.prm.services.contact.data.ContactService;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,12 +29,18 @@ class ContactClearingHouseTest {
     private ContactService contactService;
     @Mock
     private AboutService aboutService;
+    @Mock
+    private NoteService noteService;
+    @Mock
+    private TaskService taskService;
+    @Mock
+    private ReminderService reminderService;
 
     private ContactClearingHouse clearingHouse;
 
     @BeforeEach
     void setUp() {
-        clearingHouse = new ContactClearingHouse(contactService, aboutService);
+        clearingHouse = new ContactClearingHouse(contactService, aboutService, noteService, taskService, reminderService);
     }
 
     @Test
@@ -72,6 +81,9 @@ class ContactClearingHouseTest {
     void deleteContact() {
         var contact = contact();
         clearingHouse.deleteContact(contact.getContactId());
+        verify(noteService).deleteByContactId(contact.getContactId());
+        verify(taskService).deleteByContactId(contact.getContactId());
+        verify(reminderService).deleteByContactId(contact.getContactId());
         verify(aboutService).deleteAbout(contact.getContactId());
         verify(contactService).deleteContact(contact.getContactId());
     }

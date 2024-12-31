@@ -19,7 +19,6 @@ import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.contact.Contact;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
-import cz.prm.repositories.note.NoteRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,8 +37,6 @@ class ContactServiceTest {
     private ContactRepository repository;
     @Mock
     private ContactPredicates predicates;
-    @Mock
-    private NoteRepository noteRepository;
     @Captor
     private ArgumentCaptor<Contact> contactCapt;
 
@@ -47,7 +44,7 @@ class ContactServiceTest {
 
     @BeforeEach
     void setUp() {
-        contactService = new ContactService(repository, predicates, noteRepository);
+        contactService = new ContactService(repository, predicates);
     }
 
     @Test
@@ -121,7 +118,6 @@ class ContactServiceTest {
         when(repository.findOne(predicate)).thenReturn(of(contactIdDb));
 
         contactService.deleteContact(contactIdDb.getContactId());
-        verify(noteRepository).deleteByContactId(contactIdDb.getContactId());
         verify(repository).deleteById(contactIdDb.getContactId());
     }
 
@@ -132,7 +128,6 @@ class ContactServiceTest {
         when(predicates.byContactId(contactIdDb.getContactId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(empty());
         assertThrows(EntityNotFoundException.class, () -> contactService.deleteContact(contactIdDb.getContactId()));
-        verify(noteRepository, never()).deleteByContactId(any());
         verify(repository, never()).deleteById(any());
     }
 

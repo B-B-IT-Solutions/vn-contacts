@@ -4,6 +4,9 @@ import cz.prm.domain.common.query.Page;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsQuery;
+import cz.prm.services.NoteService;
+import cz.prm.services.ReminderService;
+import cz.prm.services.TaskService;
 import cz.prm.services.contact.data.AboutService;
 import cz.prm.services.contact.data.ContactService;
 import jakarta.transaction.Transactional;
@@ -17,11 +20,18 @@ public class ContactClearingHouse {
     private ContactService contactService;
 
     private AboutService aboutService;
+    private NoteService noteService;
+    private TaskService taskService;
+    private ReminderService reminderService;
 
     @Autowired
-    public ContactClearingHouse(ContactService contactService, AboutService aboutService) {
+    public ContactClearingHouse(ContactService contactService, AboutService aboutService, NoteService noteService, TaskService taskService,
+        ReminderService reminderService) {
         this.contactService = contactService;
         this.aboutService = aboutService;
+        this.noteService = noteService;
+        this.taskService = taskService;
+        this.reminderService = reminderService;
     }
 
     public Page<Contact> getContacts(ContactsQuery query) {
@@ -42,6 +52,9 @@ public class ContactClearingHouse {
     }
 
     public void deleteContact(Long contactId) {
+        noteService.deleteByContactId(contactId);
+        taskService.deleteByContactId(contactId);
+        reminderService.deleteByContactId(contactId);
         aboutService.deleteAbout(contactId);
         contactService.deleteContact(contactId);
     }

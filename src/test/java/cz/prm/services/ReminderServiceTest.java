@@ -133,6 +133,18 @@ class ReminderServiceTest {
         assertThrows(EntityNotFoundException.class, () -> reminderService.deleteReminder(reminderId));
     }
 
+    @Test
+    void deleteByContactId() {
+        var reminders = reminders();
+        var contactId = randomLong();
+        var predicate = new BooleanBuilder();
+        when(predicates.byContactId(eq(contactId))).thenReturn(predicate);
+        when(repository.findAll(predicate)).thenReturn(reminders);
+
+        reminderService.deleteByContactId(contactId);
+        verify(repository).deleteAll(reminders);
+    }
+
     private void assertFieldsUpdated(Reminder reminderIdDb, Reminder updatedReminder, Reminder savedReminder) {
         assertThat(reminderIdDb.getReminderId()).isEqualTo(savedReminder.getReminderId());
         assertThat(reminderIdDb.getContactId()).isEqualTo(savedReminder.getContactId());

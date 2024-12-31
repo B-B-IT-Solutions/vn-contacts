@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ContactsFilterDto {
 
+    private String globalFilter;
+
     private String firstName;
 
     private String middleName;
@@ -15,5 +17,7 @@ public class ContactsFilterDto {
 
     private String nickName;
 
-    private String email;
+    private String labels;
+
+    private String industries;
 }

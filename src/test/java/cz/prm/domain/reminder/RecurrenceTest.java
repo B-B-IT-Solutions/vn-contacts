@@ -247,6 +247,10 @@ class RecurrenceTest {
         r.setValue(rrule);
         r.resolveNextOccurrence();
         var eMonth = day > 15 ? month + 1 : month;
+        if (eMonth == 13) {
+            eMonth = 1;
+            year = year + 1;
+        }
         assertThat(r.getNextOccurrence()).isEqualTo(toInstant(year, eMonth, 15));
     }
 

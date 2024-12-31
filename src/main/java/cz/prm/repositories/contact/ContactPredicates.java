@@ -30,6 +30,14 @@ public class ContactPredicates {
 
     private BooleanBuilder filterPredicates(ContactsFilter filter) {
         var predicate = new BooleanBuilder();
+        if (filter.isGlobalFilter()) {
+            predicate.or(contact.firstName.containsIgnoreCase(filter.getGlobalFilter()));
+            predicate.or(contact.middleName.containsIgnoreCase(filter.getGlobalFilter()));
+            predicate.or(contact.lastName.containsIgnoreCase(filter.getGlobalFilter()));
+            predicate.or(contact.nickName.containsIgnoreCase(filter.getGlobalFilter()));
+            predicate.or(contact.labels.contains(filter.getGlobalFilter()));
+            predicate.or(contact.industries.contains(filter.getGlobalFilter()));
+        }
         if (filter.isFirstName()) {
             applyCriteria(predicate, contact.firstName, filter.getFirstName());
         }
@@ -41,6 +49,12 @@ public class ContactPredicates {
         }
         if (filter.isNickName()) {
             applyCriteria(predicate, contact.nickName, filter.getNickName());
+        }
+        if (filter.isLabels()) {
+            applyCriteria(predicate, contact.labels, filter.getLabels());
+        }
+        if (filter.isIndustries()) {
+            applyCriteria(predicate, contact.industries, filter.getIndustries());
         }
         return predicate;
     }

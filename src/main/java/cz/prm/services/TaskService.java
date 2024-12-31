@@ -5,6 +5,7 @@ import static java.lang.String.format;
 
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.task.Task;
+import cz.prm.domain.task.query.TasksFilter;
 import cz.prm.domain.task.query.TasksQuery;
 import cz.prm.repositories.task.TaskPredicates;
 import cz.prm.repositories.task.TaskRepository;
@@ -49,6 +50,12 @@ public class TaskService {
     public void deleteTask(Long taskId) {
         var savedTask = getTaskById(taskId);
         repository.deleteById(savedTask.getTaskId());
+    }
+
+    public void deleteByContactId(Long contactId) {
+        var predicate = predicates.byContactId(contactId, new TasksFilter());
+        var notes = repository.findAll(predicate);
+        repository.deleteAll(notes);
     }
 
     private void updateTaskFields(Task savedTask, Task updatedTask) {
