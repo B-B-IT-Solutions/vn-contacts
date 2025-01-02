@@ -119,7 +119,7 @@
     {
       "id": "236661ec-2572-4e4e-b427-85c7745a48e6",
       "name": "microprofile-jwt",
-      "description": "Microprofile - JWT built-in scope",
+      "description": "Microprofile - JWT scope",
       "protocol": "openid-connect",
       "attributes": {
         "include.in.token.scope": "true",
@@ -143,38 +143,6 @@
           }
         },
         {
-          "id": "789c28ee-6415-45d5-8ee0-f746b10759c8",
-          "name": "username",
-          "protocol": "openid-connect",
-          "protocolMapper": "oidc-usermodel-attribute-mapper",
-          "consentRequired": false,
-          "config": {
-            "introspection.token.claim": "true",
-            "userinfo.token.claim": "true",
-            "user.attribute": "username",
-            "id.token.claim": "true",
-            "access.token.claim": "true",
-            "claim.name": "preferred_username",
-            "jsonType.label": "String"
-          }
-        },
-        {
-          "id": "96403ff2-9cff-423e-a23c-9c189ae0510e",
-          "name": "family name",
-          "protocol": "openid-connect",
-          "protocolMapper": "oidc-usermodel-attribute-mapper",
-          "consentRequired": false,
-          "config": {
-            "introspection.token.claim": "true",
-            "userinfo.token.claim": "true",
-            "user.attribute": "lastName",
-            "id.token.claim": "true",
-            "access.token.claim": "true",
-            "claim.name": "family_name",
-            "jsonType.label": "String"
-          }
-        },
-        {
           "id": "93d6dbcf-c546-4d55-ae8b-77e99e686453",
           "name": "full name",
           "protocol": "openid-connect",
@@ -188,18 +156,18 @@
           }
         },
         {
-          "id": "6ed4d86a-0e2c-4d08-b411-a897a05b6356",
-          "name": "given name",
+          "id": "335e074f-1681-437e-a4a0-eec8d1c6d7e7",
+          "name": "email",
           "protocol": "openid-connect",
           "protocolMapper": "oidc-usermodel-attribute-mapper",
           "consentRequired": false,
           "config": {
             "introspection.token.claim": "true",
             "userinfo.token.claim": "true",
-            "user.attribute": "firstName",
+            "user.attribute": "email",
             "id.token.claim": "true",
             "access.token.claim": "true",
-            "claim.name": "given_name",
+            "claim.name": "email",
             "jsonType.label": "String"
           }
         }
