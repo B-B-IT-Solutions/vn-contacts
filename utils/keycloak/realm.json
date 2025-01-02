@@ -174,7 +174,9 @@
       ]
     }
   ],
-  "defaultDefaultClientScopes": [],
+  "defaultDefaultClientScopes": [
+    "microprofile-jwt"
+  ],
   "defaultOptionalClientScopes": [],
   "browserSecurityHeaders": {
     "contentSecurityPolicyReportOnly": "",
