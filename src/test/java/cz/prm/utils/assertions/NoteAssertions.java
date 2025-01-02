@@ -23,11 +23,7 @@ public class NoteAssertions {
         assertThat(page.getTotalElements()).isEqualTo(pageDto.getTotalElements());
         assertThat(page.getPageSize()).isEqualTo(pageDto.getPageSize());
         assertThat(page.getPageNumber()).isEqualTo(pageDto.getPageNumber());
-        assertThat(page.getContent()).isNotEmpty().hasSameSizeAs(pageDto.getContent());
-        page.getContent().forEach(contact -> {
-            var dto = pageDto.getContent().stream().filter(c -> Objects.equals(contact.getContactId(), c.getContactId())).findFirst().get();
-            assertNote(contact, dto);
-        });
+        assertNotesDto(page.getContent(), pageDto.getContent());
     }
 
     public static void assertPage(Page<Note> page1, PageImpl<Note> page2) {
@@ -36,11 +32,7 @@ public class NoteAssertions {
         assertThat(page1.getTotalElements()).isEqualTo(page2.getTotalElements());
         assertThat(page1.getPageSize()).isEqualTo(page2.getSize());
         assertThat(page1.getPageNumber()).isEqualTo(page2.getNumber());
-        assertThat(page1.getContent()).isNotEmpty().hasSameSizeAs(page2.getContent());
-        page1.getContent().forEach(contact1 -> {
-            var contact2 = page2.getContent().stream().filter(c -> Objects.equals(contact1.getContactId(), c.getContactId())).findFirst().get();
-            assertNote(contact1, contact2);
-        });
+        assertNotes(page1.getContent(), page2.getContent());
     }
 
     public static void assertNotes(List<Note> notes1, List<Note> notes2) {
