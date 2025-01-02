@@ -758,20 +758,11 @@
   "roles": {
     "realm": [
       {
-        "id": "vision-notes-user",
-        "name": "vision-notes-user",
+        "id": "user",
+        "name": "user",
         "description": "Default role for vision-notes users",
         "clientRole": false,
-        "containerId": "vision-notes",
-        "composite": true,
-        "composites": {
-          "client": {
-            "account": [
-              "manage-account",
-              "view-profile"
-            ]
-          }
-        }
+        "containerId": "vision-notes"
       }
     ]
   },
@@ -824,7 +815,7 @@
         }
       ],
       "realmRoles": [
-        "vision-notes-user"
+        "user"
       ],
       "groups": []
     },
@@ -844,7 +835,7 @@
         }
       ],
       "realmRoles": [
-        "vision-notes-user"
+        "user"
       ],
       "groups": []
     }
