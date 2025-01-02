@@ -46,7 +46,22 @@
   "maxDeltaTimeSeconds": 43200,
   "failureFactor": 30,
   "roles": {
-    "realm": []
+    "realm": [
+      {
+        "id": "1452e9f0-67c4-43d5-ba92-0c9e0823aa95",
+        "name": "user",
+        "description": "Default role for vision-notes users",
+        "composite": true,
+        "composites": {
+          "realm": [
+            "user"
+          ]
+        },
+        "clientRole": false,
+        "containerId": "vision-notes",
+        "attributes": {}
+      }
+    ]
   },
   "defaultRole": {
     "id": "1452e9f0-67c4-43d5-ba92-0c9e0823aa95",
@@ -73,6 +88,43 @@
     "totpAppGoogleName",
     "totpAppMicrosoftAuthenticatorName"
   ],
+  "scopeMappings": [],
+  "clientScopeMappings": {},
+  "clients": [
+    {
+      "id": "cecf820e-8623-4276-b154-1cb170de7eba",
+      "clientId": "vision-notes-ui",
+      "name": "Vision Notes UI Application",
+      "enabled": true,
+      "publicClient": true,
+      "rootUrl": "http://localhost:3000",
+      "adminUrl": "http://localhost:3000",
+      "baseUrl": "http://localhost:3000",
+      "redirectUris": [
+        "http://localhost:3000/*"
+      ],
+      "webOrigins": [
+        "http://localhost:3000"
+      ],
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "defaultClientScopes": [
+        "web-origins",
+        "acr",
+        "profile",
+        "roles",
+        "email",
+        "microprofile-jwt"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone"
+      ]
+    }
+  ],
+  "clientScopes": [],
+  "defaultDefaultClientScopes": [],
+  "defaultOptionalClientScopes": [],
   "browserSecurityHeaders": {
     "contentSecurityPolicyReportOnly": "",
     "xContentTypeOptions": "nosniff",
@@ -847,5 +899,8 @@
       ],
       "groups": []
     }
-  ]
+  ],
+  "keycloakVersion": "25.0.5",
+  "userManagedAccessAllowed": false,
+  "organizationsEnabled": false
 }
