@@ -909,30 +909,6 @@
   "clientAuthenticationFlow": "clients",
   "dockerAuthenticationFlow": "docker auth",
   "firstBrokerLoginFlow": "first broker login",
-  "clients": [
-    {
-      "id": "cecf820e-8623-4276-b154-1cb170de7eba",
-      "clientId": "vision-notes-ui",
-      "name": "Vision Notes UI Application",
-      "enabled": true,
-      "publicClient": true,
-      "rootUrl": "http://localhost:3000",
-      "adminUrl": "http://localhost:3000",
-      "baseUrl": "http://localhost:3000",
-      "redirectUris": [
-        "http://localhost:3000/*"
-      ],
-      "webOrigins": [
-        "http://localhost:3000"
-      ],
-      "standardFlowEnabled": true,
-      "directAccessGrantsEnabled": true,
-      "defaultClientScopes": [
-        "microprofile-jwt"
-      ],
-      "optionalClientScopes": []
-    }
-  ],
   "users": [
     {
       "id": "bobuskysergej@gmail.com",
