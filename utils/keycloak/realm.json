@@ -176,7 +176,7 @@
     },
     {
       "id": "236661ec-2572-4e4e-b427-85c7745a48e6",
-      "name": "microprofile-jwt",
+      "name": "microprofile",
       "description": "User Microprofile",
       "protocol": "openid-connect",
       "attributes": {
