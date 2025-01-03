@@ -140,12 +140,40 @@
       "fullScopeAllowed": false,
       "nodeReRegistrationTimeout": -1,
       "defaultClientScopes": [
+        "audience",
         "microprofile-jwt"
       ],
       "optionalClientScopes": []
     }
   ],
   "clientScopes": [
+    {
+      "id": "aa989158-96c2-4cce-a94b-1240ee8eb4ab",
+      "name": "audience",
+      "description": "Audience claim",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "false",
+        "display.on.consent.screen": "false"
+      },
+      "protocolMappers": [
+        {
+          "id": "b2e337e6-002a-4889-89be-e391f7fb2d2a",
+          "name": "audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "id.token.claim": "false",
+            "lightweight.claim": "false",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "included.custom.audience": "vision-notes",
+            "userinfo.token.claim": "false"
+          }
+        }
+      ]
+    },
     {
       "id": "236661ec-2572-4e4e-b427-85c7745a48e6",
       "name": "microprofile-jwt",
@@ -205,6 +233,7 @@
     }
   ],
   "defaultDefaultClientScopes": [
+    "audience",
     "microprofile-jwt"
   ],
   "defaultOptionalClientScopes": [],

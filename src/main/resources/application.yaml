@@ -18,6 +18,7 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://keycloak.internal:8090/realms/vision-notes
+          audiences: vision-notes
 
 
 #DB
