@@ -32,6 +32,7 @@ services:
       KEYCLOAK_EXTRA_ARGS: --import-realm
     ports:
       - 8090:8080
+      - 8443:8443
     volumes:
       - ./keycloak/realm.json:/opt/bitnami/keycloak/data/import/realm.json:ro
       - ./ssl/development.local.crt:/opt/bitnami/keycloak/certs/tls.crt
