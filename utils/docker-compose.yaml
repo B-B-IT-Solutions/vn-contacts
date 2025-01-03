@@ -23,11 +23,19 @@ services:
       KEYCLOAK_LOG_LEVEL: INFO
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: test
+      #      KEYCLOAK_HOSTNAME: development.local
+      KEYCLOAK_PRODUCTION: true
+      KEYCLOAK_ENABLE_HTTPS: true
+      KEYCLOAK_HTTPS_USE_PEM: true
+      KEYCLOAK_HTTPS_CERTIFICATE_FILE: /opt/bitnami/keycloak/certs/tls.crt
+      KEYCLOAK_HTTPS_CERTIFICATE_KEY_FILE: /opt/bitnami/keycloak/certs/tls.key
       KEYCLOAK_EXTRA_ARGS: --import-realm
     ports:
       - 8090:8080
     volumes:
       - ./keycloak/realm.json:/opt/bitnami/keycloak/data/import/realm.json:ro
+      - ./ssl/development.local.crt:/opt/bitnami/keycloak/certs/tls.crt
+      - ./ssl/development.local.key:/opt/bitnami/keycloak/certs/tls.key
     depends_on:
       - postgres
 volumes:
