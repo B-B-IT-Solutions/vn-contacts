@@ -23,11 +23,7 @@ public class TaskAssertions {
         assertThat(page.getTotalElements()).isEqualTo(pageDto.getTotalElements());
         assertThat(page.getPageSize()).isEqualTo(pageDto.getPageSize());
         assertThat(page.getPageNumber()).isEqualTo(pageDto.getPageNumber());
-        assertThat(page.getContent()).isNotEmpty().hasSameSizeAs(pageDto.getContent());
-        page.getContent().forEach(contact -> {
-            var dto = pageDto.getContent().stream().filter(c -> Objects.equals(contact.getContactId(), c.getContactId())).findFirst().get();
-            assertTask(contact, dto);
-        });
+        assertTasksDto(page.getContent(), pageDto.getContent());
     }
 
     public static void assertPage(Page<Task> page1, PageImpl<Task> page2) {
@@ -36,11 +32,7 @@ public class TaskAssertions {
         assertThat(page1.getTotalElements()).isEqualTo(page2.getTotalElements());
         assertThat(page1.getPageSize()).isEqualTo(page2.getSize());
         assertThat(page1.getPageNumber()).isEqualTo(page2.getNumber());
-        assertThat(page1.getContent()).isNotEmpty().hasSameSizeAs(page2.getContent());
-        page1.getContent().forEach(contact1 -> {
-            var contact2 = page2.getContent().stream().filter(c -> Objects.equals(contact1.getContactId(), c.getContactId())).findFirst().get();
-            assertTask(contact1, contact2);
-        });
+        assertTasks(page1.getContent(), page2.getContent());
     }
 
     public static void assertTasks(List<Task> tasks1, List<Task> tasks2) {

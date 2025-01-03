@@ -22,10 +22,7 @@ public class ReminderAssertions {
         assertThat(page.getPageSize()).isEqualTo(pageDto.getPageSize());
         assertThat(page.getPageNumber()).isEqualTo(pageDto.getPageNumber());
         assertThat(page.getContent()).isNotEmpty().hasSameSizeAs(pageDto.getContent());
-        page.getContent().forEach(contact -> {
-            var dto = pageDto.getContent().stream().filter(c -> Objects.equals(contact.getContactId(), c.getContactId())).findFirst().get();
-            assertReminder(contact, dto);
-        });
+        assertRemindersDto(page.getContent(), pageDto.getContent());
     }
 
     public static void assertPage(Page<Reminder> page1, PageImpl<Reminder> page2) {
@@ -34,11 +31,7 @@ public class ReminderAssertions {
         assertThat(page1.getTotalElements()).isEqualTo(page2.getTotalElements());
         assertThat(page1.getPageSize()).isEqualTo(page2.getSize());
         assertThat(page1.getPageNumber()).isEqualTo(page2.getNumber());
-        assertThat(page1.getContent()).isNotEmpty().hasSameSizeAs(page2.getContent());
-        page1.getContent().forEach(reminder1 -> {
-            var reminder2 = page2.getContent().stream().filter(c -> Objects.equals(reminder1.getContactId(), c.getContactId())).findFirst().get();
-            assertReminder(reminder1, reminder2);
-        });
+        assertReminders(page1.getContent(), page2.getContent());
     }
 
     public static void assertReminders(List<Reminder> reminders1, List<Reminder> reminders2) {
