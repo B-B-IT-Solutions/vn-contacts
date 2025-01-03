@@ -13,78 +13,169 @@
   "roles": {
     "realm": [
       {
-        "id": "prm-user",
-        "name": "prm-user",
-        "description": "Default role for PRM users",
-        "clientRole": false,
-        "containerId": "prm",
+        "id": "1452e9f0-67c4-43d5-ba92-0c9e0823aa95",
+        "name": "user",
+        "description": "Default role for vision-notes users",
         "composite": true,
         "composites": {
           "realm": [
-            "offline_access",
-            "uma_authorization"
-          ],
-          "client": {
-            "account": [
-              "manage-account",
-              "view-profile"
-            ]
-          }
-        }
-      },
-      {
-        "id": "108eef4c-3c47-42ea-830a-a9b0a8afdaa2",
-        "name": "uma_authorization",
-        "description": "${role_uma_authorization}",
-        "composite": false,
+            "user"
+          ]
+        },
         "clientRole": false,
-        "containerId": "prm",
-        "attributes": {}
-      },
-      {
-        "id": "9eff1975-7839-477b-9fb4-cdfe166e51da",
-        "name": "offline_access",
-        "description": "${role_offline-access}",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "prm",
+        "containerId": "vision-notes",
         "attributes": {}
       }
     ]
   },
+  "scopeMappings": [],
+  "clientScopeMappings": {},
   "clients": [
     {
       "id": "73ace884-ec54-48f8-9585-1ae5823ee545",
       "clientId": "componenttest",
-      "name": "PRM Application",
-      "enabled": true,
-      "publicClient": true,
+      "name": "componenttest",
+      "description": "Vision Notes ComponentTest",
       "rootUrl": "http://localhost:8091",
       "adminUrl": "http://localhost:8091",
       "baseUrl": "http://localhost:8091",
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
       "redirectUris": [
         "http://localhost:8091/*"
       ],
       "webOrigins": [
         "http://localhost:8091/"
       ],
+      "notBefore": 0,
+      "bearerOnly": false,
+      "consentRequired": false,
       "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
       "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "publicClient": true,
+      "frontchannelLogout": false,
+      "protocol": "openid-connect",
+      "attributes": {
+        "client.introspection.response.allow.jwt.claim.enabled": "false",
+        "post.logout.redirect.uris": "+",
+        "oauth2.device.authorization.grant.enabled": "false",
+        "backchannel.logout.revoke.offline.tokens": "false",
+        "use.refresh.tokens": "true",
+        "oidc.ciba.grant.enabled": "false",
+        "client.use.lightweight.access.token.enabled": "false",
+        "backchannel.logout.session.required": "true",
+        "client_credentials.use_refresh_token": "false",
+        "acr.loa.map": "{}",
+        "require.pushed.authorization.requests": "false",
+        "tls.client.certificate.bound.access.tokens": "false",
+        "display.on.consent.screen": "false",
+        "pkce.code.challenge.method": "S256",
+        "token.response.type.bearer.lower-case": "false"
+      },
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": false,
+      "nodeReRegistrationTimeout": -1,
       "defaultClientScopes": [
-        "web-origins",
-        "acr",
-        "profile",
-        "roles",
-        "email",
+        "audience",
         "microprofile-jwt"
       ],
-      "optionalClientScopes": [
-        "address",
-        "phone",
-        "offline_access"
+      "optionalClientScopes": []
+    }
+  ],
+  "clientScopes": [
+    {
+      "id": "aa989158-96c2-4cce-a94b-1240ee8eb4ab",
+      "name": "audience",
+      "description": "Audience claim",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "false",
+        "display.on.consent.screen": "false"
+      },
+      "protocolMappers": [
+        {
+          "id": "b2e337e6-002a-4889-89be-e391f7fb2d2a",
+          "name": "audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "id.token.claim": "false",
+            "lightweight.claim": "false",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "included.custom.audience": "vision-notes",
+            "userinfo.token.claim": "false"
+          }
+        }
+      ]
+    },
+    {
+      "id": "236661ec-2572-4e4e-b427-85c7745a48e6",
+      "name": "microprofile-jwt",
+      "description": "Microprofile - JWT scope",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "false"
+      },
+      "protocolMappers": [
+        {
+          "id": "935f12e7-eb50-40b4-a143-1e75dcecd87a",
+          "name": "upn",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "user.attribute": "username",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "upn",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "id": "93d6dbcf-c546-4d55-ae8b-77e99e686453",
+          "name": "full name",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-full-name-mapper",
+          "consentRequired": false,
+          "config": {
+            "id.token.claim": "true",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "id": "335e074f-1681-437e-a4a0-eec8d1c6d7e7",
+          "name": "email",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "user.attribute": "email",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "email",
+            "jsonType.label": "String"
+          }
+        }
       ]
     }
   ],
+  "defaultDefaultClientScopes": [
+    "audience",
+    "microprofile-jwt"
+  ],
+  "defaultOptionalClientScopes": [],
   "users": [
     {
       "id": "user1",
