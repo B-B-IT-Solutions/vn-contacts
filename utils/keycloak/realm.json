@@ -99,7 +99,6 @@
       "rootUrl": "http://localhost:3000",
       "adminUrl": "http://localhost:3000",
       "baseUrl": "http://localhost:3000",
-      "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
@@ -136,9 +135,7 @@
         "pkce.code.challenge.method": "S256",
         "token.response.type.bearer.lower-case": "false"
       },
-      "authenticationFlowBindingOverrides": {},
       "fullScopeAllowed": false,
-      "nodeReRegistrationTimeout": -1,
       "defaultClientScopes": [
         "audience",
         "microprofile"

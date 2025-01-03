@@ -75,9 +75,7 @@
         "pkce.code.challenge.method": "S256",
         "token.response.type.bearer.lower-case": "false"
       },
-      "authenticationFlowBindingOverrides": {},
       "fullScopeAllowed": false,
-      "nodeReRegistrationTimeout": -1,
       "defaultClientScopes": [
         "audience",
         "microprofile"

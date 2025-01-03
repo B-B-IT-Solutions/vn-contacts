@@ -16,10 +16,10 @@ public class User {
     private static final String UPN_CLAIM = "upn";
     private static final String EMAIL_CLAIM = "email";
 
-    @Column(name = "USERNAME")
+    @Column(name = "USERNAME", nullable = false)
     private String username;
 
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", nullable = false)
     private String email;
 
     public User(Jwt jwt) {
