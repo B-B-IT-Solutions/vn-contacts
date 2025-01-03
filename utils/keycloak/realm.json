@@ -180,7 +180,7 @@
       "description": "Microprofile - JWT scope",
       "protocol": "openid-connect",
       "attributes": {
-        "include.in.token.scope": "true",
+        "include.in.token.scope": "false",
         "display.on.consent.screen": "false"
       },
       "protocolMappers": [
@@ -209,7 +209,7 @@
           "config": {
             "id.token.claim": "true",
             "introspection.token.claim": "true",
-            "access.token.claim": "true",
+            "access.token.claim": "false",
             "userinfo.token.claim": "true"
           }
         },
