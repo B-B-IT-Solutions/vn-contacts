@@ -5,7 +5,7 @@ on:
     types: [ opened, reopened ]
 
 jobs:
-  run-tests:
+  run-validations:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -34,6 +34,11 @@ jobs:
           java-version: '19'
           distribution: 'adopt'
           cache: 'maven'
+
+      - name: Secret Scanner
+        uses: secret-scanner/action@0.0.2
+        with:
+          baseline-file: .github/data/.secrets.baseline
 
       - name: Run Tests
         run: mvn clean compile verify --no-transfer-progress
