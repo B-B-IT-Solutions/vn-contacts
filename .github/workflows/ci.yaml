@@ -53,8 +53,8 @@ jobs:
           continue-on-error: false
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
         if: ${{ github.event.release }}
+        uses: actions/upload-artifact@v4
         with:
           name: artifact
           path: target/contacts.jar
