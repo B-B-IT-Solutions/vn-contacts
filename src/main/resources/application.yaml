@@ -13,7 +13,6 @@ spring:
     username: contacts-workload-id
     azure:
       passwordless-enabled: true
-
   jpa:
     hibernate:
       ddl-auto: none
