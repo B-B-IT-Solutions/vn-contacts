@@ -1,9 +1,15 @@
 #DB
 spring:
+  cloud:
+    azure:
+      credential:
+        managed-identity-enabled: false
   datasource:
     url: jdbc:postgresql://localhost:5432/contacts
     username: postgres
     password: test
+    azure:
+      passwordless-enabled: false
 
 #LOGGING:
 logging:
