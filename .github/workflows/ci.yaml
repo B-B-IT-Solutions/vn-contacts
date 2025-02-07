@@ -41,6 +41,7 @@ jobs:
 
       - name: JaCoCo Report
         id: jacoco
+        if: ${{ !github.event.release }}
         uses: madrapps/jacoco-report@v1.6.1
         with:
           paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
