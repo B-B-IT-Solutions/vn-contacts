@@ -51,3 +51,10 @@ jobs:
           title: Code Coverage
           update-comment: true
           continue-on-error: false
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        if: ${{ github.event.release }}
+        with:
+          name: artifact
+          path: target/contacts.jar
