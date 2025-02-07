@@ -3,10 +3,17 @@ server:
 
 #DB
 spring:
+  cloud:
+    azure:
+      credential:
+        managed-identity-enabled: true
+        client-id: 11111111-1111-1111-1111-111111111111
   datasource:
     url: jdbc:postgresql://localhost:5432/contacts
-    username: postgres
-    password: test
+    username: contacts-workload-id
+    azure:
+      passwordless-enabled: true
+
   jpa:
     hibernate:
       ddl-auto: none
