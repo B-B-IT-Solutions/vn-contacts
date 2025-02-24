@@ -190,7 +190,7 @@ class RecurrenceTest {
         var rule = rrule(ruleYear, month, day, "RRULE:FREQ=YEARLY;BYMONTH=11;BYMONTHDAY=21;COUNT=3");
         r.setValue(rule);
         r.resolveNextOccurrence();
-        assertThat(r.getNextOccurrence()).isEqualTo(toInstant(year + 1, 11, 21));
+        assertThat(r.getNextOccurrence()).isEqualTo(toInstant(year, 11, 21));
 
         r.resetParsedRule();
         r.setValue("DTSTART:20210721T104500Z\nRRULE:FREQ=MONTHLY;COUNT=30");
