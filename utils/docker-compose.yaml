@@ -36,6 +36,7 @@ services:
       - 8443:8443
     volumes:
       - ./keycloak/realm.json:/opt/bitnami/keycloak/data/import/realm.json:ro
+      - ./keycloak/providers:/opt/bitnami/keycloak/providers/
       - ./ssl/development.local.crt:/opt/bitnami/keycloak/certs/tls.crt
       - ./ssl/development.local.key:/opt/bitnami/keycloak/certs/tls.key
     depends_on:
