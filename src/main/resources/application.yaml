@@ -23,7 +23,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://localhost:8090/realms/vision-notes/protocol/openid-connect/certs
+          jwk-set-uri: http://development.local:8090/auth/realms/vision-notes/protocol/openid-connect/certs
 #          audiences: vision-notes
 
 
