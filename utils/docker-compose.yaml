@@ -23,7 +23,7 @@ services:
       KEYCLOAK_LOG_LEVEL: INFO
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: test
-      #      KEYCLOAK_HOSTNAME: development.local
+      KEYCLOAK_HOSTNAME: development.local
       KEYCLOAK_PRODUCTION: true
       KEYCLOAK_ENABLE_HTTPS: true
       KEYCLOAK_HTTPS_USE_PEM: true
