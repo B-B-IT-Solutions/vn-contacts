@@ -94,6 +94,7 @@
       "protocol": "openid-connect",
       "attributes": {
         "client.introspection.response.allow.jwt.claim.enabled": "false",
+        "login_theme": "vision-notes-theme",
         "post.logout.redirect.uris": "+",
         "oauth2.device.authorization.grant.enabled": "false",
         "backchannel.logout.revoke.offline.tokens": "false",
@@ -228,10 +229,14 @@
     "port": "587",
     "host": "mail.infomaniak.ch",
     "from": "noreply@vision-notes.com",
-    "fromDisplayName": "Vision Notes",
+    "fromDisplayName": "Vision-Notes.com",
     "replyTo": "noreply@vision-notes.com",
-    "replyToDisplayName": "Vision Notes"
+    "replyToDisplayName": "Vision-Notes.com"
   },
+  "loginTheme": "vision-notes-theme",
+  "accountTheme": "",
+  "adminTheme": "",
+  "emailTheme": "vision-notes-theme",
   "components": {
     "org.keycloak.userprofile.UserProfileProvider": [
       {
@@ -247,11 +252,7 @@
     ]
   },
   "internationalizationEnabled": true,
-  "supportedLocales": [
-    "cs",
-    "de",
-    "en"
-  ],
+  "supportedLocales": ["en"],
   "defaultLocale": "en",
   "localizationTexts": {
     "cs": {
