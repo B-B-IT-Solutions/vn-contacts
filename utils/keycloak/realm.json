@@ -79,7 +79,7 @@
   },
   "clients": [
     {
-      "id": "cecf820e-8623-4276-b154-1cb170de7eba",
+      "id": "vision-notes-ui",
       "clientId": "vision-notes-ui",
       "name": "vision-notes-ui",
       "description": "Vision Notes UI Application",
@@ -125,10 +125,11 @@
       },
       "fullScopeAllowed": false,
       "defaultClientScopes": [
-        "audience",
         "miniprofile"
       ],
-      "optionalClientScopes": []
+      "optionalClientScopes": [
+        "vision-notes-audience"
+      ]
     },
     {
       "clientId": "subscriptions",
@@ -199,7 +200,7 @@
         }
       ],
       "defaultClientScopes": [
-        "audience",
+        "vision-notes-audience",
         "miniprofile"
       ],
       "optionalClientScopes": [
@@ -214,8 +215,8 @@
   "clientScopes": [
     {
       "id": "aa989158-96c2-4cce-a94b-1240ee8eb4ab",
-      "name": "audience",
-      "description": "Audience claim",
+      "name": "vision-notes-audience",
+      "description": "Vision Notes audience claim",
       "protocol": "openid-connect",
       "attributes": {
         "include.in.token.scope": "false",
@@ -224,7 +225,7 @@
       "protocolMappers": [
         {
           "id": "b2e337e6-002a-4889-89be-e391f7fb2d2a",
-          "name": "audience",
+          "name": "vision-notes-audience",
           "protocol": "openid-connect",
           "protocolMapper": "oidc-audience-mapper",
           "consentRequired": false,
@@ -298,10 +299,11 @@
     }
   ],
   "defaultDefaultClientScopes": [
-    "audience",
+  ],
+  "defaultOptionalClientScopes": [
+    "vision-notes-audience",
     "miniprofile"
   ],
-  "defaultOptionalClientScopes": [],
   "browserSecurityHeaders": {
     "contentSecurityPolicyReportOnly": "",
     "xContentTypeOptions": "nosniff",
