@@ -67,8 +67,17 @@
   "roles": {
     "realm": [
       {
-        "id": "user-pro-tier",
-        "name": "user-pro-tier",
+        "id": "free-tier",
+        "name": "free-tier",
+        "description": "",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "vision-notes",
+        "attributes": {}
+      },
+      {
+        "id": "pro-tier",
+        "name": "pro-tier",
         "description": "",
         "composite": false,
         "clientRole": false,
@@ -125,7 +134,8 @@
       },
       "fullScopeAllowed": false,
       "defaultClientScopes": [
-        "miniprofile"
+        "miniprofile",
+        "subscription-tiers"
       ],
       "optionalClientScopes": [
         "vision-notes-audience"
@@ -200,8 +210,6 @@
         }
       ],
       "defaultClientScopes": [
-        "vision-notes-audience",
-        "miniprofile"
       ],
       "optionalClientScopes": [
       ],
@@ -224,7 +232,7 @@
       },
       "protocolMappers": [
         {
-          "id": "b2e337e6-002a-4889-89be-e391f7fb2d2a",
+          "id": "vision-notes-audience",
           "name": "vision-notes-audience",
           "protocol": "openid-connect",
           "protocolMapper": "oidc-audience-mapper",
@@ -236,6 +244,35 @@
             "access.token.claim": "true",
             "included.custom.audience": "vision-notes",
             "userinfo.token.claim": "false"
+          }
+        }
+      ]
+    },
+    {
+      "id": "subscription-tiers",
+      "name": "subscription-tiers",
+      "description": "User subscription tiers",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "false",
+        "display.on.consent.screen": "false"
+      },
+      "protocolMappers": [
+        {
+          "id": "6e5645fd-b019-40f4-a3f2-3edd31c964fc",
+          "name": "subscription-tier-role-mapper",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "introspection.token.claim": "true",
+            "multivalued": "true",
+            "userinfo.token.claim": "false",
+            "id.token.claim": "false",
+            "lightweight.claim": "false",
+            "access.token.claim": "true",
+            "claim.name": "tier",
+            "jsonType.label": "String"
           }
         }
       ]
@@ -301,8 +338,9 @@
   "defaultDefaultClientScopes": [
   ],
   "defaultOptionalClientScopes": [
-    "vision-notes-audience",
-    "miniprofile"
+    "miniprofile",
+    "subscription-tiers",
+    "vision-notes-audience"
   ],
   "browserSecurityHeaders": {
     "contentSecurityPolicyReportOnly": "",
