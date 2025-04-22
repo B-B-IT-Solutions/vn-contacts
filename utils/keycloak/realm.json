@@ -133,7 +133,7 @@
     {
       "clientId": "subscriptions",
       "name": "subscriptions service client",
-      "description": "",
+      "description": "Client used by the subscriptions service to manage user role assignments. User role assignments always depend on the level of subscription that they purchase.",
       "rootUrl": "",
       "adminUrl": "",
       "baseUrl": "",
