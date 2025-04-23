@@ -398,14 +398,8 @@
   ],
   "defaultLocale": "en",
   "localizationTexts": {
-    "cs": {
-      "profile.attributes.jobTitle": "Profese"
-    },
-    "de": {
-      "profile.attributes.jobTitle": "Beruf"
-    },
     "en": {
-      "profile.attributes.jobTitle": "Job Title"
+      "profile.attributes.jobTitle": "Occupation"
     }
   },
   "authenticationFlows": [
