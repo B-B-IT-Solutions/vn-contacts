@@ -12,7 +12,7 @@ services:
     volumes:
       - prm_data:/var/lib/postgresql/data
   keycloak:
-    image: docker.io/bitnami/keycloak:25.0.5-debian-12-r0
+    image: docker.io/bitnami/keycloak:26.2.1
     restart: unless-stopped
     environment:
       KEYCLOAK_DATABASE_NAME: contacts
@@ -23,7 +23,8 @@ services:
       KEYCLOAK_LOG_LEVEL: INFO
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: test
-      #      KEYCLOAK_HOSTNAME: development.local
+      KEYCLOAK_HOSTNAME: development.local
+      KEYCLOAK_HTTP_RELATIVE_PATH: /auth
       KEYCLOAK_PRODUCTION: true
       KEYCLOAK_ENABLE_HTTPS: true
       KEYCLOAK_HTTPS_USE_PEM: true
@@ -35,6 +36,7 @@ services:
       - 8443:8443
     volumes:
       - ./keycloak/realm.json:/opt/bitnami/keycloak/data/import/realm.json:ro
+      - ./keycloak/providers:/opt/bitnami/keycloak/providers/
       - ./ssl/development.local.crt:/opt/bitnami/keycloak/certs/tls.crt
       - ./ssl/development.local.key:/opt/bitnami/keycloak/certs/tls.key
     depends_on:

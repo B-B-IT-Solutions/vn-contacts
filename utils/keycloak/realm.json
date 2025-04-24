@@ -27,7 +27,7 @@
   "oauth2DeviceCodeLifespan": 600,
   "oauth2DevicePollingInterval": 5,
   "enabled": true,
-  "sslRequired": "all",
+  "sslRequired": "external",
   "registrationAllowed": true,
   "registrationEmailAsUsername": true,
   "rememberMe": true,
@@ -62,11 +62,41 @@
     "totpAppGoogleName",
     "totpAppMicrosoftAuthenticatorName"
   ],
-  "scopeMappings": [],
+  "scopeMappings": [
+    {
+      "clientScope": "subscription-tier",
+      "roles": [
+        "pro-tier",
+        "free-tier"
+      ]
+    }
+  ],
   "clientScopeMappings": {},
+  "roles": {
+    "realm": [
+      {
+        "id": "free-tier",
+        "name": "free-tier",
+        "description": "",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "vision-notes",
+        "attributes": {}
+      },
+      {
+        "id": "pro-tier",
+        "name": "pro-tier",
+        "description": "",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "vision-notes",
+        "attributes": {}
+      }
+    ]
+  },
   "clients": [
     {
-      "id": "cecf820e-8623-4276-b154-1cb170de7eba",
+      "id": "vision-notes-ui",
       "clientId": "vision-notes-ui",
       "name": "vision-notes-ui",
       "description": "Vision Notes UI Application",
@@ -94,6 +124,7 @@
       "protocol": "openid-connect",
       "attributes": {
         "client.introspection.response.allow.jwt.claim.enabled": "false",
+        "login_theme": "vision-notes-theme",
         "post.logout.redirect.uris": "+",
         "oauth2.device.authorization.grant.enabled": "false",
         "backchannel.logout.revoke.offline.tokens": "false",
@@ -111,17 +142,97 @@
       },
       "fullScopeAllowed": false,
       "defaultClientScopes": [
-        "audience",
-        "microprofile"
+        "miniprofile",
+        "subscription-tier"
       ],
-      "optionalClientScopes": []
+      "optionalClientScopes": [
+        "vision-notes-audience"
+      ]
+    },
+    {
+      "clientId": "subscriptions",
+      "name": "subscriptions service client",
+      "description": "Client used by the subscriptions service to manage user role assignments. User role assignment depend on the level of subscription that they purchase.",
+      "rootUrl": "",
+      "adminUrl": "",
+      "baseUrl": "",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "NSpqZKJaUN0FCeLaiUcM2jzOPnuFdNXz",
+      "redirectUris": [
+        "/*"
+      ],
+      "webOrigins": [
+        "/*"
+      ],
+      "notBefore": 0,
+      "bearerOnly": false,
+      "consentRequired": false,
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "publicClient": false,
+      "frontchannelLogout": true,
+      "protocol": "openid-connect",
+      "attributes": {
+        "oidc.ciba.grant.enabled": "false",
+        "client.secret.creation.time": "1745318212",
+        "backchannel.logout.session.required": "true",
+        "oauth2.device.authorization.grant.enabled": "false",
+        "backchannel.logout.revoke.offline.tokens": "false"
+      },
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": true,
+      "nodeReRegistrationTimeout": -1,
+      "protocolMappers": [
+        {
+          "name": "client roles",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-client-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "foo",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "resource_access.${client_id}.roles",
+            "jsonType.label": "String",
+            "multivalued": "true"
+          }
+        },
+        {
+          "name": "realm roles",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "foo",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "realm_access.roles",
+            "jsonType.label": "String",
+            "multivalued": "true"
+          }
+        }
+      ],
+      "defaultClientScopes": [
+      ],
+      "optionalClientScopes": [
+      ],
+      "access": {
+        "view": true,
+        "configure": true,
+        "manage": true
+      }
     }
   ],
   "clientScopes": [
     {
       "id": "aa989158-96c2-4cce-a94b-1240ee8eb4ab",
-      "name": "audience",
-      "description": "Audience claim",
+      "name": "vision-notes-audience",
+      "description": "Vision Notes audience claim",
       "protocol": "openid-connect",
       "attributes": {
         "include.in.token.scope": "false",
@@ -129,8 +240,8 @@
       },
       "protocolMappers": [
         {
-          "id": "b2e337e6-002a-4889-89be-e391f7fb2d2a",
-          "name": "audience",
+          "id": "vision-notes-audience",
+          "name": "vision-notes-audience",
           "protocol": "openid-connect",
           "protocolMapper": "oidc-audience-mapper",
           "consentRequired": false,
@@ -146,9 +257,38 @@
       ]
     },
     {
+      "id": "subscription-tier",
+      "name": "subscription-tier",
+      "description": "User subscription tiers",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "false",
+        "display.on.consent.screen": "false"
+      },
+      "protocolMappers": [
+        {
+          "id": "6e5645fd-b019-40f4-a3f2-3edd31c964fc",
+          "name": "subscription-tier",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "introspection.token.claim": "true",
+            "multivalued": "true",
+            "userinfo.token.claim": "false",
+            "id.token.claim": "false",
+            "lightweight.claim": "false",
+            "access.token.claim": "true",
+            "claim.name": "tier",
+            "jsonType.label": "String"
+          }
+        }
+      ]
+    },
+    {
       "id": "236661ec-2572-4e4e-b427-85c7745a48e6",
-      "name": "microprofile",
-      "description": "User Microprofile",
+      "name": "miniprofile",
+      "description": "User Miniprofile",
       "protocol": "openid-connect",
       "attributes": {
         "include.in.token.scope": "false",
@@ -204,10 +344,12 @@
     }
   ],
   "defaultDefaultClientScopes": [
-    "audience",
-    "microprofile"
   ],
-  "defaultOptionalClientScopes": [],
+  "defaultOptionalClientScopes": [
+    "miniprofile",
+    "subscription-tier",
+    "vision-notes-audience"
+  ],
   "browserSecurityHeaders": {
     "contentSecurityPolicyReportOnly": "",
     "xContentTypeOptions": "nosniff",
@@ -228,10 +370,14 @@
     "port": "587",
     "host": "mail.infomaniak.ch",
     "from": "noreply@vision-notes.com",
-    "fromDisplayName": "Vision Notes",
+    "fromDisplayName": "Vision-Notes.com",
     "replyTo": "noreply@vision-notes.com",
-    "replyToDisplayName": "Vision Notes"
+    "replyToDisplayName": "Vision-Notes.com"
   },
+  "loginTheme": "vision-notes-theme",
+  "accountTheme": "",
+  "adminTheme": "",
+  "emailTheme": "vision-notes-theme",
   "components": {
     "org.keycloak.userprofile.UserProfileProvider": [
       {
@@ -248,20 +394,12 @@
   },
   "internationalizationEnabled": true,
   "supportedLocales": [
-    "cs",
-    "de",
     "en"
   ],
   "defaultLocale": "en",
   "localizationTexts": {
-    "cs": {
-      "profile.attributes.jobTitle": "Profese"
-    },
-    "de": {
-      "profile.attributes.jobTitle": "Beruf"
-    },
     "en": {
-      "profile.attributes.jobTitle": "Job Title"
+      "profile.attributes.jobTitle": "Occupation"
     }
   },
   "authenticationFlows": [
@@ -911,7 +1049,7 @@
   "firstBrokerLoginFlow": "first broker login",
   "users": [
     {
-      "id": "bobuskysergej@gmail.com",
+      "id": "32a8978b-b422-4058-8df6-4050c067f09a",
       "email": "bobuskysergej@gmail.com",
       "username": "bobuskysergej@gmail.com",
       "firstName": "Sergej",
@@ -929,7 +1067,7 @@
       "groups": []
     },
     {
-      "id": "boeningkatja@gmail.com",
+      "id": "ed06aec9-1964-4301-bce3-46a5d38207e6",
       "email": "boeningkatja@gmail.com",
       "username": "boeningkatja@gmail.com",
       "firstName": "Katja",
@@ -944,6 +1082,28 @@
         }
       ],
       "realmRoles": [],
+      "groups": []
+    },
+    {
+      "id": "f12f405b-59b8-46a3-9578-dbe93b3927ba",
+      "username": "service-account-subscriptions",
+      "emailVerified": false,
+      "createdTimestamp": 1745321362630,
+      "enabled": true,
+      "totp": false,
+      "serviceAccountClientId": "subscriptions",
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "default-roles-vision-notes"
+      ],
+      "clientRoles": {
+        "realm-management": [
+          "view-realm",
+          "manage-users"
+        ]
+      },
+      "notBefore": 0,
       "groups": []
     }
   ],
