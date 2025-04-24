@@ -12,7 +12,7 @@ services:
     volumes:
       - prm_data:/var/lib/postgresql/data
   keycloak:
-    image: docker.io/bitnami/keycloak:25.0.5-debian-12-r0
+    image: docker.io/bitnami/keycloak:26.2.1
     restart: unless-stopped
     environment:
       KEYCLOAK_DATABASE_NAME: contacts

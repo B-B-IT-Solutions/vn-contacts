@@ -1049,7 +1049,7 @@
   "firstBrokerLoginFlow": "first broker login",
   "users": [
     {
-      "id": "bobuskysergej@gmail.com",
+      "id": "32a8978b-b422-4058-8df6-4050c067f09a",
       "email": "bobuskysergej@gmail.com",
       "username": "bobuskysergej@gmail.com",
       "firstName": "Sergej",
@@ -1067,7 +1067,7 @@
       "groups": []
     },
     {
-      "id": "boeningkatja@gmail.com",
+      "id": "ed06aec9-1964-4301-bce3-46a5d38207e6",
       "email": "boeningkatja@gmail.com",
       "username": "boeningkatja@gmail.com",
       "firstName": "Katja",
