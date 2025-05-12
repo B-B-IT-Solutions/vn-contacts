@@ -43,7 +43,6 @@ public class ContactUtils {
         contact.setKnowScore(randomInt());
         contact.setLikeScore(randomInt());
         contact.setTrustScore(randomInt());
-        contact.setKnowLikeTrustStatus(uuid());
         contact.setTelephones(connections());
         contact.setEmails(connections());
         contact.setUrls(connections());
@@ -67,7 +66,6 @@ public class ContactUtils {
         contact.setKnowScore(randomInt());
         contact.setLikeScore(randomInt());
         contact.setTrustScore(randomInt());
-        contact.setKnowLikeTrustStatus(uuid());
         contact.setTelephones(connectionsDto());
         contact.setEmails(connectionsDto());
         contact.setUrls(connectionsDto());

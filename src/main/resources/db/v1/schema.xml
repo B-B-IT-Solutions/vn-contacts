@@ -266,7 +266,6 @@
 				 <column name="know_score" type="INT"/>
 				 <column name="like_score" type="INT"/>
 				 <column name="trust_score" type="INT"/>
-				 <column name="know_like_trust_status" type="VARCHAR(250)"/>
 			</addColumn>
 	 </changeSet>
 </databaseChangeLog>

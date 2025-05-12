@@ -41,7 +41,6 @@ public class ContractComponentTestAssertions {
         assertThat(contact.getKnowScore()).isEqualTo(contactDto.getKnowScore());
         assertThat(contact.getLikeScore()).isEqualTo(contactDto.getLikeScore());
         assertThat(contact.getTrustScore()).isEqualTo(contactDto.getTrustScore());
-        assertThat(contact.getKnowLikeTrustStatus()).isEqualTo(contactDto.getKnowLikeTrustStatus());
         assertThat(contact.getLabels()).isNotEmpty().containsExactlyElementsOf(contactDto.getLabels());
         assertThat(contact.getIndustries()).isNotEmpty().containsExactlyElementsOf(contactDto.getIndustries());
         assertThat(contact.getDateOfBirth()).isCloseTo(contactDto.getDateOfBirth(), within(1, SECONDS));

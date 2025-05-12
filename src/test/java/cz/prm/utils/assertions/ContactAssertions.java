@@ -68,7 +68,6 @@ public class ContactAssertions {
         assertThat(contact1.getKnowScore()).isEqualTo(contact2.getKnowScore());
         assertThat(contact1.getLikeScore()).isEqualTo(contact2.getLikeScore());
         assertThat(contact1.getTrustScore()).isEqualTo(contact2.getTrustScore());
-        assertThat(contact1.getKnowLikeTrustStatus()).isEqualTo(contact2.getKnowLikeTrustStatus());
         assertThat(contact1.getLabels()).containsExactlyElementsOf(contact2.getLabels());
         assertThat(contact1.getIndustries()).containsExactlyElementsOf(contact2.getIndustries());
         assertThat(contact1.getOwner()).isEqualTo(contact2.getOwner());
@@ -90,7 +89,6 @@ public class ContactAssertions {
         assertThat(contact.getKnowScore()).isEqualTo(dto.getKnowScore());
         assertThat(contact.getLikeScore()).isEqualTo(dto.getLikeScore());
         assertThat(contact.getTrustScore()).isEqualTo(dto.getTrustScore());
-        assertThat(contact.getKnowLikeTrustStatus()).isEqualTo(dto.getKnowLikeTrustStatus());
         assertThat(contact.getLabels()).containsExactlyElementsOf(dto.getLabels());
         assertThat(contact.getIndustries()).containsExactlyElementsOf(dto.getIndustries());
         assertThat(contact.getDateOfBirth()).isEqualTo(dto.getDateOfBirth());

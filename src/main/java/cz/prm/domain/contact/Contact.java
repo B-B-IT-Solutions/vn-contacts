@@ -63,9 +63,6 @@ public class Contact {
     @Column(name = "TRUST_SCORE")
     private Integer trustScore;
 
-    @Column(name = "KNOW_LIKE_TRUST_STATUS")
-    private String knowLikeTrustStatus;
-
     @ElementCollection(fetch = EAGER)
     @CollectionTable(name = "CONTACT_TELEPHONE", joinColumns = @JoinColumn(name = "CONTACT_ID"))
     @Column(name = "TELEPHONE")
