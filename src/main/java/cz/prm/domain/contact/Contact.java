@@ -54,6 +54,18 @@ public class Contact {
     @Column(name = "NICK_NAME")
     private String nickName;
 
+    @Column(name = "KNOW_SCORE")
+    private Integer knowScore;
+
+    @Column(name = "LIKE_SCORE")
+    private Integer likeScore;
+
+    @Column(name = "TRUST_SCORE")
+    private Integer trustScore;
+
+    @Column(name = "KNOW_LIKE_TRUST_STATUS")
+    private String knowLikeTrustStatus;
+
     @ElementCollection(fetch = EAGER)
     @CollectionTable(name = "CONTACT_TELEPHONE", joinColumns = @JoinColumn(name = "CONTACT_ID"))
     @Column(name = "TELEPHONE")
@@ -87,10 +99,8 @@ public class Contact {
 
     @CreatedBy
     @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "username", column = @Column(name = "OWNER_USERNAME")),
-        @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))
-    })
+    @AttributeOverrides({@AttributeOverride(name = "username", column = @Column(name = "OWNER_USERNAME")),
+        @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))})
     private User owner;
 
     @LastModifiedDate

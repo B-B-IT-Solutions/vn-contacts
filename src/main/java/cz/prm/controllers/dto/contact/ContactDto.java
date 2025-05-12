@@ -27,6 +27,18 @@ public class ContactDto {
     @JsonProperty("nickName")
     private String nickName;
 
+    @JsonProperty("knowScore")
+    private Integer knowScore;
+
+    @JsonProperty("likeScore")
+    private Integer likeScore;
+
+    @JsonProperty("trustScore")
+    private Integer trustScore;
+
+    @JsonProperty("knowLikeTrustStatus")
+    private String knowLikeTrustStatus;
+
     @JsonProperty("telephones")
     private List<ConnectionDto> telephones;
 
