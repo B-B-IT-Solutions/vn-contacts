@@ -3,6 +3,7 @@ package cz.prm.business.settings;
 import static cz.prm.utils.SettingsComponentTestUtils.categoriesDto;
 import static cz.prm.utils.SettingsComponentTestUtils.industriesDto;
 import static cz.prm.utils.SettingsComponentTestUtils.labelsDto;
+import static cz.prm.utils.SettingsComponentTestUtils.skillsDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
@@ -66,6 +67,7 @@ public class SettingsComponentTest extends SettingsComponentTestBase {
         var dto1 = user1GetContactSettings();
         dto1.setLabels(labelsDto());
         dto1.setIndustries(industriesDto());
+        dto1.setSkills(skillsDto());
         user1UpdateContactSettings(dto1);
         var dto2 = user1GetContactSettings();
         assertSettings(dto1, dto2);
@@ -73,6 +75,7 @@ public class SettingsComponentTest extends SettingsComponentTestBase {
         dto1 = user2GetContactSettings();
         dto1.setLabels(labelsDto());
         dto1.setIndustries(industriesDto());
+        dto1.setSkills(skillsDto());
         user2UpdateContactSettings(dto1);
         dto2 = user2GetContactSettings();
         assertSettings(dto1, dto2);
@@ -80,6 +83,7 @@ public class SettingsComponentTest extends SettingsComponentTestBase {
         dto1 = user3GetContactSettings();
         dto1.setLabels(labelsDto());
         dto1.setIndustries(industriesDto());
+        dto1.setSkills(skillsDto());
         user3UpdateContactSettings(dto1);
         dto2 = user3GetContactSettings();
         assertSettings(dto1, dto2);
