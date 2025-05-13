@@ -148,5 +148,8 @@ class ContactServiceTest {
         assertThat(savedContact.getOccupation()).isEqualTo(updatedContact.getOccupation());
         assertThat(savedContact.getLabels()).isEqualTo(updatedContact.getLabels());
         assertThat(savedContact.getIndustries()).isEqualTo(updatedContact.getIndustries());
+        assertThat(savedContact.getSkills()).isEqualTo(updatedContact.getSkills());
+        assertThat(savedContact.getServices()).isEqualTo(updatedContact.getServices());
+        assertThat(savedContact.getTargetMarket()).isEqualTo(updatedContact.getTargetMarket());
     }
 }

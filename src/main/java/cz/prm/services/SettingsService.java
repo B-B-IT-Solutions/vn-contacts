@@ -1,6 +1,7 @@
 package cz.prm.services;
 
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_INDUSTRIES;
+import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_SKILLS;
 
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.contact.ContactSettings;
@@ -63,6 +64,7 @@ public class SettingsService {
         if (optional.isEmpty()) {
             var settings = new ContactSettings();
             settings.setIndustries(INITIAL_INDUSTRIES);
+            settings.setSkills(INITIAL_SKILLS);
             var savedSettings = contactSettingsRepository.saveAndFlush(settings);
             contactSettingsRepository.refresh(savedSettings);
             return savedSettings;

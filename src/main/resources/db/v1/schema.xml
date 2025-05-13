@@ -285,4 +285,12 @@
 				 <column name="target_market" type="VARCHAR(250)"/>
 			</createTable>
 	 </changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.15">
+			<createTable tableName="contact_settings_skill">
+				 <column name="settings_id" type="BIGINT"/>
+				 <column name="value" type="VARCHAR(250)"/>
+				 <column name="color" type="VARCHAR(50)"/>
+			</createTable>
+	 </changeSet>
 </databaseChangeLog>

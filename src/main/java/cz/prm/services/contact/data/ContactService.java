@@ -68,6 +68,9 @@ public class ContactService {
         savedContact.setOccupation(updatedContact.getOccupation());
         savedContact.setLabels(updatedContact.getLabels());
         savedContact.setIndustries(updatedContact.getIndustries());
+        savedContact.setSkills(updatedContact.getSkills());
+        savedContact.setServices(updatedContact.getServices());
+        savedContact.setTargetMarket(updatedContact.getTargetMarket());
     }
 
     private Contact getContactById(Long contactId) {
