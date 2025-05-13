@@ -70,6 +70,9 @@ public class ContactAssertions {
         assertThat(contact1.getTrustScore()).isEqualTo(contact2.getTrustScore());
         assertThat(contact1.getLabels()).containsExactlyElementsOf(contact2.getLabels());
         assertThat(contact1.getIndustries()).containsExactlyElementsOf(contact2.getIndustries());
+        assertThat(contact1.getSkills()).containsExactlyElementsOf(contact2.getSkills());
+        assertThat(contact1.getServices()).containsExactlyElementsOf(contact2.getServices());
+        assertThat(contact1.getTargetMarket()).containsExactlyElementsOf(contact2.getTargetMarket());
         assertThat(contact1.getOwner()).isEqualTo(contact2.getOwner());
         assertThat(contact1.getDateOfBirth()).isEqualTo(contact2.getDateOfBirth());
         assertThat(contact1.getLastEditDate()).isEqualTo(contact2.getLastEditDate());
@@ -91,6 +94,9 @@ public class ContactAssertions {
         assertThat(contact.getTrustScore()).isEqualTo(dto.getTrustScore());
         assertThat(contact.getLabels()).containsExactlyElementsOf(dto.getLabels());
         assertThat(contact.getIndustries()).containsExactlyElementsOf(dto.getIndustries());
+        assertThat(contact.getSkills()).containsExactlyElementsOf(dto.getSkills());
+        assertThat(contact.getServices()).containsExactlyElementsOf(dto.getServices());
+        assertThat(contact.getTargetMarket()).containsExactlyElementsOf(dto.getTargetMarket());
         assertThat(contact.getDateOfBirth()).isEqualTo(dto.getDateOfBirth());
         assertThat(contact.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(contact.getCreationDate()).isEqualTo(dto.getCreationDate());

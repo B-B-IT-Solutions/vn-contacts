@@ -91,6 +91,21 @@ public class Contact {
     @Column(name = "INDUSTRY")
     private List<String> industries;
 
+    @ElementCollection(fetch = EAGER)
+    @CollectionTable(name = "CONTACT_SKILL", joinColumns = @JoinColumn(name = "CONTACT_ID"))
+    @Column(name = "SKILL")
+    private List<String> skills;
+
+    @ElementCollection(fetch = EAGER)
+    @CollectionTable(name = "CONTACT_SERVICE", joinColumns = @JoinColumn(name = "CONTACT_ID"))
+    @Column(name = "SERVICE")
+    private List<String> services;
+
+    @ElementCollection(fetch = EAGER)
+    @CollectionTable(name = "CONTACT_TARGET_MARKET", joinColumns = @JoinColumn(name = "CONTACT_ID"))
+    @Column(name = "TARGET_MARKET")
+    private List<String> targetMarket;
+
     @Column(name = "DATE_OF_BIRTH")
     private Instant dateOfBirth;
 

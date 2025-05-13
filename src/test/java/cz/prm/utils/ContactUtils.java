@@ -49,6 +49,9 @@ public class ContactUtils {
         contact.setOccupation(occupation());
         contact.setLabels(uuids());
         contact.setIndustries(uuids());
+        contact.setSkills(uuids());
+        contact.setServices(uuids());
+        contact.setTargetMarket(uuids());
         contact.setOwner(user());
         contact.setDateOfBirth(now());
         contact.setLastEditDate(now());
@@ -72,6 +75,9 @@ public class ContactUtils {
         contact.setOccupation(occupationDto());
         contact.setLabels(uuids());
         contact.setIndustries(uuids());
+        contact.setSkills(uuids());
+        contact.setServices(uuids());
+        contact.setTargetMarket(uuids());
         contact.setDateOfBirth(now());
         contact.setLastEditDate(now());
         contact.setCreationDate(now());
