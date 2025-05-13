@@ -13,6 +13,6 @@ public class SkillDto {
     @JsonProperty("value")
     private String value;
 
-    @JsonProperty("value")
+    @JsonProperty("color")
     private String color;
 }
