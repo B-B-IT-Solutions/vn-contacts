@@ -87,6 +87,7 @@ public class SettingsService {
     private void updateContactSettingFields(ContactSettings settings, ContactSettings updatedSettings) {
         settings.setLabels(updatedSettings.getLabels());
         settings.setIndustries(updatedSettings.getIndustries());
+        settings.setSkills(updatedSettings.getSkills());
     }
 
     private void updateNoteSettingFields(NoteSettings settings, NoteSettings updatedSettings) {

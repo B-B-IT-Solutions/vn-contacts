@@ -154,6 +154,7 @@ class SettingsServiceTest {
         assertThat(settingsInDb.getOwner()).isEqualTo(savedSettings.getOwner());
         assertThat(savedSettings.getLabels()).isEqualTo(updatedSettings.getLabels());
         assertThat(savedSettings.getIndustries()).isEqualTo(updatedSettings.getIndustries());
+        assertThat(savedSettings.getSkills()).isEqualTo(updatedSettings.getSkills());
     }
 
     private static void assertNoteSettingFieldsUpdated(NoteSettings settingsInDb, NoteSettings updatedSettings, NoteSettings savedSettings) {
