@@ -1,7 +1,9 @@
 package cz.prm.services;
 
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_INDUSTRIES;
+import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_PRODUCTS;
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_SKILLS;
+import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_TARGET_MARKETS;
 import static cz.prm.utils.SettingsUtils.accountSettings;
 import static cz.prm.utils.SettingsUtils.contactSettings;
 import static cz.prm.utils.SettingsUtils.noteSettings;
@@ -94,6 +96,8 @@ class SettingsServiceTest {
         assertThat(result).isNotNull();
         assertThat(result.getIndustries()).containsExactlyElementsOf(INITIAL_INDUSTRIES);
         assertThat(result.getSkills()).containsExactlyElementsOf(INITIAL_SKILLS);
+        assertThat(result.getProducts()).containsExactlyElementsOf(INITIAL_PRODUCTS);
+        assertThat(result.getTargetMarkets()).containsExactlyElementsOf(INITIAL_TARGET_MARKETS);
         verify(contactSettingsRepository).refresh(result);
     }
 
@@ -155,6 +159,8 @@ class SettingsServiceTest {
         assertThat(savedSettings.getLabels()).isEqualTo(updatedSettings.getLabels());
         assertThat(savedSettings.getIndustries()).isEqualTo(updatedSettings.getIndustries());
         assertThat(savedSettings.getSkills()).isEqualTo(updatedSettings.getSkills());
+        assertThat(savedSettings.getProducts()).isEqualTo(updatedSettings.getProducts());
+        assertThat(savedSettings.getTargetMarkets()).isEqualTo(updatedSettings.getTargetMarkets());
     }
 
     private static void assertNoteSettingFieldsUpdated(NoteSettings settingsInDb, NoteSettings updatedSettings, NoteSettings savedSettings) {

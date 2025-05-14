@@ -50,7 +50,7 @@ public class ContactUtils {
         contact.setLabels(uuids());
         contact.setIndustries(uuids());
         contact.setSkills(uuids());
-        contact.setServices(uuids());
+        contact.setProducts(uuids());
         contact.setTargetMarket(uuids());
         contact.setOwner(user());
         contact.setDateOfBirth(now());
@@ -76,7 +76,7 @@ public class ContactUtils {
         contact.setLabels(uuids());
         contact.setIndustries(uuids());
         contact.setSkills(uuids());
-        contact.setServices(uuids());
+        contact.setProducts(uuids());
         contact.setTargetMarket(uuids());
         contact.setDateOfBirth(now());
         contact.setLastEditDate(now());

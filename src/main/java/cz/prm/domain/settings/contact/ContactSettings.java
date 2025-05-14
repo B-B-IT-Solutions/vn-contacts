@@ -55,6 +55,16 @@ public class ContactSettings {
     @Column(name = "SKILLS")
     private List<Skill> skills;
 
+    @ElementCollection(fetch = EAGER)
+    @CollectionTable(name = "CONTACT_SETTINGS_PRODUCT", joinColumns = @JoinColumn(name = "SETTINGS_ID"))
+    @Column(name = "PRODUCTS")
+    private List<Product> products;
+
+    @ElementCollection(fetch = EAGER)
+    @CollectionTable(name = "CONTACT_SETTINGS_TARGET_MARKET", joinColumns = @JoinColumn(name = "SETTINGS_ID"))
+    @Column(name = "TARGET_MARKETS")
+    private List<TargetMarket> targetMarkets;
+
     @CreatedBy
     @Embedded
     @AttributeOverrides({

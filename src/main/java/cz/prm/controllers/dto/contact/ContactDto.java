@@ -57,8 +57,8 @@ public class ContactDto {
     @JsonProperty("skills")
     private List<String> skills;
 
-    @JsonProperty("services")
-    private List<String> services;
+    @JsonProperty("products")
+    private List<String> products;
 
     @JsonProperty("targetMarket")
     private List<String> targetMarket;

@@ -69,7 +69,7 @@ public class ContactService {
         savedContact.setLabels(updatedContact.getLabels());
         savedContact.setIndustries(updatedContact.getIndustries());
         savedContact.setSkills(updatedContact.getSkills());
-        savedContact.setServices(updatedContact.getServices());
+        savedContact.setProducts(updatedContact.getProducts());
         savedContact.setTargetMarket(updatedContact.getTargetMarket());
     }
 

@@ -275,9 +275,9 @@
 				 <column name="skill" type="VARCHAR(250)"/>
 			</createTable>
 			
-			<createTable tableName="contact_service">
+			<createTable tableName="contact_product">
 				 <column name="contact_id" type="BIGINT"/>
-				 <column name="service" type="VARCHAR(250)"/>
+				 <column name="product" type="VARCHAR(250)"/>
 			</createTable>
 			
 			<createTable tableName="contact_target_market">
@@ -292,5 +292,18 @@
 				 <column name="value" type="VARCHAR(250)"/>
 				 <column name="color" type="VARCHAR(50)"/>
 			</createTable>
+			
+			<createTable tableName="contact_settings_product">
+				 <column name="settings_id" type="BIGINT"/>
+				 <column name="value" type="VARCHAR(250)"/>
+				 <column name="color" type="VARCHAR(50)"/>
+			</createTable>
+			
+			<createTable tableName="contact_settings_target_market">
+				 <column name="settings_id" type="BIGINT"/>
+				 <column name="value" type="VARCHAR(250)"/>
+				 <column name="color" type="VARCHAR(50)"/>
+			</createTable>
 	 </changeSet>
+
 </databaseChangeLog>

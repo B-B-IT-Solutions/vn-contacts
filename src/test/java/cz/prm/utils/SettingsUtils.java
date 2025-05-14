@@ -9,14 +9,18 @@ import static java.time.Instant.now;
 import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
 import cz.prm.controllers.dto.settings.contact.IndustryDto;
 import cz.prm.controllers.dto.settings.contact.LabelDto;
+import cz.prm.controllers.dto.settings.contact.ProductDto;
 import cz.prm.controllers.dto.settings.contact.SkillDto;
+import cz.prm.controllers.dto.settings.contact.TargetMarketDto;
 import cz.prm.controllers.dto.settings.note.CategoryDto;
 import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.contact.ContactSettings;
 import cz.prm.domain.settings.contact.Industry;
 import cz.prm.domain.settings.contact.Label;
+import cz.prm.domain.settings.contact.Product;
 import cz.prm.domain.settings.contact.Skill;
+import cz.prm.domain.settings.contact.TargetMarket;
 import cz.prm.domain.settings.note.Category;
 import cz.prm.domain.settings.note.NoteSettings;
 import java.util.List;
@@ -35,6 +39,8 @@ public class SettingsUtils {
         settings.setLabels(labels());
         settings.setIndustries(industries());
         settings.setSkills(skills());
+        settings.setProducts(products());
+        settings.setTargetMarkets(targetMarkets());
         settings.setLastEditDate(now());
         settings.setOwner(user());
         return settings;
@@ -45,6 +51,8 @@ public class SettingsUtils {
         settings.setLabels(labelsDto());
         settings.setIndustries(industriesDto());
         settings.setSkills(skillsDto());
+        settings.setProducts(productsDto());
+        settings.setTargetMarkets(targetMarketsDto());
         settings.setLastEditDate(now());
         return settings;
     }
@@ -128,6 +136,50 @@ public class SettingsUtils {
         skill.setValue(uuid());
         skill.setColor(uuid());
         return skill;
+    }
+
+    public static List<Product> products() {
+        return newArrayList(product(), product(), product());
+    }
+
+    public static List<ProductDto> productsDto() {
+        return newArrayList(productDto(), productDto(), productDto());
+    }
+
+    public static Product product() {
+        var product = new Product();
+        product.setValue(uuid());
+        product.setColor(uuid());
+        return product;
+    }
+
+    public static ProductDto productDto() {
+        var product = new ProductDto();
+        product.setValue(uuid());
+        product.setColor(uuid());
+        return product;
+    }
+
+    public static List<TargetMarket> targetMarkets() {
+        return newArrayList(targetMarket(), targetMarket(), targetMarket());
+    }
+
+    public static List<TargetMarketDto> targetMarketsDto() {
+        return newArrayList(targetMarketDto(), targetMarketDto(), targetMarketDto());
+    }
+
+    public static TargetMarket targetMarket() {
+        var targetMarket = new TargetMarket();
+        targetMarket.setValue(uuid());
+        targetMarket.setColor(uuid());
+        return targetMarket;
+    }
+
+    public static TargetMarketDto targetMarketDto() {
+        var targetMarket = new TargetMarketDto();
+        targetMarket.setValue(uuid());
+        targetMarket.setColor(uuid());
+        return targetMarket;
     }
 
     public static List<Category> categories() {

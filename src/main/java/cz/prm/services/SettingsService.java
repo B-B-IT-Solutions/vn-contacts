@@ -1,7 +1,9 @@
 package cz.prm.services;
 
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_INDUSTRIES;
+import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_PRODUCTS;
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_SKILLS;
+import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_TARGET_MARKETS;
 
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.contact.ContactSettings;
@@ -65,6 +67,8 @@ public class SettingsService {
             var settings = new ContactSettings();
             settings.setIndustries(INITIAL_INDUSTRIES);
             settings.setSkills(INITIAL_SKILLS);
+            settings.setProducts(INITIAL_PRODUCTS);
+            settings.setTargetMarkets(INITIAL_TARGET_MARKETS);
             var savedSettings = contactSettingsRepository.saveAndFlush(settings);
             contactSettingsRepository.refresh(savedSettings);
             return savedSettings;
@@ -88,6 +92,8 @@ public class SettingsService {
         settings.setLabels(updatedSettings.getLabels());
         settings.setIndustries(updatedSettings.getIndustries());
         settings.setSkills(updatedSettings.getSkills());
+        settings.setProducts(updatedSettings.getProducts());
+        settings.setTargetMarkets(updatedSettings.getTargetMarkets());
     }
 
     private void updateNoteSettingFields(NoteSettings settings, NoteSettings updatedSettings) {

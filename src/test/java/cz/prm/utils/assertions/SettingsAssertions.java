@@ -6,14 +6,18 @@ import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
 import cz.prm.controllers.dto.settings.contact.IndustryDto;
 import cz.prm.controllers.dto.settings.contact.LabelDto;
+import cz.prm.controllers.dto.settings.contact.ProductDto;
 import cz.prm.controllers.dto.settings.contact.SkillDto;
+import cz.prm.controllers.dto.settings.contact.TargetMarketDto;
 import cz.prm.controllers.dto.settings.note.CategoryDto;
 import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.contact.ContactSettings;
 import cz.prm.domain.settings.contact.Industry;
 import cz.prm.domain.settings.contact.Label;
+import cz.prm.domain.settings.contact.Product;
 import cz.prm.domain.settings.contact.Skill;
+import cz.prm.domain.settings.contact.TargetMarket;
 import cz.prm.domain.settings.note.Category;
 import cz.prm.domain.settings.note.NoteSettings;
 import java.util.List;
@@ -46,6 +50,8 @@ public class SettingsAssertions {
         assertLabels(settings.getLabels(), dto.getLabels());
         assertIndustries(settings.getIndustries(), dto.getIndustries());
         assertSkills(settings.getSkills(), dto.getSkills());
+        assertProducts(settings.getProducts(), dto.getProducts());
+        assertTargetMarkets(settings.getTargetMarkets(), dto.getTargetMarkets());
     }
 
     public static void assertSettings(NoteSettings settings1, NoteSettings settings2) {
@@ -85,6 +91,32 @@ public class SettingsAssertions {
     public static void assertSkill(Skill skill, SkillDto dto) {
         assertThat(skill.getValue()).isEqualTo(dto.getValue());
         assertThat(skill.getColor()).isEqualTo(dto.getColor());
+    }
+
+    public static void assertProducts(List<Product> products, List<ProductDto> dtos) {
+        assertThat(products).isNotEmpty().hasSameSizeAs(dtos);
+        products.forEach(u1 -> {
+            var u2 = dtos.stream().filter(u -> Objects.equals(u1.getValue(), u.getValue())).findFirst().get();
+            assertProduct(u1, u2);
+        });
+    }
+
+    public static void assertProduct(Product product, ProductDto dto) {
+        assertThat(product.getValue()).isEqualTo(dto.getValue());
+        assertThat(product.getColor()).isEqualTo(dto.getColor());
+    }
+
+    public static void assertTargetMarkets(List<TargetMarket> targetMarkets, List<TargetMarketDto> dtos) {
+        assertThat(targetMarkets).isNotEmpty().hasSameSizeAs(dtos);
+        targetMarkets.forEach(u1 -> {
+            var u2 = dtos.stream().filter(u -> Objects.equals(u1.getValue(), u.getValue())).findFirst().get();
+            assertTargetMarket(u1, u2);
+        });
+    }
+
+    public static void assertTargetMarket(TargetMarket targetMarket, TargetMarketDto dto) {
+        assertThat(targetMarket.getValue()).isEqualTo(dto.getValue());
+        assertThat(targetMarket.getColor()).isEqualTo(dto.getColor());
     }
 
     public static void assertLabels(List<Label> labels, List<LabelDto> dtos) {
