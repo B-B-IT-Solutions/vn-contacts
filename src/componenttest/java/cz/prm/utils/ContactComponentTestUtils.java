@@ -42,7 +42,7 @@ public class ContactComponentTestUtils {
         contact.setOccupation(occupation());
         contact.setLabels(uuids());
         contact.setSkills(uuids());
-        contact.setServices(uuids());
+        contact.setProducts(uuids());
         contact.setTargetMarket(uuids());
         contact.setIndustries(uuids());
         contact.setDateOfBirth(now());
@@ -65,7 +65,7 @@ public class ContactComponentTestUtils {
         dto.setLabels(uuids());
         dto.setIndustries(uuids());
         dto.setSkills(uuids());
-        dto.setServices(uuids());
+        dto.setProducts(uuids());
         dto.setTargetMarket(uuids());
         dto.setDateOfBirth(now());
         return dto;

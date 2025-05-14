@@ -3,7 +3,6 @@ package cz.prm.domain.contact;
 import static jakarta.persistence.FetchType.EAGER;
 
 import cz.prm.domain.common.User;
-import cz.prm.domain.contact.listeners.ContactAnonymizerListener;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.CollectionTable;
@@ -97,9 +96,9 @@ public class Contact {
     private List<String> skills;
 
     @ElementCollection(fetch = EAGER)
-    @CollectionTable(name = "CONTACT_SERVICE", joinColumns = @JoinColumn(name = "CONTACT_ID"))
-    @Column(name = "SERVICE")
-    private List<String> services;
+    @CollectionTable(name = "CONTACT_PRODUCT", joinColumns = @JoinColumn(name = "CONTACT_ID"))
+    @Column(name = "PRODUCT")
+    private List<String> products;
 
     @ElementCollection(fetch = EAGER)
     @CollectionTable(name = "CONTACT_TARGET_MARKET", joinColumns = @JoinColumn(name = "CONTACT_ID"))
