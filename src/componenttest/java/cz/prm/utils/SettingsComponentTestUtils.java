@@ -52,8 +52,8 @@ public class SettingsComponentTestUtils {
 
     public static ProductDto productDto() {
         var product = new ProductDto();
-        product.setValue(TestUtils.uuid());
-        product.setColor(TestUtils.uuid());
+        product.setValue(uuid());
+        product.setColor(uuid());
         return product;
     }
 
@@ -63,8 +63,8 @@ public class SettingsComponentTestUtils {
 
     public static TargetMarketDto targetMarketDto() {
         var targetMarket = new TargetMarketDto();
-        targetMarket.setValue(TestUtils.uuid());
-        targetMarket.setColor(TestUtils.uuid());
+        targetMarket.setValue(uuid());
+        targetMarket.setColor(uuid());
         return targetMarket;
     }
 
