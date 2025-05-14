@@ -5,7 +5,9 @@ import static cz.prm.utils.ComponentTestUtils.uuid;
 
 import cz.prm.controllers.dto.settings.contact.IndustryDto;
 import cz.prm.controllers.dto.settings.contact.LabelDto;
+import cz.prm.controllers.dto.settings.contact.ProductDto;
 import cz.prm.controllers.dto.settings.contact.SkillDto;
+import cz.prm.controllers.dto.settings.contact.TargetMarketDto;
 import cz.prm.controllers.dto.settings.note.CategoryDto;
 import java.util.List;
 
@@ -42,6 +44,28 @@ public class SettingsComponentTestUtils {
         skill.setValue(uuid());
         skill.setColor(uuid());
         return skill;
+    }
+
+    public static List<ProductDto> productsDto() {
+        return newArrayList(productDto(), productDto(), productDto());
+    }
+
+    public static ProductDto productDto() {
+        var product = new ProductDto();
+        product.setValue(TestUtils.uuid());
+        product.setColor(TestUtils.uuid());
+        return product;
+    }
+
+    public static List<TargetMarketDto> targetMarketsDto() {
+        return newArrayList(targetMarketDto(), targetMarketDto(), targetMarketDto());
+    }
+
+    public static TargetMarketDto targetMarketDto() {
+        var targetMarket = new TargetMarketDto();
+        targetMarket.setValue(TestUtils.uuid());
+        targetMarket.setColor(TestUtils.uuid());
+        return targetMarket;
     }
 
     public static List<CategoryDto> categoriesDto() {
