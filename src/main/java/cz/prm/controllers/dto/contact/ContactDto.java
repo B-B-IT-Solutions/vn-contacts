@@ -27,6 +27,15 @@ public class ContactDto {
     @JsonProperty("nickName")
     private String nickName;
 
+    @JsonProperty("knowScore")
+    private Integer knowScore;
+
+    @JsonProperty("likeScore")
+    private Integer likeScore;
+
+    @JsonProperty("trustScore")
+    private Integer trustScore;
+
     @JsonProperty("telephones")
     private List<ConnectionDto> telephones;
 
@@ -44,6 +53,15 @@ public class ContactDto {
 
     @JsonProperty("industries")
     private List<String> industries;
+
+    @JsonProperty("skills")
+    private List<String> skills;
+
+    @JsonProperty("services")
+    private List<String> services;
+
+    @JsonProperty("targetMarket")
+    private List<String> targetMarket;
 
     @JsonProperty("dateOfBirth")
     private Instant dateOfBirth;

@@ -138,6 +138,9 @@ class ContactServiceTest {
         assertThat(savedContact.getLastName()).isEqualTo(updatedContact.getLastName());
         assertThat(savedContact.getMiddleName()).isEqualTo(updatedContact.getMiddleName());
         assertThat(savedContact.getNickName()).isEqualTo(updatedContact.getNickName());
+        assertThat(savedContact.getKnowScore()).isEqualTo(updatedContact.getKnowScore());
+        assertThat(savedContact.getLikeScore()).isEqualTo(updatedContact.getLikeScore());
+        assertThat(savedContact.getTrustScore()).isEqualTo(updatedContact.getTrustScore());
         assertThat(savedContact.getTelephones()).isEqualTo(updatedContact.getTelephones());
         assertThat(savedContact.getEmails()).isEqualTo(updatedContact.getEmails());
         assertThat(savedContact.getUrls()).isEqualTo(updatedContact.getUrls());
@@ -145,5 +148,8 @@ class ContactServiceTest {
         assertThat(savedContact.getOccupation()).isEqualTo(updatedContact.getOccupation());
         assertThat(savedContact.getLabels()).isEqualTo(updatedContact.getLabels());
         assertThat(savedContact.getIndustries()).isEqualTo(updatedContact.getIndustries());
+        assertThat(savedContact.getSkills()).isEqualTo(updatedContact.getSkills());
+        assertThat(savedContact.getServices()).isEqualTo(updatedContact.getServices());
+        assertThat(savedContact.getTargetMarket()).isEqualTo(updatedContact.getTargetMarket());
     }
 }

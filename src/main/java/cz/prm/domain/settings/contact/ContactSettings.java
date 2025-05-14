@@ -50,6 +50,11 @@ public class ContactSettings {
     @Column(name = "INDUSTRIES")
     private List<Industry> industries;
 
+    @ElementCollection(fetch = EAGER)
+    @CollectionTable(name = "CONTACT_SETTINGS_SKILL", joinColumns = @JoinColumn(name = "SETTINGS_ID"))
+    @Column(name = "SKILLS")
+    private List<Skill> skills;
+
     @CreatedBy
     @Embedded
     @AttributeOverrides({

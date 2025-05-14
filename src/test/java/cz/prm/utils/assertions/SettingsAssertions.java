@@ -6,12 +6,14 @@ import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
 import cz.prm.controllers.dto.settings.contact.IndustryDto;
 import cz.prm.controllers.dto.settings.contact.LabelDto;
+import cz.prm.controllers.dto.settings.contact.SkillDto;
 import cz.prm.controllers.dto.settings.note.CategoryDto;
 import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.contact.ContactSettings;
 import cz.prm.domain.settings.contact.Industry;
 import cz.prm.domain.settings.contact.Label;
+import cz.prm.domain.settings.contact.Skill;
 import cz.prm.domain.settings.note.Category;
 import cz.prm.domain.settings.note.NoteSettings;
 import java.util.List;
@@ -33,6 +35,7 @@ public class SettingsAssertions {
         assertThat(settings1.getSettingsId()).isEqualTo(settings2.getSettingsId());
         assertThat(settings1.getLabels()).containsExactlyElementsOf(settings2.getLabels());
         assertThat(settings1.getIndustries()).containsExactlyElementsOf(settings2.getIndustries());
+        assertThat(settings1.getSkills()).containsExactlyElementsOf(settings2.getSkills());
         assertThat(settings1.getLastEditDate()).isEqualTo(settings2.getLastEditDate());
         assertThat(settings1.getOwner()).isEqualTo(settings2.getOwner());
     }
@@ -42,6 +45,7 @@ public class SettingsAssertions {
         assertThat(settings.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertLabels(settings.getLabels(), dto.getLabels());
         assertIndustries(settings.getIndustries(), dto.getIndustries());
+        assertSkills(settings.getSkills(), dto.getSkills());
     }
 
     public static void assertSettings(NoteSettings settings1, NoteSettings settings2) {
@@ -68,6 +72,19 @@ public class SettingsAssertions {
     public static void assertIndustry(Industry industry, IndustryDto dto) {
         assertThat(industry.getValue()).isEqualTo(dto.getValue());
         assertThat(industry.getColor()).isEqualTo(dto.getColor());
+    }
+
+    public static void assertSkills(List<Skill> skills, List<SkillDto> dtos) {
+        assertThat(skills).isNotEmpty().hasSameSizeAs(dtos);
+        skills.forEach(u1 -> {
+            var u2 = dtos.stream().filter(u -> Objects.equals(u1.getValue(), u.getValue())).findFirst().get();
+            assertSkill(u1, u2);
+        });
+    }
+
+    public static void assertSkill(Skill skill, SkillDto dto) {
+        assertThat(skill.getValue()).isEqualTo(dto.getValue());
+        assertThat(skill.getColor()).isEqualTo(dto.getColor());
     }
 
     public static void assertLabels(List<Label> labels, List<LabelDto> dtos) {

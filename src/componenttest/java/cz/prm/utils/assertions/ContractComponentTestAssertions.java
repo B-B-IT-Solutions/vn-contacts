@@ -37,9 +37,15 @@ public class ContractComponentTestAssertions {
         assertThat(contact.getFirstName()).isEqualTo(contactDto.getFirstName());
         assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
         assertThat(contact.getLastName()).isEqualTo(contactDto.getLastName());
-        assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
+        assertThat(contact.getNickName()).isEqualTo(contactDto.getNickName());
+        assertThat(contact.getKnowScore()).isEqualTo(contactDto.getKnowScore());
+        assertThat(contact.getLikeScore()).isEqualTo(contactDto.getLikeScore());
+        assertThat(contact.getTrustScore()).isEqualTo(contactDto.getTrustScore());
         assertThat(contact.getLabels()).isNotEmpty().containsExactlyElementsOf(contactDto.getLabels());
         assertThat(contact.getIndustries()).isNotEmpty().containsExactlyElementsOf(contactDto.getIndustries());
+        assertThat(contact.getSkills()).containsExactlyElementsOf(contactDto.getSkills());
+        assertThat(contact.getServices()).containsExactlyElementsOf(contactDto.getServices());
+        assertThat(contact.getTargetMarket()).containsExactlyElementsOf(contactDto.getTargetMarket());
         assertThat(contact.getDateOfBirth()).isCloseTo(contactDto.getDateOfBirth(), within(1, SECONDS));
         assertThat(contact.getLastEditDate()).isNotNull();
         assertThat(contact.getCreationDate()).isNotNull();

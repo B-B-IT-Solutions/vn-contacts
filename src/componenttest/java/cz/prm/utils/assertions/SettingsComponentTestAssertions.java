@@ -6,6 +6,7 @@ import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
 import cz.prm.controllers.dto.settings.contact.IndustryDto;
 import cz.prm.controllers.dto.settings.contact.LabelDto;
+import cz.prm.controllers.dto.settings.contact.SkillDto;
 import cz.prm.controllers.dto.settings.note.CategoryDto;
 import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
 import cz.prm.domain.settings.AccountSettings;
@@ -31,6 +32,7 @@ public class SettingsComponentTestAssertions {
         assertThat(dto1.getSettingsId()).isEqualTo(dto2.getSettingsId());
         assertLabelsDto(dto1.getLabels(), dto2.getLabels());
         assertIndustriesDto(dto1.getIndustries(), dto2.getIndustries());
+        assertSkillsDto(dto1.getSkills(), dto2.getSkills());
     }
 
     public static void assertSettings(NoteSettings settings, NoteSettingsDto dto) {
@@ -66,6 +68,19 @@ public class SettingsComponentTestAssertions {
     }
 
     public static void assertIndustryDto(IndustryDto dto1, IndustryDto dto2) {
+        assertThat(dto1.getValue()).isEqualTo(dto2.getValue());
+        assertThat(dto1.getColor()).isEqualTo(dto2.getColor());
+    }
+
+    public static void assertSkillsDto(List<SkillDto> dtos1, List<SkillDto> dtos2) {
+        assertThat(dtos1).isNotEmpty().hasSameSizeAs(dtos2);
+        dtos1.forEach(u1 -> {
+            var u2 = dtos2.stream().filter(u -> Objects.equals(u1.getValue(), u.getValue())).findFirst().get();
+            assertSkill(u1, u2);
+        });
+    }
+
+    public static void assertSkill(SkillDto dto1, SkillDto dto2) {
         assertThat(dto1.getValue()).isEqualTo(dto2.getValue());
         assertThat(dto1.getColor()).isEqualTo(dto2.getColor());
     }

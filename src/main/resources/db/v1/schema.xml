@@ -260,4 +260,37 @@
 				 <column name="due_date" type="TIMESTAMP WITH TIME ZONE"/>
 			</addColumn>
 	 </changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.13">
+			<addColumn tableName="contact">
+				 <column name="know_score" type="INT"/>
+				 <column name="like_score" type="INT"/>
+				 <column name="trust_score" type="INT"/>
+			</addColumn>
+	 </changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.14">
+			<createTable tableName="contact_skill">
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="skill" type="VARCHAR(250)"/>
+			</createTable>
+			
+			<createTable tableName="contact_service">
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="service" type="VARCHAR(250)"/>
+			</createTable>
+			
+			<createTable tableName="contact_target_market">
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="target_market" type="VARCHAR(250)"/>
+			</createTable>
+	 </changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.15">
+			<createTable tableName="contact_settings_skill">
+				 <column name="settings_id" type="BIGINT"/>
+				 <column name="value" type="VARCHAR(250)"/>
+				 <column name="color" type="VARCHAR(50)"/>
+			</createTable>
+	 </changeSet>
 </databaseChangeLog>

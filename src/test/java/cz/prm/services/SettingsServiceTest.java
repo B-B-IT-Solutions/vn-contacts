@@ -1,6 +1,7 @@
 package cz.prm.services;
 
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_INDUSTRIES;
+import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_SKILLS;
 import static cz.prm.utils.SettingsUtils.accountSettings;
 import static cz.prm.utils.SettingsUtils.contactSettings;
 import static cz.prm.utils.SettingsUtils.noteSettings;
@@ -92,6 +93,7 @@ class SettingsServiceTest {
         var result = settingsService.getContactSettings();
         assertThat(result).isNotNull();
         assertThat(result.getIndustries()).containsExactlyElementsOf(INITIAL_INDUSTRIES);
+        assertThat(result.getSkills()).containsExactlyElementsOf(INITIAL_SKILLS);
         verify(contactSettingsRepository).refresh(result);
     }
 
@@ -152,6 +154,7 @@ class SettingsServiceTest {
         assertThat(settingsInDb.getOwner()).isEqualTo(savedSettings.getOwner());
         assertThat(savedSettings.getLabels()).isEqualTo(updatedSettings.getLabels());
         assertThat(savedSettings.getIndustries()).isEqualTo(updatedSettings.getIndustries());
+        assertThat(savedSettings.getSkills()).isEqualTo(updatedSettings.getSkills());
     }
 
     private static void assertNoteSettingFieldsUpdated(NoteSettings settingsInDb, NoteSettings updatedSettings, NoteSettings savedSettings) {

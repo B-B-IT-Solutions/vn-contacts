@@ -2,6 +2,7 @@ package cz.prm.utils;
 
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static cz.prm.utils.ComponentTestUtils.uuids;
+import static cz.prm.utils.TestUtils.randomInt;
 import static java.lang.String.format;
 import static java.time.Instant.now;
 import static org.assertj.core.util.Lists.newArrayList;
@@ -32,11 +33,17 @@ public class ContactComponentTestUtils {
         contact.setMiddleName(format("Middle%s", uuid()));
         contact.setLastName(format("Last%s", uuid()));
         contact.setNickName(format("Nick%s", uuid()));
+        contact.setKnowScore(randomInt());
+        contact.setLikeScore(randomInt());
+        contact.setTrustScore(randomInt());
         contact.setTelephones(connections());
         contact.setEmails(connections());
         contact.setUrls(connections());
         contact.setOccupation(occupation());
         contact.setLabels(uuids());
+        contact.setSkills(uuids());
+        contact.setServices(uuids());
+        contact.setTargetMarket(uuids());
         contact.setIndustries(uuids());
         contact.setDateOfBirth(now());
         return contact;
@@ -48,12 +55,18 @@ public class ContactComponentTestUtils {
         dto.setMiddleName(uuid());
         dto.setLastName(uuid());
         dto.setNickName(uuid());
+        dto.setKnowScore(randomInt());
+        dto.setLikeScore(randomInt());
+        dto.setTrustScore(randomInt());
         dto.setTelephones(connectionsDto());
         dto.setEmails(connectionsDto());
         dto.setUrls(connectionsDto());
         dto.setOccupation(occupationDto());
         dto.setLabels(uuids());
         dto.setIndustries(uuids());
+        dto.setSkills(uuids());
+        dto.setServices(uuids());
+        dto.setTargetMarket(uuids());
         dto.setDateOfBirth(now());
         return dto;
     }

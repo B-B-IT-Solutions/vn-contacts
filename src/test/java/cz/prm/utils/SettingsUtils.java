@@ -9,12 +9,14 @@ import static java.time.Instant.now;
 import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
 import cz.prm.controllers.dto.settings.contact.IndustryDto;
 import cz.prm.controllers.dto.settings.contact.LabelDto;
+import cz.prm.controllers.dto.settings.contact.SkillDto;
 import cz.prm.controllers.dto.settings.note.CategoryDto;
 import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.contact.ContactSettings;
 import cz.prm.domain.settings.contact.Industry;
 import cz.prm.domain.settings.contact.Label;
+import cz.prm.domain.settings.contact.Skill;
 import cz.prm.domain.settings.note.Category;
 import cz.prm.domain.settings.note.NoteSettings;
 import java.util.List;
@@ -32,6 +34,7 @@ public class SettingsUtils {
         var settings = new ContactSettings();
         settings.setLabels(labels());
         settings.setIndustries(industries());
+        settings.setSkills(skills());
         settings.setLastEditDate(now());
         settings.setOwner(user());
         return settings;
@@ -41,6 +44,7 @@ public class SettingsUtils {
         var settings = new ContactSettingsDto();
         settings.setLabels(labelsDto());
         settings.setIndustries(industriesDto());
+        settings.setSkills(skillsDto());
         settings.setLastEditDate(now());
         return settings;
     }
@@ -102,6 +106,28 @@ public class SettingsUtils {
         industry.setValue(uuid());
         industry.setColor(uuid());
         return industry;
+    }
+
+    public static List<Skill> skills() {
+        return newArrayList(skill(), skill(), skill());
+    }
+
+    public static List<SkillDto> skillsDto() {
+        return newArrayList(skillDto(), skillDto(), skillDto());
+    }
+
+    public static Skill skill() {
+        var skill = new Skill();
+        skill.setValue(uuid());
+        skill.setColor(uuid());
+        return skill;
+    }
+
+    public static SkillDto skillDto() {
+        var skill = new SkillDto();
+        skill.setValue(uuid());
+        skill.setColor(uuid());
+        return skill;
     }
 
     public static List<Category> categories() {

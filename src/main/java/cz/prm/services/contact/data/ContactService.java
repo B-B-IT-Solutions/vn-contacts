@@ -58,6 +58,9 @@ public class ContactService {
         savedContact.setLastName(updatedContact.getLastName());
         savedContact.setMiddleName(updatedContact.getMiddleName());
         savedContact.setNickName(updatedContact.getNickName());
+        savedContact.setKnowScore(updatedContact.getKnowScore());
+        savedContact.setLikeScore(updatedContact.getLikeScore());
+        savedContact.setTrustScore(updatedContact.getTrustScore());
         savedContact.setTelephones(updatedContact.getTelephones());
         savedContact.setEmails(updatedContact.getEmails());
         savedContact.setUrls(updatedContact.getUrls());
@@ -65,6 +68,9 @@ public class ContactService {
         savedContact.setOccupation(updatedContact.getOccupation());
         savedContact.setLabels(updatedContact.getLabels());
         savedContact.setIndustries(updatedContact.getIndustries());
+        savedContact.setSkills(updatedContact.getSkills());
+        savedContact.setServices(updatedContact.getServices());
+        savedContact.setTargetMarket(updatedContact.getTargetMarket());
     }
 
     private Contact getContactById(Long contactId) {

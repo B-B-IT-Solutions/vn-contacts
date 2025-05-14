@@ -12,4 +12,7 @@ public final class InitContactSettings {
     public static final List<Industry> INITIAL_INDUSTRIES = newArrayList(new Industry("Construction"), new Industry("Data Science"),
         new Industry("Education"), new Industry("Finance"), new Industry("Healthcare"), new Industry("Health & Fitness"),
         new Industry("Human Resources"), new Industry("Information Technology"), new Industry("Retail"), new Industry("Real estate"));
+
+    public static final List<Skill> INITIAL_SKILLS = newArrayList(new Skill("Marketing Strategy"), new Skill("Web Development"), new Skill("SEO"),
+        new Skill("Graphic Design"), new Skill("Sales Automation"), new Skill("Financial Planning"), new Skill("Data Analysis"));
 }

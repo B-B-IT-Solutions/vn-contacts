@@ -5,6 +5,7 @@ import static cz.prm.utils.ComponentTestUtils.uuid;
 
 import cz.prm.controllers.dto.settings.contact.IndustryDto;
 import cz.prm.controllers.dto.settings.contact.LabelDto;
+import cz.prm.controllers.dto.settings.contact.SkillDto;
 import cz.prm.controllers.dto.settings.note.CategoryDto;
 import java.util.List;
 
@@ -30,6 +31,17 @@ public class SettingsComponentTestUtils {
         industry.setValue(uuid());
         industry.setColor(uuid());
         return industry;
+    }
+
+    public static List<SkillDto> skillsDto() {
+        return newArrayList(skillDto(), skillDto(), skillDto());
+    }
+
+    public static SkillDto skillDto() {
+        var skill = new SkillDto();
+        skill.setValue(uuid());
+        skill.setColor(uuid());
+        return skill;
     }
 
     public static List<CategoryDto> categoriesDto() {
