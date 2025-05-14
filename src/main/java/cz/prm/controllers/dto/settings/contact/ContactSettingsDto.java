@@ -24,6 +24,12 @@ public class ContactSettingsDto {
     @JsonProperty("skills")
     private List<SkillDto> skills;
 
+    @JsonProperty("products")
+    private List<ProductDto> products;
+
+    @JsonProperty("targetMarkets")
+    private List<TargetMarketDto> targetMarkets;
+
     @JsonProperty("lastEditDate")
     private Instant lastEditDate;
 }

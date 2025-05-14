@@ -15,4 +15,13 @@ public final class InitContactSettings {
 
     public static final List<Skill> INITIAL_SKILLS = newArrayList(new Skill("Marketing Strategy"), new Skill("Web Development"), new Skill("SEO"),
         new Skill("Graphic Design"), new Skill("Sales Automation"), new Skill("Financial Planning"), new Skill("Data Analysis"));
+
+    public static final List<Product> INITIAL_PRODUCTS = newArrayList(new Product("Consulting"), new Product("Web Design"),
+        new Product("Custom Software"), new Product("Online Courses"), new Product("SaaS Product"), new Product("Managed Services"),
+        new Product("Training & Workshops"));
+
+    public static final List<TargetMarket> INITIAL_TARGET_MARKETS = newArrayList(new TargetMarket("North America"), new TargetMarket("Europe"),
+        new TargetMarket("Asia-Pacific"), new TargetMarket("Small Businesses"), new TargetMarket("Enterprise Clients"), new TargetMarket("Startups"),
+        new TargetMarket("Healthcare"), new TargetMarket("Startups"), new TargetMarket("Retail"), new TargetMarket("B2B"), new TargetMarket("B2C"),
+        new TargetMarket("Government"), new TargetMarket("Tech Companies"), new TargetMarket("Education"));
 }
