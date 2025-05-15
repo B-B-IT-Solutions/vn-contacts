@@ -60,7 +60,7 @@ public class ContactDto {
     @JsonProperty("products")
     private List<String> products;
 
-    @JsonProperty("targetMarket")
+    @JsonProperty("targetMarkets")
     private List<String> targetMarkets;
 
     @JsonProperty("dateOfBirth")
