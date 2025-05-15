@@ -103,7 +103,7 @@ public class Contact {
     @ElementCollection(fetch = EAGER)
     @CollectionTable(name = "CONTACT_TARGET_MARKET", joinColumns = @JoinColumn(name = "CONTACT_ID"))
     @Column(name = "TARGET_MARKET")
-    private List<String> targetMarket;
+    private List<String> targetMarkets;
 
     @Column(name = "DATE_OF_BIRTH")
     private Instant dateOfBirth;

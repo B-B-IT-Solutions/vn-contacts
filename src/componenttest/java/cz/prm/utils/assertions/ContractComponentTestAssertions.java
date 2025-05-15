@@ -45,7 +45,7 @@ public class ContractComponentTestAssertions {
         assertThat(contact.getIndustries()).isNotEmpty().containsExactlyElementsOf(contactDto.getIndustries());
         assertThat(contact.getSkills()).containsExactlyElementsOf(contactDto.getSkills());
         assertThat(contact.getProducts()).containsExactlyElementsOf(contactDto.getProducts());
-        assertThat(contact.getTargetMarket()).containsExactlyElementsOf(contactDto.getTargetMarket());
+        assertThat(contact.getTargetMarkets()).containsExactlyElementsOf(contactDto.getTargetMarkets());
         assertThat(contact.getDateOfBirth()).isCloseTo(contactDto.getDateOfBirth(), within(1, SECONDS));
         assertThat(contact.getLastEditDate()).isNotNull();
         assertThat(contact.getCreationDate()).isNotNull();

@@ -150,6 +150,6 @@ class ContactServiceTest {
         assertThat(savedContact.getIndustries()).isEqualTo(updatedContact.getIndustries());
         assertThat(savedContact.getSkills()).isEqualTo(updatedContact.getSkills());
         assertThat(savedContact.getProducts()).isEqualTo(updatedContact.getProducts());
-        assertThat(savedContact.getTargetMarket()).isEqualTo(updatedContact.getTargetMarket());
+        assertThat(savedContact.getTargetMarkets()).isEqualTo(updatedContact.getTargetMarkets());
     }
 }
