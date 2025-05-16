@@ -14,6 +14,7 @@ import static java.time.Instant.now;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.MeetingDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
@@ -21,6 +22,7 @@ import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.IdealClient;
 import cz.prm.domain.contact.Meeting;
 import cz.prm.domain.contact.Occupation;
 import cz.prm.domain.contact.query.ContactsFilter;
@@ -125,6 +127,7 @@ public class ContactUtils {
     public static About about() {
         var about = new About();
         about.setDescription(uuid());
+        about.setIdealClients(idealClients());
         about.setContactGoals(uuid());
         about.setContactChallenges(uuid());
         about.setMyBenefits(uuid());
@@ -137,6 +140,7 @@ public class ContactUtils {
     public static AboutDto aboutDto() {
         var dto = new AboutDto();
         dto.setDescription(uuid());
+        dto.setIdealClients(idealClientsDto());
         dto.setContactGoals(uuid());
         dto.setContactChallenges(uuid());
         dto.setMyBenefits(uuid());
@@ -159,6 +163,32 @@ public class ContactUtils {
         dto.setLocation(uuid());
         dto.setComment(uuid());
         return dto;
+    }
+
+    public static List<IdealClient> idealClients() {
+        return newArrayList(idealClient(), idealClient(), idealClient());
+    }
+
+    public static List<IdealClientDto> idealClientsDto() {
+        return newArrayList(idealClientDto(), idealClientDto(), idealClientDto());
+    }
+
+    public static IdealClient idealClient() {
+        var ic = new IdealClient();
+        ic.setIdealClientId(randomLong());
+        ic.setCharacteristics(uuids());
+        ic.setNeeds(uuid());
+        ic.setGoals(uuid());
+        return ic;
+    }
+
+    public static IdealClientDto idealClientDto() {
+        var ic = new IdealClientDto();
+        ic.setIdealClientId(randomLong());
+        ic.setCharacteristics(uuids());
+        ic.setNeeds(uuid());
+        ic.setGoals(uuid());
+        return ic;
     }
 
     public static ContactsQuery contactsQuery() {

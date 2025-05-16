@@ -102,9 +102,11 @@ class ContactMapperTest {
     @Test
     void afterAboutDto() {
         var target = new AboutDto();
+        target.setIdealClients(null);
         target.setFirstMeeting(null);
         assertThat(target.getFirstMeeting()).isNull();
         mapper.afterAboutDto(null, target);
+        assertThat(target.getIdealClients()).isNotNull().isEmpty();
         assertThat(target.getFirstMeeting()).isNotNull();
     }
 

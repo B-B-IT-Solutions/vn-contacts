@@ -16,6 +16,7 @@ import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsFilter;
 import cz.prm.domain.contact.query.ContactsQuery;
+import java.util.ArrayList;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -49,6 +50,9 @@ public interface ContactMapper {
 
     @AfterMapping
     default void afterAboutDto(About source, @MappingTarget AboutDto target) {
+        if (isNull(target.getIdealClients())) {
+            target.setIdealClients(new ArrayList<>());
+        }
         if (isNull(target.getFirstMeeting())) {
             target.setFirstMeeting(new MeetingDto());
         }
