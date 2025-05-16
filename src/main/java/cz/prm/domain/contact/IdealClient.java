@@ -1,12 +1,14 @@
 package cz.prm.domain.contact;
 
 import static jakarta.persistence.FetchType.EAGER;
+import static jakarta.persistence.GenerationType.SEQUENCE;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
@@ -25,6 +27,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class IdealClient {
 
     @Id
+    @GeneratedValue(strategy = SEQUENCE)
     @Column(name = "IDEAL_CLIENT_ID")
     private Long idealClientId;
 
