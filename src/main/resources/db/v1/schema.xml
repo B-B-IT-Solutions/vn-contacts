@@ -307,13 +307,16 @@
 	 </changeSet>
 	 
 	 <changeSet author="sergej" id="1.0.16">
+			<createSequence cacheSize="1" cycle="false" startValue="1" minValue="1" maxValue="9223372036854775807"
+											sequenceName="ideal_client_seq"/>
+			
 			<createTable tableName="ideal_client">
 				 <column name="ideal_client_id" type="BIGINT"/>
 				 <column name="contact_id" type="BIGINT"/>
 				 <column name="needs" type="TEXT"/>
 				 <column name="goals" type="TEXT"/>
 			</createTable>
-		 
+			
 			<createTable tableName="ideal_client_characteristics">
 				 <column name="ideal_client_id" type="BIGINT"/>
 				 <column name="characteristic" type="VARCHAR(250)"/>

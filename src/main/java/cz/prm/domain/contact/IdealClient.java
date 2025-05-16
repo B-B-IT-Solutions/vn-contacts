@@ -11,6 +11,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class IdealClient {
 
     @Id
-    @GeneratedValue(strategy = SEQUENCE)
+    @GeneratedValue(strategy = SEQUENCE, generator = "IDEAL_CLIENT_SEQ")
+    @SequenceGenerator(name = "IDEAL_CLIENT_SEQ", sequenceName = "IDEAL_CLIENT_SEQ", allocationSize = 1)
     @Column(name = "IDEAL_CLIENT_ID")
     private Long idealClientId;
 
