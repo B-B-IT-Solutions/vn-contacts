@@ -174,8 +174,12 @@ public class ContactUtils {
     }
 
     public static IdealClient idealClient() {
+        return idealClient(randomLong());
+    }
+
+    public static IdealClient idealClient(Long id) {
         var ic = new IdealClient();
-        ic.setIdealClientId(randomLong());
+        ic.setIdealClientId(id);
         ic.setCharacteristics(uuids());
         ic.setNeeds(uuid());
         ic.setGoals(uuid());

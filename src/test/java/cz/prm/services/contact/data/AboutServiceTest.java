@@ -1,6 +1,8 @@
 package cz.prm.services.contact.data;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.ContactUtils.about;
+import static cz.prm.utils.ContactUtils.idealClient;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.TestUtils.uuids;
@@ -15,6 +17,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.google.common.collect.Lists;
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Meeting;
@@ -82,7 +85,8 @@ class AboutServiceTest {
         updatedIc.setCharacteristics(uuids());
         updatedIc.setNeeds(uuid());
         updatedIc.setGoals(uuid());
-        updatedAbout.getIdealClients().add(updatedIc);
+        var updatedIcs = newArrayList(updatedIc, idealClient(null));
+        updatedAbout.getIdealClients().addAll(updatedIcs);
 
         var predicate = new BooleanBuilder();
         when(predicates.byContactId(aboutIdDb.getContactId())).thenReturn(predicate);

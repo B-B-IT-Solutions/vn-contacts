@@ -2,6 +2,8 @@ package cz.prm.services.contact.data;
 
 import static java.lang.String.format;
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
+import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 import cz.prm.domain.contact.About;
@@ -58,10 +60,13 @@ public class AboutService {
         updateFirstMeetingFields(savedAbout.getFirstMeeting(), updatedAbout.getFirstMeeting());
     }
 
-    private void updateIdealClients(List<IdealClient> savedIcs, List<IdealClient> updatedIcs) {
+    private void updateIdealClients(List<IdealClient> savedIcs, List<IdealClient> newAndUpdatedIcs) {
         var savedIcsMap = savedIcs.stream().collect(toMap(IdealClient::getIdealClientId, (ic) -> ic));
+        var newIcs = newAndUpdatedIcs.stream().filter((ic) -> isNull(ic.getIdealClientId())).collect(toList());
+        var updatedIcs = newAndUpdatedIcs.stream().filter((ic) -> nonNull(ic.getIdealClientId())).collect(toList());
         var updatedIcsMap = updatedIcs.stream().collect(toMap(IdealClient::getIdealClientId, (ic) -> ic));
 
+        savedIcs.addAll(newIcs);
         updatedIcs.forEach(uic -> {
             var sic = savedIcsMap.get(uic.getIdealClientId());
             if (isNull(sic)) {
