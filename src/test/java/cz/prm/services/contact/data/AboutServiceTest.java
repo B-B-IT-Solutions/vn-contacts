@@ -85,7 +85,7 @@ class AboutServiceTest {
         updatedIc.setCharacteristics(uuids());
         updatedIc.setNeeds(uuid());
         updatedIc.setGoals(uuid());
-        var updatedIcs = newArrayList(updatedIc, idealClient(null));
+        var updatedIcs = newArrayList(updatedIc, idealClient(null), idealClient(null), idealClient(null));
         updatedAbout.getIdealClients().addAll(updatedIcs);
 
         var predicate = new BooleanBuilder();

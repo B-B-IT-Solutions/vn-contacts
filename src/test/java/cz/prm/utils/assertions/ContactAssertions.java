@@ -1,6 +1,7 @@
 package cz.prm.utils.assertions;
 
 import static cz.prm.utils.assertions.CommonAssertions.assertQuery;
+import static java.util.Objects.isNull;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
@@ -169,7 +170,12 @@ public class ContactAssertions {
     public static void assertIdealClients(List<IdealClient> ics1, List<IdealClient> ics2) {
         assertThat(ics1).isNotEmpty().hasSameSizeAs(ics2);
         ics1.forEach(c1 -> {
-            var c2 = ics2.stream().filter(u -> Objects.equals(c1.getIdealClientId(), u.getIdealClientId())).findFirst().get();
+            var c2 = ics2.stream().filter(u -> {
+                if (isNull(c1.getIdealClientId()) && isNull(u.getIdealClientId())) {
+                    return Objects.equals(c1.getGoals(), u.getGoals());
+                }
+                return Objects.equals(c1.getIdealClientId(), u.getIdealClientId());
+            }).findFirst().get();
             assertIdealClient(c1, c2);
         });
     }
