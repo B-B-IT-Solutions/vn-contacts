@@ -70,7 +70,7 @@ public class ContactService {
         savedContact.setIndustries(updatedContact.getIndustries());
         savedContact.setSkills(updatedContact.getSkills());
         savedContact.setProducts(updatedContact.getProducts());
-        savedContact.setTargetMarket(updatedContact.getTargetMarket());
+        savedContact.setTargetMarkets(updatedContact.getTargetMarkets());
     }
 
     private Contact getContactById(Long contactId) {

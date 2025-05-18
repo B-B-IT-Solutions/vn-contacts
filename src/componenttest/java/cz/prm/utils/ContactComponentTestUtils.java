@@ -3,6 +3,7 @@ package cz.prm.utils;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static cz.prm.utils.ComponentTestUtils.uuids;
 import static cz.prm.utils.TestUtils.randomInt;
+import static cz.prm.utils.TestUtils.randomLong;
 import static java.lang.String.format;
 import static java.time.Instant.now;
 import static org.assertj.core.util.Lists.newArrayList;
@@ -17,6 +18,7 @@ import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.IdealClient;
 import cz.prm.domain.contact.Meeting;
 import cz.prm.domain.contact.Occupation;
 import java.util.List;
@@ -43,7 +45,7 @@ public class ContactComponentTestUtils {
         contact.setLabels(uuids());
         contact.setSkills(uuids());
         contact.setProducts(uuids());
-        contact.setTargetMarket(uuids());
+        contact.setTargetMarkets(uuids());
         contact.setIndustries(uuids());
         contact.setDateOfBirth(now());
         return contact;
@@ -66,7 +68,7 @@ public class ContactComponentTestUtils {
         dto.setIndustries(uuids());
         dto.setSkills(uuids());
         dto.setProducts(uuids());
-        dto.setTargetMarket(uuids());
+        dto.setTargetMarkets(uuids());
         dto.setDateOfBirth(now());
         return dto;
     }
@@ -112,11 +114,25 @@ public class ContactComponentTestUtils {
     public static About about(Contact contact) {
         var about = new About(contact.getContactId());
         about.setDescription(format("description%s", uuid()));
+        about.setIdealClients(idealClients());
         about.setContactGoals(format("contactGoals%s", uuid()));
         about.setContactChallenges(format("contactChallenges%s", uuid()));
         about.setMyBenefits(format("myBenefits%s", uuid()));
         about.setFirstMeeting(meeting());
         return about;
+    }
+
+    public static List<IdealClient> idealClients() {
+        return Lists.newArrayList(idealClient(), idealClient(), idealClient());
+    }
+
+    public static IdealClient idealClient() {
+        var ic = new IdealClient();
+        ic.setIdealClientId(randomLong());
+        ic.setCharacteristics(TestUtils.uuids());
+        ic.setNeeds(TestUtils.uuid());
+        ic.setGoals(TestUtils.uuid());
+        return ic;
     }
 
     public static Meeting meeting() {

@@ -1,12 +1,14 @@
 package cz.prm.utils.assertions;
 
 import static cz.prm.utils.assertions.CommonAssertions.assertQuery;
+import static java.util.Objects.isNull;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.MeetingDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
@@ -15,6 +17,7 @@ import cz.prm.domain.common.query.Page;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.IdealClient;
 import cz.prm.domain.contact.Meeting;
 import cz.prm.domain.contact.Occupation;
 import cz.prm.domain.contact.query.ContactsFilter;
@@ -72,7 +75,7 @@ public class ContactAssertions {
         assertThat(contact1.getIndustries()).containsExactlyElementsOf(contact2.getIndustries());
         assertThat(contact1.getSkills()).containsExactlyElementsOf(contact2.getSkills());
         assertThat(contact1.getProducts()).containsExactlyElementsOf(contact2.getProducts());
-        assertThat(contact1.getTargetMarket()).containsExactlyElementsOf(contact2.getTargetMarket());
+        assertThat(contact1.getTargetMarkets()).containsExactlyElementsOf(contact2.getTargetMarkets());
         assertThat(contact1.getOwner()).isEqualTo(contact2.getOwner());
         assertThat(contact1.getDateOfBirth()).isEqualTo(contact2.getDateOfBirth());
         assertThat(contact1.getLastEditDate()).isEqualTo(contact2.getLastEditDate());
@@ -96,7 +99,7 @@ public class ContactAssertions {
         assertThat(contact.getIndustries()).containsExactlyElementsOf(dto.getIndustries());
         assertThat(contact.getSkills()).containsExactlyElementsOf(dto.getSkills());
         assertThat(contact.getProducts()).containsExactlyElementsOf(dto.getProducts());
-        assertThat(contact.getTargetMarket()).containsExactlyElementsOf(dto.getTargetMarket());
+        assertThat(contact.getTargetMarkets()).containsExactlyElementsOf(dto.getTargetMarkets());
         assertThat(contact.getDateOfBirth()).isEqualTo(dto.getDateOfBirth());
         assertThat(contact.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(contact.getCreationDate()).isEqualTo(dto.getCreationDate());
@@ -150,6 +153,7 @@ public class ContactAssertions {
         assertThat(about1.getContactChallenges()).isEqualTo(about2.getContactChallenges());
         assertThat(about1.getMyBenefits()).isEqualTo(about2.getMyBenefits());
         assertThat(about1.getContactId()).isEqualTo(about2.getContactId());
+        assertIdealClients(about1.getIdealClients(), about2.getIdealClients());
         assertMeeting(about1.getFirstMeeting(), about2.getFirstMeeting());
     }
 
@@ -159,7 +163,43 @@ public class ContactAssertions {
         assertThat(about.getContactChallenges()).isEqualTo(dto.getContactChallenges());
         assertThat(about.getMyBenefits()).isEqualTo(dto.getMyBenefits());
         assertThat(about.getContactId()).isEqualTo(dto.getContactId());
+        assertIdealClientsDto(about.getIdealClients(), dto.getIdealClients());
         assertMeetingDto(about.getFirstMeeting(), dto.getFirstMeeting());
+    }
+
+    public static void assertIdealClients(List<IdealClient> ics1, List<IdealClient> ics2) {
+        assertThat(ics1).isNotEmpty().hasSameSizeAs(ics2);
+        ics1.forEach(c1 -> {
+            var c2 = ics2.stream().filter(u -> {
+                if (isNull(c1.getIdealClientId()) && isNull(u.getIdealClientId())) {
+                    return Objects.equals(c1.getGoals(), u.getGoals());
+                }
+                return Objects.equals(c1.getIdealClientId(), u.getIdealClientId());
+            }).findFirst().get();
+            assertIdealClient(c1, c2);
+        });
+    }
+
+    public static void assertIdealClientsDto(List<IdealClient> ics, List<IdealClientDto> dtos) {
+        assertThat(ics).isNotEmpty().hasSameSizeAs(dtos);
+        ics.forEach(c1 -> {
+            var c2 = dtos.stream().filter(u -> Objects.equals(c1.getIdealClientId(), u.getIdealClientId())).findFirst().get();
+            assertIdealClientDto(c1, c2);
+        });
+    }
+
+    public static void assertIdealClient(IdealClient ic1, IdealClient ic2) {
+        assertThat(ic1.getIdealClientId()).isEqualTo(ic2.getIdealClientId());
+        assertThat(ic1.getCharacteristics()).containsExactlyElementsOf(ic2.getCharacteristics());
+        assertThat(ic1.getNeeds()).isEqualTo(ic2.getNeeds());
+        assertThat(ic1.getGoals()).isEqualTo(ic2.getGoals());
+    }
+
+    public static void assertIdealClientDto(IdealClient ic, IdealClientDto dto) {
+        assertThat(ic.getIdealClientId()).isEqualTo(dto.getIdealClientId());
+        assertThat(ic.getCharacteristics()).containsExactlyElementsOf(dto.getCharacteristics());
+        assertThat(ic.getNeeds()).isEqualTo(dto.getNeeds());
+        assertThat(ic.getGoals()).isEqualTo(dto.getGoals());
     }
 
     public static void assertMeeting(Meeting meeting1, Meeting meeting2) {

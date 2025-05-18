@@ -1,8 +1,13 @@
 package cz.prm.services.contact.data;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.ContactUtils.about;
+import static cz.prm.utils.ContactUtils.idealClient;
 import static cz.prm.utils.TestUtils.randomLong;
+import static cz.prm.utils.TestUtils.uuid;
+import static cz.prm.utils.TestUtils.uuids;
 import static cz.prm.utils.assertions.ContactAssertions.assertAbout;
+import static cz.prm.utils.assertions.ContactAssertions.assertIdealClients;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,6 +17,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.google.common.collect.Lists;
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Meeting;
@@ -75,6 +81,13 @@ class AboutServiceTest {
     void updateAbout() {
         var aboutIdDb = about();
         var updatedAbout = about();
+        var updatedIc = aboutIdDb.getIdealClients().get(0);
+        updatedIc.setCharacteristics(uuids());
+        updatedIc.setNeeds(uuid());
+        updatedIc.setGoals(uuid());
+        var updatedIcs = newArrayList(updatedIc, idealClient(null), idealClient(null), idealClient(null));
+        updatedAbout.getIdealClients().addAll(updatedIcs);
+
         var predicate = new BooleanBuilder();
         when(predicates.byContactId(aboutIdDb.getContactId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(of(aboutIdDb));
@@ -122,6 +135,7 @@ class AboutServiceTest {
         assertThat(savedAbout.getContactGoals()).isEqualTo(updatedAbout.getContactGoals());
         assertThat(savedAbout.getContactChallenges()).isEqualTo(updatedAbout.getContactChallenges());
         assertThat(savedAbout.getMyBenefits()).isEqualTo(updatedAbout.getMyBenefits());
+        assertIdealClients(updatedAbout.getIdealClients(), savedAbout.getIdealClients());
         assertMeetingFieldsUpdated(updatedAbout.getFirstMeeting(), savedAbout.getFirstMeeting());
     }
 

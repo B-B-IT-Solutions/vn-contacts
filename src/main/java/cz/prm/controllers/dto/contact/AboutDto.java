@@ -1,6 +1,7 @@
 package cz.prm.controllers.dto.contact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,9 @@ public class AboutDto {
 
     @JsonProperty("description")
     private String description;
+
+    @JsonProperty("idealClients")
+    private List<IdealClientDto> idealClients;
 
     @JsonProperty("contactGoals")
     private String contactGoals;
