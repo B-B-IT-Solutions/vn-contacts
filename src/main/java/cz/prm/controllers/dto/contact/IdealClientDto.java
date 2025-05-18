@@ -14,6 +14,9 @@ public class IdealClientDto {
     @JsonProperty("idealClientId")
     private Long idealClientId;
 
+    @JsonProperty("name")
+    private String name;
+
     @JsonProperty("characteristics")
     private List<String> characteristics;
 
@@ -22,4 +25,7 @@ public class IdealClientDto {
 
     @JsonProperty("goals")
     private String goals;
+
+    @JsonProperty("order")
+    private Short order;
 }

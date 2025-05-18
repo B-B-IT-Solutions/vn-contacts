@@ -6,6 +6,7 @@ import static cz.prm.utils.CommonUtils.paginationDto;
 import static cz.prm.utils.CommonUtils.user;
 import static cz.prm.utils.TestUtils.randomInt;
 import static cz.prm.utils.TestUtils.randomLong;
+import static cz.prm.utils.TestUtils.randomShort;
 import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.TestUtils.uuids;
 import static java.lang.String.format;
@@ -180,18 +181,22 @@ public class ContactUtils {
     public static IdealClient idealClient(Long id) {
         var ic = new IdealClient();
         ic.setIdealClientId(id);
+        ic.setName(uuid());
         ic.setCharacteristics(uuids());
         ic.setNeeds(uuid());
         ic.setGoals(uuid());
+        ic.setOrder(randomShort());
         return ic;
     }
 
     public static IdealClientDto idealClientDto() {
         var ic = new IdealClientDto();
         ic.setIdealClientId(randomLong());
+        ic.setName(uuid());
         ic.setCharacteristics(uuids());
         ic.setNeeds(uuid());
         ic.setGoals(uuid());
+        ic.setOrder(randomShort());
         return ic;
     }
 

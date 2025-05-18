@@ -312,9 +312,11 @@
 			
 			<createTable tableName="ideal_client">
 				 <column name="ideal_client_id" type="BIGINT"/>
+				 <column name="name" type="VARCHAR(250)"/>
 				 <column name="contact_id" type="BIGINT"/>
 				 <column name="needs" type="TEXT"/>
 				 <column name="goals" type="TEXT"/>
+				 <column name="order" type="SMALLINT"/>
 			</createTable>
 			
 			<createTable tableName="ideal_client_characteristics">

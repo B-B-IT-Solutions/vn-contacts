@@ -96,9 +96,11 @@ public class ContractComponentTestAssertions {
 
     public static void assertIdealClientDto(IdealClient ic, IdealClientDto dto) {
         assertThat(ic.getIdealClientId()).isEqualTo(dto.getIdealClientId());
+        assertThat(ic.getName()).isEqualTo(dto.getName());
         assertThat(ic.getCharacteristics()).containsExactlyElementsOf(dto.getCharacteristics());
         assertThat(ic.getNeeds()).isEqualTo(dto.getNeeds());
         assertThat(ic.getGoals()).isEqualTo(dto.getGoals());
+        assertThat(ic.getOrder()).isEqualTo(dto.getOrder());
     }
 
     public static void assertMeetingDto(Meeting meeting, MeetingDto dto) {
