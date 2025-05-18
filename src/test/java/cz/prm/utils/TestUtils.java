@@ -1,6 +1,5 @@
 package cz.prm.utils;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static java.lang.Math.abs;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.range;
@@ -8,8 +7,6 @@ import static java.util.stream.IntStream.range;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class TestUtils {
 
@@ -21,6 +18,10 @@ public class TestUtils {
 
     public static Integer randomInt() {
         return abs(random.nextInt());
+    }
+
+    public static Short randomShort() {
+        return (short) abs(random.nextInt(32767));
     }
 
     public static List<String> uuids() {

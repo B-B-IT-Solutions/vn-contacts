@@ -1,9 +1,10 @@
 package cz.prm.utils;
 
+import static cz.prm.utils.ComponentTestUtils.randomInt;
+import static cz.prm.utils.ComponentTestUtils.randomLong;
+import static cz.prm.utils.ComponentTestUtils.randomShort;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static cz.prm.utils.ComponentTestUtils.uuids;
-import static cz.prm.utils.TestUtils.randomInt;
-import static cz.prm.utils.TestUtils.randomLong;
 import static java.lang.String.format;
 import static java.time.Instant.now;
 import static org.assertj.core.util.Lists.newArrayList;
@@ -129,9 +130,11 @@ public class ContactComponentTestUtils {
     public static IdealClient idealClient() {
         var ic = new IdealClient();
         ic.setIdealClientId(randomLong());
-        ic.setCharacteristics(TestUtils.uuids());
-        ic.setNeeds(TestUtils.uuid());
-        ic.setGoals(TestUtils.uuid());
+        ic.setName(uuid());
+        ic.setCharacteristics(uuids());
+        ic.setNeeds(uuid());
+        ic.setGoals(uuid());
+        ic.setOrder(randomShort());
         return ic;
     }
 

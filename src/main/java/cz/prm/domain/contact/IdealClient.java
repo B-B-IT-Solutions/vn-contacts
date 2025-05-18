@@ -33,6 +33,9 @@ public class IdealClient {
     @Column(name = "IDEAL_CLIENT_ID")
     private Long idealClientId;
 
+    @Column(name = "NAME")
+    private String name;
+
     @ElementCollection(fetch = EAGER)
     @CollectionTable(name = "IDEAL_CLIENT_CHARACTERISTICS", joinColumns = @JoinColumn(name = "IDEAL_CLIENT_ID"))
     @Column(name = "CHARACTERISTIC")
@@ -43,4 +46,7 @@ public class IdealClient {
 
     @Column(name = "GOALS")
     private String goals;
+
+    @Column(name = "_ORDER")
+    private Short order;
 }

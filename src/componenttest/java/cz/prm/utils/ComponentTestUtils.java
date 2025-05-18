@@ -25,6 +25,14 @@ public class ComponentTestUtils {
         return abs(random.nextLong());
     }
 
+    public static Integer randomInt() {
+        return abs(random.nextInt());
+    }
+
+    public static Short randomShort() {
+        return (short) abs(random.nextInt(32767));
+    }
+
     public static List<String> uuids() {
         return uuids(3);
     }

@@ -190,16 +190,20 @@ public class ContactAssertions {
 
     public static void assertIdealClient(IdealClient ic1, IdealClient ic2) {
         assertThat(ic1.getIdealClientId()).isEqualTo(ic2.getIdealClientId());
+        assertThat(ic1.getName()).isEqualTo(ic2.getName());
         assertThat(ic1.getCharacteristics()).containsExactlyElementsOf(ic2.getCharacteristics());
         assertThat(ic1.getNeeds()).isEqualTo(ic2.getNeeds());
         assertThat(ic1.getGoals()).isEqualTo(ic2.getGoals());
+        assertThat(ic1.getOrder()).isEqualTo(ic2.getOrder());
     }
 
     public static void assertIdealClientDto(IdealClient ic, IdealClientDto dto) {
         assertThat(ic.getIdealClientId()).isEqualTo(dto.getIdealClientId());
+        assertThat(ic.getName()).isEqualTo(dto.getName());
         assertThat(ic.getCharacteristics()).containsExactlyElementsOf(dto.getCharacteristics());
         assertThat(ic.getNeeds()).isEqualTo(dto.getNeeds());
         assertThat(ic.getGoals()).isEqualTo(dto.getGoals());
+        assertThat(ic.getOrder()).isEqualTo(dto.getOrder());
     }
 
     public static void assertMeeting(Meeting meeting1, Meeting meeting2) {
