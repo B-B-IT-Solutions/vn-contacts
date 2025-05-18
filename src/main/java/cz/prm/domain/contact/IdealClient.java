@@ -47,6 +47,6 @@ public class IdealClient {
     @Column(name = "GOALS")
     private String goals;
 
-    @Column(name = "ORDER")
+    @Column(name = "_ORDER")
     private Short order;
 }

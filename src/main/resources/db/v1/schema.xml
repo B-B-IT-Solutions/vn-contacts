@@ -316,7 +316,7 @@
 				 <column name="contact_id" type="BIGINT"/>
 				 <column name="needs" type="TEXT"/>
 				 <column name="goals" type="TEXT"/>
-				 <column name="order" type="SMALLINT"/>
+				 <column name="_order" type="SMALLINT"/>
 			</createTable>
 			
 			<createTable tableName="ideal_client_characteristics">
