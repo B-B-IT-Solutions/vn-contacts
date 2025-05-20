@@ -17,6 +17,9 @@ public class AboutDto {
     @JsonProperty("idealClients")
     private List<IdealClientDto> idealClients;
 
+    @JsonProperty("pastClients")
+    private List<PastClientDto> pastClients;
+
     @JsonProperty("contactGoals")
     private String contactGoals;
 

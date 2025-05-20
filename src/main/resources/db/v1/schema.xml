@@ -324,5 +324,24 @@
 				 <column name="characteristic" type="VARCHAR(250)"/>
 			</createTable>
 	 </changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.17">
+			<createSequence cacheSize="1" cycle="false" startValue="1" minValue="1" maxValue="9223372036854775807"
+											sequenceName="past_client_seq"/>
+			
+			<createTable tableName="past_client">
+				 <column name="past_client_id" type="BIGINT"/>
+				 <column name="name" type="VARCHAR(250)"/>
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="provided_services" type="TEXT"/>
+				 <column name="outcomes" type="TEXT"/>
+				 <column name="_order" type="SMALLINT"/>
+			</createTable>
+			
+			<createTable tableName="past_client_characteristics">
+				 <column name="past_client_id" type="BIGINT"/>
+				 <column name="characteristic" type="VARCHAR(250)"/>
+			</createTable>
+	 </changeSet>
 
 </databaseChangeLog>

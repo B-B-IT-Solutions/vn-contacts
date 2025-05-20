@@ -1,5 +1,6 @@
 package cz.prm.utils;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.ComponentTestUtils.randomInt;
 import static cz.prm.utils.ComponentTestUtils.randomLong;
 import static cz.prm.utils.ComponentTestUtils.randomShort;
@@ -7,9 +8,7 @@ import static cz.prm.utils.ComponentTestUtils.uuid;
 import static cz.prm.utils.ComponentTestUtils.uuids;
 import static java.lang.String.format;
 import static java.time.Instant.now;
-import static org.assertj.core.util.Lists.newArrayList;
 
-import com.google.common.collect.Lists;
 import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
@@ -22,6 +21,7 @@ import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.IdealClient;
 import cz.prm.domain.contact.Meeting;
 import cz.prm.domain.contact.Occupation;
+import cz.prm.domain.contact.PastClient;
 import java.util.List;
 
 public class ContactComponentTestUtils {
@@ -91,11 +91,11 @@ public class ContactComponentTestUtils {
     }
 
     public static List<Connection> connections() {
-        return Lists.newArrayList(connection(), connection(), connection());
+        return newArrayList(connection(), connection(), connection());
     }
 
     public static List<ConnectionDto> connectionsDto() {
-        return Lists.newArrayList(connectionDto(), connectionDto(), connectionDto());
+        return newArrayList(connectionDto(), connectionDto(), connectionDto());
     }
 
     public static Connection connection() {
@@ -116,6 +116,7 @@ public class ContactComponentTestUtils {
         var about = new About(contact.getContactId());
         about.setDescription(format("description%s", uuid()));
         about.setIdealClients(idealClients());
+        about.setPastClients(pastClients());
         about.setContactGoals(format("contactGoals%s", uuid()));
         about.setContactChallenges(format("contactChallenges%s", uuid()));
         about.setMyBenefits(format("myBenefits%s", uuid()));
@@ -124,7 +125,7 @@ public class ContactComponentTestUtils {
     }
 
     public static List<IdealClient> idealClients() {
-        return Lists.newArrayList(idealClient(), idealClient(), idealClient());
+        return newArrayList(idealClient(), idealClient(), idealClient());
     }
 
     public static IdealClient idealClient() {
@@ -134,6 +135,21 @@ public class ContactComponentTestUtils {
         ic.setCharacteristics(uuids());
         ic.setNeeds(uuid());
         ic.setGoals(uuid());
+        ic.setOrder(randomShort());
+        return ic;
+    }
+
+    public static List<PastClient> pastClients() {
+        return newArrayList(pastClient(), pastClient(), pastClient());
+    }
+
+    public static PastClient pastClient() {
+        var ic = new PastClient();
+        ic.setPastClientId(randomLong());
+        ic.setName(uuid());
+        ic.setCharacteristics(uuids());
+        ic.setProvidedServices(uuid());
+        ic.setOutcomes(uuid());
         ic.setOrder(randomShort());
         return ic;
     }

@@ -18,6 +18,7 @@ import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.MeetingDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
+import cz.prm.controllers.dto.contact.PastClientDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.About;
@@ -26,6 +27,7 @@ import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.IdealClient;
 import cz.prm.domain.contact.Meeting;
 import cz.prm.domain.contact.Occupation;
+import cz.prm.domain.contact.PastClient;
 import cz.prm.domain.contact.query.ContactsFilter;
 import cz.prm.domain.contact.query.ContactsQuery;
 import java.util.List;
@@ -129,6 +131,7 @@ public class ContactUtils {
         var about = new About();
         about.setDescription(uuid());
         about.setIdealClients(idealClients());
+        about.setPastClients(pastClients());
         about.setContactGoals(uuid());
         about.setContactChallenges(uuid());
         about.setMyBenefits(uuid());
@@ -142,6 +145,7 @@ public class ContactUtils {
         var dto = new AboutDto();
         dto.setDescription(uuid());
         dto.setIdealClients(idealClientsDto());
+        dto.setPastClients(pastClientsDto());
         dto.setContactGoals(uuid());
         dto.setContactChallenges(uuid());
         dto.setMyBenefits(uuid());
@@ -198,6 +202,40 @@ public class ContactUtils {
         ic.setGoals(uuid());
         ic.setOrder(randomShort());
         return ic;
+    }
+
+    public static List<PastClient> pastClients() {
+        return newArrayList(pastClient(), pastClient(), pastClient());
+    }
+
+    public static List<PastClientDto> pastClientsDto() {
+        return newArrayList(pastClientDto(), pastClientDto(), pastClientDto());
+    }
+
+    public static PastClient pastClient() {
+        return pastClient(randomLong());
+    }
+
+    public static PastClient pastClient(Long id) {
+        var pc = new PastClient();
+        pc.setPastClientId(id);
+        pc.setName(uuid());
+        pc.setCharacteristics(uuids());
+        pc.setProvidedServices(uuid());
+        pc.setOutcomes(uuid());
+        pc.setOrder(randomShort());
+        return pc;
+    }
+
+    public static PastClientDto pastClientDto() {
+        var pc = new PastClientDto();
+        pc.setPastClientId(randomLong());
+        pc.setName(uuid());
+        pc.setCharacteristics(uuids());
+        pc.setProvidedServices(uuid());
+        pc.setOutcomes(uuid());
+        pc.setOrder(randomShort());
+        return pc;
     }
 
     public static ContactsQuery contactsQuery() {
