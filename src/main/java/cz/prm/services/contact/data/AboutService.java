@@ -9,6 +9,7 @@ import static java.util.stream.Collectors.toMap;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.IdealClient;
 import cz.prm.domain.contact.Meeting;
+import cz.prm.domain.contact.PastClient;
 import cz.prm.repositories.contact.AboutPredicates;
 import cz.prm.repositories.contact.AboutRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -57,6 +58,7 @@ public class AboutService {
         savedAbout.setContactChallenges(updatedAbout.getContactChallenges());
         savedAbout.setMyBenefits(updatedAbout.getMyBenefits());
         updateIdealClients(savedAbout.getIdealClients(), updatedAbout.getIdealClients());
+        updatePastClients(savedAbout.getPastClients(), updatedAbout.getPastClients());
         updateFirstMeetingFields(savedAbout.getFirstMeeting(), updatedAbout.getFirstMeeting());
     }
 
@@ -88,6 +90,36 @@ public class AboutService {
         savedIc.setCharacteristics(updatedIc.getCharacteristics());
         savedIc.setNeeds(updatedIc.getNeeds());
         savedIc.setGoals(updatedIc.getGoals());
+    }
+
+    private void updatePastClients(List<PastClient> savedPcs, List<PastClient> newAndUpdatedPcs) {
+        var savedPcsMap = savedPcs.stream().collect(toMap(PastClient::getPastClientId, (ic) -> ic));
+        var newPcs = newAndUpdatedPcs.stream().filter((ic) -> isNull(ic.getPastClientId())).collect(toList());
+        var updatedPcs = newAndUpdatedPcs.stream().filter((ic) -> nonNull(ic.getPastClientId())).collect(toList());
+        var updatedPcsMap = updatedPcs.stream().collect(toMap(PastClient::getPastClientId, (ic) -> ic));
+
+        savedPcs.addAll(newPcs);
+        updatedPcs.forEach(upc -> {
+            var spc = savedPcsMap.get(upc.getPastClientId());
+            if (isNull(spc)) {
+                savedPcs.add(upc);
+            } else {
+                updatePastClientFields(spc, upc);
+            }
+        });
+
+        savedPcsMap.forEach((spcId, spc) -> {
+            var upc = updatedPcsMap.get(spcId);
+            if (isNull(upc)) {
+                savedPcs.remove(spc);
+            }
+        });
+    }
+
+    private void updatePastClientFields(PastClient savedPc, PastClient updatedPc) {
+        savedPc.setCharacteristics(updatedPc.getCharacteristics());
+        savedPc.setProvidedServices(updatedPc.getProvidedServices());
+        savedPc.setOutcomes(updatedPc.getOutcomes());
     }
 
     private void updateFirstMeetingFields(Meeting savedMeeting, Meeting updatedMeeting) {
