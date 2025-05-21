@@ -156,9 +156,10 @@ public class ContactComponentTestUtils {
 
     public static FirstInteraction firstInteraction() {
         var fi = new FirstInteraction();
-        fi.setOccurrenceDate(now());
-        fi.setLocation(format("location%s", uuid()));
-        fi.setComment(format("comment%s", uuid()));
+        fi.setType(format("type%s", uuid()));
+        fi.setSource(format("source%s", uuid()));
+        fi.setDate(now());
+        fi.setNotes(format("notes%s", uuid()));
         return fi;
     }
 

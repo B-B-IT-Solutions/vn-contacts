@@ -8,15 +8,15 @@ import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.FirstInteractionDto;
+import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.controllers.dto.contact.PastClientDto;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
-import cz.prm.domain.contact.IdealClient;
 import cz.prm.domain.contact.FirstInteraction;
+import cz.prm.domain.contact.IdealClient;
 import cz.prm.domain.contact.Occupation;
 import cz.prm.domain.contact.PastClient;
 import java.util.List;
@@ -123,9 +123,10 @@ public class ContractComponentTestAssertions {
         assertThat(pc.getOrder()).isEqualTo(dto.getOrder());
     }
 
-    public static void assertMeetingDto(FirstInteraction firstInteraction, FirstInteractionDto dto) {
-        assertThat(firstInteraction.getOccurrenceDate()).isEqualTo(dto.getOccurrenceDate());
-        assertThat(firstInteraction.getLocation()).isEqualTo(dto.getLocation());
-        assertThat(firstInteraction.getComment()).isEqualTo(dto.getComment());
+    public static void assertMeetingDto(FirstInteraction fi, FirstInteractionDto dto) {
+        assertThat(fi.getType()).isEqualTo(dto.getType());
+        assertThat(fi.getSource()).isEqualTo(dto.getSource());
+        assertThat(fi.getDate()).isEqualTo(dto.getDate());
+        assertThat(fi.getNotes()).isEqualTo(dto.getNotes());
     }
 }

@@ -13,12 +13,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FirstInteraction {
 
-    @Column(name = "OCCURRENCE_DATE")
-    private Instant occurrenceDate;
+    @Column(name = "type")
+    private String type;
 
-    @Column(name = "LOCATION")
-    private String location;
+    @Column(name = "source")
+    private String source;
 
-    @Column(name = "COMMENT")
-    private String comment;
+    @Column(name = "date")
+    private Instant date;
+
+    @Column(name = "notes")
+    private String notes;
 }

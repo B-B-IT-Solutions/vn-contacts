@@ -157,7 +157,7 @@ public class ContactAssertions {
         assertThat(about1.getContactId()).isEqualTo(about2.getContactId());
         assertIdealClients(about1.getIdealClients(), about2.getIdealClients());
         assertPastClients(about1.getPastClients(), about2.getPastClients());
-        assertMeeting(about1.getFirstInteraction(), about2.getFirstInteraction());
+        assertFirstInteraction(about1.getFirstInteraction(), about2.getFirstInteraction());
     }
 
     public static void assertAboutDto(About about, AboutDto dto) {
@@ -168,7 +168,7 @@ public class ContactAssertions {
         assertThat(about.getContactId()).isEqualTo(dto.getContactId());
         assertIdealClientsDto(about.getIdealClients(), dto.getIdealClients());
         assertPastClientsDto(about.getPastClients(), dto.getPastClients());
-        assertMeetingDto(about.getFirstInteraction(), dto.getFirstInteraction());
+        assertFirstInteractionDto(about.getFirstInteraction(), dto.getFirstInteraction());
     }
 
     public static void assertIdealClients(List<IdealClient> ics1, List<IdealClient> ics2) {
@@ -249,16 +249,17 @@ public class ContactAssertions {
         assertThat(pc.getOrder()).isEqualTo(dto.getOrder());
     }
 
-    public static void assertMeeting(FirstInteraction fi1, FirstInteraction fi2) {
-        assertThat(fi1.getOccurrenceDate()).isEqualTo(fi2.getOccurrenceDate());
-        assertThat(fi1.getLocation()).isEqualTo(fi2.getLocation());
-        assertThat(fi1.getComment()).isEqualTo(fi2.getComment());
+    public static void assertFirstInteraction(FirstInteraction fi1, FirstInteraction fi2) {
+        assertThat(fi1.getDate()).isEqualTo(fi2.getDate());
+        assertThat(fi1.getSource()).isEqualTo(fi2.getSource());
+        assertThat(fi1.getNotes()).isEqualTo(fi2.getNotes());
     }
 
-    public static void assertMeetingDto(FirstInteraction fi, FirstInteractionDto dto) {
-        assertThat(fi.getOccurrenceDate()).isEqualTo(dto.getOccurrenceDate());
-        assertThat(fi.getLocation()).isEqualTo(dto.getLocation());
-        assertThat(fi.getComment()).isEqualTo(dto.getComment());
+    public static void assertFirstInteractionDto(FirstInteraction fi, FirstInteractionDto dto) {
+        assertThat(fi.getType()).isEqualTo(dto.getType());
+        assertThat(fi.getSource()).isEqualTo(dto.getSource());
+        assertThat(fi.getDate()).isEqualTo(dto.getDate());
+        assertThat(fi.getNotes()).isEqualTo(dto.getNotes());
     }
 
     public static void assertContactQuery(ContactsQuery query, ContactsQueryDto dto) {

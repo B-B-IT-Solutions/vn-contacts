@@ -56,9 +56,10 @@ public class About {
 
     @Embedded
     @AttributeOverrides({
-        @AttributeOverride(name = "occurrenceDate", column = @Column(name = "FIRST_INTERACTION_OCCURRENCE_DATE")),
-        @AttributeOverride(name = "location", column = @Column(name = "FIRST_INTERACTION_LOCATION")),
-        @AttributeOverride(name = "comment", column = @Column(name = "FIRST_INTERACTION_COMMENT"))
+        @AttributeOverride(name = "type", column = @Column(name = "FIRST_INTERACTION_TYPE")),
+        @AttributeOverride(name = "source", column = @Column(name = "FIRST_INTERACTION_SOURCE")),
+        @AttributeOverride(name = "date", column = @Column(name = "FIRST_INTERACTION_DATE")),
+        @AttributeOverride(name = "notes", column = @Column(name = "FIRST_INTERACTION_NOTES"))
     })
     private FirstInteraction firstInteraction;
 

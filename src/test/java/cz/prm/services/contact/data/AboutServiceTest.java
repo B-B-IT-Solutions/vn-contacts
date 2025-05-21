@@ -8,7 +8,9 @@ import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.TestUtils.uuids;
 import static cz.prm.utils.assertions.ContactAssertions.assertAbout;
+import static cz.prm.utils.assertions.ContactAssertions.assertFirstInteraction;
 import static cz.prm.utils.assertions.ContactAssertions.assertIdealClients;
+import static cz.prm.utils.assertions.ContactAssertions.assertPastClients;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +22,6 @@ import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.contact.About;
-import cz.prm.domain.contact.FirstInteraction;
 import cz.prm.repositories.contact.AboutPredicates;
 import cz.prm.repositories.contact.AboutRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -144,12 +145,7 @@ class AboutServiceTest {
         assertThat(savedAbout.getContactChallenges()).isEqualTo(updatedAbout.getContactChallenges());
         assertThat(savedAbout.getMyBenefits()).isEqualTo(updatedAbout.getMyBenefits());
         assertIdealClients(updatedAbout.getIdealClients(), savedAbout.getIdealClients());
-        assertMeetingFieldsUpdated(updatedAbout.getFirstInteraction(), savedAbout.getFirstInteraction());
-    }
-
-    private void assertMeetingFieldsUpdated(FirstInteraction updatedAbout, FirstInteraction savedAbout) {
-        assertThat(savedAbout.getOccurrenceDate()).isEqualTo(updatedAbout.getOccurrenceDate());
-        assertThat(savedAbout.getLocation()).isEqualTo(updatedAbout.getLocation());
-        assertThat(savedAbout.getComment()).isEqualTo(updatedAbout.getComment());
+        assertPastClients(updatedAbout.getPastClients(), savedAbout.getPastClients());
+        assertFirstInteraction(updatedAbout.getFirstInteraction(), savedAbout.getFirstInteraction());
     }
 }

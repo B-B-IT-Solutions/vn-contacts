@@ -155,18 +155,20 @@ public class ContactUtils {
     }
 
     public static FirstInteraction firstInteraction() {
-        var meeting = new FirstInteraction();
-        meeting.setOccurrenceDate(now());
-        meeting.setLocation(uuid());
-        meeting.setComment(uuid());
-        return meeting;
+        var fi = new FirstInteraction();
+        fi.setType(uuid());
+        fi.setSource(uuid());
+        fi.setDate(now());
+        fi.setNotes(uuid());
+        return fi;
     }
 
     public static FirstInteractionDto firstInteractionDto() {
         var dto = new FirstInteractionDto();
-        dto.setOccurrenceDate(now());
-        dto.setLocation(uuid());
-        dto.setComment(uuid());
+        dto.setType(uuid());
+        dto.setSource(uuid());
+        dto.setDate(now());
+        dto.setNotes(uuid());
         return dto;
     }
 

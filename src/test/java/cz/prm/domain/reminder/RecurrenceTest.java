@@ -186,7 +186,7 @@ class RecurrenceTest {
         var day = now.getDayOfMonth();
 
         r.resetParsedRule();
-        var ruleYear = month < 11 && day < 21 ? year : year + 1;
+        var ruleYear = month < 11 && day <= 21 ? year : year + 1;
         var rule = rrule(ruleYear, month, day, "RRULE:FREQ=YEARLY;BYMONTH=11;BYMONTHDAY=21;COUNT=3");
         r.setValue(rule);
         r.resolveNextOccurrence();
