@@ -9,7 +9,7 @@ import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.IdealClientDto;
-import cz.prm.controllers.dto.contact.MeetingDto;
+import cz.prm.controllers.dto.contact.FirstInteractionDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.controllers.dto.contact.PastClientDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
@@ -19,7 +19,7 @@ import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.IdealClient;
-import cz.prm.domain.contact.Meeting;
+import cz.prm.domain.contact.FirstInteraction;
 import cz.prm.domain.contact.Occupation;
 import cz.prm.domain.contact.PastClient;
 import cz.prm.domain.contact.query.ContactsFilter;
@@ -157,7 +157,7 @@ public class ContactAssertions {
         assertThat(about1.getContactId()).isEqualTo(about2.getContactId());
         assertIdealClients(about1.getIdealClients(), about2.getIdealClients());
         assertPastClients(about1.getPastClients(), about2.getPastClients());
-        assertMeeting(about1.getFirstMeeting(), about2.getFirstMeeting());
+        assertMeeting(about1.getFirstInteraction(), about2.getFirstInteraction());
     }
 
     public static void assertAboutDto(About about, AboutDto dto) {
@@ -168,7 +168,7 @@ public class ContactAssertions {
         assertThat(about.getContactId()).isEqualTo(dto.getContactId());
         assertIdealClientsDto(about.getIdealClients(), dto.getIdealClients());
         assertPastClientsDto(about.getPastClients(), dto.getPastClients());
-        assertMeetingDto(about.getFirstMeeting(), dto.getFirstMeeting());
+        assertMeetingDto(about.getFirstInteraction(), dto.getFirstInteraction());
     }
 
     public static void assertIdealClients(List<IdealClient> ics1, List<IdealClient> ics2) {
@@ -249,16 +249,16 @@ public class ContactAssertions {
         assertThat(pc.getOrder()).isEqualTo(dto.getOrder());
     }
 
-    public static void assertMeeting(Meeting meeting1, Meeting meeting2) {
-        assertThat(meeting1.getOccurrenceDate()).isEqualTo(meeting2.getOccurrenceDate());
-        assertThat(meeting1.getLocation()).isEqualTo(meeting2.getLocation());
-        assertThat(meeting1.getComment()).isEqualTo(meeting2.getComment());
+    public static void assertMeeting(FirstInteraction fi1, FirstInteraction fi2) {
+        assertThat(fi1.getOccurrenceDate()).isEqualTo(fi2.getOccurrenceDate());
+        assertThat(fi1.getLocation()).isEqualTo(fi2.getLocation());
+        assertThat(fi1.getComment()).isEqualTo(fi2.getComment());
     }
 
-    public static void assertMeetingDto(Meeting meeting, MeetingDto dto) {
-        assertThat(meeting.getOccurrenceDate()).isEqualTo(dto.getOccurrenceDate());
-        assertThat(meeting.getLocation()).isEqualTo(dto.getLocation());
-        assertThat(meeting.getComment()).isEqualTo(dto.getComment());
+    public static void assertMeetingDto(FirstInteraction fi, FirstInteractionDto dto) {
+        assertThat(fi.getOccurrenceDate()).isEqualTo(dto.getOccurrenceDate());
+        assertThat(fi.getLocation()).isEqualTo(dto.getLocation());
+        assertThat(fi.getComment()).isEqualTo(dto.getComment());
     }
 
     public static void assertContactQuery(ContactsQuery query, ContactsQueryDto dto) {

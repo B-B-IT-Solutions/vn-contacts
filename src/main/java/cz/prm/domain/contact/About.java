@@ -56,11 +56,11 @@ public class About {
 
     @Embedded
     @AttributeOverrides({
-        @AttributeOverride(name = "occurrenceDate", column = @Column(name = "FIRST_MEETING_OCCURRENCE_DATE")),
-        @AttributeOverride(name = "location", column = @Column(name = "FIRST_MEETING_LOCATION")),
-        @AttributeOverride(name = "comment", column = @Column(name = "FIRST_MEETING_COMMENT"))
+        @AttributeOverride(name = "occurrenceDate", column = @Column(name = "FIRST_INTERACTION_OCCURRENCE_DATE")),
+        @AttributeOverride(name = "location", column = @Column(name = "FIRST_INTERACTION_LOCATION")),
+        @AttributeOverride(name = "comment", column = @Column(name = "FIRST_INTERACTION_COMMENT"))
     })
-    private Meeting firstMeeting;
+    private FirstInteraction firstInteraction;
 
     @CreatedBy
     @Embedded
@@ -74,10 +74,10 @@ public class About {
         this.contactId = contactId;
     }
 
-    public Meeting getFirstMeeting() {
-        if (isNull(firstMeeting)) {
-            firstMeeting = new Meeting();
+    public FirstInteraction getFirstInteraction() {
+        if (isNull(firstInteraction)) {
+            firstInteraction = new FirstInteraction();
         }
-        return firstMeeting;
+        return firstInteraction;
     }
 }

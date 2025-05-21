@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MeetingDto {
+public class FirstInteractionDto {
 
     @JsonProperty("occurrenceDate")
     private Instant occurrenceDate;

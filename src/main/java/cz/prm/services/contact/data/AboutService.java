@@ -7,8 +7,8 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 import cz.prm.domain.contact.About;
+import cz.prm.domain.contact.FirstInteraction;
 import cz.prm.domain.contact.IdealClient;
-import cz.prm.domain.contact.Meeting;
 import cz.prm.domain.contact.PastClient;
 import cz.prm.repositories.contact.AboutPredicates;
 import cz.prm.repositories.contact.AboutRepository;
@@ -59,7 +59,7 @@ public class AboutService {
         savedAbout.setMyBenefits(updatedAbout.getMyBenefits());
         updateIdealClients(savedAbout.getIdealClients(), updatedAbout.getIdealClients());
         updatePastClients(savedAbout.getPastClients(), updatedAbout.getPastClients());
-        updateFirstMeetingFields(savedAbout.getFirstMeeting(), updatedAbout.getFirstMeeting());
+        updateFirstMeetingFields(savedAbout.getFirstInteraction(), updatedAbout.getFirstInteraction());
     }
 
     private void updateIdealClients(List<IdealClient> savedIcs, List<IdealClient> newAndUpdatedIcs) {
@@ -122,10 +122,10 @@ public class AboutService {
         savedPc.setOutcomes(updatedPc.getOutcomes());
     }
 
-    private void updateFirstMeetingFields(Meeting savedMeeting, Meeting updatedMeeting) {
-        savedMeeting.setOccurrenceDate(updatedMeeting.getOccurrenceDate());
-        savedMeeting.setLocation(updatedMeeting.getLocation());
-        savedMeeting.setComment(updatedMeeting.getComment());
+    private void updateFirstMeetingFields(FirstInteraction savedFirstInteraction, FirstInteraction updatedFirstInteraction) {
+        savedFirstInteraction.setOccurrenceDate(updatedFirstInteraction.getOccurrenceDate());
+        savedFirstInteraction.setLocation(updatedFirstInteraction.getLocation());
+        savedFirstInteraction.setComment(updatedFirstInteraction.getComment());
     }
 
     private About getByContactId(Long contactId) {

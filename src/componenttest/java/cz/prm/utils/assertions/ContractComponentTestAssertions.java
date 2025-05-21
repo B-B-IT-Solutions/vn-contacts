@@ -9,14 +9,14 @@ import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.IdealClientDto;
-import cz.prm.controllers.dto.contact.MeetingDto;
+import cz.prm.controllers.dto.contact.FirstInteractionDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.controllers.dto.contact.PastClientDto;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.IdealClient;
-import cz.prm.domain.contact.Meeting;
+import cz.prm.domain.contact.FirstInteraction;
 import cz.prm.domain.contact.Occupation;
 import cz.prm.domain.contact.PastClient;
 import java.util.List;
@@ -86,7 +86,7 @@ public class ContractComponentTestAssertions {
         assertThat(about.getContactId()).isEqualTo(dto.getContactId());
         assertIdealClientsDto(about.getIdealClients(), dto.getIdealClients());
         assertPastClientsDto(about.getPastClients(), dto.getPastClients());
-        assertMeetingDto(about.getFirstMeeting(), dto.getFirstMeeting());
+        assertMeetingDto(about.getFirstInteraction(), dto.getFirstInteraction());
     }
 
     public static void assertIdealClientsDto(List<IdealClient> ics, List<IdealClientDto> dtos) {
@@ -123,9 +123,9 @@ public class ContractComponentTestAssertions {
         assertThat(pc.getOrder()).isEqualTo(dto.getOrder());
     }
 
-    public static void assertMeetingDto(Meeting meeting, MeetingDto dto) {
-        assertThat(meeting.getOccurrenceDate()).isEqualTo(dto.getOccurrenceDate());
-        assertThat(meeting.getLocation()).isEqualTo(dto.getLocation());
-        assertThat(meeting.getComment()).isEqualTo(dto.getComment());
+    public static void assertMeetingDto(FirstInteraction firstInteraction, FirstInteractionDto dto) {
+        assertThat(firstInteraction.getOccurrenceDate()).isEqualTo(dto.getOccurrenceDate());
+        assertThat(firstInteraction.getLocation()).isEqualTo(dto.getLocation());
+        assertThat(firstInteraction.getComment()).isEqualTo(dto.getComment());
     }
 }

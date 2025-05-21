@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Meeting {
+public class FirstInteraction {
 
     @Column(name = "OCCURRENCE_DATE")
     private Instant occurrenceDate;

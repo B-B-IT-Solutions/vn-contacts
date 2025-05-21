@@ -15,8 +15,8 @@ import static java.time.Instant.now;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.FirstInteractionDto;
 import cz.prm.controllers.dto.contact.IdealClientDto;
-import cz.prm.controllers.dto.contact.MeetingDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.controllers.dto.contact.PastClientDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
@@ -24,8 +24,8 @@ import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.FirstInteraction;
 import cz.prm.domain.contact.IdealClient;
-import cz.prm.domain.contact.Meeting;
 import cz.prm.domain.contact.Occupation;
 import cz.prm.domain.contact.PastClient;
 import cz.prm.domain.contact.query.ContactsFilter;
@@ -137,7 +137,7 @@ public class ContactUtils {
         about.setMyBenefits(uuid());
         about.setContactId(randomLong());
         about.setOwner(user());
-        about.setFirstMeeting(meeting());
+        about.setFirstInteraction(firstInteraction());
         return about;
     }
 
@@ -150,20 +150,20 @@ public class ContactUtils {
         dto.setContactChallenges(uuid());
         dto.setMyBenefits(uuid());
         dto.setContactId(randomLong());
-        dto.setFirstMeeting(meetingDto());
+        dto.setFirstInteraction(firstInteractionDto());
         return dto;
     }
 
-    public static Meeting meeting() {
-        var meeting = new Meeting();
+    public static FirstInteraction firstInteraction() {
+        var meeting = new FirstInteraction();
         meeting.setOccurrenceDate(now());
         meeting.setLocation(uuid());
         meeting.setComment(uuid());
         return meeting;
     }
 
-    public static MeetingDto meetingDto() {
-        var dto = new MeetingDto();
+    public static FirstInteractionDto firstInteractionDto() {
+        var dto = new FirstInteractionDto();
         dto.setOccurrenceDate(now());
         dto.setLocation(uuid());
         dto.setComment(uuid());

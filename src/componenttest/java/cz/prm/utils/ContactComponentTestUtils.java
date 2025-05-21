@@ -18,8 +18,8 @@ import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.FirstInteraction;
 import cz.prm.domain.contact.IdealClient;
-import cz.prm.domain.contact.Meeting;
 import cz.prm.domain.contact.Occupation;
 import cz.prm.domain.contact.PastClient;
 import java.util.List;
@@ -120,7 +120,7 @@ public class ContactComponentTestUtils {
         about.setContactGoals(format("contactGoals%s", uuid()));
         about.setContactChallenges(format("contactChallenges%s", uuid()));
         about.setMyBenefits(format("myBenefits%s", uuid()));
-        about.setFirstMeeting(meeting());
+        about.setFirstInteraction(firstInteraction());
         return about;
     }
 
@@ -154,12 +154,12 @@ public class ContactComponentTestUtils {
         return ic;
     }
 
-    public static Meeting meeting() {
-        var meeting = new Meeting();
-        meeting.setOccurrenceDate(now());
-        meeting.setLocation(format("location%s", uuid()));
-        meeting.setComment(format("comment%s", uuid()));
-        return meeting;
+    public static FirstInteraction firstInteraction() {
+        var fi = new FirstInteraction();
+        fi.setOccurrenceDate(now());
+        fi.setLocation(format("location%s", uuid()));
+        fi.setComment(format("comment%s", uuid()));
+        return fi;
     }
 
     public static ContactsQueryDto contactsQueryDto() {
