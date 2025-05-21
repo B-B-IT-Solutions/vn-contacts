@@ -3,6 +3,7 @@ package cz.prm.services.contact.data;
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.ContactUtils.about;
 import static cz.prm.utils.ContactUtils.idealClient;
+import static cz.prm.utils.ContactUtils.pastClient;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.TestUtils.uuids;
@@ -81,12 +82,20 @@ class AboutServiceTest {
     void updateAbout() {
         var aboutIdDb = about();
         var updatedAbout = about();
+
         var updatedIc = aboutIdDb.getIdealClients().get(0);
         updatedIc.setCharacteristics(uuids());
         updatedIc.setNeeds(uuid());
         updatedIc.setGoals(uuid());
         var updatedIcs = newArrayList(updatedIc, idealClient(null), idealClient(null), idealClient(null));
         updatedAbout.getIdealClients().addAll(updatedIcs);
+
+        var updatedPc = aboutIdDb.getPastClients().get(0);
+        updatedPc.setCharacteristics(uuids());
+        updatedPc.setProvidedServices(uuid());
+        updatedPc.setOutcomes(uuid());
+        var updatedPcs = newArrayList(updatedPc, pastClient(null), pastClient(null), pastClient(null));
+        updatedAbout.getPastClients().addAll(updatedPcs);
 
         var predicate = new BooleanBuilder();
         when(predicates.byContactId(aboutIdDb.getContactId())).thenReturn(predicate);

@@ -11,6 +11,7 @@ import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.MeetingDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
+import cz.prm.controllers.dto.contact.PastClientDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.common.query.Page;
@@ -20,6 +21,7 @@ import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.IdealClient;
 import cz.prm.domain.contact.Meeting;
 import cz.prm.domain.contact.Occupation;
+import cz.prm.domain.contact.PastClient;
 import cz.prm.domain.contact.query.ContactsFilter;
 import cz.prm.domain.contact.query.ContactsQuery;
 import java.util.List;
@@ -154,6 +156,7 @@ public class ContactAssertions {
         assertThat(about1.getMyBenefits()).isEqualTo(about2.getMyBenefits());
         assertThat(about1.getContactId()).isEqualTo(about2.getContactId());
         assertIdealClients(about1.getIdealClients(), about2.getIdealClients());
+        assertPastClients(about1.getPastClients(), about2.getPastClients());
         assertMeeting(about1.getFirstMeeting(), about2.getFirstMeeting());
     }
 
@@ -164,6 +167,7 @@ public class ContactAssertions {
         assertThat(about.getMyBenefits()).isEqualTo(dto.getMyBenefits());
         assertThat(about.getContactId()).isEqualTo(dto.getContactId());
         assertIdealClientsDto(about.getIdealClients(), dto.getIdealClients());
+        assertPastClientsDto(about.getPastClients(), dto.getPastClients());
         assertMeetingDto(about.getFirstMeeting(), dto.getFirstMeeting());
     }
 
@@ -204,6 +208,45 @@ public class ContactAssertions {
         assertThat(ic.getNeeds()).isEqualTo(dto.getNeeds());
         assertThat(ic.getGoals()).isEqualTo(dto.getGoals());
         assertThat(ic.getOrder()).isEqualTo(dto.getOrder());
+    }
+
+    public static void assertPastClients(List<PastClient> pcs1, List<PastClient> pcs2) {
+        assertThat(pcs1).isNotEmpty().hasSameSizeAs(pcs2);
+        pcs1.forEach(c1 -> {
+            var c2 = pcs2.stream().filter(u -> {
+                if (isNull(c1.getPastClientId()) && isNull(u.getPastClientId())) {
+                    return Objects.equals(c1.getOutcomes(), u.getOutcomes());
+                }
+                return Objects.equals(c1.getPastClientId(), u.getPastClientId());
+            }).findFirst().get();
+            assertPastClient(c1, c2);
+        });
+    }
+
+    public static void assertPastClientsDto(List<PastClient> pcs, List<PastClientDto> dtos) {
+        assertThat(pcs).isNotEmpty().hasSameSizeAs(dtos);
+        pcs.forEach(c1 -> {
+            var c2 = dtos.stream().filter(u -> Objects.equals(c1.getPastClientId(), u.getPastClientId())).findFirst().get();
+            assertPastClientDto(c1, c2);
+        });
+    }
+
+    public static void assertPastClient(PastClient pc1, PastClient pc2) {
+        assertThat(pc1.getPastClientId()).isEqualTo(pc2.getPastClientId());
+        assertThat(pc1.getName()).isEqualTo(pc2.getName());
+        assertThat(pc1.getCharacteristics()).containsExactlyElementsOf(pc2.getCharacteristics());
+        assertThat(pc1.getProvidedServices()).isEqualTo(pc2.getProvidedServices());
+        assertThat(pc1.getOutcomes()).isEqualTo(pc2.getOutcomes());
+        assertThat(pc1.getOrder()).isEqualTo(pc2.getOrder());
+    }
+
+    public static void assertPastClientDto(PastClient pc, PastClientDto dto) {
+        assertThat(pc.getPastClientId()).isEqualTo(dto.getPastClientId());
+        assertThat(pc.getName()).isEqualTo(dto.getName());
+        assertThat(pc.getCharacteristics()).containsExactlyElementsOf(dto.getCharacteristics());
+        assertThat(pc.getProvidedServices()).isEqualTo(dto.getProvidedServices());
+        assertThat(pc.getOutcomes()).isEqualTo(dto.getOutcomes());
+        assertThat(pc.getOrder()).isEqualTo(dto.getOrder());
     }
 
     public static void assertMeeting(Meeting meeting1, Meeting meeting2) {

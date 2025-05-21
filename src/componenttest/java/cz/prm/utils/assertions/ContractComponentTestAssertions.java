@@ -11,12 +11,14 @@ import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.MeetingDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
+import cz.prm.controllers.dto.contact.PastClientDto;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.IdealClient;
 import cz.prm.domain.contact.Meeting;
 import cz.prm.domain.contact.Occupation;
+import cz.prm.domain.contact.PastClient;
 import java.util.List;
 import java.util.Objects;
 
@@ -83,6 +85,7 @@ public class ContractComponentTestAssertions {
         assertThat(about.getMyBenefits()).isEqualTo(dto.getMyBenefits());
         assertThat(about.getContactId()).isEqualTo(dto.getContactId());
         assertIdealClientsDto(about.getIdealClients(), dto.getIdealClients());
+        assertPastClientsDto(about.getPastClients(), dto.getPastClients());
         assertMeetingDto(about.getFirstMeeting(), dto.getFirstMeeting());
     }
 
@@ -101,6 +104,23 @@ public class ContractComponentTestAssertions {
         assertThat(ic.getNeeds()).isEqualTo(dto.getNeeds());
         assertThat(ic.getGoals()).isEqualTo(dto.getGoals());
         assertThat(ic.getOrder()).isEqualTo(dto.getOrder());
+    }
+
+    public static void assertPastClientsDto(List<PastClient> pcs, List<PastClientDto> dtos) {
+        assertThat(pcs).isNotEmpty().hasSameSizeAs(dtos);
+        pcs.forEach(c1 -> {
+            var c2 = dtos.stream().filter(u -> Objects.equals(c1.getPastClientId(), u.getPastClientId())).findFirst().get();
+            assertPastClientDto(c1, c2);
+        });
+    }
+
+    public static void assertPastClientDto(PastClient pc, PastClientDto dto) {
+        assertThat(pc.getPastClientId()).isEqualTo(dto.getPastClientId());
+        assertThat(pc.getName()).isEqualTo(dto.getName());
+        assertThat(pc.getCharacteristics()).containsExactlyElementsOf(dto.getCharacteristics());
+        assertThat(pc.getProvidedServices()).isEqualTo(dto.getProvidedServices());
+        assertThat(pc.getOutcomes()).isEqualTo(dto.getOutcomes());
+        assertThat(pc.getOrder()).isEqualTo(dto.getOrder());
     }
 
     public static void assertMeetingDto(Meeting meeting, MeetingDto dto) {
