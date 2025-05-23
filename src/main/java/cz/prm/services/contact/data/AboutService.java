@@ -7,8 +7,8 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 import cz.prm.domain.contact.About;
+import cz.prm.domain.contact.FirstInteraction;
 import cz.prm.domain.contact.IdealClient;
-import cz.prm.domain.contact.Meeting;
 import cz.prm.domain.contact.PastClient;
 import cz.prm.repositories.contact.AboutPredicates;
 import cz.prm.repositories.contact.AboutRepository;
@@ -59,7 +59,7 @@ public class AboutService {
         savedAbout.setMyBenefits(updatedAbout.getMyBenefits());
         updateIdealClients(savedAbout.getIdealClients(), updatedAbout.getIdealClients());
         updatePastClients(savedAbout.getPastClients(), updatedAbout.getPastClients());
-        updateFirstMeetingFields(savedAbout.getFirstMeeting(), updatedAbout.getFirstMeeting());
+        updateFirstInteraction(savedAbout.getFirstInteraction(), updatedAbout.getFirstInteraction());
     }
 
     private void updateIdealClients(List<IdealClient> savedIcs, List<IdealClient> newAndUpdatedIcs) {
@@ -74,7 +74,7 @@ public class AboutService {
             if (isNull(sic)) {
                 savedIcs.add(uic);
             } else {
-                updateIdealClientFields(sic, uic);
+                updateIdealClient(sic, uic);
             }
         });
 
@@ -86,7 +86,7 @@ public class AboutService {
         });
     }
 
-    private void updateIdealClientFields(IdealClient savedIc, IdealClient updatedIc) {
+    private void updateIdealClient(IdealClient savedIc, IdealClient updatedIc) {
         savedIc.setCharacteristics(updatedIc.getCharacteristics());
         savedIc.setNeeds(updatedIc.getNeeds());
         savedIc.setGoals(updatedIc.getGoals());
@@ -104,7 +104,7 @@ public class AboutService {
             if (isNull(spc)) {
                 savedPcs.add(upc);
             } else {
-                updatePastClientFields(spc, upc);
+                updatePastClient(spc, upc);
             }
         });
 
@@ -116,16 +116,17 @@ public class AboutService {
         });
     }
 
-    private void updatePastClientFields(PastClient savedPc, PastClient updatedPc) {
+    private void updatePastClient(PastClient savedPc, PastClient updatedPc) {
         savedPc.setCharacteristics(updatedPc.getCharacteristics());
         savedPc.setProvidedServices(updatedPc.getProvidedServices());
         savedPc.setOutcomes(updatedPc.getOutcomes());
     }
 
-    private void updateFirstMeetingFields(Meeting savedMeeting, Meeting updatedMeeting) {
-        savedMeeting.setOccurrenceDate(updatedMeeting.getOccurrenceDate());
-        savedMeeting.setLocation(updatedMeeting.getLocation());
-        savedMeeting.setComment(updatedMeeting.getComment());
+    private void updateFirstInteraction(FirstInteraction savedFi, FirstInteraction updatedFi) {
+        savedFi.setType(updatedFi.getType());
+        savedFi.setSource(updatedFi.getSource());
+        savedFi.setDate(updatedFi.getDate());
+        savedFi.setNotes(updatedFi.getNotes());
     }
 
     private About getByContactId(Long contactId) {

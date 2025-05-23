@@ -9,14 +9,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MeetingDto {
+public class FirstInteractionDto {
 
-    @JsonProperty("occurrenceDate")
-    private Instant occurrenceDate;
+    @JsonProperty("type")
+    private String type;
 
-    @JsonProperty("location")
-    private String location;
+    @JsonProperty("source")
+    private String source;
 
-    @JsonProperty("comment")
-    private String comment;
+    @JsonProperty("date")
+    private Instant date;
+
+    @JsonProperty("notes")
+    private String notes;
 }

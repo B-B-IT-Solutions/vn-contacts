@@ -7,7 +7,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.MeetingDto;
+import cz.prm.controllers.dto.contact.FirstInteractionDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.common.query.Page;
@@ -53,8 +53,8 @@ public interface ContactMapper {
         if (isNull(target.getIdealClients())) {
             target.setIdealClients(new ArrayList<>());
         }
-        if (isNull(target.getFirstMeeting())) {
-            target.setFirstMeeting(new MeetingDto());
+        if (isNull(target.getFirstInteraction())) {
+            target.setFirstInteraction(new FirstInteractionDto());
         }
     }
 

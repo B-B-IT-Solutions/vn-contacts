@@ -29,8 +29,8 @@ public class AboutDto {
     @JsonProperty("myBenefits")
     private String myBenefits;
 
-    @JsonProperty("firstMeeting")
-    private MeetingDto firstMeeting;
+    @JsonProperty("firstInteraction")
+    private FirstInteractionDto firstInteraction;
 
     @JsonProperty("contactId")
     private Long contactId;
