@@ -130,6 +130,47 @@ public class TaskComponentTest extends TaskComponentTestBase {
     }
 
     @Test
+    void getTasksPagination() {
+        var queryDto = tasksQueryDto();
+        var pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getTotalPages()).isZero();
+        assertThat(pageDto.getTotalElements()).isZero();
+        assertThat(pageDto.getPageSize()).isEqualTo(50);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        createTasks(USER_1, 21);
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getTotalPages()).isEqualTo(1);
+        assertThat(pageDto.getTotalElements()).isEqualTo(21);
+        assertThat(pageDto.getPageSize()).isEqualTo(50);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        var pagination = queryDto.getPagination();
+        pagination.setPageSize(5);
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getTotalPages()).isEqualTo(5);
+        assertThat(pageDto.getTotalElements()).isEqualTo(21);
+        assertThat(pageDto.getPageSize()).isEqualTo(5);
+        assertThat(pageDto.getContent()).hasSize(5);
+
+        pagination.setPageNumber(1);
+        pagination.setPageSize(10);
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getTotalPages()).isEqualTo(3);
+        assertThat(pageDto.getTotalElements()).isEqualTo(21);
+        assertThat(pageDto.getPageSize()).isEqualTo(10);
+        assertThat(pageDto.getContent()).hasSize(10);
+
+        pagination.setPageNumber(2);
+        pagination.setPageSize(10);
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getTotalPages()).isEqualTo(3);
+        assertThat(pageDto.getTotalElements()).isEqualTo(21);
+        assertThat(pageDto.getPageSize()).isEqualTo(10);
+        assertThat(pageDto.getContent()).hasSize(1);
+    }
+
+    @Test
     void getTasksByContactIdPagination() {
         var queryDto = tasksQueryDto();
         var contactId = randomLong();
@@ -175,7 +216,7 @@ public class TaskComponentTest extends TaskComponentTestBase {
     }
 
     @Test
-    void getTasksSorting() {
+    void getTasksByContactIdSorting() {
         var queryDto = tasksQueryDto();
         var contactId = randomLong();
         var pageDto = user1GetTasksByContactId(contactId, queryDto);
@@ -238,7 +279,7 @@ public class TaskComponentTest extends TaskComponentTestBase {
     }
 
     @Test
-    void getTasksFilters() {
+    void getTasksByContactIdFilters() {
         var queryDto = tasksQueryDto();
         var contactId = randomLong();
         var pageDto = user1GetTasksByContactId(contactId, queryDto);
