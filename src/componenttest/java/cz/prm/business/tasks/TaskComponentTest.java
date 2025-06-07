@@ -60,7 +60,7 @@ public class TaskComponentTest extends TaskComponentTestBase {
         assertTasks(user2Tasks, pageDto);
 
         pageDto = user1GetTasks(queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
+        assertTasks(user1Tasks, pageDto);
 
         pageDto = user3GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
@@ -70,10 +70,10 @@ public class TaskComponentTest extends TaskComponentTestBase {
         assertTasks(user3Tasks, pageDto);
 
         pageDto = user1GetTasks(queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
+        assertTasks(user1Tasks, pageDto);
 
         pageDto = user2GetTasks(queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
+        assertTasks(user2Tasks, pageDto);
     }
 
     @Test
