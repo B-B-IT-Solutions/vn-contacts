@@ -59,15 +59,27 @@ public class TaskComponentTestBase extends BusinessComponentTestBase {
         deleteTask(taskId, USER_3);
     }
 
-    protected PageDto<TaskDto> user1GetTasks(Long contactId, TasksQueryDto queryDto) {
+    protected PageDto<TaskDto> user1GetTasks(TasksQueryDto queryDto) {
+        return getTasksPage(queryDto, USER_1);
+    }
+
+    protected PageDto<TaskDto> user2GetTasks(TasksQueryDto queryDto) {
+        return getTasksPage(queryDto, USER_2);
+    }
+
+    protected PageDto<TaskDto> user3GetTasks(TasksQueryDto queryDto) {
+        return getTasksPage(queryDto, USER_3);
+    }
+
+    protected PageDto<TaskDto> user1GetTasksByContactId(Long contactId, TasksQueryDto queryDto) {
         return getTasksPage(contactId, queryDto, USER_1);
     }
 
-    protected PageDto<TaskDto> user2GetTasks(Long contactId, TasksQueryDto queryDto) {
+    protected PageDto<TaskDto> user2GetTasksByContactId(Long contactId, TasksQueryDto queryDto) {
         return getTasksPage(contactId, queryDto, USER_2);
     }
 
-    protected PageDto<TaskDto> user3GetTasks(Long contactId, TasksQueryDto queryDto) {
+    protected PageDto<TaskDto> user3GetTasksByContactId(Long contactId, TasksQueryDto queryDto) {
         return getTasksPage(contactId, queryDto, USER_3);
     }
 
@@ -95,6 +107,14 @@ public class TaskComponentTestBase extends BusinessComponentTestBase {
     protected void deleteTask(Long taskId, ComponentTestUser user) {
         var url = format(TASK_BY_ID_URL, taskId);
         delete(url, user);
+    }
+
+    protected PageDto<TaskDto> getTasksPage(TasksQueryDto queryDto, ComponentTestUser user) {
+        var baseURl = TASKS_BASE_URL;
+        var url = appendQueryToUrl(baseURl, queryDto);
+        var typeRef = new TypeRef<PageDto<TaskDto>>() {
+        };
+        return getPage(url, user, typeRef);
     }
 
     protected PageDto<TaskDto> getTasksPage(Long contactId, TasksQueryDto queryDto, ComponentTestUser user) {
