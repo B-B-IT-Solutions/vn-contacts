@@ -62,14 +62,14 @@ class TaskServiceTest {
     }
 
     @Test
-    void getTasksByContactId() {
+    void getContactTasks() {
         var tasks = tasks();
         var page = new PageImpl(tasks);
         var query = tasksQuery();
         var contactId = randomLong();
         var predicate = new BooleanBuilder();
 
-        when(predicates.tasksByContactId(contactId, query.getFilter())).thenReturn(predicate);
+        when(predicates.contactTasks(contactId, query.getFilter())).thenReturn(predicate);
         when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
         var result = taskService.getTasks(contactId, query);
         assertPage(result, page);
@@ -152,7 +152,7 @@ class TaskServiceTest {
         var tasks = tasks();
         var contactId = randomLong();
         var predicate = new BooleanBuilder();
-        when(predicates.tasksByContactId(eq(contactId), any(TasksFilter.class))).thenReturn(predicate);
+        when(predicates.contactTasks(eq(contactId), any(TasksFilter.class))).thenReturn(predicate);
         when(repository.findAll(predicate)).thenReturn(tasks);
 
         taskService.deleteByContactId(contactId);

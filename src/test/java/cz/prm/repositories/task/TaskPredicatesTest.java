@@ -91,53 +91,53 @@ class TaskPredicatesTest {
     }
 
     @Test
-    void tasksByContactIdNoFilters() {
+    void contactTasksNoFilters() {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
             var user = user();
             var filter = new TasksFilter();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
-            var query = predicates.tasksByContactId(11L, filter);
+            var query = predicates.contactTasks(11L, filter);
             var expectedString = format("task.owner.username = %s && task.contactId = 11", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }
     }
 
     @Test
-    void tasksByContactIdWithFilters() {
+    void contactTasksWithFilters() {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
             var user = user();
             var filter = new TasksFilter();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
-            var predicate = predicates.tasksByContactId(15L, filter);
+            var predicate = predicates.contactTasks(15L, filter);
             var expectedString = format("task.owner.username = %s && task.contactId = 15", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setGlobalFilter("globalFilter_01");
-            predicate = predicates.tasksByContactId(16L, filter);
+            predicate = predicates.contactTasks(16L, filter);
             expectedString = format("task.owner.username = %s && (containsIc(task.title,globalFilter_01) || containsIc"
                 + "(task.description,globalFilter_01)) && task.contactId = 16", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setGlobalFilter("globalFilter_02");
-            predicate = predicates.tasksByContactId(17L, filter);
+            predicate = predicates.contactTasks(17L, filter);
             expectedString = format("task.owner.username = %s && (containsIc(task.title,globalFilter_02) || containsIc"
                 + "(task.description,globalFilter_02)) && task.contactId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setGlobalFilter(null);
             filter.setTitle("title_01");
-            predicate = predicates.tasksByContactId(17L, filter);
+            predicate = predicates.contactTasks(17L, filter);
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.contactId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setCompleted(true);
-            predicate = predicates.tasksByContactId(17L, filter);
+            predicate = predicates.contactTasks(17L, filter);
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.completed = true && task.contactId = 17",
                 user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setCompleted(false);
-            predicate = predicates.tasksByContactId(17L, filter);
+            predicate = predicates.contactTasks(17L, filter);
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.completed = false && task.contactId = 17",
                 user.getUsername());
             assertThat(predicate).hasToString(expectedString);
@@ -145,7 +145,7 @@ class TaskPredicatesTest {
             filter.setTitle(null);
             filter.setCompleted(null);
             filter.setDueDate("greaterThan(15 Dec 2024)");
-            predicate = predicates.tasksByContactId(17L, filter);
+            predicate = predicates.contactTasks(17L, filter);
             expectedString = format("task.owner.username = %s && task.dueDate > 2024-12-14T23:00:00Z && task.contactId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
         }

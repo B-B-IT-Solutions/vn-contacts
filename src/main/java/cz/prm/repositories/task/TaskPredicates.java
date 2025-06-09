@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskPredicates {
 
-    public Predicate tasksByContactId(Long contactId, TasksFilter filter) {
+    public Predicate contactTasks(Long contactId, TasksFilter filter) {
         var predicate = new BooleanBuilder();
         predicate.and(tasks(filter));
         return predicate.and(task.contactId.eq(contactId));
