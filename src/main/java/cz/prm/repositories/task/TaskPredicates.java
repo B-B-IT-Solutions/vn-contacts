@@ -14,19 +14,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskPredicates {
 
-    public Predicate byTaskId(Long taskId) {
-        var predicate = dataAccessPredicate();
-        return predicate.and(task.taskId.eq(taskId));
-    }
-
-    public Predicate byContactId(Long contactId, TasksFilter filter) {
-        var predicate = tasks(filter);
+    public Predicate contactTasks(Long contactId, TasksFilter filter) {
+        var predicate = new BooleanBuilder();
+        predicate.and(tasks(filter));
         return predicate.and(task.contactId.eq(contactId));
     }
 
-    private BooleanExpression tasks(TasksFilter filter) {
+    public Predicate tasks(TasksFilter filter) {
         var predicate = dataAccessPredicate();
         return predicate.and(filterPredicates(filter));
+    }
+
+    public Predicate byTaskId(Long taskId) {
+        var predicate = dataAccessPredicate();
+        return predicate.and(task.taskId.eq(taskId));
     }
 
     private BooleanExpression dataAccessPredicate() {
