@@ -466,11 +466,11 @@ public class TaskComponentTest extends TaskComponentTestBase {
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setStatus(TO_DO);
+        filter.setStatus("TO_DO");
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setStatus(IN_PROGRESS);
+        filter.setStatus("IN_PROGRESS");
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
@@ -668,11 +668,11 @@ public class TaskComponentTest extends TaskComponentTestBase {
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setStatus(TO_DO);
+        filter.setStatus("TO_DO");
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setStatus(IN_PROGRESS);
+        filter.setStatus("IN_PROGRESS");
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 

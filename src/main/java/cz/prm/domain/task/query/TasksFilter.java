@@ -1,9 +1,7 @@
 package cz.prm.domain.task.query;
 
-import static java.util.Objects.nonNull;
 import static org.apache.logging.log4j.util.Strings.isNotBlank;
 
-import cz.prm.domain.task.Status;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +13,7 @@ public class TasksFilter {
 
     private String name;
 
-    private Status status;
+    private String status;
 
     private String dueDate;
 
@@ -28,7 +26,7 @@ public class TasksFilter {
     }
 
     public boolean isStatus() {
-        return nonNull(status);
+        return isNotBlank(status);
     }
 
     public boolean isDueDate() {

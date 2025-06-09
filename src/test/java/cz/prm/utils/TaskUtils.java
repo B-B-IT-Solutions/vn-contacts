@@ -2,7 +2,6 @@ package cz.prm.utils;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.domain.task.Priority.HIGH;
-import static cz.prm.domain.task.Status.IN_PROGRESS;
 import static cz.prm.domain.task.Status.TO_DO;
 import static cz.prm.utils.CommonUtils.pagination;
 import static cz.prm.utils.CommonUtils.paginationDto;
@@ -76,7 +75,7 @@ public class TaskUtils {
         var filter = new TasksFilter();
         filter.setGlobalFilter(uuid());
         filter.setName(uuid());
-        filter.setStatus(TO_DO);
+        filter.setStatus("TO_DO");
         filter.setDueDate(uuid());
         return filter;
     }
@@ -85,7 +84,7 @@ public class TaskUtils {
         var filter = new TasksFilterDto();
         filter.setGlobalFilter(uuid());
         filter.setName(uuid());
-        filter.setStatus(IN_PROGRESS);
+        filter.setStatus("IN_PROGRESS");
         filter.setDueDate(uuid());
         return filter;
     }

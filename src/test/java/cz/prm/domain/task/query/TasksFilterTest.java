@@ -1,8 +1,5 @@
 package cz.prm.domain.task.query;
 
-import static cz.prm.domain.task.Status.COMPLETED;
-import static cz.prm.domain.task.Status.IN_PROGRESS;
-import static cz.prm.domain.task.Status.TO_DO;
 import static cz.prm.utils.TestUtils.uuid;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -44,11 +41,11 @@ class TasksFilterTest {
         assertThat(filter.isStatus()).isFalse();
         filter.setStatus(null);
         assertThat(filter.isStatus()).isFalse();
-        filter.setStatus(TO_DO);
+        filter.setStatus("");
         assertThat(filter.isStatus()).isFalse();
-        filter.setStatus(IN_PROGRESS);
+        filter.setStatus(" ");
         assertThat(filter.isStatus()).isFalse();
-        filter.setStatus(COMPLETED);
+        filter.setStatus(uuid());
         assertThat(filter.isStatus()).isTrue();
     }
 

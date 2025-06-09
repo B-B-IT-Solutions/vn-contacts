@@ -1,7 +1,5 @@
 package cz.prm.repositories.task;
 
-import static cz.prm.domain.task.Status.IN_PROGRESS;
-import static cz.prm.domain.task.Status.TO_DO;
 import static cz.prm.utils.CommonUtils.user;
 import static cz.prm.utils.TimeUtils.useMockTimeZone;
 import static cz.prm.utils.TimeUtils.useSystemDefaultTimeZone;
@@ -73,12 +71,12 @@ class TaskPredicatesTest {
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01)", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setStatus(TO_DO);
+            filter.setStatus("TO_DO");
             predicate = predicates.tasks(filter);
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.completed = true", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setStatus(IN_PROGRESS);
+            filter.setStatus("IN_PROGRESS");
             predicate = predicates.tasks(filter);
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.completed = false", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
@@ -132,13 +130,13 @@ class TaskPredicatesTest {
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.contactId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setStatus(TO_DO);
+            filter.setStatus("TO_DO");
             predicate = predicates.contactTasks(17L, filter);
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.completed = true && task.contactId = 17",
                 user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setStatus(IN_PROGRESS);
+            filter.setStatus("IN_PROGRESS");
             predicate = predicates.contactTasks(17L, filter);
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.completed = false && task.contactId = 17",
                 user.getUsername());

@@ -15,7 +15,6 @@ import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_CONTAI
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_EMPTY;
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_EQUALS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.STARTS_WITH;
-import static java.lang.String.valueOf;
 import static java.util.stream.Stream.of;
 import static lombok.AccessLevel.PRIVATE;
 
@@ -25,6 +24,8 @@ import com.querydsl.core.types.dsl.EnumPath;
 import com.querydsl.core.types.dsl.ListPath;
 import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.core.types.dsl.TemporalExpression;
+import cz.prm.repositories.common.query.filter.EnumFilterCriteria;
+import cz.prm.repositories.common.query.filter.EnumFilterCriterias;
 import cz.prm.repositories.common.query.filter.FilterCriteria;
 import cz.prm.repositories.common.query.filter.FilterCriterias;
 import cz.prm.repositories.common.query.filter.TemporalFilterCriteria;
@@ -41,8 +42,8 @@ public class PredicateCriteriaUtils {
         return predicate;
     }
 
-    public static Predicate applyCriteria(BooleanBuilder predicate, EnumPath field, Enum filter) {
-        var fcs = new FilterCriterias(valueOf(filter.ordinal()));
+    public static Predicate applyCriteria(BooleanBuilder predicate, EnumPath<?> field, String filter) {
+        var fcs = new EnumFilterCriterias(filter, field.getType());
         fcs.getCriterias().forEach(fc -> predicate.and(apply(field, fc)));
         return predicate;
     }
@@ -71,6 +72,18 @@ public class PredicateCriteriaUtils {
         return predicate;
     }
 
+    private static Predicate apply(EnumPath field, EnumFilterCriteria fc) {
+        var predicate = new BooleanBuilder();
+        if (ARRAY_INCLUDES.isOperation(fc)) {
+            of(fc.getEnumValues()).forEach(value -> predicate.or(field.eq(value)));
+        } else if (ARRAY_INCLUDES_ALL.isOperation(fc)) {
+            of(fc.getEnumValues()).forEach(value -> predicate.and(field.eq(value)));
+        } else {
+            of(fc.getEnumValues()).forEach(value -> predicate.or(field.eq(value)));
+        }
+        return predicate;
+    }
+
     private static Predicate apply(TemporalExpression field, TemporalFilterCriteria fc) {
         var predicate = new BooleanBuilder();
         if (EQUALS.isOperation(fc)) {
@@ -93,18 +106,6 @@ public class PredicateCriteriaUtils {
             }
         } else {
             fc.getDateValues().forEach(value -> predicate.or(field.eq(value)));
-        }
-        return predicate;
-    }
-
-    private static Predicate apply(EnumPath field, FilterCriteria fc) {
-        var predicate = new BooleanBuilder();
-        if (ARRAY_INCLUDES.isOperation(fc)) {
-            of(fc.getValues()).forEach(value -> predicate.or(field.eq(value)));
-        } else if (ARRAY_INCLUDES_ALL.isOperation(fc)) {
-            of(fc.getValues()).forEach(value -> predicate.and(field.eq(value)));
-        } else {
-            of(fc.getValues()).forEach(value -> predicate.or(field.eq(value)));
         }
         return predicate;
     }
