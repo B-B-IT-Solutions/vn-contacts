@@ -1,6 +1,9 @@
 package cz.prm.utils;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static cz.prm.domain.task.Priority.HIGH;
+import static cz.prm.domain.task.Status.IN_PROGRESS;
+import static cz.prm.domain.task.Status.TO_DO;
 import static cz.prm.utils.CommonUtils.pagination;
 import static cz.prm.utils.CommonUtils.paginationDto;
 import static cz.prm.utils.CommonUtils.user;
@@ -26,9 +29,11 @@ public class TaskUtils {
         var task = new Task();
         task.setTaskId(randomLong());
         task.setContactId(randomLong());
-        task.setTitle(uuid());
+        task.setName(uuid());
         task.setDescription(uuid());
-        task.setCompleted(true);
+        task.setOutcomes(uuid());
+        task.setStatus(TO_DO);
+        task.setPriority(HIGH);
         task.setDueDate(now());
         task.setLastEditDate(now());
         task.setCreationDate(now());
@@ -40,9 +45,11 @@ public class TaskUtils {
         var task = new TaskDto();
         task.setTaskId(randomLong());
         task.setContactId(randomLong());
-        task.setTitle(uuid());
+        task.setName(uuid());
         task.setDescription(uuid());
-        task.setCompleted(true);
+        task.setOutcomes(uuid());
+        task.setStatus(TO_DO);
+        task.setPriority(HIGH);
         task.setDueDate(now());
         task.setLastEditDate(now());
         task.setCreationDate(now());
@@ -68,8 +75,8 @@ public class TaskUtils {
     public static TasksFilter tasksFilter() {
         var filter = new TasksFilter();
         filter.setGlobalFilter(uuid());
-        filter.setTitle(uuid());
-        filter.setCompleted(true);
+        filter.setName(uuid());
+        filter.setStatus(TO_DO);
         filter.setDueDate(uuid());
         return filter;
     }
@@ -77,8 +84,8 @@ public class TaskUtils {
     public static TasksFilterDto tasksFilterDto() {
         var filter = new TasksFilterDto();
         filter.setGlobalFilter(uuid());
-        filter.setTitle(uuid());
-        filter.setCompleted(true);
+        filter.setName(uuid());
+        filter.setStatus(IN_PROGRESS);
         filter.setDueDate(uuid());
         return filter;
     }

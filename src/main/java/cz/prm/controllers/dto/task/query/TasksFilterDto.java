@@ -1,5 +1,6 @@
 package cz.prm.controllers.dto.task.query;
 
+import cz.prm.domain.task.Status;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,9 +10,9 @@ public class TasksFilterDto {
 
     private String globalFilter;
 
-    private String title;
+    private String name;
 
-    private Boolean completed;
+    private Status status;
 
     private String dueDate;
 }

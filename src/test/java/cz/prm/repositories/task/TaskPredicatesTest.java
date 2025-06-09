@@ -1,5 +1,7 @@
 package cz.prm.repositories.task;
 
+import static cz.prm.domain.task.Status.IN_PROGRESS;
+import static cz.prm.domain.task.Status.TO_DO;
 import static cz.prm.utils.CommonUtils.user;
 import static cz.prm.utils.TimeUtils.useMockTimeZone;
 import static cz.prm.utils.TimeUtils.useSystemDefaultTimeZone;
@@ -66,23 +68,23 @@ class TaskPredicatesTest {
             assertThat(predicate).hasToString(expectedString);
 
             filter.setGlobalFilter(null);
-            filter.setTitle("title_01");
+            filter.setName("title_01");
             predicate = predicates.tasks(filter);
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01)", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setCompleted(true);
+            filter.setStatus(TO_DO);
             predicate = predicates.tasks(filter);
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.completed = true", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setCompleted(false);
+            filter.setStatus(IN_PROGRESS);
             predicate = predicates.tasks(filter);
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.completed = false", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setTitle(null);
-            filter.setCompleted(null);
+            filter.setName(null);
+            filter.setStatus(null);
             filter.setDueDate("greaterThan(15 Dec 2024)");
             predicate = predicates.tasks(filter);
             expectedString = format("task.owner.username = %s && task.dueDate > 2024-12-14T23:00:00Z", user.getUsername());
@@ -125,25 +127,25 @@ class TaskPredicatesTest {
             assertThat(predicate).hasToString(expectedString);
 
             filter.setGlobalFilter(null);
-            filter.setTitle("title_01");
+            filter.setName("title_01");
             predicate = predicates.contactTasks(17L, filter);
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.contactId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setCompleted(true);
+            filter.setStatus(TO_DO);
             predicate = predicates.contactTasks(17L, filter);
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.completed = true && task.contactId = 17",
                 user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setCompleted(false);
+            filter.setStatus(IN_PROGRESS);
             predicate = predicates.contactTasks(17L, filter);
             expectedString = format("task.owner.username = %s && containsIc(task.title,title_01) && task.completed = false && task.contactId = 17",
                 user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setTitle(null);
-            filter.setCompleted(null);
+            filter.setName(null);
+            filter.setStatus(null);
             filter.setDueDate("greaterThan(15 Dec 2024)");
             predicate = predicates.contactTasks(17L, filter);
             expectedString = format("task.owner.username = %s && task.dueDate > 2024-12-14T23:00:00Z && task.contactId = 17", user.getUsername());

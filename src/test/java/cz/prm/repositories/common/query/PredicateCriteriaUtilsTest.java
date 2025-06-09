@@ -1,5 +1,8 @@
 package cz.prm.repositories.common.query;
 
+import static cz.prm.domain.task.Priority.HIGH;
+import static cz.prm.domain.task.Priority.LOW;
+import static cz.prm.domain.task.Status.TO_DO;
 import static cz.prm.utils.TimeUtils.useMockTimeZone;
 import static cz.prm.utils.TimeUtils.useSystemDefaultTimeZone;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -7,6 +10,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.contact.querydsl.QContact;
 import cz.prm.domain.note.querydsl.QNote;
+import cz.prm.domain.task.Priority;
+import cz.prm.domain.task.Status;
 import cz.prm.domain.task.querydsl.QTask;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -31,7 +36,7 @@ class PredicateCriteriaUtilsTest {
     }
 
     @Test
-    void applyCriteriaArrayIncludesOperation() {
+    void applyCriteriaListPathArrayIncludesOperation() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001");
         var queryPattern = "label_001 in contact.labels";
         assertThat(predicate).hasToString(queryPattern);
@@ -46,7 +51,7 @@ class PredicateCriteriaUtilsTest {
     }
 
     @Test
-    void applyCriteriaArrayIncludesOperationWithMultipleFilterValues() {
+    void applyCriteriaListPathArrayIncludesOperationWithMultipleFilterValues() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001,label_002,label_003");
         var queryPattern = "label_001,label_002,label_003 in contact.labels";
         assertThat(predicate).hasToString(queryPattern);
@@ -64,7 +69,7 @@ class PredicateCriteriaUtilsTest {
     }
 
     @Test
-    void applyCriteriaArrayIncludesAllOperation() {
+    void applyCriteriaListPathArrayIncludesAllOperation() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001");
         var queryPattern = "label_001 in contact.labels";
         assertThat(predicate).hasToString(queryPattern);
@@ -79,7 +84,7 @@ class PredicateCriteriaUtilsTest {
     }
 
     @Test
-    void applyCriteriaArrayIncludesAllOperationWithMultipleFilterValues() {
+    void applyCriteriaListPathArrayIncludesAllOperationWithMultipleFilterValues() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001,label_002,label_003");
         var queryPattern = "label_001,label_002,label_003 in contact.labels";
         assertThat(predicate).hasToString(queryPattern);
@@ -97,6 +102,76 @@ class PredicateCriteriaUtilsTest {
             + ".categories";
         assertThat(predicate).hasToString(queryPattern);
     }
+
+    @Test
+    void applyCriteriaEnumPathArrayIncludesOperation() {
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.status, TO_DO);
+        var queryPattern = "task.status = 0";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, HIGH);
+        queryPattern = "task.status = 0 && task.priority = 0";
+        assertThat(predicate).hasToString(queryPattern);
+
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, LOW);
+        queryPattern = "task.status = 0 && task.priority = 0 && task.priority = 2";
+        assertThat(predicate).hasToString(queryPattern);
+    }
+
+//    @Test
+//    void applyCriteriaEnumPathArrayIncludesOperationWithMultipleFilterValues() {
+//        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001,label_002,label_003");
+//        var queryPattern = "label_001,label_002,label_003 in contact.labels";
+//        assertThat(predicate).hasToString(queryPattern);
+//
+//        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QNote.note.categories, "arrIncludes(category_001,category_002,
+//        category_003)");
+//        queryPattern = "label_001,label_002,label_003 in contact.labels && (category_001 in note.categories || category_002 in note.categories || "
+//            + "category_003 in note.categories)";
+//        assertThat(predicate).hasToString(queryPattern);
+//
+//        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QNote.note.categories, "arrIncludes(category_004,category_005,
+//        category_006)");
+//        queryPattern = "label_001,label_002,label_003 in contact.labels && (category_001 in note.categories || category_002 in note.categories || "
+//            + "category_003 in note.categories) && (category_004 in note.categories || category_005 in note.categories || category_006 in note"
+//            + ".categories)";
+//        assertThat(predicate).hasToString(queryPattern);
+//    }
+//
+//    @Test
+//    void applyCriteriaEnumPathArrayIncludesAllOperation() {
+//        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001");
+//        var queryPattern = "label_001 in contact.labels";
+//        assertThat(predicate).hasToString(queryPattern);
+//
+//        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QNote.note.categories, "arrIncludesAll(category_002)");
+//        queryPattern = "label_001 in contact.labels && category_002 in note.categories";
+//        assertThat(predicate).hasToString(queryPattern);
+//
+//        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QNote.note.categories, "arrIncludesAll(category_003)");
+//        queryPattern = "label_001 in contact.labels && category_002 in note.categories && category_003 in note.categories";
+//        assertThat(predicate).hasToString(queryPattern);
+//    }
+//
+//    @Test
+//    void applyCriteriaEnumPathArrayIncludesAllOperationWithMultipleFilterValues() {
+//        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001,label_002,label_003");
+//        var queryPattern = "label_001,label_002,label_003 in contact.labels";
+//        assertThat(predicate).hasToString(queryPattern);
+//
+//        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QNote.note.categories,
+//            "arrIncludesAll(category_001,category_002,category_003)");
+//        queryPattern = "label_001,label_002,label_003 in contact.labels && category_001 in note.categories && category_002 in note.categories && "
+//            + "category_003 in note.categories";
+//        assertThat(predicate).hasToString(queryPattern);
+//
+//        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QNote.note.categories,
+//            "arrIncludesAll(category_004,category_005,category_006)");
+//        queryPattern = "label_001,label_002,label_003 in contact.labels && category_001 in note.categories && category_002 in note.categories && "
+//            + "category_003 in note.categories && category_004 in note.categories && category_005 in note.categories && category_006 in note"
+//            + ".categories";
+//        assertThat(predicate).hasToString(queryPattern);
+//    }
 
     @Test
     void applyCriteriaDateEqualsOperation() {

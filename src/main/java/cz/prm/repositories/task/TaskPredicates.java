@@ -38,14 +38,14 @@ public class TaskPredicates {
     private BooleanBuilder filterPredicates(TasksFilter filter) {
         var predicate = new BooleanBuilder();
         if (filter.isGlobalFilter()) {
-            predicate.or(task.title.containsIgnoreCase(filter.getGlobalFilter()));
+            predicate.or(task.name.containsIgnoreCase(filter.getGlobalFilter()));
             predicate.or(task.description.containsIgnoreCase(filter.getGlobalFilter()));
         }
-        if (filter.isTitle()) {
-            applyCriteria(predicate, task.title, filter.getTitle());
+        if (filter.isName()) {
+            applyCriteria(predicate, task.name, filter.getName());
         }
-        if (filter.isCompleted()) {
-            predicate.and(task.completed.eq(filter.getCompleted()));
+        if (filter.isStatus()) {
+            applyCriteria(predicate, task.status, filter.getStatus());
         }
         if (filter.isDueDate()) {
             applyCriteria(predicate, task.dueDate, filter.getDueDate(), Instant.class);

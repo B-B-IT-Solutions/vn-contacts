@@ -1,6 +1,8 @@
 package cz.prm.business.tasks;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static cz.prm.domain.task.Status.IN_PROGRESS;
+import static cz.prm.domain.task.Status.TO_DO;
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
@@ -354,7 +356,7 @@ public class TaskComponentTest extends TaskComponentTestBase {
         queryDto = tasksQueryDto();
         var filter = queryDto.getFilter();
 
-        filter.setGlobalFilter(userTask1.getTitle());
+        filter.setGlobalFilter(userTask1.getName());
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
@@ -373,102 +375,102 @@ public class TaskComponentTest extends TaskComponentTestBase {
         queryDto = tasksQueryDto();
         filter = queryDto.getFilter();
 
-        filter.setTitle(userTask1.getTitle());
+        filter.setName(userTask1.getName());
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setTitle(uuid());
+        filter.setName(uuid());
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(startsWithFilter("Title"));
+        filter.setName(startsWithFilter("Title"));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(startsWithFilter(userTask1.getTitle()));
+        filter.setName(startsWithFilter(userTask1.getName()));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setTitle(startsWithFilter("Q"));
+        filter.setName(startsWithFilter("Q"));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(startsWithFilter(uuid()));
+        filter.setName(startsWithFilter(uuid()));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(endsWithFilter("End"));
+        filter.setName(endsWithFilter("End"));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(endsWithFilter(userTask1.getTitle()));
+        filter.setName(endsWithFilter(userTask1.getName()));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setTitle(endsWithFilter("Q"));
+        filter.setName(endsWithFilter("Q"));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(endsWithFilter(uuid()));
+        filter.setName(endsWithFilter(uuid()));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(equalsFilter(userTask1.getTitle()));
+        filter.setName(equalsFilter(userTask1.getName()));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setTitle(equalsFilter("Q"));
+        filter.setName(equalsFilter("Q"));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(equalsFilter(" "));
+        filter.setName(equalsFilter(" "));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(equalsFilter(uuid()));
+        filter.setName(equalsFilter(uuid()));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(notEqualsFilter(userTask1.getTitle()));
+        filter.setName(notEqualsFilter(userTask1.getName()));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(20);
 
-        filter.setTitle(notEqualsFilter("Q"));
+        filter.setName(notEqualsFilter("Q"));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(notEqualsFilter(uuid()));
+        filter.setName(notEqualsFilter(uuid()));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(notEqualsFilter(" "));
+        filter.setName(notEqualsFilter(" "));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(notEqualsFilter(uuid()));
+        filter.setName(notEqualsFilter(uuid()));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(emptyFilter());
+        filter.setName(emptyFilter());
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(notEmptyFilter());
+        filter.setName(notEmptyFilter());
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
         queryDto = tasksQueryDto();
         filter = queryDto.getFilter();
 
-        filter.setCompleted(null);
+        filter.setStatus(null);
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setCompleted(true);
+        filter.setStatus(TO_DO);
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setCompleted(false);
+        filter.setStatus(IN_PROGRESS);
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
@@ -556,7 +558,7 @@ public class TaskComponentTest extends TaskComponentTestBase {
         queryDto = tasksQueryDto();
         var filter = queryDto.getFilter();
 
-        filter.setGlobalFilter(userTask1.getTitle());
+        filter.setGlobalFilter(userTask1.getName());
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
@@ -575,102 +577,102 @@ public class TaskComponentTest extends TaskComponentTestBase {
         queryDto = tasksQueryDto();
         filter = queryDto.getFilter();
 
-        filter.setTitle(userTask1.getTitle());
+        filter.setName(userTask1.getName());
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setTitle(uuid());
+        filter.setName(uuid());
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(startsWithFilter("Title"));
+        filter.setName(startsWithFilter("Title"));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(startsWithFilter(userTask1.getTitle()));
+        filter.setName(startsWithFilter(userTask1.getName()));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setTitle(startsWithFilter("Q"));
+        filter.setName(startsWithFilter("Q"));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(startsWithFilter(uuid()));
+        filter.setName(startsWithFilter(uuid()));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(endsWithFilter("End"));
+        filter.setName(endsWithFilter("End"));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(endsWithFilter(userTask1.getTitle()));
+        filter.setName(endsWithFilter(userTask1.getName()));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setTitle(endsWithFilter("Q"));
+        filter.setName(endsWithFilter("Q"));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(endsWithFilter(uuid()));
+        filter.setName(endsWithFilter(uuid()));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(equalsFilter(userTask1.getTitle()));
+        filter.setName(equalsFilter(userTask1.getName()));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setTitle(equalsFilter("Q"));
+        filter.setName(equalsFilter("Q"));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(equalsFilter(" "));
+        filter.setName(equalsFilter(" "));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(equalsFilter(uuid()));
+        filter.setName(equalsFilter(uuid()));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(notEqualsFilter(userTask1.getTitle()));
+        filter.setName(notEqualsFilter(userTask1.getName()));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(20);
 
-        filter.setTitle(notEqualsFilter("Q"));
+        filter.setName(notEqualsFilter("Q"));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(notEqualsFilter(uuid()));
+        filter.setName(notEqualsFilter(uuid()));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(notEqualsFilter(" "));
+        filter.setName(notEqualsFilter(" "));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(notEqualsFilter(uuid()));
+        filter.setName(notEqualsFilter(uuid()));
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(emptyFilter());
+        filter.setName(emptyFilter());
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(notEmptyFilter());
+        filter.setName(notEmptyFilter());
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
         queryDto = tasksQueryDto();
         filter = queryDto.getFilter();
 
-        filter.setCompleted(null);
+        filter.setStatus(null);
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setCompleted(true);
+        filter.setStatus(TO_DO);
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setCompleted(false);
+        filter.setStatus(IN_PROGRESS);
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 

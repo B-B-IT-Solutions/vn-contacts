@@ -15,11 +15,13 @@ import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_CONTAI
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_EMPTY;
 import static cz.prm.repositories.common.query.filter.FilterOperation.NOT_EQUALS;
 import static cz.prm.repositories.common.query.filter.FilterOperation.STARTS_WITH;
+import static java.lang.String.valueOf;
 import static java.util.stream.Stream.of;
 import static lombok.AccessLevel.PRIVATE;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.EnumPath;
 import com.querydsl.core.types.dsl.ListPath;
 import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.core.types.dsl.TemporalExpression;
@@ -35,6 +37,12 @@ public class PredicateCriteriaUtils {
 
     public static Predicate applyCriteria(BooleanBuilder predicate, ListPath field, String filter) {
         var fcs = new FilterCriterias(filter);
+        fcs.getCriterias().forEach(fc -> predicate.and(apply(field, fc)));
+        return predicate;
+    }
+
+    public static Predicate applyCriteria(BooleanBuilder predicate, EnumPath field, Enum filter) {
+        var fcs = new FilterCriterias(valueOf(filter.ordinal()));
         fcs.getCriterias().forEach(fc -> predicate.and(apply(field, fc)));
         return predicate;
     }
@@ -85,6 +93,18 @@ public class PredicateCriteriaUtils {
             }
         } else {
             fc.getDateValues().forEach(value -> predicate.or(field.eq(value)));
+        }
+        return predicate;
+    }
+
+    private static Predicate apply(EnumPath field, FilterCriteria fc) {
+        var predicate = new BooleanBuilder();
+        if (ARRAY_INCLUDES.isOperation(fc)) {
+            of(fc.getValues()).forEach(value -> predicate.or(field.eq(value)));
+        } else if (ARRAY_INCLUDES_ALL.isOperation(fc)) {
+            of(fc.getValues()).forEach(value -> predicate.and(field.eq(value)));
+        } else {
+            of(fc.getValues()).forEach(value -> predicate.or(field.eq(value)));
         }
         return predicate;
     }

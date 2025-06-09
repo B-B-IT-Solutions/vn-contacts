@@ -55,7 +55,9 @@ public class TaskAssertions {
         assertThat(task1.getTaskId()).isEqualTo(task2.getTaskId());
         assertThat(task1.getContactId()).isEqualTo(task2.getContactId());
         assertThat(task1.getDescription()).isEqualTo(task2.getDescription());
-        assertThat(task1.isCompleted()).isEqualTo(task2.isCompleted());
+        assertThat(task1.getOutcomes()).isEqualTo(task2.getOutcomes());
+        assertThat(task1.getStatus()).isEqualTo(task2.getStatus());
+        assertThat(task1.getPriority()).isEqualTo(task2.getPriority());
         assertThat(task1.getDueDate()).isEqualTo(task2.getDueDate());
         assertThat(task1.getLastEditDate()).isEqualTo(task2.getLastEditDate());
         assertThat(task1.getCreationDate()).isEqualTo(task2.getCreationDate());
@@ -65,9 +67,11 @@ public class TaskAssertions {
     public static void assertTask(Task task, TaskDto dto) {
         assertThat(task.getTaskId()).isEqualTo(dto.getTaskId());
         assertThat(task.getContactId()).isEqualTo(dto.getContactId());
-        assertThat(task.getTitle()).isEqualTo(dto.getTitle());
+        assertThat(task.getName()).isEqualTo(dto.getName());
         assertThat(task.getDescription()).isEqualTo(dto.getDescription());
-        assertThat(task.isCompleted()).isEqualTo(dto.isCompleted());
+        assertThat(task.getOutcomes()).isEqualTo(dto.getOutcomes());
+        assertThat(task.getStatus()).isEqualTo(dto.getStatus());
+        assertThat(task.getPriority()).isEqualTo(dto.getPriority());
         assertThat(task.getDueDate()).isEqualTo(dto.getDueDate());
         assertThat(task.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(task.getCreationDate()).isEqualTo(dto.getCreationDate());
@@ -80,8 +84,8 @@ public class TaskAssertions {
 
     public static void assertTasksFilter(TasksFilter filter, TasksFilterDto dto) {
         assertThat(filter.getGlobalFilter()).isEqualTo(dto.getGlobalFilter());
-        assertThat(filter.getTitle()).isEqualTo(dto.getTitle());
-        assertThat(filter.getCompleted()).isEqualTo(dto.getCompleted());
+        assertThat(filter.isName()).isEqualTo(dto.getName());
+        assertThat(filter.getStatus()).isEqualTo(dto.getStatus());
         assertThat(filter.getDueDate()).isEqualTo(dto.getDueDate());
     }
 }

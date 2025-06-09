@@ -1,5 +1,7 @@
 package cz.prm.utils;
 
+import static cz.prm.domain.task.Priority.HIGH;
+import static cz.prm.domain.task.Status.TO_DO;
 import static cz.prm.utils.ComponentTestUtils.randomLong;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static cz.prm.utils.TimeComponentTestUtils.todayStartOfDay;
@@ -26,9 +28,11 @@ public class TaskComponentTestUtils {
     public static Task task(long contactId) {
         var task = new Task();
         task.setContactId(contactId);
-        task.setTitle(format("Title-%s-End", uuid()));
+        task.setName(format("Title-%s-End", uuid()));
         task.setDescription(format("Text%s", uuid()));
-        task.setCompleted(true);
+        task.setOutcomes(TestUtils.uuid());
+        task.setStatus(TO_DO);
+        task.setPriority(HIGH);
         task.setDueDate(todayStartOfDay());
         return task;
     }
@@ -36,9 +40,11 @@ public class TaskComponentTestUtils {
     public static TaskDto taskDto(long contactId) {
         var dto = new TaskDto();
         dto.setContactId(contactId);
-        dto.setTitle(uuid());
+        dto.setName(uuid());
         dto.setDescription(uuid());
-        dto.setCompleted(true);
+        dto.setOutcomes(TestUtils.uuid());
+        dto.setStatus(TO_DO);
+        dto.setPriority(HIGH);
         dto.setDueDate(todayStartOfDay());
         return dto;
     }

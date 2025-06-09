@@ -1,5 +1,8 @@
 package cz.prm.domain.task.query;
 
+import static cz.prm.domain.task.Status.COMPLETED;
+import static cz.prm.domain.task.Status.IN_PROGRESS;
+import static cz.prm.domain.task.Status.TO_DO;
 import static cz.prm.utils.TestUtils.uuid;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,27 +27,29 @@ class TasksFilterTest {
     @Test
     void isTitle() {
         var filter = new TasksFilter();
-        assertThat(filter.isTitle()).isFalse();
-        filter.setTitle(null);
-        assertThat(filter.isTitle()).isFalse();
-        filter.setTitle("");
-        assertThat(filter.isTitle()).isFalse();
-        filter.setTitle(" ");
-        assertThat(filter.isTitle()).isFalse();
-        filter.setTitle(uuid());
-        assertThat(filter.isTitle()).isTrue();
+        assertThat(filter.isName()).isFalse();
+        filter.setName(null);
+        assertThat(filter.isName()).isFalse();
+        filter.setName("");
+        assertThat(filter.isName()).isFalse();
+        filter.setName(" ");
+        assertThat(filter.isName()).isFalse();
+        filter.setName(uuid());
+        assertThat(filter.isName()).isTrue();
     }
 
     @Test
-    void isCompleted() {
+    void isStatus() {
         var filter = new TasksFilter();
-        assertThat(filter.isCompleted()).isFalse();
-        filter.setCompleted(null);
-        assertThat(filter.isCompleted()).isFalse();
-        filter.setCompleted(false);
-        assertThat(filter.isCompleted()).isTrue();
-        filter.setCompleted(true);
-        assertThat(filter.isCompleted()).isTrue();
+        assertThat(filter.isStatus()).isFalse();
+        filter.setStatus(null);
+        assertThat(filter.isStatus()).isFalse();
+        filter.setStatus(TO_DO);
+        assertThat(filter.isStatus()).isFalse();
+        filter.setStatus(IN_PROGRESS);
+        assertThat(filter.isStatus()).isFalse();
+        filter.setStatus(COMPLETED);
+        assertThat(filter.isStatus()).isTrue();
     }
 
     @Test
