@@ -84,7 +84,7 @@ public class TaskAssertions {
 
     public static void assertTasksFilter(TasksFilter filter, TasksFilterDto dto) {
         assertThat(filter.getGlobalFilter()).isEqualTo(dto.getGlobalFilter());
-        assertThat(filter.isName()).isEqualTo(dto.getName());
+        assertThat(filter.getName()).isEqualTo(dto.getName());
         assertThat(filter.getStatus()).isEqualTo(dto.getStatus());
         assertThat(filter.getDueDate()).isEqualTo(dto.getDueDate());
     }

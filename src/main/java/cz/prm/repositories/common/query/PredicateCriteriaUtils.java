@@ -75,11 +75,11 @@ public class PredicateCriteriaUtils {
     private static Predicate apply(EnumPath field, EnumFilterCriteria fc) {
         var predicate = new BooleanBuilder();
         if (ARRAY_INCLUDES.isOperation(fc)) {
-            of(fc.getEnumValues()).forEach(value -> predicate.or(field.eq(value)));
+            fc.getEnumValues().forEach(value -> predicate.or(field.eq(value)));
         } else if (ARRAY_INCLUDES_ALL.isOperation(fc)) {
-            of(fc.getEnumValues()).forEach(value -> predicate.and(field.eq(value)));
+            fc.getEnumValues().forEach(value -> predicate.and(field.eq(value)));
         } else {
-            of(fc.getEnumValues()).forEach(value -> predicate.or(field.eq(value)));
+            fc.getEnumValues().forEach(value -> predicate.or(field.eq(value)));
         }
         return predicate;
     }

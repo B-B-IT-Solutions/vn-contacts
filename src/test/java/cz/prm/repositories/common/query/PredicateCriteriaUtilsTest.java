@@ -114,30 +114,28 @@ class PredicateCriteriaUtilsTest {
         var queryPattern = "task.status = 0";
         assertThat(predicate).hasToString(queryPattern);
 
-        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, "HIGH");
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, "arrIncludes(HIGH)");
         queryPattern = "task.status = 0 && task.priority = 0";
         assertThat(predicate).hasToString(queryPattern);
 
-        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, "LOW");
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, "arrIncludes(LOW)");
         queryPattern = "task.status = 0 && task.priority = 0 && task.priority = 2";
         assertThat(predicate).hasToString(queryPattern);
     }
 
     @Test
     void applyCriteriaEnumPathArrayIncludesOperationWithMultipleFilterValues() {
-        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.status, "TO_DO, WAITING, IN_PROGRESS");
-        var queryPattern = "label_001,label_002,label_003 in contact.labels";
+        var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.status, "TO_DO,WAITING,IN_PROGRESS");
+        var queryPattern = "task.status = 0 || task.status = 1 || task.status = 2";
         assertThat(predicate).hasToString(queryPattern);
 
-        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, "HIGH, MEDIUM, LOW");
-        queryPattern = "label_001,label_002,label_003 in contact.labels && (category_001 in note.categories || category_002 in note.categories || "
-            + "category_003 in note.categories)";
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, "arrIncludes(HIGH,MEDIUM,LOW)");
+        queryPattern = "(task.status = 0 || task.status = 1 || task.status = 2) && (task.priority = 0 || task.priority = 1 || task.priority = 2)";
         assertThat(predicate).hasToString(queryPattern);
 
-        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, "HIGH, LOW");
-        queryPattern = "label_001,label_002,label_003 in contact.labels && (category_001 in note.categories || category_002 in note.categories || "
-            + "category_003 in note.categories) && (category_004 in note.categories || category_005 in note.categories || category_006 in note"
-            + ".categories)";
+        predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, "arrIncludes(HIGH,LOW)");
+        queryPattern = "(task.status = 0 || task.status = 1 || task.status = 2) && (task.priority = 0 || task.priority = 1 || task.priority = 2) &&"
+            + " (task.priority = 0 || task.priority = 2)";
         assertThat(predicate).hasToString(queryPattern);
     }
 

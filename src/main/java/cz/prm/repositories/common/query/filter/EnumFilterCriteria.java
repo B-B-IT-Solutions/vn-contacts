@@ -26,10 +26,10 @@ public class EnumFilterCriteria extends AbstractFilterCriteria {
 
     private Integer toOrdinal(String filter) {
         try {
-            var field = filterType.getDeclaredField(filter);
-            var clazz = field.getDeclaringClass();
+            var constant = filterType.getDeclaredField(filter).get(null);
+            var clazz = constant.getClass();
             var ordinalMethod = clazz.getMethod("ordinal");
-            return (Integer) ordinalMethod.invoke(field);
+            return (Integer) ordinalMethod.invoke(constant);
         } catch (NoSuchMethodException | NoSuchFieldException | InvocationTargetException | IllegalAccessException e) {
             throw new IllegalArgumentException("Unrecognized enum type!", e);
         }
