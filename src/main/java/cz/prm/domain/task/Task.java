@@ -1,5 +1,7 @@
 package cz.prm.domain.task;
 
+import static jakarta.persistence.EnumType.ORDINAL;
+
 import cz.prm.domain.common.User;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -7,6 +9,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -38,14 +41,22 @@ public class Task {
     @Column(name = "CONTACT_ID")
     private Long contactId;
 
-    @Column(name = "TITLE")
-    private String title;
+    @Column(name = "NAME")
+    private String name;
 
     @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "COMPLETED")
-    private boolean completed;
+    @Column(name = "OUTCOMES", columnDefinition = "TEXT")
+    private String outcomes;
+
+    @Enumerated(value = ORDINAL)
+    @Column(name = "STATUS")
+    private Status status;
+
+    @Enumerated(value = ORDINAL)
+    @Column(name = "PRIORITY")
+    private Priority priority;
 
     @Column(name = "DUE_DATE")
     private Instant dueDate;

@@ -66,9 +66,11 @@ public class TaskService {
     }
 
     private void updateTaskFields(Task savedTask, Task updatedTask) {
-        savedTask.setTitle(updatedTask.getTitle());
+        savedTask.setName(updatedTask.getName());
         savedTask.setDescription(updatedTask.getDescription());
-        savedTask.setCompleted(updatedTask.isCompleted());
+        savedTask.setOutcomes(updatedTask.getOutcomes());
+        savedTask.setStatus(updatedTask.getStatus());
+        savedTask.setPriority(updatedTask.getPriority());
         savedTask.setDueDate(updatedTask.getDueDate());
     }
 

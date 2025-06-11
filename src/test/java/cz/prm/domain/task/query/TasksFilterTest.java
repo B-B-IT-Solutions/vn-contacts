@@ -22,29 +22,31 @@ class TasksFilterTest {
     }
 
     @Test
-    void isTitle() {
+    void isName() {
         var filter = new TasksFilter();
-        assertThat(filter.isTitle()).isFalse();
-        filter.setTitle(null);
-        assertThat(filter.isTitle()).isFalse();
-        filter.setTitle("");
-        assertThat(filter.isTitle()).isFalse();
-        filter.setTitle(" ");
-        assertThat(filter.isTitle()).isFalse();
-        filter.setTitle(uuid());
-        assertThat(filter.isTitle()).isTrue();
+        assertThat(filter.isName()).isFalse();
+        filter.setName(null);
+        assertThat(filter.isName()).isFalse();
+        filter.setName("");
+        assertThat(filter.isName()).isFalse();
+        filter.setName(" ");
+        assertThat(filter.isName()).isFalse();
+        filter.setName(uuid());
+        assertThat(filter.isName()).isTrue();
     }
 
     @Test
-    void isCompleted() {
+    void isStatus() {
         var filter = new TasksFilter();
-        assertThat(filter.isCompleted()).isFalse();
-        filter.setCompleted(null);
-        assertThat(filter.isCompleted()).isFalse();
-        filter.setCompleted(false);
-        assertThat(filter.isCompleted()).isTrue();
-        filter.setCompleted(true);
-        assertThat(filter.isCompleted()).isTrue();
+        assertThat(filter.isStatus()).isFalse();
+        filter.setStatus(null);
+        assertThat(filter.isStatus()).isFalse();
+        filter.setStatus("");
+        assertThat(filter.isStatus()).isFalse();
+        filter.setStatus(" ");
+        assertThat(filter.isStatus()).isFalse();
+        filter.setStatus(uuid());
+        assertThat(filter.isStatus()).isTrue();
     }
 
     @Test

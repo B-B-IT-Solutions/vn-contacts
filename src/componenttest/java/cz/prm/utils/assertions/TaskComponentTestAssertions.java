@@ -25,9 +25,11 @@ public class TaskComponentTestAssertions {
     public static void assertTask(Task task, TaskDto taskDto) {
         assertThat(task.getTaskId()).isEqualTo(taskDto.getTaskId());
         assertThat(task.getContactId()).isEqualTo(taskDto.getContactId());
-        assertThat(task.getTitle()).isEqualTo(taskDto.getTitle());
+        assertThat(task.getName()).isEqualTo(taskDto.getName());
         assertThat(task.getDescription()).isEqualTo(taskDto.getDescription());
-        assertThat(task.isCompleted()).isEqualTo(taskDto.isCompleted());
+        assertThat(task.getOutcomes()).isEqualTo(taskDto.getOutcomes());
+        assertThat(task.getStatus()).isEqualTo(taskDto.getStatus());
+        assertThat(task.getPriority()).isEqualTo(taskDto.getPriority());
         assertThat(task.getDueDate()).isEqualTo(taskDto.getDueDate());
         assertThat(task.getLastEditDate()).isNotNull();
         assertThat(task.getCreationDate()).isNotNull();

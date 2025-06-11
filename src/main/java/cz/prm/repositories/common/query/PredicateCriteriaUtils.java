@@ -20,9 +20,12 @@ import static lombok.AccessLevel.PRIVATE;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.EnumPath;
 import com.querydsl.core.types.dsl.ListPath;
 import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.core.types.dsl.TemporalExpression;
+import cz.prm.repositories.common.query.filter.EnumFilterCriteria;
+import cz.prm.repositories.common.query.filter.EnumFilterCriterias;
 import cz.prm.repositories.common.query.filter.FilterCriteria;
 import cz.prm.repositories.common.query.filter.FilterCriterias;
 import cz.prm.repositories.common.query.filter.TemporalFilterCriteria;
@@ -35,6 +38,12 @@ public class PredicateCriteriaUtils {
 
     public static Predicate applyCriteria(BooleanBuilder predicate, ListPath field, String filter) {
         var fcs = new FilterCriterias(filter);
+        fcs.getCriterias().forEach(fc -> predicate.and(apply(field, fc)));
+        return predicate;
+    }
+
+    public static Predicate applyCriteria(BooleanBuilder predicate, EnumPath<?> field, String filter) {
+        var fcs = new EnumFilterCriterias(filter, field.getType());
         fcs.getCriterias().forEach(fc -> predicate.and(apply(field, fc)));
         return predicate;
     }
@@ -59,6 +68,18 @@ public class PredicateCriteriaUtils {
             of(fc.getValues()).forEach(value -> predicate.and(field.contains(value)));
         } else {
             of(fc.getValues()).forEach(value -> predicate.or(field.contains(value)));
+        }
+        return predicate;
+    }
+
+    private static Predicate apply(EnumPath field, EnumFilterCriteria fc) {
+        var predicate = new BooleanBuilder();
+        if (ARRAY_INCLUDES.isOperation(fc)) {
+            fc.getEnumValues().forEach(value -> predicate.or(field.eq(value)));
+        } else if (ARRAY_INCLUDES_ALL.isOperation(fc)) {
+            fc.getEnumValues().forEach(value -> predicate.and(field.eq(value)));
+        } else {
+            fc.getEnumValues().forEach(value -> predicate.or(field.eq(value)));
         }
         return predicate;
     }

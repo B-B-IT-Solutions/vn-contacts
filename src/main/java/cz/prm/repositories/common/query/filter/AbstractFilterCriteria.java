@@ -28,6 +28,12 @@ public abstract class AbstractFilterCriteria {
                 this.values = cMatcher.group(2).split(VALUE_SEPARATOR);
                 return;
             }
+
+            if (filter.contains(VALUE_SEPARATOR)) {
+                this.operation = null;
+                this.values = filter.split(VALUE_SEPARATOR);
+                return;
+            }
         }
         this.operation = null;
         this.values = nonNull(filter) ? new String[]{filter} : new String[0];

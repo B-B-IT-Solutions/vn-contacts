@@ -1,6 +1,8 @@
 package cz.prm.controllers.dto.task;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import cz.prm.domain.task.Priority;
+import cz.prm.domain.task.Status;
 import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,14 +19,20 @@ public class TaskDto {
     @JsonProperty("contactId")
     private Long contactId;
 
-    @JsonProperty("title")
-    private String title;
+    @JsonProperty("name")
+    private String name;
 
     @JsonProperty("description")
     private String description;
 
-    @JsonProperty("completed")
-    private boolean completed;
+    @JsonProperty("outcomes")
+    private String outcomes;
+
+    @JsonProperty("status")
+    private Status status;
+
+    @JsonProperty("priority")
+    private Priority priority;
 
     @JsonProperty("dueDate")
     private Instant dueDate;

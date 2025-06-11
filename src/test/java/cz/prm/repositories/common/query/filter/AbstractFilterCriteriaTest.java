@@ -18,10 +18,20 @@ class AbstractFilterCriteriaTest {
         assertThat(fc2.getOperation()).isNull();
         assertThat(fc2.getValues()).containsExactly("");
 
-        var value = uuid();
-        var fc3 = new DummyFilterCriteria(value);
+        var value1 = uuid();
+        var fc3 = new DummyFilterCriteria(value1);
         assertThat(fc3.getOperation()).isNull();
-        assertThat(fc3.getValues()).containsExactly(value);
+        assertThat(fc3.getValues()).containsExactly(value1);
+
+        var value2 = uuid();
+        var fc4 = new DummyFilterCriteria(format("%s,%s", value1, value2));
+        assertThat(fc4.getOperation()).isNull();
+        assertThat(fc4.getValues()).hasSize(2).containsExactly(value1, value2);
+
+        var value3 = uuid();
+        var fc5 = new DummyFilterCriteria(format("%s,%s,%s", value1, value2, value3));
+        assertThat(fc5.getOperation()).isNull();
+        assertThat(fc5.getValues()).hasSize(3).containsExactly(value1, value2, value3);
     }
 
     @Test

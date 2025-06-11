@@ -164,9 +164,11 @@ class TaskServiceTest {
         assertThat(taskIdDb.getContactId()).isEqualTo(savedTask.getContactId());
         assertThat(taskIdDb.getOwner()).isEqualTo(savedTask.getOwner());
         assertThat(taskIdDb.getCreationDate()).isEqualTo(savedTask.getCreationDate());
-        assertThat(savedTask.getTitle()).isEqualTo(updatedTask.getTitle());
+        assertThat(savedTask.getName()).isEqualTo(updatedTask.getName());
         assertThat(savedTask.getDescription()).isEqualTo(updatedTask.getDescription());
-        assertThat(savedTask.isCompleted()).isEqualTo(updatedTask.isCompleted());
+        assertThat(savedTask.getOutcomes()).isEqualTo(updatedTask.getOutcomes());
+        assertThat(savedTask.getStatus()).isEqualTo(updatedTask.getStatus());
+        assertThat(savedTask.getPriority()).isEqualTo(updatedTask.getPriority());
         assertThat(savedTask.getDueDate()).isEqualTo(updatedTask.getDueDate());
     }
 }

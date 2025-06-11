@@ -9,9 +9,9 @@ public class TasksFilterDto {
 
     private String globalFilter;
 
-    private String title;
+    private String name;
 
-    private Boolean completed;
+    private String status;
 
     private String dueDate;
 }
