@@ -58,18 +58,20 @@ class PredicateCriteriaUtilsTest {
     @Test
     void applyCriteriaListPathArrayIncludesOperationWithMultipleFilterValues() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001,label_002,label_003");
-        var queryPattern = "label_001,label_002,label_003 in contact.labels";
+        var queryPattern = "label_001 in contact.labels || label_002 in contact.labels || label_003 in contact.labels";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QNote.note.categories, "arrIncludes(category_001,category_002,category_003)");
-        queryPattern = "label_001,label_002,label_003 in contact.labels && (category_001 in note.categories || category_002 in note.categories || "
-            + "category_003 in note.categories)";
+        queryPattern =
+            "(label_001 in contact.labels || label_002 in contact.labels || label_003 in contact.labels) && (category_001 in note.categories || "
+                + "category_002 in note.categories || category_003 in note.categories)";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QNote.note.categories, "arrIncludes(category_004,category_005,category_006)");
-        queryPattern = "label_001,label_002,label_003 in contact.labels && (category_001 in note.categories || category_002 in note.categories || "
-            + "category_003 in note.categories) && (category_004 in note.categories || category_005 in note.categories || category_006 in note"
-            + ".categories)";
+        queryPattern =
+            "(label_001 in contact.labels || label_002 in contact.labels || label_003 in contact.labels) && (category_001 in note.categories || "
+                + "category_002 in note.categories || category_003 in note.categories) && (category_004 in note.categories || category_005 in note"
+                + ".categories || category_006 in note.categories)";
         assertThat(predicate).hasToString(queryPattern);
     }
 
@@ -91,20 +93,22 @@ class PredicateCriteriaUtilsTest {
     @Test
     void applyCriteriaListPathArrayIncludesAllOperationWithMultipleFilterValues() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QContact.contact.labels, "label_001,label_002,label_003");
-        var queryPattern = "label_001,label_002,label_003 in contact.labels";
+        var queryPattern = "label_001 in contact.labels || label_002 in contact.labels || label_003 in contact.labels";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QNote.note.categories,
             "arrIncludesAll(category_001,category_002,category_003)");
-        queryPattern = "label_001,label_002,label_003 in contact.labels && category_001 in note.categories && category_002 in note.categories && "
-            + "category_003 in note.categories";
+        queryPattern =
+            "(label_001 in contact.labels || label_002 in contact.labels || label_003 in contact.labels) && category_001 in note.categories && "
+                + "category_002 in note.categories && category_003 in note.categories";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QNote.note.categories,
             "arrIncludesAll(category_004,category_005,category_006)");
-        queryPattern = "label_001,label_002,label_003 in contact.labels && category_001 in note.categories && category_002 in note.categories && "
-            + "category_003 in note.categories && category_004 in note.categories && category_005 in note.categories && category_006 in note"
-            + ".categories";
+        queryPattern =
+            "(label_001 in contact.labels || label_002 in contact.labels || label_003 in contact.labels) && category_001 in note.categories && "
+                + "category_002 in note.categories && category_003 in note.categories && category_004 in note.categories && category_005 in note"
+                + ".categories && category_006 in note.categories";
         assertThat(predicate).hasToString(queryPattern);
     }
 
