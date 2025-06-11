@@ -73,12 +73,12 @@ class TaskPredicatesTest {
 
             filter.setStatus("TO_DO");
             predicate = predicates.tasks(filter);
-            expectedString = format("task.owner.username = %s && containsIc(task.name,title_01) && task.status = 0", user.getUsername());
+            expectedString = format("task.owner.username = %s && containsIc(task.name,title_01) && task.status = TO_DO", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setStatus("IN_PROGRESS");
             predicate = predicates.tasks(filter);
-            expectedString = format("task.owner.username = %s && containsIc(task.name,title_01) && task.status = 2", user.getUsername());
+            expectedString = format("task.owner.username = %s && containsIc(task.name,title_01) && task.status = IN_PROGRESS", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setName(null);
@@ -132,13 +132,13 @@ class TaskPredicatesTest {
 
             filter.setStatus("TO_DO");
             predicate = predicates.contactTasks(17L, filter);
-            expectedString = format("task.owner.username = %s && containsIc(task.name,title_01) && task.status = 0 && task.contactId = 17",
+            expectedString = format("task.owner.username = %s && containsIc(task.name,title_01) && task.status = TO_DO && task.contactId = 17",
                 user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setStatus("IN_PROGRESS");
             predicate = predicates.contactTasks(17L, filter);
-            expectedString = format("task.owner.username = %s && containsIc(task.name,title_01) && task.status = 2 && task.contactId = 17",
+            expectedString = format("task.owner.username = %s && containsIc(task.name,title_01) && task.status = IN_PROGRESS && task.contactId = 17",
                 user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 

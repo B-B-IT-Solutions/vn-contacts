@@ -1,22 +1,12 @@
 package cz.prm.repositories.common.query;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static cz.prm.domain.task.Priority.HIGH;
-import static cz.prm.domain.task.Priority.LOW;
-import static cz.prm.domain.task.Priority.MEDIUM;
-import static cz.prm.domain.task.Status.IN_PROGRESS;
-import static cz.prm.domain.task.Status.TO_DO;
-import static cz.prm.domain.task.Status.WAITING;
 import static cz.prm.utils.TimeUtils.useMockTimeZone;
 import static cz.prm.utils.TimeUtils.useSystemDefaultTimeZone;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.google.common.collect.Lists;
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.contact.querydsl.QContact;
 import cz.prm.domain.note.querydsl.QNote;
-import cz.prm.domain.task.Priority;
-import cz.prm.domain.task.Status;
 import cz.prm.domain.task.querydsl.QTask;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -115,62 +105,68 @@ class PredicateCriteriaUtilsTest {
     @Test
     void applyCriteriaEnumPathArrayIncludesOperation() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.status, "TO_DO");
-        var queryPattern = "task.status = 0";
+        var queryPattern = "task.status = TO_DO";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, "arrIncludes(HIGH)");
-        queryPattern = "task.status = 0 && task.priority = 0";
+        queryPattern = "task.status = TO_DO && task.priority = HIGH";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, "arrIncludes(LOW)");
-        queryPattern = "task.status = 0 && task.priority = 0 && task.priority = 2";
+        queryPattern = "task.status = TO_DO && task.priority = HIGH && task.priority = LOW";
         assertThat(predicate).hasToString(queryPattern);
     }
 
     @Test
     void applyCriteriaEnumPathArrayIncludesOperationWithMultipleFilterValues() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.status, "TO_DO,WAITING,IN_PROGRESS");
-        var queryPattern = "task.status = 0 || task.status = 1 || task.status = 2";
+        var queryPattern = "task.status = TO_DO || task.status = WAITING || task.status = IN_PROGRESS";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, "arrIncludes(HIGH,MEDIUM,LOW)");
-        queryPattern = "(task.status = 0 || task.status = 1 || task.status = 2) && (task.priority = 0 || task.priority = 1 || task.priority = 2)";
+        queryPattern =
+            "(task.status = TO_DO || task.status = WAITING || task.status = IN_PROGRESS) && (task.priority = HIGH || task.priority = MEDIUM || "
+                + "task.priority = LOW)";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, "arrIncludes(HIGH,LOW)");
-        queryPattern = "(task.status = 0 || task.status = 1 || task.status = 2) && (task.priority = 0 || task.priority = 1 || task.priority = 2) &&"
-            + " (task.priority = 0 || task.priority = 2)";
+        queryPattern =
+            "(task.status = TO_DO || task.status = WAITING || task.status = IN_PROGRESS) && (task.priority = HIGH || task.priority = MEDIUM || task"
+                + ".priority = LOW) &&" + " (task.priority = HIGH || task.priority = LOW)";
         assertThat(predicate).hasToString(queryPattern);
     }
 
     @Test
     void applyCriteriaEnumPathArrayIncludesAllOperation() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.status, "TO_DO");
-        var queryPattern = "task.status = 0";
+        var queryPattern = "task.status = TO_DO";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, "arrIncludesAll(HIGH)");
-        queryPattern = "task.status = 0 && task.priority = 0";
+        queryPattern = "task.status = TO_DO && task.priority = HIGH";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, "arrIncludesAll(LOW)");
-        queryPattern = "task.status = 0 && task.priority = 0 && task.priority = 2";
+        queryPattern = "task.status = TO_DO && task.priority = HIGH && task.priority = LOW";
         assertThat(predicate).hasToString(queryPattern);
     }
 
     @Test
     void applyCriteriaEnumPathArrayIncludesAllOperationWithMultipleFilterValues() {
         var predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.status, "TO_DO,WAITING,IN_PROGRESS");
-        var queryPattern = "task.status = 0 || task.status = 1 || task.status = 2";
+        var queryPattern = "task.status = TO_DO || task.status = WAITING || task.status = IN_PROGRESS";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, "arrIncludesAll(HIGH,MEDIUM,LOW)");
-        queryPattern = "(task.status = 0 || task.status = 1 || task.status = 2) && task.priority = 0 && task.priority = 1 && task.priority = 2";
+        queryPattern =
+            "(task.status = TO_DO || task.status = WAITING || task.status = IN_PROGRESS) && task.priority = HIGH && task.priority = MEDIUM &&"
+                + " task.priority = LOW";
         assertThat(predicate).hasToString(queryPattern);
 
         predicate = PredicateCriteriaUtils.applyCriteria(mockPredicate, QTask.task.priority, "arrIncludesAll(HIGH,LOW)");
-        queryPattern = "(task.status = 0 || task.status = 1 || task.status = 2) && task.priority = 0 && task.priority = 1 && task.priority = 2 && "
-            + "task.priority = 0 && task.priority = 2";
+        queryPattern =
+            "(task.status = TO_DO || task.status = WAITING || task.status = IN_PROGRESS) && task.priority = HIGH && task.priority = MEDIUM && task"
+                + ".priority = LOW && task.priority = HIGH && task.priority = LOW";
         assertThat(predicate).hasToString(queryPattern);
     }
 
