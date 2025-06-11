@@ -4,15 +4,12 @@ import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.stream.Streams.of;
 
 import java.lang.reflect.InvocationTargetException;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import lombok.Getter;
 
 @Getter
 public class EnumFilterCriteria extends AbstractFilterCriteria {
 
-    private static final String DATE_FORMAT = "dd MMM yyyy";
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
     private Class<?> filterType;
 
     public EnumFilterCriteria(String filter, Class<?> filterType) {

@@ -22,7 +22,7 @@ class TasksFilterTest {
     }
 
     @Test
-    void isTitle() {
+    void isName() {
         var filter = new TasksFilter();
         assertThat(filter.isName()).isFalse();
         filter.setName(null);
