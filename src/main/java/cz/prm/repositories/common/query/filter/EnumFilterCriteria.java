@@ -1,6 +1,7 @@
 package cz.prm.repositories.common.query.filter;
 
 import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.stream.Streams.of;
 
 import java.lang.reflect.InvocationTargetException;
@@ -18,7 +19,7 @@ public class EnumFilterCriteria extends AbstractFilterCriteria {
     }
 
     public List<Comparable> getEnumValues() {
-        return of(values).map(this::toOrdinal).collect(toList());
+        return of(values).filter(v -> isNotBlank(v)).map(v -> v.trim()).map(this::toOrdinal).collect(toList());
     }
 
     private Integer toOrdinal(String filter) {
