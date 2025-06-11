@@ -7,9 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import cz.prm.domain.task.Status;
-import java.lang.reflect.InvocationTargetException;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.shaded.org.apache.commons.lang3.NotImplementedException;
 
 class EnumFilterCriteriaTest {
 
@@ -22,13 +20,13 @@ class EnumFilterCriteriaTest {
         assertThat(fc.getEnumValues()).isEmpty();
 
         fc = new EnumFilterCriteria("TO_DO", Status.class);
-        assertThat(fc.getEnumValues()).containsExactly(TO_DO.ordinal());
+        assertThat(fc.getEnumValues()).containsExactly(TO_DO);
 
         fc = new EnumFilterCriteria("TO_DO,  WAITING", Status.class);
-        assertThat(fc.getEnumValues()).containsExactly(TO_DO.ordinal(), WAITING.ordinal());
+        assertThat(fc.getEnumValues()).containsExactly(TO_DO, WAITING);
 
         fc = new EnumFilterCriteria("TO_DO,WAITING,IN_PROGRESS", Status.class);
-        assertThat(fc.getEnumValues()).containsExactly(TO_DO.ordinal(), WAITING.ordinal(), IN_PROGRESS.ordinal());
+        assertThat(fc.getEnumValues()).containsExactly(TO_DO, WAITING, IN_PROGRESS);
     }
 
     @Test
@@ -40,28 +38,11 @@ class EnumFilterCriteriaTest {
         final var fc2 = new EnumFilterCriteria("inaccessibleField", DummyClass1.class);
         exception = assertThrows(IllegalArgumentException.class, () -> fc2.getEnumValues());
         assertThat(exception.getCause()).isInstanceOf(IllegalAccessException.class);
-
-        final var fc3 = new EnumFilterCriteria("accessibleField", DummyClass1.class);
-        exception = assertThrows(IllegalArgumentException.class, () -> fc3.getEnumValues());
-        assertThat(exception.getCause()).isInstanceOf(NoSuchMethodException.class);
-
-        final var fc4 = new EnumFilterCriteria("accessibleField", DummyClass2.class);
-        exception = assertThrows(IllegalArgumentException.class, () -> fc4.getEnumValues());
-        assertThat(exception.getCause()).isInstanceOf(InvocationTargetException.class);
     }
 
     private static class DummyClass1 {
 
         private static DummyClass1 inaccessibleField = new DummyClass1();
         public static DummyClass1 accessibleField = new DummyClass1();
-    }
-
-    private static class DummyClass2 {
-
-        public static DummyClass2 accessibleField = new DummyClass2();
-
-        public void ordinal() {
-            throw new NotImplementedException("");
-        }
     }
 }

@@ -207,12 +207,12 @@ public class TaskComponentTestBase extends BusinessComponentTestBase {
                 sb.append("&");
             }
             if (isNotEmpty(filterDto.getName())) {
-                sb.append("filter.title=");
+                sb.append("filter.name=");
                 sb.append(filterDto.getName());
                 sb.append("&");
             }
             if (nonNull(filterDto.getStatus())) {
-                sb.append("filter.completed=");
+                sb.append("filter.status=");
                 sb.append(filterDto.getStatus());
                 sb.append("&");
             }

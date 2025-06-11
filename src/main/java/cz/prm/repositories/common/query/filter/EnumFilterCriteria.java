@@ -22,13 +22,11 @@ public class EnumFilterCriteria extends AbstractFilterCriteria {
         return of(values).filter(v -> isNotBlank(v)).map(v -> v.trim()).map(this::toOrdinal).collect(toList());
     }
 
-    private Integer toOrdinal(String filter) {
+    private Enum toOrdinal(String filter) {
         try {
             var constant = filterType.getDeclaredField(filter).get(null);
-            var clazz = constant.getClass();
-            var ordinalMethod = clazz.getMethod("ordinal");
-            return (Integer) ordinalMethod.invoke(constant);
-        } catch (NoSuchMethodException | NoSuchFieldException | InvocationTargetException | IllegalAccessException e) {
+            return (Enum) constant;
+        } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new IllegalArgumentException("Unrecognized enum type!", e);
         }
     }

@@ -1,8 +1,6 @@
 package cz.prm.business.tasks;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static cz.prm.domain.task.Status.IN_PROGRESS;
-import static cz.prm.domain.task.Status.TO_DO;
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
@@ -474,6 +472,10 @@ public class TaskComponentTest extends TaskComponentTestBase {
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
+        filter.setStatus("TO_DO,IN_PROGRESS");
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
         queryDto = tasksQueryDto();
         filter = queryDto.getFilter();
 
@@ -675,6 +677,10 @@ public class TaskComponentTest extends TaskComponentTestBase {
         filter.setStatus("IN_PROGRESS");
         pageDto = user1GetTasksByContactId(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setStatus("TO_DO,IN_PROGRESS");
+        pageDto = user1GetTasksByContactId(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
 
         queryDto = tasksQueryDto();
         filter = queryDto.getFilter();
