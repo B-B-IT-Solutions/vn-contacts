@@ -28,14 +28,14 @@ public class ReferralService {
 
     public Page<Referral> getReferrals(ReferralsQuery query) {
         var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
-        var predicate = predicates.referrals();
+        var predicate = predicates.referrals(query.getFilter());
         var page = repository.findAll(predicate, pageRequest);
         return new Page<>(page);
     }
 
     public Page<Referral> getContactReferrals(Long contactId, ReferralsQuery query) {
         var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
-        var predicate = predicates.byContactId(contactId);
+        var predicate = predicates.contactReferrals(contactId);
         var page = repository.findAll(predicate, pageRequest);
         return new Page<>(page);
     }
@@ -60,13 +60,13 @@ public class ReferralService {
     }
 
     public void deleteByContactId(Long contactId) {
-        var predicate = predicates.byContactId(contactId);
+        var predicate = predicates.contactReferrals(contactId);
         var notes = repository.findAll(predicate);
         repository.deleteAll(notes);
     }
 
     private void updateReferralFields(Referral savedReferral, Referral updatedReferral) {
-        savedReferral.setTitle(updatedReferral.getTitle());
+        savedReferral.setName(updatedReferral.getName());
         savedReferral.setDescription(updatedReferral.getDescription());
         savedReferral.setRecurrence(updatedReferral.getRecurrence());
         updateRecurrenceFields(savedReferral.getRecurrence(), updatedReferral.getRecurrence());

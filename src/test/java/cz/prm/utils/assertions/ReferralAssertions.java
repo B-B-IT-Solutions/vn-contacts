@@ -63,7 +63,7 @@ public class ReferralAssertions {
     public static void assertReferral(Referral referral, ReferralDto dto) {
         assertThat(referral.getReferralId()).isEqualTo(dto.getReferralId());
         assertThat(referral.getContactId()).isEqualTo(dto.getContactId());
-        assertThat(referral.getTitle()).isEqualTo(dto.getTitle());
+        assertThat(referral.getName()).isEqualTo(dto.getName());
         assertThat(referral.getDescription()).isEqualTo(dto.getDescription());
         assertThat(referral.getRecurrence().getValue()).isNotBlank().isEqualTo(dto.getRecurrence());
         assertThat(referral.getLastEditDate()).isEqualTo(dto.getLastEditDate());

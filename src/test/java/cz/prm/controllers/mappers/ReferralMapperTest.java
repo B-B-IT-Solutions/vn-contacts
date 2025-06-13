@@ -81,6 +81,7 @@ class ReferralMapperTest {
 
     private void assertNullSafeReferralQuery(ReferralsQuery query) {
         assertThat(query.getPagination()).isNotNull();
+        assertThat(query.getFilter()).isNotNull();
         assertThat(query.getSort()).isEqualTo(DEFAULT_REMINDERS_SORT);
         var pagination = query.getPagination();
         assertThat(pagination.getPageNumber()).isZero();

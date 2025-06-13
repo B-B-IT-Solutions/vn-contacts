@@ -25,7 +25,7 @@ public class ReferralComponentTestAssertions {
     public static void assertReferral(Referral referral, ReferralDto referralDto) {
         assertThat(referral.getReferralId()).isEqualTo(referralDto.getReferralId());
         assertThat(referral.getContactId()).isEqualTo(referralDto.getContactId());
-        assertThat(referral.getTitle()).isEqualTo(referralDto.getTitle());
+        assertThat(referral.getName()).isEqualTo(referralDto.getName());
         assertThat(referral.getDescription()).isEqualTo(referralDto.getDescription());
         assertThat(referral.getRecurrence().getValue()).isEqualTo(referralDto.getRecurrence());
         assertThat(referral.getLastEditDate()).isNotNull();

@@ -30,7 +30,7 @@ public class ReferralUtils {
         var reminder = new Referral();
         reminder.setReferralId(randomLong());
         reminder.setContactId(randomLong());
-        reminder.setTitle(uuid());
+        reminder.setName(uuid());
         reminder.setDescription(uuid());
         reminder.setRecurrence(recurrence());
         reminder.setLastEditDate(now());
@@ -43,7 +43,7 @@ public class ReferralUtils {
         var reminder = new ReferralDto();
         reminder.setReferralId(randomLong());
         reminder.setContactId(randomLong());
-        reminder.setTitle(uuid());
+        reminder.setName(uuid());
         reminder.setDescription(uuid());
         reminder.setRecurrence(uuid());
         reminder.setLastEditDate(now());

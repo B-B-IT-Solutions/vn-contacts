@@ -17,8 +17,8 @@ public class ReferralDto {
     @JsonProperty("contactId")
     private Long contactId;
 
-    @JsonProperty("title")
-    private String title;
+    @JsonProperty("name")
+    private String name;
 
     @JsonProperty("description")
     private String description;

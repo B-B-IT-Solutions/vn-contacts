@@ -54,7 +54,7 @@ class ReferralServiceTest {
         var query = referralsQuery();
         var predicate = new BooleanBuilder();
 
-        when(predicates.referrals()).thenReturn(predicate);
+        when(predicates.referrals(query.getFilter())).thenReturn(predicate);
         when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
         var result = referralService.getReferrals(query);
         assertPage(result, page);
@@ -68,7 +68,7 @@ class ReferralServiceTest {
         var contactId = randomLong();
         var predicate = new BooleanBuilder();
 
-        when(predicates.byContactId(contactId)).thenReturn(predicate);
+        when(predicates.contactReferrals(contactId)).thenReturn(predicate);
         when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
         var result = referralService.getContactReferrals(contactId, query);
         assertPage(result, page);
@@ -151,7 +151,7 @@ class ReferralServiceTest {
         var referrals = referrals();
         var contactId = randomLong();
         var predicate = new BooleanBuilder();
-        when(predicates.byContactId(eq(contactId))).thenReturn(predicate);
+        when(predicates.contactReferrals(eq(contactId))).thenReturn(predicate);
         when(repository.findAll(predicate)).thenReturn(referrals);
 
         referralService.deleteByContactId(contactId);
@@ -163,7 +163,7 @@ class ReferralServiceTest {
         assertThat(referralIdDb.getContactId()).isEqualTo(savedReferral.getContactId());
         assertThat(referralIdDb.getOwner()).isEqualTo(savedReferral.getOwner());
         assertThat(referralIdDb.getCreationDate()).isEqualTo(savedReferral.getCreationDate());
-        assertThat(savedReferral.getTitle()).isEqualTo(updatedReferral.getTitle());
+        assertThat(savedReferral.getName()).isEqualTo(updatedReferral.getName());
         assertThat(savedReferral.getDescription()).isEqualTo(updatedReferral.getDescription());
         assertThat(savedReferral.getRecurrence()).isEqualTo(updatedReferral.getRecurrence());
     }

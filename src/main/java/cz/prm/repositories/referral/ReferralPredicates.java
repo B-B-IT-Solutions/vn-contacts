@@ -1,22 +1,26 @@
 package cz.prm.repositories.referral;
 
 import static cz.prm.domain.referral.querydsl.QReferral.referral;
+import static cz.prm.repositories.common.query.PredicateCriteriaUtils.applyCriteria;
 import static cz.prm.security.SecurityContextUtils.getUser;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import cz.prm.domain.referral.query.ReferralsFilter;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ReferralPredicates {
 
-    public Predicate byContactId(Long contactId) {
+    public Predicate contactReferrals(Long contactId) {
         var predicate = dataAccessPredicate();
         return predicate.and(referral.contactId.eq(contactId));
     }
 
-    public Predicate referrals() {
-        return dataAccessPredicate();
+    public Predicate referrals(ReferralsFilter filter) {
+        var predicate = dataAccessPredicate();
+        return predicate.and(filterPredicates(filter));
     }
 
     public Predicate byReferralId(Long referralId) {
@@ -27,5 +31,17 @@ public class ReferralPredicates {
     private BooleanExpression dataAccessPredicate() {
         var user = getUser();
         return referral.owner.username.eq(user.getUsername());
+    }
+
+    private BooleanBuilder filterPredicates(ReferralsFilter filter) {
+        var predicate = new BooleanBuilder();
+        if (filter.isGlobalFilter()) {
+            predicate.or(referral.name.containsIgnoreCase(filter.getGlobalFilter()));
+            predicate.or(referral.description.containsIgnoreCase(filter.getGlobalFilter()));
+        }
+        if (filter.isName()) {
+            applyCriteria(predicate, referral.name, filter.getName());
+        }
+        return predicate;
     }
 }

@@ -10,6 +10,7 @@ import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.common.query.Pagination;
 import cz.prm.domain.referral.Referral;
+import cz.prm.domain.referral.query.ReferralsFilter;
 import cz.prm.domain.referral.query.ReferralsQuery;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
@@ -40,6 +41,9 @@ public interface ReferralMapper {
     default void afterReferralsQuery(ReferralQueryDto source, @MappingTarget ReferralsQuery target) {
         if (isNull(target.getPagination())) {
             target.setPagination(new Pagination());
+        }
+        if (isNull(target.getFilter())) {
+            target.setFilter(new ReferralsFilter());
         }
         if (isBlank(target.getSort())) {
             target.setSort(DEFAULT_REMINDERS_SORT);

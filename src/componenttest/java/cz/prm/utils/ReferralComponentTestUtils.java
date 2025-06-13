@@ -30,7 +30,7 @@ public class ReferralComponentTestUtils {
     public static Referral reminder(long contactId) {
         var reminder = new Referral();
         reminder.setContactId(contactId);
-        reminder.setTitle(format("Title%s", uuid()));
+        reminder.setName(format("Title%s", uuid()));
         reminder.setDescription(format("Description%s", uuid()));
         reminder.setRecurrence(recurrence());
         return reminder;
@@ -39,7 +39,7 @@ public class ReferralComponentTestUtils {
     public static ReferralDto reminderDto(long contactId) {
         var dto = new ReferralDto();
         dto.setContactId(contactId);
-        dto.setTitle(uuid());
+        dto.setName(uuid());
         dto.setDescription(uuid());
         dto.setRecurrence(uuid());
         return dto;
