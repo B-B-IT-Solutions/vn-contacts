@@ -25,7 +25,7 @@ class ReferralPredicatesTest {
             var user = user();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
             var query = predicates.reminders();
-            var expectedString = format("reminder.owner.username = %s", user.getUsername());
+            var expectedString = format("referral.owner.username = %s", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }
     }
@@ -36,7 +36,7 @@ class ReferralPredicatesTest {
             var user = user();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
             var query = predicates.byReminderId(10L);
-            var expectedString = format("reminder.owner.username = %s && reminder.reminderId = 10", user.getUsername());
+            var expectedString = format("referral.owner.username = %s && referral.reminderId = 10", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }
     }
@@ -47,7 +47,7 @@ class ReferralPredicatesTest {
             var user = user();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
             var query = predicates.byContactId(11L);
-            var expectedString = format("reminder.owner.username = %s && reminder.contactId = 11", user.getUsername());
+            var expectedString = format("referral.owner.username = %s && referral.contactId = 11", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }
     }
