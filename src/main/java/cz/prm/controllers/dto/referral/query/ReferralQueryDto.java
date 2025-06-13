@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReferralQueryDto extends QueryDto {
 
+    private ReferralsFilterDto filter;
 }

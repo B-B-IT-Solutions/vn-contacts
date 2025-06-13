@@ -13,5 +13,6 @@ class ReferralsQueryTest {
         var query = new ReferralsQuery();
         assertThat(query.getSort()).isEqualTo(DEFAULT_REMINDERS_SORT);
         assertThat(query.getPagination()).isNotNull();
+        assertThat(query.getFilter()).isNotNull();
     }
 }
