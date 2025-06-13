@@ -26,7 +26,14 @@ public class ReferralService {
         this.predicates = predicates;
     }
 
-    public Page<Referral> getReferrals(Long contactId, ReferralsQuery query) {
+    public Page<Referral> getReferrals(ReferralsQuery query) {
+        var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
+        var predicate = predicates.referrals();
+        var page = repository.findAll(predicate, pageRequest);
+        return new Page<>(page);
+    }
+
+    public Page<Referral> getContactReferrals(Long contactId, ReferralsQuery query) {
         var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
         var predicate = predicates.byContactId(contactId);
         var page = repository.findAll(predicate, pageRequest);

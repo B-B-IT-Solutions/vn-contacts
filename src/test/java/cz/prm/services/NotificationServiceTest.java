@@ -3,7 +3,7 @@ package cz.prm.services;
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.CommonUtils.page;
 import static cz.prm.utils.ReferralUtils.recurrence;
-import static cz.prm.utils.ReferralUtils.reminder;
+import static cz.prm.utils.ReferralUtils.referral;
 import static cz.prm.utils.TestUtils.randomLong;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -32,15 +32,15 @@ class NotificationServiceTest {
     @Test
     void getNotifications() {
         var contactId = randomLong();
-        var reminder1 = reminder();
+        var reminder1 = referral();
         var recurrence = recurrence();
         reminder1.setRecurrence(recurrence);
-        var reminder2 = reminder();
-        var reminder3 = reminder();
+        var reminder2 = referral();
+        var reminder3 = referral();
         var reminders = newArrayList(reminder1, reminder2, reminder3);
         var page = page(reminders);
 
-        when(referralService.getReferrals(eq(contactId), any(ReferralsQuery.class))).thenReturn(page);
+        when(referralService.getContactReferrals(eq(contactId), any(ReferralsQuery.class))).thenReturn(page);
         notificationService.getNotifications(contactId);
     }
 }

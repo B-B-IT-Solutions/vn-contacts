@@ -2,10 +2,10 @@ package cz.prm.controllers.mappers;
 
 import static cz.prm.utils.CommonUtils.DEFAULT_PAGE_SIZE;
 import static cz.prm.utils.CommonUtils.page;
-import static cz.prm.utils.ReferralUtils.reminder;
-import static cz.prm.utils.ReferralUtils.reminderDto;
-import static cz.prm.utils.ReferralUtils.reminders;
-import static cz.prm.utils.ReferralUtils.remindersQueryDto;
+import static cz.prm.utils.ReferralUtils.referral;
+import static cz.prm.utils.ReferralUtils.referralDto;
+import static cz.prm.utils.ReferralUtils.referrals;
+import static cz.prm.utils.ReferralUtils.referralsQueryDto;
 import static cz.prm.utils.assertions.ReferralAssertions.assertPage;
 import static cz.prm.utils.assertions.ReferralAssertions.assertReferral;
 import static cz.prm.utils.assertions.ReferralAssertions.assertReferralsQuery;
@@ -24,28 +24,28 @@ class ReferralMapperTest {
 
     @Test
     void toPageDto() {
-        var page = page(reminders());
+        var page = page(referrals());
         var dtos = mapper.toPageDto(page);
         assertPage(page, dtos);
     }
 
     @Test
     void toReferralDto() {
-        var reminder = reminder();
+        var reminder = referral();
         var dto = mapper.toReferralDto(reminder);
         assertReferral(reminder, dto);
     }
 
     @Test
     void toReferral() {
-        var dto = reminderDto();
+        var dto = referralDto();
         var reminder = mapper.toReferral(dto);
         assertReferral(reminder, dto);
     }
 
     @Test
     void toReferralsQuery() {
-        var dto = remindersQueryDto();
+        var dto = referralsQueryDto();
         var query = mapper.toReferralsQuery(dto);
         assertReferralsQuery(query, dto);
     }
@@ -58,7 +58,7 @@ class ReferralMapperTest {
 
     @Test
     void toNullSafeReferralsQueryNotNullQuery() {
-        var dto = remindersQueryDto();
+        var dto = referralsQueryDto();
         var query = mapper.toNullSafeReferralsQuery(dto);
         assertReferralsQuery(query, dto);
     }

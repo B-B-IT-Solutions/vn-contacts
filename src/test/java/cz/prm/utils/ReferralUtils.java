@@ -22,11 +22,11 @@ import org.dmfs.rfc5545.recur.RecurrenceRule.Part;
 
 public class ReferralUtils {
 
-    public static List<Referral> reminders() {
-        return newArrayList(reminder(), reminder(), reminder());
+    public static List<Referral> referrals() {
+        return newArrayList(referral(), referral(), referral());
     }
 
-    public static Referral reminder() {
+    public static Referral referral() {
         var reminder = new Referral();
         reminder.setReferralId(randomLong());
         reminder.setContactId(randomLong());
@@ -39,7 +39,7 @@ public class ReferralUtils {
         return reminder;
     }
 
-    public static ReferralDto reminderDto() {
+    public static ReferralDto referralDto() {
         var reminder = new ReferralDto();
         reminder.setReferralId(randomLong());
         reminder.setContactId(randomLong());
@@ -77,14 +77,14 @@ public class ReferralUtils {
         }
     }
 
-    public static ReferralsQuery remindersQuery() {
+    public static ReferralsQuery referralsQuery() {
         var query = new ReferralsQuery();
         query.setPagination(pagination());
         query.setSort(uuid());
         return query;
     }
 
-    public static ReferralQueryDto remindersQueryDto() {
+    public static ReferralQueryDto referralsQueryDto() {
         var query = new ReferralQueryDto();
         query.setPagination(paginationDto());
         query.setSort(uuid());

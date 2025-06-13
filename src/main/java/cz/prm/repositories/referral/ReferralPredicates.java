@@ -10,6 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReferralPredicates {
 
+    public Predicate byContactId(Long contactId) {
+        var predicate = dataAccessPredicate();
+        return predicate.and(referral.contactId.eq(contactId));
+    }
+
     public Predicate referrals() {
         return dataAccessPredicate();
     }
@@ -17,11 +22,6 @@ public class ReferralPredicates {
     public Predicate byReferralId(Long referralId) {
         var predicate = dataAccessPredicate();
         return predicate.and(referral.referralId.eq(referralId));
-    }
-
-    public Predicate byContactId(Long contactId) {
-        var predicate = dataAccessPredicate();
-        return predicate.and(referral.contactId.eq(contactId));
     }
 
     private BooleanExpression dataAccessPredicate() {
