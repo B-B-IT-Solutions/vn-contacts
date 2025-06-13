@@ -19,9 +19,9 @@ public class NotificationService {
     }
 
     public void getNotifications(Long contactId) {
-        var reminders = referralService.getReferrals(contactId, new ReferralsQuery());
+        var referrals = referralService.getContactReferrals(contactId, new ReferralsQuery());
 
-        reminders.getContent().stream().filter(r -> r.hasActiveRecurrence()).forEach(r -> {
+        referrals.getContent().stream().filter(r -> r.hasActiveRecurrence()).forEach(r -> {
             var rule = r.getRecurrence();
         });
     }

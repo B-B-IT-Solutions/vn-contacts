@@ -1,10 +1,10 @@
 package cz.prm.controllers;
 
 import static cz.prm.utils.CommonUtils.page;
-import static cz.prm.utils.ReferralUtils.reminder;
-import static cz.prm.utils.ReferralUtils.reminderDto;
-import static cz.prm.utils.ReferralUtils.reminders;
-import static cz.prm.utils.ReferralUtils.remindersQueryDto;
+import static cz.prm.utils.ReferralUtils.referral;
+import static cz.prm.utils.ReferralUtils.referralDto;
+import static cz.prm.utils.ReferralUtils.referrals;
+import static cz.prm.utils.ReferralUtils.referralsQueryDto;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.ReferralAssertions.assertPage;
 import static cz.prm.utils.assertions.ReferralAssertions.assertReferral;
@@ -33,7 +33,7 @@ class ReferralControllerTest {
     @Mock
     private ReferralService referralService;
     @Captor
-    private ArgumentCaptor<Referral> reminderCapt;
+    private ArgumentCaptor<Referral> referralCapt;
     @Captor
     private ArgumentCaptor<ReferralsQuery> cQueryCapt;
 
@@ -47,49 +47,62 @@ class ReferralControllerTest {
 
     @Test
     void getReferrals() {
-        var page = page(reminders());
-        var queryDto = remindersQueryDto();
-        var contactId = randomLong();
-        when(referralService.getReferrals(eq(contactId), any(ReferralsQuery.class))).thenReturn(page);
+        var page = page(referrals());
+        var queryDto = referralsQueryDto();
+        when(referralService.getReferrals(any(ReferralsQuery.class))).thenReturn(page);
 
-        var result = controller.getReferrals(contactId, queryDto);
+        var result = controller.getReferrals(queryDto);
         assertPage(page, result);
-        verify(referralService).getReferrals(eq(contactId), cQueryCapt.capture());
+        verify(referralService).getReferrals(cQueryCapt.capture());
+        var query = cQueryCapt.getValue();
+        assertReferralsQuery(query, queryDto);
+    }
+
+    @Test
+    void getContactReferrals() {
+        var page = page(referrals());
+        var queryDto = referralsQueryDto();
+        var contactId = randomLong();
+        when(referralService.getContactReferrals(eq(contactId), any(ReferralsQuery.class))).thenReturn(page);
+
+        var result = controller.getContactReferrals(contactId, queryDto);
+        assertPage(page, result);
+        verify(referralService).getContactReferrals(eq(contactId), cQueryCapt.capture());
         var query = cQueryCapt.getValue();
         assertReferralsQuery(query, queryDto);
     }
 
     @Test
     void getReferral() {
-        var reminder = reminder();
-        var reminderId = reminder.getReferralId();
-        when(referralService.getReferral(reminderId)).thenReturn(reminder);
-        var result = controller.getReferral(reminderId);
-        assertReferral(reminder, result);
+        var referral = referral();
+        var referralId = referral.getReferralId();
+        when(referralService.getReferral(referralId)).thenReturn(referral);
+        var result = controller.getReferral(referralId);
+        assertReferral(referral, result);
     }
 
     @Test
     void createReferral() {
-        var dto = reminderDto();
+        var dto = referralDto();
         controller.createReferral(dto);
-        verify(referralService).createReferral(reminderCapt.capture());
-        var reminder = reminderCapt.getValue();
-        assertReferral(reminder, dto);
+        verify(referralService).createReferral(referralCapt.capture());
+        var referral = referralCapt.getValue();
+        assertReferral(referral, dto);
     }
 
     @Test
     void updateReferral() {
-        var dto = reminderDto();
+        var dto = referralDto();
         controller.updateReferral(dto.getReferralId(), dto);
-        verify(referralService).updateReferral(eq(dto.getReferralId()), reminderCapt.capture());
-        var reminder = reminderCapt.getValue();
-        assertReferral(reminder, dto);
+        verify(referralService).updateReferral(eq(dto.getReferralId()), referralCapt.capture());
+        var referral = referralCapt.getValue();
+        assertReferral(referral, dto);
     }
 
     @Test
     void deleteReferral() {
-        var reminderId = randomLong();
-        controller.deleteReferral(reminderId);
-        verify(referralService).deleteReferral(reminderId);
+        var referralId = randomLong();
+        controller.deleteReferral(referralId);
+        verify(referralService).deleteReferral(referralId);
     }
 }

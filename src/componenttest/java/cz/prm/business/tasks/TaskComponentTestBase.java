@@ -71,15 +71,15 @@ public class TaskComponentTestBase extends BusinessComponentTestBase {
         return getTasksPage(queryDto, USER_3);
     }
 
-    protected PageDto<TaskDto> user1GetTasksByContactId(Long contactId, TasksQueryDto queryDto) {
+    protected PageDto<TaskDto> user1GetContactTasks(Long contactId, TasksQueryDto queryDto) {
         return getTasksPage(contactId, queryDto, USER_1);
     }
 
-    protected PageDto<TaskDto> user2GetTasksByContactId(Long contactId, TasksQueryDto queryDto) {
+    protected PageDto<TaskDto> user2GetContactTasks(Long contactId, TasksQueryDto queryDto) {
         return getTasksPage(contactId, queryDto, USER_2);
     }
 
-    protected PageDto<TaskDto> user3GetTasksByContactId(Long contactId, TasksQueryDto queryDto) {
+    protected PageDto<TaskDto> user3GetContactTasks(Long contactId, TasksQueryDto queryDto) {
         return getTasksPage(contactId, queryDto, USER_3);
     }
 

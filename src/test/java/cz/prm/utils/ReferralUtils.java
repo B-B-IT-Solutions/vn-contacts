@@ -22,33 +22,33 @@ import org.dmfs.rfc5545.recur.RecurrenceRule.Part;
 
 public class ReferralUtils {
 
-    public static List<Referral> reminders() {
-        return newArrayList(reminder(), reminder(), reminder());
+    public static List<Referral> referrals() {
+        return newArrayList(referral(), referral(), referral());
     }
 
-    public static Referral reminder() {
-        var reminder = new Referral();
-        reminder.setReferralId(randomLong());
-        reminder.setContactId(randomLong());
-        reminder.setTitle(uuid());
-        reminder.setDescription(uuid());
-        reminder.setRecurrence(recurrence());
-        reminder.setLastEditDate(now());
-        reminder.setCreationDate(now());
-        reminder.setOwner(user());
-        return reminder;
+    public static Referral referral() {
+        var referral = new Referral();
+        referral.setReferralId(randomLong());
+        referral.setContactId(randomLong());
+        referral.setName(uuid());
+        referral.setDescription(uuid());
+        referral.setRecurrence(recurrence());
+        referral.setLastEditDate(now());
+        referral.setCreationDate(now());
+        referral.setOwner(user());
+        return referral;
     }
 
-    public static ReferralDto reminderDto() {
-        var reminder = new ReferralDto();
-        reminder.setReferralId(randomLong());
-        reminder.setContactId(randomLong());
-        reminder.setTitle(uuid());
-        reminder.setDescription(uuid());
-        reminder.setRecurrence(uuid());
-        reminder.setLastEditDate(now());
-        reminder.setCreationDate(now());
-        return reminder;
+    public static ReferralDto referralDto() {
+        var referral = new ReferralDto();
+        referral.setReferralId(randomLong());
+        referral.setContactId(randomLong());
+        referral.setName(uuid());
+        referral.setDescription(uuid());
+        referral.setRecurrence(uuid());
+        referral.setLastEditDate(now());
+        referral.setCreationDate(now());
+        return referral;
     }
 
     public static Recurrence recurrence() {
@@ -77,14 +77,14 @@ public class ReferralUtils {
         }
     }
 
-    public static ReferralsQuery remindersQuery() {
+    public static ReferralsQuery referralsQuery() {
         var query = new ReferralsQuery();
         query.setPagination(pagination());
         query.setSort(uuid());
         return query;
     }
 
-    public static ReferralQueryDto remindersQueryDto() {
+    public static ReferralQueryDto referralsQueryDto() {
         var query = new ReferralQueryDto();
         query.setPagination(paginationDto());
         query.setSort(uuid());

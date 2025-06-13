@@ -34,10 +34,10 @@ public class ReferralAssertions {
         assertReferrals(page1.getContent(), page2.getContent());
     }
 
-    public static void assertReferrals(List<Referral> reminders1, List<Referral> reminders2) {
-        assertThat(reminders1).isNotEmpty().hasSameSizeAs(reminders2);
-        reminders1.forEach(c1 -> {
-            var c2 = reminders2.stream().filter(u -> Objects.equals(c1.getContactId(), u.getContactId())).findFirst().get();
+    public static void assertReferrals(List<Referral> referrals1, List<Referral> referrals2) {
+        assertThat(referrals1).isNotEmpty().hasSameSizeAs(referrals2);
+        referrals1.forEach(c1 -> {
+            var c2 = referrals2.stream().filter(u -> Objects.equals(c1.getContactId(), u.getContactId())).findFirst().get();
             assertReferral(c1, c2);
         });
     }
@@ -63,7 +63,7 @@ public class ReferralAssertions {
     public static void assertReferral(Referral referral, ReferralDto dto) {
         assertThat(referral.getReferralId()).isEqualTo(dto.getReferralId());
         assertThat(referral.getContactId()).isEqualTo(dto.getContactId());
-        assertThat(referral.getTitle()).isEqualTo(dto.getTitle());
+        assertThat(referral.getName()).isEqualTo(dto.getName());
         assertThat(referral.getDescription()).isEqualTo(dto.getDescription());
         assertThat(referral.getRecurrence().getValue()).isNotBlank().isEqualTo(dto.getRecurrence());
         assertThat(referral.getLastEditDate()).isEqualTo(dto.getLastEditDate());

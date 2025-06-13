@@ -28,33 +28,40 @@ public class ReferralController {
         this.mapper = mapper;
     }
 
-    @GetMapping("/contact/{contactId}")
-    public PageDto<ReferralDto> getReferrals(@PathVariable("contactId") Long contactId, ReferralQueryDto queryDto) {
+    @GetMapping
+    public PageDto<ReferralDto> getReferrals(ReferralQueryDto queryDto) {
         var query = mapper.toNullSafeReferralsQuery(queryDto);
-        var reminders = referralService.getReferrals(contactId, query);
-        return mapper.toPageDto(reminders);
+        var referrals = referralService.getReferrals(query);
+        return mapper.toPageDto(referrals);
     }
 
-    @GetMapping("/reminder/{reminderId}")
-    public ReferralDto getReferral(@PathVariable("reminderId") Long reminderId) {
-        var reminder = referralService.getReferral(reminderId);
-        return mapper.toReferralDto(reminder);
+    @GetMapping("/contact/{contactId}")
+    public PageDto<ReferralDto> getContactReferrals(@PathVariable("contactId") Long contactId, ReferralQueryDto queryDto) {
+        var query = mapper.toNullSafeReferralsQuery(queryDto);
+        var referrals = referralService.getContactReferrals(contactId, query);
+        return mapper.toPageDto(referrals);
+    }
+
+    @GetMapping("/reminder/{referralId}")
+    public ReferralDto getReferral(@PathVariable("referralId") Long referralId) {
+        var referral = referralService.getReferral(referralId);
+        return mapper.toReferralDto(referral);
     }
 
     @PostMapping("/reminder")
     public void createReferral(@RequestBody ReferralDto dto) {
-        var reminder = mapper.toReferral(dto);
-        referralService.createReferral(reminder);
+        var referral = mapper.toReferral(dto);
+        referralService.createReferral(referral);
     }
 
-    @PutMapping("/reminder/{reminderId}")
-    public void updateReferral(@PathVariable("reminderId") Long reminderId, @RequestBody ReferralDto dto) {
-        var reminder = mapper.toReferral(dto);
-        referralService.updateReferral(reminderId, reminder);
+    @PutMapping("/reminder/{referralId}")
+    public void updateReferral(@PathVariable("referralId") Long referralId, @RequestBody ReferralDto dto) {
+        var referral = mapper.toReferral(dto);
+        referralService.updateReferral(referralId, referral);
     }
 
-    @DeleteMapping("/reminder/{reminderId}")
-    public void deleteReferral(@PathVariable("reminderId") Long reminderId) {
-        referralService.deleteReferral(reminderId);
+    @DeleteMapping("/reminder/{referralId}")
+    public void deleteReferral(@PathVariable("referralId") Long referralId) {
+        referralService.deleteReferral(referralId);
     }
 }

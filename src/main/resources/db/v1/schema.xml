@@ -161,7 +161,7 @@
 						<constraints primaryKey="true" primaryKeyName="referral_pk" nullable="false"/>
 				 </column>
 				 <column name="contact_id" type="BIGINT"/>
-				 <column name="title" type="VARCHAR(1000)"/>
+				 <column name="name" type="VARCHAR(1000)"/>
 				 <column name="description" type="TEXT"/>
 				 <column name="recurrence_id" type="BIGINT"/>
 				 <column name="last_edit_date" type="TIMESTAMP WITH TIME ZONE"/>

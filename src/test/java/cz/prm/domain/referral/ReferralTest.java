@@ -10,19 +10,19 @@ class ReferralTest {
 
     @Test
     void hasActiveRecurrence() {
-        var reminder = new Referral();
-        assertThat(reminder.hasActiveRecurrence()).isFalse();
+        var referral = new Referral();
+        assertThat(referral.hasActiveRecurrence()).isFalse();
 
-        reminder.setRecurrence(null);
-        assertThat(reminder.hasActiveRecurrence()).isFalse();
+        referral.setRecurrence(null);
+        assertThat(referral.hasActiveRecurrence()).isFalse();
 
         var recurrence = mock(Recurrence.class);
         when(recurrence.hasActiveRule()).thenReturn(false);
 
-        reminder.setRecurrence(recurrence);
-        assertThat(reminder.hasActiveRecurrence()).isFalse();
+        referral.setRecurrence(recurrence);
+        assertThat(referral.hasActiveRecurrence()).isFalse();
 
         when(recurrence.hasActiveRule()).thenReturn(true);
-        assertThat(reminder.hasActiveRecurrence()).isTrue();
+        assertThat(referral.hasActiveRecurrence()).isTrue();
     }
 }

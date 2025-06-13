@@ -9,6 +9,7 @@ import static org.assertj.core.util.Lists.newArrayList;
 import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.controllers.dto.referral.ReferralDto;
 import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
+import cz.prm.controllers.dto.referral.query.ReferralsFilterDto;
 import cz.prm.domain.referral.Recurrence;
 import cz.prm.domain.referral.Referral;
 import java.util.List;
@@ -19,27 +20,27 @@ import org.dmfs.rfc5545.recur.RecurrenceRule.Part;
 
 public class ReferralComponentTestUtils {
 
-    public static List<Referral> reminders() {
-        return newArrayList(reminder(), reminder(), reminder());
+    public static List<Referral> referrals() {
+        return newArrayList(referral(), referral(), referral());
     }
 
-    public static Referral reminder() {
-        return reminder(randomLong());
+    public static Referral referral() {
+        return referral(randomLong());
     }
 
-    public static Referral reminder(long contactId) {
-        var reminder = new Referral();
-        reminder.setContactId(contactId);
-        reminder.setTitle(format("Title%s", uuid()));
-        reminder.setDescription(format("Description%s", uuid()));
-        reminder.setRecurrence(recurrence());
-        return reminder;
+    public static Referral referral(long contactId) {
+        var referral = new Referral();
+        referral.setContactId(contactId);
+        referral.setName(format("Title-%s-End", uuid()));
+        referral.setDescription(format("Description%s", uuid()));
+        referral.setRecurrence(recurrence());
+        return referral;
     }
 
-    public static ReferralDto reminderDto(long contactId) {
+    public static ReferralDto referralDto(long contactId) {
         var dto = new ReferralDto();
         dto.setContactId(contactId);
-        dto.setTitle(uuid());
+        dto.setName(uuid());
         dto.setDescription(uuid());
         dto.setRecurrence(uuid());
         return dto;
@@ -64,9 +65,10 @@ public class ReferralComponentTestUtils {
         }
     }
 
-    public static ReferralQueryDto remindersQueryDto() {
+    public static ReferralQueryDto referralsQueryDto() {
         var query = new ReferralQueryDto();
         query.setPagination(new PaginationDto());
+        query.setFilter(new ReferralsFilterDto());
         return query;
     }
 }

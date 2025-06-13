@@ -45,8 +45,8 @@ public class Referral {
     @Column(name = "CONTACT_ID")
     private Long contactId;
 
-    @Column(name = "TITLE")
-    private String title;
+    @Column(name = "NAME")
+    private String name;
 
     @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
     private String description;
