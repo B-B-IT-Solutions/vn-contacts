@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReferralPredicates {
 
-    public Predicate reminders() {
+    public Predicate referrals() {
         return dataAccessPredicate();
     }
 

@@ -20,11 +20,11 @@ class ReferralPredicatesTest {
     }
 
     @Test
-    void reminders() {
+    void referrals() {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
             var user = user();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
-            var query = predicates.reminders();
+            var query = predicates.referrals();
             var expectedString = format("referral.owner.username = %s", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }

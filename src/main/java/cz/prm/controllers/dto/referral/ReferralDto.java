@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ReferralDto {
 
-    @JsonProperty("reminderId")
+    @JsonProperty("referralId")
     private Long referralId;
 
     @JsonProperty("contactId")
