@@ -476,6 +476,130 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
     }
 
     @Test
+    void getContactReferralsFilters() {
+        var queryDto = referralsQueryDto();
+        var contactId = randomLong();
+        var pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        var user1Tasks = createTasks(USER_1, 21);
+        var userTask1 = user1Tasks.get(0);
+        var userTask = user1Tasks.get(0);
+        contactId = userTask.getContactId();
+
+        queryDto = referralsQueryDto();
+        queryDto.setFilter(null);
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        queryDto = referralsQueryDto();
+        var filter = queryDto.getFilter();
+
+        filter.setGlobalFilter(userTask1.getName());
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setGlobalFilter(userTask1.getDescription());
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setGlobalFilter(userTask1.getDescription());
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setGlobalFilter(uuid());
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        queryDto = referralsQueryDto();
+        filter = queryDto.getFilter();
+
+        filter.setName(userTask1.getName());
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setName(uuid());
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setName(startsWithFilter("Title"));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setName(startsWithFilter(userTask1.getName()));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setName(startsWithFilter("Q"));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setName(startsWithFilter(uuid()));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setName(endsWithFilter("End"));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setName(endsWithFilter(userTask1.getName()));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setName(endsWithFilter("Q"));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setName(endsWithFilter(uuid()));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setName(equalsFilter(userTask1.getName()));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setName(equalsFilter("Q"));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setName(equalsFilter(" "));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setName(equalsFilter(uuid()));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setName(notEqualsFilter(userTask1.getName()));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(20);
+
+        filter.setName(notEqualsFilter("Q"));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setName(notEqualsFilter(uuid()));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setName(notEqualsFilter(" "));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setName(notEqualsFilter(uuid()));
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setName(emptyFilter());
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setName(notEmptyFilter());
+        pageDto = user1GetContactReferrals(contactId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+    }
+
+    @Test
     void createReferral() {
         var contact = createContact(USER_1);
         var toCreateDto = referralDto(contact.getContactId());

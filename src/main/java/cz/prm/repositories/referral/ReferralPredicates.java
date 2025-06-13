@@ -13,8 +13,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReferralPredicates {
 
-    public Predicate contactReferrals(Long contactId) {
-        var predicate = dataAccessPredicate();
+    public Predicate contactReferrals(Long contactId, ReferralsFilter filter) {
+        var predicate = new BooleanBuilder();
+        predicate.and(referrals(filter));
         return predicate.and(referral.contactId.eq(contactId));
     }
 

@@ -6,6 +6,7 @@ import static java.lang.String.format;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.referral.Recurrence;
 import cz.prm.domain.referral.Referral;
+import cz.prm.domain.referral.query.ReferralsFilter;
 import cz.prm.domain.referral.query.ReferralsQuery;
 import cz.prm.repositories.referral.ReferralPredicates;
 import cz.prm.repositories.referral.ReferralRepository;
@@ -35,7 +36,7 @@ public class ReferralService {
 
     public Page<Referral> getContactReferrals(Long contactId, ReferralsQuery query) {
         var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
-        var predicate = predicates.contactReferrals(contactId);
+        var predicate = predicates.contactReferrals(contactId, query.getFilter());
         var page = repository.findAll(predicate, pageRequest);
         return new Page<>(page);
     }
@@ -60,7 +61,7 @@ public class ReferralService {
     }
 
     public void deleteByContactId(Long contactId) {
-        var predicate = predicates.contactReferrals(contactId);
+        var predicate = predicates.contactReferrals(contactId, new ReferralsFilter());
         var notes = repository.findAll(predicate);
         repository.deleteAll(notes);
     }

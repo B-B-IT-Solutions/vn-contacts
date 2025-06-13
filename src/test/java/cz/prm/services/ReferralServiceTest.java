@@ -17,6 +17,7 @@ import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.referral.Referral;
+import cz.prm.domain.referral.query.ReferralsFilter;
 import cz.prm.repositories.referral.ReferralPredicates;
 import cz.prm.repositories.referral.ReferralRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -68,7 +69,7 @@ class ReferralServiceTest {
         var contactId = randomLong();
         var predicate = new BooleanBuilder();
 
-        when(predicates.contactReferrals(contactId)).thenReturn(predicate);
+        when(predicates.contactReferrals(contactId, query.getFilter())).thenReturn(predicate);
         when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
         var result = referralService.getContactReferrals(contactId, query);
         assertPage(result, page);
@@ -151,7 +152,7 @@ class ReferralServiceTest {
         var referrals = referrals();
         var contactId = randomLong();
         var predicate = new BooleanBuilder();
-        when(predicates.contactReferrals(eq(contactId))).thenReturn(predicate);
+        when(predicates.contactReferrals(eq(contactId), any(ReferralsFilter.class))).thenReturn(predicate);
         when(repository.findAll(predicate)).thenReturn(referrals);
 
         referralService.deleteByContactId(contactId);
