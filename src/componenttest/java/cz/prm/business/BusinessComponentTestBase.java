@@ -3,7 +3,7 @@ package cz.prm.business;
 import static cz.prm.utils.ContactComponentTestUtils.about;
 import static cz.prm.utils.ContactComponentTestUtils.contact;
 import static cz.prm.utils.NoteComponentTestUtils.note;
-import static cz.prm.utils.ReferralComponentTestUtils.reminder;
+import static cz.prm.utils.ReferralComponentTestUtils.referral;
 import static cz.prm.utils.SecurityContextComponentTestUtils.clearContext;
 import static cz.prm.utils.SecurityContextComponentTestUtils.ensureUserContext;
 import static cz.prm.utils.TaskComponentTestUtils.task;
@@ -125,7 +125,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
 
     protected Referral createReferral(ComponentTestUser user, Contact contact) {
         ensureUserContext(user);
-        var reminder = reminder(contact.getContactId());
+        var reminder = referral(contact.getContactId());
         var savedReferral = referralRepository.save(reminder);
         clearContext();
         return savedReferral;

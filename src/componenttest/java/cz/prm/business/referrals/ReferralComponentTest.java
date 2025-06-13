@@ -12,8 +12,8 @@ import static cz.prm.utils.ComponentTestUtils.notEqualsFilter;
 import static cz.prm.utils.ComponentTestUtils.randomLong;
 import static cz.prm.utils.ComponentTestUtils.startsWithFilter;
 import static cz.prm.utils.ComponentTestUtils.uuid;
+import static cz.prm.utils.ReferralComponentTestUtils.referralDto;
 import static cz.prm.utils.ReferralComponentTestUtils.referralsQueryDto;
-import static cz.prm.utils.ReferralComponentTestUtils.reminderDto;
 import static cz.prm.utils.assertions.ReferralComponentTestAssertions.assertReferral;
 import static cz.prm.utils.assertions.ReferralComponentTestAssertions.assertReferrals;
 import static java.util.Collections.sort;
@@ -478,7 +478,7 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
     @Test
     void createReferral() {
         var contact = createContact(USER_1);
-        var toCreateDto = reminderDto(contact.getContactId());
+        var toCreateDto = referralDto(contact.getContactId());
         user1CreateReferral(toCreateDto);
         var reminder = getReferralFromDb(toCreateDto);
         var reminderId = reminder.getReferralId();
@@ -489,7 +489,7 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         user3GetReferralExpectNotFound(reminderId);
 
         contact = createContact(USER_2);
-        toCreateDto = reminderDto(contact.getContactId());
+        toCreateDto = referralDto(contact.getContactId());
         user2CreateReferral(toCreateDto);
         reminder = getReferralFromDb(toCreateDto);
         reminderId = reminder.getReferralId();
@@ -500,7 +500,7 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         user3GetReferralExpectNotFound(reminderId);
 
         contact = createContact(USER_3);
-        toCreateDto = reminderDto(contact.getContactId());
+        toCreateDto = referralDto(contact.getContactId());
         user3CreateReferral(toCreateDto);
         reminder = getReferralFromDb(toCreateDto);
         reminderId = reminder.getReferralId();

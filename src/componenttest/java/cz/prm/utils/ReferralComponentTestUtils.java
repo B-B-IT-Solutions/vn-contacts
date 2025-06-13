@@ -20,24 +20,24 @@ import org.dmfs.rfc5545.recur.RecurrenceRule.Part;
 
 public class ReferralComponentTestUtils {
 
-    public static List<Referral> reminders() {
-        return newArrayList(reminder(), reminder(), reminder());
+    public static List<Referral> referrals() {
+        return newArrayList(referral(), referral(), referral());
     }
 
-    public static Referral reminder() {
-        return reminder(randomLong());
+    public static Referral referral() {
+        return referral(randomLong());
     }
 
-    public static Referral reminder(long contactId) {
-        var reminder = new Referral();
-        reminder.setContactId(contactId);
-        reminder.setName(format("Title%s", uuid()));
-        reminder.setDescription(format("Description%s", uuid()));
-        reminder.setRecurrence(recurrence());
-        return reminder;
+    public static Referral referral(long contactId) {
+        var referral = new Referral();
+        referral.setContactId(contactId);
+        referral.setName(format("Title-%s-End", uuid()));
+        referral.setDescription(format("Description%s", uuid()));
+        referral.setRecurrence(recurrence());
+        return referral;
     }
 
-    public static ReferralDto reminderDto(long contactId) {
+    public static ReferralDto referralDto(long contactId) {
         var dto = new ReferralDto();
         dto.setContactId(contactId);
         dto.setName(uuid());
