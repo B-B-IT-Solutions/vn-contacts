@@ -26,30 +26,30 @@ public class ReferralService {
         this.predicates = predicates;
     }
 
-    public Page<Referral> getReminders(Long contactId, ReferralsQuery query) {
+    public Page<Referral> getReferrals(Long contactId, ReferralsQuery query) {
         var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
         var predicate = predicates.byContactId(contactId);
         var page = repository.findAll(predicate, pageRequest);
         return new Page<>(page);
     }
 
-    public Referral getReminder(Long reminderId) {
-        return getReminderById(reminderId);
+    public Referral getReferral(Long reminderId) {
+        return getReferralById(reminderId);
     }
 
-    public void createReminder(Referral referral) {
+    public void createReferral(Referral referral) {
         repository.save(referral);
     }
 
-    public void updateReminder(Long reminderId, Referral updatedReferral) {
-        var savedReminder = getReminderById(reminderId);
-        updateReminderFields(savedReminder, updatedReferral);
-        repository.save(savedReminder);
+    public void updateReferral(Long reminderId, Referral updatedReferral) {
+        var savedReferral = getReferralById(reminderId);
+        updateReferralFields(savedReferral, updatedReferral);
+        repository.save(savedReferral);
     }
 
-    public void deleteReminder(Long reminderId) {
-        var savedReminder = getReminderById(reminderId);
-        repository.deleteById(savedReminder.getReminderId());
+    public void deleteReferral(Long reminderId) {
+        var savedReferral = getReferralById(reminderId);
+        repository.deleteById(savedReferral.getReferralId());
     }
 
     public void deleteByContactId(Long contactId) {
@@ -58,7 +58,7 @@ public class ReferralService {
         repository.deleteAll(notes);
     }
 
-    private void updateReminderFields(Referral savedReferral, Referral updatedReferral) {
+    private void updateReferralFields(Referral savedReferral, Referral updatedReferral) {
         savedReferral.setTitle(updatedReferral.getTitle());
         savedReferral.setDescription(updatedReferral.getDescription());
         savedReferral.setRecurrence(updatedReferral.getRecurrence());
@@ -70,13 +70,13 @@ public class ReferralService {
         savedRecurrence.resetParsedRule();
     }
 
-    private Referral getReminderById(Long reminderId) {
-        var predicate = predicates.byReminderId(reminderId);
+    private Referral getReferralById(Long reminderId) {
+        var predicate = predicates.byReferralId(reminderId);
         var optional = repository.findOne(predicate);
         return optional.orElseThrow(entityNotFoundSupplier(reminderId));
     }
 
     private Supplier<EntityNotFoundException> entityNotFoundSupplier(Long userId) {
-        return () -> new EntityNotFoundException(format("Reminder for given id=[%s] not found!", userId));
+        return () -> new EntityNotFoundException(format("Referral for given id=[%s] not found!", userId));
     }
 }

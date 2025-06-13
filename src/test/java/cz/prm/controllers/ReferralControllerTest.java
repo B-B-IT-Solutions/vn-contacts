@@ -1,14 +1,14 @@
 package cz.prm.controllers;
 
 import static cz.prm.utils.CommonUtils.page;
-import static cz.prm.utils.ReminderUtils.reminder;
-import static cz.prm.utils.ReminderUtils.reminderDto;
-import static cz.prm.utils.ReminderUtils.reminders;
-import static cz.prm.utils.ReminderUtils.remindersQueryDto;
+import static cz.prm.utils.ReferralUtils.reminder;
+import static cz.prm.utils.ReferralUtils.reminderDto;
+import static cz.prm.utils.ReferralUtils.reminders;
+import static cz.prm.utils.ReferralUtils.remindersQueryDto;
 import static cz.prm.utils.TestUtils.randomLong;
-import static cz.prm.utils.assertions.ReminderAssertions.assertPage;
-import static cz.prm.utils.assertions.ReminderAssertions.assertReminder;
-import static cz.prm.utils.assertions.ReminderAssertions.assertRemindersQuery;
+import static cz.prm.utils.assertions.ReferralAssertions.assertPage;
+import static cz.prm.utils.assertions.ReferralAssertions.assertReferral;
+import static cz.prm.utils.assertions.ReferralAssertions.assertReferralsQuery;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
@@ -37,7 +37,7 @@ class ReferralControllerTest {
     @Captor
     private ArgumentCaptor<ReferralsQuery> cQueryCapt;
 
-    private ReferralMapper mapper = MapperUtils.getReminderMapper();
+    private ReferralMapper mapper = MapperUtils.getReferralMapper();
     private ReferralController controller;
 
     @BeforeEach
@@ -46,50 +46,50 @@ class ReferralControllerTest {
     }
 
     @Test
-    void getReminders() {
+    void getReferrals() {
         var page = page(reminders());
         var queryDto = remindersQueryDto();
         var contactId = randomLong();
-        when(referralService.getReminders(eq(contactId), any(ReferralsQuery.class))).thenReturn(page);
+        when(referralService.getReferrals(eq(contactId), any(ReferralsQuery.class))).thenReturn(page);
 
-        var result = controller.getReminders(contactId, queryDto);
+        var result = controller.getReferrals(contactId, queryDto);
         assertPage(page, result);
-        verify(referralService).getReminders(eq(contactId), cQueryCapt.capture());
+        verify(referralService).getReferrals(eq(contactId), cQueryCapt.capture());
         var query = cQueryCapt.getValue();
-        assertRemindersQuery(query, queryDto);
+        assertReferralsQuery(query, queryDto);
     }
 
     @Test
-    void getReminder() {
+    void getReferral() {
         var reminder = reminder();
-        var reminderId = reminder.getReminderId();
-        when(referralService.getReminder(reminderId)).thenReturn(reminder);
-        var result = controller.getReminder(reminderId);
-        assertReminder(reminder, result);
+        var reminderId = reminder.getReferralId();
+        when(referralService.getReferral(reminderId)).thenReturn(reminder);
+        var result = controller.getReferral(reminderId);
+        assertReferral(reminder, result);
     }
 
     @Test
-    void createReminder() {
+    void createReferral() {
         var dto = reminderDto();
-        controller.createReminder(dto);
-        verify(referralService).createReminder(reminderCapt.capture());
+        controller.createReferral(dto);
+        verify(referralService).createReferral(reminderCapt.capture());
         var reminder = reminderCapt.getValue();
-        assertReminder(reminder, dto);
+        assertReferral(reminder, dto);
     }
 
     @Test
-    void updateReminder() {
+    void updateReferral() {
         var dto = reminderDto();
-        controller.updateReminder(dto.getReminderId(), dto);
-        verify(referralService).updateReminder(eq(dto.getReminderId()), reminderCapt.capture());
+        controller.updateReferral(dto.getReferralId(), dto);
+        verify(referralService).updateReferral(eq(dto.getReferralId()), reminderCapt.capture());
         var reminder = reminderCapt.getValue();
-        assertReminder(reminder, dto);
+        assertReferral(reminder, dto);
     }
 
     @Test
-    void deleteReminder() {
+    void deleteReferral() {
         var reminderId = randomLong();
-        controller.deleteReminder(reminderId);
-        verify(referralService).deleteReminder(reminderId);
+        controller.deleteReferral(reminderId);
+        verify(referralService).deleteReferral(reminderId);
     }
 }

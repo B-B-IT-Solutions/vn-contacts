@@ -2,13 +2,13 @@ package cz.prm.controllers.mappers;
 
 import static cz.prm.utils.CommonUtils.DEFAULT_PAGE_SIZE;
 import static cz.prm.utils.CommonUtils.page;
-import static cz.prm.utils.ReminderUtils.reminder;
-import static cz.prm.utils.ReminderUtils.reminderDto;
-import static cz.prm.utils.ReminderUtils.reminders;
-import static cz.prm.utils.ReminderUtils.remindersQueryDto;
-import static cz.prm.utils.assertions.ReminderAssertions.assertPage;
-import static cz.prm.utils.assertions.ReminderAssertions.assertReminder;
-import static cz.prm.utils.assertions.ReminderAssertions.assertRemindersQuery;
+import static cz.prm.utils.ReferralUtils.reminder;
+import static cz.prm.utils.ReferralUtils.reminderDto;
+import static cz.prm.utils.ReferralUtils.reminders;
+import static cz.prm.utils.ReferralUtils.remindersQueryDto;
+import static cz.prm.utils.assertions.ReferralAssertions.assertPage;
+import static cz.prm.utils.assertions.ReferralAssertions.assertReferral;
+import static cz.prm.utils.assertions.ReferralAssertions.assertReferralsQuery;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
@@ -20,7 +20,7 @@ class ReferralMapperTest {
 
     public static final String DEFAULT_REMINDERS_SORT = "desc(creationDate)";
 
-    private ReferralMapper mapper = MapperUtils.getReminderMapper();
+    private ReferralMapper mapper = MapperUtils.getReferralMapper();
 
     @Test
     void toPageDto() {
@@ -30,56 +30,56 @@ class ReferralMapperTest {
     }
 
     @Test
-    void toReminderDto() {
+    void toReferralDto() {
         var reminder = reminder();
-        var dto = mapper.toReminderDto(reminder);
-        assertReminder(reminder, dto);
+        var dto = mapper.toReferralDto(reminder);
+        assertReferral(reminder, dto);
     }
 
     @Test
-    void toReminder() {
+    void toReferral() {
         var dto = reminderDto();
-        var reminder = mapper.toReminder(dto);
-        assertReminder(reminder, dto);
+        var reminder = mapper.toReferral(dto);
+        assertReferral(reminder, dto);
     }
 
     @Test
-    void toRemindersQuery() {
+    void toReferralsQuery() {
         var dto = remindersQueryDto();
-        var query = mapper.toRemindersQuery(dto);
-        assertRemindersQuery(query, dto);
+        var query = mapper.toReferralsQuery(dto);
+        assertReferralsQuery(query, dto);
     }
 
     @Test
-    void toNullSafeRemindersQueryNullQuery() {
-        var query = mapper.toNullSafeRemindersQuery(null);
-        assertNullSafeReminderQuery(query);
+    void toNullSafeReferralsQueryNullQuery() {
+        var query = mapper.toNullSafeReferralsQuery(null);
+        assertNullSafeReferralQuery(query);
     }
 
     @Test
-    void toNullSafeRemindersQueryNotNullQuery() {
+    void toNullSafeReferralsQueryNotNullQuery() {
         var dto = remindersQueryDto();
-        var query = mapper.toNullSafeRemindersQuery(dto);
-        assertRemindersQuery(query, dto);
+        var query = mapper.toNullSafeReferralsQuery(dto);
+        assertReferralsQuery(query, dto);
     }
 
     @Test
-    void toNullSafeRemindersQueryNullPagination() {
+    void toNullSafeReferralsQueryNullPagination() {
         var dto = new ReferralQueryDto();
         dto.setPagination(null);
-        var query = mapper.toNullSafeRemindersQuery(dto);
-        assertNullSafeReminderQuery(query);
+        var query = mapper.toNullSafeReferralsQuery(dto);
+        assertNullSafeReferralQuery(query);
     }
 
     @Test
-    void afterRemindersQuery() {
+    void afterReferralsQuery() {
         var target = new ReferralsQuery();
         target.setPagination(null);
-        mapper.afterRemindersQuery(null, target);
-        assertNullSafeReminderQuery(target);
+        mapper.afterReferralsQuery(null, target);
+        assertNullSafeReferralQuery(target);
     }
 
-    private void assertNullSafeReminderQuery(ReferralsQuery query) {
+    private void assertNullSafeReferralQuery(ReferralsQuery query) {
         assertThat(query.getPagination()).isNotNull();
         assertThat(query.getSort()).isEqualTo(DEFAULT_REMINDERS_SORT);
         var pagination = query.getPagination();

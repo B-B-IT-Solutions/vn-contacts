@@ -20,7 +20,7 @@ import org.dmfs.rfc5545.recur.Freq;
 import org.dmfs.rfc5545.recur.RecurrenceRule;
 import org.dmfs.rfc5545.recur.RecurrenceRule.Part;
 
-public class ReminderUtils {
+public class ReferralUtils {
 
     public static List<Referral> reminders() {
         return newArrayList(reminder(), reminder(), reminder());
@@ -28,7 +28,7 @@ public class ReminderUtils {
 
     public static Referral reminder() {
         var reminder = new Referral();
-        reminder.setReminderId(randomLong());
+        reminder.setReferralId(randomLong());
         reminder.setContactId(randomLong());
         reminder.setTitle(uuid());
         reminder.setDescription(uuid());
@@ -41,7 +41,7 @@ public class ReminderUtils {
 
     public static ReferralDto reminderDto() {
         var reminder = new ReferralDto();
-        reminder.setReminderId(randomLong());
+        reminder.setReferralId(randomLong());
         reminder.setContactId(randomLong());
         reminder.setTitle(uuid());
         reminder.setDescription(uuid());

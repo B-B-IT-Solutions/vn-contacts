@@ -17,7 +17,7 @@ public class MapperUtils {
         return Mappers.getMapper(NoteMapper.class);
     }
 
-    public static ReferralMapper getReminderMapper() {
+    public static ReferralMapper getReferralMapper() {
         return Mappers.getMapper(ReferralMapper.class);
     }
 

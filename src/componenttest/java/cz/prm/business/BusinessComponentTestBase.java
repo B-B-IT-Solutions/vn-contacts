@@ -3,7 +3,7 @@ package cz.prm.business;
 import static cz.prm.utils.ContactComponentTestUtils.about;
 import static cz.prm.utils.ContactComponentTestUtils.contact;
 import static cz.prm.utils.NoteComponentTestUtils.note;
-import static cz.prm.utils.ReminderComponentTestUtils.reminder;
+import static cz.prm.utils.ReferralComponentTestUtils.reminder;
 import static cz.prm.utils.SecurityContextComponentTestUtils.clearContext;
 import static cz.prm.utils.SecurityContextComponentTestUtils.ensureUserContext;
 import static cz.prm.utils.TaskComponentTestUtils.task;
@@ -109,26 +109,26 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         return savedNote;
     }
 
-    protected List<Referral> createReminders(ComponentTestUser user) {
-        return createReminders(user, 3);
+    protected List<Referral> createReferrals(ComponentTestUser user) {
+        return createReferrals(user, 3);
     }
 
-    protected List<Referral> createReminders(ComponentTestUser user, int numOfTasks) {
+    protected List<Referral> createReferrals(ComponentTestUser user, int numOfTasks) {
         var contact = createContact(user);
-        return IntStream.range(0, numOfTasks).mapToObj((i) -> createReminder(user, contact)).collect(toList());
+        return IntStream.range(0, numOfTasks).mapToObj((i) -> createReferral(user, contact)).collect(toList());
     }
 
-    protected Referral createReminder(ComponentTestUser user) {
+    protected Referral createReferral(ComponentTestUser user) {
         var contact = createContact(user);
-        return createReminder(user, contact);
+        return createReferral(user, contact);
     }
 
-    protected Referral createReminder(ComponentTestUser user, Contact contact) {
+    protected Referral createReferral(ComponentTestUser user, Contact contact) {
         ensureUserContext(user);
         var reminder = reminder(contact.getContactId());
-        var savedReminder = reminderRepository.save(reminder);
+        var savedReferral = reminderRepository.save(reminder);
         clearContext();
-        return savedReminder;
+        return savedReferral;
     }
 
     protected List<Task> createTasks(ComponentTestUser user) {
@@ -165,7 +165,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         return noteRepository.getByText(dto.getText());
     }
 
-    protected Referral getReminderFromDb(ReferralDto dto) {
+    protected Referral getReferralFromDb(ReferralDto dto) {
         return reminderRepository.getByDescription(dto.getDescription());
     }
 

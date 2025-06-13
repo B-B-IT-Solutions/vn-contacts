@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 import org.springframework.data.domain.PageImpl;
 
-public class ReminderAssertions {
+public class ReferralAssertions {
 
     public static void assertPage(Page<Referral> page, PageDto<ReferralDto> pageDto) {
         assertThat(page.getTotalPages()).isEqualTo(pageDto.getTotalPages());
@@ -22,7 +22,7 @@ public class ReminderAssertions {
         assertThat(page.getPageSize()).isEqualTo(pageDto.getPageSize());
         assertThat(page.getPageNumber()).isEqualTo(pageDto.getPageNumber());
         assertThat(page.getContent()).isNotEmpty().hasSameSizeAs(pageDto.getContent());
-        assertRemindersDto(page.getContent(), pageDto.getContent());
+        assertReferralsDto(page.getContent(), pageDto.getContent());
     }
 
     public static void assertPage(Page<Referral> page1, PageImpl<Referral> page2) {
@@ -31,27 +31,27 @@ public class ReminderAssertions {
         assertThat(page1.getTotalElements()).isEqualTo(page2.getTotalElements());
         assertThat(page1.getPageSize()).isEqualTo(page2.getSize());
         assertThat(page1.getPageNumber()).isEqualTo(page2.getNumber());
-        assertReminders(page1.getContent(), page2.getContent());
+        assertReferrals(page1.getContent(), page2.getContent());
     }
 
-    public static void assertReminders(List<Referral> reminders1, List<Referral> reminders2) {
+    public static void assertReferrals(List<Referral> reminders1, List<Referral> reminders2) {
         assertThat(reminders1).isNotEmpty().hasSameSizeAs(reminders2);
         reminders1.forEach(c1 -> {
             var c2 = reminders2.stream().filter(u -> Objects.equals(c1.getContactId(), u.getContactId())).findFirst().get();
-            assertReminder(c1, c2);
+            assertReferral(c1, c2);
         });
     }
 
-    public static void assertRemindersDto(List<Referral> referrals, List<ReferralDto> dtos) {
+    public static void assertReferralsDto(List<Referral> referrals, List<ReferralDto> dtos) {
         assertThat(referrals).isNotEmpty().hasSameSizeAs(dtos);
         referrals.forEach(u1 -> {
             var u2 = dtos.stream().filter(u -> Objects.equals(u1.getContactId(), u.getContactId())).findFirst().get();
-            assertReminder(u1, u2);
+            assertReferral(u1, u2);
         });
     }
 
-    public static void assertReminder(Referral referral1, Referral referral2) {
-        assertThat(referral1.getReminderId()).isEqualTo(referral2.getReminderId());
+    public static void assertReferral(Referral referral1, Referral referral2) {
+        assertThat(referral1.getReferralId()).isEqualTo(referral2.getReferralId());
         assertThat(referral1.getContactId()).isEqualTo(referral2.getContactId());
         assertThat(referral1.getDescription()).isEqualTo(referral2.getDescription());
         assertThat(referral1.getRecurrence()).isEqualTo(referral2.getRecurrence());
@@ -60,8 +60,8 @@ public class ReminderAssertions {
         assertThat(referral1.getOwner()).isEqualTo(referral2.getOwner());
     }
 
-    public static void assertReminder(Referral referral, ReferralDto dto) {
-        assertThat(referral.getReminderId()).isEqualTo(dto.getReminderId());
+    public static void assertReferral(Referral referral, ReferralDto dto) {
+        assertThat(referral.getReferralId()).isEqualTo(dto.getReferralId());
         assertThat(referral.getContactId()).isEqualTo(dto.getContactId());
         assertThat(referral.getTitle()).isEqualTo(dto.getTitle());
         assertThat(referral.getDescription()).isEqualTo(dto.getDescription());
@@ -70,7 +70,7 @@ public class ReminderAssertions {
         assertThat(referral.getCreationDate()).isEqualTo(dto.getCreationDate());
     }
 
-    public static void assertRemindersQuery(ReferralsQuery query, ReferralQueryDto dto) {
+    public static void assertReferralsQuery(ReferralsQuery query, ReferralQueryDto dto) {
         assertQuery(query, dto);
     }
 }

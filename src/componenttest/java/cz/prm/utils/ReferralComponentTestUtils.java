@@ -17,7 +17,7 @@ import org.dmfs.rfc5545.recur.Freq;
 import org.dmfs.rfc5545.recur.RecurrenceRule;
 import org.dmfs.rfc5545.recur.RecurrenceRule.Part;
 
-public class ReminderComponentTestUtils {
+public class ReferralComponentTestUtils {
 
     public static List<Referral> reminders() {
         return newArrayList(reminder(), reminder(), reminder());

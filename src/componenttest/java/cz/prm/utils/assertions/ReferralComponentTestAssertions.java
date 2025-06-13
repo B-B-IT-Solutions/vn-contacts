@@ -8,22 +8,22 @@ import cz.prm.domain.referral.Referral;
 import java.util.List;
 import java.util.Objects;
 
-public class ReminderComponentTestAssertions {
+public class ReferralComponentTestAssertions {
 
-    public static void assertReminders(List<Referral> referrals, PageDto<ReferralDto> pageDto) {
-        assertReminders(referrals, pageDto.getContent());
+    public static void assertReferrals(List<Referral> referrals, PageDto<ReferralDto> pageDto) {
+        assertReferrals(referrals, pageDto.getContent());
     }
 
-    public static void assertReminders(List<Referral> referrals, List<ReferralDto> dtos) {
+    public static void assertReferrals(List<Referral> referrals, List<ReferralDto> dtos) {
         assertThat(referrals).isNotEmpty().hasSameSizeAs(dtos);
         referrals.forEach(n1 -> {
-            var n2 = dtos.stream().filter(n -> Objects.equals(n1.getReminderId(), n.getReminderId())).findFirst().get();
-            assertReminder(n1, n2);
+            var n2 = dtos.stream().filter(n -> Objects.equals(n1.getReferralId(), n.getReferralId())).findFirst().get();
+            assertReferral(n1, n2);
         });
     }
 
-    public static void assertReminder(Referral referral, ReferralDto referralDto) {
-        assertThat(referral.getReminderId()).isEqualTo(referralDto.getReminderId());
+    public static void assertReferral(Referral referral, ReferralDto referralDto) {
+        assertThat(referral.getReferralId()).isEqualTo(referralDto.getReferralId());
         assertThat(referral.getContactId()).isEqualTo(referralDto.getContactId());
         assertThat(referral.getTitle()).isEqualTo(referralDto.getTitle());
         assertThat(referral.getDescription()).isEqualTo(referralDto.getDescription());

@@ -22,22 +22,22 @@ public interface ReferralMapper {
     PageDto<ReferralDto> toPageDto(Page<Referral> reminders);
 
     @Mapping(target = "recurrence", source = "recurrence.value")
-    ReferralDto toReminderDto(Referral referral);
+    ReferralDto toReferralDto(Referral referral);
 
     @Mapping(target = "recurrence.value", source = "recurrence")
-    Referral toReminder(ReferralDto dto);
+    Referral toReferral(ReferralDto dto);
 
-    ReferralsQuery toRemindersQuery(ReferralQueryDto dto);
+    ReferralsQuery toReferralsQuery(ReferralQueryDto dto);
 
-    default ReferralsQuery toNullSafeRemindersQuery(ReferralQueryDto dto) {
+    default ReferralsQuery toNullSafeReferralsQuery(ReferralQueryDto dto) {
         if (isNull(dto)) {
             return new ReferralsQuery();
         }
-        return toRemindersQuery(dto);
+        return toReferralsQuery(dto);
     }
 
     @AfterMapping
-    default void afterRemindersQuery(ReferralQueryDto source, @MappingTarget ReferralsQuery target) {
+    default void afterReferralsQuery(ReferralQueryDto source, @MappingTarget ReferralsQuery target) {
         if (isNull(target.getPagination())) {
             target.setPagination(new Pagination());
         }

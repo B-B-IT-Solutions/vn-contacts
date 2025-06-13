@@ -40,7 +40,7 @@ public class Referral {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REMINDER_SEQ")
     @SequenceGenerator(name = "REMINDER_SEQ", sequenceName = "REMINDER_SEQ", allocationSize = 1)
     @Column(name = "REMINDER_ID")
-    private Long reminderId;
+    private Long referralId;
 
     @Column(name = "CONTACT_ID")
     private Long contactId;

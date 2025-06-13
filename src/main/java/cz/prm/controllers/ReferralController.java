@@ -29,32 +29,32 @@ public class ReferralController {
     }
 
     @GetMapping("/contact/{contactId}")
-    public PageDto<ReferralDto> getReminders(@PathVariable("contactId") Long contactId, ReferralQueryDto queryDto) {
-        var query = mapper.toNullSafeRemindersQuery(queryDto);
-        var reminders = referralService.getReminders(contactId, query);
+    public PageDto<ReferralDto> getReferrals(@PathVariable("contactId") Long contactId, ReferralQueryDto queryDto) {
+        var query = mapper.toNullSafeReferralsQuery(queryDto);
+        var reminders = referralService.getReferrals(contactId, query);
         return mapper.toPageDto(reminders);
     }
 
     @GetMapping("/reminder/{reminderId}")
-    public ReferralDto getReminder(@PathVariable("reminderId") Long reminderId) {
-        var reminder = referralService.getReminder(reminderId);
-        return mapper.toReminderDto(reminder);
+    public ReferralDto getReferral(@PathVariable("reminderId") Long reminderId) {
+        var reminder = referralService.getReferral(reminderId);
+        return mapper.toReferralDto(reminder);
     }
 
     @PostMapping("/reminder")
-    public void createReminder(@RequestBody ReferralDto dto) {
-        var reminder = mapper.toReminder(dto);
-        referralService.createReminder(reminder);
+    public void createReferral(@RequestBody ReferralDto dto) {
+        var reminder = mapper.toReferral(dto);
+        referralService.createReferral(reminder);
     }
 
     @PutMapping("/reminder/{reminderId}")
-    public void updateReminder(@PathVariable("reminderId") Long reminderId, @RequestBody ReferralDto dto) {
-        var reminder = mapper.toReminder(dto);
-        referralService.updateReminder(reminderId, reminder);
+    public void updateReferral(@PathVariable("reminderId") Long reminderId, @RequestBody ReferralDto dto) {
+        var reminder = mapper.toReferral(dto);
+        referralService.updateReferral(reminderId, reminder);
     }
 
     @DeleteMapping("/reminder/{reminderId}")
-    public void deleteReminder(@PathVariable("reminderId") Long reminderId) {
-        referralService.deleteReminder(reminderId);
+    public void deleteReferral(@PathVariable("reminderId") Long reminderId) {
+        referralService.deleteReferral(reminderId);
     }
 }
