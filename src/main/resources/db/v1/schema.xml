@@ -178,13 +178,13 @@
 				 <column name="next_occurrence" type="TIMESTAMP WITH TIME ZONE"/>
 			</createTable>
 			
-			<addForeignKeyConstraint baseTableName="referral" baseColumnNames="contact_id" constraintName="reminder_contact_id_fkey"
+			<addForeignKeyConstraint baseTableName="referral" baseColumnNames="contact_id" constraintName="referral_contact_id_fkey"
 															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
 															 referencedColumnNames="contact_id" validate="true"/>
 			
 			
 			<addForeignKeyConstraint baseTableName="referral" baseColumnNames="recurrence_id"
-															 constraintName="reminder_recurrence_id_fkey"
+															 constraintName="referral_recurrence_id_fkey"
 															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="recurrence"
 															 referencedColumnNames="recurrence_id" validate="true"/>
 	 
