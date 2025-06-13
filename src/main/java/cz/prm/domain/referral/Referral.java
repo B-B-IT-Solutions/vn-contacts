@@ -1,4 +1,4 @@
-package cz.prm.domain.reminder;
+package cz.prm.domain.referral;
 
 import static jakarta.persistence.CascadeType.ALL;
 import static java.util.Objects.nonNull;
@@ -34,7 +34,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reminder {
+public class Referral {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REMINDER_SEQ")

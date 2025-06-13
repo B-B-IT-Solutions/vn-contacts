@@ -1,6 +1,6 @@
-package cz.prm.repositories.reminder;
+package cz.prm.repositories.referral;
 
-import static cz.prm.domain.reminder.querydsl.QReminder.reminder;
+import static cz.prm.domain.referral.querydsl.QReferral.referral;
 import static cz.prm.security.SecurityContextUtils.getUser;
 
 import com.querydsl.core.types.Predicate;
@@ -8,7 +8,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ReminderPredicates {
+public class ReferralPredicates {
 
     public Predicate reminders() {
         return dataAccessPredicate();
@@ -16,16 +16,16 @@ public class ReminderPredicates {
 
     public Predicate byReminderId(Long reminderId) {
         var predicate = dataAccessPredicate();
-        return predicate.and(reminder.reminderId.eq(reminderId));
+        return predicate.and(referral.reminderId.eq(reminderId));
     }
 
     public Predicate byContactId(Long contactId) {
         var predicate = dataAccessPredicate();
-        return predicate.and(reminder.contactId.eq(contactId));
+        return predicate.and(referral.contactId.eq(contactId));
     }
 
     private BooleanExpression dataAccessPredicate() {
         var user = getUser();
-        return reminder.owner.username.eq(user.getUsername());
+        return referral.owner.username.eq(user.getUsername());
     }
 }

@@ -1,4 +1,4 @@
-package cz.prm.domain.reminder;
+package cz.prm.domain.referral;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -6,11 +6,11 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 
-class ReminderTest {
+class ReferralTest {
 
     @Test
     void hasActiveRecurrence() {
-        var reminder = new Reminder();
+        var reminder = new Referral();
         assertThat(reminder.hasActiveRecurrence()).isFalse();
 
         reminder.setRecurrence(null);

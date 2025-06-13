@@ -7,10 +7,10 @@ import static java.lang.String.format;
 import static org.assertj.core.util.Lists.newArrayList;
 
 import cz.prm.controllers.dto.common.PaginationDto;
-import cz.prm.controllers.dto.reminder.ReminderDto;
-import cz.prm.controllers.dto.reminder.query.RemindersQueryDto;
-import cz.prm.domain.reminder.Recurrence;
-import cz.prm.domain.reminder.Reminder;
+import cz.prm.controllers.dto.referral.ReferralDto;
+import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
+import cz.prm.domain.referral.Recurrence;
+import cz.prm.domain.referral.Referral;
 import java.util.List;
 import org.dmfs.rfc5545.DateTime;
 import org.dmfs.rfc5545.recur.Freq;
@@ -19,16 +19,16 @@ import org.dmfs.rfc5545.recur.RecurrenceRule.Part;
 
 public class ReminderComponentTestUtils {
 
-    public static List<Reminder> reminders() {
+    public static List<Referral> reminders() {
         return newArrayList(reminder(), reminder(), reminder());
     }
 
-    public static Reminder reminder() {
+    public static Referral reminder() {
         return reminder(randomLong());
     }
 
-    public static Reminder reminder(long contactId) {
-        var reminder = new Reminder();
+    public static Referral reminder(long contactId) {
+        var reminder = new Referral();
         reminder.setContactId(contactId);
         reminder.setTitle(format("Title%s", uuid()));
         reminder.setDescription(format("Description%s", uuid()));
@@ -36,8 +36,8 @@ public class ReminderComponentTestUtils {
         return reminder;
     }
 
-    public static ReminderDto reminderDto(long contactId) {
-        var dto = new ReminderDto();
+    public static ReferralDto reminderDto(long contactId) {
+        var dto = new ReferralDto();
         dto.setContactId(contactId);
         dto.setTitle(uuid());
         dto.setDescription(uuid());
@@ -64,8 +64,8 @@ public class ReminderComponentTestUtils {
         }
     }
 
-    public static RemindersQueryDto remindersQueryDto() {
-        var query = new RemindersQueryDto();
+    public static ReferralQueryDto remindersQueryDto() {
+        var query = new ReferralQueryDto();
         query.setPagination(new PaginationDto());
         return query;
     }

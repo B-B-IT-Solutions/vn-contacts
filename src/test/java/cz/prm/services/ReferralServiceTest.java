@@ -16,9 +16,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
-import cz.prm.domain.reminder.Reminder;
-import cz.prm.repositories.reminder.ReminderPredicates;
-import cz.prm.repositories.reminder.ReminderRepository;
+import cz.prm.domain.referral.Referral;
+import cz.prm.repositories.referral.ReferralPredicates;
+import cz.prm.repositories.referral.ReferralRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,20 +31,20 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 @ExtendWith(MockitoExtension.class)
-class ReminderServiceTest {
+class ReferralServiceTest {
 
     @Mock
-    private ReminderRepository repository;
+    private ReferralRepository repository;
     @Mock
-    private ReminderPredicates predicates;
+    private ReferralPredicates predicates;
     @Captor
-    private ArgumentCaptor<Reminder> reminderCapt;
+    private ArgumentCaptor<Referral> reminderCapt;
 
-    private ReminderService reminderService;
+    private ReferralService referralService;
 
     @BeforeEach
     void setUp() {
-        reminderService = new ReminderService(repository, predicates);
+        referralService = new ReferralService(repository, predicates);
     }
 
     @Test
@@ -57,7 +57,7 @@ class ReminderServiceTest {
 
         when(predicates.byContactId(contactId)).thenReturn(predicate);
         when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
-        var result = reminderService.getReminders(contactId, query);
+        var result = referralService.getReminders(contactId, query);
         assertPage(result, page);
     }
 
@@ -67,7 +67,7 @@ class ReminderServiceTest {
         var predicate = new BooleanBuilder();
         when(predicates.byReminderId(reminder.getReminderId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(of(reminder));
-        var result = reminderService.getReminder(reminder.getReminderId());
+        var result = referralService.getReminder(reminder.getReminderId());
         assertReminder(result, reminder);
     }
 
@@ -77,13 +77,13 @@ class ReminderServiceTest {
         var predicate = new BooleanBuilder();
         when(predicates.byReminderId(reminder.getReminderId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(empty());
-        assertThrows(EntityNotFoundException.class, () -> reminderService.getReminder(reminder.getReminderId()));
+        assertThrows(EntityNotFoundException.class, () -> referralService.getReminder(reminder.getReminderId()));
     }
 
     @Test
     void createReminder() {
         var reminder = reminder();
-        reminderService.createReminder(reminder);
+        referralService.createReminder(reminder);
         verify(repository).save(reminder);
     }
 
@@ -95,7 +95,7 @@ class ReminderServiceTest {
         when(predicates.byReminderId(reminderIdDb.getReminderId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(of(reminderIdDb));
 
-        reminderService.updateReminder(reminderIdDb.getReminderId(), updatedReminder);
+        referralService.updateReminder(reminderIdDb.getReminderId(), updatedReminder);
         verify(repository).save(reminderCapt.capture());
         var savedReminder = reminderCapt.getValue();
         assertFieldsUpdated(reminderIdDb, updatedReminder, savedReminder);
@@ -108,7 +108,7 @@ class ReminderServiceTest {
         var predicate = new BooleanBuilder();
         when(predicates.byReminderId(reminderIdDb.getReminderId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(empty());
-        assertThrows(EntityNotFoundException.class, () -> reminderService.updateReminder(reminderIdDb.getReminderId(), updatedReminder));
+        assertThrows(EntityNotFoundException.class, () -> referralService.updateReminder(reminderIdDb.getReminderId(), updatedReminder));
     }
 
     @Test
@@ -119,7 +119,7 @@ class ReminderServiceTest {
         when(predicates.byReminderId(reminderId)).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(of(reminderIdDb));
 
-        reminderService.deleteReminder(reminderId);
+        referralService.deleteReminder(reminderId);
         verify(repository).deleteById(reminderId);
     }
 
@@ -130,7 +130,7 @@ class ReminderServiceTest {
         var predicate = new BooleanBuilder();
         when(predicates.byReminderId(reminderId)).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(empty());
-        assertThrows(EntityNotFoundException.class, () -> reminderService.deleteReminder(reminderId));
+        assertThrows(EntityNotFoundException.class, () -> referralService.deleteReminder(reminderId));
     }
 
     @Test
@@ -141,17 +141,17 @@ class ReminderServiceTest {
         when(predicates.byContactId(eq(contactId))).thenReturn(predicate);
         when(repository.findAll(predicate)).thenReturn(reminders);
 
-        reminderService.deleteByContactId(contactId);
+        referralService.deleteByContactId(contactId);
         verify(repository).deleteAll(reminders);
     }
 
-    private void assertFieldsUpdated(Reminder reminderIdDb, Reminder updatedReminder, Reminder savedReminder) {
-        assertThat(reminderIdDb.getReminderId()).isEqualTo(savedReminder.getReminderId());
-        assertThat(reminderIdDb.getContactId()).isEqualTo(savedReminder.getContactId());
-        assertThat(reminderIdDb.getOwner()).isEqualTo(savedReminder.getOwner());
-        assertThat(reminderIdDb.getCreationDate()).isEqualTo(savedReminder.getCreationDate());
-        assertThat(savedReminder.getTitle()).isEqualTo(updatedReminder.getTitle());
-        assertThat(savedReminder.getDescription()).isEqualTo(updatedReminder.getDescription());
-        assertThat(savedReminder.getRecurrence()).isEqualTo(updatedReminder.getRecurrence());
+    private void assertFieldsUpdated(Referral referralIdDb, Referral updatedReferral, Referral savedReferral) {
+        assertThat(referralIdDb.getReminderId()).isEqualTo(savedReferral.getReminderId());
+        assertThat(referralIdDb.getContactId()).isEqualTo(savedReferral.getContactId());
+        assertThat(referralIdDb.getOwner()).isEqualTo(savedReferral.getOwner());
+        assertThat(referralIdDb.getCreationDate()).isEqualTo(savedReferral.getCreationDate());
+        assertThat(savedReferral.getTitle()).isEqualTo(updatedReferral.getTitle());
+        assertThat(savedReferral.getDescription()).isEqualTo(updatedReferral.getDescription());
+        assertThat(savedReferral.getRecurrence()).isEqualTo(updatedReferral.getRecurrence());
     }
 }

@@ -1,43 +1,43 @@
 package cz.prm.controllers.mappers;
 
-import static cz.prm.domain.reminder.query.RemindersQuery.DEFAULT_REMINDERS_SORT;
+import static cz.prm.domain.referral.query.ReferralsQuery.DEFAULT_REMINDERS_SORT;
 import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import cz.prm.controllers.dto.common.PageDto;
-import cz.prm.controllers.dto.reminder.ReminderDto;
-import cz.prm.controllers.dto.reminder.query.RemindersQueryDto;
+import cz.prm.controllers.dto.referral.ReferralDto;
+import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.common.query.Pagination;
-import cz.prm.domain.reminder.Reminder;
-import cz.prm.domain.reminder.query.RemindersQuery;
+import cz.prm.domain.referral.Referral;
+import cz.prm.domain.referral.query.ReferralsQuery;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
-public interface ReminderMapper {
+public interface ReferralMapper {
 
-    PageDto<ReminderDto> toPageDto(Page<Reminder> reminders);
+    PageDto<ReferralDto> toPageDto(Page<Referral> reminders);
 
     @Mapping(target = "recurrence", source = "recurrence.value")
-    ReminderDto toReminderDto(Reminder reminder);
+    ReferralDto toReminderDto(Referral referral);
 
     @Mapping(target = "recurrence.value", source = "recurrence")
-    Reminder toReminder(ReminderDto dto);
+    Referral toReminder(ReferralDto dto);
 
-    RemindersQuery toRemindersQuery(RemindersQueryDto dto);
+    ReferralsQuery toRemindersQuery(ReferralQueryDto dto);
 
-    default RemindersQuery toNullSafeRemindersQuery(RemindersQueryDto dto) {
+    default ReferralsQuery toNullSafeRemindersQuery(ReferralQueryDto dto) {
         if (isNull(dto)) {
-            return new RemindersQuery();
+            return new ReferralsQuery();
         }
         return toRemindersQuery(dto);
     }
 
     @AfterMapping
-    default void afterRemindersQuery(RemindersQueryDto source, @MappingTarget RemindersQuery target) {
+    default void afterRemindersQuery(ReferralQueryDto source, @MappingTarget ReferralsQuery target) {
         if (isNull(target.getPagination())) {
             target.setPagination(new Pagination());
         }

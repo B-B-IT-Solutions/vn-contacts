@@ -4,11 +4,11 @@ import static cz.prm.domain.common.PageRequests.getPageRequest;
 import static java.lang.String.format;
 
 import cz.prm.domain.common.query.Page;
-import cz.prm.domain.reminder.Recurrence;
-import cz.prm.domain.reminder.Reminder;
-import cz.prm.domain.reminder.query.RemindersQuery;
-import cz.prm.repositories.reminder.ReminderPredicates;
-import cz.prm.repositories.reminder.ReminderRepository;
+import cz.prm.domain.referral.Recurrence;
+import cz.prm.domain.referral.Referral;
+import cz.prm.domain.referral.query.ReferralsQuery;
+import cz.prm.repositories.referral.ReferralPredicates;
+import cz.prm.repositories.referral.ReferralRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import java.util.function.Supplier;
@@ -16,34 +16,34 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
-public class ReminderService {
+public class ReferralService {
 
-    private ReminderRepository repository;
-    private ReminderPredicates predicates;
+    private ReferralRepository repository;
+    private ReferralPredicates predicates;
 
-    public ReminderService(ReminderRepository repository, ReminderPredicates predicates) {
+    public ReferralService(ReferralRepository repository, ReferralPredicates predicates) {
         this.repository = repository;
         this.predicates = predicates;
     }
 
-    public Page<Reminder> getReminders(Long contactId, RemindersQuery query) {
+    public Page<Referral> getReminders(Long contactId, ReferralsQuery query) {
         var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
         var predicate = predicates.byContactId(contactId);
         var page = repository.findAll(predicate, pageRequest);
         return new Page<>(page);
     }
 
-    public Reminder getReminder(Long reminderId) {
+    public Referral getReminder(Long reminderId) {
         return getReminderById(reminderId);
     }
 
-    public void createReminder(Reminder reminder) {
-        repository.save(reminder);
+    public void createReminder(Referral referral) {
+        repository.save(referral);
     }
 
-    public void updateReminder(Long reminderId, Reminder updatedReminder) {
+    public void updateReminder(Long reminderId, Referral updatedReferral) {
         var savedReminder = getReminderById(reminderId);
-        updateReminderFields(savedReminder, updatedReminder);
+        updateReminderFields(savedReminder, updatedReferral);
         repository.save(savedReminder);
     }
 
@@ -58,11 +58,11 @@ public class ReminderService {
         repository.deleteAll(notes);
     }
 
-    private void updateReminderFields(Reminder savedReminder, Reminder updatedReminder) {
-        savedReminder.setTitle(updatedReminder.getTitle());
-        savedReminder.setDescription(updatedReminder.getDescription());
-        savedReminder.setRecurrence(updatedReminder.getRecurrence());
-        updateRecurrenceFields(savedReminder.getRecurrence(), updatedReminder.getRecurrence());
+    private void updateReminderFields(Referral savedReferral, Referral updatedReferral) {
+        savedReferral.setTitle(updatedReferral.getTitle());
+        savedReferral.setDescription(updatedReferral.getDescription());
+        savedReferral.setRecurrence(updatedReferral.getRecurrence());
+        updateRecurrenceFields(savedReferral.getRecurrence(), updatedReferral.getRecurrence());
     }
 
     private void updateRecurrenceFields(Recurrence savedRecurrence, Recurrence updatedRecurrence) {
@@ -70,7 +70,7 @@ public class ReminderService {
         savedRecurrence.resetParsedRule();
     }
 
-    private Reminder getReminderById(Long reminderId) {
+    private Referral getReminderById(Long reminderId) {
         var predicate = predicates.byReminderId(reminderId);
         var optional = repository.findOne(predicate);
         return optional.orElseThrow(entityNotFoundSupplier(reminderId));

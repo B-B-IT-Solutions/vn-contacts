@@ -9,7 +9,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
-import cz.prm.domain.reminder.query.RemindersQuery;
+import cz.prm.domain.referral.query.ReferralsQuery;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,13 +20,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class NotificationServiceTest {
 
     @Mock
-    private ReminderService reminderService;
+    private ReferralService referralService;
 
     private NotificationService notificationService;
 
     @BeforeEach
     void setUp() {
-        notificationService = new NotificationService(reminderService);
+        notificationService = new NotificationService(referralService);
     }
 
     @Test
@@ -40,7 +40,7 @@ class NotificationServiceTest {
         var reminders = newArrayList(reminder1, reminder2, reminder3);
         var page = page(reminders);
 
-        when(reminderService.getReminders(eq(contactId), any(RemindersQuery.class))).thenReturn(page);
+        when(referralService.getReminders(eq(contactId), any(ReferralsQuery.class))).thenReturn(page);
         notificationService.getNotifications(contactId);
     }
 }

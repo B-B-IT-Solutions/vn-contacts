@@ -14,10 +14,10 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import cz.prm.controllers.mappers.ReminderMapper;
-import cz.prm.domain.reminder.Reminder;
-import cz.prm.domain.reminder.query.RemindersQuery;
-import cz.prm.services.ReminderService;
+import cz.prm.controllers.mappers.ReferralMapper;
+import cz.prm.domain.referral.Referral;
+import cz.prm.domain.referral.query.ReferralsQuery;
+import cz.prm.services.ReferralService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,21 +28,21 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class ReminderControllerTest {
+class ReferralControllerTest {
 
     @Mock
-    private ReminderService reminderService;
+    private ReferralService referralService;
     @Captor
-    private ArgumentCaptor<Reminder> reminderCapt;
+    private ArgumentCaptor<Referral> reminderCapt;
     @Captor
-    private ArgumentCaptor<RemindersQuery> cQueryCapt;
+    private ArgumentCaptor<ReferralsQuery> cQueryCapt;
 
-    private ReminderMapper mapper = MapperUtils.getReminderMapper();
-    private ReminderController controller;
+    private ReferralMapper mapper = MapperUtils.getReminderMapper();
+    private ReferralController controller;
 
     @BeforeEach
     void setUp() {
-        controller = new ReminderController(reminderService, mapper);
+        controller = new ReferralController(referralService, mapper);
     }
 
     @Test
@@ -50,11 +50,11 @@ class ReminderControllerTest {
         var page = page(reminders());
         var queryDto = remindersQueryDto();
         var contactId = randomLong();
-        when(reminderService.getReminders(eq(contactId), any(RemindersQuery.class))).thenReturn(page);
+        when(referralService.getReminders(eq(contactId), any(ReferralsQuery.class))).thenReturn(page);
 
         var result = controller.getReminders(contactId, queryDto);
         assertPage(page, result);
-        verify(reminderService).getReminders(eq(contactId), cQueryCapt.capture());
+        verify(referralService).getReminders(eq(contactId), cQueryCapt.capture());
         var query = cQueryCapt.getValue();
         assertRemindersQuery(query, queryDto);
     }
@@ -63,7 +63,7 @@ class ReminderControllerTest {
     void getReminder() {
         var reminder = reminder();
         var reminderId = reminder.getReminderId();
-        when(reminderService.getReminder(reminderId)).thenReturn(reminder);
+        when(referralService.getReminder(reminderId)).thenReturn(reminder);
         var result = controller.getReminder(reminderId);
         assertReminder(reminder, result);
     }
@@ -72,7 +72,7 @@ class ReminderControllerTest {
     void createReminder() {
         var dto = reminderDto();
         controller.createReminder(dto);
-        verify(reminderService).createReminder(reminderCapt.capture());
+        verify(referralService).createReminder(reminderCapt.capture());
         var reminder = reminderCapt.getValue();
         assertReminder(reminder, dto);
     }
@@ -81,7 +81,7 @@ class ReminderControllerTest {
     void updateReminder() {
         var dto = reminderDto();
         controller.updateReminder(dto.getReminderId(), dto);
-        verify(reminderService).updateReminder(eq(dto.getReminderId()), reminderCapt.capture());
+        verify(referralService).updateReminder(eq(dto.getReminderId()), reminderCapt.capture());
         var reminder = reminderCapt.getValue();
         assertReminder(reminder, dto);
     }
@@ -90,6 +90,6 @@ class ReminderControllerTest {
     void deleteReminder() {
         var reminderId = randomLong();
         controller.deleteReminder(reminderId);
-        verify(reminderService).deleteReminder(reminderId);
+        verify(referralService).deleteReminder(reminderId);
     }
 }

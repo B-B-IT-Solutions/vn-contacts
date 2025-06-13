@@ -1,4 +1,4 @@
-package cz.prm.controllers.dto.reminder;
+package cz.prm.controllers.dto.referral;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReminderDto {
+public class ReferralDto {
 
     @JsonProperty("reminderId")
     private Long reminderId;

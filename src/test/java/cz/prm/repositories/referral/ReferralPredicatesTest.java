@@ -1,4 +1,4 @@
-package cz.prm.repositories.reminder;
+package cz.prm.repositories.referral;
 
 import static cz.prm.utils.CommonUtils.user;
 import static java.lang.String.format;
@@ -10,13 +10,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
-class ReminderPredicatesTest {
+class ReferralPredicatesTest {
 
-    private ReminderPredicates predicates;
+    private ReferralPredicates predicates;
 
     @BeforeEach
     void setUp() {
-        predicates = new ReminderPredicates();
+        predicates = new ReferralPredicates();
     }
 
     @Test

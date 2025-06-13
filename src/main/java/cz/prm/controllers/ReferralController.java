@@ -1,10 +1,10 @@
 package cz.prm.controllers;
 
 import cz.prm.controllers.dto.common.PageDto;
-import cz.prm.controllers.dto.reminder.ReminderDto;
-import cz.prm.controllers.dto.reminder.query.RemindersQueryDto;
-import cz.prm.controllers.mappers.ReminderMapper;
-import cz.prm.services.ReminderService;
+import cz.prm.controllers.dto.referral.ReferralDto;
+import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
+import cz.prm.controllers.mappers.ReferralMapper;
+import cz.prm.services.ReferralService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,44 +17,44 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("reminders")
 @RestController
-public class ReminderController {
+public class ReferralController {
 
-    private ReminderService reminderService;
-    private ReminderMapper mapper;
+    private ReferralService referralService;
+    private ReferralMapper mapper;
 
     @Autowired
-    public ReminderController(ReminderService reminderService, ReminderMapper mapper) {
-        this.reminderService = reminderService;
+    public ReferralController(ReferralService referralService, ReferralMapper mapper) {
+        this.referralService = referralService;
         this.mapper = mapper;
     }
 
     @GetMapping("/contact/{contactId}")
-    public PageDto<ReminderDto> getReminders(@PathVariable("contactId") Long contactId, RemindersQueryDto queryDto) {
+    public PageDto<ReferralDto> getReminders(@PathVariable("contactId") Long contactId, ReferralQueryDto queryDto) {
         var query = mapper.toNullSafeRemindersQuery(queryDto);
-        var reminders = reminderService.getReminders(contactId, query);
+        var reminders = referralService.getReminders(contactId, query);
         return mapper.toPageDto(reminders);
     }
 
     @GetMapping("/reminder/{reminderId}")
-    public ReminderDto getReminder(@PathVariable("reminderId") Long reminderId) {
-        var reminder = reminderService.getReminder(reminderId);
+    public ReferralDto getReminder(@PathVariable("reminderId") Long reminderId) {
+        var reminder = referralService.getReminder(reminderId);
         return mapper.toReminderDto(reminder);
     }
 
     @PostMapping("/reminder")
-    public void createReminder(@RequestBody ReminderDto dto) {
+    public void createReminder(@RequestBody ReferralDto dto) {
         var reminder = mapper.toReminder(dto);
-        reminderService.createReminder(reminder);
+        referralService.createReminder(reminder);
     }
 
     @PutMapping("/reminder/{reminderId}")
-    public void updateReminder(@PathVariable("reminderId") Long reminderId, @RequestBody ReminderDto dto) {
+    public void updateReminder(@PathVariable("reminderId") Long reminderId, @RequestBody ReferralDto dto) {
         var reminder = mapper.toReminder(dto);
-        reminderService.updateReminder(reminderId, reminder);
+        referralService.updateReminder(reminderId, reminder);
     }
 
     @DeleteMapping("/reminder/{reminderId}")
     public void deleteReminder(@PathVariable("reminderId") Long reminderId) {
-        reminderService.deleteReminder(reminderId);
+        referralService.deleteReminder(reminderId);
     }
 }

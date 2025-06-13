@@ -1,4 +1,4 @@
-package cz.prm.business.reminders;
+package cz.prm.business.referrals;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.ComponentTestUser.USER_1;
@@ -14,10 +14,10 @@ import static java.util.Collections.sort;
 import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.controllers.dto.reminder.ReminderDto;
+import cz.prm.controllers.dto.referral.ReferralDto;
 import org.junit.jupiter.api.Test;
 
-public class ReminderComponentTest extends ReminderComponentTestBase {
+public class ReferralComponentTest extends ReferralComponentTestBase {
 
     @Test
     void getRemindersDataAccess() {
@@ -133,7 +133,7 @@ public class ReminderComponentTest extends ReminderComponentTestBase {
         pageDto = user1GetReminders(contactId, queryDto);
         var actual = pageDto.getContent();
         var expected = newArrayList(actual);
-        sort(expected, comparing(ReminderDto::getCreationDate).reversed());
+        sort(expected, comparing(ReferralDto::getCreationDate).reversed());
         assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
 
         queryDto = remindersQueryDto();
@@ -141,42 +141,42 @@ public class ReminderComponentTest extends ReminderComponentTestBase {
         pageDto = user1GetReminders(contactId, queryDto);
         actual = pageDto.getContent();
         expected = newArrayList(actual);
-        sort(expected, comparing(ReminderDto::getLastEditDate));
+        sort(expected, comparing(ReferralDto::getLastEditDate));
         assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
 
         queryDto.setSort("desc(lastEditDate)");
         pageDto = user1GetReminders(contactId, queryDto);
         actual = pageDto.getContent();
         expected = newArrayList(actual);
-        sort(expected, comparing(ReminderDto::getLastEditDate).reversed());
+        sort(expected, comparing(ReferralDto::getLastEditDate).reversed());
         assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
 
         queryDto.setSort("asc(creationDate)");
         pageDto = user1GetReminders(contactId, queryDto);
         actual = pageDto.getContent();
         expected = newArrayList(actual);
-        sort(expected, comparing(ReminderDto::getCreationDate));
+        sort(expected, comparing(ReferralDto::getCreationDate));
         assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
 
         queryDto.setSort("desc(creationDate)");
         pageDto = user1GetReminders(contactId, queryDto);
         actual = pageDto.getContent();
         expected = newArrayList(actual);
-        sort(expected, comparing(ReminderDto::getCreationDate).reversed());
+        sort(expected, comparing(ReferralDto::getCreationDate).reversed());
         assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
 
         queryDto.setSort("asc(contactId)");
         pageDto = user1GetReminders(contactId, queryDto);
         actual = pageDto.getContent();
         expected = newArrayList(actual);
-        sort(expected, comparing(ReminderDto::getContactId));
+        sort(expected, comparing(ReferralDto::getContactId));
         assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
 
         queryDto.setSort("desc(contactId)");
         pageDto = user1GetReminders(contactId, queryDto);
         actual = pageDto.getContent();
         expected = newArrayList(actual);
-        sort(expected, comparing(ReminderDto::getContactId).reversed());
+        sort(expected, comparing(ReferralDto::getContactId).reversed());
         assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
     }
 

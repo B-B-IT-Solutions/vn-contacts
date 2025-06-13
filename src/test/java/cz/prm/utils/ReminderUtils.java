@@ -9,11 +9,11 @@ import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static java.time.Instant.now;
 
-import cz.prm.controllers.dto.reminder.ReminderDto;
-import cz.prm.controllers.dto.reminder.query.RemindersQueryDto;
-import cz.prm.domain.reminder.Recurrence;
-import cz.prm.domain.reminder.Reminder;
-import cz.prm.domain.reminder.query.RemindersQuery;
+import cz.prm.controllers.dto.referral.ReferralDto;
+import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
+import cz.prm.domain.referral.Recurrence;
+import cz.prm.domain.referral.Referral;
+import cz.prm.domain.referral.query.ReferralsQuery;
 import java.util.List;
 import org.dmfs.rfc5545.DateTime;
 import org.dmfs.rfc5545.recur.Freq;
@@ -22,12 +22,12 @@ import org.dmfs.rfc5545.recur.RecurrenceRule.Part;
 
 public class ReminderUtils {
 
-    public static List<Reminder> reminders() {
+    public static List<Referral> reminders() {
         return newArrayList(reminder(), reminder(), reminder());
     }
 
-    public static Reminder reminder() {
-        var reminder = new Reminder();
+    public static Referral reminder() {
+        var reminder = new Referral();
         reminder.setReminderId(randomLong());
         reminder.setContactId(randomLong());
         reminder.setTitle(uuid());
@@ -39,8 +39,8 @@ public class ReminderUtils {
         return reminder;
     }
 
-    public static ReminderDto reminderDto() {
-        var reminder = new ReminderDto();
+    public static ReferralDto reminderDto() {
+        var reminder = new ReferralDto();
         reminder.setReminderId(randomLong());
         reminder.setContactId(randomLong());
         reminder.setTitle(uuid());
@@ -77,15 +77,15 @@ public class ReminderUtils {
         }
     }
 
-    public static RemindersQuery remindersQuery() {
-        var query = new RemindersQuery();
+    public static ReferralsQuery remindersQuery() {
+        var query = new ReferralsQuery();
         query.setPagination(pagination());
         query.setSort(uuid());
         return query;
     }
 
-    public static RemindersQueryDto remindersQueryDto() {
-        var query = new RemindersQueryDto();
+    public static ReferralQueryDto remindersQueryDto() {
+        var query = new ReferralQueryDto();
         query.setPagination(paginationDto());
         query.setSort(uuid());
         return query;

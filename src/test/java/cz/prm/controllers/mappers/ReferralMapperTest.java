@@ -11,16 +11,16 @@ import static cz.prm.utils.assertions.ReminderAssertions.assertReminder;
 import static cz.prm.utils.assertions.ReminderAssertions.assertRemindersQuery;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.controllers.dto.reminder.query.RemindersQueryDto;
-import cz.prm.domain.reminder.query.RemindersQuery;
+import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
+import cz.prm.domain.referral.query.ReferralsQuery;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.Test;
 
-class ReminderMapperTest {
+class ReferralMapperTest {
 
     public static final String DEFAULT_REMINDERS_SORT = "desc(creationDate)";
 
-    private ReminderMapper mapper = MapperUtils.getReminderMapper();
+    private ReferralMapper mapper = MapperUtils.getReminderMapper();
 
     @Test
     void toPageDto() {
@@ -65,7 +65,7 @@ class ReminderMapperTest {
 
     @Test
     void toNullSafeRemindersQueryNullPagination() {
-        var dto = new RemindersQueryDto();
+        var dto = new ReferralQueryDto();
         dto.setPagination(null);
         var query = mapper.toNullSafeRemindersQuery(dto);
         assertNullSafeReminderQuery(query);
@@ -73,13 +73,13 @@ class ReminderMapperTest {
 
     @Test
     void afterRemindersQuery() {
-        var target = new RemindersQuery();
+        var target = new ReferralsQuery();
         target.setPagination(null);
         mapper.afterRemindersQuery(null, target);
         assertNullSafeReminderQuery(target);
     }
 
-    private void assertNullSafeReminderQuery(RemindersQuery query) {
+    private void assertNullSafeReminderQuery(ReferralsQuery query) {
         assertThat(query.getPagination()).isNotNull();
         assertThat(query.getSort()).isEqualTo(DEFAULT_REMINDERS_SORT);
         var pagination = query.getPagination();

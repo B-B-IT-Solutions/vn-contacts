@@ -1,4 +1,4 @@
-package cz.prm.business.reminders;
+package cz.prm.business.referrals;
 
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
@@ -8,39 +8,39 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import cz.prm.business.BusinessComponentTestBase;
 import cz.prm.controllers.dto.common.PageDto;
-import cz.prm.controllers.dto.reminder.ReminderDto;
-import cz.prm.controllers.dto.reminder.query.RemindersQueryDto;
+import cz.prm.controllers.dto.referral.ReferralDto;
+import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 
-public class ReminderComponentTestBase extends BusinessComponentTestBase {
+public class ReferralComponentTestBase extends BusinessComponentTestBase {
 
     protected static String REMINDERS_BASE_URL = "reminders";
     protected static String CONTACT_REMINDERS_URL = REMINDERS_BASE_URL + "/contact/%s";
     protected static String REMINDER_URL = REMINDERS_BASE_URL + "/reminder";
     protected static String REMINDER_BY_ID_URL = REMINDER_URL + "/%s";
 
-    protected void user1CreateReminder(ReminderDto dto) {
+    protected void user1CreateReminder(ReferralDto dto) {
         createReminder(dto, USER_1);
     }
 
-    protected void user2CreateReminder(ReminderDto dto) {
+    protected void user2CreateReminder(ReferralDto dto) {
         createReminder(dto, USER_2);
     }
 
-    protected void user3CreateReminder(ReminderDto dto) {
+    protected void user3CreateReminder(ReferralDto dto) {
         createReminder(dto, USER_3);
     }
 
-    protected void user1UpdateReminder(Long reminderId, ReminderDto dto) {
+    protected void user1UpdateReminder(Long reminderId, ReferralDto dto) {
         updateReminder(reminderId, dto, USER_1);
     }
 
-    protected void user2UpdateReminder(Long reminderId, ReminderDto dto) {
+    protected void user2UpdateReminder(Long reminderId, ReferralDto dto) {
         updateReminder(reminderId, dto, USER_2);
     }
 
-    protected void user3UpdateReminder(Long reminderId, ReminderDto dto) {
+    protected void user3UpdateReminder(Long reminderId, ReferralDto dto) {
         updateReminder(reminderId, dto, USER_3);
     }
 
@@ -56,35 +56,35 @@ public class ReminderComponentTestBase extends BusinessComponentTestBase {
         deleteReminder(reminderId, USER_3);
     }
 
-    protected PageDto<ReminderDto> user1GetReminders(Long contactId, RemindersQueryDto queryDto) {
+    protected PageDto<ReferralDto> user1GetReminders(Long contactId, ReferralQueryDto queryDto) {
         return getRemindersPage(contactId, queryDto, USER_1);
     }
 
-    protected PageDto<ReminderDto> user2GetReminders(Long contactId, RemindersQueryDto queryDto) {
+    protected PageDto<ReferralDto> user2GetReminders(Long contactId, ReferralQueryDto queryDto) {
         return getRemindersPage(contactId, queryDto, USER_2);
     }
 
-    protected PageDto<ReminderDto> user3GetReminders(Long contactId, RemindersQueryDto queryDto) {
+    protected PageDto<ReferralDto> user3GetReminders(Long contactId, ReferralQueryDto queryDto) {
         return getRemindersPage(contactId, queryDto, USER_3);
     }
 
-    protected ReminderDto user1GetReminder(Long reminderId) {
+    protected ReferralDto user1GetReminder(Long reminderId) {
         return getReminder(reminderId, USER_1);
     }
 
-    protected ReminderDto user2GetReminder(Long reminderId) {
+    protected ReferralDto user2GetReminder(Long reminderId) {
         return getReminder(reminderId, USER_2);
     }
 
-    protected ReminderDto user3GetReminder(Long reminderId) {
+    protected ReferralDto user3GetReminder(Long reminderId) {
         return getReminder(reminderId, USER_3);
     }
 
-    protected void createReminder(ReminderDto dto, ComponentTestUser user) {
+    protected void createReminder(ReferralDto dto, ComponentTestUser user) {
         post(REMINDER_URL, user, dto);
     }
 
-    protected void updateReminder(Long reminderId, ReminderDto dto, ComponentTestUser user) {
+    protected void updateReminder(Long reminderId, ReferralDto dto, ComponentTestUser user) {
         var url = format(REMINDER_BY_ID_URL, reminderId);
         put(url, user, dto);
     }
@@ -94,30 +94,30 @@ public class ReminderComponentTestBase extends BusinessComponentTestBase {
         delete(url, user);
     }
 
-    protected PageDto<ReminderDto> getRemindersPage(Long contactId, RemindersQueryDto queryDto, ComponentTestUser user) {
+    protected PageDto<ReferralDto> getRemindersPage(Long contactId, ReferralQueryDto queryDto, ComponentTestUser user) {
         var baseURl = format(CONTACT_REMINDERS_URL, contactId);
         var url = appendQueryToUrl(baseURl, queryDto);
-        var typeRef = new TypeRef<PageDto<ReminderDto>>() {
+        var typeRef = new TypeRef<PageDto<ReferralDto>>() {
         };
         return getPage(url, user, typeRef);
     }
 
-    protected ReminderDto getReminder(Long reminderId, ComponentTestUser user) {
+    protected ReferralDto getReminder(Long reminderId, ComponentTestUser user) {
         var url = format(REMINDER_BY_ID_URL, reminderId);
-        var typeRef = new TypeRef<ReminderDto>() {
+        var typeRef = new TypeRef<ReferralDto>() {
         };
         return getOne(url, user, typeRef);
     }
 
-    protected void user1UpdateReminderExpectNotFound(Long reminderId, ReminderDto dto) {
+    protected void user1UpdateReminderExpectNotFound(Long reminderId, ReferralDto dto) {
         updateReminderExpectNotFound(reminderId, dto, USER_1);
     }
 
-    protected void user2UpdateReminderExpectNotFound(Long reminderId, ReminderDto dto) {
+    protected void user2UpdateReminderExpectNotFound(Long reminderId, ReferralDto dto) {
         updateReminderExpectNotFound(reminderId, dto, USER_2);
     }
 
-    protected void user3UpdateReminderExpectNotFound(Long reminderId, ReminderDto dto) {
+    protected void user3UpdateReminderExpectNotFound(Long reminderId, ReferralDto dto) {
         updateReminderExpectNotFound(reminderId, dto, USER_3);
     }
 
@@ -145,7 +145,7 @@ public class ReminderComponentTestBase extends BusinessComponentTestBase {
         getReminderExpectNotFound(reminderId, USER_3);
     }
 
-    protected void updateReminderExpectNotFound(Long reminderId, ReminderDto dto, ComponentTestUser user) {
+    protected void updateReminderExpectNotFound(Long reminderId, ReferralDto dto, ComponentTestUser user) {
         var url = format(REMINDER_BY_ID_URL, reminderId);
         putExpectNotFound(url, user, dto);
     }
@@ -160,7 +160,7 @@ public class ReminderComponentTestBase extends BusinessComponentTestBase {
         getExpectNotFound(url, user);
     }
 
-    protected String appendQueryToUrl(String url, RemindersQueryDto queryDto) {
+    protected String appendQueryToUrl(String url, ReferralQueryDto queryDto) {
         var sb = new StringBuilder(url);
         var pagination = toUrlPaginationParams(queryDto.getPagination());
         var sort = toUrlSortParams(queryDto.getSort());

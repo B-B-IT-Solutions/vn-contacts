@@ -1,4 +1,4 @@
-package cz.prm.controllers.dto.reminder.query;
+package cz.prm.controllers.dto.referral.query;
 
 import cz.prm.controllers.dto.common.QueryDto;
 import lombok.Data;
@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class RemindersQueryDto extends QueryDto {
+public class ReferralQueryDto extends QueryDto {
 
 }
