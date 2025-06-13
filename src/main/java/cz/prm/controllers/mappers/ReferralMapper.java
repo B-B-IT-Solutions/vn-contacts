@@ -1,6 +1,6 @@
 package cz.prm.controllers.mappers;
 
-import static cz.prm.domain.referral.query.ReferralsQuery.DEFAULT_REMINDERS_SORT;
+import static cz.prm.domain.referral.query.ReferralsQuery.DEFAULT_REFERRALS_SORT;
 import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -20,7 +20,7 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public interface ReferralMapper {
 
-    PageDto<ReferralDto> toPageDto(Page<Referral> reminders);
+    PageDto<ReferralDto> toPageDto(Page<Referral> referrals);
 
     @Mapping(target = "recurrence", source = "recurrence.value")
     ReferralDto toReferralDto(Referral referral);
@@ -46,7 +46,7 @@ public interface ReferralMapper {
             target.setFilter(new ReferralsFilter());
         }
         if (isBlank(target.getSort())) {
-            target.setSort(DEFAULT_REMINDERS_SORT);
+            target.setSort(DEFAULT_REFERRALS_SORT);
         }
     }
 }

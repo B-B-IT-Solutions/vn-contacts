@@ -125,8 +125,8 @@ public class BusinessComponentTestBase extends ComponentTestBase {
 
     protected Referral createReferral(ComponentTestUser user, Contact contact) {
         ensureUserContext(user);
-        var reminder = referral(contact.getContactId());
-        var savedReferral = referralRepository.save(reminder);
+        var referral = referral(contact.getContactId());
+        var savedReferral = referralRepository.save(referral);
         clearContext();
         return savedReferral;
     }

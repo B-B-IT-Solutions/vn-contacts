@@ -81,12 +81,12 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         pageDto = user3GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var reminders = createReferrals(USER_1);
-        var reminder = reminders.get(0);
-        contactId = reminder.getContactId();
+        var referrals = createReferrals(USER_1);
+        var referral = referrals.get(0);
+        contactId = referral.getContactId();
 
         pageDto = user1GetContactReferrals(contactId, queryDto);
-        assertReferrals(reminders, pageDto);
+        assertReferrals(referrals, pageDto);
 
         pageDto = user2GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
@@ -95,8 +95,8 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         assertThat(pageDto.getContent()).isEmpty();
 
         var user2Referrals = createReferrals(USER_2);
-        reminder = user2Referrals.get(0);
-        contactId = reminder.getContactId();
+        referral = user2Referrals.get(0);
+        contactId = referral.getContactId();
 
         pageDto = user2GetContactReferrals(contactId, queryDto);
         assertReferrals(user2Referrals, pageDto);
@@ -108,8 +108,8 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         assertThat(pageDto.getContent()).isEmpty();
 
         var user3Referrals = createReferrals(USER_3);
-        reminder = user3Referrals.get(0);
-        contactId = reminder.getContactId();
+        referral = user3Referrals.get(0);
+        contactId = referral.getContactId();
 
         pageDto = user3GetContactReferrals(contactId, queryDto);
         assertReferrals(user3Referrals, pageDto);
@@ -172,9 +172,9 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         assertThat(pageDto.getPageSize()).isEqualTo(50);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var reminders = createReferrals(USER_1, 21);
-        var reminder = reminders.get(0);
-        contactId = reminder.getContactId();
+        var referrals = createReferrals(USER_1, 21);
+        var referral = referrals.get(0);
+        contactId = referral.getContactId();
 
         pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getTotalPages()).isEqualTo(1);
@@ -273,9 +273,9 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         var pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var reminders = createReferrals(USER_1, 21);
-        var reminder = reminders.get(0);
-        contactId = reminder.getContactId();
+        var referrals = createReferrals(USER_1, 21);
+        var referral = referrals.get(0);
+        contactId = referral.getContactId();
 
         queryDto = referralsQueryDto();
         queryDto.setSort(null);
@@ -452,27 +452,27 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
 
     @Test
     void getReferral() {
-        var reminder = createReferral(USER_1);
-        var reminderId = reminder.getReferralId();
+        var referral = createReferral(USER_1);
+        var referralId = referral.getReferralId();
 
-        var reminderDto = user1GetReferral(reminderId);
-        assertReferral(reminder, reminderDto);
-        user2GetReferralExpectNotFound(reminderId);
-        user3GetReferralExpectNotFound(reminderId);
+        var referralDto = user1GetReferral(referralId);
+        assertReferral(referral, referralDto);
+        user2GetReferralExpectNotFound(referralId);
+        user3GetReferralExpectNotFound(referralId);
 
-        reminder = createReferral(USER_2);
-        reminderId = reminder.getReferralId();
-        reminderDto = user2GetReferral(reminderId);
-        assertReferral(reminder, reminderDto);
-        user1GetReferralExpectNotFound(reminderId);
-        user3GetReferralExpectNotFound(reminderId);
+        referral = createReferral(USER_2);
+        referralId = referral.getReferralId();
+        referralDto = user2GetReferral(referralId);
+        assertReferral(referral, referralDto);
+        user1GetReferralExpectNotFound(referralId);
+        user3GetReferralExpectNotFound(referralId);
 
-        reminder = createReferral(USER_3);
-        reminderId = reminder.getReferralId();
-        reminderDto = user3GetReferral(reminderId);
-        assertReferral(reminder, reminderDto);
-        user1GetReferralExpectNotFound(reminderId);
-        user2GetReferralExpectNotFound(reminderId);
+        referral = createReferral(USER_3);
+        referralId = referral.getReferralId();
+        referralDto = user3GetReferral(referralId);
+        assertReferral(referral, referralDto);
+        user1GetReferralExpectNotFound(referralId);
+        user2GetReferralExpectNotFound(referralId);
     }
 
     @Test
@@ -603,106 +603,106 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         var contact = createContact(USER_1);
         var toCreateDto = referralDto(contact.getContactId());
         user1CreateReferral(toCreateDto);
-        var reminder = getReferralFromDb(toCreateDto);
-        var reminderId = reminder.getReferralId();
+        var referral = getReferralFromDb(toCreateDto);
+        var referralId = referral.getReferralId();
 
-        var createdDto = user1GetReferral(reminderId);
-        assertReferral(reminder, createdDto);
-        user2GetReferralExpectNotFound(reminderId);
-        user3GetReferralExpectNotFound(reminderId);
+        var createdDto = user1GetReferral(referralId);
+        assertReferral(referral, createdDto);
+        user2GetReferralExpectNotFound(referralId);
+        user3GetReferralExpectNotFound(referralId);
 
         contact = createContact(USER_2);
         toCreateDto = referralDto(contact.getContactId());
         user2CreateReferral(toCreateDto);
-        reminder = getReferralFromDb(toCreateDto);
-        reminderId = reminder.getReferralId();
+        referral = getReferralFromDb(toCreateDto);
+        referralId = referral.getReferralId();
 
-        createdDto = user2GetReferral(reminderId);
-        assertReferral(reminder, createdDto);
-        user1GetReferralExpectNotFound(reminderId);
-        user3GetReferralExpectNotFound(reminderId);
+        createdDto = user2GetReferral(referralId);
+        assertReferral(referral, createdDto);
+        user1GetReferralExpectNotFound(referralId);
+        user3GetReferralExpectNotFound(referralId);
 
         contact = createContact(USER_3);
         toCreateDto = referralDto(contact.getContactId());
         user3CreateReferral(toCreateDto);
-        reminder = getReferralFromDb(toCreateDto);
-        reminderId = reminder.getReferralId();
+        referral = getReferralFromDb(toCreateDto);
+        referralId = referral.getReferralId();
 
-        createdDto = user3GetReferral(reminderId);
-        assertReferral(reminder, createdDto);
-        user1GetReferralExpectNotFound(reminderId);
-        user2GetReferralExpectNotFound(reminderId);
+        createdDto = user3GetReferral(referralId);
+        assertReferral(referral, createdDto);
+        user1GetReferralExpectNotFound(referralId);
+        user2GetReferralExpectNotFound(referralId);
     }
 
     @Test
     void updateReferral() {
-        var reminder = createReferral(USER_1);
-        var reminderId = reminder.getReferralId();
-        var updateDto = user1GetReferral(reminderId);
+        var referral = createReferral(USER_1);
+        var referralId = referral.getReferralId();
+        var updateDto = user1GetReferral(referralId);
 
         updateDto.setDescription(uuid());
-        user1UpdateReferral(reminderId, updateDto);
-        reminder = getReferralFromDb(updateDto);
-        assertReferral(reminder, updateDto);
+        user1UpdateReferral(referralId, updateDto);
+        referral = getReferralFromDb(updateDto);
+        assertReferral(referral, updateDto);
 
-        user2UpdateReferralExpectNotFound(reminderId, updateDto);
-        user3UpdateReferralExpectNotFound(reminderId, updateDto);
+        user2UpdateReferralExpectNotFound(referralId, updateDto);
+        user3UpdateReferralExpectNotFound(referralId, updateDto);
 
-        reminder = createReferral(USER_2);
-        reminderId = reminder.getReferralId();
-        updateDto = user2GetReferral(reminderId);
-
-        updateDto.setDescription(uuid());
-        user2UpdateReferral(reminderId, updateDto);
-        reminder = getReferralFromDb(updateDto);
-        assertReferral(reminder, updateDto);
-
-        user1UpdateReferralExpectNotFound(reminderId, updateDto);
-        user3UpdateReferralExpectNotFound(reminderId, updateDto);
-
-        reminder = createReferral(USER_3);
-        reminderId = reminder.getReferralId();
-        updateDto = user3GetReferral(reminderId);
+        referral = createReferral(USER_2);
+        referralId = referral.getReferralId();
+        updateDto = user2GetReferral(referralId);
 
         updateDto.setDescription(uuid());
-        user3UpdateReferral(reminderId, updateDto);
-        reminder = getReferralFromDb(updateDto);
-        assertReferral(reminder, updateDto);
+        user2UpdateReferral(referralId, updateDto);
+        referral = getReferralFromDb(updateDto);
+        assertReferral(referral, updateDto);
 
-        user1UpdateReferralExpectNotFound(reminderId, updateDto);
-        user2UpdateReferralExpectNotFound(reminderId, updateDto);
+        user1UpdateReferralExpectNotFound(referralId, updateDto);
+        user3UpdateReferralExpectNotFound(referralId, updateDto);
+
+        referral = createReferral(USER_3);
+        referralId = referral.getReferralId();
+        updateDto = user3GetReferral(referralId);
+
+        updateDto.setDescription(uuid());
+        user3UpdateReferral(referralId, updateDto);
+        referral = getReferralFromDb(updateDto);
+        assertReferral(referral, updateDto);
+
+        user1UpdateReferralExpectNotFound(referralId, updateDto);
+        user2UpdateReferralExpectNotFound(referralId, updateDto);
     }
 
     @Test
     void deleteReferral() {
-        var reminder = createReferral(USER_1);
-        var reminderId = reminder.getReferralId();
-        var reminderDto = user1GetReferral(reminderId);
-        assertReferral(reminder, reminderDto);
+        var referral = createReferral(USER_1);
+        var referralId = referral.getReferralId();
+        var referralDto = user1GetReferral(referralId);
+        assertReferral(referral, referralDto);
 
-        user2DeleteReferralExpectNotFound(reminderId);
-        user3DeleteReferralExpectNotFound(reminderId);
-        user1DeleteReferral(reminderId);
-        user1GetReferralExpectNotFound(reminderId);
+        user2DeleteReferralExpectNotFound(referralId);
+        user3DeleteReferralExpectNotFound(referralId);
+        user1DeleteReferral(referralId);
+        user1GetReferralExpectNotFound(referralId);
 
-        reminder = createReferral(USER_2);
-        reminderId = reminder.getReferralId();
-        reminderDto = user2GetReferral(reminderId);
-        assertReferral(reminder, reminderDto);
+        referral = createReferral(USER_2);
+        referralId = referral.getReferralId();
+        referralDto = user2GetReferral(referralId);
+        assertReferral(referral, referralDto);
 
-        user1DeleteReferralExpectNotFound(reminderId);
-        user3DeleteReferralExpectNotFound(reminderId);
-        user2DeleteReferral(reminderId);
-        user2GetReferralExpectNotFound(reminderId);
+        user1DeleteReferralExpectNotFound(referralId);
+        user3DeleteReferralExpectNotFound(referralId);
+        user2DeleteReferral(referralId);
+        user2GetReferralExpectNotFound(referralId);
 
-        reminder = createReferral(USER_3);
-        reminderId = reminder.getReferralId();
-        reminderDto = user3GetReferral(reminderId);
-        assertReferral(reminder, reminderDto);
+        referral = createReferral(USER_3);
+        referralId = referral.getReferralId();
+        referralDto = user3GetReferral(referralId);
+        assertReferral(referral, referralDto);
 
-        user1DeleteReferralExpectNotFound(reminderId);
-        user2DeleteReferralExpectNotFound(reminderId);
-        user3DeleteReferral(reminderId);
-        user3GetReferralExpectNotFound(reminderId);
+        user1DeleteReferralExpectNotFound(referralId);
+        user2DeleteReferralExpectNotFound(referralId);
+        user3DeleteReferral(referralId);
+        user3GetReferralExpectNotFound(referralId);
     }
 }

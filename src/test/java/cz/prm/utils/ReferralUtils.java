@@ -27,28 +27,28 @@ public class ReferralUtils {
     }
 
     public static Referral referral() {
-        var reminder = new Referral();
-        reminder.setReferralId(randomLong());
-        reminder.setContactId(randomLong());
-        reminder.setName(uuid());
-        reminder.setDescription(uuid());
-        reminder.setRecurrence(recurrence());
-        reminder.setLastEditDate(now());
-        reminder.setCreationDate(now());
-        reminder.setOwner(user());
-        return reminder;
+        var referral = new Referral();
+        referral.setReferralId(randomLong());
+        referral.setContactId(randomLong());
+        referral.setName(uuid());
+        referral.setDescription(uuid());
+        referral.setRecurrence(recurrence());
+        referral.setLastEditDate(now());
+        referral.setCreationDate(now());
+        referral.setOwner(user());
+        return referral;
     }
 
     public static ReferralDto referralDto() {
-        var reminder = new ReferralDto();
-        reminder.setReferralId(randomLong());
-        reminder.setContactId(randomLong());
-        reminder.setName(uuid());
-        reminder.setDescription(uuid());
-        reminder.setRecurrence(uuid());
-        reminder.setLastEditDate(now());
-        reminder.setCreationDate(now());
-        return reminder;
+        var referral = new ReferralDto();
+        referral.setReferralId(randomLong());
+        referral.setContactId(randomLong());
+        referral.setName(uuid());
+        referral.setDescription(uuid());
+        referral.setRecurrence(uuid());
+        referral.setLastEditDate(now());
+        referral.setCreationDate(now());
+        return referral;
     }
 
     public static Recurrence recurrence() {

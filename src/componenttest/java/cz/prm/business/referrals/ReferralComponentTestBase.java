@@ -35,28 +35,28 @@ public class ReferralComponentTestBase extends BusinessComponentTestBase {
         createReferral(dto, USER_3);
     }
 
-    protected void user1UpdateReferral(Long reminderId, ReferralDto dto) {
-        updateReferral(reminderId, dto, USER_1);
+    protected void user1UpdateReferral(Long referralId, ReferralDto dto) {
+        updateReferral(referralId, dto, USER_1);
     }
 
-    protected void user2UpdateReferral(Long reminderId, ReferralDto dto) {
-        updateReferral(reminderId, dto, USER_2);
+    protected void user2UpdateReferral(Long referralId, ReferralDto dto) {
+        updateReferral(referralId, dto, USER_2);
     }
 
-    protected void user3UpdateReferral(Long reminderId, ReferralDto dto) {
-        updateReferral(reminderId, dto, USER_3);
+    protected void user3UpdateReferral(Long referralId, ReferralDto dto) {
+        updateReferral(referralId, dto, USER_3);
     }
 
-    protected void user1DeleteReferral(Long reminderId) {
-        deleteReferral(reminderId, USER_1);
+    protected void user1DeleteReferral(Long referralId) {
+        deleteReferral(referralId, USER_1);
     }
 
-    protected void user2DeleteReferral(Long reminderId) {
-        deleteReferral(reminderId, USER_2);
+    protected void user2DeleteReferral(Long referralId) {
+        deleteReferral(referralId, USER_2);
     }
 
-    protected void user3DeleteReferral(Long reminderId) {
-        deleteReferral(reminderId, USER_3);
+    protected void user3DeleteReferral(Long referralId) {
+        deleteReferral(referralId, USER_3);
     }
 
     protected PageDto<ReferralDto> user1GetReferrals(ReferralQueryDto queryDto) {
@@ -83,29 +83,29 @@ public class ReferralComponentTestBase extends BusinessComponentTestBase {
         return getContactReferralsPage(contactId, queryDto, USER_3);
     }
 
-    protected ReferralDto user1GetReferral(Long reminderId) {
-        return getReferral(reminderId, USER_1);
+    protected ReferralDto user1GetReferral(Long referralId) {
+        return getReferral(referralId, USER_1);
     }
 
-    protected ReferralDto user2GetReferral(Long reminderId) {
-        return getReferral(reminderId, USER_2);
+    protected ReferralDto user2GetReferral(Long referralId) {
+        return getReferral(referralId, USER_2);
     }
 
-    protected ReferralDto user3GetReferral(Long reminderId) {
-        return getReferral(reminderId, USER_3);
+    protected ReferralDto user3GetReferral(Long referralId) {
+        return getReferral(referralId, USER_3);
     }
 
     protected void createReferral(ReferralDto dto, ComponentTestUser user) {
         post(REMINDER_URL, user, dto);
     }
 
-    protected void updateReferral(Long reminderId, ReferralDto dto, ComponentTestUser user) {
-        var url = format(REMINDER_BY_ID_URL, reminderId);
+    protected void updateReferral(Long referralId, ReferralDto dto, ComponentTestUser user) {
+        var url = format(REMINDER_BY_ID_URL, referralId);
         put(url, user, dto);
     }
 
-    protected void deleteReferral(Long reminderId, ComponentTestUser user) {
-        var url = format(REMINDER_BY_ID_URL, reminderId);
+    protected void deleteReferral(Long referralId, ComponentTestUser user) {
+        var url = format(REMINDER_BY_ID_URL, referralId);
         delete(url, user);
     }
 
@@ -125,61 +125,61 @@ public class ReferralComponentTestBase extends BusinessComponentTestBase {
         return getPage(url, user, typeRef);
     }
 
-    protected ReferralDto getReferral(Long reminderId, ComponentTestUser user) {
-        var url = format(REMINDER_BY_ID_URL, reminderId);
+    protected ReferralDto getReferral(Long referralId, ComponentTestUser user) {
+        var url = format(REMINDER_BY_ID_URL, referralId);
         var typeRef = new TypeRef<ReferralDto>() {
         };
         return getOne(url, user, typeRef);
     }
 
-    protected void user1UpdateReferralExpectNotFound(Long reminderId, ReferralDto dto) {
-        updateReferralExpectNotFound(reminderId, dto, USER_1);
+    protected void user1UpdateReferralExpectNotFound(Long referralId, ReferralDto dto) {
+        updateReferralExpectNotFound(referralId, dto, USER_1);
     }
 
-    protected void user2UpdateReferralExpectNotFound(Long reminderId, ReferralDto dto) {
-        updateReferralExpectNotFound(reminderId, dto, USER_2);
+    protected void user2UpdateReferralExpectNotFound(Long referralId, ReferralDto dto) {
+        updateReferralExpectNotFound(referralId, dto, USER_2);
     }
 
-    protected void user3UpdateReferralExpectNotFound(Long reminderId, ReferralDto dto) {
-        updateReferralExpectNotFound(reminderId, dto, USER_3);
+    protected void user3UpdateReferralExpectNotFound(Long referralId, ReferralDto dto) {
+        updateReferralExpectNotFound(referralId, dto, USER_3);
     }
 
-    protected void user1DeleteReferralExpectNotFound(Long reminderId) {
-        deleteReferralExpectNotFound(reminderId, USER_1);
+    protected void user1DeleteReferralExpectNotFound(Long referralId) {
+        deleteReferralExpectNotFound(referralId, USER_1);
     }
 
-    protected void user2DeleteReferralExpectNotFound(Long reminderId) {
-        deleteReferralExpectNotFound(reminderId, USER_2);
+    protected void user2DeleteReferralExpectNotFound(Long referralId) {
+        deleteReferralExpectNotFound(referralId, USER_2);
     }
 
-    protected void user3DeleteReferralExpectNotFound(Long reminderId) {
-        deleteReferralExpectNotFound(reminderId, USER_3);
+    protected void user3DeleteReferralExpectNotFound(Long referralId) {
+        deleteReferralExpectNotFound(referralId, USER_3);
     }
 
-    protected void user1GetReferralExpectNotFound(Long reminderId) {
-        getReferralExpectNotFound(reminderId, USER_1);
+    protected void user1GetReferralExpectNotFound(Long referralId) {
+        getReferralExpectNotFound(referralId, USER_1);
     }
 
-    protected void user2GetReferralExpectNotFound(Long reminderId) {
-        getReferralExpectNotFound(reminderId, USER_2);
+    protected void user2GetReferralExpectNotFound(Long referralId) {
+        getReferralExpectNotFound(referralId, USER_2);
     }
 
-    protected void user3GetReferralExpectNotFound(Long reminderId) {
-        getReferralExpectNotFound(reminderId, USER_3);
+    protected void user3GetReferralExpectNotFound(Long referralId) {
+        getReferralExpectNotFound(referralId, USER_3);
     }
 
-    protected void updateReferralExpectNotFound(Long reminderId, ReferralDto dto, ComponentTestUser user) {
-        var url = format(REMINDER_BY_ID_URL, reminderId);
+    protected void updateReferralExpectNotFound(Long referralId, ReferralDto dto, ComponentTestUser user) {
+        var url = format(REMINDER_BY_ID_URL, referralId);
         putExpectNotFound(url, user, dto);
     }
 
-    protected void deleteReferralExpectNotFound(Long reminderId, ComponentTestUser user) {
-        var url = format(REMINDER_BY_ID_URL, reminderId);
+    protected void deleteReferralExpectNotFound(Long referralId, ComponentTestUser user) {
+        var url = format(REMINDER_BY_ID_URL, referralId);
         deleteExpectNotFound(url, user);
     }
 
-    protected void getReferralExpectNotFound(Long reminderId, ComponentTestUser user) {
-        var url = format(REMINDER_BY_ID_URL, reminderId);
+    protected void getReferralExpectNotFound(Long referralId, ComponentTestUser user) {
+        var url = format(REMINDER_BY_ID_URL, referralId);
         getExpectNotFound(url, user);
     }
 

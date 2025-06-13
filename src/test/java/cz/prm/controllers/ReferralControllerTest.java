@@ -86,8 +86,8 @@ class ReferralControllerTest {
         var dto = referralDto();
         controller.createReferral(dto);
         verify(referralService).createReferral(referralCapt.capture());
-        var reminder = referralCapt.getValue();
-        assertReferral(reminder, dto);
+        var referral = referralCapt.getValue();
+        assertReferral(referral, dto);
     }
 
     @Test

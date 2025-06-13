@@ -32,13 +32,13 @@ class NotificationServiceTest {
     @Test
     void getNotifications() {
         var contactId = randomLong();
-        var reminder1 = referral();
+        var referral1 = referral();
         var recurrence = recurrence();
-        reminder1.setRecurrence(recurrence);
-        var reminder2 = referral();
-        var reminder3 = referral();
-        var reminders = newArrayList(reminder1, reminder2, reminder3);
-        var page = page(reminders);
+        referral1.setRecurrence(recurrence);
+        var referral2 = referral();
+        var referral3 = referral();
+        var referrals = newArrayList(referral1, referral2, referral3);
+        var page = page(referrals);
 
         when(referralService.getContactReferrals(eq(contactId), any(ReferralsQuery.class))).thenReturn(page);
         notificationService.getNotifications(contactId);

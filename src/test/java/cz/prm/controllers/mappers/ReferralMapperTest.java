@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 class ReferralMapperTest {
 
-    public static final String DEFAULT_REMINDERS_SORT = "desc(creationDate)";
+    public static final String DEFAULT_REFERRALS_SORT = "desc(creationDate)";
 
     private ReferralMapper mapper = MapperUtils.getReferralMapper();
 
@@ -31,16 +31,16 @@ class ReferralMapperTest {
 
     @Test
     void toReferralDto() {
-        var reminder = referral();
-        var dto = mapper.toReferralDto(reminder);
-        assertReferral(reminder, dto);
+        var referral = referral();
+        var dto = mapper.toReferralDto(referral);
+        assertReferral(referral, dto);
     }
 
     @Test
     void toReferral() {
         var dto = referralDto();
-        var reminder = mapper.toReferral(dto);
-        assertReferral(reminder, dto);
+        var referral = mapper.toReferral(dto);
+        assertReferral(referral, dto);
     }
 
     @Test
@@ -82,7 +82,7 @@ class ReferralMapperTest {
     private void assertNullSafeReferralQuery(ReferralsQuery query) {
         assertThat(query.getPagination()).isNotNull();
         assertThat(query.getFilter()).isNotNull();
-        assertThat(query.getSort()).isEqualTo(DEFAULT_REMINDERS_SORT);
+        assertThat(query.getSort()).isEqualTo(DEFAULT_REFERRALS_SORT);
         var pagination = query.getPagination();
         assertThat(pagination.getPageNumber()).isZero();
         assertThat(pagination.getPageSize()).isEqualTo(DEFAULT_PAGE_SIZE);

@@ -41,22 +41,22 @@ public class ReferralService {
         return new Page<>(page);
     }
 
-    public Referral getReferral(Long reminderId) {
-        return getReferralById(reminderId);
+    public Referral getReferral(Long referralId) {
+        return getReferralById(referralId);
     }
 
     public void createReferral(Referral referral) {
         repository.save(referral);
     }
 
-    public void updateReferral(Long reminderId, Referral updatedReferral) {
-        var savedReferral = getReferralById(reminderId);
+    public void updateReferral(Long referralId, Referral updatedReferral) {
+        var savedReferral = getReferralById(referralId);
         updateReferralFields(savedReferral, updatedReferral);
         repository.save(savedReferral);
     }
 
-    public void deleteReferral(Long reminderId) {
-        var savedReferral = getReferralById(reminderId);
+    public void deleteReferral(Long referralId) {
+        var savedReferral = getReferralById(referralId);
         repository.deleteById(savedReferral.getReferralId());
     }
 
@@ -78,10 +78,10 @@ public class ReferralService {
         savedRecurrence.resetParsedRule();
     }
 
-    private Referral getReferralById(Long reminderId) {
-        var predicate = predicates.byReferralId(reminderId);
+    private Referral getReferralById(Long referralId) {
+        var predicate = predicates.byReferralId(referralId);
         var optional = repository.findOne(predicate);
-        return optional.orElseThrow(entityNotFoundSupplier(reminderId));
+        return optional.orElseThrow(entityNotFoundSupplier(referralId));
     }
 
     private Supplier<EntityNotFoundException> entityNotFoundSupplier(Long userId) {

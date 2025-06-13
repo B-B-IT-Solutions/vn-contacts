@@ -39,7 +39,7 @@ class ReferralServiceTest {
     @Mock
     private ReferralPredicates predicates;
     @Captor
-    private ArgumentCaptor<Referral> reminderCapt;
+    private ArgumentCaptor<Referral> referralCapt;
 
     private ReferralService referralService;
 
@@ -110,8 +110,8 @@ class ReferralServiceTest {
         when(repository.findOne(predicate)).thenReturn(of(referralIdDb));
 
         referralService.updateReferral(referralIdDb.getReferralId(), updatedReferral);
-        verify(repository).save(reminderCapt.capture());
-        var savedReferral = reminderCapt.getValue();
+        verify(repository).save(referralCapt.capture());
+        var savedReferral = referralCapt.getValue();
         assertFieldsUpdated(referralIdDb, updatedReferral, savedReferral);
     }
 
