@@ -482,10 +482,9 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         var pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var user1Tasks = createTasks(USER_1, 21);
-        var userTask1 = user1Tasks.get(0);
-        var userTask = user1Tasks.get(0);
-        contactId = userTask.getContactId();
+        var user1Referrals = createReferrals(USER_1, 21);
+        var user1Task = user1Referrals.get(0);
+        contactId = user1Task.getContactId();
 
         queryDto = referralsQueryDto();
         queryDto.setFilter(null);
@@ -495,15 +494,15 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         queryDto = referralsQueryDto();
         var filter = queryDto.getFilter();
 
-        filter.setGlobalFilter(userTask1.getName());
+        filter.setGlobalFilter(user1Task.getName());
         pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setGlobalFilter(userTask1.getDescription());
+        filter.setGlobalFilter(user1Task.getDescription());
         pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setGlobalFilter(userTask1.getDescription());
+        filter.setGlobalFilter(user1Task.getDescription());
         pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
@@ -514,7 +513,7 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         queryDto = referralsQueryDto();
         filter = queryDto.getFilter();
 
-        filter.setName(userTask1.getName());
+        filter.setName(user1Task.getName());
         pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
@@ -526,7 +525,7 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setName(startsWithFilter(userTask1.getName()));
+        filter.setName(startsWithFilter(user1Task.getName()));
         pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
@@ -542,7 +541,7 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setName(endsWithFilter(userTask1.getName()));
+        filter.setName(endsWithFilter(user1Task.getName()));
         pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
@@ -554,7 +553,7 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setName(equalsFilter(userTask1.getName()));
+        filter.setName(equalsFilter(user1Task.getName()));
         pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
@@ -570,7 +569,7 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setName(notEqualsFilter(userTask1.getName()));
+        filter.setName(notEqualsFilter(user1Task.getName()));
         pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(20);
 
