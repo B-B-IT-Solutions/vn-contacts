@@ -56,16 +56,28 @@ public class ReferralComponentTestBase extends BusinessComponentTestBase {
         deleteReferral(reminderId, USER_3);
     }
 
-    protected PageDto<ReferralDto> user1GetReferrals(Long contactId, ReferralQueryDto queryDto) {
-        return getReferralsPage(contactId, queryDto, USER_1);
+    protected PageDto<ReferralDto> user1GetReferrals(ReferralQueryDto queryDto) {
+        return getReferralsPage(queryDto, USER_1);
     }
 
-    protected PageDto<ReferralDto> user2GetReferrals(Long contactId, ReferralQueryDto queryDto) {
-        return getReferralsPage(contactId, queryDto, USER_2);
+    protected PageDto<ReferralDto> user2GetReferrals(ReferralQueryDto queryDto) {
+        return getReferralsPage(queryDto, USER_2);
     }
 
-    protected PageDto<ReferralDto> user3GetReferrals(Long contactId, ReferralQueryDto queryDto) {
-        return getReferralsPage(contactId, queryDto, USER_3);
+    protected PageDto<ReferralDto> user3GetReferrals(ReferralQueryDto queryDto) {
+        return getReferralsPage(queryDto, USER_3);
+    }
+
+    protected PageDto<ReferralDto> user1GetContactReferrals(Long contactId, ReferralQueryDto queryDto) {
+        return getContactReferralsPage(contactId, queryDto, USER_1);
+    }
+
+    protected PageDto<ReferralDto> user2GetContactReferrals(Long contactId, ReferralQueryDto queryDto) {
+        return getContactReferralsPage(contactId, queryDto, USER_2);
+    }
+
+    protected PageDto<ReferralDto> user3GetContactReferrals(Long contactId, ReferralQueryDto queryDto) {
+        return getContactReferralsPage(contactId, queryDto, USER_3);
     }
 
     protected ReferralDto user1GetReferral(Long reminderId) {
@@ -94,7 +106,15 @@ public class ReferralComponentTestBase extends BusinessComponentTestBase {
         delete(url, user);
     }
 
-    protected PageDto<ReferralDto> getReferralsPage(Long contactId, ReferralQueryDto queryDto, ComponentTestUser user) {
+    protected PageDto<ReferralDto> getReferralsPage(ReferralQueryDto queryDto, ComponentTestUser user) {
+        var baseURl = REMINDERS_BASE_URL;
+        var url = appendQueryToUrl(baseURl, queryDto);
+        var typeRef = new TypeRef<PageDto<ReferralDto>>() {
+        };
+        return getPage(url, user, typeRef);
+    }
+
+    protected PageDto<ReferralDto> getContactReferralsPage(Long contactId, ReferralQueryDto queryDto, ComponentTestUser user) {
         var baseURl = format(CONTACT_REMINDERS_URL, contactId);
         var url = appendQueryToUrl(baseURl, queryDto);
         var typeRef = new TypeRef<PageDto<ReferralDto>>() {
