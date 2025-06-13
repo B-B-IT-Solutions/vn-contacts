@@ -14,9 +14,9 @@ public class ReferralPredicates {
         return dataAccessPredicate();
     }
 
-    public Predicate byReferralId(Long reminderId) {
+    public Predicate byReferralId(Long referralId) {
         var predicate = dataAccessPredicate();
-        return predicate.and(referral.reminderId.eq(reminderId));
+        return predicate.and(referral.referralId.eq(referralId));
     }
 
     public Predicate byContactId(Long contactId) {

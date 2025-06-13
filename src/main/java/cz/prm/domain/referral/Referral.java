@@ -30,16 +30,16 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Slf4j
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-@Table(name = "REMINDER", schema = "public")
+@Table(name = "REFERRAL", schema = "public")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Referral {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REMINDER_SEQ")
-    @SequenceGenerator(name = "REMINDER_SEQ", sequenceName = "REMINDER_SEQ", allocationSize = 1)
-    @Column(name = "REMINDER_ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REFERRAL_SEQ")
+    @SequenceGenerator(name = "REFERRAL_SEQ", sequenceName = "REFERRAL_SEQ", allocationSize = 1)
+    @Column(name = "REFERRAL_ID")
     private Long referralId;
 
     @Column(name = "CONTACT_ID")

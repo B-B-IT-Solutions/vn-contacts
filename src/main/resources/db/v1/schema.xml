@@ -151,14 +151,14 @@
 	 
 	 <changeSet author="sergej" id="1.0.5">
 			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
-											sequenceName="reminder_seq"/>
+											sequenceName="referral_seq"/>
 			
 			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
 											sequenceName="recurrence_seq"/>
 			
 			<createTable tableName="referral">
-				 <column name="reminder_id" type="BIGINT">
-						<constraints primaryKey="true" primaryKeyName="reminder_pk" nullable="false"/>
+				 <column name="referral_id" type="BIGINT">
+						<constraints primaryKey="true" primaryKeyName="referral_pk" nullable="false"/>
 				 </column>
 				 <column name="contact_id" type="BIGINT"/>
 				 <column name="title" type="VARCHAR(1000)"/>

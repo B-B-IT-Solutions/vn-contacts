@@ -48,7 +48,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     @Autowired
     protected ComponentTestNoteRepository noteRepository;
     @Autowired
-    protected ComponentTestReferralRepository reminderRepository;
+    protected ComponentTestReferralRepository referralRepository;
     @Autowired
     protected ComponentTestTaskRepository taskRepository;
     @Autowired
@@ -61,7 +61,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     @BeforeEach
     void setUp() {
         noteRepository.deleteAll();
-        reminderRepository.deleteAll();
+        referralRepository.deleteAll();
         taskRepository.deleteAll();
         aboutRepository.deleteAll();
         contactRepository.deleteAll();
@@ -126,7 +126,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     protected Referral createReferral(ComponentTestUser user, Contact contact) {
         ensureUserContext(user);
         var reminder = reminder(contact.getContactId());
-        var savedReferral = reminderRepository.save(reminder);
+        var savedReferral = referralRepository.save(reminder);
         clearContext();
         return savedReferral;
     }
@@ -166,7 +166,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     }
 
     protected Referral getReferralFromDb(ReferralDto dto) {
-        return reminderRepository.getByDescription(dto.getDescription());
+        return referralRepository.getByDescription(dto.getDescription());
     }
 
     protected Task getTaskFromDb(TaskDto dto) {

@@ -36,7 +36,7 @@ class ReferralPredicatesTest {
             var user = user();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
             var query = predicates.byReferralId(10L);
-            var expectedString = format("referral.owner.username = %s && referral.reminderId = 10", user.getUsername());
+            var expectedString = format("referral.owner.username = %s && referral.referralId = 10", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }
     }
