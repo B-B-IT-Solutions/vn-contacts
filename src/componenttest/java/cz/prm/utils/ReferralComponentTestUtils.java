@@ -9,6 +9,7 @@ import static org.assertj.core.util.Lists.newArrayList;
 import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.controllers.dto.referral.ReferralDto;
 import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
+import cz.prm.controllers.dto.referral.query.ReferralsFilterDto;
 import cz.prm.domain.referral.Recurrence;
 import cz.prm.domain.referral.Referral;
 import java.util.List;
@@ -64,9 +65,10 @@ public class ReferralComponentTestUtils {
         }
     }
 
-    public static ReferralQueryDto remindersQueryDto() {
+    public static ReferralQueryDto referralsQueryDto() {
         var query = new ReferralQueryDto();
         query.setPagination(new PaginationDto());
+        query.setFilter(new ReferralsFilterDto());
         return query;
     }
 }

@@ -4,12 +4,15 @@ import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
 import static java.lang.String.format;
+import static java.util.Objects.nonNull;
+import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import cz.prm.business.BusinessComponentTestBase;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.referral.ReferralDto;
 import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
+import cz.prm.controllers.dto.referral.query.ReferralsFilterDto;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 
@@ -182,13 +185,37 @@ public class ReferralComponentTestBase extends BusinessComponentTestBase {
 
     protected String appendQueryToUrl(String url, ReferralQueryDto queryDto) {
         var sb = new StringBuilder(url);
+        var filters = toUrlFilterParams(queryDto.getFilter());
         var pagination = toUrlPaginationParams(queryDto.getPagination());
         var sort = toUrlSortParams(queryDto.getSort());
 
-        if (isNotBlank(pagination) || isNotBlank(sort)) {
+        if (isNotBlank(filters) || isNotBlank(pagination) || isNotBlank(sort)) {
             sb.append("?");
+            sb.append(filters);
             sb.append(pagination);
             sb.append(sort);
+        }
+        return sb.toString();
+    }
+
+    protected String toUrlFilterParams(ReferralsFilterDto filterDto) {
+        var sb = new StringBuilder();
+        if (nonNull(filterDto)) {
+            if (isNotEmpty(filterDto.getGlobalFilter())) {
+                sb.append("filter.globalFilter=");
+                sb.append(filterDto.getGlobalFilter());
+                sb.append("&");
+            }
+            if (isNotEmpty(filterDto.getName())) {
+                sb.append("filter.name=");
+                sb.append(filterDto.getName());
+                sb.append("&");
+            }
+            if (nonNull(filterDto.getStatus())) {
+                sb.append("filter.status=");
+                sb.append(filterDto.getStatus());
+                sb.append("&");
+            }
         }
         return sb.toString();
     }
