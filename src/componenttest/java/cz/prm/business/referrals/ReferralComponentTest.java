@@ -46,7 +46,7 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         assertReferrals(user2Referrals, pageDto);
 
         pageDto = user1GetReferrals(queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
+        assertReferrals(user1Referrals, pageDto);
 
         pageDto = user3GetReferrals(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
@@ -56,10 +56,10 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         assertReferrals(user3Referrals, pageDto);
 
         pageDto = user1GetReferrals(queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
+        assertReferrals(user1Referrals, pageDto);
 
         pageDto = user2GetReferrals(queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
+        assertReferrals(user2Referrals, pageDto);
     }
 
     @Test
