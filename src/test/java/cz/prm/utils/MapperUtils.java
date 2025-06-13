@@ -2,7 +2,7 @@ package cz.prm.utils;
 
 import cz.prm.controllers.mappers.ContactMapper;
 import cz.prm.controllers.mappers.NoteMapper;
-import cz.prm.controllers.mappers.ReminderMapper;
+import cz.prm.controllers.mappers.ReferralMapper;
 import cz.prm.controllers.mappers.SettingsMapper;
 import cz.prm.controllers.mappers.TaskMapper;
 import org.mapstruct.factory.Mappers;
@@ -17,8 +17,8 @@ public class MapperUtils {
         return Mappers.getMapper(NoteMapper.class);
     }
 
-    public static ReminderMapper getReminderMapper() {
-        return Mappers.getMapper(ReminderMapper.class);
+    public static ReferralMapper getReferralMapper() {
+        return Mappers.getMapper(ReferralMapper.class);
     }
 
     public static TaskMapper getTaskMapper() {

@@ -151,14 +151,14 @@
 	 
 	 <changeSet author="sergej" id="1.0.5">
 			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
-											sequenceName="reminder_seq"/>
+											sequenceName="referral_seq"/>
 			
 			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
 											sequenceName="recurrence_seq"/>
 			
-			<createTable tableName="reminder">
-				 <column name="reminder_id" type="BIGINT">
-						<constraints primaryKey="true" primaryKeyName="reminder_pk" nullable="false"/>
+			<createTable tableName="referral">
+				 <column name="referral_id" type="BIGINT">
+						<constraints primaryKey="true" primaryKeyName="referral_pk" nullable="false"/>
 				 </column>
 				 <column name="contact_id" type="BIGINT"/>
 				 <column name="title" type="VARCHAR(1000)"/>
@@ -178,13 +178,13 @@
 				 <column name="next_occurrence" type="TIMESTAMP WITH TIME ZONE"/>
 			</createTable>
 			
-			<addForeignKeyConstraint baseTableName="reminder" baseColumnNames="contact_id" constraintName="reminder_contact_id_fkey"
+			<addForeignKeyConstraint baseTableName="referral" baseColumnNames="contact_id" constraintName="referral_contact_id_fkey"
 															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
 															 referencedColumnNames="contact_id" validate="true"/>
 			
 			
-			<addForeignKeyConstraint baseTableName="reminder" baseColumnNames="recurrence_id"
-															 constraintName="reminder_recurrence_id_fkey"
+			<addForeignKeyConstraint baseTableName="referral" baseColumnNames="recurrence_id"
+															 constraintName="referral_recurrence_id_fkey"
 															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="recurrence"
 															 referencedColumnNames="recurrence_id" validate="true"/>
 	 

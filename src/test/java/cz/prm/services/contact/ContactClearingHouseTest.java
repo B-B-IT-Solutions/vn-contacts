@@ -12,7 +12,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import cz.prm.services.NoteService;
-import cz.prm.services.ReminderService;
+import cz.prm.services.ReferralService;
 import cz.prm.services.TaskService;
 import cz.prm.services.contact.data.AboutService;
 import cz.prm.services.contact.data.ContactService;
@@ -34,13 +34,13 @@ class ContactClearingHouseTest {
     @Mock
     private TaskService taskService;
     @Mock
-    private ReminderService reminderService;
+    private ReferralService referralService;
 
     private ContactClearingHouse clearingHouse;
 
     @BeforeEach
     void setUp() {
-        clearingHouse = new ContactClearingHouse(contactService, aboutService, noteService, taskService, reminderService);
+        clearingHouse = new ContactClearingHouse(contactService, aboutService, noteService, taskService, referralService);
     }
 
     @Test
@@ -83,7 +83,7 @@ class ContactClearingHouseTest {
         clearingHouse.deleteContact(contact.getContactId());
         verify(noteService).deleteByContactId(contact.getContactId());
         verify(taskService).deleteByContactId(contact.getContactId());
-        verify(reminderService).deleteByContactId(contact.getContactId());
+        verify(referralService).deleteByContactId(contact.getContactId());
         verify(aboutService).deleteAbout(contact.getContactId());
         verify(contactService).deleteContact(contact.getContactId());
     }
