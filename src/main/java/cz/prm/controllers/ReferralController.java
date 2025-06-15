@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("reminders")
+@RequestMapping("referrals")
 @RestController
 public class ReferralController {
 
@@ -42,25 +42,25 @@ public class ReferralController {
         return mapper.toPageDto(referrals);
     }
 
-    @GetMapping("/reminder/{referralId}")
+    @GetMapping("/referral/{referralId}")
     public ReferralDto getReferral(@PathVariable("referralId") Long referralId) {
         var referral = referralService.getReferral(referralId);
         return mapper.toReferralDto(referral);
     }
 
-    @PostMapping("/reminder")
+    @PostMapping("/referral")
     public void createReferral(@RequestBody ReferralDto dto) {
         var referral = mapper.toReferral(dto);
         referralService.createReferral(referral);
     }
 
-    @PutMapping("/reminder/{referralId}")
+    @PutMapping("/referral/{referralId}")
     public void updateReferral(@PathVariable("referralId") Long referralId, @RequestBody ReferralDto dto) {
         var referral = mapper.toReferral(dto);
         referralService.updateReferral(referralId, referral);
     }
 
-    @DeleteMapping("/reminder/{referralId}")
+    @DeleteMapping("/referral/{referralId}")
     public void deleteReferral(@PathVariable("referralId") Long referralId) {
         referralService.deleteReferral(referralId);
     }
