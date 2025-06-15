@@ -18,10 +18,10 @@ import io.restassured.common.mapper.TypeRef;
 
 public class ReferralComponentTestBase extends BusinessComponentTestBase {
 
-    protected static String REMINDERS_BASE_URL = "reminders";
-    protected static String CONTACT_REMINDERS_URL = REMINDERS_BASE_URL + "/contact/%s";
-    protected static String REMINDER_URL = REMINDERS_BASE_URL + "/reminder";
-    protected static String REMINDER_BY_ID_URL = REMINDER_URL + "/%s";
+    protected static String REFERRALS_BASE_URL = "referrals";
+    protected static String CONTACT_REFERRALS_URL = REFERRALS_BASE_URL + "/contact/%s";
+    protected static String REFERRAL_URL = REFERRALS_BASE_URL + "/referral";
+    protected static String REFERRAL_BY_ID_URL = REFERRAL_URL + "/%s";
 
     protected void user1CreateReferral(ReferralDto dto) {
         createReferral(dto, USER_1);
@@ -96,21 +96,21 @@ public class ReferralComponentTestBase extends BusinessComponentTestBase {
     }
 
     protected void createReferral(ReferralDto dto, ComponentTestUser user) {
-        post(REMINDER_URL, user, dto);
+        post(REFERRAL_URL, user, dto);
     }
 
     protected void updateReferral(Long referralId, ReferralDto dto, ComponentTestUser user) {
-        var url = format(REMINDER_BY_ID_URL, referralId);
+        var url = format(REFERRAL_BY_ID_URL, referralId);
         put(url, user, dto);
     }
 
     protected void deleteReferral(Long referralId, ComponentTestUser user) {
-        var url = format(REMINDER_BY_ID_URL, referralId);
+        var url = format(REFERRAL_BY_ID_URL, referralId);
         delete(url, user);
     }
 
     protected PageDto<ReferralDto> getReferralsPage(ReferralQueryDto queryDto, ComponentTestUser user) {
-        var baseURl = REMINDERS_BASE_URL;
+        var baseURl = REFERRALS_BASE_URL;
         var url = appendQueryToUrl(baseURl, queryDto);
         var typeRef = new TypeRef<PageDto<ReferralDto>>() {
         };
@@ -118,7 +118,7 @@ public class ReferralComponentTestBase extends BusinessComponentTestBase {
     }
 
     protected PageDto<ReferralDto> getContactReferralsPage(Long contactId, ReferralQueryDto queryDto, ComponentTestUser user) {
-        var baseURl = format(CONTACT_REMINDERS_URL, contactId);
+        var baseURl = format(CONTACT_REFERRALS_URL, contactId);
         var url = appendQueryToUrl(baseURl, queryDto);
         var typeRef = new TypeRef<PageDto<ReferralDto>>() {
         };
@@ -126,7 +126,7 @@ public class ReferralComponentTestBase extends BusinessComponentTestBase {
     }
 
     protected ReferralDto getReferral(Long referralId, ComponentTestUser user) {
-        var url = format(REMINDER_BY_ID_URL, referralId);
+        var url = format(REFERRAL_BY_ID_URL, referralId);
         var typeRef = new TypeRef<ReferralDto>() {
         };
         return getOne(url, user, typeRef);
@@ -169,17 +169,17 @@ public class ReferralComponentTestBase extends BusinessComponentTestBase {
     }
 
     protected void updateReferralExpectNotFound(Long referralId, ReferralDto dto, ComponentTestUser user) {
-        var url = format(REMINDER_BY_ID_URL, referralId);
+        var url = format(REFERRAL_BY_ID_URL, referralId);
         putExpectNotFound(url, user, dto);
     }
 
     protected void deleteReferralExpectNotFound(Long referralId, ComponentTestUser user) {
-        var url = format(REMINDER_BY_ID_URL, referralId);
+        var url = format(REFERRAL_BY_ID_URL, referralId);
         deleteExpectNotFound(url, user);
     }
 
     protected void getReferralExpectNotFound(Long referralId, ComponentTestUser user) {
-        var url = format(REMINDER_BY_ID_URL, referralId);
+        var url = format(REFERRAL_BY_ID_URL, referralId);
         getExpectNotFound(url, user);
     }
 
