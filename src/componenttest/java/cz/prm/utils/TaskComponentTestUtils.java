@@ -8,6 +8,7 @@ import static cz.prm.utils.TestUtils.randomInt;
 import static cz.prm.utils.TimeComponentTestUtils.todayStartOfDay;
 import static java.lang.String.format;
 import static org.assertj.core.util.Lists.newArrayList;
+import static org.dmfs.rfc5545.DateTime.now;
 
 import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.controllers.dto.task.TaskDto;
@@ -16,7 +17,6 @@ import cz.prm.controllers.dto.task.query.TasksQueryDto;
 import cz.prm.domain.reminder.Recurrence;
 import cz.prm.domain.task.Task;
 import java.util.List;
-import org.dmfs.rfc5545.DateTime;
 import org.dmfs.rfc5545.recur.Freq;
 import org.dmfs.rfc5545.recur.RecurrenceRule;
 import org.dmfs.rfc5545.recur.RecurrenceRule.Part;
@@ -59,7 +59,7 @@ public class TaskComponentTestUtils {
 
     public static Recurrence recurrence() {
         var rrule = recurrenceRule();
-        var startDate = DateTime.now();
+        var startDate = now();
         var value = format("DTSTART:%s\nRRULE:%s", startDate, rrule);
         return new Recurrence(value);
     }
