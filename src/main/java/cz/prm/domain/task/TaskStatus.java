@@ -1,6 +1,6 @@
 package cz.prm.domain.task;
 
-public enum Status {
+public enum TaskStatus {
     TO_DO,
     WAITING,
     IN_PROGRESS,

@@ -1,31 +1,31 @@
 package cz.prm.repositories.common.query.filter;
 
-import static cz.prm.domain.task.Status.IN_PROGRESS;
-import static cz.prm.domain.task.Status.TO_DO;
-import static cz.prm.domain.task.Status.WAITING;
+import static cz.prm.domain.task.TaskStatus.IN_PROGRESS;
+import static cz.prm.domain.task.TaskStatus.TO_DO;
+import static cz.prm.domain.task.TaskStatus.WAITING;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThrows;
 
-import cz.prm.domain.task.Status;
+import cz.prm.domain.task.TaskStatus;
 import org.junit.jupiter.api.Test;
 
 class EnumFilterCriteriaTest {
 
     @Test
     void getEnumValues() {
-        var fc = new EnumFilterCriteria(null, Status.class);
+        var fc = new EnumFilterCriteria(null, TaskStatus.class);
         assertThat(fc.getEnumValues()).isEmpty();
 
-        fc = new EnumFilterCriteria("", Status.class);
+        fc = new EnumFilterCriteria("", TaskStatus.class);
         assertThat(fc.getEnumValues()).isEmpty();
 
-        fc = new EnumFilterCriteria("TO_DO", Status.class);
+        fc = new EnumFilterCriteria("TO_DO", TaskStatus.class);
         assertThat(fc.getEnumValues()).containsExactly(TO_DO);
 
-        fc = new EnumFilterCriteria("TO_DO,  WAITING", Status.class);
+        fc = new EnumFilterCriteria("TO_DO,  WAITING", TaskStatus.class);
         assertThat(fc.getEnumValues()).containsExactly(TO_DO, WAITING);
 
-        fc = new EnumFilterCriteria("TO_DO,WAITING,IN_PROGRESS", Status.class);
+        fc = new EnumFilterCriteria("TO_DO,WAITING,IN_PROGRESS", TaskStatus.class);
         assertThat(fc.getEnumValues()).containsExactly(TO_DO, WAITING, IN_PROGRESS);
     }
 

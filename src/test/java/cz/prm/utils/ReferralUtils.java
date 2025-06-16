@@ -1,6 +1,8 @@
 package cz.prm.utils;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static cz.prm.domain.common.Priority.HIGH;
+import static cz.prm.domain.referral.ReferralStatus.TO_DO;
 import static cz.prm.utils.CommonUtils.pagination;
 import static cz.prm.utils.CommonUtils.paginationDto;
 import static cz.prm.utils.CommonUtils.user;
@@ -26,6 +28,12 @@ public class ReferralUtils {
         referral.setContactId(randomLong());
         referral.setName(uuid());
         referral.setNote(uuid());
+        referral.setSource(uuid());
+        referral.setPriority(HIGH);
+        referral.setStatus(TO_DO);
+        referral.setClosedDate(now());
+        referral.setStartDate(now());
+        referral.setExpiredDate(now());
         referral.setLastEditDate(now());
         referral.setCreationDate(now());
         referral.setOwner(user());
@@ -38,6 +46,12 @@ public class ReferralUtils {
         referral.setContactId(randomLong());
         referral.setName(uuid());
         referral.setNote(uuid());
+        referral.setSource(uuid());
+        referral.setPriority(HIGH);
+        referral.setStatus(TO_DO);
+        referral.setClosedDate(now());
+        referral.setStartDate(now());
+        referral.setExpiredDate(now());
         referral.setLastEditDate(now());
         referral.setCreationDate(now());
         return referral;

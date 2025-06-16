@@ -1,4 +1,4 @@
-package cz.prm.domain.task;
+package cz.prm.domain.common;
 
 public enum Priority {
     HIGH,

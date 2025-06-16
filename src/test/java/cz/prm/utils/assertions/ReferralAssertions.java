@@ -54,6 +54,12 @@ public class ReferralAssertions {
         assertThat(referral1.getReferralId()).isEqualTo(referral2.getReferralId());
         assertThat(referral1.getContactId()).isEqualTo(referral2.getContactId());
         assertThat(referral1.getNote()).isEqualTo(referral2.getNote());
+        assertThat(referral1.getSource()).isEqualTo(referral2.getSource());
+        assertThat(referral1.getPriority()).isEqualTo(referral2.getPriority());
+        assertThat(referral1.getStatus()).isEqualTo(referral2.getStatus());
+        assertThat(referral1.getClosedDate()).isEqualTo(referral2.getClosedDate());
+        assertThat(referral1.getStartDate()).isEqualTo(referral2.getStartDate());
+        assertThat(referral1.getExpiredDate()).isEqualTo(referral2.getExpiredDate());
         assertThat(referral1.getLastEditDate()).isEqualTo(referral2.getLastEditDate());
         assertThat(referral1.getCreationDate()).isEqualTo(referral2.getCreationDate());
         assertThat(referral1.getOwner()).isEqualTo(referral2.getOwner());
@@ -64,6 +70,12 @@ public class ReferralAssertions {
         assertThat(referral.getContactId()).isEqualTo(dto.getContactId());
         assertThat(referral.getName()).isEqualTo(dto.getName());
         assertThat(referral.getNote()).isEqualTo(dto.getNote());
+        assertThat(referral.getSource()).isEqualTo(dto.getSource());
+        assertThat(referral.getPriority()).isEqualTo(dto.getPriority());
+        assertThat(referral.getStatus()).isEqualTo(dto.getStatus());
+        assertThat(referral.getClosedDate()).isEqualTo(dto.getClosedDate());
+        assertThat(referral.getStartDate()).isEqualTo(dto.getStartDate());
+        assertThat(referral.getExpiredDate()).isEqualTo(dto.getExpiredDate());
         assertThat(referral.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(referral.getCreationDate()).isEqualTo(dto.getCreationDate());
     }

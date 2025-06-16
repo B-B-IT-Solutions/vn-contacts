@@ -1,5 +1,8 @@
 package cz.prm.domain.referral;
 
+import static jakarta.persistence.EnumType.ORDINAL;
+
+import cz.prm.domain.common.Priority;
 import cz.prm.domain.common.User;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -7,6 +10,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -45,6 +49,26 @@ public class Referral {
 
     @Column(name = "NOTE", columnDefinition = "TEXT")
     private String note;
+
+    @Column(name = "SOURCE")
+    private String source;
+
+    @Enumerated(value = ORDINAL)
+    @Column(name = "PRIORITY")
+    private Priority priority;
+
+    @Enumerated(value = ORDINAL)
+    @Column(name = "STATUS")
+    private ReferralStatus status;
+
+    @Column(name = "CLOSED_DATE")
+    private Instant closedDate;
+
+    @Column(name = "START_DATE")
+    private Instant startDate;
+
+    @Column(name = "EXPIRED_DATE")
+    private Instant expiredDate;
 
     @LastModifiedDate
     @Column(name = "LAST_EDIT_DATE")
