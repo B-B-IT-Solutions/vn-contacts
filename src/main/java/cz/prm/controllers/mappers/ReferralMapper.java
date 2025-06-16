@@ -14,6 +14,7 @@ import cz.prm.domain.referral.query.ReferralsFilter;
 import cz.prm.domain.referral.query.ReferralsQuery;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
@@ -23,6 +24,7 @@ public interface ReferralMapper {
 
     ReferralDto toReferralDto(Referral referral);
 
+    @Mapping(target = "owner", ignore = true)
     Referral toReferral(ReferralDto dto);
 
     ReferralsQuery toReferralsQuery(ReferralQueryDto dto);

@@ -1,27 +1,20 @@
 package cz.prm.repositories.reminder;
 
-import static cz.prm.domain.referral.querydsl.QReferral.referral;
-import static cz.prm.security.SecurityContextUtils.getUser;
+import static cz.prm.domain.reminder.querydsl.QReminder.reminder;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ReminderPredicates {
 
     public Predicate reminders() {
-        var predicate = dataAccessPredicate();
-        return predicate;
+        return new BooleanBuilder();
     }
 
     public Predicate byReminderId(Long reminderId) {
-        var predicate = dataAccessPredicate();
-        return predicate.and(referral.referralId.eq(reminderId));
-    }
-
-    private BooleanExpression dataAccessPredicate() {
-        var user = getUser();
-        return referral.owner.username.eq(user.getUsername());
+        var predicate = new BooleanBuilder();
+        return predicate.and(reminder.reminderId.eq(reminderId));
     }
 }

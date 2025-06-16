@@ -3,11 +3,12 @@ package cz.prm.utils;
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.TestUtils.randomInt;
 import static cz.prm.utils.TestUtils.randomLong;
+import static java.lang.String.format;
+import static org.dmfs.rfc5545.DateTime.now;
 
 import cz.prm.domain.reminder.Recurrence;
 import cz.prm.domain.reminder.Reminder;
 import java.util.List;
-import org.dmfs.rfc5545.DateTime;
 import org.dmfs.rfc5545.recur.Freq;
 import org.dmfs.rfc5545.recur.RecurrenceRule;
 import org.dmfs.rfc5545.recur.RecurrenceRule.Part;
@@ -27,8 +28,8 @@ public class ReminderUtils {
 
     public static Recurrence recurrence() {
         var rrule = recurrenceRule();
-        var startDate = DateTime.now();
-        var value = String.format("DTSTART:%s\nRRULE:%s", startDate, rrule);
+        var startDate = now();
+        var value = format("DTSTART:%s\nRRULE:%s", startDate, rrule);
         return recurrence(value);
     }
 
