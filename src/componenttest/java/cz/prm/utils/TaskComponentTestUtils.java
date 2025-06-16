@@ -46,6 +46,7 @@ public class TaskComponentTestUtils {
         dto.setStatus(TO_DO);
         dto.setPriority(HIGH);
         dto.setDueDate(todayStartOfDay());
+        dto.setRecurrence(uuid());
         return dto;
     }
 

@@ -22,8 +22,10 @@ public interface TaskMapper {
 
     PageDto<TaskDto> toPageDto(Page<Task> tasks);
 
+    @Mapping(target = "recurrence", source = "recurrence.value")
     TaskDto toTaskDto(Task task);
 
+    @Mapping(target = "recurrence.value", source = "recurrence")
     @Mapping(target = "owner", ignore = true)
     Task toTask(TaskDto dto);
 

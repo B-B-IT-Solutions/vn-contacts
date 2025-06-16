@@ -41,7 +41,6 @@ public class ReferralComponentTestUtils {
         dto.setContactId(contactId);
         dto.setName(uuid());
         dto.setDescription(uuid());
-        dto.setRecurrence(uuid());
         return dto;
     }
 

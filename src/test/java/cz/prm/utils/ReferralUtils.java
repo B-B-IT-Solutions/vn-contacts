@@ -38,7 +38,6 @@ public class ReferralUtils {
         referral.setContactId(randomLong());
         referral.setName(uuid());
         referral.setDescription(uuid());
-        referral.setRecurrence(uuid());
         referral.setLastEditDate(now());
         referral.setCreationDate(now());
         return referral;

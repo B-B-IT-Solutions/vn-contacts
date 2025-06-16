@@ -37,6 +37,9 @@ public class TaskDto {
     @JsonProperty("dueDate")
     private Instant dueDate;
 
+    @JsonProperty("recurrence")
+    private String recurrence;
+
     @JsonProperty("lastEditDate")
     private Instant lastEditDate;
 
