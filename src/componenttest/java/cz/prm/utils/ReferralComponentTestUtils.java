@@ -26,7 +26,7 @@ public class ReferralComponentTestUtils {
         var referral = new Referral();
         referral.setContactId(contactId);
         referral.setName(format("Title-%s-End", uuid()));
-        referral.setDescription(format("Description%s", uuid()));
+        referral.setNote(format("Description%s", uuid()));
         return referral;
     }
 
@@ -34,7 +34,7 @@ public class ReferralComponentTestUtils {
         var dto = new ReferralDto();
         dto.setContactId(contactId);
         dto.setName(uuid());
-        dto.setDescription(uuid());
+        dto.setNote(uuid());
         return dto;
     }
 

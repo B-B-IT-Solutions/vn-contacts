@@ -350,11 +350,11 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         pageDto = user1GetReferrals(queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setGlobalFilter(userTask1.getDescription());
+        filter.setGlobalFilter(userTask1.getNote());
         pageDto = user1GetReferrals(queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setGlobalFilter(userTask1.getDescription());
+        filter.setGlobalFilter(userTask1.getNote());
         pageDto = user1GetReferrals(queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
@@ -498,11 +498,11 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setGlobalFilter(user1Task.getDescription());
+        filter.setGlobalFilter(user1Task.getNote());
         pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setGlobalFilter(user1Task.getDescription());
+        filter.setGlobalFilter(user1Task.getNote());
         pageDto = user1GetContactReferrals(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
@@ -640,7 +640,7 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         var referralId = referral.getReferralId();
         var updateDto = user1GetReferral(referralId);
 
-        updateDto.setDescription(uuid());
+        updateDto.setNote(uuid());
         user1UpdateReferral(referralId, updateDto);
         referral = getReferralFromDb(updateDto);
         assertReferral(referral, updateDto);
@@ -652,7 +652,7 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         referralId = referral.getReferralId();
         updateDto = user2GetReferral(referralId);
 
-        updateDto.setDescription(uuid());
+        updateDto.setNote(uuid());
         user2UpdateReferral(referralId, updateDto);
         referral = getReferralFromDb(updateDto);
         assertReferral(referral, updateDto);
@@ -664,7 +664,7 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         referralId = referral.getReferralId();
         updateDto = user3GetReferral(referralId);
 
-        updateDto.setDescription(uuid());
+        updateDto.setNote(uuid());
         user3UpdateReferral(referralId, updateDto);
         referral = getReferralFromDb(updateDto);
         assertReferral(referral, updateDto);

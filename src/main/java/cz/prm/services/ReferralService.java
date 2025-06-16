@@ -67,7 +67,7 @@ public class ReferralService {
 
     private void updateReferralFields(Referral savedReferral, Referral updatedReferral) {
         savedReferral.setName(updatedReferral.getName());
-        savedReferral.setDescription(updatedReferral.getDescription());
+        savedReferral.setNote(updatedReferral.getNote());
     }
 
     private Referral getReferralById(Long referralId) {

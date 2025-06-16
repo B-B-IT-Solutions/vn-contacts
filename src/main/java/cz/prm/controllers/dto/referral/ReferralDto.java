@@ -20,8 +20,8 @@ public class ReferralDto {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("description")
-    private String description;
+    @JsonProperty("note")
+    private String note;
 
     @JsonProperty("lastEditDate")
     private Instant lastEditDate;

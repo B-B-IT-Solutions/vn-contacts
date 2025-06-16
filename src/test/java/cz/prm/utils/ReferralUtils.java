@@ -25,7 +25,7 @@ public class ReferralUtils {
         referral.setReferralId(randomLong());
         referral.setContactId(randomLong());
         referral.setName(uuid());
-        referral.setDescription(uuid());
+        referral.setNote(uuid());
         referral.setLastEditDate(now());
         referral.setCreationDate(now());
         referral.setOwner(user());
@@ -37,7 +37,7 @@ public class ReferralUtils {
         referral.setReferralId(randomLong());
         referral.setContactId(randomLong());
         referral.setName(uuid());
-        referral.setDescription(uuid());
+        referral.setNote(uuid());
         referral.setLastEditDate(now());
         referral.setCreationDate(now());
         return referral;

@@ -43,8 +43,8 @@ public class Referral {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
-    private String description;
+    @Column(name = "NOTE", columnDefinition = "TEXT")
+    private String note;
 
     @LastModifiedDate
     @Column(name = "LAST_EDIT_DATE")
