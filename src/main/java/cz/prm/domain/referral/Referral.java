@@ -1,8 +1,5 @@
 package cz.prm.domain.referral;
 
-import static jakarta.persistence.CascadeType.ALL;
-import static java.util.Objects.nonNull;
-
 import cz.prm.domain.common.User;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -13,8 +10,6 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.time.Instant;
@@ -51,10 +46,6 @@ public class Referral {
     @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
     private String description;
 
-    @OneToOne(cascade = ALL)
-    @JoinColumn(name = "recurrence_id")
-    private Recurrence recurrence;
-
     @LastModifiedDate
     @Column(name = "LAST_EDIT_DATE")
     private Instant lastEditDate;
@@ -70,11 +61,4 @@ public class Referral {
         @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))
     })
     private User owner;
-
-    public boolean hasActiveRecurrence() {
-        if (nonNull(recurrence)) {
-            return recurrence.hasActiveRule();
-        }
-        return false;
-    }
 }

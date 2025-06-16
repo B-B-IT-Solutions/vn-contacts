@@ -3,6 +3,7 @@ package cz.prm.domain.task;
 import static jakarta.persistence.EnumType.ORDINAL;
 
 import cz.prm.domain.common.User;
+import cz.prm.domain.reminder.Recurrence;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -15,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -60,6 +62,9 @@ public class Task {
 
     @Column(name = "DUE_DATE")
     private Instant dueDate;
+
+    @Transient
+    private Recurrence recurrence;
 
     @LastModifiedDate
     @Column(name = "LAST_EDIT_DATE")

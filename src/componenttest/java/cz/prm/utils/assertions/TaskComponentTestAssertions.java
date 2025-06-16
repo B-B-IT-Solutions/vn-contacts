@@ -31,6 +31,7 @@ public class TaskComponentTestAssertions {
         assertThat(task.getStatus()).isEqualTo(taskDto.getStatus());
         assertThat(task.getPriority()).isEqualTo(taskDto.getPriority());
         assertThat(task.getDueDate()).isEqualTo(taskDto.getDueDate());
+//        assertThat(task.getRecurrence().getValue()).isEqualTo(taskDto.getRecurrence());
         assertThat(task.getLastEditDate()).isNotNull();
         assertThat(task.getCreationDate()).isNotNull();
     }

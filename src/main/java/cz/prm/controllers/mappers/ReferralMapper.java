@@ -22,10 +22,9 @@ public interface ReferralMapper {
 
     PageDto<ReferralDto> toPageDto(Page<Referral> referrals);
 
-    @Mapping(target = "recurrence", source = "recurrence.value")
     ReferralDto toReferralDto(Referral referral);
 
-    @Mapping(target = "recurrence.value", source = "recurrence")
+    @Mapping(target = "owner", ignore = true)
     Referral toReferral(ReferralDto dto);
 
     ReferralsQuery toReferralsQuery(ReferralQueryDto dto);

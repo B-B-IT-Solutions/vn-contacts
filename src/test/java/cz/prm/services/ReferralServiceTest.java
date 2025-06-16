@@ -166,6 +166,5 @@ class ReferralServiceTest {
         assertThat(referralIdDb.getCreationDate()).isEqualTo(savedReferral.getCreationDate());
         assertThat(savedReferral.getName()).isEqualTo(updatedReferral.getName());
         assertThat(savedReferral.getDescription()).isEqualTo(updatedReferral.getDescription());
-        assertThat(savedReferral.getRecurrence()).isEqualTo(updatedReferral.getRecurrence());
     }
 }

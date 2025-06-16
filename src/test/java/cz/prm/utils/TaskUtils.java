@@ -6,6 +6,7 @@ import static cz.prm.domain.task.Status.TO_DO;
 import static cz.prm.utils.CommonUtils.pagination;
 import static cz.prm.utils.CommonUtils.paginationDto;
 import static cz.prm.utils.CommonUtils.user;
+import static cz.prm.utils.ReminderUtils.recurrence;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static java.time.Instant.now;
@@ -34,6 +35,7 @@ public class TaskUtils {
         task.setStatus(TO_DO);
         task.setPriority(HIGH);
         task.setDueDate(now());
+        task.setRecurrence(recurrence());
         task.setLastEditDate(now());
         task.setCreationDate(now());
         task.setOwner(user());
@@ -50,6 +52,7 @@ public class TaskUtils {
         task.setStatus(TO_DO);
         task.setPriority(HIGH);
         task.setDueDate(now());
+        task.setRecurrence(uuid());
         task.setLastEditDate(now());
         task.setCreationDate(now());
         return task;
