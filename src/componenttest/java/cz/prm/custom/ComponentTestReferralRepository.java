@@ -7,5 +7,5 @@ import org.springframework.context.annotation.Primary;
 @Primary
 public interface ComponentTestReferralRepository extends ReferralRepository {
 
-    Referral getByDescription(String description);
+    Referral getByNote(String note);
 }

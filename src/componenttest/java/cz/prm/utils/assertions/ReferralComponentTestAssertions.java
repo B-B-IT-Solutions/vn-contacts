@@ -1,5 +1,6 @@
 package cz.prm.utils.assertions;
 
+import static cz.prm.utils.TimeComponentTestUtils.ONE_SECOND_OFFSET;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
@@ -27,6 +28,12 @@ public class ReferralComponentTestAssertions {
         assertThat(referral.getContactId()).isEqualTo(referralDto.getContactId());
         assertThat(referral.getName()).isEqualTo(referralDto.getName());
         assertThat(referral.getNote()).isEqualTo(referralDto.getNote());
+        assertThat(referral.getSource()).isEqualTo(referralDto.getSource());
+        assertThat(referral.getPriority()).isEqualTo(referralDto.getPriority());
+        assertThat(referral.getStatus()).isEqualTo(referralDto.getStatus());
+        assertThat(referral.getClosedDate()).isCloseTo(referralDto.getClosedDate(), ONE_SECOND_OFFSET);
+        assertThat(referral.getStartDate()).isCloseTo(referralDto.getStartDate(), ONE_SECOND_OFFSET);
+        assertThat(referral.getExpiredDate()).isCloseTo(referralDto.getExpiredDate(), ONE_SECOND_OFFSET);
         assertThat(referral.getLastEditDate()).isNotNull();
         assertThat(referral.getCreationDate()).isNotNull();
     }

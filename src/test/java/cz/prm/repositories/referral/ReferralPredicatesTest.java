@@ -45,13 +45,13 @@ class ReferralPredicatesTest {
             filter.setGlobalFilter("globalFilter_01");
             predicate = predicates.referrals(filter);
             expectedString = format("referral.owner.username = %s && (containsIc(referral.name,globalFilter_01) || containsIc"
-                + "(referral.description,globalFilter_01))", user.getUsername());
+                + "(referral.note,globalFilter_01))", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setGlobalFilter("globalFilter_02");
             predicate = predicates.referrals(filter);
             expectedString = format("referral.owner.username = %s && (containsIc(referral.name,globalFilter_02) || containsIc"
-                + "(referral.description,globalFilter_02))", user.getUsername());
+                + "(referral.note,globalFilter_02))", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setGlobalFilter(null);
@@ -87,13 +87,13 @@ class ReferralPredicatesTest {
             filter.setGlobalFilter("globalFilter_01");
             predicate = predicates.contactReferrals(16L, filter);
             expectedString = format("referral.owner.username = %s && (containsIc(referral.name,globalFilter_01) || containsIc"
-                + "(referral.description,globalFilter_01)) && referral.contactId = 16", user.getUsername());
+                + "(referral.note,globalFilter_01)) && referral.contactId = 16", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setGlobalFilter("globalFilter_02");
             predicate = predicates.contactReferrals(17L, filter);
             expectedString = format("referral.owner.username = %s && (containsIc(referral.name,globalFilter_02) || containsIc"
-                + "(referral.description,globalFilter_02)) && referral.contactId = 17", user.getUsername());
+                + "(referral.note,globalFilter_02)) && referral.contactId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setGlobalFilter(null);
