@@ -1,4 +1,4 @@
-package cz.prm.domain.referral;
+package cz.prm.domain.reminder;
 
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;

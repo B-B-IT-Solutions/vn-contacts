@@ -4,7 +4,6 @@ import static cz.prm.domain.common.PageRequests.getPageRequest;
 import static java.lang.String.format;
 
 import cz.prm.domain.common.query.Page;
-import cz.prm.domain.referral.Recurrence;
 import cz.prm.domain.referral.Referral;
 import cz.prm.domain.referral.query.ReferralsFilter;
 import cz.prm.domain.referral.query.ReferralsQuery;
@@ -69,13 +68,6 @@ public class ReferralService {
     private void updateReferralFields(Referral savedReferral, Referral updatedReferral) {
         savedReferral.setName(updatedReferral.getName());
         savedReferral.setDescription(updatedReferral.getDescription());
-        savedReferral.setRecurrence(updatedReferral.getRecurrence());
-        updateRecurrenceFields(savedReferral.getRecurrence(), updatedReferral.getRecurrence());
-    }
-
-    private void updateRecurrenceFields(Recurrence savedRecurrence, Recurrence updatedRecurrence) {
-        savedRecurrence.setValue(updatedRecurrence.getValue());
-        savedRecurrence.resetParsedRule();
     }
 
     private Referral getReferralById(Long referralId) {

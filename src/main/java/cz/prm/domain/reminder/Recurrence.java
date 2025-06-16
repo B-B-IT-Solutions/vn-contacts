@@ -1,4 +1,4 @@
-package cz.prm.domain.referral;
+package cz.prm.domain.reminder;
 
 import static java.time.Instant.ofEpochMilli;
 import static java.util.Objects.isNull;

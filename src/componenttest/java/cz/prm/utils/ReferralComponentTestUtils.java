@@ -10,8 +10,8 @@ import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.controllers.dto.referral.ReferralDto;
 import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
 import cz.prm.controllers.dto.referral.query.ReferralsFilterDto;
-import cz.prm.domain.referral.Recurrence;
 import cz.prm.domain.referral.Referral;
+import cz.prm.domain.reminder.Recurrence;
 import java.util.List;
 import org.dmfs.rfc5545.DateTime;
 import org.dmfs.rfc5545.recur.Freq;
@@ -33,7 +33,6 @@ public class ReferralComponentTestUtils {
         referral.setContactId(contactId);
         referral.setName(format("Title-%s-End", uuid()));
         referral.setDescription(format("Description%s", uuid()));
-        referral.setRecurrence(recurrence());
         return referral;
     }
 

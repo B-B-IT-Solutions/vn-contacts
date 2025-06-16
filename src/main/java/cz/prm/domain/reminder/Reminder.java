@@ -1,0 +1,33 @@
+package cz.prm.domain.reminder;
+
+import static jakarta.persistence.CascadeType.ALL;
+import static java.util.Objects.nonNull;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "REMINDER", schema = "public")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Reminder {
+
+    private Long reminderId;
+
+    @OneToOne(cascade = ALL)
+    @JoinColumn(name = "RECURRENCE_ID")
+    private Recurrence recurrence;
+
+    public boolean hasActiveRecurrence() {
+        if (nonNull(recurrence)) {
+            return recurrence.hasActiveRule();
+        }
+        return false;
+    }
+}

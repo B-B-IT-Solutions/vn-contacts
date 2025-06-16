@@ -1,15 +1,10 @@
 package cz.prm.services;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static cz.prm.utils.CommonUtils.page;
-import static cz.prm.utils.ReferralUtils.recurrence;
-import static cz.prm.utils.ReferralUtils.referral;
-import static cz.prm.utils.TestUtils.randomLong;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+import static cz.prm.utils.ReminderUtils.recurrence;
+import static cz.prm.utils.ReminderUtils.reminder;
 import static org.mockito.Mockito.when;
 
-import cz.prm.domain.referral.query.ReferralsQuery;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,27 +15,25 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class NotificationServiceTest {
 
     @Mock
-    private ReferralService referralService;
+    private ReminderService reminderService;
 
     private NotificationService notificationService;
 
     @BeforeEach
     void setUp() {
-        notificationService = new NotificationService(referralService);
+        notificationService = new NotificationService(reminderService);
     }
 
     @Test
     void getNotifications() {
-        var contactId = randomLong();
-        var referral1 = referral();
+        var reminder1 = reminder();
         var recurrence = recurrence();
-        referral1.setRecurrence(recurrence);
-        var referral2 = referral();
-        var referral3 = referral();
-        var referrals = newArrayList(referral1, referral2, referral3);
-        var page = page(referrals);
+        reminder1.setRecurrence(recurrence);
+        var reminder2 = reminder();
+        var reminder3 = reminder();
+        var reminders = newArrayList(reminder1, reminder2, reminder3);
 
-        when(referralService.getContactReferrals(eq(contactId), any(ReferralsQuery.class))).thenReturn(page);
-        notificationService.getNotifications(contactId);
+        when(reminderService.getReminders()).thenReturn(reminders);
+        notificationService.getNotifications();
     }
 }
