@@ -67,7 +67,13 @@ public class ReferralService {
 
     private void updateReferralFields(Referral savedReferral, Referral updatedReferral) {
         savedReferral.setName(updatedReferral.getName());
-        savedReferral.setDescription(updatedReferral.getDescription());
+        savedReferral.setNote(updatedReferral.getNote());
+        savedReferral.setSource(updatedReferral.getSource());
+        savedReferral.setStatus(updatedReferral.getStatus());
+        savedReferral.setPriority(updatedReferral.getPriority());
+        savedReferral.setClosedDate(updatedReferral.getClosedDate());
+        savedReferral.setStartDate(updatedReferral.getStartDate());
+        savedReferral.setExpiredDate(updatedReferral.getExpiredDate());
     }
 
     private Referral getReferralById(Long referralId) {

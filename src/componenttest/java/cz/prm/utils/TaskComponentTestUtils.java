@@ -1,7 +1,7 @@
 package cz.prm.utils;
 
-import static cz.prm.domain.task.Priority.HIGH;
-import static cz.prm.domain.task.Status.TO_DO;
+import static cz.prm.domain.common.Priority.HIGH;
+import static cz.prm.domain.task.TaskStatus.TO_DO;
 import static cz.prm.utils.ComponentTestUtils.randomLong;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static cz.prm.utils.TestUtils.randomInt;

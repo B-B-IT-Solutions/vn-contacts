@@ -166,7 +166,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     }
 
     protected Referral getReferralFromDb(ReferralDto dto) {
-        return referralRepository.getByDescription(dto.getDescription());
+        return referralRepository.getByNote(dto.getNote());
     }
 
     protected Task getTaskFromDb(TaskDto dto) {

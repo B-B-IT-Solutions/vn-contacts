@@ -1,8 +1,8 @@
 package cz.prm.controllers.dto.task;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import cz.prm.domain.task.Priority;
-import cz.prm.domain.task.Status;
+import cz.prm.domain.common.Priority;
+import cz.prm.domain.task.TaskStatus;
 import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,7 +29,7 @@ public class TaskDto {
     private String outcomes;
 
     @JsonProperty("status")
-    private Status status;
+    private TaskStatus status;
 
     @JsonProperty("priority")
     private Priority priority;

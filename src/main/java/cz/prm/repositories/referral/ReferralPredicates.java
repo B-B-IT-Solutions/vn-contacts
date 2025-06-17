@@ -38,7 +38,7 @@ public class ReferralPredicates {
         var predicate = new BooleanBuilder();
         if (filter.isGlobalFilter()) {
             predicate.or(referral.name.containsIgnoreCase(filter.getGlobalFilter()));
-            predicate.or(referral.description.containsIgnoreCase(filter.getGlobalFilter()));
+            predicate.or(referral.note.containsIgnoreCase(filter.getGlobalFilter()));
         }
         if (filter.isName()) {
             applyCriteria(predicate, referral.name, filter.getName());

@@ -1,8 +1,8 @@
 package cz.prm.utils;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static cz.prm.domain.task.Priority.HIGH;
-import static cz.prm.domain.task.Status.TO_DO;
+import static cz.prm.domain.common.Priority.HIGH;
+import static cz.prm.domain.task.TaskStatus.TO_DO;
 import static cz.prm.utils.CommonUtils.pagination;
 import static cz.prm.utils.CommonUtils.paginationDto;
 import static cz.prm.utils.CommonUtils.user;

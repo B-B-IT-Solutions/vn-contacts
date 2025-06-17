@@ -2,6 +2,7 @@ package cz.prm.domain.task;
 
 import static jakarta.persistence.EnumType.ORDINAL;
 
+import cz.prm.domain.common.Priority;
 import cz.prm.domain.common.User;
 import cz.prm.domain.reminder.Recurrence;
 import jakarta.persistence.AttributeOverride;
@@ -54,7 +55,7 @@ public class Task {
 
     @Enumerated(value = ORDINAL)
     @Column(name = "STATUS")
-    private Status status;
+    private TaskStatus status;
 
     @Enumerated(value = ORDINAL)
     @Column(name = "PRIORITY")

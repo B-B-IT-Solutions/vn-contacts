@@ -1,8 +1,11 @@
 package cz.prm.utils;
 
+import static cz.prm.domain.common.Priority.HIGH;
+import static cz.prm.domain.referral.ReferralStatus.TO_DO;
 import static cz.prm.utils.ComponentTestUtils.randomLong;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static java.lang.String.format;
+import static java.time.Instant.now;
 import static org.assertj.core.util.Lists.newArrayList;
 
 import cz.prm.controllers.dto.common.PaginationDto;
@@ -26,7 +29,13 @@ public class ReferralComponentTestUtils {
         var referral = new Referral();
         referral.setContactId(contactId);
         referral.setName(format("Title-%s-End", uuid()));
-        referral.setDescription(format("Description%s", uuid()));
+        referral.setNote(format("Description%s", uuid()));
+        referral.setSource(uuid());
+        referral.setPriority(HIGH);
+        referral.setStatus(TO_DO);
+        referral.setClosedDate(now());
+        referral.setStartDate(now());
+        referral.setExpiredDate(now());
         return referral;
     }
 
@@ -34,7 +43,13 @@ public class ReferralComponentTestUtils {
         var dto = new ReferralDto();
         dto.setContactId(contactId);
         dto.setName(uuid());
-        dto.setDescription(uuid());
+        dto.setNote(uuid());
+        dto.setSource(uuid());
+        dto.setPriority(HIGH);
+        dto.setStatus(TO_DO);
+        dto.setClosedDate(now());
+        dto.setStartDate(now());
+        dto.setExpiredDate(now());
         return dto;
     }
 
