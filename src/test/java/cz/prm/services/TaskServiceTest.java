@@ -169,6 +169,7 @@ class TaskServiceTest {
         assertThat(savedTask.getOutcomes()).isEqualTo(updatedTask.getOutcomes());
         assertThat(savedTask.getStatus()).isEqualTo(updatedTask.getStatus());
         assertThat(savedTask.getPriority()).isEqualTo(updatedTask.getPriority());
-        assertThat(savedTask.getDueDate()).isEqualTo(updatedTask.getDueDate());
+        assertThat(savedTask.getStartDate()).isEqualTo(updatedTask.getStartDate());
+        assertThat(savedTask.getEndDate()).isEqualTo(updatedTask.getEndDate());
     }
 }

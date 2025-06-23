@@ -61,8 +61,11 @@ public class Task {
     @Column(name = "PRIORITY")
     private Priority priority;
 
-    @Column(name = "DUE_DATE")
-    private Instant dueDate;
+    @Column(name = "START_DATE")
+    private Instant startDate;
+
+    @Column(name = "END_DATE")
+    private Instant endDate;
 
     @Transient
     private Recurrence recurrence;

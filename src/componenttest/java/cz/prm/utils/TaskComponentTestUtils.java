@@ -39,7 +39,8 @@ public class TaskComponentTestUtils {
         task.setOutcomes(TestUtils.uuid());
         task.setStatus(TO_DO);
         task.setPriority(HIGH);
-        task.setDueDate(todayStartOfDay());
+        task.setStartDate(todayStartOfDay());
+        task.setEndDate(todayStartOfDay());
         task.setRecurrence(recurrence());
         return task;
     }
@@ -52,7 +53,8 @@ public class TaskComponentTestUtils {
         dto.setOutcomes(TestUtils.uuid());
         dto.setStatus(TO_DO);
         dto.setPriority(HIGH);
-        dto.setDueDate(todayStartOfDay());
+        dto.setStartDate(todayStartOfDay());
+        dto.setEndDate(todayStartOfDay());
         dto.setRecurrence(uuid());
         return dto;
     }

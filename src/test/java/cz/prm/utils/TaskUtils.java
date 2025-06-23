@@ -34,7 +34,8 @@ public class TaskUtils {
         task.setOutcomes(uuid());
         task.setStatus(TO_DO);
         task.setPriority(HIGH);
-        task.setDueDate(now());
+        task.setStartDate(now());
+        task.setEndDate(now());
         task.setRecurrence(recurrence());
         task.setLastEditDate(now());
         task.setCreationDate(now());
@@ -51,7 +52,8 @@ public class TaskUtils {
         task.setOutcomes(uuid());
         task.setStatus(TO_DO);
         task.setPriority(HIGH);
-        task.setDueDate(now());
+        task.setStartDate(now());
+        task.setEndDate(now());
         task.setRecurrence(uuid());
         task.setLastEditDate(now());
         task.setCreationDate(now());

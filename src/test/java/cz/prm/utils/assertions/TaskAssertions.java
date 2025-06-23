@@ -58,7 +58,8 @@ public class TaskAssertions {
         assertThat(task1.getOutcomes()).isEqualTo(task2.getOutcomes());
         assertThat(task1.getStatus()).isEqualTo(task2.getStatus());
         assertThat(task1.getPriority()).isEqualTo(task2.getPriority());
-        assertThat(task1.getDueDate()).isEqualTo(task2.getDueDate());
+        assertThat(task1.getStartDate()).isEqualTo(task2.getStartDate());
+        assertThat(task1.getEndDate()).isEqualTo(task2.getEndDate());
         assertThat(task1.getRecurrence()).isEqualTo(task2.getRecurrence());
         assertThat(task1.getLastEditDate()).isEqualTo(task2.getLastEditDate());
         assertThat(task1.getCreationDate()).isEqualTo(task2.getCreationDate());
@@ -73,7 +74,8 @@ public class TaskAssertions {
         assertThat(task.getOutcomes()).isEqualTo(dto.getOutcomes());
         assertThat(task.getStatus()).isEqualTo(dto.getStatus());
         assertThat(task.getPriority()).isEqualTo(dto.getPriority());
-        assertThat(task.getDueDate()).isEqualTo(dto.getDueDate());
+        assertThat(task.getStartDate()).isEqualTo(dto.getStartDate());
+        assertThat(task.getEndDate()).isEqualTo(dto.getEndDate());
         assertThat(task.getRecurrence().getValue()).isNotBlank().isEqualTo(dto.getRecurrence());
         assertThat(task.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(task.getCreationDate()).isEqualTo(dto.getCreationDate());
