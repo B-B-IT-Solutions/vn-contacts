@@ -369,12 +369,13 @@
 				 <column name="task_id" type="BIGINT"/>
 			</createTable>
 			
-			<addForeignKeyConstraint baseTableName="task" baseColumnNames="task_id" constraintName="task_task_id_fkey"
-															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
+			<addForeignKeyConstraint baseTableName="task_reminders" baseColumnNames="task_id" constraintName="task_task_id_fkey"
+															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="task"
 															 referencedColumnNames="task_id" validate="true"/>
-			<addForeignKeyConstraint baseTableName="recurrence" baseColumnNames="recurrence_id"
+			
+			<addForeignKeyConstraint baseTableName="task_reminders" baseColumnNames="recurrence_id"
 															 constraintName="recurrence_recurrence_id_fkey"
-															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
+															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="recurrence"
 															 referencedColumnNames="recurrence_id" validate="true"/>
 	 </changeSet>
 
