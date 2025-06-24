@@ -3,7 +3,6 @@ package cz.prm.controllers.mappers;
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.domain.task.query.TasksQuery.DEFAULT_TASKS_SORT;
 import static java.util.Objects.isNull;
-import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -15,7 +14,6 @@ import cz.prm.domain.common.query.Page;
 import cz.prm.domain.common.query.Pagination;
 import cz.prm.domain.recurrence.Recurrence;
 import cz.prm.domain.task.Task;
-import cz.prm.domain.task.TaskReminder;
 import cz.prm.domain.task.query.TasksFilter;
 import cz.prm.domain.task.query.TasksQuery;
 import java.util.List;
@@ -30,32 +28,29 @@ public interface TaskMapper {
 
     PageDto<TaskDto> toPageDto(Page<Task> tasks);
 
-    @Mapping(target = "reminderRules", source = "reminder", qualifiedByName = "toReminderRules")
+    @Mapping(target = "reminderRules", source = "reminders", qualifiedByName = "toReminderRules")
     TaskDto toTaskDto(Task task);
 
-    @Mapping(target = "reminder", source = "reminderRules", qualifiedByName = "toTaskReminder")
+    @Mapping(target = "reminders", source = "reminderRules", qualifiedByName = "toReminders")
     @Mapping(target = "owner", ignore = true)
     Task toTask(TaskDto dto);
 
     TasksQuery toTasksQuery(TasksQueryDto dto);
 
     @Named("toReminderRules")
-    default List<String> toReminderRules(TaskReminder tr) {
-        if (nonNull(tr)) {
-            return tr.getReminderRuleValues();
+    default List<String> toReminderRules(List<Recurrence> reminders) {
+        if (isNotEmpty(reminders)) {
+            return reminders.stream().map(r -> r.getValue()).collect(toList());
         }
         return newArrayList();
     }
 
-    @Named("toTaskReminder")
-    default TaskReminder toTaskReminder(List<String> reminderRules) {
+    @Named("toReminders")
+    default List<Recurrence> toReminders(List<String> reminderRules) {
         if (isNotEmpty(reminderRules)) {
-            var tr = new TaskReminder();
-            var recurrences = reminderRules.stream().map(r -> new Recurrence(r)).collect(toList());
-            tr.setReminderRules(recurrences);
-            return tr;
+            return reminderRules.stream().map(r -> new Recurrence(r)).collect(toList());
         }
-        return null;
+        return newArrayList();
     }
 
     default TasksQuery toNullSafeTasksQuery(TasksQueryDto dto) {

@@ -3,15 +3,15 @@ package cz.prm.controllers.mappers;
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.CommonUtils.DEFAULT_PAGE_SIZE;
 import static cz.prm.utils.CommonUtils.page;
+import static cz.prm.utils.RecurrenceUtils.recurrences;
 import static cz.prm.utils.RecurrenceUtils.reminderRules;
 import static cz.prm.utils.TaskUtils.task;
 import static cz.prm.utils.TaskUtils.taskDto;
-import static cz.prm.utils.TaskUtils.taskReminder;
 import static cz.prm.utils.TaskUtils.tasks;
 import static cz.prm.utils.TaskUtils.tasksQueryDto;
+import static cz.prm.utils.assertions.RecurrenceAssertions.assertRecurrencesDto;
 import static cz.prm.utils.assertions.TaskAssertions.assertPage;
 import static cz.prm.utils.assertions.TaskAssertions.assertTask;
-import static cz.prm.utils.assertions.TaskAssertions.assertTaskReminder;
 import static cz.prm.utils.assertions.TaskAssertions.assertTasksQuery;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -49,34 +49,40 @@ class TaskMapperTest {
 
     @Test
     void toReminderRules() {
-        var tr = taskReminder();
-        var rRules = mapper.toReminderRules(tr);
-        assertTaskReminder(tr, rRules);
+        var reminders = recurrences();
+        var rRules = mapper.toReminderRules(reminders);
+        assertRecurrencesDto(reminders, rRules);
     }
 
     @Test
-    void toReminderRules_NullTaskReminder() {
+    void toReminderRules_EmptyRules() {
+        var rRules = mapper.toReminderRules(newArrayList());
+        assertThat(rRules).isNotNull().isEmpty();
+    }
+
+    @Test
+    void toReminderRules_NullReminders() {
         var rRules = mapper.toReminderRules(null);
         assertThat(rRules).isNotNull().isEmpty();
     }
 
     @Test
-    void toTaskReminder() {
+    void toReminders() {
         var rRules = reminderRules();
-        var tr = mapper.toTaskReminder(rRules);
-        assertTaskReminder(tr, rRules);
+        var reminders = mapper.toReminders(rRules);
+        assertRecurrencesDto(reminders, rRules);
     }
 
     @Test
-    void toTaskReminder_EmptyRules() {
-        var tr = mapper.toTaskReminder(newArrayList());
-        assertThat(tr).isNull();
+    void toReminders_EmptyRules() {
+        var reminders = mapper.toReminders(newArrayList());
+        assertThat(reminders).isNotNull().isEmpty();
     }
 
     @Test
-    void toTaskReminder_NullRules() {
-        var tr = mapper.toTaskReminder(null);
-        assertThat(tr).isNull();
+    void toReminders_NullRules() {
+        var reminders = mapper.toReminders(null);
+        assertThat(reminders).isNotNull().isEmpty();
     }
 
     @Test

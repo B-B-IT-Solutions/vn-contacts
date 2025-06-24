@@ -16,7 +16,6 @@ import cz.prm.controllers.dto.task.TaskDto;
 import cz.prm.controllers.dto.task.query.TasksFilterDto;
 import cz.prm.controllers.dto.task.query.TasksQueryDto;
 import cz.prm.domain.task.Task;
-import cz.prm.domain.task.TaskReminder;
 import cz.prm.domain.task.query.TasksFilter;
 import cz.prm.domain.task.query.TasksQuery;
 import java.util.List;
@@ -38,7 +37,7 @@ public class TaskUtils {
         task.setPriority(HIGH);
         task.setStartDate(now());
         task.setEndDate(now());
-        task.setReminder(taskReminder());
+        task.setReminders(recurrences());
         task.setLastEditDate(now());
         task.setCreationDate(now());
         task.setOwner(user());
@@ -60,12 +59,6 @@ public class TaskUtils {
         task.setLastEditDate(now());
         task.setCreationDate(now());
         return task;
-    }
-
-    public static TaskReminder taskReminder() {
-        var tr = new TaskReminder();
-        tr.setReminderRules(recurrences());
-        return tr;
     }
 
     public static TasksQuery tasksQuery() {

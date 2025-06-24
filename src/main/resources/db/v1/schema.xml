@@ -362,5 +362,20 @@
 				 <column name="characteristic" type="VARCHAR(250)"/>
 			</createTable>
 	 </changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.18">
+			<createTable tableName="task_reminders">
+				 <column name="recurrence_id" type="BIGINT"/>
+				 <column name="task_id" type="BIGINT"/>
+			</createTable>
+			
+			<addForeignKeyConstraint baseTableName="task" baseColumnNames="task_id" constraintName="task_task_id_fkey"
+															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
+															 referencedColumnNames="task_id" validate="true"/>
+			<addForeignKeyConstraint baseTableName="recurrence" baseColumnNames="recurrence_id"
+															 constraintName="recurrence_recurrence_id_fkey"
+															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
+															 referencedColumnNames="recurrence_id" validate="true"/>
+	 </changeSet>
 
 </databaseChangeLog>

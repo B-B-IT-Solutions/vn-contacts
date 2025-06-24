@@ -15,7 +15,6 @@ import cz.prm.controllers.dto.task.TaskDto;
 import cz.prm.controllers.dto.task.query.TasksFilterDto;
 import cz.prm.controllers.dto.task.query.TasksQueryDto;
 import cz.prm.domain.task.Task;
-import cz.prm.domain.task.TaskReminder;
 import java.util.List;
 
 public class TaskComponentTestUtils {
@@ -38,7 +37,7 @@ public class TaskComponentTestUtils {
         task.setPriority(HIGH);
         task.setStartDate(todayStartOfDay());
         task.setEndDate(todayStartOfDay());
-        task.setReminder(taskReminder());
+        task.setReminders(recurrences());
         return task;
     }
 
@@ -54,12 +53,6 @@ public class TaskComponentTestUtils {
         dto.setEndDate(todayStartOfDay());
         dto.setReminderRules(reminderRules());
         return dto;
-    }
-
-    public static TaskReminder taskReminder() {
-        var tr = new TaskReminder();
-        tr.setReminderRules(recurrences());
-        return tr;
     }
 
     public static TasksQueryDto tasksQueryDto() {
