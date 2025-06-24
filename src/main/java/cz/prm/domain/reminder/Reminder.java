@@ -3,6 +3,7 @@ package cz.prm.domain.reminder;
 import static jakarta.persistence.CascadeType.ALL;
 import static java.util.Objects.nonNull;
 
+import cz.prm.domain.recurrence.Recurrence;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -3,7 +3,7 @@ package cz.prm.services;
 import static com.google.common.collect.Lists.newArrayList;
 import static java.lang.String.format;
 
-import cz.prm.domain.reminder.Recurrence;
+import cz.prm.domain.recurrence.Recurrence;
 import cz.prm.domain.reminder.Reminder;
 import cz.prm.repositories.reminder.ReminderPredicates;
 import cz.prm.repositories.reminder.ReminderRepository;

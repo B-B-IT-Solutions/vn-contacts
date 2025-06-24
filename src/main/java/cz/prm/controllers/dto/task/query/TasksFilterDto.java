@@ -13,5 +13,5 @@ public class TasksFilterDto {
 
     private String status;
 
-    private String dueDate;
+    private String endDate;
 }

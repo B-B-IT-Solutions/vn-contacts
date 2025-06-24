@@ -7,6 +7,7 @@ import static cz.prm.utils.ComponentTestUtils.uuid;
 import static cz.prm.utils.TestUtils.randomInt;
 import static cz.prm.utils.TimeComponentTestUtils.todayStartOfDay;
 import static java.lang.String.format;
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.dmfs.rfc5545.DateTime.now;
 
@@ -14,8 +15,9 @@ import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.controllers.dto.task.TaskDto;
 import cz.prm.controllers.dto.task.query.TasksFilterDto;
 import cz.prm.controllers.dto.task.query.TasksQueryDto;
-import cz.prm.domain.reminder.Recurrence;
+import cz.prm.domain.recurrence.Recurrence;
 import cz.prm.domain.task.Task;
+import cz.prm.domain.task.TaskReminder;
 import java.util.List;
 import org.dmfs.rfc5545.recur.Freq;
 import org.dmfs.rfc5545.recur.RecurrenceRule;
@@ -36,12 +38,12 @@ public class TaskComponentTestUtils {
         task.setContactId(contactId);
         task.setName(format("Title-%s-End", uuid()));
         task.setDescription(format("Text%s", uuid()));
-        task.setOutcomes(TestUtils.uuid());
+        task.setOutcomes(uuid());
         task.setStatus(TO_DO);
         task.setPriority(HIGH);
         task.setStartDate(todayStartOfDay());
         task.setEndDate(todayStartOfDay());
-        task.setRecurrence(recurrence());
+        task.setReminder(taskReminder());
         return task;
     }
 
@@ -55,8 +57,22 @@ public class TaskComponentTestUtils {
         dto.setPriority(HIGH);
         dto.setStartDate(todayStartOfDay());
         dto.setEndDate(todayStartOfDay());
-        dto.setRecurrence(uuid());
+        dto.setReminderRules(reminderRules());
         return dto;
+    }
+
+    public static TaskReminder taskReminder() {
+        var tr = new TaskReminder();
+        tr.setReminderRules(recurrences());
+        return tr;
+    }
+
+    public static List<String> reminderRules() {
+        return recurrences().stream().map(r -> r.getValue()).collect(toList());
+    }
+
+    public static List<Recurrence> recurrences() {
+        return newArrayList(recurrence(), recurrence(), recurrence());
     }
 
     public static Recurrence recurrence() {

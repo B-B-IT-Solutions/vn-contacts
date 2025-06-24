@@ -15,7 +15,7 @@ public class TasksFilter {
 
     private String status;
 
-    private String dueDate;
+    private String endDate;
 
     public boolean isGlobalFilter() {
         return isNotBlank(globalFilter);
@@ -29,7 +29,7 @@ public class TasksFilter {
         return isNotBlank(status);
     }
 
-    public boolean isDueDate() {
-        return isNotBlank(dueDate);
+    public boolean isEndDate() {
+        return isNotBlank(endDate);
     }
 }

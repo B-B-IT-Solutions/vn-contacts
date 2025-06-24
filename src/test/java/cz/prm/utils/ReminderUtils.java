@@ -6,7 +6,7 @@ import static cz.prm.utils.TestUtils.randomLong;
 import static java.lang.String.format;
 import static org.dmfs.rfc5545.DateTime.now;
 
-import cz.prm.domain.reminder.Recurrence;
+import cz.prm.domain.recurrence.Recurrence;
 import cz.prm.domain.reminder.Reminder;
 import java.util.List;
 import org.dmfs.rfc5545.recur.Freq;

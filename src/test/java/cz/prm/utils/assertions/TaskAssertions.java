@@ -1,6 +1,7 @@
 package cz.prm.utils.assertions;
 
 import static cz.prm.utils.assertions.CommonAssertions.assertQuery;
+import static cz.prm.utils.assertions.RecurrenceAssertions.assertRecurrences;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
@@ -9,6 +10,7 @@ import cz.prm.controllers.dto.task.query.TasksFilterDto;
 import cz.prm.controllers.dto.task.query.TasksQueryDto;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.task.Task;
+import cz.prm.domain.task.TaskReminder;
 import cz.prm.domain.task.query.TasksFilter;
 import cz.prm.domain.task.query.TasksQuery;
 import java.util.List;
@@ -60,10 +62,10 @@ public class TaskAssertions {
         assertThat(task1.getPriority()).isEqualTo(task2.getPriority());
         assertThat(task1.getStartDate()).isEqualTo(task2.getStartDate());
         assertThat(task1.getEndDate()).isEqualTo(task2.getEndDate());
-        assertThat(task1.getRecurrence()).isEqualTo(task2.getRecurrence());
         assertThat(task1.getLastEditDate()).isEqualTo(task2.getLastEditDate());
         assertThat(task1.getCreationDate()).isEqualTo(task2.getCreationDate());
         assertThat(task1.getOwner()).isEqualTo(task2.getOwner());
+        assertTaskReminder(task1.getReminder(), task2.getReminder());
     }
 
     public static void assertTask(Task task, TaskDto dto) {
@@ -76,9 +78,19 @@ public class TaskAssertions {
         assertThat(task.getPriority()).isEqualTo(dto.getPriority());
         assertThat(task.getStartDate()).isEqualTo(dto.getStartDate());
         assertThat(task.getEndDate()).isEqualTo(dto.getEndDate());
-        assertThat(task.getRecurrence().getValue()).isNotBlank().isEqualTo(dto.getRecurrence());
         assertThat(task.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(task.getCreationDate()).isEqualTo(dto.getCreationDate());
+        assertTaskReminder(task.getReminder(), dto.getReminderRules());
+    }
+
+    public static void assertTaskReminder(TaskReminder task1, TaskReminder task2) {
+        assertThat(task1.getTaskReminderId()).isEqualTo(task2.getTaskReminderId());
+        assertThat(task1.getReminderRuleValues()).isEqualTo(task2.getReminderRuleValues());
+        assertRecurrences(task1.getReminderRules(), task2.getReminderRules());
+    }
+
+    public static void assertTaskReminder(TaskReminder task, List<String> reminderRules) {
+        assertThat(task.getReminderRuleValues()).isNotEmpty().isEqualTo(reminderRules);
     }
 
     public static void assertTasksQuery(TasksQuery query, TasksQueryDto dto) {
@@ -90,6 +102,6 @@ public class TaskAssertions {
         assertThat(filter.getGlobalFilter()).isEqualTo(dto.getGlobalFilter());
         assertThat(filter.getName()).isEqualTo(dto.getName());
         assertThat(filter.getStatus()).isEqualTo(dto.getStatus());
-        assertThat(filter.getDueDate()).isEqualTo(dto.getDueDate());
+        assertThat(filter.getEndDate()).isEqualTo(dto.getEndDate());
     }
 }
