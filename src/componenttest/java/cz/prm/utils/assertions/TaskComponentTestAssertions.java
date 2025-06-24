@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.task.TaskDto;
 import cz.prm.domain.task.Task;
+import cz.prm.domain.task.TaskReminder;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,8 +33,12 @@ public class TaskComponentTestAssertions {
         assertThat(task.getPriority()).isEqualTo(taskDto.getPriority());
         assertThat(task.getStartDate()).isEqualTo(taskDto.getStartDate());
         assertThat(task.getEndDate()).isEqualTo(taskDto.getEndDate());
-//        assertThat(task.getRecurrence().getValue()).isEqualTo(taskDto.getRecurrence());
         assertThat(task.getLastEditDate()).isNotNull();
         assertThat(task.getCreationDate()).isNotNull();
+        assertTaskReminder(task.getReminder(), taskDto.getReminderRules());
+    }
+
+    public static void assertTaskReminder(TaskReminder task, List<String> reminderRules) {
+        assertThat(task.getReminderRuleValues()).isNotEmpty().isEqualTo(reminderRules);
     }
 }

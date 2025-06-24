@@ -1,5 +1,6 @@
 package cz.prm.utils.assertions;
 
+import static cz.prm.utils.assertions.RecurrenceAssertions.assertRecurrence;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.domain.common.query.Page;
@@ -29,6 +30,6 @@ public class ReminderAssertions {
 
     public static void assertReminder(Reminder reminder1, Reminder reminder2) {
         assertThat(reminder1.getReminderId()).isEqualTo(reminder2.getReminderId());
-        assertThat(reminder1.getRecurrence()).isEqualTo(reminder2.getRecurrence());
+        assertRecurrence(reminder1.getRecurrence(), reminder2.getRecurrence());
     }
 }

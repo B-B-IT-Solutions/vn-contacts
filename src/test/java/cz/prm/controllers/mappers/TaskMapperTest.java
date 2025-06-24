@@ -3,7 +3,7 @@ package cz.prm.controllers.mappers;
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.CommonUtils.DEFAULT_PAGE_SIZE;
 import static cz.prm.utils.CommonUtils.page;
-import static cz.prm.utils.TaskUtils.reminderRules;
+import static cz.prm.utils.RecurrenceUtils.reminderRules;
 import static cz.prm.utils.TaskUtils.task;
 import static cz.prm.utils.TaskUtils.taskDto;
 import static cz.prm.utils.TaskUtils.taskReminder;

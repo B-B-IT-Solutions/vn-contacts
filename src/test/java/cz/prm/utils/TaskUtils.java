@@ -6,22 +6,20 @@ import static cz.prm.domain.task.TaskStatus.TO_DO;
 import static cz.prm.utils.CommonUtils.pagination;
 import static cz.prm.utils.CommonUtils.paginationDto;
 import static cz.prm.utils.CommonUtils.user;
-import static cz.prm.utils.ReminderUtils.recurrence;
+import static cz.prm.utils.RecurrenceUtils.recurrences;
+import static cz.prm.utils.RecurrenceUtils.reminderRules;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static java.time.Instant.now;
-import static java.util.stream.Collectors.toList;
 
 import cz.prm.controllers.dto.task.TaskDto;
 import cz.prm.controllers.dto.task.query.TasksFilterDto;
 import cz.prm.controllers.dto.task.query.TasksQueryDto;
-import cz.prm.domain.recurrence.Recurrence;
 import cz.prm.domain.task.Task;
 import cz.prm.domain.task.TaskReminder;
 import cz.prm.domain.task.query.TasksFilter;
 import cz.prm.domain.task.query.TasksQuery;
 import java.util.List;
-import org.assertj.core.util.Lists;
 
 public class TaskUtils {
 
@@ -68,14 +66,6 @@ public class TaskUtils {
         var tr = new TaskReminder();
         tr.setReminderRules(recurrences());
         return tr;
-    }
-
-    public static List<String> reminderRules() {
-        return recurrences().stream().map(r -> r.getValue()).collect(toList());
-    }
-
-    public static List<Recurrence> recurrences() {
-        return Lists.newArrayList(recurrence(), recurrence(), recurrence());
     }
 
     public static TasksQuery tasksQuery() {
