@@ -97,11 +97,4 @@ public class Task {
         @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))
     })
     private User owner;
-
-    public List<String> getReminderRuleValues() {
-        if (isNotEmpty(reminders)) {
-            return reminders.stream().map(r -> r.getValue()).collect(toList());
-        }
-        return newArrayList();
-    }
 }
