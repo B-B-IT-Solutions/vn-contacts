@@ -1,11 +1,8 @@
 package cz.prm.domain.task;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.EnumType.ORDINAL;
 import static jakarta.persistence.FetchType.EAGER;
-import static java.util.stream.Collectors.toList;
-import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 import cz.prm.domain.common.Priority;
 import cz.prm.domain.common.User;
