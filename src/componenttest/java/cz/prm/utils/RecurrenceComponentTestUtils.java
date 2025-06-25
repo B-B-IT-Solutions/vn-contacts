@@ -1,14 +1,13 @@
 package cz.prm.utils;
 
 import static cz.prm.utils.TestUtils.randomInt;
-import static cz.prm.utils.TestUtils.randomLong;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
+import static org.assertj.core.util.Lists.newArrayList;
 import static org.dmfs.rfc5545.DateTime.now;
 
 import cz.prm.domain.recurrence.Recurrence;
 import java.util.List;
-import org.assertj.core.util.Lists;
 import org.dmfs.rfc5545.recur.Freq;
 import org.dmfs.rfc5545.recur.RecurrenceRule;
 import org.dmfs.rfc5545.recur.RecurrenceRule.Part;
@@ -20,7 +19,7 @@ public class RecurrenceComponentTestUtils {
     }
 
     public static List<Recurrence> recurrences() {
-        return Lists.newArrayList(recurrence(), recurrence(), recurrence());
+        return newArrayList(recurrence(), recurrence(), recurrence());
     }
 
     public static Recurrence recurrence() {
