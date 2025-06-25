@@ -1,10 +1,12 @@
 package cz.prm.domain.task;
 
+import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.EnumType.ORDINAL;
+import static jakarta.persistence.FetchType.EAGER;
 
 import cz.prm.domain.common.Priority;
 import cz.prm.domain.common.User;
-import cz.prm.domain.reminder.Recurrence;
+import cz.prm.domain.recurrence.Recurrence;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -15,10 +17,13 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import java.time.Instant;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -61,11 +66,18 @@ public class Task {
     @Column(name = "PRIORITY")
     private Priority priority;
 
-    @Column(name = "DUE_DATE")
-    private Instant dueDate;
+    @Column(name = "START_DATE")
+    private Instant startDate;
 
-    @Transient
-    private Recurrence recurrence;
+    @Column(name = "END_DATE")
+    private Instant endDate;
+
+    @ManyToMany(cascade = ALL, fetch = EAGER)
+    @JoinTable(name = "TASK_REMINDERS",
+        joinColumns = {@JoinColumn(name = "TASK_ID")},
+        inverseJoinColumns = {@JoinColumn(name = "RECURRENCE_ID")}
+    )
+    private List<Recurrence> reminders;
 
     @LastModifiedDate
     @Column(name = "LAST_EDIT_DATE")

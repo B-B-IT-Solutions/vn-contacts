@@ -6,7 +6,8 @@ import static cz.prm.domain.task.TaskStatus.TO_DO;
 import static cz.prm.utils.CommonUtils.pagination;
 import static cz.prm.utils.CommonUtils.paginationDto;
 import static cz.prm.utils.CommonUtils.user;
-import static cz.prm.utils.ReminderUtils.recurrence;
+import static cz.prm.utils.RecurrenceUtils.recurrences;
+import static cz.prm.utils.RecurrenceUtils.reminderRules;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static java.time.Instant.now;
@@ -34,8 +35,9 @@ public class TaskUtils {
         task.setOutcomes(uuid());
         task.setStatus(TO_DO);
         task.setPriority(HIGH);
-        task.setDueDate(now());
-        task.setRecurrence(recurrence());
+        task.setStartDate(now());
+        task.setEndDate(now());
+        task.setReminders(recurrences());
         task.setLastEditDate(now());
         task.setCreationDate(now());
         task.setOwner(user());
@@ -51,8 +53,9 @@ public class TaskUtils {
         task.setOutcomes(uuid());
         task.setStatus(TO_DO);
         task.setPriority(HIGH);
-        task.setDueDate(now());
-        task.setRecurrence(uuid());
+        task.setStartDate(now());
+        task.setEndDate(now());
+        task.setReminderRules(reminderRules());
         task.setLastEditDate(now());
         task.setCreationDate(now());
         return task;
@@ -79,7 +82,7 @@ public class TaskUtils {
         filter.setGlobalFilter(uuid());
         filter.setName(uuid());
         filter.setStatus("TO_DO");
-        filter.setDueDate(uuid());
+        filter.setEndDate(uuid());
         return filter;
     }
 
@@ -88,7 +91,7 @@ public class TaskUtils {
         filter.setGlobalFilter(uuid());
         filter.setName(uuid());
         filter.setStatus("IN_PROGRESS");
-        filter.setDueDate(uuid());
+        filter.setEndDate(uuid());
         return filter;
     }
 }

@@ -216,9 +216,9 @@ public class TaskComponentTestBase extends BusinessComponentTestBase {
                 sb.append(filterDto.getStatus());
                 sb.append("&");
             }
-            if (isNotEmpty(filterDto.getDueDate())) {
-                sb.append("filter.dueDate=");
-                sb.append(filterDto.getDueDate());
+            if (isNotEmpty(filterDto.getEndDate())) {
+                sb.append("filter.endDate=");
+                sb.append(filterDto.getEndDate());
                 sb.append("&");
             }
         }

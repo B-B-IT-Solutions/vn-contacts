@@ -50,16 +50,16 @@ class TasksFilterTest {
     }
 
     @Test
-    void isDueDate() {
+    void isEndDate() {
         var filter = new TasksFilter();
-        assertThat(filter.isDueDate()).isFalse();
-        filter.setDueDate(null);
-        assertThat(filter.isDueDate()).isFalse();
-        filter.setDueDate("");
-        assertThat(filter.isDueDate()).isFalse();
-        filter.setDueDate(" ");
-        assertThat(filter.isDueDate()).isFalse();
-        filter.setDueDate(uuid());
-        assertThat(filter.isDueDate()).isTrue();
+        assertThat(filter.isEndDate()).isFalse();
+        filter.setEndDate(null);
+        assertThat(filter.isEndDate()).isFalse();
+        filter.setEndDate("");
+        assertThat(filter.isEndDate()).isFalse();
+        filter.setEndDate(" ");
+        assertThat(filter.isEndDate()).isFalse();
+        filter.setEndDate(uuid());
+        assertThat(filter.isEndDate()).isTrue();
     }
 }

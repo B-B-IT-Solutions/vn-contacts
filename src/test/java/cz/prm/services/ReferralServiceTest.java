@@ -166,11 +166,11 @@ class ReferralServiceTest {
         assertThat(referralIdDb.getCreationDate()).isEqualTo(savedReferral.getCreationDate());
         assertThat(savedReferral.getName()).isEqualTo(updatedReferral.getName());
         assertThat(savedReferral.getNote()).isEqualTo(updatedReferral.getNote());
-        assertThat(referralIdDb.getSource()).isEqualTo(updatedReferral.getSource());
-        assertThat(referralIdDb.getStatus()).isEqualTo(updatedReferral.getStatus());
-        assertThat(referralIdDb.getPriority()).isEqualTo(updatedReferral.getPriority());
-        assertThat(referralIdDb.getClosedDate()).isEqualTo(updatedReferral.getClosedDate());
-        assertThat(referralIdDb.getStartDate()).isEqualTo(updatedReferral.getStartDate());
-        assertThat(referralIdDb.getExpiredDate()).isEqualTo(updatedReferral.getExpiredDate());
+        assertThat(savedReferral.getSource()).isEqualTo(updatedReferral.getSource());
+        assertThat(savedReferral.getStatus()).isEqualTo(updatedReferral.getStatus());
+        assertThat(savedReferral.getPriority()).isEqualTo(updatedReferral.getPriority());
+        assertThat(savedReferral.getClosedDate()).isEqualTo(updatedReferral.getClosedDate());
+        assertThat(savedReferral.getStartDate()).isEqualTo(updatedReferral.getStartDate());
+        assertThat(savedReferral.getExpiredDate()).isEqualTo(updatedReferral.getExpiredDate());
     }
 }

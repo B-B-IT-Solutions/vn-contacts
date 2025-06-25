@@ -1,4 +1,4 @@
-package cz.prm.domain.reminder;
+package cz.prm.domain.recurrence;
 
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;

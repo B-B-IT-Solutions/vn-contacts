@@ -1,11 +1,15 @@
 package cz.prm.controllers.mappers;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.CommonUtils.DEFAULT_PAGE_SIZE;
 import static cz.prm.utils.CommonUtils.page;
+import static cz.prm.utils.RecurrenceUtils.recurrences;
+import static cz.prm.utils.RecurrenceUtils.reminderRules;
 import static cz.prm.utils.TaskUtils.task;
 import static cz.prm.utils.TaskUtils.taskDto;
 import static cz.prm.utils.TaskUtils.tasks;
 import static cz.prm.utils.TaskUtils.tasksQueryDto;
+import static cz.prm.utils.assertions.RecurrenceAssertions.assertRecurrencesDto;
 import static cz.prm.utils.assertions.TaskAssertions.assertPage;
 import static cz.prm.utils.assertions.TaskAssertions.assertTask;
 import static cz.prm.utils.assertions.TaskAssertions.assertTasksQuery;
@@ -41,6 +45,44 @@ class TaskMapperTest {
         var dto = taskDto();
         var task = mapper.toTask(dto);
         assertTask(task, dto);
+    }
+
+    @Test
+    void toReminderRules() {
+        var reminders = recurrences();
+        var rRules = mapper.toReminderRules(reminders);
+        assertRecurrencesDto(reminders, rRules);
+    }
+
+    @Test
+    void toReminderRules_EmptyRules() {
+        var rRules = mapper.toReminderRules(newArrayList());
+        assertThat(rRules).isNotNull().isEmpty();
+    }
+
+    @Test
+    void toReminderRules_NullReminders() {
+        var rRules = mapper.toReminderRules(null);
+        assertThat(rRules).isNotNull().isEmpty();
+    }
+
+    @Test
+    void toReminders() {
+        var rRules = reminderRules();
+        var reminders = mapper.toReminders(rRules);
+        assertRecurrencesDto(reminders, rRules);
+    }
+
+    @Test
+    void toReminders_EmptyRules() {
+        var reminders = mapper.toReminders(newArrayList());
+        assertThat(reminders).isNotNull().isEmpty();
+    }
+
+    @Test
+    void toReminders_NullRules() {
+        var reminders = mapper.toReminders(null);
+        assertThat(reminders).isNotNull().isEmpty();
     }
 
     @Test

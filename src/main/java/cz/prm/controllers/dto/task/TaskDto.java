@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.prm.domain.common.Priority;
 import cz.prm.domain.task.TaskStatus;
 import java.time.Instant;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,11 +35,14 @@ public class TaskDto {
     @JsonProperty("priority")
     private Priority priority;
 
-    @JsonProperty("dueDate")
-    private Instant dueDate;
+    @JsonProperty("startDate")
+    private Instant startDate;
 
-    @JsonProperty("recurrence")
-    private String recurrence;
+    @JsonProperty("endDate")
+    private Instant endDate;
+
+    @JsonProperty("reminderRules")
+    private List<String> reminderRules;
 
     @JsonProperty("lastEditDate")
     private Instant lastEditDate;

@@ -479,63 +479,63 @@ public class TaskComponentTest extends TaskComponentTestBase {
         queryDto = tasksQueryDto();
         filter = queryDto.getFilter();
 
-        filter.setDueDate(greaterThanFilter(todayStartOfDay().minus(1, DAYS)));
+        filter.setEndDate(greaterThanFilter(todayStartOfDay().minus(1, DAYS)));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setDueDate(greaterThanFilter(todayStartOfDay()));
+        filter.setEndDate(greaterThanFilter(todayStartOfDay()));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setDueDate(greaterThanFilter(todayStartOfDay().plus(1, DAYS)));
+        filter.setEndDate(greaterThanFilter(todayStartOfDay().plus(1, DAYS)));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setDueDate(greaterThanOrEqualToFilter(todayStartOfDay().minus(1, DAYS)));
+        filter.setEndDate(greaterThanOrEqualToFilter(todayStartOfDay().minus(1, DAYS)));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setDueDate(greaterThanOrEqualToFilter(todayStartOfDay()));
+        filter.setEndDate(greaterThanOrEqualToFilter(todayStartOfDay()));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setDueDate(greaterThanOrEqualToFilter(todayStartOfDay().plus(1, DAYS)));
+        filter.setEndDate(greaterThanOrEqualToFilter(todayStartOfDay().plus(1, DAYS)));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setDueDate(lessThanFilter(todayStartOfDay().plus(1, DAYS)));
+        filter.setEndDate(lessThanFilter(todayStartOfDay().plus(1, DAYS)));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setDueDate(lessThanFilter(todayStartOfDay()));
+        filter.setEndDate(lessThanFilter(todayStartOfDay()));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setDueDate(lessThanFilter(todayStartOfDay().minus(1, DAYS)));
+        filter.setEndDate(lessThanFilter(todayStartOfDay().minus(1, DAYS)));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setDueDate(lessThanOrEqualToFilter(todayStartOfDay().plus(1, DAYS)));
+        filter.setEndDate(lessThanOrEqualToFilter(todayStartOfDay().plus(1, DAYS)));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setDueDate(lessThanOrEqualToFilter(todayStartOfDay()));
+        filter.setEndDate(lessThanOrEqualToFilter(todayStartOfDay()));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setDueDate(lessThanOrEqualToFilter(todayStartOfDay().minus(1, DAYS)));
+        filter.setEndDate(lessThanOrEqualToFilter(todayStartOfDay().minus(1, DAYS)));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setDueDate(betweenFilter(todayStartOfDay().minus(1, DAYS), now().plus(5, DAYS)));
+        filter.setEndDate(betweenFilter(todayStartOfDay().minus(1, DAYS), now().plus(5, DAYS)));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setDueDate(betweenFilter(todayStartOfDay(), now().plus(5, DAYS)));
+        filter.setEndDate(betweenFilter(todayStartOfDay(), now().plus(5, DAYS)));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setDueDate(betweenFilter(todayStartOfDay().plus(1, DAYS), now().plus(5, DAYS)));
+        filter.setEndDate(betweenFilter(todayStartOfDay().plus(1, DAYS), now().plus(5, DAYS)));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
     }
@@ -685,63 +685,63 @@ public class TaskComponentTest extends TaskComponentTestBase {
         queryDto = tasksQueryDto();
         filter = queryDto.getFilter();
 
-        filter.setDueDate(greaterThanFilter(todayStartOfDay().minus(1, DAYS)));
+        filter.setEndDate(greaterThanFilter(todayStartOfDay().minus(1, DAYS)));
         pageDto = user1GetContactTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setDueDate(greaterThanFilter(todayStartOfDay()));
+        filter.setEndDate(greaterThanFilter(todayStartOfDay()));
         pageDto = user1GetContactTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setDueDate(greaterThanFilter(todayStartOfDay().plus(1, DAYS)));
+        filter.setEndDate(greaterThanFilter(todayStartOfDay().plus(1, DAYS)));
         pageDto = user1GetContactTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setDueDate(greaterThanOrEqualToFilter(todayStartOfDay().minus(1, DAYS)));
+        filter.setEndDate(greaterThanOrEqualToFilter(todayStartOfDay().minus(1, DAYS)));
         pageDto = user1GetContactTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setDueDate(greaterThanOrEqualToFilter(todayStartOfDay()));
+        filter.setEndDate(greaterThanOrEqualToFilter(todayStartOfDay()));
         pageDto = user1GetContactTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setDueDate(greaterThanOrEqualToFilter(todayStartOfDay().plus(1, DAYS)));
+        filter.setEndDate(greaterThanOrEqualToFilter(todayStartOfDay().plus(1, DAYS)));
         pageDto = user1GetContactTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setDueDate(lessThanFilter(todayStartOfDay().plus(1, DAYS)));
+        filter.setEndDate(lessThanFilter(todayStartOfDay().plus(1, DAYS)));
         pageDto = user1GetContactTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setDueDate(lessThanFilter(todayStartOfDay()));
+        filter.setEndDate(lessThanFilter(todayStartOfDay()));
         pageDto = user1GetContactTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setDueDate(lessThanFilter(todayStartOfDay().minus(1, DAYS)));
+        filter.setEndDate(lessThanFilter(todayStartOfDay().minus(1, DAYS)));
         pageDto = user1GetContactTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setDueDate(lessThanOrEqualToFilter(todayStartOfDay().plus(1, DAYS)));
+        filter.setEndDate(lessThanOrEqualToFilter(todayStartOfDay().plus(1, DAYS)));
         pageDto = user1GetContactTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setDueDate(lessThanOrEqualToFilter(todayStartOfDay()));
+        filter.setEndDate(lessThanOrEqualToFilter(todayStartOfDay()));
         pageDto = user1GetContactTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setDueDate(lessThanOrEqualToFilter(todayStartOfDay().minus(1, DAYS)));
+        filter.setEndDate(lessThanOrEqualToFilter(todayStartOfDay().minus(1, DAYS)));
         pageDto = user1GetContactTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setDueDate(betweenFilter(todayStartOfDay().minus(1, DAYS), now().plus(5, DAYS)));
+        filter.setEndDate(betweenFilter(todayStartOfDay().minus(1, DAYS), now().plus(5, DAYS)));
         pageDto = user1GetContactTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setDueDate(betweenFilter(todayStartOfDay(), now().plus(5, DAYS)));
+        filter.setEndDate(betweenFilter(todayStartOfDay(), now().plus(5, DAYS)));
         pageDto = user1GetContactTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setDueDate(betweenFilter(todayStartOfDay().plus(1, DAYS), now().plus(5, DAYS)));
+        filter.setEndDate(betweenFilter(todayStartOfDay().plus(1, DAYS), now().plus(5, DAYS)));
         pageDto = user1GetContactTasks(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
     }

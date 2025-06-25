@@ -47,8 +47,8 @@ public class TaskPredicates {
         if (filter.isStatus()) {
             applyCriteria(predicate, task.status, filter.getStatus());
         }
-        if (filter.isDueDate()) {
-            applyCriteria(predicate, task.dueDate, filter.getDueDate(), Instant.class);
+        if (filter.isEndDate()) {
+            applyCriteria(predicate, task.endDate, filter.getEndDate(), Instant.class);
         }
         return predicate;
     }

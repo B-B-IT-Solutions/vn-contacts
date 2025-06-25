@@ -4,6 +4,7 @@ import static cz.prm.utils.TaskUtils.task;
 import static cz.prm.utils.TaskUtils.tasks;
 import static cz.prm.utils.TaskUtils.tasksQuery;
 import static cz.prm.utils.TestUtils.randomLong;
+import static cz.prm.utils.assertions.RecurrenceAssertions.assertRecurrences;
 import static cz.prm.utils.assertions.TaskAssertions.assertPage;
 import static cz.prm.utils.assertions.TaskAssertions.assertTask;
 import static java.util.Optional.empty;
@@ -169,6 +170,8 @@ class TaskServiceTest {
         assertThat(savedTask.getOutcomes()).isEqualTo(updatedTask.getOutcomes());
         assertThat(savedTask.getStatus()).isEqualTo(updatedTask.getStatus());
         assertThat(savedTask.getPriority()).isEqualTo(updatedTask.getPriority());
-        assertThat(savedTask.getDueDate()).isEqualTo(updatedTask.getDueDate());
+        assertThat(savedTask.getStartDate()).isEqualTo(updatedTask.getStartDate());
+        assertThat(savedTask.getEndDate()).isEqualTo(updatedTask.getEndDate());
+        assertRecurrences(savedTask.getReminders(), updatedTask.getReminders());
     }
 }

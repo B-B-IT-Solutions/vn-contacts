@@ -71,7 +71,9 @@ public class TaskService {
         savedTask.setOutcomes(updatedTask.getOutcomes());
         savedTask.setStatus(updatedTask.getStatus());
         savedTask.setPriority(updatedTask.getPriority());
-        savedTask.setDueDate(updatedTask.getDueDate());
+        savedTask.setReminders(updatedTask.getReminders());
+        savedTask.setStartDate(updatedTask.getStartDate());
+        savedTask.setEndDate(updatedTask.getEndDate());
     }
 
     private Task getTaskById(Long taskId) {

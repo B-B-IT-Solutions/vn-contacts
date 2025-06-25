@@ -1,7 +1,7 @@
 package cz.prm.services;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static cz.prm.utils.ReminderUtils.recurrence;
+import static cz.prm.utils.RecurrenceUtils.recurrence;
 import static cz.prm.utils.ReminderUtils.reminder;
 import static org.mockito.Mockito.when;
 
