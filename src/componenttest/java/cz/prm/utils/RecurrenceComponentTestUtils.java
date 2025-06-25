@@ -32,7 +32,6 @@ public class RecurrenceComponentTestUtils {
 
     public static Recurrence recurrence(String value) {
         var r = new Recurrence();
-        r.setRecurrenceId(randomLong());
         r.setValue(value);
         return r;
     }
