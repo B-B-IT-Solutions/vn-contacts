@@ -1,0 +1,44 @@
+package cz.prm.services.referral;
+
+import cz.prm.domain.common.query.Page;
+import cz.prm.domain.referral.Referral;
+import cz.prm.domain.referral.query.ReferralsQuery;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+@Transactional
+public class ReferralClearingHouse {
+
+    private ReferralService referralService;
+
+    @Autowired
+    public ReferralClearingHouse(ReferralService referralService) {
+        this.referralService = referralService;
+    }
+
+    public Page<Referral> getReferrals(ReferralsQuery query) {
+        return referralService.getReferrals(query);
+    }
+
+    public Page<Referral> getContactReferrals(Long contactId, ReferralsQuery query) {
+        return referralService.getContactReferrals(contactId, query);
+    }
+
+    public Referral getReferral(Long referralId) {
+        return referralService.getReferral(referralId);
+    }
+
+    public void createReferral(Referral referral) {
+        referralService.createReferral(referral);
+    }
+
+    public void updateReferral(Long referralId, Referral uReferral) {
+        referralService.updateReferral(referralId, uReferral);
+    }
+
+    public void deleteReferral(Long referralId) {
+        referralService.deleteReferral(referralId);
+    }
+}

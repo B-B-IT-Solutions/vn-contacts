@@ -25,6 +25,15 @@ public class ReferralAssertions {
         assertReferralsDto(page.getContent(), pageDto.getContent());
     }
 
+    public static void assertPage(Page<Referral> page1, Page<Referral> page2) {
+        assertThat(page1.getTotalPages()).isEqualTo(page2.getTotalPages());
+        assertThat(page1.getNumberOfElements()).isEqualTo(page2.getNumberOfElements());
+        assertThat(page1.getTotalElements()).isEqualTo(page2.getTotalElements());
+        assertThat(page1.getPageSize()).isEqualTo(page2.getPageSize());
+        assertThat(page1.getPageNumber()).isEqualTo(page2.getPageNumber());
+        assertReferrals(page1.getContent(), page2.getContent());
+    }
+
     public static void assertPage(Page<Referral> page1, PageImpl<Referral> page2) {
         assertThat(page1.getTotalPages()).isEqualTo(page2.getTotalPages());
         assertThat(page1.getNumberOfElements()).isEqualTo(page2.getNumberOfElements());

@@ -5,7 +5,7 @@ import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.services.NoteService;
-import cz.prm.services.ReferralService;
+import cz.prm.services.referral.ReferralService;
 import cz.prm.services.TaskService;
 import cz.prm.services.contact.data.AboutService;
 import cz.prm.services.contact.data.ContactService;

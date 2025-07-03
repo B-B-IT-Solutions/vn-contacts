@@ -1,4 +1,4 @@
-package cz.prm.services;
+package cz.prm.services.referral;
 
 import static cz.prm.utils.ReferralUtils.referral;
 import static cz.prm.utils.ReferralUtils.referrals;

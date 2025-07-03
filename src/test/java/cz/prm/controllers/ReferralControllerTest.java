@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 import cz.prm.controllers.mappers.ReferralMapper;
 import cz.prm.domain.referral.Referral;
 import cz.prm.domain.referral.query.ReferralsQuery;
-import cz.prm.services.ReferralService;
+import cz.prm.services.referral.ReferralService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
