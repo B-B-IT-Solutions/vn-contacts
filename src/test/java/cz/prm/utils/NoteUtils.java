@@ -39,7 +39,6 @@ public class NoteUtils {
     public static NoteDto noteDto() {
         var note = new NoteDto();
         note.setNoteId(randomLong());
-        note.setContactId(randomLong());
         note.setText(uuid());
         note.setCategories(uuids());
         note.setLastEditDate(now());
