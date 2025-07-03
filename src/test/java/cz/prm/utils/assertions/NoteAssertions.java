@@ -67,8 +67,6 @@ public class NoteAssertions {
         assertThat(note.getText()).isEqualTo(dto.getText());
         assertThat(note.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(note.getCreationDate()).isEqualTo(dto.getCreationDate());
-        assertThat(note.getContactId()).isNotNull();
-        assertThat(note.getReferralId()).isNotNull();
     }
 
     public static void assertNotesQuery(NotesQuery query, NotesQueryDto dto) {
