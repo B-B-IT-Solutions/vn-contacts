@@ -31,9 +31,8 @@ public class NoteComponentTestUtils {
         return note;
     }
 
-    public static NoteDto noteDto(long contactId) {
+    public static NoteDto noteDto() {
         var dto = new NoteDto();
-        dto.setContactId(contactId);
         dto.setText(uuid());
         dto.setCategories(uuids());
         return dto;

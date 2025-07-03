@@ -353,10 +353,10 @@ public class NoteComponentTest extends NoteComponentTestBase {
     }
 
     @Test
-    void createNote() {
+    void createContactNote() {
         var contact = createContact(USER_1);
-        var toCreateDto = noteDto(contact.getContactId());
-        user1CreateNote(toCreateDto);
+        var toCreateDto = noteDto();
+        user1CreateContactNote(contact.getContactId(), toCreateDto);
         var note = getNoteFromDb(toCreateDto);
         var noteId = note.getNoteId();
 
@@ -366,8 +366,8 @@ public class NoteComponentTest extends NoteComponentTestBase {
         user3GetNoteExpectNotFound(noteId);
 
         contact = createContact(USER_2);
-        toCreateDto = noteDto(contact.getContactId());
-        user2CreateNote(toCreateDto);
+        toCreateDto = noteDto();
+        user2CreateContactNote(contact.getContactId(), toCreateDto);
         note = getNoteFromDb(toCreateDto);
         noteId = note.getNoteId();
 
@@ -377,8 +377,44 @@ public class NoteComponentTest extends NoteComponentTestBase {
         user3GetNoteExpectNotFound(noteId);
 
         contact = createContact(USER_3);
-        toCreateDto = noteDto(contact.getContactId());
-        user3CreateNote(toCreateDto);
+        toCreateDto = noteDto();
+        user3CreateContactNote(contact.getContactId(), toCreateDto);
+        note = getNoteFromDb(toCreateDto);
+        noteId = note.getNoteId();
+
+        createdDto = user3GetNote(noteId);
+        assertNote(note, createdDto);
+        user1GetNoteExpectNotFound(noteId);
+        user2GetNoteExpectNotFound(noteId);
+    }
+
+    @Test
+    void createReferralNote() {
+        var referral = createReferral(USER_1);
+        var toCreateDto = noteDto();
+        user1CreateReferralNote(referral.getReferralId(), toCreateDto);
+        var note = getNoteFromDb(toCreateDto);
+        var noteId = note.getNoteId();
+
+        var createdDto = user1GetNote(noteId);
+        assertNote(note, createdDto);
+        user2GetNoteExpectNotFound(noteId);
+        user3GetNoteExpectNotFound(noteId);
+
+        referral = createReferral(USER_2);
+        toCreateDto = noteDto();
+        user2CreateReferralNote(referral.getReferralId(), toCreateDto);
+        note = getNoteFromDb(toCreateDto);
+        noteId = note.getNoteId();
+
+        createdDto = user2GetNote(noteId);
+        assertNote(note, createdDto);
+        user1GetNoteExpectNotFound(noteId);
+        user3GetNoteExpectNotFound(noteId);
+
+        referral = createReferral(USER_3);
+        toCreateDto = noteDto();
+        user3CreateReferralNote(referral.getReferralId(), toCreateDto);
         note = getNoteFromDb(toCreateDto);
         noteId = note.getNoteId();
 

@@ -20,19 +20,32 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
 
     protected static String NOTES_BASE_URL = "notes";
     protected static String CONTACT_NOTES_URL = NOTES_BASE_URL + "/contact/%s";
+    protected static String REFERRAL_NOTES_URL = NOTES_BASE_URL + "/referral/%s";
     protected static String NOTE_URL = NOTES_BASE_URL + "/note";
     protected static String NOTE_BY_ID_URL = NOTE_URL + "/%s";
 
-    protected void user1CreateNote(NoteDto dto) {
-        createNote(dto, USER_1);
+    protected void user1CreateContactNote(Long contactId, NoteDto dto) {
+        createContactNote(contactId, dto, USER_1);
     }
 
-    protected void user2CreateNote(NoteDto dto) {
-        createNote(dto, USER_2);
+    protected void user2CreateContactNote(Long contactId, NoteDto dto) {
+        createContactNote(contactId, dto, USER_2);
     }
 
-    protected void user3CreateNote(NoteDto dto) {
-        createNote(dto, USER_3);
+    protected void user3CreateContactNote(Long contactId, NoteDto dto) {
+        createContactNote(contactId, dto, USER_3);
+    }
+
+    protected void user1CreateReferralNote(Long referralId, NoteDto dto) {
+        createReferralNote(referralId, dto, USER_1);
+    }
+
+    protected void user2CreateReferralNote(Long referralId, NoteDto dto) {
+        createReferralNote(referralId, dto, USER_2);
+    }
+
+    protected void user3CreateReferralNote(Long referralId, NoteDto dto) {
+        createReferralNote(referralId, dto, USER_3);
     }
 
     protected void user1UpdateNote(Long noteId, NoteDto dto) {
@@ -83,8 +96,14 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
         return getNote(noteId, USER_3);
     }
 
-    protected void createNote(NoteDto dto, ComponentTestUser user) {
-        post(NOTE_URL, user, dto);
+    protected void createContactNote(Long contactId, NoteDto dto, ComponentTestUser user) {
+        var url = format(CONTACT_NOTES_URL, contactId);
+        post(url, user, dto);
+    }
+
+    protected void createReferralNote(Long referralId, NoteDto dto, ComponentTestUser user) {
+        var url = format(REFERRAL_NOTES_URL, referralId);
+        post(url, user, dto);
     }
 
     protected void updateNote(Long noteId, NoteDto dto, ComponentTestUser user) {
