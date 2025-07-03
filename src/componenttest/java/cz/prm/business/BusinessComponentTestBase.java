@@ -87,23 +87,45 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         return savedContact;
     }
 
-    protected List<Note> createNotes(ComponentTestUser user) {
-        return createNotes(user, 3);
+    protected List<Note> createContactNotes(ComponentTestUser user) {
+        return createContactNotes(user, 3);
     }
 
-    protected List<Note> createNotes(ComponentTestUser user, int numOfNotes) {
+    protected List<Note> createReferralNotes(ComponentTestUser user) {
+        return createReferralNotes(user, 3);
+    }
+
+    protected List<Note> createContactNotes(ComponentTestUser user, int numOfNotes) {
         var contact = createContact(user);
         return IntStream.range(0, numOfNotes).mapToObj((i) -> createNote(user, contact)).collect(toList());
     }
 
-    protected Note createNote(ComponentTestUser user) {
+    protected List<Note> createReferralNotes(ComponentTestUser user, int numOfNotes) {
+        var referral = createReferral(user);
+        return IntStream.range(0, numOfNotes).mapToObj((i) -> createNote(user, referral)).collect(toList());
+    }
+
+    protected Note createContactNote(ComponentTestUser user) {
         var contact = createContact(user);
         return createNote(user, contact);
     }
 
+    protected Note createReferralNote(ComponentTestUser user) {
+        var referral = createReferral(user);
+        return createNote(user, referral);
+    }
+
     protected Note createNote(ComponentTestUser user, Contact contact) {
         ensureUserContext(user);
-        var note = note(contact.getContactId());
+        var note = note(contact.getContactId(), null);
+        var savedNote = noteRepository.save(note);
+        clearContext();
+        return savedNote;
+    }
+
+    protected Note createNote(ComponentTestUser user, Referral referral) {
+        ensureUserContext(user);
+        var note = note(null, referral.getReferralId());
         var savedNote = noteRepository.save(note);
         clearContext();
         return savedNote;

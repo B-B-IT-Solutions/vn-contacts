@@ -20,12 +20,13 @@ public class NoteComponentTestUtils {
     }
 
     public static Note note() {
-        return note(randomLong());
+        return note(randomLong(), randomLong());
     }
 
-    public static Note note(long contactId) {
+    public static Note note(Long contactId, Long referralId) {
         var note = new Note();
         note.setContactId(contactId);
+        note.setReferralId(referralId);
         note.setText(format("Text-%s-End", uuid()));
         note.setCategories(uuids());
         return note;

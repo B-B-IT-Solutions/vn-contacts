@@ -84,6 +84,18 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
         return getContactNotesPage(contactId, queryDto, USER_3);
     }
 
+    protected PageDto<NoteDto> user1GetReferralNotes(Long referralId, NotesQueryDto queryDto) {
+        return getReferralNotesPage(referralId, queryDto, USER_1);
+    }
+
+    protected PageDto<NoteDto> user2GetReferralNotes(Long referralId, NotesQueryDto queryDto) {
+        return getReferralNotesPage(referralId, queryDto, USER_2);
+    }
+
+    protected PageDto<NoteDto> user3GetReferralNotes(Long referralId, NotesQueryDto queryDto) {
+        return getReferralNotesPage(referralId, queryDto, USER_3);
+    }
+
     protected NoteDto user1GetNote(Long noteId) {
         return getNote(noteId, USER_1);
     }
@@ -118,6 +130,11 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
 
     protected PageDto<NoteDto> getContactNotesPage(Long contactId, NotesQueryDto queryDto, ComponentTestUser user) {
         var baseURl = format(CONTACT_NOTES_URL, contactId);
+        return getNotesPage(baseURl, queryDto, user);
+    }
+
+    protected PageDto<NoteDto> getReferralNotesPage(Long referralId, NotesQueryDto queryDto, ComponentTestUser user) {
+        var baseURl = format(REFERRAL_NOTES_URL, referralId);
         return getNotesPage(baseURl, queryDto, user);
     }
 
