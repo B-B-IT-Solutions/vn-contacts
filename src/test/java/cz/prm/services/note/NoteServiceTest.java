@@ -97,7 +97,7 @@ class NoteServiceTest {
     }
 
     @Test
-    void createNote() {
+    void createContactNote() {
         var note = note();
         var contactId = randomLong();
         assertThat(note.getContactId()).isNotEqualTo(contactId);
