@@ -19,9 +19,9 @@ import io.restassured.common.mapper.TypeRef;
 public class TaskComponentTestBase extends BusinessComponentTestBase {
 
     protected static String TASKS_BASE_URL = "tasks";
-    protected static String CONTACT_TASKS_URL = TASKS_BASE_URL + "/contact/%s";
-    protected static String TASK_URL = TASKS_BASE_URL + "/task";
-    protected static String TASK_BY_ID_URL = TASK_URL + "/%s";
+    protected static String TASKS_URL = TASKS_BASE_URL;
+    protected static String CONTACT_TASKS_URL = TASKS_URL + "/contact/%s";
+    protected static String TASK_URL = TASKS_URL + "/%s";
 
     protected void user1CreateTask(TaskDto dto) {
         createTask(dto, USER_1);
@@ -96,16 +96,16 @@ public class TaskComponentTestBase extends BusinessComponentTestBase {
     }
 
     protected void createTask(TaskDto dto, ComponentTestUser user) {
-        post(TASK_URL, user, dto);
+        post(TASKS_URL, user, dto);
     }
 
     protected void updateTask(Long taskId, TaskDto dto, ComponentTestUser user) {
-        var url = format(TASK_BY_ID_URL, taskId);
+        var url = format(TASK_URL, taskId);
         put(url, user, dto);
     }
 
     protected void deleteTask(Long taskId, ComponentTestUser user) {
-        var url = format(TASK_BY_ID_URL, taskId);
+        var url = format(TASK_URL, taskId);
         delete(url, user);
     }
 
@@ -126,7 +126,7 @@ public class TaskComponentTestBase extends BusinessComponentTestBase {
     }
 
     protected TaskDto getTask(Long taskId, ComponentTestUser user) {
-        var url = format(TASK_BY_ID_URL, taskId);
+        var url = format(TASK_URL, taskId);
         var typeRef = new TypeRef<TaskDto>() {
         };
         return getOne(url, user, typeRef);
@@ -169,17 +169,17 @@ public class TaskComponentTestBase extends BusinessComponentTestBase {
     }
 
     protected void updateTaskExpectNotFound(Long taskId, TaskDto dto, ComponentTestUser user) {
-        var url = format(TASK_BY_ID_URL, taskId);
+        var url = format(TASK_URL, taskId);
         putExpectNotFound(url, user, dto);
     }
 
     protected void deleteTaskExpectNotFound(Long taskId, ComponentTestUser user) {
-        var url = format(TASK_BY_ID_URL, taskId);
+        var url = format(TASK_URL, taskId);
         deleteExpectNotFound(url, user);
     }
 
     protected void getTaskExpectNotFound(Long taskId, ComponentTestUser user) {
-        var url = format(TASK_BY_ID_URL, taskId);
+        var url = format(TASK_URL, taskId);
         getExpectNotFound(url, user);
     }
 
