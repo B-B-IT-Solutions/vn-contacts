@@ -23,6 +23,11 @@ public class NotePredicates {
         return predicate.and(note.contactId.eq(contactId));
     }
 
+    public Predicate byReferralId(Long referralId, NotesFilter filter) {
+        var predicate = notes(filter);
+        return predicate.and(note.referralId.eq(referralId));
+    }
+
     private BooleanExpression notes(NotesFilter filter) {
         var predicate = dataAccessPredicate();
         return predicate.and(filterPredicates(filter));

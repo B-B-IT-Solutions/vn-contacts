@@ -26,9 +26,16 @@ public class NoteService {
         this.predicates = predicates;
     }
 
-    public Page<Note> getNotes(Long contactId, NotesQuery query) {
+    public Page<Note> getContactNotes(Long contactId, NotesQuery query) {
         var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
         var predicate = predicates.byContactId(contactId, query.getFilter());
+        var page = repository.findAll(predicate, pageRequest);
+        return new Page<>(page);
+    }
+
+    public Page<Note> getReferralNotes(Long referralId, NotesQuery query) {
+        var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
+        var predicate = predicates.byReferralId(referralId, query.getFilter());
         var page = repository.findAll(predicate, pageRequest);
         return new Page<>(page);
     }

@@ -6,7 +6,7 @@ import static cz.prm.utils.ReferralUtils.referral;
 import static cz.prm.utils.ReferralUtils.referralDto;
 import static cz.prm.utils.ReferralUtils.referrals;
 import static cz.prm.utils.ReferralUtils.referralsQueryDto;
-import static cz.prm.utils.assertions.ReferralAssertions.assertPage;
+import static cz.prm.utils.assertions.ReferralAssertions.assertReferralsPage;
 import static cz.prm.utils.assertions.ReferralAssertions.assertReferral;
 import static cz.prm.utils.assertions.ReferralAssertions.assertReferralsQuery;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,6 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
 import cz.prm.domain.referral.query.ReferralsQuery;
 import cz.prm.utils.MapperUtils;
+import cz.prm.utils.assertions.ReferralAssertions;
 import org.junit.jupiter.api.Test;
 
 class ReferralMapperTest {
@@ -26,7 +27,7 @@ class ReferralMapperTest {
     void toPageDto() {
         var page = page(referrals());
         var dtos = mapper.toPageDto(page);
-        assertPage(page, dtos);
+        ReferralAssertions.assertReferralsPage(page, dtos);
     }
 
     @Test

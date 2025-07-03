@@ -8,7 +8,7 @@ import static cz.prm.utils.NoteUtils.notesQueryDto;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.NoteAssertions.assertNote;
 import static cz.prm.utils.assertions.NoteAssertions.assertNotesQuery;
-import static cz.prm.utils.assertions.NoteAssertions.assertPage;
+import static cz.prm.utils.assertions.NoteAssertions.assertNotesPage;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
@@ -19,6 +19,7 @@ import cz.prm.domain.note.Note;
 import cz.prm.domain.note.query.NotesQuery;
 import cz.prm.services.NoteService;
 import cz.prm.utils.MapperUtils;
+import cz.prm.utils.assertions.NoteAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -46,15 +47,15 @@ class NoteControllerTest {
     }
 
     @Test
-    void getNotes() {
+    void getContactNotes() {
         var page = page(notes());
         var queryDto = notesQueryDto();
         var contactId = randomLong();
-        when(noteService.getNotes(eq(contactId), any(NotesQuery.class))).thenReturn(page);
+        when(noteService.getContactNotes(eq(contactId), any(NotesQuery.class))).thenReturn(page);
 
-        var result = controller.getNotes(contactId, queryDto);
-        assertPage(page, result);
-        verify(noteService).getNotes(eq(contactId), cQueryCapt.capture());
+        var result = controller.getContactNotes(contactId, queryDto);
+        NoteAssertions.assertNotesPage(page, result);
+        verify(noteService).getContactNotes(eq(contactId), cQueryCapt.capture());
         var query = cQueryCapt.getValue();
         assertNotesQuery(query, queryDto);
     }

@@ -4,7 +4,7 @@ import static cz.prm.utils.ReferralUtils.referral;
 import static cz.prm.utils.ReferralUtils.referrals;
 import static cz.prm.utils.ReferralUtils.referralsQuery;
 import static cz.prm.utils.TestUtils.randomLong;
-import static cz.prm.utils.assertions.ReferralAssertions.assertPage;
+import static cz.prm.utils.assertions.ReferralAssertions.assertReferralsPage;
 import static cz.prm.utils.assertions.ReferralAssertions.assertReferral;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
@@ -58,7 +58,7 @@ class ReferralServiceTest {
         when(predicates.referrals(query.getFilter())).thenReturn(predicate);
         when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
         var result = referralService.getReferrals(query);
-        assertPage(result, page);
+        assertReferralsPage(result, page);
     }
 
     @Test
@@ -72,7 +72,7 @@ class ReferralServiceTest {
         when(predicates.contactReferrals(contactId, query.getFilter())).thenReturn(predicate);
         when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
         var result = referralService.getContactReferrals(contactId, query);
-        assertPage(result, page);
+        assertReferralsPage(result, page);
     }
 
     @Test

@@ -6,7 +6,7 @@ import static cz.prm.utils.ReferralUtils.referralDto;
 import static cz.prm.utils.ReferralUtils.referrals;
 import static cz.prm.utils.ReferralUtils.referralsQueryDto;
 import static cz.prm.utils.TestUtils.randomLong;
-import static cz.prm.utils.assertions.ReferralAssertions.assertPage;
+import static cz.prm.utils.assertions.ReferralAssertions.assertReferralsPage;
 import static cz.prm.utils.assertions.ReferralAssertions.assertReferral;
 import static cz.prm.utils.assertions.ReferralAssertions.assertReferralsQuery;
 import static org.mockito.ArgumentMatchers.any;
@@ -19,6 +19,7 @@ import cz.prm.domain.referral.Referral;
 import cz.prm.domain.referral.query.ReferralsQuery;
 import cz.prm.services.referral.ReferralClearingHouse;
 import cz.prm.utils.MapperUtils;
+import cz.prm.utils.assertions.ReferralAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -52,7 +53,7 @@ class ReferralControllerTest {
         when(clearingHouse.getReferrals(any(ReferralsQuery.class))).thenReturn(page);
 
         var result = controller.getReferrals(queryDto);
-        assertPage(page, result);
+        ReferralAssertions.assertReferralsPage(page, result);
         verify(clearingHouse).getReferrals(cQueryCapt.capture());
         var query = cQueryCapt.getValue();
         assertReferralsQuery(query, queryDto);
@@ -66,7 +67,7 @@ class ReferralControllerTest {
         when(clearingHouse.getContactReferrals(eq(contactId), any(ReferralsQuery.class))).thenReturn(page);
 
         var result = controller.getContactReferrals(contactId, queryDto);
-        assertPage(page, result);
+        ReferralAssertions.assertReferralsPage(page, result);
         verify(clearingHouse).getContactReferrals(eq(contactId), cQueryCapt.capture());
         var query = cQueryCapt.getValue();
         assertReferralsQuery(query, queryDto);

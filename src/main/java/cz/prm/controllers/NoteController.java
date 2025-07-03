@@ -29,9 +29,9 @@ public class NoteController {
     }
 
     @GetMapping("/contact/{contactId}")
-    public PageDto<NoteDto> getNotes(@PathVariable("contactId") Long contactId, NotesQueryDto queryDto) {
+    public PageDto<NoteDto> getContactNotes(@PathVariable("contactId") Long contactId, NotesQueryDto queryDto) {
         var query = mapper.toNullSafeNotesQuery(queryDto);
-        var notes = noteService.getNotes(contactId, query);
+        var notes = noteService.getContactNotes(contactId, query);
         return mapper.toPageDto(notes);
     }
 

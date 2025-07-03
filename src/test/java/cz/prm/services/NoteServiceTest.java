@@ -5,7 +5,7 @@ import static cz.prm.utils.NoteUtils.notes;
 import static cz.prm.utils.NoteUtils.notesQuery;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.NoteAssertions.assertNote;
-import static cz.prm.utils.assertions.NoteAssertions.assertPage;
+import static cz.prm.utils.assertions.NoteAssertions.assertNotesPage;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -49,7 +49,7 @@ class NoteServiceTest {
     }
 
     @Test
-    void getNotes() {
+    void getContactNotes() {
         var notes = notes();
         var page = new PageImpl(notes);
         var query = notesQuery();
@@ -58,8 +58,22 @@ class NoteServiceTest {
 
         when(predicates.byContactId(contactId, query.getFilter())).thenReturn(predicate);
         when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
-        var result = noteService.getNotes(contactId, query);
-        assertPage(result, page);
+        var result = noteService.getContactNotes(contactId, query);
+        assertNotesPage(result, page);
+    }
+
+    @Test
+    void getReferralNotes() {
+        var notes = notes();
+        var page = new PageImpl(notes);
+        var query = notesQuery();
+        var referralId = randomLong();
+        var predicate = new BooleanBuilder();
+
+        when(predicates.byReferralId(referralId, query.getFilter())).thenReturn(predicate);
+        when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
+        var result = noteService.getReferralNotes(referralId, query);
+        assertNotesPage(result, page);
     }
 
     @Test

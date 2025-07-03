@@ -1,8 +1,11 @@
 package cz.prm.services.referral;
 
 import cz.prm.domain.common.query.Page;
+import cz.prm.domain.note.Note;
+import cz.prm.domain.note.query.NotesQuery;
 import cz.prm.domain.referral.Referral;
 import cz.prm.domain.referral.query.ReferralsQuery;
+import cz.prm.services.NoteService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +15,12 @@ import org.springframework.stereotype.Service;
 public class ReferralClearingHouse {
 
     private ReferralService referralService;
+    private NoteService noteService;
 
     @Autowired
-    public ReferralClearingHouse(ReferralService referralService) {
+    public ReferralClearingHouse(ReferralService referralService, NoteService noteService) {
         this.referralService = referralService;
+        this.noteService = noteService;
     }
 
     public Page<Referral> getReferrals(ReferralsQuery query) {
@@ -28,6 +33,10 @@ public class ReferralClearingHouse {
 
     public Referral getReferral(Long referralId) {
         return referralService.getReferral(referralId);
+    }
+
+    public Page<Note> getReferralNotes(Long referralId, NotesQuery query) {
+        return noteService.getReferralNotes(referralId, query);
     }
 
     public void createReferral(Referral referral) {
