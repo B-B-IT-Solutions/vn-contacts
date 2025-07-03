@@ -179,6 +179,51 @@ public class NoteComponentTest extends NoteComponentTestBase {
     }
 
     @Test
+    void getReferralNotesPagination() {
+        var queryDto = notesQueryDto();
+        var referralId = randomLong();
+        var pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getTotalPages()).isZero();
+        assertThat(pageDto.getTotalElements()).isZero();
+        assertThat(pageDto.getPageSize()).isEqualTo(50);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        var user1Notes = createReferralNotes(USER_1, 21);
+        var userNote = user1Notes.get(0);
+        referralId = userNote.getReferralId();
+
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getTotalPages()).isEqualTo(1);
+        assertThat(pageDto.getTotalElements()).isEqualTo(21);
+        assertThat(pageDto.getPageSize()).isEqualTo(50);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        var pagination = queryDto.getPagination();
+        pagination.setPageSize(5);
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getTotalPages()).isEqualTo(5);
+        assertThat(pageDto.getTotalElements()).isEqualTo(21);
+        assertThat(pageDto.getPageSize()).isEqualTo(5);
+        assertThat(pageDto.getContent()).hasSize(5);
+
+        pagination.setPageNumber(1);
+        pagination.setPageSize(10);
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getTotalPages()).isEqualTo(3);
+        assertThat(pageDto.getTotalElements()).isEqualTo(21);
+        assertThat(pageDto.getPageSize()).isEqualTo(10);
+        assertThat(pageDto.getContent()).hasSize(10);
+
+        pagination.setPageNumber(2);
+        pagination.setPageSize(10);
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getTotalPages()).isEqualTo(3);
+        assertThat(pageDto.getTotalElements()).isEqualTo(21);
+        assertThat(pageDto.getPageSize()).isEqualTo(10);
+        assertThat(pageDto.getContent()).hasSize(1);
+    }
+
+    @Test
     void getContactNotesSorting() {
         var queryDto = notesQueryDto();
         var contactId = randomLong();
@@ -226,18 +271,81 @@ public class NoteComponentTest extends NoteComponentTestBase {
         sort(expected, comparing(NoteDto::getCreationDate).reversed());
         assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
 
-        queryDto.setSort("asc(contactId)");
+        queryDto.setSort("asc(text)");
         pageDto = user1GetContactNotes(contactId, queryDto);
         actual = pageDto.getContent();
         expected = newArrayList(actual);
-        sort(expected, comparing(NoteDto::getContactId));
+        sort(expected, comparing(NoteDto::getText));
         assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
 
-        queryDto.setSort("desc(contactId)");
+        queryDto.setSort("desc(text)");
         pageDto = user1GetContactNotes(contactId, queryDto);
         actual = pageDto.getContent();
         expected = newArrayList(actual);
-        sort(expected, comparing(NoteDto::getContactId).reversed());
+        sort(expected, comparing(NoteDto::getText).reversed());
+        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+    }
+
+    @Test
+    void getReferralNotesSorting() {
+        var queryDto = notesQueryDto();
+        var referralId = randomLong();
+        var pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        var user1Notes = createReferralNotes(USER_1, 21);
+        var userNote = user1Notes.get(0);
+        referralId = userNote.getReferralId();
+
+        queryDto = notesQueryDto();
+        queryDto.setSort(null);
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        var actual = pageDto.getContent();
+        var expected = newArrayList(actual);
+        sort(expected, comparing(NoteDto::getCreationDate).reversed());
+        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+        queryDto = notesQueryDto();
+        queryDto.setSort("asc(lastEditDate)");
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        actual = pageDto.getContent();
+        expected = newArrayList(actual);
+        sort(expected, comparing(NoteDto::getLastEditDate));
+        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+        queryDto.setSort("desc(lastEditDate)");
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        actual = pageDto.getContent();
+        expected = newArrayList(actual);
+        sort(expected, comparing(NoteDto::getLastEditDate).reversed());
+        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+        queryDto.setSort("asc(creationDate)");
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        actual = pageDto.getContent();
+        expected = newArrayList(actual);
+        sort(expected, comparing(NoteDto::getCreationDate));
+        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+        queryDto.setSort("desc(creationDate)");
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        actual = pageDto.getContent();
+        expected = newArrayList(actual);
+        sort(expected, comparing(NoteDto::getCreationDate).reversed());
+        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+        queryDto.setSort("asc(text)");
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        actual = pageDto.getContent();
+        expected = newArrayList(actual);
+        sort(expected, comparing(NoteDto::getText));
+        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
+
+        queryDto.setSort("desc(text)");
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        actual = pageDto.getContent();
+        expected = newArrayList(actual);
+        sort(expected, comparing(NoteDto::getText).reversed());
         assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
     }
 
