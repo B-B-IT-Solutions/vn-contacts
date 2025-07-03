@@ -8,13 +8,12 @@ import static cz.prm.utils.NoteUtils.notes;
 import static cz.prm.utils.NoteUtils.notesQueryDto;
 import static cz.prm.utils.assertions.NoteAssertions.assertNote;
 import static cz.prm.utils.assertions.NoteAssertions.assertNotesQuery;
-import static cz.prm.utils.assertions.NoteAssertions.assertNotesPage;
+import static cz.prm.utils.assertions.NoteAssertions.assertPage;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.note.query.NotesQueryDto;
 import cz.prm.domain.note.query.NotesQuery;
 import cz.prm.utils.MapperUtils;
-import cz.prm.utils.assertions.NoteAssertions;
 import org.junit.jupiter.api.Test;
 
 class NoteMapperTest {
@@ -27,7 +26,7 @@ class NoteMapperTest {
     void toPageDto() {
         var page = page(notes());
         var dtos = mapper.toPageDto(page);
-        NoteAssertions.assertNotesPage(page, dtos);
+        assertPage(page, dtos);
     }
 
     @Test

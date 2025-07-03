@@ -17,7 +17,7 @@ import org.springframework.data.domain.PageImpl;
 
 public class NoteAssertions {
 
-    public static void assertNotesPage(Page<Note> page, PageDto<NoteDto> pageDto) {
+    public static void assertPage(Page<Note> page, PageDto<NoteDto> pageDto) {
         assertThat(page.getTotalPages()).isEqualTo(pageDto.getTotalPages());
         assertThat(page.getNumberOfElements()).isEqualTo(pageDto.getNumberOfElements());
         assertThat(page.getTotalElements()).isEqualTo(pageDto.getTotalElements());
@@ -26,16 +26,7 @@ public class NoteAssertions {
         assertNotesDto(page.getContent(), pageDto.getContent());
     }
 
-    public static void assertNotesPage(Page<Note> page1, Page<Note> page2) {
-        assertThat(page1.getTotalPages()).isEqualTo(page2.getTotalPages());
-        assertThat(page1.getNumberOfElements()).isEqualTo(page2.getNumberOfElements());
-        assertThat(page1.getTotalElements()).isEqualTo(page2.getTotalElements());
-        assertThat(page1.getPageSize()).isEqualTo(page2.getPageSize());
-        assertThat(page1.getPageNumber()).isEqualTo(page2.getPageNumber());
-        assertNotes(page1.getContent(), page2.getContent());
-    }
-
-    public static void assertNotesPage(Page<Note> page1, PageImpl<Note> page2) {
+    public static void assertPage(Page<Note> page1, PageImpl<Note> page2) {
         assertThat(page1.getTotalPages()).isEqualTo(page2.getTotalPages());
         assertThat(page1.getNumberOfElements()).isEqualTo(page2.getNumberOfElements());
         assertThat(page1.getTotalElements()).isEqualTo(page2.getTotalElements());

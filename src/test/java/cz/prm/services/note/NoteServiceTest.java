@@ -5,7 +5,7 @@ import static cz.prm.utils.NoteUtils.notes;
 import static cz.prm.utils.NoteUtils.notesQuery;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.NoteAssertions.assertNote;
-import static cz.prm.utils.assertions.NoteAssertions.assertNotesPage;
+import static cz.prm.utils.assertions.NoteAssertions.assertPage;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,6 +20,7 @@ import cz.prm.domain.note.Note;
 import cz.prm.domain.note.query.NotesFilter;
 import cz.prm.repositories.note.NotePredicates;
 import cz.prm.repositories.note.NoteRepository;
+import cz.prm.utils.assertions.NoteAssertions;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -59,7 +60,7 @@ class NoteServiceTest {
         when(predicates.byContactId(contactId, query.getFilter())).thenReturn(predicate);
         when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
         var result = noteService.getContactNotes(contactId, query);
-        assertNotesPage(result, page);
+        NoteAssertions.assertPage(result, page);
     }
 
     @Test
@@ -73,7 +74,7 @@ class NoteServiceTest {
         when(predicates.byReferralId(referralId, query.getFilter())).thenReturn(predicate);
         when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
         var result = noteService.getReferralNotes(referralId, query);
-        assertNotesPage(result, page);
+        NoteAssertions.assertPage(result, page);
     }
 
     @Test

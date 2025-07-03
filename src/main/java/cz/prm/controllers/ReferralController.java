@@ -20,43 +20,43 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReferralController {
 
     private ReferralService referralService;
-    private ReferralMapper referralMapper;
+    private ReferralMapper mapper;
 
     @Autowired
-    public ReferralController(ReferralService referralService, ReferralMapper referralMapper) {
+    public ReferralController(ReferralService referralService, ReferralMapper mapper) {
         this.referralService = referralService;
-        this.referralMapper = referralMapper;
+        this.mapper = mapper;
     }
 
     @GetMapping
     public PageDto<ReferralDto> getReferrals(ReferralQueryDto queryDto) {
-        var query = referralMapper.toNullSafeReferralsQuery(queryDto);
+        var query = mapper.toNullSafeReferralsQuery(queryDto);
         var referrals = referralService.getReferrals(query);
-        return referralMapper.toPageDto(referrals);
+        return mapper.toPageDto(referrals);
     }
 
     @GetMapping("/contact/{contactId}")
     public PageDto<ReferralDto> getContactReferrals(@PathVariable("contactId") Long contactId, ReferralQueryDto queryDto) {
-        var query = referralMapper.toNullSafeReferralsQuery(queryDto);
+        var query = mapper.toNullSafeReferralsQuery(queryDto);
         var referrals = referralService.getContactReferrals(contactId, query);
-        return referralMapper.toPageDto(referrals);
+        return mapper.toPageDto(referrals);
     }
 
     @GetMapping("/referral/{referralId}")
     public ReferralDto getReferral(@PathVariable("referralId") Long referralId) {
         var referral = referralService.getReferral(referralId);
-        return referralMapper.toReferralDto(referral);
+        return mapper.toReferralDto(referral);
     }
 
     @PostMapping("/referral")
     public void createReferral(@RequestBody ReferralDto dto) {
-        var referral = referralMapper.toReferral(dto);
+        var referral = mapper.toReferral(dto);
         referralService.createReferral(referral);
     }
 
     @PutMapping("/referral/{referralId}")
     public void updateReferral(@PathVariable("referralId") Long referralId, @RequestBody ReferralDto dto) {
-        var referral = referralMapper.toReferral(dto);
+        var referral = mapper.toReferral(dto);
         referralService.updateReferral(referralId, referral);
     }
 

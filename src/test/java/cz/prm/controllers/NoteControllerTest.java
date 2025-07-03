@@ -7,7 +7,7 @@ import static cz.prm.utils.NoteUtils.notes;
 import static cz.prm.utils.NoteUtils.notesQueryDto;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.NoteAssertions.assertNote;
-import static cz.prm.utils.assertions.NoteAssertions.assertNotesPage;
+import static cz.prm.utils.assertions.NoteAssertions.assertPage;
 import static cz.prm.utils.assertions.NoteAssertions.assertNotesQuery;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -53,7 +53,7 @@ class NoteControllerTest {
         when(noteService.getContactNotes(eq(contactId), any(NotesQuery.class))).thenReturn(page);
 
         var result = controller.getContactNotes(contactId, queryDto);
-        assertNotesPage(page, result);
+        assertPage(page, result);
         verify(noteService).getContactNotes(eq(contactId), cQueryCapt.capture());
         var query = cQueryCapt.getValue();
         assertNotesQuery(query, queryDto);
@@ -67,7 +67,7 @@ class NoteControllerTest {
         when(noteService.getReferralNotes(eq(referralId), any(NotesQuery.class))).thenReturn(page);
 
         var result = controller.getReferralNotes(referralId, queryDto);
-        assertNotesPage(page, result);
+        assertPage(page, result);
         verify(noteService).getReferralNotes(eq(referralId), cQueryCapt.capture());
         var query = cQueryCapt.getValue();
         assertNotesQuery(query, queryDto);
