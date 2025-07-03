@@ -83,10 +83,11 @@ class NoteControllerTest {
     }
 
     @Test
-    void createNote() {
+    void createContactNote() {
         var dto = noteDto();
-        controller.createNote(dto);
-        verify(noteService).createNote(noteCapt.capture());
+        var contactId = randomLong();
+        controller.createContactNote(contactId, dto);
+        verify(noteService).createContactNote(eq(contactId), noteCapt.capture());
         var note = noteCapt.getValue();
         assertNote(note, dto);
     }

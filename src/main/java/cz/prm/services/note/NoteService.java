@@ -44,7 +44,8 @@ public class NoteService {
         return getNoteById(noteId);
     }
 
-    public void createNote(Note note) {
+    public void createContactNote(Long contactId, Note note) {
+        note.setContactId(contactId);
         repository.save(note);
     }
 

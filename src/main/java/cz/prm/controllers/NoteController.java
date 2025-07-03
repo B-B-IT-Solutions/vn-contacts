@@ -48,10 +48,10 @@ public class NoteController {
         return mapper.toNoteDto(note);
     }
 
-    @PostMapping("/note")
-    public void createNote(@RequestBody NoteDto dto) {
+    @PostMapping("/contact/{contactId}")
+    public void createContactNote(@PathVariable("contactId") Long contactId, @RequestBody NoteDto dto) {
         var note = mapper.toNote(dto);
-        noteService.createNote(note);
+        noteService.createContactNote(contactId, note);
     }
 
     @PostMapping("/referral/{referralId}")

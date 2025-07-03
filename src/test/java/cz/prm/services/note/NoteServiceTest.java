@@ -99,8 +99,13 @@ class NoteServiceTest {
     @Test
     void createNote() {
         var note = note();
-        noteService.createNote(note);
-        verify(repository).save(note);
+        var contactId = randomLong();
+        assertThat(note.getContactId()).isNotEqualTo(contactId);
+
+        noteService.createContactNote(contactId, note);
+        verify(repository).save(noteCapt.capture());
+        var savedNoted = noteCapt.getValue();
+        assertThat(savedNoted.getContactId()).isEqualTo(contactId);
     }
 
     @Test
