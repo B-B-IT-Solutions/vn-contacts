@@ -72,85 +72,6 @@
 	 
 	 <changeSet author="sergej" id="1.0.2">
 			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
-											sequenceName="note_seq"/>
-			
-			<createTable tableName="note">
-				 <column name="note_id" type="BIGINT">
-						<constraints primaryKey="true" primaryKeyName="note_pk" nullable="false"/>
-				 </column>
-				 <column name="contact_id" type="BIGINT"/>
-				 <column name="title" type="VARCHAR(1000)"/>
-				 <column name="text" type="TEXT"/>
-				 <column name="last_edit_date" type="TIMESTAMP WITH TIME ZONE"/>
-				 <column name="creation_date" type="TIMESTAMP WITH TIME ZONE"/>
-				 <column name="owner_username" type="VARCHAR(255)"/>
-				 <column name="owner_email" type="VARCHAR(255)"/>
-			</createTable>
-			
-			<addForeignKeyConstraint baseTableName="note" baseColumnNames="contact_id" constraintName="note_contact_id_fkey"
-															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
-															 referencedColumnNames="contact_id" validate="true"/>
-	 </changeSet>
-	 
-	 <changeSet author="sergej" id="1.0.3">
-			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
-											sequenceName="settings_seq"/>
-			
-			<createTable tableName="account_settings">
-				 <column name="settings_id" type="BIGINT">
-						<constraints primaryKey="true" primaryKeyName="general_settings_pk" nullable="false"/>
-				 </column>
-				 <column name="app_language" type="VARCHAR(255)"/>
-			</createTable>
-			
-			<createTable tableName="user_settings">
-				 <column name="settings_id" type="BIGINT">
-						<constraints primaryKey="true" primaryKeyName="user_settings_pk" nullable="false"/>
-				 </column>
-				 <column name="owner_username" type="VARCHAR(255)"/>
-				 <column name="owner_email" type="VARCHAR(255)"/>
-				 <column name="last_edit_date" type="TIMESTAMP WITH TIME ZONE"/>
-			</createTable>
-			
-			<createTable tableName="contact_settings_label">
-				 <column name="settings_id" type="BIGINT"/>
-				 <column name="value" type="VARCHAR(250)"/>
-				 <column name="color" type="VARCHAR(50)"/>
-			</createTable>
-			
-			<createTable tableName="contact_settings_industry">
-				 <column name="settings_id" type="BIGINT"/>
-				 <column name="name" type="VARCHAR(250)"/>
-			</createTable>
-	 </changeSet>
-	 
-	 <changeSet author="sergej" id="1.0.4">
-			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
-											sequenceName="task_seq"/>
-			
-			<createTable tableName="task">
-				 <column name="task_id" type="BIGINT">
-						<constraints primaryKey="true" primaryKeyName="task_pk" nullable="false"/>
-				 </column>
-				 <column name="contact_id" type="BIGINT"/>
-				 <column name="name" type="VARCHAR(1000)"/>
-				 <column name="description" type="TEXT"/>
-				 <column name="outcomes" type="TEXT"/>
-				 <column name="status" type="INT"/>
-				 <column name="priority" type="INT"/>
-				 <column name="last_edit_date" type="TIMESTAMP WITH TIME ZONE"/>
-				 <column name="creation_date" type="TIMESTAMP WITH TIME ZONE"/>
-				 <column name="owner_username" type="VARCHAR(255)"/>
-				 <column name="owner_email" type="VARCHAR(255)"/>
-			</createTable>
-			
-			<addForeignKeyConstraint baseTableName="task" baseColumnNames="contact_id" constraintName="task_contact_id_fkey"
-															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
-															 referencedColumnNames="contact_id" validate="true"/>
-	 </changeSet>
-	 
-	 <changeSet author="sergej" id="1.0.5">
-			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
 											sequenceName="referral_seq"/>
 			
 			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
@@ -204,6 +125,90 @@
 															 referencedColumnNames="recurrence_id" validate="true"/>
 	 
 	 
+	 </changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.3">
+			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
+											sequenceName="note_seq"/>
+			
+			<createTable tableName="note">
+				 <column name="note_id" type="BIGINT">
+						<constraints primaryKey="true" primaryKeyName="note_pk" nullable="false"/>
+				 </column>
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="referral_id" type="BIGINT"/>
+				 <column name="text" type="TEXT"/>
+				 <column name="last_edit_date" type="TIMESTAMP WITH TIME ZONE"/>
+				 <column name="creation_date" type="TIMESTAMP WITH TIME ZONE"/>
+				 <column name="owner_username" type="VARCHAR(255)"/>
+				 <column name="owner_email" type="VARCHAR(255)"/>
+			</createTable>
+			
+			<addForeignKeyConstraint baseTableName="note" baseColumnNames="contact_id" constraintName="note_contact_id_fkey"
+															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
+															 referencedColumnNames="contact_id" validate="true"/>
+			
+			<addForeignKeyConstraint baseTableName="note" baseColumnNames="referral_id" constraintName="note_referral_id_fkey"
+															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="referral"
+															 referencedColumnNames="referral_id" validate="true"/>
+	 </changeSet>
+	 
+	 
+	 <changeSet author="sergej" id="1.0.4">
+			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
+											sequenceName="settings_seq"/>
+			
+			<createTable tableName="account_settings">
+				 <column name="settings_id" type="BIGINT">
+						<constraints primaryKey="true" primaryKeyName="general_settings_pk" nullable="false"/>
+				 </column>
+				 <column name="app_language" type="VARCHAR(255)"/>
+			</createTable>
+			
+			<createTable tableName="user_settings">
+				 <column name="settings_id" type="BIGINT">
+						<constraints primaryKey="true" primaryKeyName="user_settings_pk" nullable="false"/>
+				 </column>
+				 <column name="owner_username" type="VARCHAR(255)"/>
+				 <column name="owner_email" type="VARCHAR(255)"/>
+				 <column name="last_edit_date" type="TIMESTAMP WITH TIME ZONE"/>
+			</createTable>
+			
+			<createTable tableName="contact_settings_label">
+				 <column name="settings_id" type="BIGINT"/>
+				 <column name="value" type="VARCHAR(250)"/>
+				 <column name="color" type="VARCHAR(50)"/>
+			</createTable>
+			
+			<createTable tableName="contact_settings_industry">
+				 <column name="settings_id" type="BIGINT"/>
+				 <column name="name" type="VARCHAR(250)"/>
+			</createTable>
+	 </changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.5">
+			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
+											sequenceName="task_seq"/>
+			
+			<createTable tableName="task">
+				 <column name="task_id" type="BIGINT">
+						<constraints primaryKey="true" primaryKeyName="task_pk" nullable="false"/>
+				 </column>
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="name" type="VARCHAR(1000)"/>
+				 <column name="description" type="TEXT"/>
+				 <column name="outcomes" type="TEXT"/>
+				 <column name="status" type="INT"/>
+				 <column name="priority" type="INT"/>
+				 <column name="last_edit_date" type="TIMESTAMP WITH TIME ZONE"/>
+				 <column name="creation_date" type="TIMESTAMP WITH TIME ZONE"/>
+				 <column name="owner_username" type="VARCHAR(255)"/>
+				 <column name="owner_email" type="VARCHAR(255)"/>
+			</createTable>
+			
+			<addForeignKeyConstraint baseTableName="task" baseColumnNames="contact_id" constraintName="task_contact_id_fkey"
+															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
+															 referencedColumnNames="contact_id" validate="true"/>
 	 </changeSet>
 	 
 	 <changeSet author="sergej" id="1.0.6">

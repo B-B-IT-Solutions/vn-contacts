@@ -24,6 +24,8 @@ public interface NoteMapper {
 
     NoteDto toNoteDto(Note note);
 
+    @Mapping(target = "contactId", ignore = true)
+    @Mapping(target = "referralId", ignore = true)
     @Mapping(target = "owner", ignore = true)
     Note toNote(NoteDto dto);
 

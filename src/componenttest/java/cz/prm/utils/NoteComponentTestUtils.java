@@ -20,22 +20,20 @@ public class NoteComponentTestUtils {
     }
 
     public static Note note() {
-        return note(randomLong());
+        return note(randomLong(), randomLong());
     }
 
-    public static Note note(long contactId) {
+    public static Note note(Long contactId, Long referralId) {
         var note = new Note();
         note.setContactId(contactId);
-        note.setTitle(format("Title-%s-End", uuid()));
-        note.setText(format("Text-%s", uuid()));
+        note.setReferralId(referralId);
+        note.setText(format("Text-%s-End", uuid()));
         note.setCategories(uuids());
         return note;
     }
 
-    public static NoteDto noteDto(long contactId) {
+    public static NoteDto noteDto() {
         var dto = new NoteDto();
-        dto.setContactId(contactId);
-        dto.setTitle(uuid());
         dto.setText(uuid());
         dto.setCategories(uuids());
         return dto;

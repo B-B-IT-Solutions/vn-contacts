@@ -27,7 +27,7 @@ public class NoteUtils {
         var note = new Note();
         note.setNoteId(randomLong());
         note.setContactId(randomLong());
-        note.setTitle(uuid());
+        note.setReferralId(randomLong());
         note.setText(uuid());
         note.setCategories(uuids());
         note.setLastEditDate(now());
@@ -39,8 +39,6 @@ public class NoteUtils {
     public static NoteDto noteDto() {
         var note = new NoteDto();
         note.setNoteId(randomLong());
-        note.setContactId(randomLong());
-        note.setTitle(uuid());
         note.setText(uuid());
         note.setCategories(uuids());
         note.setLastEditDate(now());
@@ -67,7 +65,7 @@ public class NoteUtils {
     public static NotesFilter notesFilter() {
         var filter = new NotesFilter();
         filter.setGlobalFilter(uuid());
-        filter.setTitle(uuid());
+        filter.setText(uuid());
         filter.setCategories(uuid());
         return filter;
     }
@@ -75,7 +73,7 @@ public class NoteUtils {
     public static NotesFilterDto notesFilterDto() {
         var filter = new NotesFilterDto();
         filter.setGlobalFilter(uuid());
-        filter.setTitle(uuid());
+        filter.setText(uuid());
         filter.setCategories(uuid());
         return filter;
     }

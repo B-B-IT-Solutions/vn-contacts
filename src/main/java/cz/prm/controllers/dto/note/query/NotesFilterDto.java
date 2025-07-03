@@ -9,7 +9,7 @@ public class NotesFilterDto {
 
     private String globalFilter;
 
-    private String title;
+    private String text;
 
     private String categories;
 }

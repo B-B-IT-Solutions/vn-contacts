@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 import cz.prm.controllers.mappers.NoteMapper;
 import cz.prm.domain.note.Note;
 import cz.prm.domain.note.query.NotesQuery;
-import cz.prm.services.NoteService;
+import cz.prm.services.note.NoteService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,15 +46,29 @@ class NoteControllerTest {
     }
 
     @Test
-    void getNotes() {
+    void getContactNotes() {
         var page = page(notes());
         var queryDto = notesQueryDto();
         var contactId = randomLong();
-        when(noteService.getNotes(eq(contactId), any(NotesQuery.class))).thenReturn(page);
+        when(noteService.getContactNotes(eq(contactId), any(NotesQuery.class))).thenReturn(page);
 
-        var result = controller.getNotes(contactId, queryDto);
+        var result = controller.getContactNotes(contactId, queryDto);
         assertPage(page, result);
-        verify(noteService).getNotes(eq(contactId), cQueryCapt.capture());
+        verify(noteService).getContactNotes(eq(contactId), cQueryCapt.capture());
+        var query = cQueryCapt.getValue();
+        assertNotesQuery(query, queryDto);
+    }
+
+    @Test
+    void getReferralNotes() {
+        var page = page(notes());
+        var queryDto = notesQueryDto();
+        var referralId = randomLong();
+        when(noteService.getReferralNotes(eq(referralId), any(NotesQuery.class))).thenReturn(page);
+
+        var result = controller.getReferralNotes(referralId, queryDto);
+        assertPage(page, result);
+        verify(noteService).getReferralNotes(eq(referralId), cQueryCapt.capture());
         var query = cQueryCapt.getValue();
         assertNotesQuery(query, queryDto);
     }
@@ -69,10 +83,21 @@ class NoteControllerTest {
     }
 
     @Test
-    void createNote() {
+    void createContactNote() {
         var dto = noteDto();
-        controller.createNote(dto);
-        verify(noteService).createNote(noteCapt.capture());
+        var contactId = randomLong();
+        controller.createContactNote(contactId, dto);
+        verify(noteService).createContactNote(eq(contactId), noteCapt.capture());
+        var note = noteCapt.getValue();
+        assertNote(note, dto);
+    }
+
+    @Test
+    void createReferralNote() {
+        var dto = noteDto();
+        var referralId = randomLong();
+        controller.createReferralNote(referralId, dto);
+        verify(noteService).createReferralNote(eq(referralId), noteCapt.capture());
         var note = noteCapt.getValue();
         assertNote(note, dto);
     }

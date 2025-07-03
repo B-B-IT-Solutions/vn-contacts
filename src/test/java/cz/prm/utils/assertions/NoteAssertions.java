@@ -46,7 +46,7 @@ public class NoteAssertions {
     public static void assertNotesDto(List<Note> notes, List<NoteDto> dtos) {
         assertThat(notes).isNotEmpty().hasSameSizeAs(dtos);
         notes.forEach(u1 -> {
-            var u2 = dtos.stream().filter(u -> Objects.equals(u1.getContactId(), u.getContactId())).findFirst().get();
+            var u2 = dtos.stream().filter(u -> Objects.equals(u1.getNoteId(), u.getNoteId())).findFirst().get();
             assertNote(u1, u2);
         });
     }
@@ -63,8 +63,6 @@ public class NoteAssertions {
 
     public static void assertNote(Note note, NoteDto dto) {
         assertThat(note.getNoteId()).isEqualTo(dto.getNoteId());
-        assertThat(note.getContactId()).isEqualTo(dto.getContactId());
-        assertThat(note.getTitle()).isEqualTo(dto.getTitle());
         assertThat(note.getCategories()).isEqualTo(dto.getCategories());
         assertThat(note.getText()).isEqualTo(dto.getText());
         assertThat(note.getLastEditDate()).isEqualTo(dto.getLastEditDate());
@@ -78,7 +76,7 @@ public class NoteAssertions {
 
     public static void assertNotesFilter(NotesFilter filter, NotesFilterDto dto) {
         assertThat(filter.getGlobalFilter()).isEqualTo(dto.getGlobalFilter());
-        assertThat(filter.getTitle()).isEqualTo(dto.getTitle());
+        assertThat(filter.getText()).isEqualTo(dto.getText());
         assertThat(filter.getCategories()).isEqualTo(dto.getCategories());
     }
 }

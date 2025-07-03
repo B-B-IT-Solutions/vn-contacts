@@ -1,4 +1,4 @@
-package cz.prm.services;
+package cz.prm.services.note;
 
 import static cz.prm.domain.common.PageRequests.getPageRequest;
 import static java.lang.String.format;
@@ -26,9 +26,16 @@ public class NoteService {
         this.predicates = predicates;
     }
 
-    public Page<Note> getNotes(Long contactId, NotesQuery query) {
+    public Page<Note> getContactNotes(Long contactId, NotesQuery query) {
         var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
         var predicate = predicates.byContactId(contactId, query.getFilter());
+        var page = repository.findAll(predicate, pageRequest);
+        return new Page<>(page);
+    }
+
+    public Page<Note> getReferralNotes(Long referralId, NotesQuery query) {
+        var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
+        var predicate = predicates.byReferralId(referralId, query.getFilter());
         var page = repository.findAll(predicate, pageRequest);
         return new Page<>(page);
     }
@@ -37,7 +44,13 @@ public class NoteService {
         return getNoteById(noteId);
     }
 
-    public void createNote(Note note) {
+    public void createContactNote(Long contactId, Note note) {
+        note.setContactId(contactId);
+        repository.save(note);
+    }
+
+    public void createReferralNote(Long referralId, Note note) {
+        note.setReferralId(referralId);
         repository.save(note);
     }
 
@@ -59,7 +72,6 @@ public class NoteService {
     }
 
     private void updateNoteFields(Note savedNote, Note updatedNote) {
-        savedNote.setTitle(updatedNote.getTitle());
         savedNote.setCategories(updatedNote.getCategories());
         savedNote.setText(updatedNote.getText());
     }

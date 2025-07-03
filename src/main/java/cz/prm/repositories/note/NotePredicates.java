@@ -23,6 +23,11 @@ public class NotePredicates {
         return predicate.and(note.contactId.eq(contactId));
     }
 
+    public Predicate byReferralId(Long referralId, NotesFilter filter) {
+        var predicate = notes(filter);
+        return predicate.and(note.referralId.eq(referralId));
+    }
+
     private BooleanExpression notes(NotesFilter filter) {
         var predicate = dataAccessPredicate();
         return predicate.and(filterPredicates(filter));
@@ -36,11 +41,10 @@ public class NotePredicates {
     private BooleanBuilder filterPredicates(NotesFilter filter) {
         var predicate = new BooleanBuilder();
         if (filter.isGlobalFilter()) {
-            predicate.or(note.title.containsIgnoreCase(filter.getGlobalFilter()));
             predicate.or(note.text.containsIgnoreCase(filter.getGlobalFilter()));
         }
-        if (filter.isTitle()) {
-            applyCriteria(predicate, note.title, filter.getTitle());
+        if (filter.isText()) {
+            applyCriteria(predicate, note.text, filter.getText());
         }
         if (filter.isCategories()) {
             applyCriteria(predicate, note.categories, filter.getCategories());

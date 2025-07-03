@@ -4,7 +4,7 @@ import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.note.NoteDto;
 import cz.prm.controllers.dto.note.query.NotesQueryDto;
 import cz.prm.controllers.mappers.NoteMapper;
-import cz.prm.services.NoteService;
+import cz.prm.services.note.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,31 +29,44 @@ public class NoteController {
     }
 
     @GetMapping("/contact/{contactId}")
-    public PageDto<NoteDto> getNotes(@PathVariable("contactId") Long contactId, NotesQueryDto queryDto) {
+    public PageDto<NoteDto> getContactNotes(@PathVariable("contactId") Long contactId, NotesQueryDto queryDto) {
         var query = mapper.toNullSafeNotesQuery(queryDto);
-        var notes = noteService.getNotes(contactId, query);
+        var notes = noteService.getContactNotes(contactId, query);
         return mapper.toPageDto(notes);
     }
 
-    @GetMapping("/note/{noteId}")
+    @GetMapping("/referral/{referralId}")
+    public PageDto<NoteDto> getReferralNotes(@PathVariable("referralId") Long referralId, NotesQueryDto queryDto) {
+        var query = mapper.toNullSafeNotesQuery(queryDto);
+        var referral = noteService.getReferralNotes(referralId, query);
+        return mapper.toPageDto(referral);
+    }
+
+    @GetMapping("/{noteId}")
     public NoteDto getNote(@PathVariable("noteId") Long noteId) {
         var note = noteService.getNote(noteId);
         return mapper.toNoteDto(note);
     }
 
-    @PostMapping("/note")
-    public void createNote(@RequestBody NoteDto dto) {
+    @PostMapping("/contact/{contactId}")
+    public void createContactNote(@PathVariable("contactId") Long contactId, @RequestBody NoteDto dto) {
         var note = mapper.toNote(dto);
-        noteService.createNote(note);
+        noteService.createContactNote(contactId, note);
     }
 
-    @PutMapping("/note/{noteId}")
+    @PostMapping("/referral/{referralId}")
+    public void createReferralNote(@PathVariable("referralId") Long referralId, @RequestBody NoteDto dto) {
+        var note = mapper.toNote(dto);
+        noteService.createReferralNote(referralId, note);
+    }
+
+    @PutMapping("/{noteId}")
     public void updateNote(@PathVariable("noteId") Long noteId, @RequestBody NoteDto dto) {
         var note = mapper.toNote(dto);
         noteService.updateNote(noteId, note);
     }
 
-    @DeleteMapping("/note/{noteId}")
+    @DeleteMapping("/{noteId}")
     public void deleteNote(@PathVariable("noteId") Long noteId) {
         noteService.deleteNote(noteId);
     }

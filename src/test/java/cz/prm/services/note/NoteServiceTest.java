@@ -1,4 +1,4 @@
-package cz.prm.services;
+package cz.prm.services.note;
 
 import static cz.prm.utils.NoteUtils.note;
 import static cz.prm.utils.NoteUtils.notes;
@@ -20,6 +20,7 @@ import cz.prm.domain.note.Note;
 import cz.prm.domain.note.query.NotesFilter;
 import cz.prm.repositories.note.NotePredicates;
 import cz.prm.repositories.note.NoteRepository;
+import cz.prm.utils.assertions.NoteAssertions;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,7 +50,7 @@ class NoteServiceTest {
     }
 
     @Test
-    void getNotes() {
+    void getContactNotes() {
         var notes = notes();
         var page = new PageImpl(notes);
         var query = notesQuery();
@@ -58,8 +59,22 @@ class NoteServiceTest {
 
         when(predicates.byContactId(contactId, query.getFilter())).thenReturn(predicate);
         when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
-        var result = noteService.getNotes(contactId, query);
-        assertPage(result, page);
+        var result = noteService.getContactNotes(contactId, query);
+        NoteAssertions.assertPage(result, page);
+    }
+
+    @Test
+    void getReferralNotes() {
+        var notes = notes();
+        var page = new PageImpl(notes);
+        var query = notesQuery();
+        var referralId = randomLong();
+        var predicate = new BooleanBuilder();
+
+        when(predicates.byReferralId(referralId, query.getFilter())).thenReturn(predicate);
+        when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
+        var result = noteService.getReferralNotes(referralId, query);
+        NoteAssertions.assertPage(result, page);
     }
 
     @Test
@@ -82,10 +97,27 @@ class NoteServiceTest {
     }
 
     @Test
-    void createNote() {
+    void createContactNote() {
         var note = note();
-        noteService.createNote(note);
-        verify(repository).save(note);
+        var contactId = randomLong();
+        assertThat(note.getContactId()).isNotEqualTo(contactId);
+
+        noteService.createContactNote(contactId, note);
+        verify(repository).save(noteCapt.capture());
+        var savedNoted = noteCapt.getValue();
+        assertThat(savedNoted.getContactId()).isEqualTo(contactId);
+    }
+
+    @Test
+    void createReferralNote() {
+        var note = note();
+        var referralId = randomLong();
+        assertThat(note.getReferralId()).isNotEqualTo(referralId);
+
+        noteService.createReferralNote(referralId, note);
+        verify(repository).save(noteCapt.capture());
+        var savedNoted = noteCapt.getValue();
+        assertThat(savedNoted.getReferralId()).isEqualTo(referralId);
     }
 
     @Test
@@ -151,7 +183,6 @@ class NoteServiceTest {
         assertThat(noteIdDb.getContactId()).isEqualTo(savedNote.getContactId());
         assertThat(noteIdDb.getOwner()).isEqualTo(savedNote.getOwner());
         assertThat(noteIdDb.getCreationDate()).isEqualTo(savedNote.getCreationDate());
-        assertThat(savedNote.getTitle()).isEqualTo(updatedNote.getTitle());
         assertThat(savedNote.getCategories()).isEqualTo(updatedNote.getCategories());
         assertThat(savedNote.getText()).isEqualTo(updatedNote.getText());
     }

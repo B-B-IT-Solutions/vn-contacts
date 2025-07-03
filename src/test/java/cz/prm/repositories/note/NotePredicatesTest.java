@@ -55,28 +55,74 @@ class NotePredicatesTest {
 
             filter.setGlobalFilter("globalFilter_01");
             predicate = predicates.byContactId(16L, filter);
-            expectedString = format("note.owner.username = %s && (containsIc(note.title,globalFilter_01) || containsIc"
-                + "(note.text,globalFilter_01)) && note.contactId = 16", user.getUsername());
+            expectedString = format("note.owner.username = %s && containsIc(note.text,globalFilter_01) && note.contactId = 16", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setGlobalFilter("globalFilter_02");
             predicate = predicates.byContactId(17L, filter);
-            expectedString = format("note.owner.username = %s && (containsIc(note.title,globalFilter_02) || containsIc"
-                + "(note.text,globalFilter_02)) && note.contactId = 17", user.getUsername());
+            expectedString = format("note.owner.username = %s && containsIc(note.text,globalFilter_02) && note.contactId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
             filter.setGlobalFilter(null);
-            filter.setTitle("title_01");
+            filter.setText("title_01");
             predicate = predicates.byContactId(17L, filter);
-            expectedString = format("note.owner.username = %s && containsIc(note.title,title_01) && note.contactId = 17", user.getUsername());
+            expectedString = format("note.owner.username = %s && containsIc(note.text,title_01) && note.contactId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
 
-            filter.setTitle(null);
+            filter.setText(null);
             filter.setCategories("arrIncludes(category_1,category_2,category_3)");
             predicate = predicates.byContactId(17L, filter);
             expectedString = format(
                 "note.owner.username = %s && (category_1 in note.categories || category_2 in note.categories || category_3 in note.categories) && "
                     + "note.contactId = 17", user.getUsername());
+            assertThat(predicate).hasToString(expectedString);
+        }
+    }
+
+    @Test
+    void byReferralIdNoFilters() {
+        try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
+            var user = user();
+            var filter = new NotesFilter();
+            context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
+            var query = predicates.byReferralId(10L, filter);
+            var expectedString = format("note.owner.username = %s && note.referralId = 10", user.getUsername());
+            assertThat(query).hasToString(expectedString);
+        }
+    }
+
+    @Test
+    void byReferralIdWithFilters() {
+        try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
+            var user = user();
+            var filter = new NotesFilter();
+            context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
+            var predicate = predicates.byReferralId(15L, filter);
+            var expectedString = format("note.owner.username = %s && note.referralId = 15", user.getUsername());
+            assertThat(predicate).hasToString(expectedString);
+
+            filter.setGlobalFilter("globalFilter_01");
+            predicate = predicates.byReferralId(16L, filter);
+            expectedString = format("note.owner.username = %s && containsIc(note.text,globalFilter_01) && note.referralId = 16", user.getUsername());
+            assertThat(predicate).hasToString(expectedString);
+
+            filter.setGlobalFilter("globalFilter_02");
+            predicate = predicates.byReferralId(17L, filter);
+            expectedString = format("note.owner.username = %s && containsIc(note.text,globalFilter_02) && note.referralId = 17", user.getUsername());
+            assertThat(predicate).hasToString(expectedString);
+
+            filter.setGlobalFilter(null);
+            filter.setText("title_01");
+            predicate = predicates.byReferralId(17L, filter);
+            expectedString = format("note.owner.username = %s && containsIc(note.text,title_01) && note.referralId = 17", user.getUsername());
+            assertThat(predicate).hasToString(expectedString);
+
+            filter.setText(null);
+            filter.setCategories("arrIncludes(category_1,category_2,category_3)");
+            predicate = predicates.byReferralId(17L, filter);
+            expectedString = format(
+                "note.owner.username = %s && (category_1 in note.categories || category_2 in note.categories || category_3 in note.categories) && "
+                    + "note.referralId = 17", user.getUsername());
             assertThat(predicate).hasToString(expectedString);
         }
     }

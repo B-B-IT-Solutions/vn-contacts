@@ -4,7 +4,7 @@ import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.referral.ReferralDto;
 import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
 import cz.prm.controllers.mappers.ReferralMapper;
-import cz.prm.services.ReferralService;
+import cz.prm.services.referral.ReferralService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

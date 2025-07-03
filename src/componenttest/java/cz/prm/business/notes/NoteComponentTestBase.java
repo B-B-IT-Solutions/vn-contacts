@@ -20,19 +20,31 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
 
     protected static String NOTES_BASE_URL = "notes";
     protected static String CONTACT_NOTES_URL = NOTES_BASE_URL + "/contact/%s";
-    protected static String NOTE_URL = NOTES_BASE_URL + "/note";
-    protected static String NOTE_BY_ID_URL = NOTE_URL + "/%s";
+    protected static String REFERRAL_NOTES_URL = NOTES_BASE_URL + "/referral/%s";
+    protected static String NOTE_URL = NOTES_BASE_URL + "/%s";
 
-    protected void user1CreateNote(NoteDto dto) {
-        createNote(dto, USER_1);
+    protected void user1CreateContactNote(Long contactId, NoteDto dto) {
+        createContactNote(contactId, dto, USER_1);
     }
 
-    protected void user2CreateNote(NoteDto dto) {
-        createNote(dto, USER_2);
+    protected void user2CreateContactNote(Long contactId, NoteDto dto) {
+        createContactNote(contactId, dto, USER_2);
     }
 
-    protected void user3CreateNote(NoteDto dto) {
-        createNote(dto, USER_3);
+    protected void user3CreateContactNote(Long contactId, NoteDto dto) {
+        createContactNote(contactId, dto, USER_3);
+    }
+
+    protected void user1CreateReferralNote(Long referralId, NoteDto dto) {
+        createReferralNote(referralId, dto, USER_1);
+    }
+
+    protected void user2CreateReferralNote(Long referralId, NoteDto dto) {
+        createReferralNote(referralId, dto, USER_2);
+    }
+
+    protected void user3CreateReferralNote(Long referralId, NoteDto dto) {
+        createReferralNote(referralId, dto, USER_3);
     }
 
     protected void user1UpdateNote(Long noteId, NoteDto dto) {
@@ -59,16 +71,28 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
         deleteNote(noteId, USER_3);
     }
 
-    protected PageDto<NoteDto> user1GetNotes(Long contactId, NotesQueryDto queryDto) {
-        return getNotesPage(contactId, queryDto, USER_1);
+    protected PageDto<NoteDto> user1GetContactNotes(Long contactId, NotesQueryDto queryDto) {
+        return getContactNotesPage(contactId, queryDto, USER_1);
     }
 
-    protected PageDto<NoteDto> user2GetNotes(Long contactId, NotesQueryDto queryDto) {
-        return getNotesPage(contactId, queryDto, USER_2);
+    protected PageDto<NoteDto> user2GetContactNotes(Long contactId, NotesQueryDto queryDto) {
+        return getContactNotesPage(contactId, queryDto, USER_2);
     }
 
-    protected PageDto<NoteDto> user3GetNotes(Long contactId, NotesQueryDto queryDto) {
-        return getNotesPage(contactId, queryDto, USER_3);
+    protected PageDto<NoteDto> user3GetContactNotes(Long contactId, NotesQueryDto queryDto) {
+        return getContactNotesPage(contactId, queryDto, USER_3);
+    }
+
+    protected PageDto<NoteDto> user1GetReferralNotes(Long referralId, NotesQueryDto queryDto) {
+        return getReferralNotesPage(referralId, queryDto, USER_1);
+    }
+
+    protected PageDto<NoteDto> user2GetReferralNotes(Long referralId, NotesQueryDto queryDto) {
+        return getReferralNotesPage(referralId, queryDto, USER_2);
+    }
+
+    protected PageDto<NoteDto> user3GetReferralNotes(Long referralId, NotesQueryDto queryDto) {
+        return getReferralNotesPage(referralId, queryDto, USER_3);
     }
 
     protected NoteDto user1GetNote(Long noteId) {
@@ -83,22 +107,37 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
         return getNote(noteId, USER_3);
     }
 
-    protected void createNote(NoteDto dto, ComponentTestUser user) {
-        post(NOTE_URL, user, dto);
+    protected void createContactNote(Long contactId, NoteDto dto, ComponentTestUser user) {
+        var url = format(CONTACT_NOTES_URL, contactId);
+        post(url, user, dto);
+    }
+
+    protected void createReferralNote(Long referralId, NoteDto dto, ComponentTestUser user) {
+        var url = format(REFERRAL_NOTES_URL, referralId);
+        post(url, user, dto);
     }
 
     protected void updateNote(Long noteId, NoteDto dto, ComponentTestUser user) {
-        var url = format(NOTE_BY_ID_URL, noteId);
+        var url = format(NOTE_URL, noteId);
         put(url, user, dto);
     }
 
     protected void deleteNote(Long noteId, ComponentTestUser user) {
-        var url = format(NOTE_BY_ID_URL, noteId);
+        var url = format(NOTE_URL, noteId);
         delete(url, user);
     }
 
-    protected PageDto<NoteDto> getNotesPage(Long contactId, NotesQueryDto queryDto, ComponentTestUser user) {
+    protected PageDto<NoteDto> getContactNotesPage(Long contactId, NotesQueryDto queryDto, ComponentTestUser user) {
         var baseURl = format(CONTACT_NOTES_URL, contactId);
+        return getNotesPage(baseURl, queryDto, user);
+    }
+
+    protected PageDto<NoteDto> getReferralNotesPage(Long referralId, NotesQueryDto queryDto, ComponentTestUser user) {
+        var baseURl = format(REFERRAL_NOTES_URL, referralId);
+        return getNotesPage(baseURl, queryDto, user);
+    }
+
+    protected PageDto<NoteDto> getNotesPage(String baseURl, NotesQueryDto queryDto, ComponentTestUser user) {
         var url = appendQueryToUrl(baseURl, queryDto);
         var typeRef = new TypeRef<PageDto<NoteDto>>() {
         };
@@ -106,7 +145,7 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
     }
 
     protected NoteDto getNote(Long noteId, ComponentTestUser user) {
-        var url = format(NOTE_BY_ID_URL, noteId);
+        var url = format(NOTE_URL, noteId);
         var typeRef = new TypeRef<NoteDto>() {
         };
         return getOne(url, user, typeRef);
@@ -149,17 +188,17 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
     }
 
     protected void updateNoteExpectNotFound(Long noteId, NoteDto dto, ComponentTestUser user) {
-        var url = format(NOTE_BY_ID_URL, noteId);
+        var url = format(NOTE_URL, noteId);
         putExpectNotFound(url, user, dto);
     }
 
     protected void deleteNoteExpectNotFound(Long noteId, ComponentTestUser user) {
-        var url = format(NOTE_BY_ID_URL, noteId);
+        var url = format(NOTE_URL, noteId);
         deleteExpectNotFound(url, user);
     }
 
     protected void getNoteExpectNotFound(Long noteId, ComponentTestUser user) {
-        var url = format(NOTE_BY_ID_URL, noteId);
+        var url = format(NOTE_URL, noteId);
         getExpectNotFound(url, user);
     }
 
@@ -186,9 +225,9 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
                 sb.append(filterDto.getGlobalFilter());
                 sb.append("&");
             }
-            if (isNotEmpty(filterDto.getTitle())) {
-                sb.append("filter.title=");
-                sb.append(filterDto.getTitle());
+            if (isNotEmpty(filterDto.getText())) {
+                sb.append("filter.text=");
+                sb.append(filterDto.getText());
                 sb.append("&");
             }
             if (isNotEmpty(filterDto.getCategories())) {

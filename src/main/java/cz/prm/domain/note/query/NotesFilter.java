@@ -11,7 +11,7 @@ public class NotesFilter {
 
     private String globalFilter;
 
-    private String title;
+    private String text;
 
     private String categories;
 
@@ -19,8 +19,8 @@ public class NotesFilter {
         return isNotBlank(globalFilter);
     }
 
-    public boolean isTitle() {
-        return isNotBlank(title);
+    public boolean isText() {
+        return isNotBlank(text);
     }
 
     public boolean isCategories() {
