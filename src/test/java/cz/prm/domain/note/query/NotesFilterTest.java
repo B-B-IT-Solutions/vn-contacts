@@ -22,17 +22,17 @@ class NotesFilterTest {
     }
 
     @Test
-    void isTitle() {
+    void isText() {
         var filter = new NotesFilter();
-        assertThat(filter.isTitle()).isFalse();
-        filter.setTitle(null);
-        assertThat(filter.isTitle()).isFalse();
-        filter.setTitle("");
-        assertThat(filter.isTitle()).isFalse();
-        filter.setTitle(" ");
-        assertThat(filter.isTitle()).isFalse();
-        filter.setTitle(uuid());
-        assertThat(filter.isTitle()).isTrue();
+        assertThat(filter.isText()).isFalse();
+        filter.setText(null);
+        assertThat(filter.isText()).isFalse();
+        filter.setText("");
+        assertThat(filter.isText()).isFalse();
+        filter.setText(" ");
+        assertThat(filter.isText()).isFalse();
+        filter.setText(uuid());
+        assertThat(filter.isText()).isTrue();
     }
 
     @Test

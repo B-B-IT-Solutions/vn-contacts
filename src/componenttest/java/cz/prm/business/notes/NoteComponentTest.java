@@ -219,87 +219,87 @@ public class NoteComponentTest extends NoteComponentTestBase {
         queryDto = notesQueryDto();
         filter = queryDto.getFilter();
 
-        filter.setTitle(userNote1.getText());
+        filter.setText(userNote1.getText());
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setTitle(uuid());
+        filter.setText(uuid());
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(startsWithFilter("Text"));
+        filter.setText(startsWithFilter("Text"));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(startsWithFilter(userNote1.getText()));
+        filter.setText(startsWithFilter(userNote1.getText()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setTitle(startsWithFilter("Q"));
+        filter.setText(startsWithFilter("Q"));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(startsWithFilter(uuid()));
+        filter.setText(startsWithFilter(uuid()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(endsWithFilter("End"));
+        filter.setText(endsWithFilter("End"));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(endsWithFilter(userNote1.getText()));
+        filter.setText(endsWithFilter(userNote1.getText()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setTitle(endsWithFilter("Q"));
+        filter.setText(endsWithFilter("Q"));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(endsWithFilter(uuid()));
+        filter.setText(endsWithFilter(uuid()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(equalsFilter(userNote1.getText()));
+        filter.setText(equalsFilter(userNote1.getText()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setTitle(equalsFilter("Q"));
+        filter.setText(equalsFilter("Q"));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(equalsFilter(" "));
+        filter.setText(equalsFilter(" "));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(equalsFilter(uuid()));
+        filter.setText(equalsFilter(uuid()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(notEqualsFilter(userNote1.getText()));
+        filter.setText(notEqualsFilter(userNote1.getText()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(20);
 
-        filter.setTitle(notEqualsFilter("Q"));
+        filter.setText(notEqualsFilter("Q"));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(notEqualsFilter(uuid()));
+        filter.setText(notEqualsFilter(uuid()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(notEqualsFilter(" "));
+        filter.setText(notEqualsFilter(" "));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(notEqualsFilter(uuid()));
+        filter.setText(notEqualsFilter(uuid()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(emptyFilter());
+        filter.setText(emptyFilter());
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(notEmptyFilter());
+        filter.setText(notEmptyFilter());
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 

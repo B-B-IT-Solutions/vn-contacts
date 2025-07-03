@@ -205,9 +205,9 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
                 sb.append(filterDto.getGlobalFilter());
                 sb.append("&");
             }
-            if (isNotEmpty(filterDto.getTitle())) {
-                sb.append("filter.title=");
-                sb.append(filterDto.getTitle());
+            if (isNotEmpty(filterDto.getText())) {
+                sb.append("filter.text=");
+                sb.append(filterDto.getText());
                 sb.append("&");
             }
             if (isNotEmpty(filterDto.getCategories())) {
