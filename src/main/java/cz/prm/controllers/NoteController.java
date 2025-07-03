@@ -35,6 +35,13 @@ public class NoteController {
         return mapper.toPageDto(notes);
     }
 
+    @GetMapping("/referral/{referralId}")
+    public PageDto<NoteDto> getReferralNotes(@PathVariable("referralId") Long referralId, NotesQueryDto queryDto) {
+        var query = mapper.toNullSafeNotesQuery(queryDto);
+        var referral = noteService.getReferralNotes(referralId, query);
+        return mapper.toPageDto(referral);
+    }
+
     @GetMapping("/note/{noteId}")
     public NoteDto getNote(@PathVariable("noteId") Long noteId) {
         var note = noteService.getNote(noteId);
@@ -45,6 +52,12 @@ public class NoteController {
     public void createNote(@RequestBody NoteDto dto) {
         var note = mapper.toNote(dto);
         noteService.createNote(note);
+    }
+
+    @PostMapping("/referral/{referralId}")
+    public void createReferralNote(@PathVariable("referralId") Long referralId, @RequestBody NoteDto dto) {
+        var note = mapper.toNote(dto);
+        noteService.createReferralNote(referralId, note);
     }
 
     @PutMapping("/note/{noteId}")

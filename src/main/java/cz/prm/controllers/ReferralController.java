@@ -4,7 +4,7 @@ import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.referral.ReferralDto;
 import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
 import cz.prm.controllers.mappers.ReferralMapper;
-import cz.prm.services.referral.ReferralClearingHouse;
+import cz.prm.services.referral.ReferralService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,49 +19,49 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ReferralController {
 
-    private ReferralClearingHouse clearingHouse;
-    private ReferralMapper mapper;
+    private ReferralService referralService;
+    private ReferralMapper referralMapper;
 
     @Autowired
-    public ReferralController(ReferralClearingHouse clearingHouse, ReferralMapper mapper) {
-        this.clearingHouse = clearingHouse;
-        this.mapper = mapper;
+    public ReferralController(ReferralService referralService, ReferralMapper referralMapper) {
+        this.referralService = referralService;
+        this.referralMapper = referralMapper;
     }
 
     @GetMapping
     public PageDto<ReferralDto> getReferrals(ReferralQueryDto queryDto) {
-        var query = mapper.toNullSafeReferralsQuery(queryDto);
-        var referrals = clearingHouse.getReferrals(query);
-        return mapper.toPageDto(referrals);
+        var query = referralMapper.toNullSafeReferralsQuery(queryDto);
+        var referrals = referralService.getReferrals(query);
+        return referralMapper.toPageDto(referrals);
     }
 
     @GetMapping("/contact/{contactId}")
     public PageDto<ReferralDto> getContactReferrals(@PathVariable("contactId") Long contactId, ReferralQueryDto queryDto) {
-        var query = mapper.toNullSafeReferralsQuery(queryDto);
-        var referrals = clearingHouse.getContactReferrals(contactId, query);
-        return mapper.toPageDto(referrals);
+        var query = referralMapper.toNullSafeReferralsQuery(queryDto);
+        var referrals = referralService.getContactReferrals(contactId, query);
+        return referralMapper.toPageDto(referrals);
     }
 
     @GetMapping("/referral/{referralId}")
     public ReferralDto getReferral(@PathVariable("referralId") Long referralId) {
-        var referral = clearingHouse.getReferral(referralId);
-        return mapper.toReferralDto(referral);
+        var referral = referralService.getReferral(referralId);
+        return referralMapper.toReferralDto(referral);
     }
 
     @PostMapping("/referral")
     public void createReferral(@RequestBody ReferralDto dto) {
-        var referral = mapper.toReferral(dto);
-        clearingHouse.createReferral(referral);
+        var referral = referralMapper.toReferral(dto);
+        referralService.createReferral(referral);
     }
 
     @PutMapping("/referral/{referralId}")
     public void updateReferral(@PathVariable("referralId") Long referralId, @RequestBody ReferralDto dto) {
-        var referral = mapper.toReferral(dto);
-        clearingHouse.updateReferral(referralId, referral);
+        var referral = referralMapper.toReferral(dto);
+        referralService.updateReferral(referralId, referral);
     }
 
     @DeleteMapping("/referral/{referralId}")
     public void deleteReferral(@PathVariable("referralId") Long referralId) {
-        clearingHouse.deleteReferral(referralId);
+        referralService.deleteReferral(referralId);
     }
 }

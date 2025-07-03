@@ -48,6 +48,11 @@ public class NoteService {
         repository.save(note);
     }
 
+    public void createReferralNote(Long referralId, Note note) {
+        note.setReferralId(referralId);
+        repository.save(note);
+    }
+
     public void updateNote(Long noteId, Note updatedNote) {
         var savedNote = getNoteById(noteId);
         updateNoteFields(savedNote, updatedNote);

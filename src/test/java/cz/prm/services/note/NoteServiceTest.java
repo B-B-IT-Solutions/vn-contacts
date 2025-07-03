@@ -103,6 +103,18 @@ class NoteServiceTest {
     }
 
     @Test
+    void createReferralNote() {
+        var note = note();
+        var referralId = randomLong();
+        assertThat(note.getReferralId()).isNotEqualTo(referralId);
+
+        noteService.createReferralNote(referralId, note);
+        verify(repository).save(noteCapt.capture());
+        var savedNoted = noteCapt.getValue();
+        assertThat(savedNoted.getReferralId()).isEqualTo(referralId);
+    }
+
+    @Test
     void updateNote() {
         var noteIdDb = note();
         var updatedNote = note();
