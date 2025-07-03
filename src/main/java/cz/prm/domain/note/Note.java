@@ -44,6 +44,9 @@ public class Note {
     @Column(name = "CONTACT_ID")
     private Long contactId;
 
+    @Column(name = "REFERRAL_ID")
+    private Long referralId;
+
     @Column(name = "TITLE")
     private String title;
 
