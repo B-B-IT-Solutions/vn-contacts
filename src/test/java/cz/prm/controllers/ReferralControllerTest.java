@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 import cz.prm.controllers.mappers.ReferralMapper;
 import cz.prm.domain.referral.Referral;
 import cz.prm.domain.referral.query.ReferralsQuery;
-import cz.prm.services.referral.ReferralService;
+import cz.prm.services.referral.ReferralClearingHouse;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class ReferralControllerTest {
 
     @Mock
-    private ReferralService referralService;
+    private ReferralClearingHouse clearingHouse;
     @Captor
     private ArgumentCaptor<Referral> referralCapt;
     @Captor
@@ -42,18 +42,18 @@ class ReferralControllerTest {
 
     @BeforeEach
     void setUp() {
-        controller = new ReferralController(referralService, mapper);
+        controller = new ReferralController(clearingHouse, mapper);
     }
 
     @Test
     void getReferrals() {
         var page = page(referrals());
         var queryDto = referralsQueryDto();
-        when(referralService.getReferrals(any(ReferralsQuery.class))).thenReturn(page);
+        when(clearingHouse.getReferrals(any(ReferralsQuery.class))).thenReturn(page);
 
         var result = controller.getReferrals(queryDto);
         assertPage(page, result);
-        verify(referralService).getReferrals(cQueryCapt.capture());
+        verify(clearingHouse).getReferrals(cQueryCapt.capture());
         var query = cQueryCapt.getValue();
         assertReferralsQuery(query, queryDto);
     }
@@ -63,11 +63,11 @@ class ReferralControllerTest {
         var page = page(referrals());
         var queryDto = referralsQueryDto();
         var contactId = randomLong();
-        when(referralService.getContactReferrals(eq(contactId), any(ReferralsQuery.class))).thenReturn(page);
+        when(clearingHouse.getContactReferrals(eq(contactId), any(ReferralsQuery.class))).thenReturn(page);
 
         var result = controller.getContactReferrals(contactId, queryDto);
         assertPage(page, result);
-        verify(referralService).getContactReferrals(eq(contactId), cQueryCapt.capture());
+        verify(clearingHouse).getContactReferrals(eq(contactId), cQueryCapt.capture());
         var query = cQueryCapt.getValue();
         assertReferralsQuery(query, queryDto);
     }
@@ -76,7 +76,7 @@ class ReferralControllerTest {
     void getReferral() {
         var referral = referral();
         var referralId = referral.getReferralId();
-        when(referralService.getReferral(referralId)).thenReturn(referral);
+        when(clearingHouse.getReferral(referralId)).thenReturn(referral);
         var result = controller.getReferral(referralId);
         assertReferral(referral, result);
     }
@@ -85,7 +85,7 @@ class ReferralControllerTest {
     void createReferral() {
         var dto = referralDto();
         controller.createReferral(dto);
-        verify(referralService).createReferral(referralCapt.capture());
+        verify(clearingHouse).createReferral(referralCapt.capture());
         var referral = referralCapt.getValue();
         assertReferral(referral, dto);
     }
@@ -94,7 +94,7 @@ class ReferralControllerTest {
     void updateReferral() {
         var dto = referralDto();
         controller.updateReferral(dto.getReferralId(), dto);
-        verify(referralService).updateReferral(eq(dto.getReferralId()), referralCapt.capture());
+        verify(clearingHouse).updateReferral(eq(dto.getReferralId()), referralCapt.capture());
         var referral = referralCapt.getValue();
         assertReferral(referral, dto);
     }
@@ -103,6 +103,6 @@ class ReferralControllerTest {
     void deleteReferral() {
         var referralId = randomLong();
         controller.deleteReferral(referralId);
-        verify(referralService).deleteReferral(referralId);
+        verify(clearingHouse).deleteReferral(referralId);
     }
 }
