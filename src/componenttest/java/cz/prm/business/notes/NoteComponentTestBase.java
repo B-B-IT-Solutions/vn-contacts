@@ -72,16 +72,16 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
         deleteNote(noteId, USER_3);
     }
 
-    protected PageDto<NoteDto> user1GetNotes(Long contactId, NotesQueryDto queryDto) {
-        return getNotesPage(contactId, queryDto, USER_1);
+    protected PageDto<NoteDto> user1GetContactNotes(Long contactId, NotesQueryDto queryDto) {
+        return getContactNotesPage(contactId, queryDto, USER_1);
     }
 
-    protected PageDto<NoteDto> user2GetNotes(Long contactId, NotesQueryDto queryDto) {
-        return getNotesPage(contactId, queryDto, USER_2);
+    protected PageDto<NoteDto> user2GetContactNotes(Long contactId, NotesQueryDto queryDto) {
+        return getContactNotesPage(contactId, queryDto, USER_2);
     }
 
-    protected PageDto<NoteDto> user3GetNotes(Long contactId, NotesQueryDto queryDto) {
-        return getNotesPage(contactId, queryDto, USER_3);
+    protected PageDto<NoteDto> user3GetContactNotes(Long contactId, NotesQueryDto queryDto) {
+        return getContactNotesPage(contactId, queryDto, USER_3);
     }
 
     protected NoteDto user1GetNote(Long noteId) {
@@ -116,8 +116,12 @@ public class NoteComponentTestBase extends BusinessComponentTestBase {
         delete(url, user);
     }
 
-    protected PageDto<NoteDto> getNotesPage(Long contactId, NotesQueryDto queryDto, ComponentTestUser user) {
+    protected PageDto<NoteDto> getContactNotesPage(Long contactId, NotesQueryDto queryDto, ComponentTestUser user) {
         var baseURl = format(CONTACT_NOTES_URL, contactId);
+        return getNotesPage(baseURl, queryDto, user);
+    }
+
+    protected PageDto<NoteDto> getNotesPage(String baseURl, NotesQueryDto queryDto, ComponentTestUser user) {
         var url = appendQueryToUrl(baseURl, queryDto);
         var typeRef = new TypeRef<PageDto<NoteDto>>() {
         };
