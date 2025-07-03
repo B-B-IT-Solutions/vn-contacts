@@ -489,7 +489,146 @@ public class NoteComponentTest extends NoteComponentTestBase {
     }
 
     @Test
-    void getNote() {
+    void getReferralNotesFilters() {
+        var queryDto = notesQueryDto();
+        var referralId = randomLong();
+        var pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        var user1Notes = createReferralNotes(USER_1, 21);
+        var userNote1 = user1Notes.get(0);
+        var userNote = user1Notes.get(0);
+        referralId = userNote.getReferralId();
+
+        queryDto = notesQueryDto();
+        queryDto.setFilter(null);
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        queryDto = notesQueryDto();
+        var filter = queryDto.getFilter();
+
+        filter.setGlobalFilter(userNote1.getText());
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setGlobalFilter(uuid());
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        queryDto = notesQueryDto();
+        filter = queryDto.getFilter();
+
+        filter.setText(userNote1.getText());
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setText(uuid());
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setText(startsWithFilter("Text"));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setText(startsWithFilter(userNote1.getText()));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setText(startsWithFilter("Q"));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setText(startsWithFilter(uuid()));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setText(endsWithFilter("End"));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setText(endsWithFilter(userNote1.getText()));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setText(endsWithFilter("Q"));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setText(endsWithFilter(uuid()));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setText(equalsFilter(userNote1.getText()));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setText(equalsFilter("Q"));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setText(equalsFilter(" "));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setText(equalsFilter(uuid()));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setText(notEqualsFilter(userNote1.getText()));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(20);
+
+        filter.setText(notEqualsFilter("Q"));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setText(notEqualsFilter(uuid()));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setText(notEqualsFilter(" "));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setText(notEqualsFilter(uuid()));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setText(emptyFilter());
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setText(notEmptyFilter());
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        queryDto = notesQueryDto();
+        filter = queryDto.getFilter();
+
+        filter.setCategories(null);
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(21);
+
+        filter.setCategories(arrayIncludesFilter(userNote1.getCategories()));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setCategories(arrayIncludesFilter(newArrayList(uuid())));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setCategories(arrayIncludesAllFilter(userNote1.getCategories()));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setCategories(arrayIncludesAllFilter(newArrayList(uuid())));
+        pageDto = user1GetReferralNotes(referralId, queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+    }
+
+    @Test
+    void getContactNote() {
         var note = createContactNote(USER_1);
         var noteId = note.getNoteId();
 
@@ -506,6 +645,31 @@ public class NoteComponentTest extends NoteComponentTestBase {
         user3GetNoteExpectNotFound(noteId);
 
         note = createContactNote(USER_3);
+        noteId = note.getNoteId();
+        noteDto = user3GetNote(noteId);
+        assertNote(note, noteDto);
+        user1GetNoteExpectNotFound(noteId);
+        user2GetNoteExpectNotFound(noteId);
+    }
+
+    @Test
+    void getReferralNote() {
+        var note = createReferralNote(USER_1);
+        var noteId = note.getNoteId();
+
+        var noteDto = user1GetNote(noteId);
+        assertNote(note, noteDto);
+        user2GetNoteExpectNotFound(noteId);
+        user3GetNoteExpectNotFound(noteId);
+
+        note = createReferralNote(USER_2);
+        noteId = note.getNoteId();
+        noteDto = user2GetNote(noteId);
+        assertNote(note, noteDto);
+        user1GetNoteExpectNotFound(noteId);
+        user3GetNoteExpectNotFound(noteId);
+
+        note = createReferralNote(USER_3);
         noteId = note.getNoteId();
         noteDto = user3GetNote(noteId);
         assertNote(note, noteDto);
@@ -586,7 +750,7 @@ public class NoteComponentTest extends NoteComponentTestBase {
     }
 
     @Test
-    void updateNote() {
+    void updateContactNote() {
         var note = createContactNote(USER_1);
         var noteId = note.getNoteId();
         var updateDto = user1GetNote(noteId);
@@ -625,7 +789,46 @@ public class NoteComponentTest extends NoteComponentTestBase {
     }
 
     @Test
-    void deleteNote() {
+    void updateReferralNote() {
+        var note = createReferralNote(USER_1);
+        var noteId = note.getNoteId();
+        var updateDto = user1GetNote(noteId);
+
+        updateDto.setText(uuid());
+        user1UpdateNote(noteId, updateDto);
+        note = getNoteFromDb(updateDto);
+        assertNote(note, updateDto);
+
+        user2UpdateNoteExpectNotFound(noteId, updateDto);
+        user3UpdateNoteExpectNotFound(noteId, updateDto);
+
+        note = createReferralNote(USER_2);
+        noteId = note.getNoteId();
+        updateDto = user2GetNote(noteId);
+
+        updateDto.setText(uuid());
+        user2UpdateNote(noteId, updateDto);
+        note = getNoteFromDb(updateDto);
+        assertNote(note, updateDto);
+
+        user1UpdateNoteExpectNotFound(noteId, updateDto);
+        user3UpdateNoteExpectNotFound(noteId, updateDto);
+
+        note = createReferralNote(USER_3);
+        noteId = note.getNoteId();
+        updateDto = user3GetNote(noteId);
+
+        updateDto.setText(uuid());
+        user3UpdateNote(noteId, updateDto);
+        note = getNoteFromDb(updateDto);
+        assertNote(note, updateDto);
+
+        user1UpdateNoteExpectNotFound(noteId, updateDto);
+        user2UpdateNoteExpectNotFound(noteId, updateDto);
+    }
+
+    @Test
+    void deleteContactNote() {
         var note = createContactNote(USER_1);
         var noteId = note.getNoteId();
         var noteDto = user1GetNote(noteId);
@@ -647,6 +850,39 @@ public class NoteComponentTest extends NoteComponentTestBase {
         user2GetNoteExpectNotFound(noteId);
 
         note = createContactNote(USER_3);
+        noteId = note.getNoteId();
+        noteDto = user3GetNote(noteId);
+        assertNote(note, noteDto);
+
+        user1DeleteNoteExpectNotFound(noteId);
+        user2DeleteNoteExpectNotFound(noteId);
+        user3DeleteNote(noteId);
+        user3GetNoteExpectNotFound(noteId);
+    }
+
+    @Test
+    void deleteReferralNote() {
+        var note = createReferralNote(USER_1);
+        var noteId = note.getNoteId();
+        var noteDto = user1GetNote(noteId);
+        assertNote(note, noteDto);
+
+        user2DeleteNoteExpectNotFound(noteId);
+        user3DeleteNoteExpectNotFound(noteId);
+        user1DeleteNote(noteId);
+        user1GetNoteExpectNotFound(noteId);
+
+        note = createReferralNote(USER_2);
+        noteId = note.getNoteId();
+        noteDto = user2GetNote(noteId);
+        assertNote(note, noteDto);
+
+        user1DeleteNoteExpectNotFound(noteId);
+        user3DeleteNoteExpectNotFound(noteId);
+        user2DeleteNote(noteId);
+        user2GetNoteExpectNotFound(noteId);
+
+        note = createReferralNote(USER_3);
         noteId = note.getNoteId();
         noteDto = user3GetNote(noteId);
         assertNote(note, noteDto);
