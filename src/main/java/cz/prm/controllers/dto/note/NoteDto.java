@@ -18,9 +18,6 @@ public class NoteDto {
     @JsonProperty("contactId")
     private Long contactId;
 
-    @JsonProperty("title")
-    private String title;
-
     @JsonProperty("text")
     private String text;
 

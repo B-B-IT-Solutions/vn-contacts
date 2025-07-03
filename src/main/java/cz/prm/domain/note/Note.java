@@ -47,9 +47,6 @@ public class Note {
     @Column(name = "REFERRAL_ID")
     private Long referralId;
 
-    @Column(name = "TITLE")
-    private String title;
-
     @Column(name = "TEXT", columnDefinition = "TEXT")
     private String text;
 

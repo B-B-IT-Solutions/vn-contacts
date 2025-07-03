@@ -26,8 +26,7 @@ public class NoteComponentTestUtils {
     public static Note note(long contactId) {
         var note = new Note();
         note.setContactId(contactId);
-        note.setTitle(format("Title-%s-End", uuid()));
-        note.setText(format("Text-%s", uuid()));
+        note.setText(format("Text-%s-End", uuid()));
         note.setCategories(uuids());
         return note;
     }
@@ -35,7 +34,6 @@ public class NoteComponentTestUtils {
     public static NoteDto noteDto(long contactId) {
         var dto = new NoteDto();
         dto.setContactId(contactId);
-        dto.setTitle(uuid());
         dto.setText(uuid());
         dto.setCategories(uuids());
         return dto;

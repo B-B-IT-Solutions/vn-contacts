@@ -64,7 +64,6 @@ public class NoteAssertions {
     public static void assertNote(Note note, NoteDto dto) {
         assertThat(note.getNoteId()).isEqualTo(dto.getNoteId());
         assertThat(note.getContactId()).isEqualTo(dto.getContactId());
-        assertThat(note.getTitle()).isEqualTo(dto.getTitle());
         assertThat(note.getCategories()).isEqualTo(dto.getCategories());
         assertThat(note.getText()).isEqualTo(dto.getText());
         assertThat(note.getLastEditDate()).isEqualTo(dto.getLastEditDate());

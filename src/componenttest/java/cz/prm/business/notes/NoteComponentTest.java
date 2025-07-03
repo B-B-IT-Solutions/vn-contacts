@@ -208,14 +208,6 @@ public class NoteComponentTest extends NoteComponentTestBase {
         queryDto = notesQueryDto();
         var filter = queryDto.getFilter();
 
-        filter.setGlobalFilter(userNote1.getTitle());
-        pageDto = user1GetNotes(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
-
-        filter.setGlobalFilter(userNote1.getText());
-        pageDto = user1GetNotes(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
-
         filter.setGlobalFilter(userNote1.getText());
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
@@ -227,7 +219,7 @@ public class NoteComponentTest extends NoteComponentTestBase {
         queryDto = notesQueryDto();
         filter = queryDto.getFilter();
 
-        filter.setTitle(userNote1.getTitle());
+        filter.setTitle(userNote1.getText());
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
@@ -235,11 +227,11 @@ public class NoteComponentTest extends NoteComponentTestBase {
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(startsWithFilter("Title"));
+        filter.setTitle(startsWithFilter("Text"));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(startsWithFilter(userNote1.getTitle()));
+        filter.setTitle(startsWithFilter(userNote1.getText()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
@@ -255,7 +247,7 @@ public class NoteComponentTest extends NoteComponentTestBase {
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
 
-        filter.setTitle(endsWithFilter(userNote1.getTitle()));
+        filter.setTitle(endsWithFilter(userNote1.getText()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
@@ -267,7 +259,7 @@ public class NoteComponentTest extends NoteComponentTestBase {
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(equalsFilter(userNote1.getTitle()));
+        filter.setTitle(equalsFilter(userNote1.getText()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
@@ -283,7 +275,7 @@ public class NoteComponentTest extends NoteComponentTestBase {
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setTitle(notEqualsFilter(userNote1.getTitle()));
+        filter.setTitle(notEqualsFilter(userNote1.getText()));
         pageDto = user1GetNotes(contactId, queryDto);
         assertThat(pageDto.getContent()).hasSize(20);
 

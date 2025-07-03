@@ -183,7 +183,6 @@ class NoteServiceTest {
         assertThat(noteIdDb.getContactId()).isEqualTo(savedNote.getContactId());
         assertThat(noteIdDb.getOwner()).isEqualTo(savedNote.getOwner());
         assertThat(noteIdDb.getCreationDate()).isEqualTo(savedNote.getCreationDate());
-        assertThat(savedNote.getTitle()).isEqualTo(updatedNote.getTitle());
         assertThat(savedNote.getCategories()).isEqualTo(updatedNote.getCategories());
         assertThat(savedNote.getText()).isEqualTo(updatedNote.getText());
     }

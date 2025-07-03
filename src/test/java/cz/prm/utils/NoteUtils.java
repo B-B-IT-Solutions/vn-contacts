@@ -28,7 +28,6 @@ public class NoteUtils {
         note.setNoteId(randomLong());
         note.setContactId(randomLong());
         note.setReferralId(randomLong());
-        note.setTitle(uuid());
         note.setText(uuid());
         note.setCategories(uuids());
         note.setLastEditDate(now());
@@ -41,7 +40,6 @@ public class NoteUtils {
         var note = new NoteDto();
         note.setNoteId(randomLong());
         note.setContactId(randomLong());
-        note.setTitle(uuid());
         note.setText(uuid());
         note.setCategories(uuids());
         note.setLastEditDate(now());

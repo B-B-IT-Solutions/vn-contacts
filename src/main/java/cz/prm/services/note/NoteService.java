@@ -72,7 +72,6 @@ public class NoteService {
     }
 
     private void updateNoteFields(Note savedNote, Note updatedNote) {
-        savedNote.setTitle(updatedNote.getTitle());
         savedNote.setCategories(updatedNote.getCategories());
         savedNote.setText(updatedNote.getText());
     }
