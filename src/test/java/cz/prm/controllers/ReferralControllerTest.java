@@ -6,8 +6,8 @@ import static cz.prm.utils.ReferralUtils.referralDto;
 import static cz.prm.utils.ReferralUtils.referrals;
 import static cz.prm.utils.ReferralUtils.referralsQueryDto;
 import static cz.prm.utils.TestUtils.randomLong;
-import static cz.prm.utils.assertions.ReferralAssertions.assertReferral;
 import static cz.prm.utils.assertions.ReferralAssertions.assertPage;
+import static cz.prm.utils.assertions.ReferralAssertions.assertReferral;
 import static cz.prm.utils.assertions.ReferralAssertions.assertReferralsQuery;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -19,7 +19,6 @@ import cz.prm.domain.referral.Referral;
 import cz.prm.domain.referral.query.ReferralsQuery;
 import cz.prm.services.referral.ReferralService;
 import cz.prm.utils.MapperUtils;
-import cz.prm.utils.assertions.ReferralAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,14 +35,14 @@ class ReferralControllerTest {
     @Captor
     private ArgumentCaptor<Referral> referralCapt;
     @Captor
-    private ArgumentCaptor<ReferralsQuery> cReferralsQueryCapt;
+    private ArgumentCaptor<ReferralsQuery> rQueryCapt;
 
-    private ReferralMapper referralMapper = MapperUtils.getReferralMapper();
+    private ReferralMapper mapper = MapperUtils.getReferralMapper();
     private ReferralController controller;
 
     @BeforeEach
     void setUp() {
-        controller = new ReferralController(referralService, referralMapper);
+        controller = new ReferralController(referralService, mapper);
     }
 
     @Test
@@ -53,9 +52,9 @@ class ReferralControllerTest {
         when(referralService.getReferrals(any(ReferralsQuery.class))).thenReturn(page);
 
         var result = controller.getReferrals(queryDto);
-        ReferralAssertions.assertPage(page, result);
-        verify(referralService).getReferrals(cReferralsQueryCapt.capture());
-        var query = cReferralsQueryCapt.getValue();
+        assertPage(page, result);
+        verify(referralService).getReferrals(rQueryCapt.capture());
+        var query = rQueryCapt.getValue();
         assertReferralsQuery(query, queryDto);
     }
 
@@ -67,9 +66,9 @@ class ReferralControllerTest {
         when(referralService.getContactReferrals(eq(contactId), any(ReferralsQuery.class))).thenReturn(page);
 
         var result = controller.getContactReferrals(contactId, queryDto);
-        ReferralAssertions.assertPage(page, result);
-        verify(referralService).getContactReferrals(eq(contactId), cReferralsQueryCapt.capture());
-        var query = cReferralsQueryCapt.getValue();
+        assertPage(page, result);
+        verify(referralService).getContactReferrals(eq(contactId), rQueryCapt.capture());
+        var query = rQueryCapt.getValue();
         assertReferralsQuery(query, queryDto);
     }
 
