@@ -42,25 +42,25 @@ public class ReferralController {
         return mapper.toPageDto(referrals);
     }
 
-    @GetMapping("/referral/{referralId}")
+    @GetMapping("/{referralId}")
     public ReferralDto getReferral(@PathVariable("referralId") Long referralId) {
         var referral = referralService.getReferral(referralId);
         return mapper.toReferralDto(referral);
     }
 
-    @PostMapping("/referral")
+    @PostMapping
     public void createReferral(@RequestBody ReferralDto dto) {
         var referral = mapper.toReferral(dto);
         referralService.createReferral(referral);
     }
 
-    @PutMapping("/referral/{referralId}")
+    @PutMapping("/{referralId}")
     public void updateReferral(@PathVariable("referralId") Long referralId, @RequestBody ReferralDto dto) {
         var referral = mapper.toReferral(dto);
         referralService.updateReferral(referralId, referral);
     }
 
-    @DeleteMapping("/referral/{referralId}")
+    @DeleteMapping("/{referralId}")
     public void deleteReferral(@PathVariable("referralId") Long referralId) {
         referralService.deleteReferral(referralId);
     }
