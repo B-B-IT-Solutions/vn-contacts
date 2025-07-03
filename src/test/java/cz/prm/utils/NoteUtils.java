@@ -27,6 +27,7 @@ public class NoteUtils {
         var note = new Note();
         note.setNoteId(randomLong());
         note.setContactId(randomLong());
+        note.setReferralId(randomLong());
         note.setTitle(uuid());
         note.setText(uuid());
         note.setCategories(uuids());

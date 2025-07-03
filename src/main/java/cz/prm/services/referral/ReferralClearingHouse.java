@@ -35,7 +35,7 @@ public class ReferralClearingHouse {
         return referralService.getReferral(referralId);
     }
 
-    public Page<Note> getReferralNotes(Long referralId, NotesQuery query) {
+    public Page<Note> getNotes(Long referralId, NotesQuery query) {
         return noteService.getReferralNotes(referralId, query);
     }
 
@@ -43,11 +43,24 @@ public class ReferralClearingHouse {
         referralService.createReferral(referral);
     }
 
+    public void createNote(Long referralId, Note note) {
+        note.setReferralId(referralId);
+        noteService.createNote(note);
+    }
+
     public void updateReferral(Long referralId, Referral uReferral) {
         referralService.updateReferral(referralId, uReferral);
     }
 
+    public void updateNote(Long noteId, Note uNote) {
+        noteService.updateNote(noteId, uNote);
+    }
+
     public void deleteReferral(Long referralId) {
         referralService.deleteReferral(referralId);
+    }
+
+    public void deleteNote(Long noteId) {
+        noteService.deleteNote(noteId);
     }
 }
