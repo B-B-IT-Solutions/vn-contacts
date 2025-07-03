@@ -5,7 +5,7 @@ import cz.prm.domain.note.Note;
 import cz.prm.domain.note.query.NotesQuery;
 import cz.prm.domain.referral.Referral;
 import cz.prm.domain.referral.query.ReferralsQuery;
-import cz.prm.services.NoteService;
+import cz.prm.services.note.NoteService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

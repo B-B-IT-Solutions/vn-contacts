@@ -1,4 +1,4 @@
-package cz.prm.services;
+package cz.prm.services.note;
 
 import static cz.prm.utils.NoteUtils.note;
 import static cz.prm.utils.NoteUtils.notes;

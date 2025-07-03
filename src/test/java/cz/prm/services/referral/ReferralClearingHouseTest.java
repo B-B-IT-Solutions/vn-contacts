@@ -13,7 +13,7 @@ import static cz.prm.utils.assertions.ReferralAssertions.assertReferralsPage;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import cz.prm.services.NoteService;
+import cz.prm.services.note.NoteService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

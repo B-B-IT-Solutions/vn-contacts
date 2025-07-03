@@ -1,4 +1,4 @@
-package cz.prm.services;
+package cz.prm.services.note;
 
 import static cz.prm.domain.common.PageRequests.getPageRequest;
 import static java.lang.String.format;
