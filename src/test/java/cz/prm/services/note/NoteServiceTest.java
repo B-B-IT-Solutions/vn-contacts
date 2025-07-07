@@ -1,5 +1,6 @@
 package cz.prm.services.note;
 
+import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.NoteUtils.note;
 import static cz.prm.utils.NoteUtils.notes;
 import static cz.prm.utils.NoteUtils.notesQuery;
@@ -127,11 +128,13 @@ class NoteServiceTest {
         var predicate = new BooleanBuilder();
         when(predicates.byNoteId(noteIdDb.getNoteId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(of(noteIdDb));
+        when(repository.save(noteIdDb)).thenAnswer(returnParamAnswer(0));
 
-        noteService.updateNote(noteIdDb.getNoteId(), updatedNote);
+        var response = noteService.updateNote(noteIdDb.getNoteId(), updatedNote);
         verify(repository).save(noteCapt.capture());
         var savedNote = noteCapt.getValue();
         assertFieldsUpdated(noteIdDb, updatedNote, savedNote);
+        assertFieldsUpdated(noteIdDb, updatedNote, response);
     }
 
     @Test

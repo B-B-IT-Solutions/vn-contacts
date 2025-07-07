@@ -54,10 +54,10 @@ public class NoteService {
         repository.save(note);
     }
 
-    public void updateNote(Long noteId, Note updatedNote) {
+    public Note updateNote(Long noteId, Note updatedNote) {
         var savedNote = getNoteById(noteId);
         updateNoteFields(savedNote, updatedNote);
-        repository.save(savedNote);
+        return repository.save(savedNote);
     }
 
     public void deleteNote(Long noteId) {

@@ -1,6 +1,7 @@
 package cz.prm.controllers;
 
 import static cz.prm.utils.CommonUtils.page;
+import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.NoteUtils.note;
 import static cz.prm.utils.NoteUtils.noteDto;
 import static cz.prm.utils.NoteUtils.notes;
@@ -104,11 +105,15 @@ class NoteControllerTest {
 
     @Test
     void updateNote() {
-        var dto = noteDto();
-        controller.updateNote(dto.getNoteId(), dto);
-        verify(noteService).updateNote(eq(dto.getNoteId()), noteCapt.capture());
+        var updatedDto = noteDto();
+        var noteId = updatedDto.getNoteId();
+        when(noteService.updateNote(eq(noteId), any(Note.class))).thenAnswer(returnParamAnswer(1));
+
+        var responseDto = controller.updateNote(noteId, updatedDto);
+        verify(noteService).updateNote(eq(noteId), noteCapt.capture());
         var note = noteCapt.getValue();
-        assertNote(note, dto);
+        assertNote(note, updatedDto);
+        assertNote(note, responseDto);
     }
 
     @Test

@@ -61,9 +61,10 @@ public class NoteController {
     }
 
     @PutMapping("/{noteId}")
-    public void updateNote(@PathVariable("noteId") Long noteId, @RequestBody NoteDto dto) {
-        var note = mapper.toNote(dto);
-        noteService.updateNote(noteId, note);
+    public NoteDto updateNote(@PathVariable("noteId") Long noteId, @RequestBody NoteDto updatedDto) {
+        var updatedNote = mapper.toNote(updatedDto);
+        var response = noteService.updateNote(noteId, updatedNote);
+        return mapper.toNoteDto(response);
     }
 
     @DeleteMapping("/{noteId}")
