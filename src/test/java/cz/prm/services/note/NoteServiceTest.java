@@ -6,7 +6,6 @@ import static cz.prm.utils.NoteUtils.notes;
 import static cz.prm.utils.NoteUtils.notesQuery;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.NoteAssertions.assertNote;
-import static cz.prm.utils.assertions.NoteAssertions.assertPage;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -102,11 +101,13 @@ class NoteServiceTest {
         var note = note();
         var contactId = randomLong();
         assertThat(note.getContactId()).isNotEqualTo(contactId);
+        when(repository.save(note)).thenAnswer(returnParamAnswer(0));
 
-        noteService.createContactNote(contactId, note);
+        var response = noteService.createContactNote(contactId, note);
         verify(repository).save(noteCapt.capture());
         var savedNoted = noteCapt.getValue();
         assertThat(savedNoted.getContactId()).isEqualTo(contactId);
+        assertThat(response.getContactId()).isEqualTo(contactId);
     }
 
     @Test
@@ -114,11 +115,13 @@ class NoteServiceTest {
         var note = note();
         var referralId = randomLong();
         assertThat(note.getReferralId()).isNotEqualTo(referralId);
+        when(repository.save(note)).thenAnswer(returnParamAnswer(0));
 
-        noteService.createReferralNote(referralId, note);
+        var response = noteService.createReferralNote(referralId, note);
         verify(repository).save(noteCapt.capture());
         var savedNoted = noteCapt.getValue();
         assertThat(savedNoted.getReferralId()).isEqualTo(referralId);
+        assertThat(response.getReferralId()).isEqualTo(referralId);
     }
 
     @Test

@@ -44,14 +44,14 @@ public class NoteService {
         return getNoteById(noteId);
     }
 
-    public void createContactNote(Long contactId, Note note) {
+    public Note createContactNote(Long contactId, Note note) {
         note.setContactId(contactId);
-        repository.save(note);
+        return repository.save(note);
     }
 
-    public void createReferralNote(Long referralId, Note note) {
+    public Note createReferralNote(Long referralId, Note note) {
         note.setReferralId(referralId);
-        repository.save(note);
+        return repository.save(note);
     }
 
     public Note updateNote(Long noteId, Note updatedNote) {
