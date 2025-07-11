@@ -49,21 +49,24 @@ public class NoteController {
     }
 
     @PostMapping("/contact/{contactId}")
-    public void createContactNote(@PathVariable("contactId") Long contactId, @RequestBody NoteDto dto) {
-        var note = mapper.toNote(dto);
-        noteService.createContactNote(contactId, note);
+    public NoteDto createContactNote(@PathVariable("contactId") Long contactId, @RequestBody NoteDto addedDto) {
+        var note = mapper.toNote(addedDto);
+        var response = noteService.createContactNote(contactId, note);
+        return mapper.toNoteDto(response);
     }
 
     @PostMapping("/referral/{referralId}")
-    public void createReferralNote(@PathVariable("referralId") Long referralId, @RequestBody NoteDto dto) {
-        var note = mapper.toNote(dto);
-        noteService.createReferralNote(referralId, note);
+    public NoteDto createReferralNote(@PathVariable("referralId") Long referralId, @RequestBody NoteDto addedDto) {
+        var note = mapper.toNote(addedDto);
+        var response = noteService.createReferralNote(referralId, note);
+        return mapper.toNoteDto(response);
     }
 
     @PutMapping("/{noteId}")
-    public void updateNote(@PathVariable("noteId") Long noteId, @RequestBody NoteDto dto) {
-        var note = mapper.toNote(dto);
-        noteService.updateNote(noteId, note);
+    public NoteDto updateNote(@PathVariable("noteId") Long noteId, @RequestBody NoteDto updatedDto) {
+        var updatedNote = mapper.toNote(updatedDto);
+        var response = noteService.updateNote(noteId, updatedNote);
+        return mapper.toNoteDto(response);
     }
 
     @DeleteMapping("/{noteId}")

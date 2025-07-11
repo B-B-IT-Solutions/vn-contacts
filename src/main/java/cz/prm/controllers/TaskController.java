@@ -42,25 +42,25 @@ public class TaskController {
         return mapper.toPageDto(tasks);
     }
 
-    @GetMapping("/task/{taskId}")
+    @GetMapping("/{taskId}")
     public TaskDto getTask(@PathVariable("taskId") Long taskId) {
         var task = taskService.getTask(taskId);
         return mapper.toTaskDto(task);
     }
 
-    @PostMapping("/task")
+    @PostMapping
     public void createTask(@RequestBody TaskDto dto) {
         var task = mapper.toTask(dto);
         taskService.createTask(task);
     }
 
-    @PutMapping("/task/{taskId}")
+    @PutMapping("/{taskId}")
     public void updateTask(@PathVariable("taskId") Long taskId, @RequestBody TaskDto dto) {
         var task = mapper.toTask(dto);
         taskService.updateTask(taskId, task);
     }
 
-    @DeleteMapping("/task/{taskId}")
+    @DeleteMapping("/{taskId}")
     public void deleteTask(@PathVariable("taskId") Long taskId) {
         taskService.deleteTask(taskId);
     }

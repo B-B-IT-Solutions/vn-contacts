@@ -44,20 +44,20 @@ public class NoteService {
         return getNoteById(noteId);
     }
 
-    public void createContactNote(Long contactId, Note note) {
+    public Note createContactNote(Long contactId, Note note) {
         note.setContactId(contactId);
-        repository.save(note);
+        return repository.save(note);
     }
 
-    public void createReferralNote(Long referralId, Note note) {
+    public Note createReferralNote(Long referralId, Note note) {
         note.setReferralId(referralId);
-        repository.save(note);
+        return repository.save(note);
     }
 
-    public void updateNote(Long noteId, Note updatedNote) {
+    public Note updateNote(Long noteId, Note updatedNote) {
         var savedNote = getNoteById(noteId);
         updateNoteFields(savedNote, updatedNote);
-        repository.save(savedNote);
+        return repository.save(savedNote);
     }
 
     public void deleteNote(Long noteId) {

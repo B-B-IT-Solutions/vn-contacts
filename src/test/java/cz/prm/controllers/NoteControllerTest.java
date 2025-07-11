@@ -1,6 +1,7 @@
 package cz.prm.controllers;
 
 import static cz.prm.utils.CommonUtils.page;
+import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.NoteUtils.note;
 import static cz.prm.utils.NoteUtils.noteDto;
 import static cz.prm.utils.NoteUtils.notes;
@@ -84,31 +85,41 @@ class NoteControllerTest {
 
     @Test
     void createContactNote() {
-        var dto = noteDto();
+        var addedDto = noteDto();
         var contactId = randomLong();
-        controller.createContactNote(contactId, dto);
+        when(noteService.createContactNote(eq(contactId), any(Note.class))).thenAnswer(returnParamAnswer(1));
+
+        var responseDto = controller.createContactNote(contactId, addedDto);
         verify(noteService).createContactNote(eq(contactId), noteCapt.capture());
         var note = noteCapt.getValue();
-        assertNote(note, dto);
+        assertNote(note, addedDto);
+        assertNote(note, responseDto);
     }
 
     @Test
     void createReferralNote() {
-        var dto = noteDto();
+        var addedDto = noteDto();
         var referralId = randomLong();
-        controller.createReferralNote(referralId, dto);
+        when(noteService.createReferralNote(eq(referralId), any(Note.class))).thenAnswer(returnParamAnswer(1));
+
+        var responseDto = controller.createReferralNote(referralId, addedDto);
         verify(noteService).createReferralNote(eq(referralId), noteCapt.capture());
         var note = noteCapt.getValue();
-        assertNote(note, dto);
+        assertNote(note, addedDto);
+        assertNote(note, responseDto);
     }
 
     @Test
     void updateNote() {
-        var dto = noteDto();
-        controller.updateNote(dto.getNoteId(), dto);
-        verify(noteService).updateNote(eq(dto.getNoteId()), noteCapt.capture());
+        var updatedDto = noteDto();
+        var noteId = updatedDto.getNoteId();
+        when(noteService.updateNote(eq(noteId), any(Note.class))).thenAnswer(returnParamAnswer(1));
+
+        var responseDto = controller.updateNote(noteId, updatedDto);
+        verify(noteService).updateNote(eq(noteId), noteCapt.capture());
         var note = noteCapt.getValue();
-        assertNote(note, dto);
+        assertNote(note, updatedDto);
+        assertNote(note, responseDto);
     }
 
     @Test
