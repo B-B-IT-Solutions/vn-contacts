@@ -11,15 +11,15 @@ public class MockitoUtils {
 
     public static class RetrunParamAnswer implements Answer {
 
-        private final int PARAM_INDEX;
+        private final int paramIndex;
 
         public RetrunParamAnswer(int paramIndex) {
-            this.PARAM_INDEX = paramIndex;
+            this.paramIndex = paramIndex;
         }
 
         @Override
-        public Object answer(InvocationOnMock invocation) throws Throwable {
-            return invocation.getArgument(PARAM_INDEX);
+        public Object answer(InvocationOnMock invocation) {
+            return invocation.getArgument(paramIndex);
         }
     }
 }
