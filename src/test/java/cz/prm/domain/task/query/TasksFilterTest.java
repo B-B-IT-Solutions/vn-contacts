@@ -1,5 +1,6 @@
 package cz.prm.domain.task.query;
 
+import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,6 +20,26 @@ class TasksFilterTest {
         assertThat(filter.isGlobalFilter()).isFalse();
         filter.setGlobalFilter(uuid());
         assertThat(filter.isGlobalFilter()).isTrue();
+    }
+
+    @Test
+    void isContactId() {
+        var filter = new TasksFilter();
+        assertThat(filter.isContactId()).isFalse();
+        filter.setContactId(null);
+        assertThat(filter.isContactId()).isFalse();
+        filter.setContactId(randomLong());
+        assertThat(filter.isContactId()).isTrue();
+    }
+
+    @Test
+    void isReferralId() {
+        var filter = new TasksFilter();
+        assertThat(filter.isReferralId()).isFalse();
+        filter.setReferralId(null);
+        assertThat(filter.isReferralId()).isFalse();
+        filter.setReferralId(randomLong());
+        assertThat(filter.isReferralId()).isTrue();
     }
 
     @Test
