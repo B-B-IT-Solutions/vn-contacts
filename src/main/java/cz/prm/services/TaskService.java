@@ -33,13 +33,6 @@ public class TaskService {
         return new Page<>(page);
     }
 
-    public Page<Task> getTasks(Long contactId, TasksQuery query) {
-        var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
-        var predicate = predicates.contactTasks(contactId, query.getFilter());
-        var page = repository.findAll(predicate, pageRequest);
-        return new Page<>(page);
-    }
-
     public Task getTask(Long taskId) {
         return getTaskById(taskId);
     }
@@ -60,7 +53,9 @@ public class TaskService {
     }
 
     public void deleteByContactId(Long contactId) {
-        var predicate = predicates.contactTasks(contactId, new TasksFilter());
+        var filter = new TasksFilter();
+        filter.setContactId(contactId);
+        var predicate = predicates.tasks(filter);
         var notes = repository.findAll(predicate);
         repository.deleteAll(notes);
     }

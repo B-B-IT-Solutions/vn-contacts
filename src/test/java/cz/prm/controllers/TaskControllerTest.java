@@ -59,20 +59,6 @@ class TaskControllerTest {
     }
 
     @Test
-    void getTasksByContactId() {
-        var page = page(tasks());
-        var queryDto = tasksQueryDto();
-        var contactId = randomLong();
-        when(taskService.getTasks(eq(contactId), any(TasksQuery.class))).thenReturn(page);
-
-        var result = controller.getTasks(contactId, queryDto);
-        assertPage(page, result);
-        verify(taskService).getTasks(eq(contactId), cQueryCapt.capture());
-        var query = cQueryCapt.getValue();
-        assertTasksQuery(query, queryDto);
-    }
-
-    @Test
     void getTask() {
         var task = task();
         var taskId = task.getTaskId();

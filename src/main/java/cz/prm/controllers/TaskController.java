@@ -35,13 +35,6 @@ public class TaskController {
         return mapper.toPageDto(tasks);
     }
 
-    @GetMapping("/contact/{contactId}")
-    public PageDto<TaskDto> getTasks(@PathVariable("contactId") Long contactId, TasksQueryDto queryDto) {
-        var query = mapper.toNullSafeTasksQuery(queryDto);
-        var tasks = taskService.getTasks(contactId, query);
-        return mapper.toPageDto(tasks);
-    }
-
     @GetMapping("/{taskId}")
     public TaskDto getTask(@PathVariable("taskId") Long taskId) {
         var task = taskService.getTask(taskId);

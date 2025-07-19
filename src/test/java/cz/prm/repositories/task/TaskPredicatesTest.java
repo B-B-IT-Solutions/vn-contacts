@@ -103,67 +103,6 @@ class TaskPredicatesTest {
     }
 
     @Test
-    void contactTasksNoFilters() {
-        try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
-            var user = user();
-            var filter = new TasksFilter();
-            context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
-            var query = predicates.contactTasks(11L, filter);
-            var expectedString = format("task.owner.username = %s && task.contactId = 11", user.getUsername());
-            assertThat(query).hasToString(expectedString);
-        }
-    }
-
-    @Test
-    void contactTasksWithFilters() {
-        try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
-            var user = user();
-            var filter = new TasksFilter();
-            context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
-            var predicate = predicates.contactTasks(15L, filter);
-            var expectedString = format("task.owner.username = %s && task.contactId = 15", user.getUsername());
-            assertThat(predicate).hasToString(expectedString);
-
-            filter.setGlobalFilter("globalFilter_01");
-            predicate = predicates.contactTasks(16L, filter);
-            expectedString = format("task.owner.username = %s && (containsIc(task.name,globalFilter_01) || containsIc"
-                + "(task.description,globalFilter_01)) && task.contactId = 16", user.getUsername());
-            assertThat(predicate).hasToString(expectedString);
-
-            filter.setGlobalFilter("globalFilter_02");
-            predicate = predicates.contactTasks(17L, filter);
-            expectedString = format("task.owner.username = %s && (containsIc(task.name,globalFilter_02) || containsIc"
-                + "(task.description,globalFilter_02)) && task.contactId = 17", user.getUsername());
-            assertThat(predicate).hasToString(expectedString);
-
-            filter.setGlobalFilter(null);
-            filter.setName("title_01");
-            predicate = predicates.contactTasks(17L, filter);
-            expectedString = format("task.owner.username = %s && containsIc(task.name,title_01) && task.contactId = 17", user.getUsername());
-            assertThat(predicate).hasToString(expectedString);
-
-            filter.setStatus("TO_DO");
-            predicate = predicates.contactTasks(17L, filter);
-            expectedString = format("task.owner.username = %s && containsIc(task.name,title_01) && task.status = TO_DO && task.contactId = 17",
-                user.getUsername());
-            assertThat(predicate).hasToString(expectedString);
-
-            filter.setStatus("IN_PROGRESS");
-            predicate = predicates.contactTasks(17L, filter);
-            expectedString = format("task.owner.username = %s && containsIc(task.name,title_01) && task.status = IN_PROGRESS && task.contactId = 17",
-                user.getUsername());
-            assertThat(predicate).hasToString(expectedString);
-
-            filter.setName(null);
-            filter.setStatus(null);
-            filter.setEndDate("greaterThan(15 Dec 2024)");
-            predicate = predicates.contactTasks(17L, filter);
-            expectedString = format("task.owner.username = %s && task.endDate > 2024-12-14T23:00:00Z && task.contactId = 17", user.getUsername());
-            assertThat(predicate).hasToString(expectedString);
-        }
-    }
-
-    @Test
     void byTaskId() {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
             var user = user();
