@@ -579,6 +579,18 @@ public class TaskComponentTest extends TaskComponentTestBase {
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(30);
 
+        filter.setReferralId(userTask3.getReferralId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(30);
+
+        filter.setReferralId(userTask2.getReferralId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setReferralId(randomLong());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
         queryDto = tasksQueryDto();
         filter = queryDto.getFilter();
 
@@ -597,6 +609,18 @@ public class TaskComponentTest extends TaskComponentTestBase {
         filter.setReferralId(userTask3.getReferralId());
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).hasSize(30);
+
+        filter.setContactId(userTask3.getContactId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(30);
+
+        filter.setContactId(userTask1.getContactId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setContactId(randomLong());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
     }
 
     @Test
