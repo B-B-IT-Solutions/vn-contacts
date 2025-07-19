@@ -2,34 +2,24 @@ package cz.prm.utils;
 
 import static cz.prm.domain.common.Priority.HIGH;
 import static cz.prm.domain.task.TaskStatus.TO_DO;
-import static cz.prm.utils.ComponentTestUtils.randomLong;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static cz.prm.utils.RecurrenceComponentTestUtils.recurrences;
 import static cz.prm.utils.RecurrenceComponentTestUtils.reminderRules;
 import static cz.prm.utils.TimeComponentTestUtils.todayStartOfDay;
 import static java.lang.String.format;
-import static org.assertj.core.util.Lists.newArrayList;
 
 import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.controllers.dto.task.TaskDto;
 import cz.prm.controllers.dto.task.query.TasksFilterDto;
 import cz.prm.controllers.dto.task.query.TasksQueryDto;
 import cz.prm.domain.task.Task;
-import java.util.List;
 
 public class TaskComponentTestUtils {
 
-    public static List<Task> tasks() {
-        return newArrayList(task(), task(), task());
-    }
-
-    public static Task task() {
-        return task(randomLong());
-    }
-
-    public static Task task(long contactId) {
+    public static Task task(Long contactId, Long referralId) {
         var task = new Task();
         task.setContactId(contactId);
+        task.setReferralId(referralId);
         task.setName(format("Title-%s-End", uuid()));
         task.setDescription(format("Text%s", uuid()));
         task.setOutcomes(uuid());
@@ -41,9 +31,14 @@ public class TaskComponentTestUtils {
         return task;
     }
 
-    public static TaskDto taskDto(long contactId) {
+    public static TaskDto taskDto() {
+        return taskDto(null, null);
+    }
+
+    public static TaskDto taskDto(Long contactId, Long referralId) {
         var dto = new TaskDto();
         dto.setContactId(contactId);
+        dto.setReferralId(referralId);
         dto.setName(uuid());
         dto.setDescription(uuid());
         dto.setOutcomes(TestUtils.uuid());

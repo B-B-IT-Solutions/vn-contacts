@@ -14,12 +14,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskPredicates {
 
-    public Predicate contactTasks(Long contactId, TasksFilter filter) {
-        var predicate = new BooleanBuilder();
-        predicate.and(tasks(filter));
-        return predicate.and(task.contactId.eq(contactId));
-    }
-
     public Predicate tasks(TasksFilter filter) {
         var predicate = dataAccessPredicate();
         return predicate.and(filterPredicates(filter));
@@ -40,6 +34,12 @@ public class TaskPredicates {
         if (filter.isGlobalFilter()) {
             predicate.or(task.name.containsIgnoreCase(filter.getGlobalFilter()));
             predicate.or(task.description.containsIgnoreCase(filter.getGlobalFilter()));
+        }
+        if (filter.isContactId()) {
+            predicate.and(task.contactId.eq(filter.getContactId()));
+        }
+        if (filter.isReferralId()) {
+            predicate.and(task.referralId.eq(filter.getReferralId()));
         }
         if (filter.isName()) {
             applyCriteria(predicate, task.name, filter.getName());

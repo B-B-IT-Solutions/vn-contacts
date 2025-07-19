@@ -77,59 +77,6 @@ public class TaskComponentTest extends TaskComponentTestBase {
     }
 
     @Test
-    void getTasksByContactIdDataAccess() {
-        var queryDto = tasksQueryDto();
-        var contactId = randomLong();
-        var pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        pageDto = user2GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        pageDto = user3GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        var tasks = createTasks(USER_1);
-        var task = tasks.get(0);
-        contactId = task.getContactId();
-
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertTasks(tasks, pageDto);
-
-        pageDto = user2GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        pageDto = user3GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        var user2Tasks = createTasks(USER_2);
-        task = user2Tasks.get(0);
-        contactId = task.getContactId();
-
-        pageDto = user2GetContactTasks(contactId, queryDto);
-        assertTasks(user2Tasks, pageDto);
-
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        pageDto = user3GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        var user3Tasks = createTasks(USER_3);
-        task = user3Tasks.get(0);
-        contactId = task.getContactId();
-
-        pageDto = user3GetContactTasks(contactId, queryDto);
-        assertTasks(user3Tasks, pageDto);
-
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        pageDto = user2GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-    }
-
-    @Test
     void getTasksPagination() {
         var queryDto = tasksQueryDto();
         var pageDto = user1GetTasks(queryDto);
@@ -164,51 +111,6 @@ public class TaskComponentTest extends TaskComponentTestBase {
         pagination.setPageNumber(2);
         pagination.setPageSize(10);
         pageDto = user1GetTasks(queryDto);
-        assertThat(pageDto.getTotalPages()).isEqualTo(3);
-        assertThat(pageDto.getTotalElements()).isEqualTo(21);
-        assertThat(pageDto.getPageSize()).isEqualTo(10);
-        assertThat(pageDto.getContent()).hasSize(1);
-    }
-
-    @Test
-    void getTasksByContactIdPagination() {
-        var queryDto = tasksQueryDto();
-        var contactId = randomLong();
-        var pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getTotalPages()).isZero();
-        assertThat(pageDto.getTotalElements()).isZero();
-        assertThat(pageDto.getPageSize()).isEqualTo(50);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        var tasks = createTasks(USER_1, 21);
-        var task = tasks.get(0);
-        contactId = task.getContactId();
-
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getTotalPages()).isEqualTo(1);
-        assertThat(pageDto.getTotalElements()).isEqualTo(21);
-        assertThat(pageDto.getPageSize()).isEqualTo(50);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        var pagination = queryDto.getPagination();
-        pagination.setPageSize(5);
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getTotalPages()).isEqualTo(5);
-        assertThat(pageDto.getTotalElements()).isEqualTo(21);
-        assertThat(pageDto.getPageSize()).isEqualTo(5);
-        assertThat(pageDto.getContent()).hasSize(5);
-
-        pagination.setPageNumber(1);
-        pagination.setPageSize(10);
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getTotalPages()).isEqualTo(3);
-        assertThat(pageDto.getTotalElements()).isEqualTo(21);
-        assertThat(pageDto.getPageSize()).isEqualTo(10);
-        assertThat(pageDto.getContent()).hasSize(10);
-
-        pagination.setPageNumber(2);
-        pagination.setPageSize(10);
-        pageDto = user1GetContactTasks(contactId, queryDto);
         assertThat(pageDto.getTotalPages()).isEqualTo(3);
         assertThat(pageDto.getTotalElements()).isEqualTo(21);
         assertThat(pageDto.getPageSize()).isEqualTo(10);
@@ -275,76 +177,13 @@ public class TaskComponentTest extends TaskComponentTestBase {
     }
 
     @Test
-    void getTasksByContactIdSorting() {
-        var queryDto = tasksQueryDto();
-        var contactId = randomLong();
-        var pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        var tasks = createTasks(USER_1, 21);
-        var task = tasks.get(0);
-        contactId = task.getContactId();
-
-        queryDto = tasksQueryDto();
-        queryDto.setSort(null);
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        var actual = pageDto.getContent();
-        var expected = newArrayList(actual);
-        sort(expected, comparing(TaskDto::getCreationDate).reversed());
-        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
-
-        queryDto = tasksQueryDto();
-        queryDto.setSort("asc(lastEditDate)");
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        actual = pageDto.getContent();
-        expected = newArrayList(actual);
-        sort(expected, comparing(TaskDto::getLastEditDate));
-        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
-
-        queryDto.setSort("desc(lastEditDate)");
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        actual = pageDto.getContent();
-        expected = newArrayList(actual);
-        sort(expected, comparing(TaskDto::getLastEditDate).reversed());
-        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
-
-        queryDto.setSort("asc(creationDate)");
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        actual = pageDto.getContent();
-        expected = newArrayList(actual);
-        sort(expected, comparing(TaskDto::getCreationDate));
-        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
-
-        queryDto.setSort("desc(creationDate)");
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        actual = pageDto.getContent();
-        expected = newArrayList(actual);
-        sort(expected, comparing(TaskDto::getCreationDate).reversed());
-        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
-
-        queryDto.setSort("asc(contactId)");
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        actual = pageDto.getContent();
-        expected = newArrayList(actual);
-        sort(expected, comparing(TaskDto::getContactId));
-        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
-
-        queryDto.setSort("desc(contactId)");
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        actual = pageDto.getContent();
-        expected = newArrayList(actual);
-        sort(expected, comparing(TaskDto::getContactId).reversed());
-        assertThat(actual).hasSize(21).containsExactlyElementsOf(expected);
-    }
-
-    @Test
     void getTasksFilters() {
         var queryDto = tasksQueryDto();
         var pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var user1Tasks = createTasks(USER_1, 21);
-        var userTask1 = user1Tasks.get(0);
+        var user1Tasks1 = createTasks(USER_1, 21);
+        var userTask1 = user1Tasks1.get(0);
 
         queryDto = tasksQueryDto();
         queryDto.setFilter(null);
@@ -541,208 +380,85 @@ public class TaskComponentTest extends TaskComponentTestBase {
     }
 
     @Test
-    void getTasksByContactIdFilters() {
+    void getTasksFilters_ContactIdReferralId() {
         var queryDto = tasksQueryDto();
-        var contactId = randomLong();
-        var pageDto = user1GetContactTasks(contactId, queryDto);
+        var pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var user1Tasks = createTasks(USER_1, 21);
-        var userTask1 = user1Tasks.get(0);
-        var userTask = user1Tasks.get(0);
-        contactId = userTask.getContactId();
+        var user1Tasks1 = createTasks(USER_1, 5);
+        var userTask1 = user1Tasks1.get(0);
+
+        var user1Tasks2 = createTasks(USER_1, 11);
+        var userTask2 = user1Tasks2.get(0);
+
+        var user1Tasks3 = createTasks(USER_1, 30);
+        var userTask3 = user1Tasks3.get(0);
 
         queryDto = tasksQueryDto();
         queryDto.setFilter(null);
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(46);
 
         queryDto = tasksQueryDto();
         var filter = queryDto.getFilter();
 
-        filter.setGlobalFilter(userTask1.getName());
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
+        filter.setContactId(randomLong());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setGlobalFilter(userTask1.getDescription());
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
+        filter.setContactId(userTask1.getContactId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(5);
 
-        filter.setGlobalFilter(userTask1.getDescription());
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
+        filter.setContactId(userTask2.getContactId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(11);
 
-        filter.setGlobalFilter(uuid());
-        pageDto = user1GetContactTasks(contactId, queryDto);
+        filter.setContactId(userTask3.getContactId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(30);
+
+        filter.setReferralId(userTask3.getReferralId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(30);
+
+        filter.setReferralId(userTask2.getReferralId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setReferralId(randomLong());
+        pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
         queryDto = tasksQueryDto();
         filter = queryDto.getFilter();
 
-        filter.setName(userTask1.getName());
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
-
-        filter.setName(uuid());
-        pageDto = user1GetContactTasks(contactId, queryDto);
+        filter.setReferralId(randomLong());
+        pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setName(startsWithFilter("Title"));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
+        filter.setReferralId(userTask1.getReferralId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(5);
 
-        filter.setName(startsWithFilter(userTask1.getName()));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
+        filter.setReferralId(userTask2.getReferralId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(11);
 
-        filter.setName(startsWithFilter("Q"));
-        pageDto = user1GetContactTasks(contactId, queryDto);
+        filter.setReferralId(userTask3.getReferralId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(30);
+
+        filter.setContactId(userTask3.getContactId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(30);
+
+        filter.setContactId(userTask1.getContactId());
+        pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        filter.setName(startsWithFilter(uuid()));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        filter.setName(endsWithFilter("End"));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        filter.setName(endsWithFilter(userTask1.getName()));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
-
-        filter.setName(endsWithFilter("Q"));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        filter.setName(endsWithFilter(uuid()));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        filter.setName(equalsFilter(userTask1.getName()));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
-
-        filter.setName(equalsFilter("Q"));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        filter.setName(equalsFilter(" "));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        filter.setName(equalsFilter(uuid()));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        filter.setName(notEqualsFilter(userTask1.getName()));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(20);
-
-        filter.setName(notEqualsFilter("Q"));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        filter.setName(notEqualsFilter(uuid()));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        filter.setName(notEqualsFilter(" "));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        filter.setName(notEqualsFilter(uuid()));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        filter.setName(emptyFilter());
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        filter.setName(notEmptyFilter());
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        queryDto = tasksQueryDto();
-        filter = queryDto.getFilter();
-
-        filter.setStatus(null);
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        filter.setStatus("TO_DO");
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        filter.setStatus("IN_PROGRESS");
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        filter.setStatus("TO_DO,IN_PROGRESS");
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        queryDto = tasksQueryDto();
-        filter = queryDto.getFilter();
-
-        filter.setEndDate(greaterThanFilter(todayStartOfDay().minus(1, DAYS)));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        filter.setEndDate(greaterThanFilter(todayStartOfDay()));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        filter.setEndDate(greaterThanFilter(todayStartOfDay().plus(1, DAYS)));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        filter.setEndDate(greaterThanOrEqualToFilter(todayStartOfDay().minus(1, DAYS)));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        filter.setEndDate(greaterThanOrEqualToFilter(todayStartOfDay()));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        filter.setEndDate(greaterThanOrEqualToFilter(todayStartOfDay().plus(1, DAYS)));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        filter.setEndDate(lessThanFilter(todayStartOfDay().plus(1, DAYS)));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        filter.setEndDate(lessThanFilter(todayStartOfDay()));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        filter.setEndDate(lessThanFilter(todayStartOfDay().minus(1, DAYS)));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        filter.setEndDate(lessThanOrEqualToFilter(todayStartOfDay().plus(1, DAYS)));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        filter.setEndDate(lessThanOrEqualToFilter(todayStartOfDay()));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        filter.setEndDate(lessThanOrEqualToFilter(todayStartOfDay().minus(1, DAYS)));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        filter.setEndDate(betweenFilter(todayStartOfDay().minus(1, DAYS), now().plus(5, DAYS)));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        filter.setEndDate(betweenFilter(todayStartOfDay(), now().plus(5, DAYS)));
-        pageDto = user1GetContactTasks(contactId, queryDto);
-        assertThat(pageDto.getContent()).hasSize(21);
-
-        filter.setEndDate(betweenFilter(todayStartOfDay().plus(1, DAYS), now().plus(5, DAYS)));
-        pageDto = user1GetContactTasks(contactId, queryDto);
+        filter.setContactId(randomLong());
+        pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
     }
 
@@ -773,8 +489,7 @@ public class TaskComponentTest extends TaskComponentTestBase {
 
     @Test
     void createTask() {
-        var contact = createContact(USER_1);
-        var toCreateDto = taskDto(contact.getContactId());
+        var toCreateDto = taskDto();
         user1CreateTask(toCreateDto);
         var task = getTaskFromDb(toCreateDto);
         var taskId = task.getTaskId();
@@ -784,8 +499,21 @@ public class TaskComponentTest extends TaskComponentTestBase {
         user2GetTaskExpectNotFound(taskId);
         user3GetTaskExpectNotFound(taskId);
 
+        var contact = createContact(USER_1);
+        var referral = createReferral(USER_1);
+        toCreateDto = taskDto(contact.getContactId(), referral.getReferralId());
+        user2CreateTask(toCreateDto);
+        task = getTaskFromDb(toCreateDto);
+        taskId = task.getTaskId();
+
+        createdDto = user2GetTask(taskId);
+        assertTask(task, createdDto);
+        user1GetTaskExpectNotFound(taskId);
+        user3GetTaskExpectNotFound(taskId);
+
         contact = createContact(USER_2);
-        toCreateDto = taskDto(contact.getContactId());
+        referral = createReferral(USER_2);
+        toCreateDto = taskDto(contact.getContactId(), referral.getReferralId());
         user2CreateTask(toCreateDto);
         task = getTaskFromDb(toCreateDto);
         taskId = task.getTaskId();
@@ -796,7 +524,8 @@ public class TaskComponentTest extends TaskComponentTestBase {
         user3GetTaskExpectNotFound(taskId);
 
         contact = createContact(USER_3);
-        toCreateDto = taskDto(contact.getContactId());
+        referral = createReferral(USER_3);
+        toCreateDto = taskDto(contact.getContactId(), referral.getReferralId());
         user3CreateTask(toCreateDto);
         task = getTaskFromDb(toCreateDto);
         taskId = task.getTaskId();

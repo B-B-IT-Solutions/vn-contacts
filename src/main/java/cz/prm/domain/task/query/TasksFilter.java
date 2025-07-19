@@ -1,5 +1,6 @@
 package cz.prm.domain.task.query;
 
+import static java.util.Objects.nonNull;
 import static org.apache.logging.log4j.util.Strings.isNotBlank;
 
 import lombok.Data;
@@ -11,6 +12,10 @@ public class TasksFilter {
 
     private String globalFilter;
 
+    private Long contactId;
+
+    private Long referralId;
+
     private String name;
 
     private String status;
@@ -19,6 +24,14 @@ public class TasksFilter {
 
     public boolean isGlobalFilter() {
         return isNotBlank(globalFilter);
+    }
+
+    public boolean isContactId() {
+        return nonNull(contactId);
+    }
+
+    public boolean isReferralId() {
+        return nonNull(referralId);
     }
 
     public boolean isName() {

@@ -49,6 +49,9 @@ public class Task {
     @Column(name = "CONTACT_ID")
     private Long contactId;
 
+    @Column(name = "REFERRAL_ID")
+    private Long referralId;
+
     @Column(name = "NAME")
     private String name;
 

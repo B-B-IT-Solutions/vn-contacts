@@ -20,6 +20,9 @@ public class TaskDto {
     @JsonProperty("contactId")
     private Long contactId;
 
+    @JsonProperty("referralId")
+    private Long referralId;
+
     @JsonProperty("name")
     private String name;
 

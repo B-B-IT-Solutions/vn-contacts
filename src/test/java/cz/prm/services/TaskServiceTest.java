@@ -41,6 +41,8 @@ class TaskServiceTest {
     private TaskPredicates predicates;
     @Captor
     private ArgumentCaptor<Task> taskCapt;
+    @Captor
+    private ArgumentCaptor<TasksFilter> filterCapt;
 
     private TaskService taskService;
 
@@ -59,20 +61,6 @@ class TaskServiceTest {
         when(predicates.tasks(query.getFilter())).thenReturn(predicate);
         when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
         var result = taskService.getTasks(query);
-        assertPage(result, page);
-    }
-
-    @Test
-    void getContactTasks() {
-        var tasks = tasks();
-        var page = new PageImpl(tasks);
-        var query = tasksQuery();
-        var contactId = randomLong();
-        var predicate = new BooleanBuilder();
-
-        when(predicates.contactTasks(contactId, query.getFilter())).thenReturn(predicate);
-        when(repository.findAll(eq(predicate), any(PageRequest.class))).thenReturn(page);
-        var result = taskService.getTasks(contactId, query);
         assertPage(result, page);
     }
 
@@ -153,11 +141,14 @@ class TaskServiceTest {
         var tasks = tasks();
         var contactId = randomLong();
         var predicate = new BooleanBuilder();
-        when(predicates.contactTasks(eq(contactId), any(TasksFilter.class))).thenReturn(predicate);
+        when(predicates.tasks(any(TasksFilter.class))).thenReturn(predicate);
         when(repository.findAll(predicate)).thenReturn(tasks);
 
         taskService.deleteByContactId(contactId);
         verify(repository).deleteAll(tasks);
+        verify(predicates).tasks(filterCapt.capture());
+        var filter = filterCapt.getValue();
+        assertThat(filter.getContactId()).isEqualTo(contactId);
     }
 
     private void assertFieldsUpdated(Task taskIdDb, Task updatedTask, Task savedTask) {

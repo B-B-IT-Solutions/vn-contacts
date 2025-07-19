@@ -30,6 +30,7 @@ public class TaskUtils {
         var task = new Task();
         task.setTaskId(randomLong());
         task.setContactId(randomLong());
+        task.setReferralId(randomLong());
         task.setName(uuid());
         task.setDescription(uuid());
         task.setOutcomes(uuid());
@@ -48,6 +49,7 @@ public class TaskUtils {
         var task = new TaskDto();
         task.setTaskId(randomLong());
         task.setContactId(randomLong());
+        task.setReferralId(randomLong());
         task.setName(uuid());
         task.setDescription(uuid());
         task.setOutcomes(uuid());
@@ -80,6 +82,8 @@ public class TaskUtils {
     public static TasksFilter tasksFilter() {
         var filter = new TasksFilter();
         filter.setGlobalFilter(uuid());
+        filter.setContactId(randomLong());
+        filter.setReferralId(randomLong());
         filter.setName(uuid());
         filter.setStatus("TO_DO");
         filter.setEndDate(uuid());
@@ -89,6 +93,8 @@ public class TaskUtils {
     public static TasksFilterDto tasksFilterDto() {
         var filter = new TasksFilterDto();
         filter.setGlobalFilter(uuid());
+        filter.setContactId(randomLong());
+        filter.setReferralId(randomLong());
         filter.setName(uuid());
         filter.setStatus("IN_PROGRESS");
         filter.setEndDate(uuid());

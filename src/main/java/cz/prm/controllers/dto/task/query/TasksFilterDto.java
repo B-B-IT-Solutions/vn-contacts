@@ -9,6 +9,10 @@ public class TasksFilterDto {
 
     private String globalFilter;
 
+    private Long contactId;
+
+    private Long referralId;
+
     private String name;
 
     private String status;
