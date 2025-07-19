@@ -41,6 +41,12 @@ public class TaskPredicates {
             predicate.or(task.name.containsIgnoreCase(filter.getGlobalFilter()));
             predicate.or(task.description.containsIgnoreCase(filter.getGlobalFilter()));
         }
+        if (filter.isContactId()) {
+            predicate.and(task.contactId.eq(filter.getContactId()));
+        }
+        if (filter.isReferralId()) {
+            predicate.and(task.referralId.eq(filter.getReferralId()));
+        }
         if (filter.isName()) {
             applyCriteria(predicate, task.name, filter.getName());
         }

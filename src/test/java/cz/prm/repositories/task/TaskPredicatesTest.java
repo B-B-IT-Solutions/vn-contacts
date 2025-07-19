@@ -66,6 +66,18 @@ class TaskPredicatesTest {
             assertThat(predicate).hasToString(expectedString);
 
             filter.setGlobalFilter(null);
+            filter.setContactId(11L);
+            predicate = predicates.tasks(filter);
+            expectedString = format("task.owner.username = %s && task.contactId = 11", user.getUsername());
+            assertThat(predicate).hasToString(expectedString);
+
+            filter.setContactId(null);
+            filter.setReferralId(15L);
+            predicate = predicates.tasks(filter);
+            expectedString = format("task.owner.username = %s && task.referralId = 15", user.getUsername());
+            assertThat(predicate).hasToString(expectedString);
+
+            filter.setReferralId(null);
             filter.setName("title_01");
             predicate = predicates.tasks(filter);
             expectedString = format("task.owner.username = %s && containsIc(task.name,title_01)", user.getUsername());
