@@ -206,6 +206,16 @@ public class TaskComponentTestBase extends BusinessComponentTestBase {
                 sb.append(filterDto.getGlobalFilter());
                 sb.append("&");
             }
+            if (isNotEmpty(filterDto.getContactId())) {
+                sb.append("filter.contactId=");
+                sb.append(filterDto.getContactId());
+                sb.append("&");
+            }
+            if (isNotEmpty(filterDto.getReferralId())) {
+                sb.append("filter.referralId=");
+                sb.append(filterDto.getReferralId());
+                sb.append("&");
+            }
             if (isNotEmpty(filterDto.getName())) {
                 sb.append("filter.name=");
                 sb.append(filterDto.getName());

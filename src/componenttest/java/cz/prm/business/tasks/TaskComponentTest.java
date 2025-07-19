@@ -343,8 +343,8 @@ public class TaskComponentTest extends TaskComponentTestBase {
         var pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var user1Tasks = createTasks(USER_1, 21);
-        var userTask1 = user1Tasks.get(0);
+        var user1Tasks1 = createTasks(USER_1, 10);
+        var userTask1 = user1Tasks1.get(0);
 
         queryDto = tasksQueryDto();
         queryDto.setFilter(null);
@@ -538,6 +538,65 @@ public class TaskComponentTest extends TaskComponentTestBase {
         filter.setEndDate(betweenFilter(todayStartOfDay().plus(1, DAYS), now().plus(5, DAYS)));
         pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
+    }
+
+    @Test
+    void getTasksFilters_ContactIdReferralId() {
+        var queryDto = tasksQueryDto();
+        var pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        var user1Tasks1 = createTasks(USER_1, 5);
+        var userTask1 = user1Tasks1.get(0);
+
+        var user1Tasks2 = createTasks(USER_1, 11);
+        var userTask2 = user1Tasks2.get(0);
+
+        var user1Tasks3 = createTasks(USER_1, 30);
+        var userTask3 = user1Tasks3.get(0);
+
+        queryDto = tasksQueryDto();
+        queryDto.setFilter(null);
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(46);
+
+        queryDto = tasksQueryDto();
+        var filter = queryDto.getFilter();
+
+        filter.setContactId(randomLong());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setContactId(userTask1.getContactId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(5);
+
+        filter.setContactId(userTask2.getContactId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(11);
+
+        filter.setContactId(userTask3.getContactId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(30);
+
+        queryDto = tasksQueryDto();
+        filter = queryDto.getFilter();
+
+        filter.setReferralId(randomLong());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        filter.setReferralId(userTask1.getReferralId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(5);
+
+        filter.setReferralId(userTask2.getReferralId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(11);
+
+        filter.setReferralId(userTask3.getReferralId());
+        pageDto = user1GetTasks(queryDto);
+        assertThat(pageDto.getContent()).hasSize(30);
     }
 
     @Test

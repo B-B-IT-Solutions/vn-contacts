@@ -61,8 +61,8 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     @BeforeEach
     void setUp() {
         noteRepository.deleteAll();
-        referralRepository.deleteAll();
         taskRepository.deleteAll();
+        referralRepository.deleteAll();
         aboutRepository.deleteAll();
         contactRepository.deleteAll();
         contactSettingsRepository.deleteAll();
@@ -159,17 +159,19 @@ public class BusinessComponentTestBase extends ComponentTestBase {
 
     protected List<Task> createTasks(ComponentTestUser user, int numOfTasks) {
         var contact = createContact(user);
-        return IntStream.range(0, numOfTasks).mapToObj((i) -> createTask(user, contact)).collect(toList());
+        var referral = createReferral(user);
+        return IntStream.range(0, numOfTasks).mapToObj((i) -> createTask(user, contact, referral)).collect(toList());
     }
 
     protected Task createTask(ComponentTestUser user) {
         var contact = createContact(user);
-        return createTask(user, contact);
+        var referral = createReferral(user);
+        return createTask(user, contact, referral);
     }
 
-    protected Task createTask(ComponentTestUser user, Contact contact) {
+    protected Task createTask(ComponentTestUser user, Contact contact, Referral referral) {
         ensureUserContext(user);
-        var task = task(contact.getContactId());
+        var task = task(contact.getContactId(), referral.getReferralId());
         var savedTask = taskRepository.save(task);
         clearContext();
         return savedTask;

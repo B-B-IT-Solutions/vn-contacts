@@ -195,6 +195,7 @@
 						<constraints primaryKey="true" primaryKeyName="task_pk" nullable="false"/>
 				 </column>
 				 <column name="contact_id" type="BIGINT"/>
+				 <column name="referral_id" type="BIGINT"/>
 				 <column name="name" type="VARCHAR(1000)"/>
 				 <column name="description" type="TEXT"/>
 				 <column name="outcomes" type="TEXT"/>
@@ -209,6 +210,10 @@
 			<addForeignKeyConstraint baseTableName="task" baseColumnNames="contact_id" constraintName="task_contact_id_fkey"
 															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
 															 referencedColumnNames="contact_id" validate="true"/>
+			
+			<addForeignKeyConstraint baseTableName="task" baseColumnNames="referral_id" constraintName="task_referral_id_fkey"
+															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="referral"
+															 referencedColumnNames="referral_id" validate="true"/>
 	 </changeSet>
 	 
 	 <changeSet author="sergej" id="1.0.6">
