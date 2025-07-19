@@ -20,7 +20,6 @@ public class TaskComponentTestBase extends BusinessComponentTestBase {
 
     protected static String TASKS_BASE_URL = "tasks";
     protected static String TASKS_URL = TASKS_BASE_URL;
-    protected static String CONTACT_TASKS_URL = TASKS_URL + "/contact/%s";
     protected static String TASK_URL = TASKS_URL + "/%s";
 
     protected void user1CreateTask(TaskDto dto) {
@@ -71,18 +70,6 @@ public class TaskComponentTestBase extends BusinessComponentTestBase {
         return getTasksPage(queryDto, USER_3);
     }
 
-    protected PageDto<TaskDto> user1GetContactTasks(Long contactId, TasksQueryDto queryDto) {
-        return getTasksPage(contactId, queryDto, USER_1);
-    }
-
-    protected PageDto<TaskDto> user2GetContactTasks(Long contactId, TasksQueryDto queryDto) {
-        return getTasksPage(contactId, queryDto, USER_2);
-    }
-
-    protected PageDto<TaskDto> user3GetContactTasks(Long contactId, TasksQueryDto queryDto) {
-        return getTasksPage(contactId, queryDto, USER_3);
-    }
-
     protected TaskDto user1GetTask(Long taskId) {
         return getTask(taskId, USER_1);
     }
@@ -111,14 +98,6 @@ public class TaskComponentTestBase extends BusinessComponentTestBase {
 
     protected PageDto<TaskDto> getTasksPage(TasksQueryDto queryDto, ComponentTestUser user) {
         var baseURl = TASKS_BASE_URL;
-        var url = appendQueryToUrl(baseURl, queryDto);
-        var typeRef = new TypeRef<PageDto<TaskDto>>() {
-        };
-        return getPage(url, user, typeRef);
-    }
-
-    protected PageDto<TaskDto> getTasksPage(Long contactId, TasksQueryDto queryDto, ComponentTestUser user) {
-        var baseURl = format(CONTACT_TASKS_URL, contactId);
         var url = appendQueryToUrl(baseURl, queryDto);
         var typeRef = new TypeRef<PageDto<TaskDto>>() {
         };
