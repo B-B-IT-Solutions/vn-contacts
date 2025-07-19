@@ -56,6 +56,7 @@ public class TaskAssertions {
     public static void assertTask(Task task1, Task task2) {
         assertThat(task1.getTaskId()).isEqualTo(task2.getTaskId());
         assertThat(task1.getContactId()).isEqualTo(task2.getContactId());
+        assertThat(task1.getReferralId()).isEqualTo(task2.getReferralId());
         assertThat(task1.getDescription()).isEqualTo(task2.getDescription());
         assertThat(task1.getOutcomes()).isEqualTo(task2.getOutcomes());
         assertThat(task1.getStatus()).isEqualTo(task2.getStatus());
@@ -71,6 +72,7 @@ public class TaskAssertions {
     public static void assertTask(Task task, TaskDto dto) {
         assertThat(task.getTaskId()).isEqualTo(dto.getTaskId());
         assertThat(task.getContactId()).isEqualTo(dto.getContactId());
+        assertThat(task.getReferralId()).isEqualTo(dto.getReferralId());
         assertThat(task.getName()).isEqualTo(dto.getName());
         assertThat(task.getDescription()).isEqualTo(dto.getDescription());
         assertThat(task.getOutcomes()).isEqualTo(dto.getOutcomes());
@@ -90,6 +92,8 @@ public class TaskAssertions {
 
     public static void assertTasksFilter(TasksFilter filter, TasksFilterDto dto) {
         assertThat(filter.getGlobalFilter()).isEqualTo(dto.getGlobalFilter());
+        assertThat(filter.getContactId()).isEqualTo(dto.getContactId());
+        assertThat(filter.getReferralId()).isEqualTo(dto.getReferralId());
         assertThat(filter.getName()).isEqualTo(dto.getName());
         assertThat(filter.getStatus()).isEqualTo(dto.getStatus());
         assertThat(filter.getEndDate()).isEqualTo(dto.getEndDate());
