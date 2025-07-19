@@ -182,7 +182,7 @@ public class TaskComponentTest extends TaskComponentTestBase {
         var pageDto = user1GetTasks(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var user1Tasks1 = createTasks(USER_1, 10);
+        var user1Tasks1 = createTasks(USER_1, 21);
         var userTask1 = user1Tasks1.get(0);
 
         queryDto = tasksQueryDto();
