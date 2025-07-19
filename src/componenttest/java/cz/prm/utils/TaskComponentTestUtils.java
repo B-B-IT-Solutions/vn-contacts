@@ -31,9 +31,14 @@ public class TaskComponentTestUtils {
         return task;
     }
 
-    public static TaskDto taskDto(Long contactId) {
+    public static TaskDto taskDto() {
+        return taskDto(null, null);
+    }
+
+    public static TaskDto taskDto(Long contactId, Long referralId) {
         var dto = new TaskDto();
         dto.setContactId(contactId);
+        dto.setReferralId(referralId);
         dto.setName(uuid());
         dto.setDescription(uuid());
         dto.setOutcomes(TestUtils.uuid());
