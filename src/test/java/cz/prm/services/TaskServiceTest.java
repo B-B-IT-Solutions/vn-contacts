@@ -1,5 +1,6 @@
 package cz.prm.services;
 
+import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.TaskUtils.task;
 import static cz.prm.utils.TaskUtils.tasks;
 import static cz.prm.utils.TaskUtils.tasksQuery;
@@ -86,8 +87,13 @@ class TaskServiceTest {
     @Test
     void createTask() {
         var task = task();
-        taskService.createTask(task);
-        verify(repository).save(task);
+        when(repository.save(task)).thenAnswer(returnParamAnswer(0));
+
+        var response = taskService.createTask(task);
+        verify(repository).save(taskCapt.capture());
+        var savedTask = taskCapt.getValue();
+        assertThat(savedTask.getTaskId()).isEqualTo(task.getTaskId());
+        assertThat(response.getTaskId()).isEqualTo(task.getTaskId());
     }
 
     @Test
@@ -97,11 +103,13 @@ class TaskServiceTest {
         var predicate = new BooleanBuilder();
         when(predicates.byTaskId(taskIdDb.getTaskId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(of(taskIdDb));
+        when(repository.save(taskIdDb)).thenAnswer(returnParamAnswer(0));
 
-        taskService.updateTask(taskIdDb.getTaskId(), updatedTask);
+        var response = taskService.updateTask(taskIdDb.getTaskId(), updatedTask);
         verify(repository).save(taskCapt.capture());
         var savedTask = taskCapt.getValue();
         assertFieldsUpdated(taskIdDb, updatedTask, savedTask);
+        assertFieldsUpdated(taskIdDb, updatedTask, response);
     }
 
     @Test

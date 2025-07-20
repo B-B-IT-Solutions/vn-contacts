@@ -42,15 +42,17 @@ public class TaskController {
     }
 
     @PostMapping
-    public void createTask(@RequestBody TaskDto dto) {
+    public TaskDto createTask(@RequestBody TaskDto dto) {
         var task = mapper.toTask(dto);
-        taskService.createTask(task);
+        var response = taskService.createTask(task);
+        return mapper.toTaskDto(response);
     }
 
     @PutMapping("/{taskId}")
-    public void updateTask(@PathVariable("taskId") Long taskId, @RequestBody TaskDto dto) {
+    public TaskDto updateTask(@PathVariable("taskId") Long taskId, @RequestBody TaskDto dto) {
         var task = mapper.toTask(dto);
-        taskService.updateTask(taskId, task);
+        var response = taskService.updateTask(taskId, task);
+        return mapper.toTaskDto(response);
     }
 
     @DeleteMapping("/{taskId}")

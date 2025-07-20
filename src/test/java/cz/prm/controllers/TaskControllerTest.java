@@ -1,6 +1,7 @@
 package cz.prm.controllers;
 
 import static cz.prm.utils.CommonUtils.page;
+import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.TaskUtils.task;
 import static cz.prm.utils.TaskUtils.taskDto;
 import static cz.prm.utils.TaskUtils.tasks;
@@ -69,20 +70,27 @@ class TaskControllerTest {
 
     @Test
     void createTask() {
-        var dto = taskDto();
-        controller.createTask(dto);
+        var addedDto = taskDto();
+        when(taskService.createTask(any(Task.class))).thenAnswer(returnParamAnswer(1));
+
+        var responseDto = controller.createTask(addedDto);
         verify(taskService).createTask(taskCapt.capture());
         var task = taskCapt.getValue();
-        assertTask(task, dto);
+        assertTask(task, addedDto);
+        assertTask(task, responseDto);
     }
 
     @Test
     void updateTask() {
-        var dto = taskDto();
-        controller.updateTask(dto.getTaskId(), dto);
-        verify(taskService).updateTask(eq(dto.getTaskId()), taskCapt.capture());
+        var updatedDto = taskDto();
+        var taskId = updatedDto.getTaskId();
+        when(taskService.updateTask(eq(taskId), any(Task.class))).thenAnswer(returnParamAnswer(1));
+
+        var responseDto = controller.updateTask(taskId, updatedDto);
+        verify(taskService).updateTask(eq(taskId), taskCapt.capture());
         var task = taskCapt.getValue();
-        assertTask(task, dto);
+        assertTask(task, updatedDto);
+        assertTask(task, responseDto);
     }
 
     @Test
