@@ -71,7 +71,7 @@ class TaskControllerTest {
     @Test
     void createTask() {
         var addedDto = taskDto();
-        when(taskService.createTask(any(Task.class))).thenAnswer(returnParamAnswer(1));
+        when(taskService.createTask(any(Task.class))).thenAnswer(returnParamAnswer(0));
 
         var responseDto = controller.createTask(addedDto);
         verify(taskService).createTask(taskCapt.capture());
