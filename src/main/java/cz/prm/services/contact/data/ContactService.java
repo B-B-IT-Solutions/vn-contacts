@@ -61,7 +61,7 @@ public class ContactService {
         savedContact.setKnowScore(updatedContact.getKnowScore());
         savedContact.setLikeScore(updatedContact.getLikeScore());
         savedContact.setTrustScore(updatedContact.getTrustScore());
-        savedContact.setTelephones(updatedContact.getTelephones());
+        savedContact.setPhoneNumber(updatedContact.getPhoneNumber());
         savedContact.setEmails(updatedContact.getEmails());
         savedContact.setUrls(updatedContact.getUrls());
         savedContact.setDateOfBirth(updatedContact.getDateOfBirth());

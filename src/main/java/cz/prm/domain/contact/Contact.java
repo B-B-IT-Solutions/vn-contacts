@@ -62,10 +62,8 @@ public class Contact {
     @Column(name = "TRUST_SCORE")
     private Integer trustScore;
 
-    @ElementCollection(fetch = EAGER)
-    @CollectionTable(name = "CONTACT_TELEPHONE", joinColumns = @JoinColumn(name = "CONTACT_ID"))
-    @Column(name = "TELEPHONE")
-    private List<Connection> telephones;
+    @Column(name = "PHONE_NUMBER")
+    private String phoneNumber;
 
     @ElementCollection(fetch = EAGER)
     @CollectionTable(name = "CONTACT_EMAIL", joinColumns = @JoinColumn(name = "CONTACT_ID"))

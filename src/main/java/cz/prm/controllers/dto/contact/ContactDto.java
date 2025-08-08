@@ -36,8 +36,8 @@ public class ContactDto {
     @JsonProperty("trustScore")
     private Integer trustScore;
 
-    @JsonProperty("telephones")
-    private List<ConnectionDto> telephones;
+    @JsonProperty("phoneNumber")
+    private String phoneNumber;
 
     @JsonProperty("emails")
     private List<ConnectionDto> emails;

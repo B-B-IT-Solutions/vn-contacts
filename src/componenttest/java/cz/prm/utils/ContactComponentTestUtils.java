@@ -39,7 +39,7 @@ public class ContactComponentTestUtils {
         contact.setKnowScore(randomInt());
         contact.setLikeScore(randomInt());
         contact.setTrustScore(randomInt());
-        contact.setTelephones(connections());
+        contact.setPhoneNumber(uuid());
         contact.setEmails(connections());
         contact.setUrls(connections());
         contact.setOccupation(occupation());
@@ -61,7 +61,7 @@ public class ContactComponentTestUtils {
         dto.setKnowScore(randomInt());
         dto.setLikeScore(randomInt());
         dto.setTrustScore(randomInt());
-        dto.setTelephones(connectionsDto());
+        dto.setPhoneNumber(uuid());
         dto.setEmails(connectionsDto());
         dto.setUrls(connectionsDto());
         dto.setOccupation(occupationDto());
