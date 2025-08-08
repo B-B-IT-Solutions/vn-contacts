@@ -136,13 +136,13 @@ class ContactServiceTest {
         assertThat(contactIdDb.getOwner()).isEqualTo(savedContact.getOwner());
         assertThat(savedContact.getFirstName()).isEqualTo(updatedContact.getFirstName());
         assertThat(savedContact.getLastName()).isEqualTo(updatedContact.getLastName());
-        assertThat(savedContact.getMiddleName()).isEqualTo(updatedContact.getMiddleName());
-        assertThat(savedContact.getNickName()).isEqualTo(updatedContact.getNickName());
+        assertThat(savedContact.getEmail()).isEqualTo(updatedContact.getEmail());
+        assertThat(savedContact.getPhoneNumber()).isEqualTo(updatedContact.getPhoneNumber());
+        assertThat(savedContact.getStatus()).isEqualTo(updatedContact.getStatus());
+        assertThat(savedContact.getSource()).isEqualTo(updatedContact.getSource());
         assertThat(savedContact.getKnowScore()).isEqualTo(updatedContact.getKnowScore());
         assertThat(savedContact.getLikeScore()).isEqualTo(updatedContact.getLikeScore());
         assertThat(savedContact.getTrustScore()).isEqualTo(updatedContact.getTrustScore());
-        assertThat(savedContact.getTelephones()).isEqualTo(updatedContact.getTelephones());
-        assertThat(savedContact.getEmails()).isEqualTo(updatedContact.getEmails());
         assertThat(savedContact.getUrls()).isEqualTo(updatedContact.getUrls());
         assertThat(savedContact.getDateOfBirth()).isEqualTo(updatedContact.getDateOfBirth());
         assertThat(savedContact.getOccupation()).isEqualTo(updatedContact.getOccupation());

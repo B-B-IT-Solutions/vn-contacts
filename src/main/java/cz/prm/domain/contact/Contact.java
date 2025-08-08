@@ -44,14 +44,20 @@ public class Contact {
     @Column(name = "FIRST_NAME")
     private String firstName;
 
-    @Column(name = "MIDDLE_NAME")
-    private String middleName;
-
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "NICK_NAME")
-    private String nickName;
+    @Column(name = "EMAIL")
+    private String email;
+
+    @Column(name = "PHONE_NUMBER")
+    private String phoneNumber;
+
+    @Column(name = "STATUS")
+    private String status;
+
+    @Column(name = "SOURCE")
+    private String source;
 
     @Column(name = "KNOW_SCORE")
     private Integer knowScore;
@@ -61,16 +67,6 @@ public class Contact {
 
     @Column(name = "TRUST_SCORE")
     private Integer trustScore;
-
-    @ElementCollection(fetch = EAGER)
-    @CollectionTable(name = "CONTACT_TELEPHONE", joinColumns = @JoinColumn(name = "CONTACT_ID"))
-    @Column(name = "TELEPHONE")
-    private List<Connection> telephones;
-
-    @ElementCollection(fetch = EAGER)
-    @CollectionTable(name = "CONTACT_EMAIL", joinColumns = @JoinColumn(name = "CONTACT_ID"))
-    @Column(name = "EMAIL")
-    private List<Connection> emails;
 
     @ElementCollection(fetch = EAGER)
     @CollectionTable(name = "CONTACT_URL", joinColumns = @JoinColumn(name = "CONTACT_ID"))
@@ -110,8 +106,10 @@ public class Contact {
 
     @CreatedBy
     @Embedded
-    @AttributeOverrides({@AttributeOverride(name = "username", column = @Column(name = "OWNER_USERNAME")),
-        @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))})
+    @AttributeOverrides({
+        @AttributeOverride(name = "username", column = @Column(name = "OWNER_USERNAME")),
+        @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))
+    })
     private User owner;
 
     @LastModifiedDate

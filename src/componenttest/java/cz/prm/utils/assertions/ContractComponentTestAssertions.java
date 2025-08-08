@@ -39,9 +39,11 @@ public class ContractComponentTestAssertions {
     public static void assertContact(Contact contact, ContactDto contactDto) {
         assertThat(contact.getContactId()).isEqualTo(contactDto.getContactId());
         assertThat(contact.getFirstName()).isEqualTo(contactDto.getFirstName());
-        assertThat(contact.getMiddleName()).isEqualTo(contactDto.getMiddleName());
         assertThat(contact.getLastName()).isEqualTo(contactDto.getLastName());
-        assertThat(contact.getNickName()).isEqualTo(contactDto.getNickName());
+        assertThat(contact.getEmail()).isEqualTo(contactDto.getEmail());
+        assertThat(contact.getPhoneNumber()).isEqualTo(contactDto.getPhoneNumber());
+        assertThat(contact.getStatus()).isEqualTo(contactDto.getStatus());
+        assertThat(contact.getSource()).isEqualTo(contactDto.getSource());
         assertThat(contact.getKnowScore()).isEqualTo(contactDto.getKnowScore());
         assertThat(contact.getLikeScore()).isEqualTo(contactDto.getLikeScore());
         assertThat(contact.getTrustScore()).isEqualTo(contactDto.getTrustScore());
@@ -54,8 +56,6 @@ public class ContractComponentTestAssertions {
         assertThat(contact.getLastEditDate()).isNotNull();
         assertThat(contact.getCreationDate()).isNotNull();
         assertOccupationDto(contact.getOccupation(), contactDto.getOccupation());
-        assertConnectionsDto(contact.getTelephones(), contactDto.getTelephones());
-        assertConnectionsDto(contact.getEmails(), contactDto.getEmails());
         assertConnectionsDto(contact.getUrls(), contactDto.getUrls());
     }
 

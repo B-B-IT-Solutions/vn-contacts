@@ -33,14 +33,14 @@ public class ContactComponentTestUtils {
     public static Contact contact() {
         var contact = new Contact();
         contact.setFirstName(format("First%s", uuid()));
-        contact.setMiddleName(format("Middle%s", uuid()));
         contact.setLastName(format("Last%s", uuid()));
-        contact.setNickName(format("Nick%s", uuid()));
+        contact.setEmail(uuid());
+        contact.setPhoneNumber(uuid());
+        contact.setStatus(format("Status%s", uuid()));
+        contact.setSource(format("Source%s", uuid()));
         contact.setKnowScore(randomInt());
         contact.setLikeScore(randomInt());
         contact.setTrustScore(randomInt());
-        contact.setTelephones(connections());
-        contact.setEmails(connections());
         contact.setUrls(connections());
         contact.setOccupation(occupation());
         contact.setLabels(uuids());
@@ -55,14 +55,14 @@ public class ContactComponentTestUtils {
     public static ContactDto contactDto() {
         var dto = new ContactDto();
         dto.setFirstName(uuid());
-        dto.setMiddleName(uuid());
         dto.setLastName(uuid());
-        dto.setNickName(uuid());
+        dto.setEmail(uuid());
+        dto.setPhoneNumber(uuid());
+        dto.setStatus(uuid());
+        dto.setSource(uuid());
         dto.setKnowScore(randomInt());
         dto.setLikeScore(randomInt());
         dto.setTrustScore(randomInt());
-        dto.setTelephones(connectionsDto());
-        dto.setEmails(connectionsDto());
         dto.setUrls(connectionsDto());
         dto.setOccupation(occupationDto());
         dto.setLabels(uuids());

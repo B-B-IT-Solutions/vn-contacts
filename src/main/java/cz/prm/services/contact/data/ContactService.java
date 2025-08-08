@@ -56,13 +56,13 @@ public class ContactService {
     private void updateContactFields(Contact savedContact, Contact updatedContact) {
         savedContact.setFirstName(updatedContact.getFirstName());
         savedContact.setLastName(updatedContact.getLastName());
-        savedContact.setMiddleName(updatedContact.getMiddleName());
-        savedContact.setNickName(updatedContact.getNickName());
+        savedContact.setEmail(updatedContact.getEmail());
+        savedContact.setPhoneNumber(updatedContact.getPhoneNumber());
+        savedContact.setStatus(updatedContact.getStatus());
+        savedContact.setSource(updatedContact.getSource());
         savedContact.setKnowScore(updatedContact.getKnowScore());
         savedContact.setLikeScore(updatedContact.getLikeScore());
         savedContact.setTrustScore(updatedContact.getTrustScore());
-        savedContact.setTelephones(updatedContact.getTelephones());
-        savedContact.setEmails(updatedContact.getEmails());
         savedContact.setUrls(updatedContact.getUrls());
         savedContact.setDateOfBirth(updatedContact.getDateOfBirth());
         savedContact.setOccupation(updatedContact.getOccupation());

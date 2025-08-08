@@ -18,14 +18,20 @@ public class ContactDto {
     @JsonProperty("firstName")
     private String firstName;
 
-    @JsonProperty("middleName")
-    private String middleName;
-
     @JsonProperty("lastName")
     private String lastName;
 
-    @JsonProperty("nickName")
-    private String nickName;
+    @JsonProperty("email")
+    private String email;
+
+    @JsonProperty("phoneNumber")
+    private String phoneNumber;
+
+    @JsonProperty("status")
+    private String status;
+
+    @JsonProperty("source")
+    private String source;
 
     @JsonProperty("knowScore")
     private Integer knowScore;
@@ -35,12 +41,6 @@ public class ContactDto {
 
     @JsonProperty("trustScore")
     private Integer trustScore;
-
-    @JsonProperty("telephones")
-    private List<ConnectionDto> telephones;
-
-    @JsonProperty("emails")
-    private List<ConnectionDto> emails;
 
     @JsonProperty("urls")
     private List<ConnectionDto> urls;

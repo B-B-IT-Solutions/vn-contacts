@@ -199,29 +199,6 @@ public class ContactComponentTest extends ContactComponentTestBase {
         queryDto = contactsQueryDto();
         filter = queryDto.getFilter();
 
-        filter.setMiddleName(contactDto1.getMiddleName());
-        pageDto = user1GetContacts(queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
-
-        filter.setMiddleName(containsFilter(contactDto1.getMiddleName()));
-        pageDto = user1GetContacts(queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
-
-        filter.setMiddleName(notContainsFilter(contactDto1.getMiddleName()));
-        pageDto = user1GetContacts(queryDto);
-        assertThat(pageDto.getContent()).hasSize(20);
-
-        filter.setMiddleName(containsNotContainsFilter(contactDto1.getMiddleName(), contactDto2.getMiddleName()));
-        pageDto = user1GetContacts(queryDto);
-        assertThat(pageDto.getContent()).hasSize(1);
-
-        filter.setMiddleName(notContainsFilter("Middle"));
-        pageDto = user1GetContacts(queryDto);
-        assertThat(pageDto.getContent()).isEmpty();
-
-        queryDto = contactsQueryDto();
-        filter = queryDto.getFilter();
-
         filter.setLastName(contactDto1.getLastName());
         pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
@@ -245,23 +222,46 @@ public class ContactComponentTest extends ContactComponentTestBase {
         queryDto = contactsQueryDto();
         filter = queryDto.getFilter();
 
-        filter.setNickName(contactDto1.getNickName());
+        filter.setStatus(contactDto1.getStatus());
         pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setNickName(containsFilter(contactDto1.getNickName()));
+        filter.setStatus(containsFilter(contactDto1.getStatus()));
         pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setNickName(notContainsFilter(contactDto1.getNickName()));
+        filter.setStatus(notContainsFilter(contactDto1.getStatus()));
         pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).hasSize(20);
 
-        filter.setNickName(containsNotContainsFilter(contactDto1.getNickName(), contactDto2.getNickName()));
+        filter.setStatus(containsNotContainsFilter(contactDto1.getStatus(), contactDto2.getStatus()));
         pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
 
-        filter.setNickName(notContainsFilter("Nick"));
+        filter.setStatus(notContainsFilter("Status"));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        queryDto = contactsQueryDto();
+        filter = queryDto.getFilter();
+
+        filter.setSource(contactDto1.getSource());
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setSource(containsFilter(contactDto1.getSource()));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setSource(notContainsFilter(contactDto1.getSource()));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(20);
+
+        filter.setSource(containsNotContainsFilter(contactDto1.getSource(), contactDto2.getSource()));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setSource(notContainsFilter("Source"));
         pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
