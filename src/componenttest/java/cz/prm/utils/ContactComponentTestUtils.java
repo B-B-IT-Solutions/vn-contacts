@@ -54,10 +54,10 @@ public class ContactComponentTestUtils {
 
     public static ContactDto contactDto() {
         var dto = new ContactDto();
+        dto.setFirstName(uuid());
         dto.setLastName(uuid());
         dto.setEmail(uuid());
         dto.setPhoneNumber(uuid());
-        dto.setFirstName(uuid());
         dto.setStatus(uuid());
         dto.setSource(uuid());
         dto.setKnowScore(randomInt());
