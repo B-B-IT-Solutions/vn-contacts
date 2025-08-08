@@ -270,8 +270,8 @@ public class ContactAssertions {
     public static void assertContactFilter(ContactsFilter filter, ContactsFilterDto dto) {
         assertThat(filter.getGlobalFilter()).isEqualTo(dto.getGlobalFilter());
         assertThat(filter.getFirstName()).isEqualTo(dto.getFirstName());
-        assertThat(filter.getStatus()).isEqualTo(dto.getStatus());
         assertThat(filter.getLastName()).isEqualTo(dto.getLastName());
+        assertThat(filter.getStatus()).isEqualTo(dto.getStatus());
         assertThat(filter.getSource()).isEqualTo(dto.getSource());
         assertThat(filter.getLabels()).isEqualTo(dto.getLabels());
         assertThat(filter.getIndustries()).isEqualTo(dto.getIndustries());
