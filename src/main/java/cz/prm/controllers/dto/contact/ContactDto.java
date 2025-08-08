@@ -40,7 +40,7 @@ public class ContactDto {
     private String phoneNumber;
 
     @JsonProperty("emails")
-    private List<ConnectionDto> emails;
+    private String email;
 
     @JsonProperty("urls")
     private List<ConnectionDto> urls;

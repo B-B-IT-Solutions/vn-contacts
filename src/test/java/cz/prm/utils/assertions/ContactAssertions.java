@@ -69,6 +69,7 @@ public class ContactAssertions {
         assertThat(contact1.getFirstName()).isEqualTo(contact2.getFirstName());
         assertThat(contact1.getMiddleName()).isEqualTo(contact2.getMiddleName());
         assertThat(contact1.getLastName()).isEqualTo(contact2.getLastName());
+        assertThat(contact1.getEmail()).isEqualTo(contact2.getEmail());
         assertThat(contact1.getPhoneNumber()).isEqualTo(contact2.getPhoneNumber());
         assertThat(contact1.getNickName()).isEqualTo(contact2.getNickName());
         assertThat(contact1.getKnowScore()).isEqualTo(contact2.getKnowScore());
@@ -84,7 +85,6 @@ public class ContactAssertions {
         assertThat(contact1.getLastEditDate()).isEqualTo(contact2.getLastEditDate());
         assertThat(contact1.getCreationDate()).isEqualTo(contact2.getCreationDate());
         assertOccupation(contact1.getOccupation(), contact2.getOccupation());
-        assertConnections(contact1.getEmails(), contact2.getEmails());
         assertConnections(contact1.getUrls(), contact2.getUrls());
     }
 
@@ -93,6 +93,7 @@ public class ContactAssertions {
         assertThat(contact.getFirstName()).isEqualTo(dto.getFirstName());
         assertThat(contact.getMiddleName()).isEqualTo(dto.getMiddleName());
         assertThat(contact.getLastName()).isEqualTo(dto.getLastName());
+        assertThat(contact.getEmail()).isEqualTo(dto.getEmail());
         assertThat(contact.getPhoneNumber()).isEqualTo(dto.getPhoneNumber());
         assertThat(contact.getNickName()).isEqualTo(dto.getNickName());
         assertThat(contact.getKnowScore()).isEqualTo(dto.getKnowScore());
@@ -107,7 +108,6 @@ public class ContactAssertions {
         assertThat(contact.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(contact.getCreationDate()).isEqualTo(dto.getCreationDate());
         assertOccupationDto(contact.getOccupation(), dto.getOccupation());
-        assertConnectionsDto(contact.getEmails(), dto.getEmails());
         assertConnectionsDto(contact.getUrls(), dto.getUrls());
     }
 

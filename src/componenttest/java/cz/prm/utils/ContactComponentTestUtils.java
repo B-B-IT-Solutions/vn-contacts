@@ -36,11 +36,11 @@ public class ContactComponentTestUtils {
         contact.setMiddleName(format("Middle%s", uuid()));
         contact.setLastName(format("Last%s", uuid()));
         contact.setNickName(format("Nick%s", uuid()));
+        contact.setPhoneNumber(uuid());
+        contact.setEmail(uuid());
         contact.setKnowScore(randomInt());
         contact.setLikeScore(randomInt());
         contact.setTrustScore(randomInt());
-        contact.setPhoneNumber(uuid());
-        contact.setEmails(connections());
         contact.setUrls(connections());
         contact.setOccupation(occupation());
         contact.setLabels(uuids());
@@ -57,12 +57,12 @@ public class ContactComponentTestUtils {
         dto.setFirstName(uuid());
         dto.setMiddleName(uuid());
         dto.setLastName(uuid());
+        dto.setPhoneNumber(uuid());
+        dto.setEmail(uuid());
         dto.setNickName(uuid());
         dto.setKnowScore(randomInt());
         dto.setLikeScore(randomInt());
         dto.setTrustScore(randomInt());
-        dto.setPhoneNumber(uuid());
-        dto.setEmails(connectionsDto());
         dto.setUrls(connectionsDto());
         dto.setOccupation(occupationDto());
         dto.setLabels(uuids());

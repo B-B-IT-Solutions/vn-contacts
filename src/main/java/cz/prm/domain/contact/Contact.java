@@ -65,10 +65,8 @@ public class Contact {
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
 
-    @ElementCollection(fetch = EAGER)
-    @CollectionTable(name = "CONTACT_EMAIL", joinColumns = @JoinColumn(name = "CONTACT_ID"))
     @Column(name = "EMAIL")
-    private List<Connection> emails;
+    private String email;
 
     @ElementCollection(fetch = EAGER)
     @CollectionTable(name = "CONTACT_URL", joinColumns = @JoinColumn(name = "CONTACT_ID"))
@@ -108,8 +106,10 @@ public class Contact {
 
     @CreatedBy
     @Embedded
-    @AttributeOverrides({@AttributeOverride(name = "username", column = @Column(name = "OWNER_USERNAME")),
-        @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))})
+    @AttributeOverrides({
+        @AttributeOverride(name = "username", column = @Column(name = "OWNER_USERNAME")),
+        @AttributeOverride(name = "email", column = @Column(name = "OWNER_EMAIL"))
+    })
     private User owner;
 
     @LastModifiedDate

@@ -142,7 +142,7 @@ class ContactServiceTest {
         assertThat(savedContact.getLikeScore()).isEqualTo(updatedContact.getLikeScore());
         assertThat(savedContact.getTrustScore()).isEqualTo(updatedContact.getTrustScore());
         assertThat(savedContact.getPhoneNumber()).isEqualTo(updatedContact.getPhoneNumber());
-        assertThat(savedContact.getEmails()).isEqualTo(updatedContact.getEmails());
+        assertThat(savedContact.getEmail()).isEqualTo(updatedContact.getEmail());
         assertThat(savedContact.getUrls()).isEqualTo(updatedContact.getUrls());
         assertThat(savedContact.getDateOfBirth()).isEqualTo(updatedContact.getDateOfBirth());
         assertThat(savedContact.getOccupation()).isEqualTo(updatedContact.getOccupation());
