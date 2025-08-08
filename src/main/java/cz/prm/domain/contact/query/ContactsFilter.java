@@ -13,11 +13,11 @@ public class ContactsFilter {
 
     private String firstName;
 
-    private String middleName;
-
     private String lastName;
 
-    private String nickName;
+    private String status;
+
+    private String source;
 
     private String labels;
 
@@ -31,16 +31,16 @@ public class ContactsFilter {
         return isNotBlank(firstName);
     }
 
-    public boolean isMiddleName() {
-        return isNotBlank(middleName);
-    }
-
     public boolean isLastName() {
         return isNotBlank(lastName);
     }
 
-    public boolean isNickName() {
-        return isNotBlank(nickName);
+    public boolean isStatus() {
+        return isNotBlank(status);
+    }
+
+    public boolean isSource() {
+        return isNotBlank(source);
     }
 
     public boolean isLabels() {

@@ -32,23 +32,23 @@ public class ContactPredicates {
         var predicate = new BooleanBuilder();
         if (filter.isGlobalFilter()) {
             predicate.or(contact.firstName.containsIgnoreCase(filter.getGlobalFilter()));
-            predicate.or(contact.middleName.containsIgnoreCase(filter.getGlobalFilter()));
             predicate.or(contact.lastName.containsIgnoreCase(filter.getGlobalFilter()));
-            predicate.or(contact.nickName.containsIgnoreCase(filter.getGlobalFilter()));
+            predicate.or(contact.status.containsIgnoreCase(filter.getGlobalFilter()));
+            predicate.or(contact.source.containsIgnoreCase(filter.getGlobalFilter()));
             predicate.or(contact.labels.contains(filter.getGlobalFilter()));
             predicate.or(contact.industries.contains(filter.getGlobalFilter()));
         }
         if (filter.isFirstName()) {
             applyCriteria(predicate, contact.firstName, filter.getFirstName());
         }
-        if (filter.isMiddleName()) {
-            applyCriteria(predicate, contact.middleName, filter.getMiddleName());
-        }
         if (filter.isLastName()) {
             applyCriteria(predicate, contact.lastName, filter.getLastName());
         }
-        if (filter.isNickName()) {
-            applyCriteria(predicate, contact.nickName, filter.getNickName());
+        if (filter.isStatus()) {
+            applyCriteria(predicate, contact.status, filter.getStatus());
+        }
+        if (filter.isSource()) {
+            applyCriteria(predicate, contact.source, filter.getSource());
         }
         if (filter.isLabels()) {
             applyCriteria(predicate, contact.labels, filter.getLabels());
