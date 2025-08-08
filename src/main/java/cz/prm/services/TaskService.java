@@ -37,14 +37,14 @@ public class TaskService {
         return getTaskById(taskId);
     }
 
-    public void createTask(Task task) {
-        repository.save(task);
+    public Task createTask(Task task) {
+        return repository.save(task);
     }
 
-    public void updateTask(Long taskId, Task updatedTask) {
+    public Task updateTask(Long taskId, Task updatedTask) {
         var savedTask = getTaskById(taskId);
         updateTaskFields(savedTask, updatedTask);
-        repository.save(savedTask);
+        return repository.save(savedTask);
     }
 
     public void deleteTask(Long taskId) {
