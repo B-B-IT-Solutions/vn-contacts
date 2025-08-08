@@ -42,11 +42,11 @@ public class ContactUtils {
         var contact = new Contact();
         contact.setContactId(randomLong());
         contact.setFirstName(uuid());
-        contact.setMiddleName(uuid());
         contact.setLastName(uuid());
-        contact.setPhoneNumber(uuid());
         contact.setEmail(uuid());
-        contact.setNickName(uuid());
+        contact.setPhoneNumber(uuid());
+        contact.setStatus(uuid());
+        contact.setSource(uuid());
         contact.setKnowScore(randomInt());
         contact.setLikeScore(randomInt());
         contact.setTrustScore(randomInt());
@@ -68,11 +68,11 @@ public class ContactUtils {
         var contact = new ContactDto();
         contact.setContactId(randomLong());
         contact.setFirstName(uuid());
-        contact.setMiddleName(uuid());
         contact.setLastName(uuid());
         contact.setEmail(uuid());
         contact.setPhoneNumber(uuid());
-        contact.setNickName(uuid());
+        contact.setStatus(uuid());
+        contact.setSource(uuid());
         contact.setKnowScore(randomInt());
         contact.setLikeScore(randomInt());
         contact.setTrustScore(randomInt());

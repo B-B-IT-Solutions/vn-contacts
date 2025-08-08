@@ -44,14 +44,20 @@ public class Contact {
     @Column(name = "FIRST_NAME")
     private String firstName;
 
-    @Column(name = "MIDDLE_NAME")
-    private String middleName;
-
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "NICK_NAME")
-    private String nickName;
+    @Column(name = "EMAIL")
+    private String email;
+
+    @Column(name = "PHONE_NUMBER")
+    private String phoneNumber;
+
+    @Column(name = "STATUS")
+    private String status;
+
+    @Column(name = "SOURCE")
+    private String source;
 
     @Column(name = "KNOW_SCORE")
     private Integer knowScore;
@@ -61,12 +67,6 @@ public class Contact {
 
     @Column(name = "TRUST_SCORE")
     private Integer trustScore;
-
-    @Column(name = "PHONE_NUMBER")
-    private String phoneNumber;
-
-    @Column(name = "EMAIL")
-    private String email;
 
     @ElementCollection(fetch = EAGER)
     @CollectionTable(name = "CONTACT_URL", joinColumns = @JoinColumn(name = "CONTACT_ID"))
