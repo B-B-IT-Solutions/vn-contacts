@@ -281,8 +281,8 @@
 	 
 	 <changeSet author="sergej" id="1.0.13">
 			<addColumn tableName="contact">
-				 <column name="know_score" type="INT"/>
-				 <column name="like_score" type="INT"/>
+				 <column name="country" type="VARCHAR(250)"/>
+				 <column name="city" type="VARCHAR(250)"/>
 				 <column name="trust_score" type="INT"/>
 			</addColumn>
 	 </changeSet>

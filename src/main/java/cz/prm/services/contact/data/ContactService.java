@@ -60,8 +60,8 @@ public class ContactService {
         savedContact.setPhoneNumber(updatedContact.getPhoneNumber());
         savedContact.setStatus(updatedContact.getStatus());
         savedContact.setSource(updatedContact.getSource());
-        savedContact.setKnowScore(updatedContact.getKnowScore());
-        savedContact.setLikeScore(updatedContact.getLikeScore());
+        savedContact.setCountry(updatedContact.getCountry());
+        savedContact.setCity(updatedContact.getCity());
         savedContact.setTrustScore(updatedContact.getTrustScore());
         savedContact.setUrls(updatedContact.getUrls());
         savedContact.setDateOfBirth(updatedContact.getDateOfBirth());

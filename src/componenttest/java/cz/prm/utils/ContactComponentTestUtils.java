@@ -38,8 +38,8 @@ public class ContactComponentTestUtils {
         contact.setPhoneNumber(uuid());
         contact.setStatus(format("Status%s", uuid()));
         contact.setSource(format("Source%s", uuid()));
-        contact.setKnowScore(randomInt());
-        contact.setLikeScore(randomInt());
+        contact.setCountry(format("Country%s", uuid()));
+        contact.setCity(format("City%s", uuid()));
         contact.setTrustScore(randomInt());
         contact.setUrls(connections());
         contact.setOccupation(occupation());
@@ -60,8 +60,8 @@ public class ContactComponentTestUtils {
         dto.setPhoneNumber(uuid());
         dto.setStatus(uuid());
         dto.setSource(uuid());
-        dto.setKnowScore(randomInt());
-        dto.setLikeScore(randomInt());
+        dto.setCountry(format("Country%s", uuid()));
+        dto.setCity(format("City%s", uuid()));
         dto.setTrustScore(randomInt());
         dto.setUrls(connectionsDto());
         dto.setOccupation(occupationDto());
