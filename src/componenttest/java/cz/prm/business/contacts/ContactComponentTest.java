@@ -10,9 +10,9 @@ import static cz.prm.utils.ComponentTestUtils.containsFilter;
 import static cz.prm.utils.ComponentTestUtils.containsNotContainsFilter;
 import static cz.prm.utils.ComponentTestUtils.notContainsFilter;
 import static cz.prm.utils.ComponentTestUtils.uuid;
-import static cz.prm.utils.ContactComponentTestUtils.contactDto;
+import static cz.prm.utils.ContactComponentTestUtils.contactEditDto;
 import static cz.prm.utils.ContactComponentTestUtils.contactsQueryDto;
-import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertAboutDto;
+import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertAbout;
 import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertContact;
 import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertContacts;
 import static java.time.Instant.now;
@@ -385,35 +385,50 @@ public class ContactComponentTest extends ContactComponentTestBase {
 
     @Test
     void createContact() {
-        var toCreateDto = contactDto();
+        var toCreateDto = contactEditDto();
         user1CreateContact(toCreateDto);
         var contact = getContactFromDb(toCreateDto);
+        var about = getAboutFromDb(contact);
         var contactId = contact.getContactId();
 
-        var createdDto = user1GetContact(contactId);
-        assertContact(contact, createdDto);
+        var createdContactDto = user1GetContact(contactId);
+        var createdAboutDto = user1GetAbout(contactId);
+        assertContact(contact, createdContactDto);
+        assertAbout(about, createdAboutDto);
         user2GetContactExpectNotFound(contactId);
+        user2GetAboutExpectNotFound(contactId);
         user3GetContactExpectNotFound(contactId);
+        user3GetAboutExpectNotFound(contactId);
 
-        toCreateDto = contactDto();
+        toCreateDto = contactEditDto();
         user2CreateContact(toCreateDto);
         contact = getContactFromDb(toCreateDto);
+        about = getAboutFromDb(contact);
         contactId = contact.getContactId();
 
-        createdDto = user2GetContact(contactId);
-        assertContact(contact, createdDto);
+        createdContactDto = user2GetContact(contactId);
+        createdAboutDto = user2GetAbout(contactId);
+        assertContact(contact, createdContactDto);
+        assertAbout(about, createdAboutDto);
         user1GetContactExpectNotFound(contactId);
+        user1GetAboutExpectNotFound(contactId);
         user3GetContactExpectNotFound(contactId);
+        user3GetAboutExpectNotFound(contactId);
 
-        toCreateDto = contactDto();
+        toCreateDto = contactEditDto();
         user3CreateContact(toCreateDto);
         contact = getContactFromDb(toCreateDto);
+        about = getAboutFromDb(contact);
         contactId = contact.getContactId();
 
-        createdDto = user3GetContact(contactId);
-        assertContact(contact, createdDto);
+        createdContactDto = user3GetContact(contactId);
+        createdAboutDto = user3GetAbout(contactId);
+        assertContact(contact, createdContactDto);
+        assertAbout(about, createdAboutDto);
         user1GetContactExpectNotFound(contactId);
+        user1GetAboutExpectNotFound(contactId);
         user2GetContactExpectNotFound(contactId);
+        user2GetAboutExpectNotFound(contactId);
     }
 
     @Test
@@ -501,7 +516,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
 
         var about = getAboutFromDb(contact);
         var aboutDto = user1GetAbout(contactId);
-        assertAboutDto(about, aboutDto);
+        assertAbout(about, aboutDto);
         user2GetAboutExpectNotFound(contactId);
         user3GetAboutExpectNotFound(contactId);
 
@@ -510,7 +525,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
 
         about = getAboutFromDb(contact);
         aboutDto = user2GetAbout(contactId);
-        assertAboutDto(about, aboutDto);
+        assertAbout(about, aboutDto);
         user1GetAboutExpectNotFound(contactId);
         user3GetAboutExpectNotFound(contactId);
 
@@ -519,7 +534,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
 
         about = getAboutFromDb(contact);
         aboutDto = user3GetAbout(contactId);
-        assertAboutDto(about, aboutDto);
+        assertAbout(about, aboutDto);
         user1GetAboutExpectNotFound(contactId);
         user2GetAboutExpectNotFound(contactId);
     }
@@ -533,7 +548,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
         updateDto.setDescription(uuid());
         user1UpdateAbout(contactId, updateDto);
         var about = getAboutFromDb(contact);
-        assertAboutDto(about, updateDto);
+        assertAbout(about, updateDto);
 
         user2UpdateAboutExpectNotFound(contactId, updateDto);
         user3UpdateAboutExpectNotFound(contactId, updateDto);
@@ -545,7 +560,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
         updateDto.setDescription(uuid());
         user2UpdateAbout(contactId, updateDto);
         about = getAboutFromDb(contact);
-        assertAboutDto(about, updateDto);
+        assertAbout(about, updateDto);
 
         user1UpdateAboutExpectNotFound(contactId, updateDto);
         user3UpdateAboutExpectNotFound(contactId, updateDto);
@@ -557,7 +572,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
         updateDto.setDescription(uuid());
         user3UpdateAbout(contactId, updateDto);
         about = getAboutFromDb(contact);
-        assertAboutDto(about, updateDto);
+        assertAbout(about, updateDto);
 
         user1UpdateAboutExpectNotFound(contactId, updateDto);
         user2UpdateAboutExpectNotFound(contactId, updateDto);

@@ -63,7 +63,7 @@ public class ContractComponentTestAssertions {
         assertThat(occupation.getIndustry()).isEqualTo(dto.getIndustry());
     }
 
-    public static void assertAboutDto(About about, AboutDto dto) {
+    public static void assertAbout(About about, AboutDto dto) {
         assertThat(about.getDescription()).isEqualTo(dto.getDescription());
         assertThat(about.getContactGoals()).isEqualTo(dto.getContactGoals());
         assertThat(about.getContactChallenges()).isEqualTo(dto.getContactChallenges());

@@ -13,6 +13,7 @@ import cz.prm.business.BusinessComponentTestBase;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.ContactEditDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.Contact;
@@ -27,15 +28,15 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
     protected static String CONTACT_URL = CONTACTS_URL + "/%s";
     protected static String ABOUT_URL = CONTACTS_URL + "/%s/about";
 
-    protected void user1CreateContact(ContactDto dto) {
+    protected void user1CreateContact(ContactEditDto dto) {
         createContact(dto, USER_1);
     }
 
-    protected void user2CreateContact(ContactDto dto) {
+    protected void user2CreateContact(ContactEditDto dto) {
         createContact(dto, USER_2);
     }
 
-    protected void user3CreateContact(ContactDto dto) {
+    protected void user3CreateContact(ContactEditDto dto) {
         createContact(dto, USER_3);
     }
 
@@ -111,7 +112,7 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         return getAbout(contactId, USER_3);
     }
 
-    protected void createContact(ContactDto dto, ComponentTestUser user) {
+    protected void createContact(ContactEditDto dto, ComponentTestUser user) {
         post(CONTACTS_URL, user, dto);
     }
 

@@ -10,8 +10,13 @@ import static java.lang.String.format;
 import static java.time.Instant.now;
 
 import cz.prm.controllers.dto.common.PaginationDto;
+import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.ContactEditDto;
+import cz.prm.controllers.dto.contact.FirstInteractionDto;
+import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
+import cz.prm.controllers.dto.contact.PastClientDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.About;
@@ -23,6 +28,15 @@ import cz.prm.domain.contact.PastClient;
 import java.util.List;
 
 public class ContactComponentTestUtils {
+
+    public static ContactEditDto contactEditDto() {
+        var contact = contactDto();
+        var about = aboutDto(contact);
+        var ce = new ContactEditDto();
+        ce.setContact(contact);
+        ce.setAbout(about);
+        return ce;
+    }
 
     public static List<Contact> contacts() {
         return newArrayList(contact(), contact(), contact());
@@ -99,8 +113,24 @@ public class ContactComponentTestUtils {
         return about;
     }
 
+    public static AboutDto aboutDto(ContactDto contact) {
+        var about = new AboutDto();
+        about.setContactId(contact.getContactId());
+        about.setDescription(format("description%s", uuid()));
+        about.setIdealClients(idealClientsDto());
+        about.setPastClients(pastClientsDto());
+        about.setContactGoals(format("contactGoals%s", uuid()));
+        about.setContactChallenges(format("contactChallenges%s", uuid()));
+        about.setFirstInteraction(firstInteractionDto());
+        return about;
+    }
+
     public static List<IdealClient> idealClients() {
         return newArrayList(idealClient(), idealClient(), idealClient());
+    }
+
+    public static List<IdealClientDto> idealClientsDto() {
+        return newArrayList(idealClientDto(), idealClientDto(), idealClientDto());
     }
 
     public static IdealClient idealClient() {
@@ -114,8 +144,23 @@ public class ContactComponentTestUtils {
         return ic;
     }
 
+    public static IdealClientDto idealClientDto() {
+        var ic = new IdealClientDto();
+        ic.setIdealClientId(randomLong());
+        ic.setName(uuid());
+        ic.setCharacteristics(uuids());
+        ic.setNeeds(uuid());
+        ic.setGoals(uuid());
+        ic.setOrder(randomShort());
+        return ic;
+    }
+
     public static List<PastClient> pastClients() {
         return newArrayList(pastClient(), pastClient(), pastClient());
+    }
+
+    public static List<PastClientDto> pastClientsDto() {
+        return newArrayList(pastClientDto(), pastClientDto(), pastClientDto());
     }
 
     public static PastClient pastClient() {
@@ -129,8 +174,28 @@ public class ContactComponentTestUtils {
         return ic;
     }
 
+    public static PastClientDto pastClientDto() {
+        var ic = new PastClientDto();
+        ic.setPastClientId(randomLong());
+        ic.setName(uuid());
+        ic.setCharacteristics(uuids());
+        ic.setProvidedServices(uuid());
+        ic.setOutcomes(uuid());
+        ic.setOrder(randomShort());
+        return ic;
+    }
+
     public static FirstInteraction firstInteraction() {
         var fi = new FirstInteraction();
+        fi.setType(format("type%s", uuid()));
+        fi.setSource(format("source%s", uuid()));
+        fi.setDate(now());
+        fi.setNotes(format("notes%s", uuid()));
+        return fi;
+    }
+
+    public static FirstInteractionDto firstInteractionDto() {
+        var fi = new FirstInteractionDto();
         fi.setType(format("type%s", uuid()));
         fi.setSource(format("source%s", uuid()));
         fi.setDate(now());
