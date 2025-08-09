@@ -1,7 +1,7 @@
 package cz.prm.utils.assertions;
 
 import static cz.prm.utils.TimeComponentTestUtils.ONE_SECOND_OFFSET;
-import static cz.prm.utils.assertions.ConditionsUtils.nullOrEquals;
+import static cz.prm.utils.assertions.ConditionUtils.nullOrEquals;
 import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
