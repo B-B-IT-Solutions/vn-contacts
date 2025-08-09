@@ -3,6 +3,7 @@ package cz.prm.services.contact;
 import static cz.prm.utils.CommonUtils.page;
 import static cz.prm.utils.ContactUtils.about;
 import static cz.prm.utils.ContactUtils.contact;
+import static cz.prm.utils.ContactUtils.contactEdit;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsQuery;
 import static cz.prm.utils.assertions.ContactAssertions.assertAbout;
@@ -63,9 +64,11 @@ class ContactClearingHouseTest {
 
     @Test
     void createContact() {
-        var contact = contact();
+        var ce = contactEdit();
+        var contact = ce.getContact();
+        var about = ce.getAbout();
         when(contactService.createContact(contact)).thenAnswer((invocation -> invocation.getArgument(0)));
-        clearingHouse.createContact(contact);
+        clearingHouse.createContact(ce);
         verify(contactService).createContact(contact);
         verify(aboutService).createAbout(contact.getContactId());
     }

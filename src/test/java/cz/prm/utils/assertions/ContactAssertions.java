@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.ContactEditDto;
 import cz.prm.controllers.dto.contact.FirstInteractionDto;
 import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
@@ -16,6 +17,7 @@ import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.ContactEdit;
 import cz.prm.domain.contact.FirstInteraction;
 import cz.prm.domain.contact.IdealClient;
 import cz.prm.domain.contact.Occupation;
@@ -60,6 +62,11 @@ public class ContactAssertions {
             var u2 = dtos.stream().filter(u -> Objects.equals(u1.getContactId(), u.getContactId())).findFirst().get();
             assertContact(u1, u2);
         });
+    }
+
+    public static void assertContactEdit(ContactEdit ce, ContactEditDto dto) {
+        assertContact(ce.getContact(), dto.getContact());
+        assertAbout(ce.getAbout(), dto.getAbout());
     }
 
     public static void assertContact(Contact contact1, Contact contact2) {
@@ -131,7 +138,7 @@ public class ContactAssertions {
         assertFirstInteraction(about1.getFirstInteraction(), about2.getFirstInteraction());
     }
 
-    public static void assertAboutDto(About about, AboutDto dto) {
+    public static void assertAbout(About about, AboutDto dto) {
         assertThat(about.getDescription()).isEqualTo(dto.getDescription());
         assertThat(about.getContactGoals()).isEqualTo(dto.getContactGoals());
         assertThat(about.getContactChallenges()).isEqualTo(dto.getContactChallenges());

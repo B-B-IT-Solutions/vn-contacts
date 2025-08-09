@@ -6,11 +6,14 @@ import static cz.prm.utils.ContactUtils.about;
 import static cz.prm.utils.ContactUtils.aboutDto;
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contactDto;
+import static cz.prm.utils.ContactUtils.contactEdit;
+import static cz.prm.utils.ContactUtils.contactEditDto;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsFilterDto;
 import static cz.prm.utils.ContactUtils.contactsQueryDto;
-import static cz.prm.utils.assertions.ContactAssertions.assertAboutDto;
+import static cz.prm.utils.assertions.ContactAssertions.assertAbout;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
+import static cz.prm.utils.assertions.ContactAssertions.assertContactEdit;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactFilter;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactQuery;
 import static cz.prm.utils.assertions.ContactAssertions.assertPage;
@@ -36,6 +39,20 @@ class ContactMapperTest {
     }
 
     @Test
+    void toContactEdit() {
+        var dto = contactEditDto();
+        var ce = mapper.toContactEdit(dto);
+        assertContactEdit(ce, dto);
+    }
+
+    @Test
+    void toContactEditDto() {
+        var ce = contactEdit();
+        var dto = mapper.toContactEditDto(ce);
+        assertContactEdit(ce, dto);
+    }
+
+    @Test
     void toContactDto() {
         var contact = contact();
         var dto = mapper.toContactDto(contact);
@@ -53,14 +70,14 @@ class ContactMapperTest {
     void toAboutDto() {
         var about = about();
         var dto = mapper.toAboutDto(about);
-        assertAboutDto(about, dto);
+        assertAbout(about, dto);
     }
 
     @Test
     void toAbout() {
         var dto = aboutDto();
         var about = mapper.toAbout(dto);
-        assertAboutDto(about, dto);
+        assertAbout(about, dto);
     }
 
     @Test

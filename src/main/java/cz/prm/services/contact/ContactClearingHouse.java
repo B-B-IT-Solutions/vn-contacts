@@ -3,6 +3,7 @@ package cz.prm.services.contact;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.ContactEdit;
 import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.services.TaskService;
 import cz.prm.services.contact.data.AboutService;
@@ -42,9 +43,10 @@ public class ContactClearingHouse {
         return contactService.getContact(contactId);
     }
 
-    public void createContact(Contact contact) {
-        var savedContact = contactService.createContact(contact);
+    public ContactEdit createContact(ContactEdit contact) {
+        var savedContact = contactService.createContact(contact.getContact());
         aboutService.createAbout(savedContact.getContactId());
+        return new ContactEdit(savedContact, null);
     }
 
     public void updateContact(Long contactId, Contact updatedContact) {

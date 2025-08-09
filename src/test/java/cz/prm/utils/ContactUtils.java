@@ -14,6 +14,7 @@ import static java.time.Instant.now;
 
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.ContactEditDto;
 import cz.prm.controllers.dto.contact.FirstInteractionDto;
 import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
@@ -22,6 +23,7 @@ import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.ContactEdit;
 import cz.prm.domain.contact.FirstInteraction;
 import cz.prm.domain.contact.IdealClient;
 import cz.prm.domain.contact.Occupation;
@@ -31,6 +33,20 @@ import cz.prm.domain.contact.query.ContactsQuery;
 import java.util.List;
 
 public class ContactUtils {
+
+    public static ContactEdit contactEdit() {
+        var ce = new ContactEdit();
+        ce.setContact(contact());
+        ce.setAbout(about());
+        return ce;
+    }
+
+    public static ContactEditDto contactEditDto() {
+        var ce = new ContactEditDto();
+        ce.setContact(contactDto());
+        ce.setAbout(aboutDto());
+        return ce;
+    }
 
     public static List<Contact> contacts() {
         return newArrayList(contact(), contact(), contact());
