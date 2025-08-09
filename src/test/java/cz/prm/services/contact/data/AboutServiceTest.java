@@ -143,7 +143,6 @@ class AboutServiceTest {
         assertThat(savedAbout.getDescription()).isEqualTo(updatedAbout.getDescription());
         assertThat(savedAbout.getContactGoals()).isEqualTo(updatedAbout.getContactGoals());
         assertThat(savedAbout.getContactChallenges()).isEqualTo(updatedAbout.getContactChallenges());
-        assertThat(savedAbout.getMyBenefits()).isEqualTo(updatedAbout.getMyBenefits());
         assertIdealClients(updatedAbout.getIdealClients(), savedAbout.getIdealClients());
         assertPastClients(updatedAbout.getPastClients(), savedAbout.getPastClients());
         assertFirstInteraction(updatedAbout.getFirstInteraction(), savedAbout.getFirstInteraction());

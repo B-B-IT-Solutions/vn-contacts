@@ -26,9 +26,6 @@ public class AboutDto {
     @JsonProperty("contactChallenges")
     private String contactChallenges;
 
-    @JsonProperty("myBenefits")
-    private String myBenefits;
-
     @JsonProperty("firstInteraction")
     private FirstInteractionDto firstInteraction;
 

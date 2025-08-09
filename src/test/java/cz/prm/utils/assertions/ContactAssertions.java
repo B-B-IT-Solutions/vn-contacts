@@ -153,7 +153,6 @@ public class ContactAssertions {
         assertThat(about1.getDescription()).isEqualTo(about2.getDescription());
         assertThat(about1.getContactGoals()).isEqualTo(about2.getContactGoals());
         assertThat(about1.getContactChallenges()).isEqualTo(about2.getContactChallenges());
-        assertThat(about1.getMyBenefits()).isEqualTo(about2.getMyBenefits());
         assertThat(about1.getContactId()).isEqualTo(about2.getContactId());
         assertIdealClients(about1.getIdealClients(), about2.getIdealClients());
         assertPastClients(about1.getPastClients(), about2.getPastClients());
@@ -164,7 +163,6 @@ public class ContactAssertions {
         assertThat(about.getDescription()).isEqualTo(dto.getDescription());
         assertThat(about.getContactGoals()).isEqualTo(dto.getContactGoals());
         assertThat(about.getContactChallenges()).isEqualTo(dto.getContactChallenges());
-        assertThat(about.getMyBenefits()).isEqualTo(dto.getMyBenefits());
         assertThat(about.getContactId()).isEqualTo(dto.getContactId());
         assertIdealClientsDto(about.getIdealClients(), dto.getIdealClients());
         assertPastClientsDto(about.getPastClients(), dto.getPastClients());

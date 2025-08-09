@@ -51,9 +51,6 @@ public class About {
     @Column(name = "CONTACT_CHALLENGES", columnDefinition = "TEXT")
     private String contactChallenges;
 
-    @Column(name = "MY_BENEFITS", columnDefinition = "TEXT")
-    private String myBenefits;
-
     @Embedded
     @AttributeOverrides({
         @AttributeOverride(name = "type", column = @Column(name = "FIRST_INTERACTION_TYPE")),

@@ -134,7 +134,6 @@ public class ContactUtils {
         about.setPastClients(pastClients());
         about.setContactGoals(uuid());
         about.setContactChallenges(uuid());
-        about.setMyBenefits(uuid());
         about.setContactId(randomLong());
         about.setOwner(user());
         about.setFirstInteraction(firstInteraction());
@@ -148,7 +147,6 @@ public class ContactUtils {
         dto.setPastClients(pastClientsDto());
         dto.setContactGoals(uuid());
         dto.setContactChallenges(uuid());
-        dto.setMyBenefits(uuid());
         dto.setContactId(randomLong());
         dto.setFirstInteraction(firstInteractionDto());
         return dto;

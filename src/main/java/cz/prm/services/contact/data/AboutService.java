@@ -56,7 +56,6 @@ public class AboutService {
         savedAbout.setDescription(updatedAbout.getDescription());
         savedAbout.setContactGoals(updatedAbout.getContactGoals());
         savedAbout.setContactChallenges(updatedAbout.getContactChallenges());
-        savedAbout.setMyBenefits(updatedAbout.getMyBenefits());
         updateIdealClients(savedAbout.getIdealClients(), updatedAbout.getIdealClients());
         updatePastClients(savedAbout.getPastClients(), updatedAbout.getPastClients());
         updateFirstInteraction(savedAbout.getFirstInteraction(), updatedAbout.getFirstInteraction());

@@ -82,7 +82,6 @@ public class ContractComponentTestAssertions {
         assertThat(about.getDescription()).isEqualTo(dto.getDescription());
         assertThat(about.getContactGoals()).isEqualTo(dto.getContactGoals());
         assertThat(about.getContactChallenges()).isEqualTo(dto.getContactChallenges());
-        assertThat(about.getMyBenefits()).isEqualTo(dto.getMyBenefits());
         assertThat(about.getContactId()).isEqualTo(dto.getContactId());
         assertIdealClientsDto(about.getIdealClients(), dto.getIdealClients());
         assertPastClientsDto(about.getPastClients(), dto.getPastClients());
