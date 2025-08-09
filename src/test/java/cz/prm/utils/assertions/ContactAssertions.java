@@ -64,6 +64,11 @@ public class ContactAssertions {
         });
     }
 
+    public static void assertContactEdit(ContactEdit ce1, ContactEdit ce2) {
+        assertContact(ce1.getContact(), ce2.getContact());
+        assertAbout(ce1.getAbout(), ce2.getAbout());
+    }
+
     public static void assertContactEdit(ContactEdit ce, ContactEditDto dto) {
         assertContact(ce.getContact(), dto.getContact());
         assertAbout(ce.getAbout(), dto.getAbout());

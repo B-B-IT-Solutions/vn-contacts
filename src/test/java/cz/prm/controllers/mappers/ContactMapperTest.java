@@ -21,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
+import cz.prm.domain.contact.ContactEdit;
 import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.Test;
@@ -114,6 +115,18 @@ class ContactMapperTest {
         dto.setFilter(null);
         var query = mapper.toNullSafeContactsQuery(dto);
         assertNullSafeContactQuery(query);
+    }
+
+    @Test
+    void afterContactEditDto() {
+        var target = new ContactEdit();
+        target.setContact(null);
+        target.setAbout(null);
+        assertThat(target.getContact()).isNull();
+        assertThat(target.getAbout()).isNull();
+        mapper.afterContactEditDto(null, target);
+        assertThat(target.getContact()).isNotNull();
+        assertThat(target.getAbout()).isNotNull();
     }
 
     @Test

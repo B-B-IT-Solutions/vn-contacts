@@ -3,6 +3,7 @@ package cz.prm.services.contact.data;
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsQuery;
+import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertPage;
 import static java.util.Optional.empty;
@@ -82,8 +83,13 @@ class ContactServiceTest {
     @Test
     void createContact() {
         var contact = contact();
-        contactService.createContact(contact);
-        verify(repository).save(contact);
+        when(repository.save(contact)).thenAnswer(returnParamAnswer(0));
+
+        var response = contactService.createContact(contact);
+        verify(repository).save(contactCapt.capture());
+        var savedContact = contactCapt.getValue();
+        assertThat(savedContact).isEqualTo(contact);
+        assertThat(response).isEqualTo(contact);
     }
 
     @Test

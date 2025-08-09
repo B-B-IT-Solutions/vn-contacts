@@ -43,10 +43,10 @@ public class ContactClearingHouse {
         return contactService.getContact(contactId);
     }
 
-    public ContactEdit createContact(ContactEdit contact) {
-        var savedContact = contactService.createContact(contact.getContact());
-        aboutService.createAbout(savedContact.getContactId());
-        return new ContactEdit(savedContact, null);
+    public ContactEdit createContact(ContactEdit ce) {
+        var savedContact = contactService.createContact(ce.getContact());
+        var savedAbout = aboutService.createAbout(savedContact.getContactId(), ce.getAbout());
+        return new ContactEdit(savedContact, savedAbout);
     }
 
     public void updateContact(Long contactId, Contact updatedContact) {

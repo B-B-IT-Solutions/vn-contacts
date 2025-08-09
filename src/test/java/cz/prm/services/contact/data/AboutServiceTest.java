@@ -4,6 +4,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.ContactUtils.about;
 import static cz.prm.utils.ContactUtils.idealClient;
 import static cz.prm.utils.ContactUtils.pastClient;
+import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.TestUtils.uuids;
@@ -71,11 +72,16 @@ class AboutServiceTest {
 
     @Test
     void createAbout() {
+        var about = about();
         var contactId = randomLong();
-        aboutService.createAbout(contactId);
+        assertThat(about.getContactId()).isNotEqualTo(contactId);
+        when(repository.save(about)).thenAnswer(returnParamAnswer(0));
+
+        var response = aboutService.createAbout(contactId, about);
         verify(repository).save(aboutCapt.capture());
         var savedAbout = aboutCapt.getValue();
         assertThat(savedAbout.getContactId()).isEqualTo(contactId);
+        assertThat(response.getContactId()).isEqualTo(contactId);
     }
 
     @Test

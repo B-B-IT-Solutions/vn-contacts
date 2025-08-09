@@ -6,8 +6,10 @@ import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contactEdit;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsQuery;
+import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.assertions.ContactAssertions.assertAbout;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
+import static cz.prm.utils.assertions.ContactAssertions.assertContactEdit;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -67,10 +69,13 @@ class ContactClearingHouseTest {
         var ce = contactEdit();
         var contact = ce.getContact();
         var about = ce.getAbout();
-        when(contactService.createContact(contact)).thenAnswer((invocation -> invocation.getArgument(0)));
-        clearingHouse.createContact(ce);
+        when(contactService.createContact(contact)).thenAnswer(returnParamAnswer(0));
+        when(aboutService.createAbout(contact.getContactId(), about)).thenAnswer(returnParamAnswer(1));
+
+        var response = clearingHouse.createContact(ce);
         verify(contactService).createContact(contact);
-        verify(aboutService).createAbout(contact.getContactId());
+        verify(aboutService).createAbout(contact.getContactId(), about);
+        assertContactEdit(ce, response);
     }
 
     @Test

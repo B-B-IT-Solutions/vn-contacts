@@ -55,6 +55,16 @@ public interface ContactMapper {
     }
 
     @AfterMapping
+    default void afterContactEditDto(ContactEditDto source, @MappingTarget ContactEdit target) {
+        if (isNull(target.getContact())) {
+            target.setContact(new Contact());
+        }
+        if (isNull(target.getAbout())) {
+            target.setAbout(new About());
+        }
+    }
+
+    @AfterMapping
     default void afterAboutDto(About source, @MappingTarget AboutDto target) {
         if (isNull(target.getIdealClients())) {
             target.setIdealClients(new ArrayList<>());

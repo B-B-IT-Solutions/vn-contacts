@@ -36,9 +36,9 @@ public class AboutService {
         return getByContactId(contactId);
     }
 
-    public void createAbout(Long contactId) {
-        var about = new About(contactId);
-        repository.save(about);
+    public About createAbout(Long contactId, About about) {
+        about.setContactId(contactId);
+        return repository.save(about);
     }
 
     public void updateAbout(Long contactId, About updatedAbout) {
