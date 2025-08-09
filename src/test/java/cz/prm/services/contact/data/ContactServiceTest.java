@@ -140,8 +140,8 @@ class ContactServiceTest {
         assertThat(savedContact.getPhoneNumber()).isEqualTo(updatedContact.getPhoneNumber());
         assertThat(savedContact.getStatus()).isEqualTo(updatedContact.getStatus());
         assertThat(savedContact.getSource()).isEqualTo(updatedContact.getSource());
-        assertThat(savedContact.getKnowScore()).isEqualTo(updatedContact.getKnowScore());
-        assertThat(savedContact.getLikeScore()).isEqualTo(updatedContact.getLikeScore());
+        assertThat(savedContact.getCountry()).isEqualTo(updatedContact.getCountry());
+        assertThat(savedContact.getCity()).isEqualTo(updatedContact.getCity());
         assertThat(savedContact.getTrustScore()).isEqualTo(updatedContact.getTrustScore());
         assertThat(savedContact.getUrls()).isEqualTo(updatedContact.getUrls());
         assertThat(savedContact.getDateOfBirth()).isEqualTo(updatedContact.getDateOfBirth());

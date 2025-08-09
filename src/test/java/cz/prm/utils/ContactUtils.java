@@ -47,8 +47,8 @@ public class ContactUtils {
         contact.setPhoneNumber(uuid());
         contact.setStatus(uuid());
         contact.setSource(uuid());
-        contact.setKnowScore(randomInt());
-        contact.setLikeScore(randomInt());
+        contact.setCountry(uuid());
+        contact.setCity(uuid());
         contact.setTrustScore(randomInt());
         contact.setUrls(connections());
         contact.setOccupation(occupation());
@@ -73,8 +73,8 @@ public class ContactUtils {
         contact.setPhoneNumber(uuid());
         contact.setStatus(uuid());
         contact.setSource(uuid());
-        contact.setKnowScore(randomInt());
-        contact.setLikeScore(randomInt());
+        contact.setCountry(uuid());
+        contact.setCity(uuid());
         contact.setTrustScore(randomInt());
         contact.setUrls(connectionsDto());
         contact.setOccupation(occupationDto());
@@ -134,7 +134,6 @@ public class ContactUtils {
         about.setPastClients(pastClients());
         about.setContactGoals(uuid());
         about.setContactChallenges(uuid());
-        about.setMyBenefits(uuid());
         about.setContactId(randomLong());
         about.setOwner(user());
         about.setFirstInteraction(firstInteraction());
@@ -148,7 +147,6 @@ public class ContactUtils {
         dto.setPastClients(pastClientsDto());
         dto.setContactGoals(uuid());
         dto.setContactChallenges(uuid());
-        dto.setMyBenefits(uuid());
         dto.setContactId(randomLong());
         dto.setFirstInteraction(firstInteractionDto());
         return dto;

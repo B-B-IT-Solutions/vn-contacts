@@ -44,8 +44,8 @@ public class ContractComponentTestAssertions {
         assertThat(contact.getPhoneNumber()).isEqualTo(contactDto.getPhoneNumber());
         assertThat(contact.getStatus()).isEqualTo(contactDto.getStatus());
         assertThat(contact.getSource()).isEqualTo(contactDto.getSource());
-        assertThat(contact.getKnowScore()).isEqualTo(contactDto.getKnowScore());
-        assertThat(contact.getLikeScore()).isEqualTo(contactDto.getLikeScore());
+        assertThat(contact.getCountry()).isEqualTo(contactDto.getCountry());
+        assertThat(contact.getCity()).isEqualTo(contactDto.getCity());
         assertThat(contact.getTrustScore()).isEqualTo(contactDto.getTrustScore());
         assertThat(contact.getLabels()).isNotEmpty().containsExactlyElementsOf(contactDto.getLabels());
         assertThat(contact.getIndustries()).isNotEmpty().containsExactlyElementsOf(contactDto.getIndustries());
@@ -82,7 +82,6 @@ public class ContractComponentTestAssertions {
         assertThat(about.getDescription()).isEqualTo(dto.getDescription());
         assertThat(about.getContactGoals()).isEqualTo(dto.getContactGoals());
         assertThat(about.getContactChallenges()).isEqualTo(dto.getContactChallenges());
-        assertThat(about.getMyBenefits()).isEqualTo(dto.getMyBenefits());
         assertThat(about.getContactId()).isEqualTo(dto.getContactId());
         assertIdealClientsDto(about.getIdealClients(), dto.getIdealClients());
         assertPastClientsDto(about.getPastClients(), dto.getPastClients());

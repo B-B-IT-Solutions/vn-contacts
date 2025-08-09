@@ -27,17 +27,20 @@ public class ContactDto {
     @JsonProperty("phoneNumber")
     private String phoneNumber;
 
+    @JsonProperty("dateOfBirth")
+    private Instant dateOfBirth;
+
+    @JsonProperty("country")
+    private String country;
+
+    @JsonProperty("city")
+    private String city;
+
     @JsonProperty("status")
     private String status;
 
     @JsonProperty("source")
     private String source;
-
-    @JsonProperty("knowScore")
-    private Integer knowScore;
-
-    @JsonProperty("likeScore")
-    private Integer likeScore;
 
     @JsonProperty("trustScore")
     private Integer trustScore;
@@ -62,9 +65,6 @@ public class ContactDto {
 
     @JsonProperty("targetMarkets")
     private List<String> targetMarkets;
-
-    @JsonProperty("dateOfBirth")
-    private Instant dateOfBirth;
 
     @JsonProperty("lastEditDate")
     private Instant lastEditDate;

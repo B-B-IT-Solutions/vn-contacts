@@ -50,6 +50,34 @@ class ContactsFilterTest {
     }
 
     @Test
+    void isCountry() {
+        var filter = new ContactsFilter();
+        assertThat(filter.isCountry()).isFalse();
+        filter.setCountry(null);
+        assertThat(filter.isCountry()).isFalse();
+        filter.setCountry("");
+        assertThat(filter.isCountry()).isFalse();
+        filter.setCountry(" ");
+        assertThat(filter.isCountry()).isFalse();
+        filter.setCountry(uuid());
+        assertThat(filter.isCountry()).isTrue();
+    }
+
+    @Test
+    void isCity() {
+        var filter = new ContactsFilter();
+        assertThat(filter.isCity()).isFalse();
+        filter.setCity(null);
+        assertThat(filter.isCity()).isFalse();
+        filter.setCity("");
+        assertThat(filter.isCity()).isFalse();
+        filter.setCity(" ");
+        assertThat(filter.isCity()).isFalse();
+        filter.setCity(uuid());
+        assertThat(filter.isCity()).isTrue();
+    }
+
+    @Test
     void isStatus() {
         var filter = new ContactsFilter();
         assertThat(filter.isStatus()).isFalse();

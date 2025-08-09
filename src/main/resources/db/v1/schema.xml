@@ -223,8 +223,8 @@
 	 
 	 <changeSet author="sergej" id="1.0.8">
 			<addColumn tableName="about">
-				 <column name="contact_benefits" type="TEXT"/>
-				 <column name="my_benefits" type="TEXT"/>
+				 <column name="contact_goals" type="TEXT"/>
+				 <column name="contact_challenges" type="TEXT"/>
 			</addColumn>
 	 </changeSet>
 	 
@@ -265,29 +265,21 @@
 	 </changeSet>
 	 
 	 <changeSet author="sergej" id="1.0.11">
-			<renameColumn tableName="about" newColumnName="contact_goals" oldColumnName="contact_benefits" columnDataType="TEXT"/>
-			
-			<addColumn tableName="about">
-				 <column name="contact_challenges" type="TEXT"/>
-			</addColumn>
-	 </changeSet>
-	 
-	 <changeSet author="sergej" id="1.0.12">
 			<addColumn tableName="task">
 				 <column name="start_date" type="TIMESTAMP WITH TIME ZONE"/>
 				 <column name="end_date" type="TIMESTAMP WITH TIME ZONE"/>
 			</addColumn>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.13">
+	 <changeSet author="sergej" id="1.0.12">
 			<addColumn tableName="contact">
-				 <column name="know_score" type="INT"/>
-				 <column name="like_score" type="INT"/>
+				 <column name="country" type="VARCHAR(250)"/>
+				 <column name="city" type="VARCHAR(250)"/>
 				 <column name="trust_score" type="INT"/>
 			</addColumn>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.14">
+	 <changeSet author="sergej" id="1.0.13">
 			<createTable tableName="contact_skill">
 				 <column name="contact_id" type="BIGINT"/>
 				 <column name="skill" type="VARCHAR(250)"/>
@@ -304,7 +296,7 @@
 			</createTable>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.15">
+	 <changeSet author="sergej" id="1.0.14">
 			<createTable tableName="contact_settings_skill">
 				 <column name="settings_id" type="BIGINT"/>
 				 <column name="value" type="VARCHAR(250)"/>
@@ -324,7 +316,7 @@
 			</createTable>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.16">
+	 <changeSet author="sergej" id="1.0.15">
 			<createSequence cacheSize="1" cycle="false" startValue="1" minValue="1" maxValue="9223372036854775807"
 											sequenceName="ideal_client_seq"/>
 			
@@ -343,7 +335,7 @@
 			</createTable>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.17">
+	 <changeSet author="sergej" id="1.0.16">
 			<createSequence cacheSize="1" cycle="false" startValue="1" minValue="1" maxValue="9223372036854775807"
 											sequenceName="past_client_seq"/>
 			
@@ -362,7 +354,7 @@
 			</createTable>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.18">
+	 <changeSet author="sergej" id="1.0.17">
 			<createTable tableName="task_reminders">
 				 <column name="recurrence_id" type="BIGINT"/>
 				 <column name="task_id" type="BIGINT"/>

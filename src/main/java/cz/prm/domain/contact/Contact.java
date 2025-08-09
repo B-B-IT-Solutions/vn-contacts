@@ -53,17 +53,20 @@ public class Contact {
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
 
+    @Column(name = "DATE_OF_BIRTH")
+    private Instant dateOfBirth;
+
+    @Column(name = "COUNTRY")
+    private String country;
+
+    @Column(name = "CITY")
+    private String city;
+
     @Column(name = "STATUS")
     private String status;
 
     @Column(name = "SOURCE")
     private String source;
-
-    @Column(name = "KNOW_SCORE")
-    private Integer knowScore;
-
-    @Column(name = "LIKE_SCORE")
-    private Integer likeScore;
 
     @Column(name = "TRUST_SCORE")
     private Integer trustScore;
@@ -100,9 +103,6 @@ public class Contact {
     @CollectionTable(name = "CONTACT_TARGET_MARKET", joinColumns = @JoinColumn(name = "CONTACT_ID"))
     @Column(name = "TARGET_MARKET")
     private List<String> targetMarkets;
-
-    @Column(name = "DATE_OF_BIRTH")
-    private Instant dateOfBirth;
 
     @CreatedBy
     @Embedded

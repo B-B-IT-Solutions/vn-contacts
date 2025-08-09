@@ -264,6 +264,16 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
                 sb.append(filterDto.getLastName());
                 sb.append("&");
             }
+            if (isNotEmpty(filterDto.getCountry())) {
+                sb.append("filter.country=");
+                sb.append(filterDto.getCountry());
+                sb.append("&");
+            }
+            if (isNotEmpty(filterDto.getCity())) {
+                sb.append("filter.city=");
+                sb.append(filterDto.getCity());
+                sb.append("&");
+            }
             if (isNotEmpty(filterDto.getStatus())) {
                 sb.append("filter.status=");
                 sb.append(filterDto.getStatus());
