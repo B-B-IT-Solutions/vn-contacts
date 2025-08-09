@@ -386,7 +386,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
     @Test
     void createContact() {
         var toCreateDto = contactEditDto();
-        user1CreateContact(toCreateDto);
+        var responseDto = user1CreateContact(toCreateDto);
         var contact = getContactFromDb(toCreateDto);
         var about = getAboutFromDb(contact);
         var contactId = contact.getContactId();
@@ -394,14 +394,16 @@ public class ContactComponentTest extends ContactComponentTestBase {
         var createdContactDto = user1GetContact(contactId);
         var createdAboutDto = user1GetAbout(contactId);
         assertContact(contact, createdContactDto);
+        assertContact(contact, responseDto.getContact());
         assertAbout(about, createdAboutDto);
+        assertAbout(about, responseDto.getAbout());
         user2GetContactExpectNotFound(contactId);
         user2GetAboutExpectNotFound(contactId);
         user3GetContactExpectNotFound(contactId);
         user3GetAboutExpectNotFound(contactId);
 
         toCreateDto = contactEditDto();
-        user2CreateContact(toCreateDto);
+        responseDto = user2CreateContact(toCreateDto);
         contact = getContactFromDb(toCreateDto);
         about = getAboutFromDb(contact);
         contactId = contact.getContactId();
@@ -409,14 +411,16 @@ public class ContactComponentTest extends ContactComponentTestBase {
         createdContactDto = user2GetContact(contactId);
         createdAboutDto = user2GetAbout(contactId);
         assertContact(contact, createdContactDto);
+        assertContact(contact, responseDto.getContact());
         assertAbout(about, createdAboutDto);
+        assertAbout(about, responseDto.getAbout());
         user1GetContactExpectNotFound(contactId);
         user1GetAboutExpectNotFound(contactId);
         user3GetContactExpectNotFound(contactId);
         user3GetAboutExpectNotFound(contactId);
 
         toCreateDto = contactEditDto();
-        user3CreateContact(toCreateDto);
+        responseDto = user3CreateContact(toCreateDto);
         contact = getContactFromDb(toCreateDto);
         about = getAboutFromDb(contact);
         contactId = contact.getContactId();
@@ -424,7 +428,9 @@ public class ContactComponentTest extends ContactComponentTestBase {
         createdContactDto = user3GetContact(contactId);
         createdAboutDto = user3GetAbout(contactId);
         assertContact(contact, createdContactDto);
+        assertContact(contact, responseDto.getContact());
         assertAbout(about, createdAboutDto);
+        assertAbout(about, responseDto.getAbout());
         user1GetContactExpectNotFound(contactId);
         user1GetAboutExpectNotFound(contactId);
         user2GetContactExpectNotFound(contactId);

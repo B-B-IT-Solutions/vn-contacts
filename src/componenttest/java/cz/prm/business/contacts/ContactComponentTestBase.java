@@ -28,16 +28,16 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
     protected static String CONTACT_URL = CONTACTS_URL + "/%s";
     protected static String ABOUT_URL = CONTACTS_URL + "/%s/about";
 
-    protected void user1CreateContact(ContactEditDto dto) {
-        createContact(dto, USER_1);
+    protected ContactEditDto user1CreateContact(ContactEditDto dto) {
+        return createContact(dto, USER_1);
     }
 
-    protected void user2CreateContact(ContactEditDto dto) {
-        createContact(dto, USER_2);
+    protected ContactEditDto user2CreateContact(ContactEditDto dto) {
+        return createContact(dto, USER_2);
     }
 
-    protected void user3CreateContact(ContactEditDto dto) {
-        createContact(dto, USER_3);
+    protected ContactEditDto user3CreateContact(ContactEditDto dto) {
+        return createContact(dto, USER_3);
     }
 
     protected void user1UpdateContact(Long contactId, ContactDto dto) {
@@ -112,8 +112,10 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         return getAbout(contactId, USER_3);
     }
 
-    protected void createContact(ContactEditDto dto, ComponentTestUser user) {
-        post(CONTACTS_URL, user, dto);
+    protected ContactEditDto createContact(ContactEditDto dto, ComponentTestUser user) {
+        var returnType = new TypeRef<ContactEditDto>() {
+        };
+        return postWithResponse(CONTACTS_URL, user, dto, returnType);
     }
 
     protected void updateContact(Long contactId, ContactDto dto, ComponentTestUser user) {

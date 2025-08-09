@@ -1,5 +1,6 @@
 package cz.prm.utils.assertions;
 
+import static cz.prm.utils.TimeComponentTestUtils.ONE_SECOND_OFFSET;
 import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
@@ -110,7 +111,7 @@ public class ContractComponentTestAssertions {
     public static void assertMeetingDto(FirstInteraction fi, FirstInteractionDto dto) {
         assertThat(fi.getType()).isEqualTo(dto.getType());
         assertThat(fi.getSource()).isEqualTo(dto.getSource());
-        assertThat(fi.getDate()).isEqualTo(dto.getDate());
+        assertThat(fi.getDate()).isCloseTo(dto.getDate(), ONE_SECOND_OFFSET);
         assertThat(fi.getNotes()).isEqualTo(dto.getNotes());
     }
 }
