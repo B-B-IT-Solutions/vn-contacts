@@ -33,6 +33,8 @@ public class ContactPredicates {
         if (filter.isGlobalFilter()) {
             predicate.or(contact.firstName.containsIgnoreCase(filter.getGlobalFilter()));
             predicate.or(contact.lastName.containsIgnoreCase(filter.getGlobalFilter()));
+            predicate.or(contact.country.containsIgnoreCase(filter.getGlobalFilter()));
+            predicate.or(contact.city.containsIgnoreCase(filter.getGlobalFilter()));
             predicate.or(contact.status.containsIgnoreCase(filter.getGlobalFilter()));
             predicate.or(contact.source.containsIgnoreCase(filter.getGlobalFilter()));
             predicate.or(contact.labels.contains(filter.getGlobalFilter()));
@@ -43,6 +45,12 @@ public class ContactPredicates {
         }
         if (filter.isLastName()) {
             applyCriteria(predicate, contact.lastName, filter.getLastName());
+        }
+        if (filter.isCountry()) {
+            applyCriteria(predicate, contact.country, filter.getCountry());
+        }
+        if (filter.isCity()) {
+            applyCriteria(predicate, contact.city, filter.getCity());
         }
         if (filter.isStatus()) {
             applyCriteria(predicate, contact.status, filter.getStatus());

@@ -15,6 +15,10 @@ public class ContactsFilter {
 
     private String lastName;
 
+    private String country;
+
+    private String city;
+
     private String status;
 
     private String source;
@@ -33,6 +37,14 @@ public class ContactsFilter {
 
     public boolean isLastName() {
         return isNotBlank(lastName);
+    }
+
+    public boolean isCountry() {
+        return isNotBlank(country);
+    }
+
+    public boolean isCity() {
+        return isNotBlank(city);
     }
 
     public boolean isStatus() {
