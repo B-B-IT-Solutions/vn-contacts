@@ -1,6 +1,7 @@
 package cz.prm.utils.assertions;
 
 import static cz.prm.utils.TimeComponentTestUtils.ONE_SECOND_OFFSET;
+import static cz.prm.utils.assertions.ConditionsUtils.nullOrEquals;
 import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
@@ -77,13 +78,14 @@ public class ContractComponentTestAssertions {
     public static void assertIdealClientsDto(List<IdealClient> ics, List<IdealClientDto> dtos) {
         assertThat(ics).isNotEmpty().hasSameSizeAs(dtos);
         ics.forEach(c1 -> {
-            var c2 = dtos.stream().filter(u -> Objects.equals(c1.getIdealClientId(), u.getIdealClientId())).findFirst().get();
+            var c2 = dtos.stream().filter(u -> Objects.equals(c1.getName(), u.getName())).findFirst().get();
             assertIdealClientDto(c1, c2);
         });
     }
 
     public static void assertIdealClientDto(IdealClient ic, IdealClientDto dto) {
-        assertThat(ic.getIdealClientId()).isEqualTo(dto.getIdealClientId());
+        assertThat(ic.getIdealClientId()).isNotNull();
+        assertThat(dto.getIdealClientId()).is(nullOrEquals(ic.getIdealClientId()));
         assertThat(ic.getName()).isEqualTo(dto.getName());
         assertThat(ic.getCharacteristics()).containsExactlyElementsOf(dto.getCharacteristics());
         assertThat(ic.getNeeds()).isEqualTo(dto.getNeeds());
@@ -94,13 +96,14 @@ public class ContractComponentTestAssertions {
     public static void assertPastClientsDto(List<PastClient> pcs, List<PastClientDto> dtos) {
         assertThat(pcs).isNotEmpty().hasSameSizeAs(dtos);
         pcs.forEach(c1 -> {
-            var c2 = dtos.stream().filter(u -> Objects.equals(c1.getPastClientId(), u.getPastClientId())).findFirst().get();
+            var c2 = dtos.stream().filter(u -> Objects.equals(c1.getName(), u.getName())).findFirst().get();
             assertPastClientDto(c1, c2);
         });
     }
 
     public static void assertPastClientDto(PastClient pc, PastClientDto dto) {
-        assertThat(pc.getPastClientId()).isEqualTo(dto.getPastClientId());
+        assertThat(pc.getPastClientId()).isNotNull();
+        assertThat(dto.getPastClientId()).is(nullOrEquals(pc.getPastClientId()));
         assertThat(pc.getName()).isEqualTo(dto.getName());
         assertThat(pc.getCharacteristics()).containsExactlyElementsOf(dto.getCharacteristics());
         assertThat(pc.getProvidedServices()).isEqualTo(dto.getProvidedServices());

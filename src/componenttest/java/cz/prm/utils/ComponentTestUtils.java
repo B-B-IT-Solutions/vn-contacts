@@ -4,6 +4,7 @@ import static java.lang.Math.abs;
 import static java.lang.String.format;
 import static java.time.ZoneId.systemDefault;
 import static java.time.format.DateTimeFormatter.ofPattern;
+import static java.util.Objects.isNull;
 import static java.util.UUID.randomUUID;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
@@ -14,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
+import org.assertj.core.api.Condition;
 
 public class ComponentTestUtils {
 

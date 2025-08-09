@@ -77,6 +77,11 @@ public abstract class ComponentTestBase {
         given().spec(requestSpec(body, user)).expect().log().ifError().when().put(url).then().assertThat().statusCode(OK.value());
     }
 
+    protected <T, R> R putWithResponse(String url, ComponentTestUser user, T body, TypeRef<R> returnType) {
+        return given().spec(requestSpec(body, user)).expect().log().ifError().when().put(url).then().assertThat().statusCode(OK.value()).extract()
+            .as(returnType);
+    }
+
     protected void delete(String url, ComponentTestUser user) {
         given().spec(requestSpec(user)).expect().log().ifError().when().delete(url).then().assertThat().statusCode(OK.value());
     }

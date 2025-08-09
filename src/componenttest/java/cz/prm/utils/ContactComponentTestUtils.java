@@ -146,7 +146,6 @@ public class ContactComponentTestUtils {
 
     public static IdealClientDto idealClientDto() {
         var ic = new IdealClientDto();
-        ic.setIdealClientId(randomLong());
         ic.setName(uuid());
         ic.setCharacteristics(uuids());
         ic.setNeeds(uuid());
@@ -176,7 +175,6 @@ public class ContactComponentTestUtils {
 
     public static PastClientDto pastClientDto() {
         var ic = new PastClientDto();
-        ic.setPastClientId(randomLong());
         ic.setName(uuid());
         ic.setCharacteristics(uuids());
         ic.setProvidedServices(uuid());
