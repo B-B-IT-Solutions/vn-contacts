@@ -53,6 +53,9 @@ public class Contact {
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
 
+    @Column(name = "LINKED_IN_URL")
+    private String linkedInUrl;
+
     @Column(name = "DATE_OF_BIRTH")
     private Instant dateOfBirth;
 
@@ -70,11 +73,6 @@ public class Contact {
 
     @Column(name = "TRUST_SCORE")
     private Integer trustScore;
-
-    @ElementCollection(fetch = EAGER)
-    @CollectionTable(name = "CONTACT_URL", joinColumns = @JoinColumn(name = "CONTACT_ID"))
-    @Column(name = "URL")
-    private List<Connection> urls;
 
     @Embedded
     private Occupation occupation;

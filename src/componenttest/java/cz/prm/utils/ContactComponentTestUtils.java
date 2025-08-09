@@ -10,13 +10,11 @@ import static java.lang.String.format;
 import static java.time.Instant.now;
 
 import cz.prm.controllers.dto.common.PaginationDto;
-import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.About;
-import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.FirstInteraction;
 import cz.prm.domain.contact.IdealClient;
@@ -36,19 +34,19 @@ public class ContactComponentTestUtils {
         contact.setLastName(format("Last%s", uuid()));
         contact.setEmail(uuid());
         contact.setPhoneNumber(uuid());
+        contact.setLinkedInUrl(uuid());
+        contact.setDateOfBirth(now());
         contact.setStatus(format("Status%s", uuid()));
         contact.setSource(format("Source%s", uuid()));
         contact.setCountry(format("Country%s", uuid()));
         contact.setCity(format("City%s", uuid()));
         contact.setTrustScore(randomInt());
-        contact.setUrls(connections());
         contact.setOccupation(occupation());
         contact.setLabels(uuids());
         contact.setSkills(uuids());
         contact.setProducts(uuids());
         contact.setTargetMarkets(uuids());
         contact.setIndustries(uuids());
-        contact.setDateOfBirth(now());
         return contact;
     }
 
@@ -58,19 +56,19 @@ public class ContactComponentTestUtils {
         dto.setLastName(uuid());
         dto.setEmail(uuid());
         dto.setPhoneNumber(uuid());
+        dto.setLinkedInUrl(uuid());
+        dto.setDateOfBirth(now());
         dto.setStatus(uuid());
         dto.setSource(uuid());
         dto.setCountry(format("Country%s", uuid()));
         dto.setCity(format("City%s", uuid()));
         dto.setTrustScore(randomInt());
-        dto.setUrls(connectionsDto());
         dto.setOccupation(occupationDto());
         dto.setLabels(uuids());
         dto.setIndustries(uuids());
         dto.setSkills(uuids());
         dto.setProducts(uuids());
         dto.setTargetMarkets(uuids());
-        dto.setDateOfBirth(now());
         return dto;
     }
 
@@ -88,28 +86,6 @@ public class ContactComponentTestUtils {
         occupation.setCompany(format("company%s", uuid()));
         occupation.setIndustry(format("industry%s", uuid()));
         return occupation;
-    }
-
-    public static List<Connection> connections() {
-        return newArrayList(connection(), connection(), connection());
-    }
-
-    public static List<ConnectionDto> connectionsDto() {
-        return newArrayList(connectionDto(), connectionDto(), connectionDto());
-    }
-
-    public static Connection connection() {
-        var connection = new Connection();
-        connection.setValue(format("connection%s", uuid()));
-        connection.setType(uuid());
-        return connection;
-    }
-
-    public static ConnectionDto connectionDto() {
-        var dto = new ConnectionDto();
-        dto.setValue(uuid());
-        dto.setType(uuid());
-        return dto;
     }
 
     public static About about(Contact contact) {

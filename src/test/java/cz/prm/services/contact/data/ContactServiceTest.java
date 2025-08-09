@@ -138,13 +138,13 @@ class ContactServiceTest {
         assertThat(savedContact.getLastName()).isEqualTo(updatedContact.getLastName());
         assertThat(savedContact.getEmail()).isEqualTo(updatedContact.getEmail());
         assertThat(savedContact.getPhoneNumber()).isEqualTo(updatedContact.getPhoneNumber());
+        assertThat(savedContact.getLinkedInUrl()).isEqualTo(updatedContact.getLinkedInUrl());
+        assertThat(savedContact.getDateOfBirth()).isEqualTo(updatedContact.getDateOfBirth());
         assertThat(savedContact.getStatus()).isEqualTo(updatedContact.getStatus());
         assertThat(savedContact.getSource()).isEqualTo(updatedContact.getSource());
         assertThat(savedContact.getCountry()).isEqualTo(updatedContact.getCountry());
         assertThat(savedContact.getCity()).isEqualTo(updatedContact.getCity());
         assertThat(savedContact.getTrustScore()).isEqualTo(updatedContact.getTrustScore());
-        assertThat(savedContact.getUrls()).isEqualTo(updatedContact.getUrls());
-        assertThat(savedContact.getDateOfBirth()).isEqualTo(updatedContact.getDateOfBirth());
         assertThat(savedContact.getOccupation()).isEqualTo(updatedContact.getOccupation());
         assertThat(savedContact.getLabels()).isEqualTo(updatedContact.getLabels());
         assertThat(savedContact.getIndustries()).isEqualTo(updatedContact.getIndustries());
