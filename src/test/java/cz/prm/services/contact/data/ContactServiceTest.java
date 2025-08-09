@@ -97,13 +97,16 @@ class ContactServiceTest {
         var contactIdDb = contact();
         var updatedContact = contact();
         var predicate = new BooleanBuilder();
+
         when(predicates.byContactId(contactIdDb.getContactId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(of(contactIdDb));
+        when(repository.save(contactIdDb)).thenAnswer(returnParamAnswer(0));
 
-        contactService.updateContact(contactIdDb.getContactId(), updatedContact);
+        var response = contactService.updateContact(contactIdDb.getContactId(), updatedContact);
         verify(repository).save(contactCapt.capture());
         var savedContact = contactCapt.getValue();
         assertFieldsUpdated(contactIdDb, updatedContact, savedContact);
+        assertFieldsUpdated(contactIdDb, updatedContact, response);
     }
 
     @Test

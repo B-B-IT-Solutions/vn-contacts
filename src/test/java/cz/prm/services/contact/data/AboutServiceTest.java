@@ -106,11 +106,13 @@ class AboutServiceTest {
         var predicate = new BooleanBuilder();
         when(predicates.byContactId(aboutIdDb.getContactId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(of(aboutIdDb));
+        when(repository.save(aboutIdDb)).thenAnswer(returnParamAnswer(0));
 
-        aboutService.updateAbout(aboutIdDb.getContactId(), updatedAbout);
+        var response = aboutService.updateAbout(aboutIdDb.getContactId(), updatedAbout);
         verify(repository).save(aboutCapt.capture());
         var savedAbout = aboutCapt.getValue();
         assertFieldsUpdated(aboutIdDb, updatedAbout, savedAbout);
+        assertFieldsUpdated(aboutIdDb, updatedAbout, response);
     }
 
     @Test

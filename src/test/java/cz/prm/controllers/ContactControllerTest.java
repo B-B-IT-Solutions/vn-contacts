@@ -86,18 +86,22 @@ class ContactControllerTest {
 
         var responseDto = controller.createContact(dto);
         verify(clearingHouse).createContact(contactEditCapt.capture());
-        var ce = contactEditCapt.getValue();
-        assertContactEdit(ce, dto);
-        assertContactEdit(ce, responseDto);
+        var contactEdit = contactEditCapt.getValue();
+        assertContactEdit(contactEdit, dto);
+        assertContactEdit(contactEdit, responseDto);
     }
 
     @Test
     void updateContact() {
-        var dto = contactDto();
-        controller.updateContact(dto.getContactId(), dto);
-        verify(clearingHouse).updateContact(eq(dto.getContactId()), contactCapt.capture());
-        var contact = contactCapt.getValue();
-        assertContact(contact, dto);
+        var dto = contactEditDto();
+        var contactId = randomLong();
+        when(clearingHouse.updateContact(eq(contactId), any(ContactEdit.class))).thenAnswer(returnParamAnswer(1));
+
+        var responseDto = controller.updateContact(contactId, dto);
+        verify(clearingHouse).updateContact(eq(contactId), contactEditCapt.capture());
+        var contactEdit = contactEditCapt.getValue();
+        assertContactEdit(contactEdit, dto);
+        assertContactEdit(contactEdit, responseDto);
     }
 
     @Test

@@ -45,15 +45,16 @@ public class ContactController {
 
     @PostMapping
     public ContactEditDto createContact(@RequestBody ContactEditDto dto) {
-        var ce = mapper.toContactEdit(dto);
-        var response = clearingHouse.createContact(ce);
+        var contactEdit = mapper.toContactEdit(dto);
+        var response = clearingHouse.createContact(contactEdit);
         return mapper.toContactEditDto(response);
     }
 
     @PutMapping("/{contactId}")
-    public void updateContact(@PathVariable("contactId") Long contactId, @RequestBody ContactDto dto) {
-        var contact = mapper.toContact(dto);
-        clearingHouse.updateContact(contactId, contact);
+    public ContactEditDto updateContact(@PathVariable("contactId") Long contactId, @RequestBody ContactEditDto dto) {
+        var contactEdit = mapper.toContactEdit(dto);
+        var response = clearingHouse.updateContact(contactId, contactEdit);
+        return mapper.toContactEditDto(response);
     }
 
     @DeleteMapping("/{contactId}")

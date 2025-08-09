@@ -41,10 +41,10 @@ public class AboutService {
         return repository.save(about);
     }
 
-    public void updateAbout(Long contactId, About updatedAbout) {
+    public About updateAbout(Long contactId, About updatedAbout) {
         var savedAbout = getByContactId(contactId);
         updateAboutFields(savedAbout, updatedAbout);
-        repository.save(savedAbout);
+        return repository.save(savedAbout);
     }
 
     public void deleteAbout(Long contactId) {

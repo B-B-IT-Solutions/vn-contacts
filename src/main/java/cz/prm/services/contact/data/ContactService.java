@@ -42,10 +42,10 @@ public class ContactService {
         return repository.save(contact);
     }
 
-    public void updateContact(Long contactId, Contact updatedContact) {
+    public Contact updateContact(Long contactId, Contact updatedContact) {
         var savedContact = getContactById(contactId);
         updateContactFields(savedContact, updatedContact);
-        repository.save(savedContact);
+        return repository.save(savedContact);
     }
 
     public void deleteContact(Long contactId) {

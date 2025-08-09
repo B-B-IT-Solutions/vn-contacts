@@ -7,6 +7,7 @@ import static cz.prm.utils.ContactUtils.contactEdit;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsQuery;
 import static cz.prm.utils.MockitoUtils.returnParamAnswer;
+import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.ContactAssertions.assertAbout;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactEdit;
@@ -66,23 +67,31 @@ class ContactClearingHouseTest {
 
     @Test
     void createContact() {
-        var ce = contactEdit();
-        var contact = ce.getContact();
-        var about = ce.getAbout();
+        var contactEdit = contactEdit();
+        var contact = contactEdit.getContact();
+        var about = contactEdit.getAbout();
         when(contactService.createContact(contact)).thenAnswer(returnParamAnswer(0));
         when(aboutService.createAbout(contact.getContactId(), about)).thenAnswer(returnParamAnswer(1));
 
-        var response = clearingHouse.createContact(ce);
+        var response = clearingHouse.createContact(contactEdit);
         verify(contactService).createContact(contact);
         verify(aboutService).createAbout(contact.getContactId(), about);
-        assertContactEdit(ce, response);
+        assertContactEdit(contactEdit, response);
     }
 
     @Test
     void updateContact() {
-        var contact = contact();
-        clearingHouse.updateContact(contact.getContactId(), contact);
-        verify(contactService).updateContact(contact.getContactId(), contact);
+        var contactEdit = contactEdit();
+        var contact = contactEdit.getContact();
+        var about = contactEdit.getAbout();
+        var contactId = randomLong();
+        when(contactService.updateContact(contactId, contact)).thenAnswer(returnParamAnswer(1));
+        when(aboutService.updateAbout(contactId, about)).thenAnswer(returnParamAnswer(1));
+
+        var response = clearingHouse.updateContact(contactId, contactEdit);
+        verify(contactService).updateContact(contactId, contact);
+        verify(aboutService).updateAbout(contactId, about);
+        assertContactEdit(contactEdit, response);
     }
 
     @Test

@@ -49,8 +49,10 @@ public class ContactClearingHouse {
         return new ContactEdit(savedContact, savedAbout);
     }
 
-    public void updateContact(Long contactId, Contact updatedContact) {
-        contactService.updateContact(contactId, updatedContact);
+    public ContactEdit updateContact(Long contactId, ContactEdit updatedContactEdit) {
+        var updtedContact = contactService.updateContact(contactId, updatedContactEdit.getContact());
+        var updatedAbout = aboutService.updateAbout(contactId, updatedContactEdit.getAbout());
+        return new ContactEdit(updtedContact, updatedAbout);
     }
 
     public void deleteContact(Long contactId) {
