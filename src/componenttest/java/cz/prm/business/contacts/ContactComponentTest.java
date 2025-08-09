@@ -222,6 +222,52 @@ public class ContactComponentTest extends ContactComponentTestBase {
         queryDto = contactsQueryDto();
         filter = queryDto.getFilter();
 
+        filter.setCountry(contactDto1.getCountry());
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setCountry(containsFilter(contactDto1.getCountry()));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setCountry(notContainsFilter(contactDto1.getCountry()));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(20);
+
+        filter.setCountry(containsNotContainsFilter(contactDto1.getCountry(), contactDto2.getCountry()));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setCountry(notContainsFilter("Country"));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        queryDto = contactsQueryDto();
+        filter = queryDto.getFilter();
+
+        filter.setCity(contactDto1.getCity());
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setCity(containsFilter(contactDto1.getCity()));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setCity(notContainsFilter(contactDto1.getCity()));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(20);
+
+        filter.setCity(containsNotContainsFilter(contactDto1.getCity(), contactDto2.getCity()));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).hasSize(1);
+
+        filter.setCity(notContainsFilter("City"));
+        pageDto = user1GetContacts(queryDto);
+        assertThat(pageDto.getContent()).isEmpty();
+
+        queryDto = contactsQueryDto();
+        filter = queryDto.getFilter();
+
         filter.setStatus(contactDto1.getStatus());
         pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).hasSize(1);
