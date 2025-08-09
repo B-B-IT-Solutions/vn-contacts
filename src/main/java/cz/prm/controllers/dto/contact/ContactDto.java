@@ -30,17 +30,17 @@ public class ContactDto {
     @JsonProperty("dateOfBirth")
     private Instant dateOfBirth;
 
-    @JsonProperty("status")
-    private String status;
-
-    @JsonProperty("source")
-    private String source;
-
     @JsonProperty("country")
     private String country;
 
     @JsonProperty("city")
     private String city;
+
+    @JsonProperty("status")
+    private String status;
+
+    @JsonProperty("source")
+    private String source;
 
     @JsonProperty("trustScore")
     private Integer trustScore;

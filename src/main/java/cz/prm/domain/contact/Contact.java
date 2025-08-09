@@ -56,17 +56,17 @@ public class Contact {
     @Column(name = "DATE_OF_BIRTH")
     private Instant dateOfBirth;
 
-    @Column(name = "STATUS")
-    private String status;
-
-    @Column(name = "SOURCE")
-    private String source;
-
     @Column(name = "COUNTRY")
     private String country;
 
     @Column(name = "CITY")
     private String city;
+
+    @Column(name = "STATUS")
+    private String status;
+
+    @Column(name = "SOURCE")
+    private String source;
 
     @Column(name = "TRUST_SCORE")
     private Integer trustScore;
