@@ -12,7 +12,7 @@ import static java.time.Instant.now;
 import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.ContactEditDto;
+import cz.prm.controllers.dto.contact.DecoratedContactDto;
 import cz.prm.controllers.dto.contact.FirstInteractionDto;
 import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
@@ -29,10 +29,10 @@ import java.util.List;
 
 public class ContactComponentTestUtils {
 
-    public static ContactEditDto contactEditDto() {
+    public static DecoratedContactDto contactEditDto() {
         var contact = contactDto();
         var about = aboutDto(contact);
-        var ce = new ContactEditDto();
+        var ce = new DecoratedContactDto();
         ce.setContact(contact);
         ce.setAbout(about);
         return ce;

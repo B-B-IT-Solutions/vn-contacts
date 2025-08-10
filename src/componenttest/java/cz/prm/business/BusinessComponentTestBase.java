@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toList;
 
 import cz.prm.ComponentTestBase;
 import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.ContactEditDto;
+import cz.prm.controllers.dto.contact.DecoratedContactDto;
 import cz.prm.controllers.dto.note.NoteDto;
 import cz.prm.controllers.dto.referral.ReferralDto;
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
@@ -178,7 +178,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         return savedTask;
     }
 
-    protected Contact getContactFromDb(ContactEditDto dto) {
+    protected Contact getContactFromDb(DecoratedContactDto dto) {
         return getContactFromDb(dto.getContact());
     }
 

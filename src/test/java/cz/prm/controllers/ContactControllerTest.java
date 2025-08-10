@@ -4,7 +4,6 @@ import static cz.prm.utils.CommonUtils.page;
 import static cz.prm.utils.ContactUtils.about;
 import static cz.prm.utils.ContactUtils.aboutDto;
 import static cz.prm.utils.ContactUtils.contact;
-import static cz.prm.utils.ContactUtils.contactDto;
 import static cz.prm.utils.ContactUtils.contactEditDto;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsQueryDto;
@@ -12,7 +11,7 @@ import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.ContactAssertions.assertAbout;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
-import static cz.prm.utils.assertions.ContactAssertions.assertContactEdit;
+import static cz.prm.utils.assertions.ContactAssertions.assertDecoratedContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactQuery;
 import static cz.prm.utils.assertions.ContactAssertions.assertPage;
 import static org.mockito.ArgumentMatchers.any;
@@ -23,7 +22,7 @@ import static org.mockito.Mockito.when;
 import cz.prm.controllers.mappers.ContactMapper;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
-import cz.prm.domain.contact.ContactEdit;
+import cz.prm.domain.contact.DecoratedContact;
 import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.services.contact.ContactClearingHouse;
 import cz.prm.utils.MapperUtils;
@@ -41,7 +40,7 @@ class ContactControllerTest {
     @Mock
     private ContactClearingHouse clearingHouse;
     @Captor
-    private ArgumentCaptor<ContactEdit> contactEditCapt;
+    private ArgumentCaptor<DecoratedContact> contactEditCapt;
     @Captor
     private ArgumentCaptor<Contact> contactCapt;
     @Captor
@@ -80,28 +79,28 @@ class ContactControllerTest {
     }
 
     @Test
-    void createContact() {
+    void createDecoratedContact() {
         var dto = contactEditDto();
-        when(clearingHouse.createContact(any(ContactEdit.class))).thenAnswer(returnParamAnswer(0));
+        when(clearingHouse.createDecoratedContact(any(DecoratedContact.class))).thenAnswer(returnParamAnswer(0));
 
-        var responseDto = controller.createContact(dto);
-        verify(clearingHouse).createContact(contactEditCapt.capture());
+        var responseDto = controller.createDecoratedContact(dto);
+        verify(clearingHouse).createDecoratedContact(contactEditCapt.capture());
         var contactEdit = contactEditCapt.getValue();
-        assertContactEdit(contactEdit, dto);
-        assertContactEdit(contactEdit, responseDto);
+        assertDecoratedContact(contactEdit, dto);
+        assertDecoratedContact(contactEdit, responseDto);
     }
 
     @Test
     void updateContact() {
         var dto = contactEditDto();
         var contactId = randomLong();
-        when(clearingHouse.updateContact(eq(contactId), any(ContactEdit.class))).thenAnswer(returnParamAnswer(1));
+        when(clearingHouse.updateDecoratedContact(eq(contactId), any(DecoratedContact.class))).thenAnswer(returnParamAnswer(1));
 
         var responseDto = controller.updateContact(contactId, dto);
-        verify(clearingHouse).updateContact(eq(contactId), contactEditCapt.capture());
+        verify(clearingHouse).updateDecoratedContact(eq(contactId), contactEditCapt.capture());
         var contactEdit = contactEditCapt.getValue();
-        assertContactEdit(contactEdit, dto);
-        assertContactEdit(contactEdit, responseDto);
+        assertDecoratedContact(contactEdit, dto);
+        assertDecoratedContact(contactEdit, responseDto);
     }
 
     @Test

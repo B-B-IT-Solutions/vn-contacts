@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.ContactEditDto;
+import cz.prm.controllers.dto.contact.DecoratedContactDto;
 import cz.prm.controllers.dto.contact.FirstInteractionDto;
 import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
@@ -17,7 +17,7 @@ import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
-import cz.prm.domain.contact.ContactEdit;
+import cz.prm.domain.contact.DecoratedContact;
 import cz.prm.domain.contact.FirstInteraction;
 import cz.prm.domain.contact.IdealClient;
 import cz.prm.domain.contact.Occupation;
@@ -64,12 +64,12 @@ public class ContactAssertions {
         });
     }
 
-    public static void assertContactEdit(ContactEdit ce1, ContactEdit ce2) {
+    public static void assertDecoratedContact(DecoratedContact ce1, DecoratedContact ce2) {
         assertContact(ce1.getContact(), ce2.getContact());
         assertAbout(ce1.getAbout(), ce2.getAbout());
     }
 
-    public static void assertContactEdit(ContactEdit ce, ContactEditDto dto) {
+    public static void assertDecoratedContact(DecoratedContact ce, DecoratedContactDto dto) {
         assertContact(ce.getContact(), dto.getContact());
         assertAbout(ce.getAbout(), dto.getAbout());
     }

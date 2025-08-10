@@ -23,7 +23,7 @@ import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.ContactEditDto;
+import cz.prm.controllers.dto.contact.DecoratedContactDto;
 import org.junit.jupiter.api.Test;
 
 public class ContactComponentTest extends ContactComponentTestBase {
@@ -389,7 +389,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
     @Test
     void createContactEdit() {
         var toCreateDto = contactEditDto();
-        var responseDto = user1CreateContact(toCreateDto);
+        var responseDto = user1CreateDecoratedContact(toCreateDto);
         var contact = getContactFromDb(toCreateDto);
         var about = getAboutFromDb(contact);
         var contactId = contact.getContactId();
@@ -406,7 +406,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
         user3GetAboutExpectNotFound(contactId);
 
         toCreateDto = contactEditDto();
-        responseDto = user2CreateContact(toCreateDto);
+        responseDto = user2CreateDecoratedContact(toCreateDto);
         contact = getContactFromDb(toCreateDto);
         about = getAboutFromDb(contact);
         contactId = contact.getContactId();
@@ -423,7 +423,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
         user3GetAboutExpectNotFound(contactId);
 
         toCreateDto = contactEditDto();
-        responseDto = user3CreateContact(toCreateDto);
+        responseDto = user3CreateDecoratedContact(toCreateDto);
         contact = getContactFromDb(toCreateDto);
         about = getAboutFromDb(contact);
         contactId = contact.getContactId();
@@ -453,8 +453,8 @@ public class ContactComponentTest extends ContactComponentTestBase {
         updateAboutDto.setDescription(uuid());
         updateAboutDto.setPastClients(pastClientsDto());
         updateAboutDto.setIdealClients(idealClientsDto());
-        var updateDto = new ContactEditDto(updateContactDto, updateAboutDto);
-        var responseDto = user1UpdateContact(contactId, updateDto);
+        var updateDto = new DecoratedContactDto(updateContactDto, updateAboutDto);
+        var responseDto = user1UpdateDecoratedContact(contactId, updateDto);
         contact = getContactFromDb(updateContactDto);
         var about = getAboutFromDb(contact);
         assertContact(contact, updateContactDto);
@@ -476,8 +476,8 @@ public class ContactComponentTest extends ContactComponentTestBase {
         updateAboutDto.setDescription(uuid());
         updateAboutDto.setPastClients(pastClientsDto());
         updateAboutDto.setIdealClients(idealClientsDto());
-        updateDto = new ContactEditDto(updateContactDto, updateAboutDto);
-        responseDto = user2UpdateContact(contactId, updateDto);
+        updateDto = new DecoratedContactDto(updateContactDto, updateAboutDto);
+        responseDto = user2UpdateDecoratedContact(contactId, updateDto);
         contact = getContactFromDb(updateContactDto);
         about = getAboutFromDb(contact);
         assertContact(contact, updateContactDto);
@@ -499,8 +499,8 @@ public class ContactComponentTest extends ContactComponentTestBase {
         updateAboutDto.setDescription(uuid());
         updateAboutDto.setPastClients(pastClientsDto());
         updateAboutDto.setIdealClients(idealClientsDto());
-        updateDto = new ContactEditDto(updateContactDto, updateAboutDto);
-        responseDto = user3UpdateContact(contactId, updateDto);
+        updateDto = new DecoratedContactDto(updateContactDto, updateAboutDto);
+        responseDto = user3UpdateDecoratedContact(contactId, updateDto);
         contact = getContactFromDb(updateContactDto);
         about = getAboutFromDb(contact);
         assertContact(contact, updateContactDto);

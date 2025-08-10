@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContactEdit {
+public class DecoratedContact {
 
     private Contact contact;
 

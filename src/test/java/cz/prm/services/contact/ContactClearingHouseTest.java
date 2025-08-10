@@ -10,7 +10,7 @@ import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.ContactAssertions.assertAbout;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
-import static cz.prm.utils.assertions.ContactAssertions.assertContactEdit;
+import static cz.prm.utils.assertions.ContactAssertions.assertDecoratedContact;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -66,21 +66,21 @@ class ContactClearingHouseTest {
     }
 
     @Test
-    void createContact() {
+    void createDecoratedContact() {
         var contactEdit = contactEdit();
         var contact = contactEdit.getContact();
         var about = contactEdit.getAbout();
         when(contactService.createContact(contact)).thenAnswer(returnParamAnswer(0));
         when(aboutService.createAbout(contact.getContactId(), about)).thenAnswer(returnParamAnswer(1));
 
-        var response = clearingHouse.createContact(contactEdit);
+        var response = clearingHouse.createDecoratedContact(contactEdit);
         verify(contactService).createContact(contact);
         verify(aboutService).createAbout(contact.getContactId(), about);
-        assertContactEdit(contactEdit, response);
+        assertDecoratedContact(contactEdit, response);
     }
 
     @Test
-    void updateContact() {
+    void updateDecoratedContact() {
         var contactEdit = contactEdit();
         var contact = contactEdit.getContact();
         var about = contactEdit.getAbout();
@@ -88,10 +88,10 @@ class ContactClearingHouseTest {
         when(contactService.updateContact(contactId, contact)).thenAnswer(returnParamAnswer(1));
         when(aboutService.updateAbout(contactId, about)).thenAnswer(returnParamAnswer(1));
 
-        var response = clearingHouse.updateContact(contactId, contactEdit);
+        var response = clearingHouse.updateDecoratedContact(contactId, contactEdit);
         verify(contactService).updateContact(contactId, contact);
         verify(aboutService).updateAbout(contactId, about);
-        assertContactEdit(contactEdit, response);
+        assertDecoratedContact(contactEdit, response);
     }
 
     @Test

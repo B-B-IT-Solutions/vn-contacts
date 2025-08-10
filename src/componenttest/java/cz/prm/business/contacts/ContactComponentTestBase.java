@@ -13,7 +13,7 @@ import cz.prm.business.BusinessComponentTestBase;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.ContactEditDto;
+import cz.prm.controllers.dto.contact.DecoratedContactDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.Contact;
@@ -28,28 +28,28 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
     protected static String CONTACT_URL = CONTACTS_URL + "/%s";
     protected static String ABOUT_URL = CONTACTS_URL + "/%s/about";
 
-    protected ContactEditDto user1CreateContact(ContactEditDto dto) {
-        return createContact(dto, USER_1);
+    protected DecoratedContactDto user1CreateDecoratedContact(DecoratedContactDto dto) {
+        return createDecoratedContact(dto, USER_1);
     }
 
-    protected ContactEditDto user2CreateContact(ContactEditDto dto) {
-        return createContact(dto, USER_2);
+    protected DecoratedContactDto user2CreateDecoratedContact(DecoratedContactDto dto) {
+        return createDecoratedContact(dto, USER_2);
     }
 
-    protected ContactEditDto user3CreateContact(ContactEditDto dto) {
-        return createContact(dto, USER_3);
+    protected DecoratedContactDto user3CreateDecoratedContact(DecoratedContactDto dto) {
+        return createDecoratedContact(dto, USER_3);
     }
 
-    protected ContactEditDto user1UpdateContact(Long contactId, ContactEditDto dto) {
-        return updateContact(contactId, dto, USER_1);
+    protected DecoratedContactDto user1UpdateDecoratedContact(Long contactId, DecoratedContactDto dto) {
+        return updateDecoratedContact(contactId, dto, USER_1);
     }
 
-    protected ContactEditDto user2UpdateContact(Long contactId, ContactEditDto dto) {
-        return updateContact(contactId, dto, USER_2);
+    protected DecoratedContactDto user2UpdateDecoratedContact(Long contactId, DecoratedContactDto dto) {
+        return updateDecoratedContact(contactId, dto, USER_2);
     }
 
-    protected ContactEditDto user3UpdateContact(Long contactId, ContactEditDto dto) {
-        return updateContact(contactId, dto, USER_3);
+    protected DecoratedContactDto user3UpdateDecoratedContact(Long contactId, DecoratedContactDto dto) {
+        return updateDecoratedContact(contactId, dto, USER_3);
     }
 
     protected void user1DeleteContact(Long contactId) {
@@ -112,14 +112,14 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         return getAbout(contactId, USER_3);
     }
 
-    protected ContactEditDto createContact(ContactEditDto dto, ComponentTestUser user) {
-        var returnType = new TypeRef<ContactEditDto>() {
+    protected DecoratedContactDto createDecoratedContact(DecoratedContactDto dto, ComponentTestUser user) {
+        var returnType = new TypeRef<DecoratedContactDto>() {
         };
         return postWithResponse(CONTACTS_URL, user, dto, returnType);
     }
 
-    protected ContactEditDto updateContact(Long contactId, ContactEditDto dto, ComponentTestUser user) {
-        var returnType = new TypeRef<ContactEditDto>() {
+    protected DecoratedContactDto updateDecoratedContact(Long contactId, DecoratedContactDto dto, ComponentTestUser user) {
+        var returnType = new TypeRef<DecoratedContactDto>() {
         };
         var url = format(CONTACT_URL, contactId);
         return putWithResponse(url, user, dto, returnType);
@@ -156,15 +156,15 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         return getOne(url, user, typeRef);
     }
 
-    protected void user1UpdateContactExpectNotFound(Long contactId, ContactEditDto dto) {
+    protected void user1UpdateContactExpectNotFound(Long contactId, DecoratedContactDto dto) {
         updateContactExpectNotFound(contactId, dto, USER_1);
     }
 
-    protected void user2UpdateContactExpectNotFound(Long contactId, ContactEditDto dto) {
+    protected void user2UpdateContactExpectNotFound(Long contactId, DecoratedContactDto dto) {
         updateContactExpectNotFound(contactId, dto, USER_2);
     }
 
-    protected void user3UpdateContactExpectNotFound(Long contactId, ContactEditDto dto) {
+    protected void user3UpdateContactExpectNotFound(Long contactId, DecoratedContactDto dto) {
         updateContactExpectNotFound(contactId, dto, USER_3);
     }
 
@@ -216,7 +216,7 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         getAboutExpectNotFound(contactId, USER_3);
     }
 
-    protected void updateContactExpectNotFound(Long contactId, ContactEditDto dto, ComponentTestUser user) {
+    protected void updateContactExpectNotFound(Long contactId, DecoratedContactDto dto, ComponentTestUser user) {
         var url = format(CONTACT_URL, contactId);
         putExpectNotFound(url, user, dto);
     }

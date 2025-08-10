@@ -3,7 +3,7 @@ package cz.prm.controllers;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.ContactEditDto;
+import cz.prm.controllers.dto.contact.DecoratedContactDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.controllers.mappers.ContactMapper;
 import cz.prm.services.contact.ContactClearingHouse;
@@ -44,16 +44,16 @@ public class ContactController {
     }
 
     @PostMapping
-    public ContactEditDto createContact(@RequestBody ContactEditDto dto) {
+    public DecoratedContactDto createDecoratedContact(@RequestBody DecoratedContactDto dto) {
         var contactEdit = mapper.toContactEdit(dto);
-        var response = clearingHouse.createContact(contactEdit);
+        var response = clearingHouse.createDecoratedContact(contactEdit);
         return mapper.toContactEditDto(response);
     }
 
     @PutMapping("/{contactId}")
-    public ContactEditDto updateContact(@PathVariable("contactId") Long contactId, @RequestBody ContactEditDto dto) {
+    public DecoratedContactDto updateContact(@PathVariable("contactId") Long contactId, @RequestBody DecoratedContactDto dto) {
         var contactEdit = mapper.toContactEdit(dto);
-        var response = clearingHouse.updateContact(contactId, contactEdit);
+        var response = clearingHouse.updateDecoratedContact(contactId, contactEdit);
         return mapper.toContactEditDto(response);
     }
 
