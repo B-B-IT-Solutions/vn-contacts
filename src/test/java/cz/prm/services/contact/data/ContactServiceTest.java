@@ -3,6 +3,7 @@ package cz.prm.services.contact.data;
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsQuery;
+import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertPage;
 import static java.util.Optional.empty;
@@ -82,8 +83,13 @@ class ContactServiceTest {
     @Test
     void createContact() {
         var contact = contact();
-        contactService.createContact(contact);
-        verify(repository).save(contact);
+        when(repository.save(contact)).thenAnswer(returnParamAnswer(0));
+
+        var response = contactService.createContact(contact);
+        verify(repository).save(contactCapt.capture());
+        var savedContact = contactCapt.getValue();
+        assertThat(savedContact).isEqualTo(contact);
+        assertThat(response).isEqualTo(contact);
     }
 
     @Test
@@ -91,13 +97,16 @@ class ContactServiceTest {
         var contactIdDb = contact();
         var updatedContact = contact();
         var predicate = new BooleanBuilder();
+
         when(predicates.byContactId(contactIdDb.getContactId())).thenReturn(predicate);
         when(repository.findOne(predicate)).thenReturn(of(contactIdDb));
+        when(repository.save(contactIdDb)).thenAnswer(returnParamAnswer(0));
 
-        contactService.updateContact(contactIdDb.getContactId(), updatedContact);
+        var response = contactService.updateContact(contactIdDb.getContactId(), updatedContact);
         verify(repository).save(contactCapt.capture());
         var savedContact = contactCapt.getValue();
         assertFieldsUpdated(contactIdDb, updatedContact, savedContact);
+        assertFieldsUpdated(contactIdDb, updatedContact, response);
     }
 
     @Test
@@ -138,13 +147,13 @@ class ContactServiceTest {
         assertThat(savedContact.getLastName()).isEqualTo(updatedContact.getLastName());
         assertThat(savedContact.getEmail()).isEqualTo(updatedContact.getEmail());
         assertThat(savedContact.getPhoneNumber()).isEqualTo(updatedContact.getPhoneNumber());
+        assertThat(savedContact.getLinkedInUrl()).isEqualTo(updatedContact.getLinkedInUrl());
+        assertThat(savedContact.getDateOfBirth()).isEqualTo(updatedContact.getDateOfBirth());
         assertThat(savedContact.getStatus()).isEqualTo(updatedContact.getStatus());
         assertThat(savedContact.getSource()).isEqualTo(updatedContact.getSource());
         assertThat(savedContact.getCountry()).isEqualTo(updatedContact.getCountry());
         assertThat(savedContact.getCity()).isEqualTo(updatedContact.getCity());
         assertThat(savedContact.getTrustScore()).isEqualTo(updatedContact.getTrustScore());
-        assertThat(savedContact.getUrls()).isEqualTo(updatedContact.getUrls());
-        assertThat(savedContact.getDateOfBirth()).isEqualTo(updatedContact.getDateOfBirth());
         assertThat(savedContact.getOccupation()).isEqualTo(updatedContact.getOccupation());
         assertThat(savedContact.getLabels()).isEqualTo(updatedContact.getLabels());
         assertThat(savedContact.getIndustries()).isEqualTo(updatedContact.getIndustries());

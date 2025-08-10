@@ -36,15 +36,15 @@ public class AboutService {
         return getByContactId(contactId);
     }
 
-    public void createAbout(Long contactId) {
-        var about = new About(contactId);
-        repository.save(about);
+    public About createAbout(Long contactId, About about) {
+        about.setContactId(contactId);
+        return repository.save(about);
     }
 
-    public void updateAbout(Long contactId, About updatedAbout) {
+    public About updateAbout(Long contactId, About updatedAbout) {
         var savedAbout = getByContactId(contactId);
         updateAboutFields(savedAbout, updatedAbout);
-        repository.save(savedAbout);
+        return repository.save(savedAbout);
     }
 
     public void deleteAbout(Long contactId) {

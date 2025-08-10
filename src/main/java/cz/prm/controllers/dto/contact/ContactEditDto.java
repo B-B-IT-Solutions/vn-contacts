@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConnectionDto {
+public class ContactEditDto {
 
-    @JsonProperty("value")
-    private String value;
+    @JsonProperty("contact")
+    private ContactDto contact;
 
-    @JsonProperty("type")
-    private String type;
+    @JsonProperty("about")
+    private AboutDto about;
 }

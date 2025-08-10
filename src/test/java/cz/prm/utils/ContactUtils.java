@@ -13,8 +13,8 @@ import static java.lang.String.format;
 import static java.time.Instant.now;
 
 import cz.prm.controllers.dto.contact.AboutDto;
-import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.ContactEditDto;
 import cz.prm.controllers.dto.contact.FirstInteractionDto;
 import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
@@ -22,8 +22,8 @@ import cz.prm.controllers.dto.contact.PastClientDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.About;
-import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.ContactEdit;
 import cz.prm.domain.contact.FirstInteraction;
 import cz.prm.domain.contact.IdealClient;
 import cz.prm.domain.contact.Occupation;
@@ -33,6 +33,20 @@ import cz.prm.domain.contact.query.ContactsQuery;
 import java.util.List;
 
 public class ContactUtils {
+
+    public static ContactEdit contactEdit() {
+        var ce = new ContactEdit();
+        ce.setContact(contact());
+        ce.setAbout(about());
+        return ce;
+    }
+
+    public static ContactEditDto contactEditDto() {
+        var ce = new ContactEditDto();
+        ce.setContact(contactDto());
+        ce.setAbout(aboutDto());
+        return ce;
+    }
 
     public static List<Contact> contacts() {
         return newArrayList(contact(), contact(), contact());
@@ -45,12 +59,13 @@ public class ContactUtils {
         contact.setLastName(uuid());
         contact.setEmail(uuid());
         contact.setPhoneNumber(uuid());
+        contact.setLinkedInUrl(uuid());
+        contact.setDateOfBirth(now());
         contact.setStatus(uuid());
         contact.setSource(uuid());
         contact.setCountry(uuid());
         contact.setCity(uuid());
         contact.setTrustScore(randomInt());
-        contact.setUrls(connections());
         contact.setOccupation(occupation());
         contact.setLabels(uuids());
         contact.setIndustries(uuids());
@@ -58,7 +73,6 @@ public class ContactUtils {
         contact.setProducts(uuids());
         contact.setTargetMarkets(uuids());
         contact.setOwner(user());
-        contact.setDateOfBirth(now());
         contact.setLastEditDate(now());
         contact.setCreationDate(now());
         return contact;
@@ -71,19 +85,19 @@ public class ContactUtils {
         contact.setLastName(uuid());
         contact.setEmail(uuid());
         contact.setPhoneNumber(uuid());
+        contact.setLinkedInUrl(uuid());
+        contact.setDateOfBirth(now());
         contact.setStatus(uuid());
         contact.setSource(uuid());
         contact.setCountry(uuid());
         contact.setCity(uuid());
         contact.setTrustScore(randomInt());
-        contact.setUrls(connectionsDto());
         contact.setOccupation(occupationDto());
         contact.setLabels(uuids());
         contact.setIndustries(uuids());
         contact.setSkills(uuids());
         contact.setProducts(uuids());
         contact.setTargetMarkets(uuids());
-        contact.setDateOfBirth(now());
         contact.setLastEditDate(now());
         contact.setCreationDate(now());
         return contact;
@@ -103,28 +117,6 @@ public class ContactUtils {
         occupation.setCompany(format("company%s", uuid()));
         occupation.setIndustry(format("industry%s", uuid()));
         return occupation;
-    }
-
-    public static List<Connection> connections() {
-        return newArrayList(connection(), connection(), connection());
-    }
-
-    public static List<ConnectionDto> connectionsDto() {
-        return newArrayList(connectionDto(), connectionDto(), connectionDto());
-    }
-
-    public static Connection connection() {
-        var connection = new Connection();
-        connection.setValue(uuid());
-        connection.setType(uuid());
-        return connection;
-    }
-
-    public static ConnectionDto connectionDto() {
-        var dto = new ConnectionDto();
-        dto.setValue(uuid());
-        dto.setType(uuid());
-        return dto;
     }
 
     public static About about() {

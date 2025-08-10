@@ -6,8 +6,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.AboutDto;
-import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
+import cz.prm.controllers.dto.contact.ContactEditDto;
 import cz.prm.controllers.dto.contact.FirstInteractionDto;
 import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
@@ -16,8 +16,8 @@ import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.contact.About;
-import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contact.ContactEdit;
 import cz.prm.domain.contact.FirstInteraction;
 import cz.prm.domain.contact.IdealClient;
 import cz.prm.domain.contact.Occupation;
@@ -64,12 +64,24 @@ public class ContactAssertions {
         });
     }
 
+    public static void assertContactEdit(ContactEdit ce1, ContactEdit ce2) {
+        assertContact(ce1.getContact(), ce2.getContact());
+        assertAbout(ce1.getAbout(), ce2.getAbout());
+    }
+
+    public static void assertContactEdit(ContactEdit ce, ContactEditDto dto) {
+        assertContact(ce.getContact(), dto.getContact());
+        assertAbout(ce.getAbout(), dto.getAbout());
+    }
+
     public static void assertContact(Contact contact1, Contact contact2) {
         assertThat(contact1.getContactId()).isEqualTo(contact2.getContactId());
         assertThat(contact1.getFirstName()).isEqualTo(contact2.getFirstName());
         assertThat(contact1.getLastName()).isEqualTo(contact2.getLastName());
         assertThat(contact1.getEmail()).isEqualTo(contact2.getEmail());
         assertThat(contact1.getPhoneNumber()).isEqualTo(contact2.getPhoneNumber());
+        assertThat(contact1.getLinkedInUrl()).isEqualTo(contact2.getLinkedInUrl());
+        assertThat(contact1.getDateOfBirth()).isEqualTo(contact2.getDateOfBirth());
         assertThat(contact1.getStatus()).isEqualTo(contact2.getStatus());
         assertThat(contact1.getSource()).isEqualTo(contact2.getSource());
         assertThat(contact1.getCountry()).isEqualTo(contact2.getCountry());
@@ -81,11 +93,9 @@ public class ContactAssertions {
         assertThat(contact1.getProducts()).containsExactlyElementsOf(contact2.getProducts());
         assertThat(contact1.getTargetMarkets()).containsExactlyElementsOf(contact2.getTargetMarkets());
         assertThat(contact1.getOwner()).isEqualTo(contact2.getOwner());
-        assertThat(contact1.getDateOfBirth()).isEqualTo(contact2.getDateOfBirth());
         assertThat(contact1.getLastEditDate()).isEqualTo(contact2.getLastEditDate());
         assertThat(contact1.getCreationDate()).isEqualTo(contact2.getCreationDate());
         assertOccupation(contact1.getOccupation(), contact2.getOccupation());
-        assertConnections(contact1.getUrls(), contact2.getUrls());
     }
 
     public static void assertContact(Contact contact, ContactDto dto) {
@@ -94,6 +104,8 @@ public class ContactAssertions {
         assertThat(contact.getLastName()).isEqualTo(dto.getLastName());
         assertThat(contact.getEmail()).isEqualTo(dto.getEmail());
         assertThat(contact.getPhoneNumber()).isEqualTo(dto.getPhoneNumber());
+        assertThat(contact.getLinkedInUrl()).isEqualTo(dto.getLinkedInUrl());
+        assertThat(contact.getDateOfBirth()).isEqualTo(dto.getDateOfBirth());
         assertThat(contact.getStatus()).isEqualTo(dto.getStatus());
         assertThat(contact.getSource()).isEqualTo(dto.getSource());
         assertThat(contact.getCountry()).isEqualTo(dto.getCountry());
@@ -104,11 +116,9 @@ public class ContactAssertions {
         assertThat(contact.getSkills()).containsExactlyElementsOf(dto.getSkills());
         assertThat(contact.getProducts()).containsExactlyElementsOf(dto.getProducts());
         assertThat(contact.getTargetMarkets()).containsExactlyElementsOf(dto.getTargetMarkets());
-        assertThat(contact.getDateOfBirth()).isEqualTo(dto.getDateOfBirth());
         assertThat(contact.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertThat(contact.getCreationDate()).isEqualTo(dto.getCreationDate());
         assertOccupationDto(contact.getOccupation(), dto.getOccupation());
-        assertConnectionsDto(contact.getUrls(), dto.getUrls());
     }
 
     public static void assertOccupation(Occupation occupation1, Occupation occupation2) {
@@ -123,32 +133,6 @@ public class ContactAssertions {
         assertThat(occupation.getIndustry()).isEqualTo(dto.getIndustry());
     }
 
-    public static void assertConnections(List<Connection> cons1, List<Connection> cons2) {
-        assertThat(cons1).isNotEmpty().hasSameSizeAs(cons2);
-        cons1.forEach(c1 -> {
-            var c2 = cons2.stream().filter(u -> Objects.equals(c1.getValue(), u.getValue())).findFirst().get();
-            assertConnection(c1, c2);
-        });
-    }
-
-    public static void assertConnectionsDto(List<Connection> cons, List<ConnectionDto> dtos) {
-        assertThat(cons).isNotEmpty().hasSameSizeAs(dtos);
-        cons.forEach(c1 -> {
-            var c2 = dtos.stream().filter(u -> Objects.equals(c1.getValue(), u.getValue())).findFirst().get();
-            assertConnectionDto(c1, c2);
-        });
-    }
-
-    public static void assertConnection(Connection con1, Connection con2) {
-        assertThat(con1.getValue()).isEqualTo(con2.getValue());
-        assertThat(con1.getValue()).isEqualTo(con2.getValue());
-    }
-
-    public static void assertConnectionDto(Connection connection, ConnectionDto dto) {
-        assertThat(connection.getValue()).isEqualTo(dto.getValue());
-        assertThat(connection.getValue()).isEqualTo(dto.getValue());
-    }
-
     public static void assertAbout(About about1, About about2) {
         assertThat(about1.getDescription()).isEqualTo(about2.getDescription());
         assertThat(about1.getContactGoals()).isEqualTo(about2.getContactGoals());
@@ -159,7 +143,7 @@ public class ContactAssertions {
         assertFirstInteraction(about1.getFirstInteraction(), about2.getFirstInteraction());
     }
 
-    public static void assertAboutDto(About about, AboutDto dto) {
+    public static void assertAbout(About about, AboutDto dto) {
         assertThat(about.getDescription()).isEqualTo(dto.getDescription());
         assertThat(about.getContactGoals()).isEqualTo(dto.getContactGoals());
         assertThat(about.getContactChallenges()).isEqualTo(dto.getContactChallenges());

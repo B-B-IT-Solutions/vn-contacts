@@ -27,6 +27,9 @@ public class ContactDto {
     @JsonProperty("phoneNumber")
     private String phoneNumber;
 
+    @JsonProperty("linkedInUrl")
+    private String linkedInUrl;
+
     @JsonProperty("dateOfBirth")
     private Instant dateOfBirth;
 
@@ -44,9 +47,6 @@ public class ContactDto {
 
     @JsonProperty("trustScore")
     private Integer trustScore;
-
-    @JsonProperty("urls")
-    private List<ConnectionDto> urls;
 
     @JsonProperty("occupation")
     private OccupationDto occupation;

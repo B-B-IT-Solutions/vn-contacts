@@ -6,11 +6,14 @@ import static cz.prm.utils.ContactUtils.about;
 import static cz.prm.utils.ContactUtils.aboutDto;
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contactDto;
+import static cz.prm.utils.ContactUtils.contactEdit;
+import static cz.prm.utils.ContactUtils.contactEditDto;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsFilterDto;
 import static cz.prm.utils.ContactUtils.contactsQueryDto;
-import static cz.prm.utils.assertions.ContactAssertions.assertAboutDto;
+import static cz.prm.utils.assertions.ContactAssertions.assertAbout;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
+import static cz.prm.utils.assertions.ContactAssertions.assertContactEdit;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactFilter;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactQuery;
 import static cz.prm.utils.assertions.ContactAssertions.assertPage;
@@ -18,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
+import cz.prm.domain.contact.ContactEdit;
 import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.Test;
@@ -33,6 +37,20 @@ class ContactMapperTest {
         var page = page(contacts());
         var dtos = mapper.toPageDto(page);
         assertPage(page, dtos);
+    }
+
+    @Test
+    void toContactEdit() {
+        var dto = contactEditDto();
+        var ce = mapper.toContactEdit(dto);
+        assertContactEdit(ce, dto);
+    }
+
+    @Test
+    void toContactEditDto() {
+        var ce = contactEdit();
+        var dto = mapper.toContactEditDto(ce);
+        assertContactEdit(ce, dto);
     }
 
     @Test
@@ -53,14 +71,14 @@ class ContactMapperTest {
     void toAboutDto() {
         var about = about();
         var dto = mapper.toAboutDto(about);
-        assertAboutDto(about, dto);
+        assertAbout(about, dto);
     }
 
     @Test
     void toAbout() {
         var dto = aboutDto();
         var about = mapper.toAbout(dto);
-        assertAboutDto(about, dto);
+        assertAbout(about, dto);
     }
 
     @Test
@@ -97,6 +115,18 @@ class ContactMapperTest {
         dto.setFilter(null);
         var query = mapper.toNullSafeContactsQuery(dto);
         assertNullSafeContactQuery(query);
+    }
+
+    @Test
+    void afterContactEditDto() {
+        var target = new ContactEdit();
+        target.setContact(null);
+        target.setAbout(null);
+        assertThat(target.getContact()).isNull();
+        assertThat(target.getAbout()).isNull();
+        mapper.afterContactEditDto(null, target);
+        assertThat(target.getContact()).isNotNull();
+        assertThat(target.getAbout()).isNotNull();
     }
 
     @Test

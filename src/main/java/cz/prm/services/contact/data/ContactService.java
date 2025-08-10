@@ -42,10 +42,10 @@ public class ContactService {
         return repository.save(contact);
     }
 
-    public void updateContact(Long contactId, Contact updatedContact) {
+    public Contact updateContact(Long contactId, Contact updatedContact) {
         var savedContact = getContactById(contactId);
         updateContactFields(savedContact, updatedContact);
-        repository.save(savedContact);
+        return repository.save(savedContact);
     }
 
     public void deleteContact(Long contactId) {
@@ -58,13 +58,13 @@ public class ContactService {
         savedContact.setLastName(updatedContact.getLastName());
         savedContact.setEmail(updatedContact.getEmail());
         savedContact.setPhoneNumber(updatedContact.getPhoneNumber());
+        savedContact.setLinkedInUrl(updatedContact.getLinkedInUrl());
+        savedContact.setDateOfBirth(updatedContact.getDateOfBirth());
         savedContact.setStatus(updatedContact.getStatus());
         savedContact.setSource(updatedContact.getSource());
         savedContact.setCountry(updatedContact.getCountry());
         savedContact.setCity(updatedContact.getCity());
         savedContact.setTrustScore(updatedContact.getTrustScore());
-        savedContact.setUrls(updatedContact.getUrls());
-        savedContact.setDateOfBirth(updatedContact.getDateOfBirth());
         savedContact.setOccupation(updatedContact.getOccupation());
         savedContact.setLabels(updatedContact.getLabels());
         savedContact.setIndustries(updatedContact.getIndustries());

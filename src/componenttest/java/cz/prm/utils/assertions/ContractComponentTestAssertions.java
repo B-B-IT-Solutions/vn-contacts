@@ -1,19 +1,19 @@
 package cz.prm.utils.assertions;
 
+import static cz.prm.utils.TimeComponentTestUtils.ONE_SECOND_OFFSET;
+import static cz.prm.utils.assertions.ConditionUtils.nullOrEquals;
 import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
 
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.AboutDto;
-import cz.prm.controllers.dto.contact.ConnectionDto;
 import cz.prm.controllers.dto.contact.ContactDto;
 import cz.prm.controllers.dto.contact.FirstInteractionDto;
 import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
 import cz.prm.controllers.dto.contact.PastClientDto;
 import cz.prm.domain.contact.About;
-import cz.prm.domain.contact.Connection;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.FirstInteraction;
 import cz.prm.domain.contact.IdealClient;
@@ -42,6 +42,8 @@ public class ContractComponentTestAssertions {
         assertThat(contact.getLastName()).isEqualTo(contactDto.getLastName());
         assertThat(contact.getEmail()).isEqualTo(contactDto.getEmail());
         assertThat(contact.getPhoneNumber()).isEqualTo(contactDto.getPhoneNumber());
+        assertThat(contact.getLinkedInUrl()).isEqualTo(contactDto.getLinkedInUrl());
+        assertThat(contact.getDateOfBirth()).isCloseTo(contactDto.getDateOfBirth(), within(1, SECONDS));
         assertThat(contact.getStatus()).isEqualTo(contactDto.getStatus());
         assertThat(contact.getSource()).isEqualTo(contactDto.getSource());
         assertThat(contact.getCountry()).isEqualTo(contactDto.getCountry());
@@ -52,11 +54,9 @@ public class ContractComponentTestAssertions {
         assertThat(contact.getSkills()).containsExactlyElementsOf(contactDto.getSkills());
         assertThat(contact.getProducts()).containsExactlyElementsOf(contactDto.getProducts());
         assertThat(contact.getTargetMarkets()).containsExactlyElementsOf(contactDto.getTargetMarkets());
-        assertThat(contact.getDateOfBirth()).isCloseTo(contactDto.getDateOfBirth(), within(1, SECONDS));
         assertThat(contact.getLastEditDate()).isNotNull();
         assertThat(contact.getCreationDate()).isNotNull();
         assertOccupationDto(contact.getOccupation(), contactDto.getOccupation());
-        assertConnectionsDto(contact.getUrls(), contactDto.getUrls());
     }
 
     public static void assertOccupationDto(Occupation occupation, OccupationDto dto) {
@@ -65,20 +65,7 @@ public class ContractComponentTestAssertions {
         assertThat(occupation.getIndustry()).isEqualTo(dto.getIndustry());
     }
 
-    public static void assertConnectionsDto(List<Connection> cons, List<ConnectionDto> dtos) {
-        assertThat(cons).isNotEmpty().hasSameSizeAs(dtos);
-        cons.forEach(c1 -> {
-            var c2 = dtos.stream().filter(u -> Objects.equals(c1.getValue(), u.getValue())).findFirst().get();
-            assertConnectionDto(c1, c2);
-        });
-    }
-
-    public static void assertConnectionDto(Connection connection, ConnectionDto dto) {
-        assertThat(connection.getValue()).isEqualTo(dto.getValue());
-        assertThat(connection.getValue()).isEqualTo(dto.getValue());
-    }
-
-    public static void assertAboutDto(About about, AboutDto dto) {
+    public static void assertAbout(About about, AboutDto dto) {
         assertThat(about.getDescription()).isEqualTo(dto.getDescription());
         assertThat(about.getContactGoals()).isEqualTo(dto.getContactGoals());
         assertThat(about.getContactChallenges()).isEqualTo(dto.getContactChallenges());
@@ -91,13 +78,14 @@ public class ContractComponentTestAssertions {
     public static void assertIdealClientsDto(List<IdealClient> ics, List<IdealClientDto> dtos) {
         assertThat(ics).isNotEmpty().hasSameSizeAs(dtos);
         ics.forEach(c1 -> {
-            var c2 = dtos.stream().filter(u -> Objects.equals(c1.getIdealClientId(), u.getIdealClientId())).findFirst().get();
+            var c2 = dtos.stream().filter(u -> Objects.equals(c1.getName(), u.getName())).findFirst().get();
             assertIdealClientDto(c1, c2);
         });
     }
 
     public static void assertIdealClientDto(IdealClient ic, IdealClientDto dto) {
-        assertThat(ic.getIdealClientId()).isEqualTo(dto.getIdealClientId());
+        assertThat(ic.getIdealClientId()).isNotNull();
+        assertThat(dto.getIdealClientId()).is(nullOrEquals(ic.getIdealClientId()));
         assertThat(ic.getName()).isEqualTo(dto.getName());
         assertThat(ic.getCharacteristics()).containsExactlyElementsOf(dto.getCharacteristics());
         assertThat(ic.getNeeds()).isEqualTo(dto.getNeeds());
@@ -108,13 +96,14 @@ public class ContractComponentTestAssertions {
     public static void assertPastClientsDto(List<PastClient> pcs, List<PastClientDto> dtos) {
         assertThat(pcs).isNotEmpty().hasSameSizeAs(dtos);
         pcs.forEach(c1 -> {
-            var c2 = dtos.stream().filter(u -> Objects.equals(c1.getPastClientId(), u.getPastClientId())).findFirst().get();
+            var c2 = dtos.stream().filter(u -> Objects.equals(c1.getName(), u.getName())).findFirst().get();
             assertPastClientDto(c1, c2);
         });
     }
 
     public static void assertPastClientDto(PastClient pc, PastClientDto dto) {
-        assertThat(pc.getPastClientId()).isEqualTo(dto.getPastClientId());
+        assertThat(pc.getPastClientId()).isNotNull();
+        assertThat(dto.getPastClientId()).is(nullOrEquals(pc.getPastClientId()));
         assertThat(pc.getName()).isEqualTo(dto.getName());
         assertThat(pc.getCharacteristics()).containsExactlyElementsOf(dto.getCharacteristics());
         assertThat(pc.getProvidedServices()).isEqualTo(dto.getProvidedServices());
@@ -125,7 +114,7 @@ public class ContractComponentTestAssertions {
     public static void assertMeetingDto(FirstInteraction fi, FirstInteractionDto dto) {
         assertThat(fi.getType()).isEqualTo(dto.getType());
         assertThat(fi.getSource()).isEqualTo(dto.getSource());
-        assertThat(fi.getDate()).isEqualTo(dto.getDate());
+        assertThat(fi.getDate()).isCloseTo(dto.getDate(), ONE_SECOND_OFFSET);
         assertThat(fi.getNotes()).isEqualTo(dto.getNotes());
     }
 }
