@@ -30,19 +30,6 @@ public class ContactController {
         this.mapper = mapper;
     }
 
-    @GetMapping
-    public PageDto<ContactDto> getContacts(ContactsQueryDto queryDto) {
-        var query = mapper.toNullSafeContactsQuery(queryDto);
-        var contacts = clearingHouse.getContacts(query);
-        return mapper.toPageDto(contacts);
-    }
-
-    @GetMapping("/{contactId}")
-    public ContactDto getContact(@PathVariable("contactId") Long contactId) {
-        var contact = clearingHouse.getContact(contactId);
-        return mapper.toContactDto(contact);
-    }
-
     @PostMapping
     public DecoratedContactDto createDecoratedContact(@RequestBody DecoratedContactDto dto) {
         var contactEdit = mapper.toContactEdit(dto);
@@ -51,15 +38,28 @@ public class ContactController {
     }
 
     @PutMapping("/{contactId}")
-    public DecoratedContactDto updateContact(@PathVariable("contactId") Long contactId, @RequestBody DecoratedContactDto dto) {
+    public DecoratedContactDto updateDecoratedContact(@PathVariable("contactId") Long contactId, @RequestBody DecoratedContactDto dto) {
         var contactEdit = mapper.toContactEdit(dto);
         var response = clearingHouse.updateDecoratedContact(contactId, contactEdit);
         return mapper.toContactEditDto(response);
     }
 
     @DeleteMapping("/{contactId}")
-    public void deleteContact(@PathVariable("contactId") Long contactId) {
-        clearingHouse.deleteContact(contactId);
+    public void deleteDecoratedContact(@PathVariable("contactId") Long contactId) {
+        clearingHouse.deleteDecoratedContact(contactId);
+    }
+
+    @GetMapping("/contact")
+    public PageDto<ContactDto> getContacts(ContactsQueryDto queryDto) {
+        var query = mapper.toNullSafeContactsQuery(queryDto);
+        var contacts = clearingHouse.getContacts(query);
+        return mapper.toPageDto(contacts);
+    }
+
+    @GetMapping("/{contactId}/contact")
+    public ContactDto getContact(@PathVariable("contactId") Long contactId) {
+        var contact = clearingHouse.getContact(contactId);
+        return mapper.toContactDto(contact);
     }
 
     @GetMapping("/{contactId}/about")

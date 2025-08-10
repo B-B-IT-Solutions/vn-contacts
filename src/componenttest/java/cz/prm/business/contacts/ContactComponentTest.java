@@ -387,7 +387,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
     }
 
     @Test
-    void createContactEdit() {
+    void createDecoratedContact() {
         var toCreateDto = contactEditDto();
         var responseDto = user1CreateDecoratedContact(toCreateDto);
         var contact = getContactFromDb(toCreateDto);
@@ -441,7 +441,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
     }
 
     @Test
-    void updateContactEdit() {
+    void updateDecoratedContact() {
         var contact = createContact(USER_1);
         var contactId = contact.getContactId();
         var updateContactDto = user1GetContact(contactId);
@@ -462,8 +462,8 @@ public class ContactComponentTest extends ContactComponentTestBase {
         assertAbout(about, updateAboutDto);
         assertAbout(about, responseDto.getAbout());
 
-        user2UpdateContactExpectNotFound(contactId, updateDto);
-        user3UpdateContactExpectNotFound(contactId, updateDto);
+        user2UpdateDecoratedContactExpectNotFound(contactId, updateDto);
+        user3UpdateDecoratedContactExpectNotFound(contactId, updateDto);
 
         contact = createContact(USER_2);
         contactId = contact.getContactId();
@@ -485,8 +485,8 @@ public class ContactComponentTest extends ContactComponentTestBase {
         assertAbout(about, updateAboutDto);
         assertAbout(about, responseDto.getAbout());
 
-        user1UpdateContactExpectNotFound(contactId, updateDto);
-        user3UpdateContactExpectNotFound(contactId, updateDto);
+        user1UpdateDecoratedContactExpectNotFound(contactId, updateDto);
+        user3UpdateDecoratedContactExpectNotFound(contactId, updateDto);
 
         contact = createContact(USER_3);
         contactId = contact.getContactId();
@@ -508,20 +508,20 @@ public class ContactComponentTest extends ContactComponentTestBase {
         assertAbout(about, updateAboutDto);
         assertAbout(about, responseDto.getAbout());
 
-        user1UpdateContactExpectNotFound(contactId, updateDto);
-        user2UpdateContactExpectNotFound(contactId, updateDto);
+        user1UpdateDecoratedContactExpectNotFound(contactId, updateDto);
+        user2UpdateDecoratedContactExpectNotFound(contactId, updateDto);
     }
 
     @Test
-    void deleteContact() {
+    void deleteDecoratedContact() {
         var contact = createContact(USER_1);
         var contactId = contact.getContactId();
         var contactDto = user1GetContact(contactId);
         assertContact(contact, contactDto);
 
-        user2DeleteContactExpectNotFound(contactId);
-        user3DeleteContactExpectNotFound(contactId);
-        user1DeleteContact(contactId);
+        user2DeleteDecoratedContactExpectNotFound(contactId);
+        user3DeleteDecoratedContactExpectNotFound(contactId);
+        user1DeleteDecoratedContact(contactId);
         user1GetContactExpectNotFound(contactId);
 
         contact = createContact(USER_2);
@@ -529,9 +529,9 @@ public class ContactComponentTest extends ContactComponentTestBase {
         contactDto = user2GetContact(contactId);
         assertContact(contact, contactDto);
 
-        user1DeleteContactExpectNotFound(contactId);
-        user3DeleteContactExpectNotFound(contactId);
-        user2DeleteContact(contactId);
+        user1DeleteDecoratedContactExpectNotFound(contactId);
+        user3DeleteDecoratedContactExpectNotFound(contactId);
+        user2DeleteDecoratedContact(contactId);
         user2GetContactExpectNotFound(contactId);
 
         contact = createContact(USER_3);
@@ -539,9 +539,9 @@ public class ContactComponentTest extends ContactComponentTestBase {
         contactDto = user3GetContact(contactId);
         assertContact(contact, contactDto);
 
-        user1DeleteContactExpectNotFound(contactId);
-        user2DeleteContactExpectNotFound(contactId);
-        user3DeleteContact(contactId);
+        user1DeleteDecoratedContactExpectNotFound(contactId);
+        user2DeleteDecoratedContactExpectNotFound(contactId);
+        user3DeleteDecoratedContact(contactId);
         user3GetContactExpectNotFound(contactId);
     }
 

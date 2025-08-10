@@ -35,14 +35,6 @@ public class ContactClearingHouse {
         this.referralService = referralService;
     }
 
-    public Page<Contact> getContacts(ContactsQuery query) {
-        return contactService.getContacts(query);
-    }
-
-    public Contact getContact(Long contactId) {
-        return contactService.getContact(contactId);
-    }
-
     public DecoratedContact createDecoratedContact(DecoratedContact ce) {
         var savedContact = contactService.createContact(ce.getContact());
         var savedAbout = aboutService.createAbout(savedContact.getContactId(), ce.getAbout());
@@ -55,12 +47,20 @@ public class ContactClearingHouse {
         return new DecoratedContact(updtedContact, updatedAbout);
     }
 
-    public void deleteContact(Long contactId) {
+    public void deleteDecoratedContact(Long contactId) {
         noteService.deleteByContactId(contactId);
         taskService.deleteByContactId(contactId);
         referralService.deleteByContactId(contactId);
         aboutService.deleteAbout(contactId);
         contactService.deleteContact(contactId);
+    }
+
+    public Page<Contact> getContacts(ContactsQuery query) {
+        return contactService.getContacts(query);
+    }
+
+    public Contact getContact(Long contactId) {
+        return contactService.getContact(contactId);
     }
 
     public About getAbout(Long contactId) {

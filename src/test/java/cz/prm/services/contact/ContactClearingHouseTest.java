@@ -48,24 +48,6 @@ class ContactClearingHouseTest {
     }
 
     @Test
-    void getContacts() {
-        var contacts = contacts();
-        var page = page(contacts);
-        var query = contactsQuery();
-        when(contactService.getContacts(query)).thenReturn(page);
-        var result = clearingHouse.getContacts(query);
-        assertThat(result).isEqualTo(page);
-    }
-
-    @Test
-    void getContact() {
-        var contact = contact();
-        when(contactService.getContact(contact.getContactId())).thenReturn(contact);
-        var result = clearingHouse.getContact(contact.getContactId());
-        assertContact(result, contact);
-    }
-
-    @Test
     void createDecoratedContact() {
         var contactEdit = contactEdit();
         var contact = contactEdit.getContact();
@@ -95,14 +77,32 @@ class ContactClearingHouseTest {
     }
 
     @Test
-    void deleteContact() {
+    void deleteDecoratedContact() {
         var contact = contact();
-        clearingHouse.deleteContact(contact.getContactId());
+        clearingHouse.deleteDecoratedContact(contact.getContactId());
         verify(noteService).deleteByContactId(contact.getContactId());
         verify(taskService).deleteByContactId(contact.getContactId());
         verify(referralService).deleteByContactId(contact.getContactId());
         verify(aboutService).deleteAbout(contact.getContactId());
         verify(contactService).deleteContact(contact.getContactId());
+    }
+
+    @Test
+    void getContacts() {
+        var contacts = contacts();
+        var page = page(contacts);
+        var query = contactsQuery();
+        when(contactService.getContacts(query)).thenReturn(page);
+        var result = clearingHouse.getContacts(query);
+        assertThat(result).isEqualTo(page);
+    }
+
+    @Test
+    void getContact() {
+        var contact = contact();
+        when(contactService.getContact(contact.getContactId())).thenReturn(contact);
+        var result = clearingHouse.getContact(contact.getContactId());
+        assertContact(result, contact);
     }
 
     @Test

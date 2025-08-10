@@ -21,7 +21,6 @@ import static org.mockito.Mockito.when;
 
 import cz.prm.controllers.mappers.ContactMapper;
 import cz.prm.domain.contact.About;
-import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.DecoratedContact;
 import cz.prm.domain.contact.query.ContactsQuery;
 import cz.prm.services.contact.ContactClearingHouse;
@@ -40,9 +39,7 @@ class ContactControllerTest {
     @Mock
     private ContactClearingHouse clearingHouse;
     @Captor
-    private ArgumentCaptor<DecoratedContact> contactEditCapt;
-    @Captor
-    private ArgumentCaptor<Contact> contactCapt;
+    private ArgumentCaptor<DecoratedContact> decoratedContactCapt;
     @Captor
     private ArgumentCaptor<About> aboutCapt;
     @Captor
@@ -54,6 +51,38 @@ class ContactControllerTest {
     @BeforeEach
     void setUp() {
         controller = new ContactController(clearingHouse, mapper);
+    }
+
+    @Test
+    void createDecoratedContact() {
+        var dto = contactEditDto();
+        when(clearingHouse.createDecoratedContact(any(DecoratedContact.class))).thenAnswer(returnParamAnswer(0));
+
+        var responseDto = controller.createDecoratedContact(dto);
+        verify(clearingHouse).createDecoratedContact(decoratedContactCapt.capture());
+        var contactEdit = decoratedContactCapt.getValue();
+        assertDecoratedContact(contactEdit, dto);
+        assertDecoratedContact(contactEdit, responseDto);
+    }
+
+    @Test
+    void updateDecoratedContact() {
+        var dto = contactEditDto();
+        var contactId = randomLong();
+        when(clearingHouse.updateDecoratedContact(eq(contactId), any(DecoratedContact.class))).thenAnswer(returnParamAnswer(1));
+
+        var responseDto = controller.updateDecoratedContact(contactId, dto);
+        verify(clearingHouse).updateDecoratedContact(eq(contactId), decoratedContactCapt.capture());
+        var contactEdit = decoratedContactCapt.getValue();
+        assertDecoratedContact(contactEdit, dto);
+        assertDecoratedContact(contactEdit, responseDto);
+    }
+
+    @Test
+    void deleteDecoratedContact() {
+        var contactId = randomLong();
+        controller.deleteDecoratedContact(contactId);
+        verify(clearingHouse).deleteDecoratedContact(contactId);
     }
 
     @Test
@@ -76,38 +105,6 @@ class ContactControllerTest {
         when(clearingHouse.getContact(contactId)).thenReturn(contact);
         var result = controller.getContact(contactId);
         assertContact(contact, result);
-    }
-
-    @Test
-    void createDecoratedContact() {
-        var dto = contactEditDto();
-        when(clearingHouse.createDecoratedContact(any(DecoratedContact.class))).thenAnswer(returnParamAnswer(0));
-
-        var responseDto = controller.createDecoratedContact(dto);
-        verify(clearingHouse).createDecoratedContact(contactEditCapt.capture());
-        var contactEdit = contactEditCapt.getValue();
-        assertDecoratedContact(contactEdit, dto);
-        assertDecoratedContact(contactEdit, responseDto);
-    }
-
-    @Test
-    void updateContact() {
-        var dto = contactEditDto();
-        var contactId = randomLong();
-        when(clearingHouse.updateDecoratedContact(eq(contactId), any(DecoratedContact.class))).thenAnswer(returnParamAnswer(1));
-
-        var responseDto = controller.updateContact(contactId, dto);
-        verify(clearingHouse).updateDecoratedContact(eq(contactId), contactEditCapt.capture());
-        var contactEdit = contactEditCapt.getValue();
-        assertDecoratedContact(contactEdit, dto);
-        assertDecoratedContact(contactEdit, responseDto);
-    }
-
-    @Test
-    void deleteContact() {
-        var contactId = randomLong();
-        controller.deleteContact(contactId);
-        verify(clearingHouse).deleteContact(contactId);
     }
 
     @Test
