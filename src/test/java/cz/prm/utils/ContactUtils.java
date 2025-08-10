@@ -34,14 +34,14 @@ import java.util.List;
 
 public class ContactUtils {
 
-    public static DecoratedContact contactEdit() {
+    public static DecoratedContact decoratedContact() {
         var ce = new DecoratedContact();
         ce.setContact(contact());
         ce.setAbout(about());
         return ce;
     }
 
-    public static DecoratedContactDto contactEditDto() {
+    public static DecoratedContactDto decoratedContactDto() {
         var ce = new DecoratedContactDto();
         ce.setContact(contactDto());
         ce.setAbout(aboutDto());

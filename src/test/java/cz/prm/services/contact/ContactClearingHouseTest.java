@@ -3,9 +3,9 @@ package cz.prm.services.contact;
 import static cz.prm.utils.CommonUtils.page;
 import static cz.prm.utils.ContactUtils.about;
 import static cz.prm.utils.ContactUtils.contact;
-import static cz.prm.utils.ContactUtils.contactEdit;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsQuery;
+import static cz.prm.utils.ContactUtils.decoratedContact;
 import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.ContactAssertions.assertAbout;
@@ -48,32 +48,47 @@ class ContactClearingHouseTest {
     }
 
     @Test
+    void getDecoratedContact() {
+        var contact = contact();
+        var about = about();
+        var contactId = randomLong();
+        when(contactService.getContact(contactId)).thenReturn(contact);
+        when(aboutService.getAbout(contactId)).thenReturn(about);
+
+        var response = clearingHouse.getDecoratedContact(contactId);
+        verify(contactService).getContact(contactId);
+        verify(aboutService).getAbout(contactId);
+        assertContact(response.getContact(), contact);
+        assertAbout(response.getAbout(), about);
+    }
+
+    @Test
     void createDecoratedContact() {
-        var contactEdit = contactEdit();
-        var contact = contactEdit.getContact();
-        var about = contactEdit.getAbout();
+        var dc = decoratedContact();
+        var contact = dc.getContact();
+        var about = dc.getAbout();
         when(contactService.createContact(contact)).thenAnswer(returnParamAnswer(0));
         when(aboutService.createAbout(contact.getContactId(), about)).thenAnswer(returnParamAnswer(1));
 
-        var response = clearingHouse.createDecoratedContact(contactEdit);
+        var response = clearingHouse.createDecoratedContact(dc);
         verify(contactService).createContact(contact);
         verify(aboutService).createAbout(contact.getContactId(), about);
-        assertDecoratedContact(contactEdit, response);
+        assertDecoratedContact(dc, response);
     }
 
     @Test
     void updateDecoratedContact() {
-        var contactEdit = contactEdit();
-        var contact = contactEdit.getContact();
-        var about = contactEdit.getAbout();
+        var dc = decoratedContact();
+        var contact = dc.getContact();
+        var about = dc.getAbout();
         var contactId = randomLong();
         when(contactService.updateContact(contactId, contact)).thenAnswer(returnParamAnswer(1));
         when(aboutService.updateAbout(contactId, about)).thenAnswer(returnParamAnswer(1));
 
-        var response = clearingHouse.updateDecoratedContact(contactId, contactEdit);
+        var response = clearingHouse.updateDecoratedContact(contactId, dc);
         verify(contactService).updateContact(contactId, contact);
         verify(aboutService).updateAbout(contactId, about);
-        assertDecoratedContact(contactEdit, response);
+        assertDecoratedContact(dc, response);
     }
 
     @Test

@@ -29,9 +29,9 @@ public interface ContactMapper {
 
     PageDto<ContactDto> toPageDto(Page<Contact> contacts);
 
-    DecoratedContact toContactEdit(DecoratedContactDto dto);
+    DecoratedContact toDecoratedContact(DecoratedContactDto dto);
 
-    DecoratedContactDto toContactEditDto(DecoratedContact dto);
+    DecoratedContactDto toDecoratedContactDto(DecoratedContact dto);
 
     ContactDto toContactDto(Contact contact);
 

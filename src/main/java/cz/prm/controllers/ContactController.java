@@ -30,18 +30,24 @@ public class ContactController {
         this.mapper = mapper;
     }
 
+    @GetMapping("/{contactId}")
+    public DecoratedContactDto getDecoratedContact(@PathVariable("contactId") Long contactId) {
+        var dc = clearingHouse.getDecoratedContact(contactId);
+        return mapper.toDecoratedContactDto(dc);
+    }
+
     @PostMapping
     public DecoratedContactDto createDecoratedContact(@RequestBody DecoratedContactDto dto) {
-        var contactEdit = mapper.toContactEdit(dto);
+        var contactEdit = mapper.toDecoratedContact(dto);
         var response = clearingHouse.createDecoratedContact(contactEdit);
-        return mapper.toContactEditDto(response);
+        return mapper.toDecoratedContactDto(response);
     }
 
     @PutMapping("/{contactId}")
     public DecoratedContactDto updateDecoratedContact(@PathVariable("contactId") Long contactId, @RequestBody DecoratedContactDto dto) {
-        var contactEdit = mapper.toContactEdit(dto);
+        var contactEdit = mapper.toDecoratedContact(dto);
         var response = clearingHouse.updateDecoratedContact(contactId, contactEdit);
-        return mapper.toContactEditDto(response);
+        return mapper.toDecoratedContactDto(response);
     }
 
     @DeleteMapping("/{contactId}")

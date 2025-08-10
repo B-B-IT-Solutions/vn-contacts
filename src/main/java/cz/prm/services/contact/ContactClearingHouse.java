@@ -35,6 +35,12 @@ public class ContactClearingHouse {
         this.referralService = referralService;
     }
 
+    public DecoratedContact getDecoratedContact(Long contactId) {
+        var contact = contactService.getContact(contactId);
+        var about = aboutService.getAbout(contactId);
+        return new DecoratedContact(contact, about);
+    }
+
     public DecoratedContact createDecoratedContact(DecoratedContact ce) {
         var savedContact = contactService.createContact(ce.getContact());
         var savedAbout = aboutService.createAbout(savedContact.getContactId(), ce.getAbout());

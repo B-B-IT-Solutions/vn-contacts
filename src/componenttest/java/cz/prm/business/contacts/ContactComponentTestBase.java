@@ -67,6 +67,18 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         deleteDecoratedContact(contactId, USER_3);
     }
 
+    protected DecoratedContactDto user1GetDecoratedContact(Long contactId) {
+        return getDecoratedContact(contactId, USER_1);
+    }
+
+    protected DecoratedContactDto user2GetDecoratedContact(Long contactId) {
+        return getDecoratedContact(contactId, USER_2);
+    }
+
+    protected DecoratedContactDto user3GetDecoratedContact(Long contactId) {
+        return getDecoratedContact(contactId, USER_3);
+    }
+
     protected PageDto<ContactDto> user1GetContacts(ContactsQueryDto queryDto) {
         return getContactsPage(queryDto, USER_1);
     }
@@ -133,6 +145,13 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         delete(url, user);
     }
 
+    protected DecoratedContactDto getDecoratedContact(Long contactId, ComponentTestUser user) {
+        var url = format(DECORATED_CONTACT_URL, contactId);
+        var typeRef = new TypeRef<DecoratedContactDto>() {
+        };
+        return getOne(url, user, typeRef);
+    }
+
     protected PageDto<ContactDto> getContactsPage(ContactsQueryDto queryDto, ComponentTestUser user) {
         var url = appendQueryToUrl(CONTACTS_URL, queryDto);
         var typeRef = new TypeRef<PageDto<ContactDto>>() {
@@ -157,6 +176,18 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         var typeRef = new TypeRef<AboutDto>() {
         };
         return getOne(url, user, typeRef);
+    }
+
+    protected void user1GetDecoratedContactExpectNotFound(Long contactId) {
+        getDecoratedContactExpectNotFound(contactId, USER_1);
+    }
+
+    protected void user2GetDecoratedContactExpectNotFound(Long contactId) {
+        getDecoratedContactExpectNotFound(contactId, USER_2);
+    }
+
+    protected void user3GetDecoratedContactExpectNotFound(Long contactId) {
+        getDecoratedContactExpectNotFound(contactId, USER_3);
     }
 
     protected void user1UpdateDecoratedContactExpectNotFound(Long contactId, DecoratedContactDto dto) {
@@ -227,6 +258,11 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
     protected void deleteDecoratedContactExpectNotFound(Long contactId, ComponentTestUser user) {
         var url = format(DECORATED_CONTACT_URL, contactId);
         deleteExpectNotFound(url, user);
+    }
+
+    protected void getDecoratedContactExpectNotFound(Long contactId, ComponentTestUser user) {
+        var url = format(DECORATED_CONTACT_URL, contactId);
+        getExpectNotFound(url, user);
     }
 
     protected void getContactExpectNotFound(Long contactId, ComponentTestUser user) {
@@ -306,11 +342,11 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         return sb.toString();
     }
 
-    protected List<Contact> createContacts(ComponentTestUser user) {
-        return createContacts(user, 3);
+    protected List<Contact> createDecoratedContacts(ComponentTestUser user) {
+        return createDecoratedContacts(user, 3);
     }
 
-    protected List<Contact> createContacts(ComponentTestUser user, int numOfContacts) {
-        return IntStream.range(0, numOfContacts).mapToObj((i) -> createContact(user)).collect(toList());
+    protected List<Contact> createDecoratedContacts(ComponentTestUser user, int numOfContacts) {
+        return IntStream.range(0, numOfContacts).mapToObj((i) -> createDecoratedContact(user)).collect(toList());
     }
 }

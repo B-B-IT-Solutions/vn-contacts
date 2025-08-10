@@ -6,8 +6,8 @@ import static cz.prm.utils.ContactUtils.about;
 import static cz.prm.utils.ContactUtils.aboutDto;
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contactDto;
-import static cz.prm.utils.ContactUtils.contactEdit;
-import static cz.prm.utils.ContactUtils.contactEditDto;
+import static cz.prm.utils.ContactUtils.decoratedContact;
+import static cz.prm.utils.ContactUtils.decoratedContactDto;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsFilterDto;
 import static cz.prm.utils.ContactUtils.contactsQueryDto;
@@ -40,16 +40,16 @@ class ContactMapperTest {
     }
 
     @Test
-    void toContactEdit() {
-        var dto = contactEditDto();
-        var ce = mapper.toContactEdit(dto);
+    void toDecoratedContact() {
+        var dto = decoratedContactDto();
+        var ce = mapper.toDecoratedContact(dto);
         assertDecoratedContact(ce, dto);
     }
 
     @Test
-    void toContactEditDto() {
-        var ce = contactEdit();
-        var dto = mapper.toContactEditDto(ce);
+    void toDecoratedContactDto() {
+        var ce = decoratedContact();
+        var dto = mapper.toDecoratedContactDto(ce);
         assertDecoratedContact(ce, dto);
     }
 
