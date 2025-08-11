@@ -121,12 +121,11 @@ public class ContactUtils {
 
     public static About about() {
         var about = new About();
+        about.setContactId(randomLong());
         about.setDescription(uuid());
+        about.setGoals(uuid());
         about.setIdealClients(idealClients());
         about.setPastClients(pastClients());
-        about.setContactGoals(uuid());
-        about.setContactChallenges(uuid());
-        about.setContactId(randomLong());
         about.setOwner(user());
         about.setFirstInteraction(firstInteraction());
         return about;
@@ -134,12 +133,11 @@ public class ContactUtils {
 
     public static AboutDto aboutDto() {
         var dto = new AboutDto();
+        dto.setContactId(randomLong());
         dto.setDescription(uuid());
+        dto.setGoals(uuid());
         dto.setIdealClients(idealClientsDto());
         dto.setPastClients(pastClientsDto());
-        dto.setContactGoals(uuid());
-        dto.setContactChallenges(uuid());
-        dto.setContactId(randomLong());
         dto.setFirstInteraction(firstInteractionDto());
         return dto;
     }

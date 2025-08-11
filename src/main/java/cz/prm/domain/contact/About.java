@@ -37,6 +37,9 @@ public class About {
     @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "GOALS", columnDefinition = "TEXT")
+    private String goals;
+
     @OneToMany(cascade = ALL, fetch = EAGER, orphanRemoval = true)
     @JoinColumn(name = "CONTACT_ID")
     private List<IdealClient> idealClients;
@@ -44,12 +47,6 @@ public class About {
     @OneToMany(cascade = ALL, fetch = EAGER, orphanRemoval = true)
     @JoinColumn(name = "CONTACT_ID")
     private List<PastClient> pastClients;
-
-    @Column(name = "CONTACT_GOALS", columnDefinition = "TEXT")
-    private String contactGoals;
-
-    @Column(name = "CONTACT_CHALLENGES", columnDefinition = "TEXT")
-    private String contactChallenges;
 
     @Embedded
     @AttributeOverrides({

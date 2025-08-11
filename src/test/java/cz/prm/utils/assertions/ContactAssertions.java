@@ -134,20 +134,18 @@ public class ContactAssertions {
     }
 
     public static void assertAbout(About about1, About about2) {
-        assertThat(about1.getDescription()).isEqualTo(about2.getDescription());
-        assertThat(about1.getContactGoals()).isEqualTo(about2.getContactGoals());
-        assertThat(about1.getContactChallenges()).isEqualTo(about2.getContactChallenges());
         assertThat(about1.getContactId()).isEqualTo(about2.getContactId());
+        assertThat(about1.getDescription()).isEqualTo(about2.getDescription());
+        assertThat(about1.getGoals()).isEqualTo(about2.getGoals());
         assertIdealClients(about1.getIdealClients(), about2.getIdealClients());
         assertPastClients(about1.getPastClients(), about2.getPastClients());
         assertFirstInteraction(about1.getFirstInteraction(), about2.getFirstInteraction());
     }
 
     public static void assertAbout(About about, AboutDto dto) {
-        assertThat(about.getDescription()).isEqualTo(dto.getDescription());
-        assertThat(about.getContactGoals()).isEqualTo(dto.getContactGoals());
-        assertThat(about.getContactChallenges()).isEqualTo(dto.getContactChallenges());
         assertThat(about.getContactId()).isEqualTo(dto.getContactId());
+        assertThat(about.getDescription()).isEqualTo(dto.getDescription());
+        assertThat(about.getGoals()).isEqualTo(dto.getGoals());
         assertIdealClientsDto(about.getIdealClients(), dto.getIdealClients());
         assertPastClientsDto(about.getPastClients(), dto.getPastClients());
         assertFirstInteractionDto(about.getFirstInteraction(), dto.getFirstInteraction());

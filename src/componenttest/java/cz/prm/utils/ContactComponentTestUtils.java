@@ -105,10 +105,9 @@ public class ContactComponentTestUtils {
     public static About about(Contact contact) {
         var about = new About(contact.getContactId());
         about.setDescription(format("description%s", uuid()));
+        about.setGoals(format("contactGoals%s", uuid()));
         about.setIdealClients(idealClients());
         about.setPastClients(pastClients());
-        about.setContactGoals(format("contactGoals%s", uuid()));
-        about.setContactChallenges(format("contactChallenges%s", uuid()));
         about.setFirstInteraction(firstInteraction());
         return about;
     }
@@ -117,10 +116,10 @@ public class ContactComponentTestUtils {
         var about = new AboutDto();
         about.setContactId(contact.getContactId());
         about.setDescription(format("description%s", uuid()));
+        about.setGoals(format("contactGoals%s", uuid()));
         about.setIdealClients(idealClientsDto());
         about.setPastClients(pastClientsDto());
-        about.setContactGoals(format("contactGoals%s", uuid()));
-        about.setContactChallenges(format("contactChallenges%s", uuid()));
+
         about.setFirstInteraction(firstInteractionDto());
         return about;
     }
