@@ -119,7 +119,6 @@ public class ContactComponentTestUtils {
         about.setGoals(format("contactGoals%s", uuid()));
         about.setIdealClients(idealClientsDto());
         about.setPastClients(pastClientsDto());
-
         about.setFirstInteraction(firstInteractionDto());
         return about;
     }
