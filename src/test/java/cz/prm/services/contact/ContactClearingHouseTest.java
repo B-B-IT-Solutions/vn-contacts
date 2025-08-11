@@ -3,14 +3,14 @@ package cz.prm.services.contact;
 import static cz.prm.utils.CommonUtils.page;
 import static cz.prm.utils.ContactUtils.about;
 import static cz.prm.utils.ContactUtils.contact;
-import static cz.prm.utils.ContactUtils.contactEdit;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsQuery;
+import static cz.prm.utils.ContactUtils.decoratedContact;
 import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.ContactAssertions.assertAbout;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
-import static cz.prm.utils.assertions.ContactAssertions.assertContactEdit;
+import static cz.prm.utils.assertions.ContactAssertions.assertDecoratedContact;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -48,6 +48,61 @@ class ContactClearingHouseTest {
     }
 
     @Test
+    void getDecoratedContact() {
+        var contact = contact();
+        var about = about();
+        var contactId = randomLong();
+        when(contactService.getContact(contactId)).thenReturn(contact);
+        when(aboutService.getAbout(contactId)).thenReturn(about);
+
+        var response = clearingHouse.getDecoratedContact(contactId);
+        verify(contactService).getContact(contactId);
+        verify(aboutService).getAbout(contactId);
+        assertContact(response.getContact(), contact);
+        assertAbout(response.getAbout(), about);
+    }
+
+    @Test
+    void createDecoratedContact() {
+        var dc = decoratedContact();
+        var contact = dc.getContact();
+        var about = dc.getAbout();
+        when(contactService.createContact(contact)).thenAnswer(returnParamAnswer(0));
+        when(aboutService.createAbout(contact.getContactId(), about)).thenAnswer(returnParamAnswer(1));
+
+        var response = clearingHouse.createDecoratedContact(dc);
+        verify(contactService).createContact(contact);
+        verify(aboutService).createAbout(contact.getContactId(), about);
+        assertDecoratedContact(dc, response);
+    }
+
+    @Test
+    void updateDecoratedContact() {
+        var dc = decoratedContact();
+        var contact = dc.getContact();
+        var about = dc.getAbout();
+        var contactId = randomLong();
+        when(contactService.updateContact(contactId, contact)).thenAnswer(returnParamAnswer(1));
+        when(aboutService.updateAbout(contactId, about)).thenAnswer(returnParamAnswer(1));
+
+        var response = clearingHouse.updateDecoratedContact(contactId, dc);
+        verify(contactService).updateContact(contactId, contact);
+        verify(aboutService).updateAbout(contactId, about);
+        assertDecoratedContact(dc, response);
+    }
+
+    @Test
+    void deleteDecoratedContact() {
+        var contact = contact();
+        clearingHouse.deleteDecoratedContact(contact.getContactId());
+        verify(noteService).deleteByContactId(contact.getContactId());
+        verify(taskService).deleteByContactId(contact.getContactId());
+        verify(referralService).deleteByContactId(contact.getContactId());
+        verify(aboutService).deleteAbout(contact.getContactId());
+        verify(contactService).deleteContact(contact.getContactId());
+    }
+
+    @Test
     void getContacts() {
         var contacts = contacts();
         var page = page(contacts);
@@ -63,46 +118,6 @@ class ContactClearingHouseTest {
         when(contactService.getContact(contact.getContactId())).thenReturn(contact);
         var result = clearingHouse.getContact(contact.getContactId());
         assertContact(result, contact);
-    }
-
-    @Test
-    void createContact() {
-        var contactEdit = contactEdit();
-        var contact = contactEdit.getContact();
-        var about = contactEdit.getAbout();
-        when(contactService.createContact(contact)).thenAnswer(returnParamAnswer(0));
-        when(aboutService.createAbout(contact.getContactId(), about)).thenAnswer(returnParamAnswer(1));
-
-        var response = clearingHouse.createContact(contactEdit);
-        verify(contactService).createContact(contact);
-        verify(aboutService).createAbout(contact.getContactId(), about);
-        assertContactEdit(contactEdit, response);
-    }
-
-    @Test
-    void updateContact() {
-        var contactEdit = contactEdit();
-        var contact = contactEdit.getContact();
-        var about = contactEdit.getAbout();
-        var contactId = randomLong();
-        when(contactService.updateContact(contactId, contact)).thenAnswer(returnParamAnswer(1));
-        when(aboutService.updateAbout(contactId, about)).thenAnswer(returnParamAnswer(1));
-
-        var response = clearingHouse.updateContact(contactId, contactEdit);
-        verify(contactService).updateContact(contactId, contact);
-        verify(aboutService).updateAbout(contactId, about);
-        assertContactEdit(contactEdit, response);
-    }
-
-    @Test
-    void deleteContact() {
-        var contact = contact();
-        clearingHouse.deleteContact(contact.getContactId());
-        verify(noteService).deleteByContactId(contact.getContactId());
-        verify(taskService).deleteByContactId(contact.getContactId());
-        verify(referralService).deleteByContactId(contact.getContactId());
-        verify(aboutService).deleteAbout(contact.getContactId());
-        verify(contactService).deleteContact(contact.getContactId());
     }
 
     @Test

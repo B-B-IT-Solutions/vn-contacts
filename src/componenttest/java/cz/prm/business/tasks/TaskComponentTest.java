@@ -499,7 +499,7 @@ public class TaskComponentTest extends TaskComponentTestBase {
         user2GetTaskExpectNotFound(taskId);
         user3GetTaskExpectNotFound(taskId);
 
-        var contact = createContact(USER_1);
+        var contact = createDecoratedContact(USER_1);
         var referral = createReferral(USER_1);
         toCreateDto = taskDto(contact.getContactId(), referral.getReferralId());
         user2CreateTask(toCreateDto);
@@ -511,7 +511,7 @@ public class TaskComponentTest extends TaskComponentTestBase {
         user1GetTaskExpectNotFound(taskId);
         user3GetTaskExpectNotFound(taskId);
 
-        contact = createContact(USER_2);
+        contact = createDecoratedContact(USER_2);
         referral = createReferral(USER_2);
         toCreateDto = taskDto(contact.getContactId(), referral.getReferralId());
         user2CreateTask(toCreateDto);
@@ -523,7 +523,7 @@ public class TaskComponentTest extends TaskComponentTestBase {
         user1GetTaskExpectNotFound(taskId);
         user3GetTaskExpectNotFound(taskId);
 
-        contact = createContact(USER_3);
+        contact = createDecoratedContact(USER_3);
         referral = createReferral(USER_3);
         toCreateDto = taskDto(contact.getContactId(), referral.getReferralId());
         user3CreateTask(toCreateDto);

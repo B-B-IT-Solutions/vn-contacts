@@ -12,7 +12,7 @@ import static java.time.Instant.now;
 import cz.prm.controllers.dto.common.PaginationDto;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.ContactEditDto;
+import cz.prm.controllers.dto.contact.DecoratedContactDto;
 import cz.prm.controllers.dto.contact.FirstInteractionDto;
 import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
@@ -29,10 +29,10 @@ import java.util.List;
 
 public class ContactComponentTestUtils {
 
-    public static ContactEditDto contactEditDto() {
+    public static DecoratedContactDto contactEditDto() {
         var contact = contactDto();
         var about = aboutDto(contact);
-        var ce = new ContactEditDto();
+        var ce = new DecoratedContactDto();
         ce.setContact(contact);
         ce.setAbout(about);
         return ce;
@@ -105,10 +105,9 @@ public class ContactComponentTestUtils {
     public static About about(Contact contact) {
         var about = new About(contact.getContactId());
         about.setDescription(format("description%s", uuid()));
+        about.setGoals(format("contactGoals%s", uuid()));
         about.setIdealClients(idealClients());
         about.setPastClients(pastClients());
-        about.setContactGoals(format("contactGoals%s", uuid()));
-        about.setContactChallenges(format("contactChallenges%s", uuid()));
         about.setFirstInteraction(firstInteraction());
         return about;
     }
@@ -117,10 +116,9 @@ public class ContactComponentTestUtils {
         var about = new AboutDto();
         about.setContactId(contact.getContactId());
         about.setDescription(format("description%s", uuid()));
+        about.setGoals(format("contactGoals%s", uuid()));
         about.setIdealClients(idealClientsDto());
         about.setPastClients(pastClientsDto());
-        about.setContactGoals(format("contactGoals%s", uuid()));
-        about.setContactChallenges(format("contactChallenges%s", uuid()));
         about.setFirstInteraction(firstInteractionDto());
         return about;
     }

@@ -13,7 +13,7 @@ import cz.prm.business.BusinessComponentTestBase;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.ContactEditDto;
+import cz.prm.controllers.dto.contact.DecoratedContactDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.Contact;
@@ -24,44 +24,59 @@ import java.util.stream.IntStream;
 
 public class ContactComponentTestBase extends BusinessComponentTestBase {
 
-    protected static String CONTACTS_URL = "contacts";
-    protected static String CONTACT_URL = CONTACTS_URL + "/%s";
-    protected static String ABOUT_URL = CONTACTS_URL + "/%s/about";
+    protected static String CONTACTS_BASE_URL = "contacts";
+    protected static String DECORATED_CONTACTS_URL = CONTACTS_BASE_URL;
+    protected static String DECORATED_CONTACT_URL = CONTACTS_BASE_URL + "/%s";
+    protected static String CONTACTS_URL = CONTACTS_BASE_URL + "/contact";
+    protected static String CONTACT_URL = CONTACTS_BASE_URL + "/%s/contact";
+    protected static String ABOUT_URL = CONTACTS_BASE_URL + "/%s/about";
 
-    protected ContactEditDto user1CreateContact(ContactEditDto dto) {
-        return createContact(dto, USER_1);
+    protected DecoratedContactDto user1CreateDecoratedContact(DecoratedContactDto dto) {
+        return createDecoratedContact(dto, USER_1);
     }
 
-    protected ContactEditDto user2CreateContact(ContactEditDto dto) {
-        return createContact(dto, USER_2);
+    protected DecoratedContactDto user2CreateDecoratedContact(DecoratedContactDto dto) {
+        return createDecoratedContact(dto, USER_2);
     }
 
-    protected ContactEditDto user3CreateContact(ContactEditDto dto) {
-        return createContact(dto, USER_3);
+    protected DecoratedContactDto user3CreateDecoratedContact(DecoratedContactDto dto) {
+        return createDecoratedContact(dto, USER_3);
     }
 
-    protected ContactEditDto user1UpdateContact(Long contactId, ContactEditDto dto) {
-        return updateContact(contactId, dto, USER_1);
+    protected DecoratedContactDto user1UpdateDecoratedContact(Long contactId, DecoratedContactDto dto) {
+        return updateDecoratedContact(contactId, dto, USER_1);
     }
 
-    protected ContactEditDto user2UpdateContact(Long contactId, ContactEditDto dto) {
-        return updateContact(contactId, dto, USER_2);
+    protected DecoratedContactDto user2UpdateDecoratedContact(Long contactId, DecoratedContactDto dto) {
+        return updateDecoratedContact(contactId, dto, USER_2);
     }
 
-    protected ContactEditDto user3UpdateContact(Long contactId, ContactEditDto dto) {
-        return updateContact(contactId, dto, USER_3);
+    protected DecoratedContactDto user3UpdateDecoratedContact(Long contactId, DecoratedContactDto dto) {
+        return updateDecoratedContact(contactId, dto, USER_3);
     }
 
-    protected void user1DeleteContact(Long contactId) {
-        deleteContact(contactId, USER_1);
+    protected void user1DeleteDecoratedContact(Long contactId) {
+        deleteDecoratedContact(contactId, USER_1);
     }
 
-    protected void user2DeleteContact(Long contactId) {
-        deleteContact(contactId, USER_2);
+    protected void user2DeleteDecoratedContact(Long contactId) {
+        deleteDecoratedContact(contactId, USER_2);
     }
 
-    protected void user3DeleteContact(Long contactId) {
-        deleteContact(contactId, USER_3);
+    protected void user3DeleteDecoratedContact(Long contactId) {
+        deleteDecoratedContact(contactId, USER_3);
+    }
+
+    protected DecoratedContactDto user1GetDecoratedContact(Long contactId) {
+        return getDecoratedContact(contactId, USER_1);
+    }
+
+    protected DecoratedContactDto user2GetDecoratedContact(Long contactId) {
+        return getDecoratedContact(contactId, USER_2);
+    }
+
+    protected DecoratedContactDto user3GetDecoratedContact(Long contactId) {
+        return getDecoratedContact(contactId, USER_3);
     }
 
     protected PageDto<ContactDto> user1GetContacts(ContactsQueryDto queryDto) {
@@ -112,22 +127,29 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         return getAbout(contactId, USER_3);
     }
 
-    protected ContactEditDto createContact(ContactEditDto dto, ComponentTestUser user) {
-        var returnType = new TypeRef<ContactEditDto>() {
+    protected DecoratedContactDto createDecoratedContact(DecoratedContactDto dto, ComponentTestUser user) {
+        var returnType = new TypeRef<DecoratedContactDto>() {
         };
-        return postWithResponse(CONTACTS_URL, user, dto, returnType);
+        return postWithResponse(DECORATED_CONTACTS_URL, user, dto, returnType);
     }
 
-    protected ContactEditDto updateContact(Long contactId, ContactEditDto dto, ComponentTestUser user) {
-        var returnType = new TypeRef<ContactEditDto>() {
+    protected DecoratedContactDto updateDecoratedContact(Long contactId, DecoratedContactDto dto, ComponentTestUser user) {
+        var returnType = new TypeRef<DecoratedContactDto>() {
         };
-        var url = format(CONTACT_URL, contactId);
+        var url = format(DECORATED_CONTACT_URL, contactId);
         return putWithResponse(url, user, dto, returnType);
     }
 
-    protected void deleteContact(Long contactId, ComponentTestUser user) {
-        var url = format(CONTACT_URL, contactId);
+    protected void deleteDecoratedContact(Long contactId, ComponentTestUser user) {
+        var url = format(DECORATED_CONTACT_URL, contactId);
         delete(url, user);
+    }
+
+    protected DecoratedContactDto getDecoratedContact(Long contactId, ComponentTestUser user) {
+        var url = format(DECORATED_CONTACT_URL, contactId);
+        var typeRef = new TypeRef<DecoratedContactDto>() {
+        };
+        return getOne(url, user, typeRef);
     }
 
     protected PageDto<ContactDto> getContactsPage(ContactsQueryDto queryDto, ComponentTestUser user) {
@@ -156,28 +178,40 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         return getOne(url, user, typeRef);
     }
 
-    protected void user1UpdateContactExpectNotFound(Long contactId, ContactEditDto dto) {
-        updateContactExpectNotFound(contactId, dto, USER_1);
+    protected void user1GetDecoratedContactExpectNotFound(Long contactId) {
+        getDecoratedContactExpectNotFound(contactId, USER_1);
     }
 
-    protected void user2UpdateContactExpectNotFound(Long contactId, ContactEditDto dto) {
-        updateContactExpectNotFound(contactId, dto, USER_2);
+    protected void user2GetDecoratedContactExpectNotFound(Long contactId) {
+        getDecoratedContactExpectNotFound(contactId, USER_2);
     }
 
-    protected void user3UpdateContactExpectNotFound(Long contactId, ContactEditDto dto) {
-        updateContactExpectNotFound(contactId, dto, USER_3);
+    protected void user3GetDecoratedContactExpectNotFound(Long contactId) {
+        getDecoratedContactExpectNotFound(contactId, USER_3);
     }
 
-    protected void user1DeleteContactExpectNotFound(Long contactId) {
-        deleteContactExpectNotFound(contactId, USER_1);
+    protected void user1UpdateDecoratedContactExpectNotFound(Long contactId, DecoratedContactDto dto) {
+        updateDecoratedContactExpectNotFound(contactId, dto, USER_1);
     }
 
-    protected void user2DeleteContactExpectNotFound(Long contactId) {
-        deleteContactExpectNotFound(contactId, USER_2);
+    protected void user2UpdateDecoratedContactExpectNotFound(Long contactId, DecoratedContactDto dto) {
+        updateDecoratedContactExpectNotFound(contactId, dto, USER_2);
     }
 
-    protected void user3DeleteContactExpectNotFound(Long contactId) {
-        deleteContactExpectNotFound(contactId, USER_3);
+    protected void user3UpdateDecoratedContactExpectNotFound(Long contactId, DecoratedContactDto dto) {
+        updateDecoratedContactExpectNotFound(contactId, dto, USER_3);
+    }
+
+    protected void user1DeleteDecoratedContactExpectNotFound(Long contactId) {
+        deleteDecoratedContactExpectNotFound(contactId, USER_1);
+    }
+
+    protected void user2DeleteDecoratedContactExpectNotFound(Long contactId) {
+        deleteDecoratedContactExpectNotFound(contactId, USER_2);
+    }
+
+    protected void user3DeleteDecoratedContactExpectNotFound(Long contactId) {
+        deleteDecoratedContactExpectNotFound(contactId, USER_3);
     }
 
     protected void user1GetContactExpectNotFound(Long contactId) {
@@ -216,14 +250,19 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         getAboutExpectNotFound(contactId, USER_3);
     }
 
-    protected void updateContactExpectNotFound(Long contactId, ContactEditDto dto, ComponentTestUser user) {
-        var url = format(CONTACT_URL, contactId);
+    protected void updateDecoratedContactExpectNotFound(Long contactId, DecoratedContactDto dto, ComponentTestUser user) {
+        var url = format(DECORATED_CONTACT_URL, contactId);
         putExpectNotFound(url, user, dto);
     }
 
-    protected void deleteContactExpectNotFound(Long contactId, ComponentTestUser user) {
-        var url = format(CONTACT_URL, contactId);
+    protected void deleteDecoratedContactExpectNotFound(Long contactId, ComponentTestUser user) {
+        var url = format(DECORATED_CONTACT_URL, contactId);
         deleteExpectNotFound(url, user);
+    }
+
+    protected void getDecoratedContactExpectNotFound(Long contactId, ComponentTestUser user) {
+        var url = format(DECORATED_CONTACT_URL, contactId);
+        getExpectNotFound(url, user);
     }
 
     protected void getContactExpectNotFound(Long contactId, ComponentTestUser user) {
@@ -303,11 +342,11 @@ public class ContactComponentTestBase extends BusinessComponentTestBase {
         return sb.toString();
     }
 
-    protected List<Contact> createContacts(ComponentTestUser user) {
-        return createContacts(user, 3);
+    protected List<Contact> createDecoratedContacts(ComponentTestUser user) {
+        return createDecoratedContacts(user, 3);
     }
 
-    protected List<Contact> createContacts(ComponentTestUser user, int numOfContacts) {
-        return IntStream.range(0, numOfContacts).mapToObj((i) -> createContact(user)).collect(toList());
+    protected List<Contact> createDecoratedContacts(ComponentTestUser user, int numOfContacts) {
+        return IntStream.range(0, numOfContacts).mapToObj((i) -> createDecoratedContact(user)).collect(toList());
     }
 }

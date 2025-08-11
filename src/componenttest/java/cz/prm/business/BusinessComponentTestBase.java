@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toList;
 
 import cz.prm.ComponentTestBase;
 import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.ContactEditDto;
+import cz.prm.controllers.dto.contact.DecoratedContactDto;
 import cz.prm.controllers.dto.note.NoteDto;
 import cz.prm.controllers.dto.referral.ReferralDto;
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
@@ -70,15 +70,15 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         noteSettingsRepository.deleteAll();
     }
 
-    protected List<Contact> createContacts(ComponentTestUser user) {
-        return createContacts(user, 3);
+    protected List<Contact> createDecoratedContacts(ComponentTestUser user) {
+        return createDecoratedContacts(user, 3);
     }
 
-    protected List<Contact> createContacts(ComponentTestUser user, int numOfContacts) {
-        return IntStream.range(0, numOfContacts).mapToObj((i) -> createContact(user)).collect(toList());
+    protected List<Contact> createDecoratedContacts(ComponentTestUser user, int numOfContacts) {
+        return IntStream.range(0, numOfContacts).mapToObj((i) -> createDecoratedContact(user)).collect(toList());
     }
 
-    protected Contact createContact(ComponentTestUser user) {
+    protected Contact createDecoratedContact(ComponentTestUser user) {
         ensureUserContext(user);
         var contact = contact();
         var savedContact = contactRepository.save(contact);
@@ -97,7 +97,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     }
 
     protected List<Note> createContactNotes(ComponentTestUser user, int numOfNotes) {
-        var contact = createContact(user);
+        var contact = createDecoratedContact(user);
         return IntStream.range(0, numOfNotes).mapToObj((i) -> createNote(user, contact)).collect(toList());
     }
 
@@ -107,7 +107,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     }
 
     protected Note createContactNote(ComponentTestUser user) {
-        var contact = createContact(user);
+        var contact = createDecoratedContact(user);
         return createNote(user, contact);
     }
 
@@ -137,12 +137,12 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     }
 
     protected List<Referral> createReferrals(ComponentTestUser user, int numOfTasks) {
-        var contact = createContact(user);
+        var contact = createDecoratedContact(user);
         return IntStream.range(0, numOfTasks).mapToObj((i) -> createReferral(user, contact)).collect(toList());
     }
 
     protected Referral createReferral(ComponentTestUser user) {
-        var contact = createContact(user);
+        var contact = createDecoratedContact(user);
         return createReferral(user, contact);
     }
 
@@ -159,13 +159,13 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     }
 
     protected List<Task> createTasks(ComponentTestUser user, int numOfTasks) {
-        var contact = createContact(user);
+        var contact = createDecoratedContact(user);
         var referral = createReferral(user);
         return IntStream.range(0, numOfTasks).mapToObj((i) -> createTask(user, contact, referral)).collect(toList());
     }
 
     protected Task createTask(ComponentTestUser user) {
-        var contact = createContact(user);
+        var contact = createDecoratedContact(user);
         var referral = createReferral(user);
         return createTask(user, contact, referral);
     }
@@ -178,7 +178,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         return savedTask;
     }
 
-    protected Contact getContactFromDb(ContactEditDto dto) {
+    protected Contact getContactFromDb(DecoratedContactDto dto) {
         return getContactFromDb(dto.getContact());
     }
 

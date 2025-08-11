@@ -41,6 +41,7 @@
 						<constraints primaryKey="true" primaryKeyName="about_pk" nullable="false"/>
 				 </column>
 				 <column name="description" type="TEXT"/>
+				 <column name="goals" type="TEXT"/>
 				 <column name="first_interaction_type" type="VARCHAR(500)"/>
 				 <column name="first_interaction_source" type="VARCHAR(500)"/>
 				 <column name="first_interaction_date" type="TIMESTAMP WITH TIME ZONE"/>
@@ -217,20 +218,13 @@
 	 </changeSet>
 	 
 	 <changeSet author="sergej" id="1.0.8">
-			<addColumn tableName="about">
-				 <column name="contact_goals" type="TEXT"/>
-				 <column name="contact_challenges" type="TEXT"/>
-			</addColumn>
-	 </changeSet>
-	 
-	 <changeSet author="sergej" id="1.0.9">
 			<createTable tableName="note_category">
 				 <column name="note_id" type="BIGINT"/>
 				 <column name="category" type="VARCHAR(250)"/>
 			</createTable>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.10">
+	 <changeSet author="sergej" id="1.0.9">
 			<renameTable newTableName="contact_settings" oldTableName="user_settings"
 			/>
 			
@@ -259,14 +253,14 @@
 															 referencedColumnNames="settings_id" validate="true"/>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.11">
+	 <changeSet author="sergej" id="1.0.10">
 			<addColumn tableName="task">
 				 <column name="start_date" type="TIMESTAMP WITH TIME ZONE"/>
 				 <column name="end_date" type="TIMESTAMP WITH TIME ZONE"/>
 			</addColumn>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.12">
+	 <changeSet author="sergej" id="1.0.11">
 			<addColumn tableName="contact">
 				 <column name="country" type="VARCHAR(250)"/>
 				 <column name="city" type="VARCHAR(250)"/>
@@ -274,7 +268,7 @@
 			</addColumn>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.13">
+	 <changeSet author="sergej" id="1.0.12">
 			<createTable tableName="contact_skill">
 				 <column name="contact_id" type="BIGINT"/>
 				 <column name="skill" type="VARCHAR(250)"/>
@@ -291,7 +285,7 @@
 			</createTable>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.14">
+	 <changeSet author="sergej" id="1.0.13">
 			<createTable tableName="contact_settings_skill">
 				 <column name="settings_id" type="BIGINT"/>
 				 <column name="value" type="VARCHAR(250)"/>
@@ -311,7 +305,7 @@
 			</createTable>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.15">
+	 <changeSet author="sergej" id="1.0.14">
 			<createSequence cacheSize="1" cycle="false" startValue="1" minValue="1" maxValue="9223372036854775807"
 											sequenceName="ideal_client_seq"/>
 			
@@ -330,7 +324,7 @@
 			</createTable>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.16">
+	 <changeSet author="sergej" id="1.0.15">
 			<createSequence cacheSize="1" cycle="false" startValue="1" minValue="1" maxValue="9223372036854775807"
 											sequenceName="past_client_seq"/>
 			
@@ -349,7 +343,7 @@
 			</createTable>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.17">
+	 <changeSet author="sergej" id="1.0.16">
 			<createTable tableName="task_reminders">
 				 <column name="recurrence_id" type="BIGINT"/>
 				 <column name="task_id" type="BIGINT"/>

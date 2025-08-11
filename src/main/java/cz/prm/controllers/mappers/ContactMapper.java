@@ -7,7 +7,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.ContactEditDto;
+import cz.prm.controllers.dto.contact.DecoratedContactDto;
 import cz.prm.controllers.dto.contact.FirstInteractionDto;
 import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
@@ -15,7 +15,7 @@ import cz.prm.domain.common.query.Page;
 import cz.prm.domain.common.query.Pagination;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
-import cz.prm.domain.contact.ContactEdit;
+import cz.prm.domain.contact.DecoratedContact;
 import cz.prm.domain.contact.query.ContactsFilter;
 import cz.prm.domain.contact.query.ContactsQuery;
 import java.util.ArrayList;
@@ -29,9 +29,9 @@ public interface ContactMapper {
 
     PageDto<ContactDto> toPageDto(Page<Contact> contacts);
 
-    ContactEdit toContactEdit(ContactEditDto dto);
+    DecoratedContact toDecoratedContact(DecoratedContactDto dto);
 
-    ContactEditDto toContactEditDto(ContactEdit dto);
+    DecoratedContactDto toDecoratedContactDto(DecoratedContact dto);
 
     ContactDto toContactDto(Contact contact);
 
@@ -55,7 +55,7 @@ public interface ContactMapper {
     }
 
     @AfterMapping
-    default void afterContactEditDto(ContactEditDto source, @MappingTarget ContactEdit target) {
+    default void afterDecoratedContactDto(DecoratedContactDto source, @MappingTarget DecoratedContact target) {
         if (isNull(target.getContact())) {
             target.setContact(new Contact());
         }

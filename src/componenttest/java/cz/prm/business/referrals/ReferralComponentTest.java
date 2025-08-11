@@ -600,7 +600,7 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
 
     @Test
     void createReferral() {
-        var contact = createContact(USER_1);
+        var contact = createDecoratedContact(USER_1);
         var toCreateDto = referralDto(contact.getContactId());
         user1CreateReferral(toCreateDto);
         var referral = getReferralFromDb(toCreateDto);
@@ -611,7 +611,7 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         user2GetReferralExpectNotFound(referralId);
         user3GetReferralExpectNotFound(referralId);
 
-        contact = createContact(USER_2);
+        contact = createDecoratedContact(USER_2);
         toCreateDto = referralDto(contact.getContactId());
         user2CreateReferral(toCreateDto);
         referral = getReferralFromDb(toCreateDto);
@@ -622,7 +622,7 @@ public class ReferralComponentTest extends ReferralComponentTestBase {
         user1GetReferralExpectNotFound(referralId);
         user3GetReferralExpectNotFound(referralId);
 
-        contact = createContact(USER_3);
+        contact = createDecoratedContact(USER_3);
         toCreateDto = referralDto(contact.getContactId());
         user3CreateReferral(toCreateDto);
         referral = getReferralFromDb(toCreateDto);

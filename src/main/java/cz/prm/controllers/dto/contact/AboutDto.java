@@ -11,8 +11,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AboutDto {
 
+    @JsonProperty("contactId")
+    private Long contactId;
+
     @JsonProperty("description")
     private String description;
+
+    @JsonProperty("goals")
+    private String goals;
 
     @JsonProperty("idealClients")
     private List<IdealClientDto> idealClients;
@@ -20,15 +26,6 @@ public class AboutDto {
     @JsonProperty("pastClients")
     private List<PastClientDto> pastClients;
 
-    @JsonProperty("contactGoals")
-    private String contactGoals;
-
-    @JsonProperty("contactChallenges")
-    private String contactChallenges;
-
     @JsonProperty("firstInteraction")
     private FirstInteractionDto firstInteraction;
-
-    @JsonProperty("contactId")
-    private Long contactId;
 }

@@ -14,7 +14,7 @@ import static java.time.Instant.now;
 
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.ContactEditDto;
+import cz.prm.controllers.dto.contact.DecoratedContactDto;
 import cz.prm.controllers.dto.contact.FirstInteractionDto;
 import cz.prm.controllers.dto.contact.IdealClientDto;
 import cz.prm.controllers.dto.contact.OccupationDto;
@@ -23,7 +23,7 @@ import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
-import cz.prm.domain.contact.ContactEdit;
+import cz.prm.domain.contact.DecoratedContact;
 import cz.prm.domain.contact.FirstInteraction;
 import cz.prm.domain.contact.IdealClient;
 import cz.prm.domain.contact.Occupation;
@@ -34,15 +34,15 @@ import java.util.List;
 
 public class ContactUtils {
 
-    public static ContactEdit contactEdit() {
-        var ce = new ContactEdit();
+    public static DecoratedContact decoratedContact() {
+        var ce = new DecoratedContact();
         ce.setContact(contact());
         ce.setAbout(about());
         return ce;
     }
 
-    public static ContactEditDto contactEditDto() {
-        var ce = new ContactEditDto();
+    public static DecoratedContactDto decoratedContactDto() {
+        var ce = new DecoratedContactDto();
         ce.setContact(contactDto());
         ce.setAbout(aboutDto());
         return ce;
@@ -121,12 +121,11 @@ public class ContactUtils {
 
     public static About about() {
         var about = new About();
+        about.setContactId(randomLong());
         about.setDescription(uuid());
+        about.setGoals(uuid());
         about.setIdealClients(idealClients());
         about.setPastClients(pastClients());
-        about.setContactGoals(uuid());
-        about.setContactChallenges(uuid());
-        about.setContactId(randomLong());
         about.setOwner(user());
         about.setFirstInteraction(firstInteraction());
         return about;
@@ -134,12 +133,11 @@ public class ContactUtils {
 
     public static AboutDto aboutDto() {
         var dto = new AboutDto();
+        dto.setContactId(randomLong());
         dto.setDescription(uuid());
+        dto.setGoals(uuid());
         dto.setIdealClients(idealClientsDto());
         dto.setPastClients(pastClientsDto());
-        dto.setContactGoals(uuid());
-        dto.setContactChallenges(uuid());
-        dto.setContactId(randomLong());
         dto.setFirstInteraction(firstInteractionDto());
         return dto;
     }

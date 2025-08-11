@@ -681,7 +681,7 @@ public class NoteComponentTest extends NoteComponentTestBase {
 
     @Test
     void createContactNote() {
-        var contact = createContact(USER_1);
+        var contact = createDecoratedContact(USER_1);
         var toCreateDto = noteDto();
         user1CreateContactNote(contact.getContactId(), toCreateDto);
         var note = getNoteFromDb(toCreateDto);
@@ -692,7 +692,7 @@ public class NoteComponentTest extends NoteComponentTestBase {
         user2GetNoteExpectNotFound(noteId);
         user3GetNoteExpectNotFound(noteId);
 
-        contact = createContact(USER_2);
+        contact = createDecoratedContact(USER_2);
         toCreateDto = noteDto();
         user2CreateContactNote(contact.getContactId(), toCreateDto);
         note = getNoteFromDb(toCreateDto);
@@ -703,7 +703,7 @@ public class NoteComponentTest extends NoteComponentTestBase {
         user1GetNoteExpectNotFound(noteId);
         user3GetNoteExpectNotFound(noteId);
 
-        contact = createContact(USER_3);
+        contact = createDecoratedContact(USER_3);
         toCreateDto = noteDto();
         user3CreateContactNote(contact.getContactId(), toCreateDto);
         note = getNoteFromDb(toCreateDto);

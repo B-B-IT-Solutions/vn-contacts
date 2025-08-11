@@ -3,7 +3,7 @@ package cz.prm.controllers;
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contact.AboutDto;
 import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.ContactEditDto;
+import cz.prm.controllers.dto.contact.DecoratedContactDto;
 import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
 import cz.prm.controllers.mappers.ContactMapper;
 import cz.prm.services.contact.ContactClearingHouse;
@@ -30,36 +30,42 @@ public class ContactController {
         this.mapper = mapper;
     }
 
-    @GetMapping
+    @GetMapping("/{contactId}")
+    public DecoratedContactDto getDecoratedContact(@PathVariable("contactId") Long contactId) {
+        var dc = clearingHouse.getDecoratedContact(contactId);
+        return mapper.toDecoratedContactDto(dc);
+    }
+
+    @PostMapping
+    public DecoratedContactDto createDecoratedContact(@RequestBody DecoratedContactDto dto) {
+        var contactEdit = mapper.toDecoratedContact(dto);
+        var response = clearingHouse.createDecoratedContact(contactEdit);
+        return mapper.toDecoratedContactDto(response);
+    }
+
+    @PutMapping("/{contactId}")
+    public DecoratedContactDto updateDecoratedContact(@PathVariable("contactId") Long contactId, @RequestBody DecoratedContactDto dto) {
+        var contactEdit = mapper.toDecoratedContact(dto);
+        var response = clearingHouse.updateDecoratedContact(contactId, contactEdit);
+        return mapper.toDecoratedContactDto(response);
+    }
+
+    @DeleteMapping("/{contactId}")
+    public void deleteDecoratedContact(@PathVariable("contactId") Long contactId) {
+        clearingHouse.deleteDecoratedContact(contactId);
+    }
+
+    @GetMapping("/contact")
     public PageDto<ContactDto> getContacts(ContactsQueryDto queryDto) {
         var query = mapper.toNullSafeContactsQuery(queryDto);
         var contacts = clearingHouse.getContacts(query);
         return mapper.toPageDto(contacts);
     }
 
-    @GetMapping("/{contactId}")
+    @GetMapping("/{contactId}/contact")
     public ContactDto getContact(@PathVariable("contactId") Long contactId) {
         var contact = clearingHouse.getContact(contactId);
         return mapper.toContactDto(contact);
-    }
-
-    @PostMapping
-    public ContactEditDto createContact(@RequestBody ContactEditDto dto) {
-        var contactEdit = mapper.toContactEdit(dto);
-        var response = clearingHouse.createContact(contactEdit);
-        return mapper.toContactEditDto(response);
-    }
-
-    @PutMapping("/{contactId}")
-    public ContactEditDto updateContact(@PathVariable("contactId") Long contactId, @RequestBody ContactEditDto dto) {
-        var contactEdit = mapper.toContactEdit(dto);
-        var response = clearingHouse.updateContact(contactId, contactEdit);
-        return mapper.toContactEditDto(response);
-    }
-
-    @DeleteMapping("/{contactId}")
-    public void deleteContact(@PathVariable("contactId") Long contactId) {
-        clearingHouse.deleteContact(contactId);
     }
 
     @GetMapping("/{contactId}/about")

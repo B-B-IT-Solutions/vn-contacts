@@ -23,10 +23,200 @@ import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.ContactEditDto;
+import cz.prm.controllers.dto.contact.DecoratedContactDto;
 import org.junit.jupiter.api.Test;
 
 public class ContactComponentTest extends ContactComponentTestBase {
+
+    @Test
+    void getDecoratedContact() {
+        var contact = createDecoratedContact(USER_1);
+        var about = getAboutFromDb(contact);
+        var contactId = contact.getContactId();
+
+        var dcDto = user1GetDecoratedContact(contactId);
+        assertContact(contact, dcDto.getContact());
+        assertAbout(about, dcDto.getAbout());
+        user2GetDecoratedContactExpectNotFound(contactId);
+        user3GetDecoratedContactExpectNotFound(contactId);
+
+        contact = createDecoratedContact(USER_2);
+        about = getAboutFromDb(contact);
+        contactId = contact.getContactId();
+        dcDto = user2GetDecoratedContact(contactId);
+        assertContact(contact, dcDto.getContact());
+        assertAbout(about, dcDto.getAbout());
+        user1GetDecoratedContactExpectNotFound(contactId);
+        user3GetDecoratedContactExpectNotFound(contactId);
+
+        contact = createDecoratedContact(USER_3);
+        about = getAboutFromDb(contact);
+        contactId = contact.getContactId();
+        dcDto = user3GetDecoratedContact(contactId);
+        assertContact(contact, dcDto.getContact());
+        assertAbout(about, dcDto.getAbout());
+        user1GetDecoratedContactExpectNotFound(contactId);
+        user2GetDecoratedContactExpectNotFound(contactId);
+    }
+
+    @Test
+    void createDecoratedContact() {
+        var toCreateDto = contactEditDto();
+        var responseDto = user1CreateDecoratedContact(toCreateDto);
+        var contact = getContactFromDb(toCreateDto);
+        var about = getAboutFromDb(contact);
+        var contactId = contact.getContactId();
+
+        var createdContactDto = user1GetContact(contactId);
+        var createdAboutDto = user1GetAbout(contactId);
+        assertContact(contact, createdContactDto);
+        assertContact(contact, responseDto.getContact());
+        assertAbout(about, createdAboutDto);
+        assertAbout(about, responseDto.getAbout());
+        user2GetContactExpectNotFound(contactId);
+        user2GetAboutExpectNotFound(contactId);
+        user3GetContactExpectNotFound(contactId);
+        user3GetAboutExpectNotFound(contactId);
+
+        toCreateDto = contactEditDto();
+        responseDto = user2CreateDecoratedContact(toCreateDto);
+        contact = getContactFromDb(toCreateDto);
+        about = getAboutFromDb(contact);
+        contactId = contact.getContactId();
+
+        createdContactDto = user2GetContact(contactId);
+        createdAboutDto = user2GetAbout(contactId);
+        assertContact(contact, createdContactDto);
+        assertContact(contact, responseDto.getContact());
+        assertAbout(about, createdAboutDto);
+        assertAbout(about, responseDto.getAbout());
+        user1GetContactExpectNotFound(contactId);
+        user1GetAboutExpectNotFound(contactId);
+        user3GetContactExpectNotFound(contactId);
+        user3GetAboutExpectNotFound(contactId);
+
+        toCreateDto = contactEditDto();
+        responseDto = user3CreateDecoratedContact(toCreateDto);
+        contact = getContactFromDb(toCreateDto);
+        about = getAboutFromDb(contact);
+        contactId = contact.getContactId();
+
+        createdContactDto = user3GetContact(contactId);
+        createdAboutDto = user3GetAbout(contactId);
+        assertContact(contact, createdContactDto);
+        assertContact(contact, responseDto.getContact());
+        assertAbout(about, createdAboutDto);
+        assertAbout(about, responseDto.getAbout());
+        user1GetContactExpectNotFound(contactId);
+        user1GetAboutExpectNotFound(contactId);
+        user2GetContactExpectNotFound(contactId);
+        user2GetAboutExpectNotFound(contactId);
+    }
+
+    @Test
+    void updateDecoratedContact() {
+        var contact = createDecoratedContact(USER_1);
+        var contactId = contact.getContactId();
+        var updateContactDto = user1GetContact(contactId);
+        var updateAboutDto = user1GetAbout(contactId);
+
+        updateContactDto.setFirstName(uuid());
+        updateContactDto.setLastName(uuid());
+        updateContactDto.setDateOfBirth(now());
+        updateAboutDto.setDescription(uuid());
+        updateAboutDto.setPastClients(pastClientsDto());
+        updateAboutDto.setIdealClients(idealClientsDto());
+        var updateDto = new DecoratedContactDto(updateContactDto, updateAboutDto);
+        var responseDto = user1UpdateDecoratedContact(contactId, updateDto);
+        contact = getContactFromDb(updateContactDto);
+        var about = getAboutFromDb(contact);
+        assertContact(contact, updateContactDto);
+        assertContact(contact, responseDto.getContact());
+        assertAbout(about, updateAboutDto);
+        assertAbout(about, responseDto.getAbout());
+
+        user2UpdateDecoratedContactExpectNotFound(contactId, updateDto);
+        user3UpdateDecoratedContactExpectNotFound(contactId, updateDto);
+
+        contact = createDecoratedContact(USER_2);
+        contactId = contact.getContactId();
+        updateContactDto = user2GetContact(contactId);
+        updateAboutDto = user2GetAbout(contactId);
+
+        updateContactDto.setFirstName(uuid());
+        updateContactDto.setLastName(uuid());
+        updateContactDto.setDateOfBirth(now());
+        updateAboutDto.setDescription(uuid());
+        updateAboutDto.setPastClients(pastClientsDto());
+        updateAboutDto.setIdealClients(idealClientsDto());
+        updateDto = new DecoratedContactDto(updateContactDto, updateAboutDto);
+        responseDto = user2UpdateDecoratedContact(contactId, updateDto);
+        contact = getContactFromDb(updateContactDto);
+        about = getAboutFromDb(contact);
+        assertContact(contact, updateContactDto);
+        assertContact(contact, responseDto.getContact());
+        assertAbout(about, updateAboutDto);
+        assertAbout(about, responseDto.getAbout());
+
+        user1UpdateDecoratedContactExpectNotFound(contactId, updateDto);
+        user3UpdateDecoratedContactExpectNotFound(contactId, updateDto);
+
+        contact = createDecoratedContact(USER_3);
+        contactId = contact.getContactId();
+        updateContactDto = user3GetContact(contactId);
+        updateAboutDto = user3GetAbout(contactId);
+
+        updateContactDto.setFirstName(uuid());
+        updateContactDto.setLastName(uuid());
+        updateContactDto.setDateOfBirth(now());
+        updateAboutDto.setDescription(uuid());
+        updateAboutDto.setPastClients(pastClientsDto());
+        updateAboutDto.setIdealClients(idealClientsDto());
+        updateDto = new DecoratedContactDto(updateContactDto, updateAboutDto);
+        responseDto = user3UpdateDecoratedContact(contactId, updateDto);
+        contact = getContactFromDb(updateContactDto);
+        about = getAboutFromDb(contact);
+        assertContact(contact, updateContactDto);
+        assertContact(contact, responseDto.getContact());
+        assertAbout(about, updateAboutDto);
+        assertAbout(about, responseDto.getAbout());
+
+        user1UpdateDecoratedContactExpectNotFound(contactId, updateDto);
+        user2UpdateDecoratedContactExpectNotFound(contactId, updateDto);
+    }
+
+    @Test
+    void deleteDecoratedContact() {
+        var contact = createDecoratedContact(USER_1);
+        var contactId = contact.getContactId();
+        var contactDto = user1GetContact(contactId);
+        assertContact(contact, contactDto);
+
+        user2DeleteDecoratedContactExpectNotFound(contactId);
+        user3DeleteDecoratedContactExpectNotFound(contactId);
+        user1DeleteDecoratedContact(contactId);
+        user1GetContactExpectNotFound(contactId);
+
+        contact = createDecoratedContact(USER_2);
+        contactId = contact.getContactId();
+        contactDto = user2GetContact(contactId);
+        assertContact(contact, contactDto);
+
+        user1DeleteDecoratedContactExpectNotFound(contactId);
+        user3DeleteDecoratedContactExpectNotFound(contactId);
+        user2DeleteDecoratedContact(contactId);
+        user2GetContactExpectNotFound(contactId);
+
+        contact = createDecoratedContact(USER_3);
+        contactId = contact.getContactId();
+        contactDto = user3GetContact(contactId);
+        assertContact(contact, contactDto);
+
+        user1DeleteDecoratedContactExpectNotFound(contactId);
+        user2DeleteDecoratedContactExpectNotFound(contactId);
+        user3DeleteDecoratedContact(contactId);
+        user3GetContactExpectNotFound(contactId);
+    }
 
     @Test
     void getContactsDataAccess() {
@@ -40,7 +230,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
         pageDto = user3GetContacts(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var user1Contacts = createContacts(USER_1);
+        var user1Contacts = createDecoratedContacts(USER_1);
         pageDto = user1GetContacts(queryDto);
         assertContacts(user1Contacts, pageDto);
 
@@ -50,7 +240,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
         pageDto = user3GetContacts(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var user2Contacts = createContacts(USER_2);
+        var user2Contacts = createDecoratedContacts(USER_2);
         pageDto = user2GetContacts(queryDto);
         assertContacts(user2Contacts, pageDto);
 
@@ -60,7 +250,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
         pageDto = user3GetContacts(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var user3Contacts = createContacts(USER_3);
+        var user3Contacts = createDecoratedContacts(USER_3);
         pageDto = user3GetContacts(queryDto);
         assertContacts(user3Contacts, pageDto);
 
@@ -80,7 +270,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
         assertThat(pageDto.getPageSize()).isEqualTo(50);
         assertThat(pageDto.getContent()).isEmpty();
 
-        createContacts(USER_1, 21);
+        createDecoratedContacts(USER_1, 21);
         pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getTotalPages()).isEqualTo(1);
         assertThat(pageDto.getTotalElements()).isEqualTo(21);
@@ -119,7 +309,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
         var pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        createContacts(USER_1, 21);
+        createDecoratedContacts(USER_1, 21);
         queryDto = contactsQueryDto();
         queryDto.setSort("asc(firstName)");
         pageDto = user1GetContacts(queryDto);
@@ -170,7 +360,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
         var pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).isEmpty();
 
-        var contactsDto = createContacts(USER_1, 21);
+        var contactsDto = createDecoratedContacts(USER_1, 21);
         var contactDto1 = contactsDto.get(0);
         pageDto = user1GetContacts(queryDto);
         assertThat(pageDto.getContent()).hasSize(21);
@@ -363,7 +553,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
 
     @Test
     void getContact() {
-        var contact = createContact(USER_1);
+        var contact = createDecoratedContact(USER_1);
         var contactId = contact.getContactId();
 
         var contactDto = user1GetContact(contactId);
@@ -371,183 +561,24 @@ public class ContactComponentTest extends ContactComponentTestBase {
         user2GetContactExpectNotFound(contactId);
         user3GetContactExpectNotFound(contactId);
 
-        contact = createContact(USER_2);
+        contact = createDecoratedContact(USER_2);
         contactId = contact.getContactId();
         contactDto = user2GetContact(contactId);
         assertContact(contact, contactDto);
         user1GetContactExpectNotFound(contactId);
         user3GetContactExpectNotFound(contactId);
 
-        contact = createContact(USER_3);
+        contact = createDecoratedContact(USER_3);
         contactId = contact.getContactId();
         contactDto = user3GetContact(contactId);
         assertContact(contact, contactDto);
         user1GetContactExpectNotFound(contactId);
         user2GetContactExpectNotFound(contactId);
-    }
-
-    @Test
-    void createContactEdit() {
-        var toCreateDto = contactEditDto();
-        var responseDto = user1CreateContact(toCreateDto);
-        var contact = getContactFromDb(toCreateDto);
-        var about = getAboutFromDb(contact);
-        var contactId = contact.getContactId();
-
-        var createdContactDto = user1GetContact(contactId);
-        var createdAboutDto = user1GetAbout(contactId);
-        assertContact(contact, createdContactDto);
-        assertContact(contact, responseDto.getContact());
-        assertAbout(about, createdAboutDto);
-        assertAbout(about, responseDto.getAbout());
-        user2GetContactExpectNotFound(contactId);
-        user2GetAboutExpectNotFound(contactId);
-        user3GetContactExpectNotFound(contactId);
-        user3GetAboutExpectNotFound(contactId);
-
-        toCreateDto = contactEditDto();
-        responseDto = user2CreateContact(toCreateDto);
-        contact = getContactFromDb(toCreateDto);
-        about = getAboutFromDb(contact);
-        contactId = contact.getContactId();
-
-        createdContactDto = user2GetContact(contactId);
-        createdAboutDto = user2GetAbout(contactId);
-        assertContact(contact, createdContactDto);
-        assertContact(contact, responseDto.getContact());
-        assertAbout(about, createdAboutDto);
-        assertAbout(about, responseDto.getAbout());
-        user1GetContactExpectNotFound(contactId);
-        user1GetAboutExpectNotFound(contactId);
-        user3GetContactExpectNotFound(contactId);
-        user3GetAboutExpectNotFound(contactId);
-
-        toCreateDto = contactEditDto();
-        responseDto = user3CreateContact(toCreateDto);
-        contact = getContactFromDb(toCreateDto);
-        about = getAboutFromDb(contact);
-        contactId = contact.getContactId();
-
-        createdContactDto = user3GetContact(contactId);
-        createdAboutDto = user3GetAbout(contactId);
-        assertContact(contact, createdContactDto);
-        assertContact(contact, responseDto.getContact());
-        assertAbout(about, createdAboutDto);
-        assertAbout(about, responseDto.getAbout());
-        user1GetContactExpectNotFound(contactId);
-        user1GetAboutExpectNotFound(contactId);
-        user2GetContactExpectNotFound(contactId);
-        user2GetAboutExpectNotFound(contactId);
-    }
-
-    @Test
-    void updateContactEdit() {
-        var contact = createContact(USER_1);
-        var contactId = contact.getContactId();
-        var updateContactDto = user1GetContact(contactId);
-        var updateAboutDto = user1GetAbout(contactId);
-
-        updateContactDto.setFirstName(uuid());
-        updateContactDto.setLastName(uuid());
-        updateContactDto.setDateOfBirth(now());
-        updateAboutDto.setDescription(uuid());
-        updateAboutDto.setPastClients(pastClientsDto());
-        updateAboutDto.setIdealClients(idealClientsDto());
-        var updateDto = new ContactEditDto(updateContactDto, updateAboutDto);
-        var responseDto = user1UpdateContact(contactId, updateDto);
-        contact = getContactFromDb(updateContactDto);
-        var about = getAboutFromDb(contact);
-        assertContact(contact, updateContactDto);
-        assertContact(contact, responseDto.getContact());
-        assertAbout(about, updateAboutDto);
-        assertAbout(about, responseDto.getAbout());
-
-        user2UpdateContactExpectNotFound(contactId, updateDto);
-        user3UpdateContactExpectNotFound(contactId, updateDto);
-
-        contact = createContact(USER_2);
-        contactId = contact.getContactId();
-        updateContactDto = user2GetContact(contactId);
-        updateAboutDto = user2GetAbout(contactId);
-
-        updateContactDto.setFirstName(uuid());
-        updateContactDto.setLastName(uuid());
-        updateContactDto.setDateOfBirth(now());
-        updateAboutDto.setDescription(uuid());
-        updateAboutDto.setPastClients(pastClientsDto());
-        updateAboutDto.setIdealClients(idealClientsDto());
-        updateDto = new ContactEditDto(updateContactDto, updateAboutDto);
-        responseDto = user2UpdateContact(contactId, updateDto);
-        contact = getContactFromDb(updateContactDto);
-        about = getAboutFromDb(contact);
-        assertContact(contact, updateContactDto);
-        assertContact(contact, responseDto.getContact());
-        assertAbout(about, updateAboutDto);
-        assertAbout(about, responseDto.getAbout());
-
-        user1UpdateContactExpectNotFound(contactId, updateDto);
-        user3UpdateContactExpectNotFound(contactId, updateDto);
-
-        contact = createContact(USER_3);
-        contactId = contact.getContactId();
-        updateContactDto = user3GetContact(contactId);
-        updateAboutDto = user3GetAbout(contactId);
-
-        updateContactDto.setFirstName(uuid());
-        updateContactDto.setLastName(uuid());
-        updateContactDto.setDateOfBirth(now());
-        updateAboutDto.setDescription(uuid());
-        updateAboutDto.setPastClients(pastClientsDto());
-        updateAboutDto.setIdealClients(idealClientsDto());
-        updateDto = new ContactEditDto(updateContactDto, updateAboutDto);
-        responseDto = user3UpdateContact(contactId, updateDto);
-        contact = getContactFromDb(updateContactDto);
-        about = getAboutFromDb(contact);
-        assertContact(contact, updateContactDto);
-        assertContact(contact, responseDto.getContact());
-        assertAbout(about, updateAboutDto);
-        assertAbout(about, responseDto.getAbout());
-
-        user1UpdateContactExpectNotFound(contactId, updateDto);
-        user2UpdateContactExpectNotFound(contactId, updateDto);
-    }
-
-    @Test
-    void deleteContact() {
-        var contact = createContact(USER_1);
-        var contactId = contact.getContactId();
-        var contactDto = user1GetContact(contactId);
-        assertContact(contact, contactDto);
-
-        user2DeleteContactExpectNotFound(contactId);
-        user3DeleteContactExpectNotFound(contactId);
-        user1DeleteContact(contactId);
-        user1GetContactExpectNotFound(contactId);
-
-        contact = createContact(USER_2);
-        contactId = contact.getContactId();
-        contactDto = user2GetContact(contactId);
-        assertContact(contact, contactDto);
-
-        user1DeleteContactExpectNotFound(contactId);
-        user3DeleteContactExpectNotFound(contactId);
-        user2DeleteContact(contactId);
-        user2GetContactExpectNotFound(contactId);
-
-        contact = createContact(USER_3);
-        contactId = contact.getContactId();
-        contactDto = user3GetContact(contactId);
-        assertContact(contact, contactDto);
-
-        user1DeleteContactExpectNotFound(contactId);
-        user2DeleteContactExpectNotFound(contactId);
-        user3DeleteContact(contactId);
-        user3GetContactExpectNotFound(contactId);
     }
 
     @Test
     void getAbout() {
-        var contact = createContact(USER_1);
+        var contact = createDecoratedContact(USER_1);
         var contactId = contact.getContactId();
 
         var about = getAboutFromDb(contact);
@@ -556,7 +587,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
         user2GetAboutExpectNotFound(contactId);
         user3GetAboutExpectNotFound(contactId);
 
-        contact = createContact(USER_2);
+        contact = createDecoratedContact(USER_2);
         contactId = contact.getContactId();
 
         about = getAboutFromDb(contact);
@@ -565,7 +596,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
         user1GetAboutExpectNotFound(contactId);
         user3GetAboutExpectNotFound(contactId);
 
-        contact = createContact(USER_3);
+        contact = createDecoratedContact(USER_3);
         contactId = contact.getContactId();
 
         about = getAboutFromDb(contact);
@@ -577,7 +608,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
 
     @Test
     void updateAbout() {
-        var contact = createContact(USER_1);
+        var contact = createDecoratedContact(USER_1);
         var contactId = contact.getContactId();
         var updateDto = user1GetAbout(contactId);
 
@@ -589,7 +620,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
         user2UpdateAboutExpectNotFound(contactId, updateDto);
         user3UpdateAboutExpectNotFound(contactId, updateDto);
 
-        contact = createContact(USER_2);
+        contact = createDecoratedContact(USER_2);
         contactId = contact.getContactId();
         updateDto = user2GetAbout(contactId);
 
@@ -601,7 +632,7 @@ public class ContactComponentTest extends ContactComponentTestBase {
         user1UpdateAboutExpectNotFound(contactId, updateDto);
         user3UpdateAboutExpectNotFound(contactId, updateDto);
 
-        contact = createContact(USER_3);
+        contact = createDecoratedContact(USER_3);
         contactId = contact.getContactId();
         updateDto = user3GetAbout(contactId);
 

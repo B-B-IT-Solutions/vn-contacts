@@ -149,8 +149,7 @@ class AboutServiceTest {
         assertThat(aboutIdDb.getContactId()).isEqualTo(savedAbout.getContactId());
         assertThat(aboutIdDb.getOwner()).isEqualTo(savedAbout.getOwner());
         assertThat(savedAbout.getDescription()).isEqualTo(updatedAbout.getDescription());
-        assertThat(savedAbout.getContactGoals()).isEqualTo(updatedAbout.getContactGoals());
-        assertThat(savedAbout.getContactChallenges()).isEqualTo(updatedAbout.getContactChallenges());
+        assertThat(savedAbout.getGoals()).isEqualTo(updatedAbout.getGoals());
         assertIdealClients(updatedAbout.getIdealClients(), savedAbout.getIdealClients());
         assertPastClients(updatedAbout.getPastClients(), savedAbout.getPastClients());
         assertFirstInteraction(updatedAbout.getFirstInteraction(), savedAbout.getFirstInteraction());
