@@ -8,6 +8,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import cz.prm.domain.contact.query.ContactsFilter;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,6 +22,15 @@ public class ContactPredicates {
     public Predicate byContactId(Long userId) {
         var predicate = dataAccessPredicate();
         return predicate.and(contact.contactId.eq(userId));
+    }
+
+    public Predicate matchingContacts(List<String> industries, List<String> skills, List<String> products, List<String> targetMarkets) {
+        var predicate = new BooleanBuilder();
+        predicate.or(contact.industries.any().in(industries));
+        predicate.or(contact.skills.any().in(skills));
+        predicate.or(contact.products.any().in(products));
+        predicate.or(contact.targetMarkets.any().in(targetMarkets));
+        return dataAccessPredicate().and(predicate);
     }
 
     private BooleanExpression dataAccessPredicate() {

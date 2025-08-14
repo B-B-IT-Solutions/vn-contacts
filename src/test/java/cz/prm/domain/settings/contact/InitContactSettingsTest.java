@@ -25,9 +25,8 @@ class InitContactSettingsTest {
 
     public static final List<TargetMarket> EXPECTED_INITIAL_TARGET_MARKETS = newArrayList(new TargetMarket("North America"),
         new TargetMarket("Europe"), new TargetMarket("Asia-Pacific"), new TargetMarket("Small Businesses"), new TargetMarket("Enterprise Clients"),
-        new TargetMarket("Startups"), new TargetMarket("Healthcare"), new TargetMarket("Startups"), new TargetMarket("Retail"),
-        new TargetMarket("B2B"), new TargetMarket("B2C"), new TargetMarket("Government"), new TargetMarket("Tech Companies"),
-        new TargetMarket("Education"));
+        new TargetMarket("Startups"), new TargetMarket("Healthcare"), new TargetMarket("Retail"), new TargetMarket("B2B"), new TargetMarket("B2C"),
+        new TargetMarket("Government"), new TargetMarket("Tech Companies"), new TargetMarket("Education"));
 
     @Test
     void initialIndustries() {
