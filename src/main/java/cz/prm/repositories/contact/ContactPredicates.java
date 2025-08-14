@@ -8,7 +8,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import cz.prm.domain.contact.query.ContactsFilter;
-import java.util.List;
+import cz.prm.domain.networking.ReferralRequirement;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,13 +24,15 @@ public class ContactPredicates {
         return predicate.and(contact.contactId.eq(userId));
     }
 
-    public Predicate matchingContacts(List<String> industries, List<String> skills, List<String> products, List<String> targetMarkets) {
-        var predicate = new BooleanBuilder();
-        predicate.or(contact.industries.any().in(industries));
-        predicate.or(contact.skills.any().in(skills));
-        predicate.or(contact.products.any().in(products));
-        predicate.or(contact.targetMarkets.any().in(targetMarkets));
-        return dataAccessPredicate().and(predicate);
+    public Predicate potentialReferrals(ReferralRequirement rr) {
+        var dimensionsPredicate = new BooleanBuilder();
+        dimensionsPredicate.and(contact.industries.any().in(rr.getIndustries()));
+        dimensionsPredicate.or(contact.skills.any().in(rr.getSkills()));
+        dimensionsPredicate.or(contact.products.any().in(rr.getProducts()));
+        dimensionsPredicate.or(contact.targetMarkets.any().in(rr.getTargetMarkets()));
+
+        var contactPredicate = dataAccessPredicate().and(contact.contactId.ne(rr.getContactId()));
+        return contactPredicate.and(dimensionsPredicate);
     }
 
     private BooleanExpression dataAccessPredicate() {

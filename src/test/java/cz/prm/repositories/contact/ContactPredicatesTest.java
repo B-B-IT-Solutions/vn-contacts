@@ -1,7 +1,7 @@
 package cz.prm.repositories.contact;
 
 import static cz.prm.utils.CommonUtils.user;
-import static cz.prm.utils.TestUtils.uuids;
+import static cz.prm.utils.NetworkingUtils.referralRequirement;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -106,18 +106,16 @@ class ContactPredicatesTest {
     }
 
     @Test
-    void matchingContacts() {
+    void potentialReferrals() {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
             var user = user();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
-            var industries = uuids();
-            var skills = uuids();
-            var products = uuids();
-            var targetMarkets = uuids();
-            var query = predicates.matchingContacts(industries, skills, products, targetMarkets);
+            var rr = referralRequirement();
+            var query = predicates.potentialReferrals(rr);
             var expectedString = format(
-                "contact.owner.username = %s && (any(contact.industries) in %s || any(contact.skills) in %s || any(contact.products) in %s ||"
-                    + " any(contact.targetMarkets) in %s)", user.getUsername(), industries, skills, products, targetMarkets);
+                "contact.owner.username = %s && contact.contactId != %s && (any(contact.industries) in %s || any(contact.skills) in %s || any"
+                    + "(contact.products) in %s || any(contact.targetMarkets) in %s)", user.getUsername(), rr.getContactId(), rr.getIndustries(),
+                rr.getSkills(), rr.getProducts(), rr.getTargetMarkets());
             assertThat(query).hasToString(expectedString);
         }
     }

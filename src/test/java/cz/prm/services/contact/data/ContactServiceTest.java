@@ -5,6 +5,7 @@ import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsQuery;
 import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
+import static cz.prm.utils.assertions.ContactAssertions.assertContacts;
 import static cz.prm.utils.assertions.ContactAssertions.assertPage;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
@@ -18,6 +19,7 @@ import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.networking.ReferralRequirement;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -46,6 +48,22 @@ class ContactServiceTest {
     @BeforeEach
     void setUp() {
         contactService = new ContactService(repository, predicates);
+    }
+
+    @Test
+    void getPotentialReferrals() {
+        var contact = contact();
+        var potentialReferrals = contacts();
+        var predicate1 = new BooleanBuilder();
+        var predicate2 = new BooleanBuilder();
+
+        when(predicates.byContactId(contact.getContactId())).thenReturn(predicate1);
+        when(repository.findOne(predicate1)).thenReturn(of(contact));
+        when(predicates.potentialReferrals(any(ReferralRequirement.class))).thenReturn(predicate2);
+        when(repository.findAll(eq(predicate2))).thenReturn(potentialReferrals);
+
+        var result = contactService.getPotentialReferrals(contact.getContactId());
+        assertContacts(result, potentialReferrals);
     }
 
     @Test
