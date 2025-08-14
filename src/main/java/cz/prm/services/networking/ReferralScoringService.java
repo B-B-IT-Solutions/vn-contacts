@@ -2,6 +2,7 @@ package cz.prm.services.networking;
 
 import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.toList;
+import static org.apache.commons.collections4.CollectionUtils.disjunction;
 import static org.apache.commons.collections4.CollectionUtils.intersection;
 
 import cz.prm.domain.contact.Contact;
@@ -18,68 +19,38 @@ public class ReferralScoringService {
 
     public List<ReferralSuggestion> scorePotentialReferrals(ReferralRequirement rr, List<Contact> potentialReferrals) {
         var suggestions = new ArrayList<ReferralSuggestion>();
-
-        for (Contact pr : potentialReferrals) {
+        potentialReferrals.forEach(pr -> {
             var rs = new ReferralSuggestion(pr);
 
-            var industries = intersection(rr.getIndustries(), pr.getIndustries());
-            var products = intersection(rr.getProducts(), pr.getProducts());
-            var skills = intersection(rr.getSkills(), pr.getSkills());
-            var targetMarkets = intersection(rr.getTargetMarkets(), pr.getTargetMarkets());
-
-            if (!industries.isEmpty()) {
-                rs.addReason("Both work in " + String.join(", ", industries) + " industries");
-                rs.addScore(industries.size(), 20);
+            var commonIndustries = intersection(rr.getIndustries(), pr.getIndustries());
+            if (!commonIndustries.isEmpty()) {
+                rs.addReason("Both work in " + String.join(", ", commonIndustries) + " commonIndustries");
+                rs.addScore(commonIndustries.size(), 20);
             }
 
-            // Contact's target market/ideal clients match potential referral's products
-            boolean targetMarketProductMatch = rr.getTargetMarkets().stream().anyMatch(rrTargetMarket -> {
-                var targetMaretLowerCase = rrTargetMarket.toLowerCase().split(" ")[0];
-                return pr.getProducts().stream().anyMatch(prProduct -> {
-                    var productLowerCase = prProduct.toLowerCase().split(" ")[0];
-                    return prProduct.toLowerCase().contains(targetMaretLowerCase) || rrTargetMarket.toLowerCase().contains(productLowerCase);
-                });
-            });
-            if (targetMarketProductMatch) {
+            var targetMarketsProducts = intersection(rr.getTargetMarkets(), pr.getProducts());
+            if (!targetMarketsProducts.isEmpty()) {
                 rs.addReason("Their products align with your target clients");
                 rs.addScore(25);
             }
 
-            // Contact's contactIdeal clients match target's services
-            boolean serviceClientMatch = pr.getTargetMarkets().stream().anyMatch(client -> rr.getProducts().stream().anyMatch(
-                service -> service.toLowerCase().contains(client.toLowerCase().split(" ")[0]) || client.toLowerCase()
-                    .contains(service.toLowerCase().split(" ")[0])));
-            if (serviceClientMatch) {
+            var productsTargetMarkets = intersection(rr.getProducts(), pr.getTargetMarkets());
+            if (!productsTargetMarkets.isEmpty()) {
                 rs.addReason("Your services align with their target clients");
                 rs.addScore(25);
             }
 
             // Complementary services
-            List<String> complementaryServices = pr.getProducts().stream()
-                .filter(service -> !rr.getProducts().contains(service) && rr.getIndustries().stream().anyMatch(pr.getIndustries()::contains))
-                .collect(toList());
-            if (!complementaryServices.isEmpty()) {
-                rs.addReason("Offers complementary services you don't provcontactIde");
+            var complementaryServices = disjunction(rr.getProducts(), pr.getProducts());
+            if (!commonIndustries.isEmpty() && !complementaryServices.isEmpty()) {
+                rs.addReason("Offers complementary services you don't provide");
                 rs.addScore(15);
             }
-
-//            // Connection strength bonus
-//            if ("Strong".equalsIgnoreCase(pr.connectionStrength)) {
-//                matchScore += 10;
-//                reasons.add("Strong existing relationship");
-//            }
-//
-//            // Location proximity bonus
-//            String targetRegion = targetContact.location.contains(",") ? targetContact.location.split(",")[1].trim() : "";
-//            if (!targetRegion.isEmpty() && pr.location.contains(targetRegion)) {
-//                reasons.add("Located in same region");
-//                matchScore += 5;
-//            }
 
             if (rs.isRelevant()) {
                 suggestions.add(rs);
             }
-        }
+        });
         return suggestions.stream().sorted(comparingInt(ReferralSuggestion::getScore).reversed()).limit(7).collect(toList());
     }
 }
