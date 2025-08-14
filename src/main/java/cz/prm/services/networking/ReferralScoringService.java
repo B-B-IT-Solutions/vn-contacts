@@ -1,5 +1,6 @@
 package cz.prm.services.networking;
 
+import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.collections4.CollectionUtils.intersection;
 
@@ -31,12 +32,16 @@ public class ReferralScoringService {
                 rs.addScore(industries.size(), 20);
             }
 
-            // Contact's Ideal clients match potential referral's products
-            boolean clientServiceMatch = rr.getTargetMarkets().stream().anyMatch(rrTargetMarket -> pr.getProducts().stream().anyMatch(
-                prProduct -> prProduct.toLowerCase().contains(rrTargetMarket.toLowerCase().split(" ")[0]) || rrTargetMarket.toLowerCase()
-                    .contains(prProduct.toLowerCase().split(" ")[0])));
-            if (clientServiceMatch) {
-                rs.addReason("Their services align with your target clients");
+            // Contact's target market/ideal clients match potential referral's products
+            boolean targetMarketProductMatch = rr.getTargetMarkets().stream().anyMatch(rrTargetMarket -> {
+                var targetMaretLowerCase = rrTargetMarket.toLowerCase().split(" ")[0];
+                return pr.getProducts().stream().anyMatch(prProduct -> {
+                    var productLowerCase = prProduct.toLowerCase().split(" ")[0];
+                    return prProduct.toLowerCase().contains(targetMaretLowerCase) || rrTargetMarket.toLowerCase().contains(productLowerCase);
+                });
+            });
+            if (targetMarketProductMatch) {
+                rs.addReason("Their products align with your target clients");
                 rs.addScore(25);
             }
 
@@ -75,7 +80,6 @@ public class ReferralScoringService {
                 suggestions.add(rs);
             }
         }
-
-        return suggestions.stream().sorted((a, b) -> Integer.compare(b.getScore(), a.getScore())).limit(6).collect(toList());
+        return suggestions.stream().sorted(comparingInt(ReferralSuggestion::getScore).reversed()).limit(7).collect(toList());
     }
 }
