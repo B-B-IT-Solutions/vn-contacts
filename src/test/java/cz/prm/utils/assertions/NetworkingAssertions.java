@@ -27,6 +27,18 @@ public class NetworkingAssertions {
         assertThat(rr1.getTargetMarkets()).containsExactlyElementsOf(rr2.getTargetMarkets());
     }
 
+    public static void assertContactReferralSuggestions(List<ReferralSuggestion> rss, List<Contact> contactReferrals) {
+        assertThat(rss).isNotEmpty().hasSizeLessThanOrEqualTo(contactReferrals.size());
+        rss.forEach(rs1 -> {
+            var contact = contactReferrals.stream().filter(c -> Objects.equals(rs1.getContact(), c)).findFirst().get();
+            assertContactReferralSuggestion(rs1, contact);
+        });
+    }
+
+    public static void assertContactReferralSuggestion(ReferralSuggestion rs, Contact contact) {
+        assertContact(rs.getContact(), contact);
+    }
+
     public static void assertReferralSuggestions(List<ReferralSuggestion> rss1, List<ReferralSuggestion> rss2) {
         assertThat(rss1).isNotEmpty().hasSameSizeAs(rss2);
         rss1.forEach(rs1 -> {

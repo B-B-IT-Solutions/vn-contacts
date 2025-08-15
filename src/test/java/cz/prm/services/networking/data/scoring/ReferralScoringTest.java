@@ -10,7 +10,7 @@ import cz.prm.domain.networking.ReferralRequirement;
 import cz.prm.domain.networking.ReferralSuggestion;
 import org.junit.jupiter.api.Test;
 
-class ScoringCriteriaTest {
+class ReferralScoringTest {
 
     @Test
     void commonIndustries_NoIntersection() {
@@ -18,8 +18,9 @@ class ScoringCriteriaTest {
         var potentialReferral = contact();
         var rs = new ReferralSuggestion(potentialReferral);
         var rr = new ReferralRequirement(contact);
+        var refScoring = new ReferralScoring(rr);
 
-        ScoringCriteria.commonIndustries(rs, rr, potentialReferral);
+        refScoring.commonIndustries(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(0);
         assertThat(rs.getReasons()).isEmpty();
     }
@@ -33,9 +34,10 @@ class ScoringCriteriaTest {
         potentialReferral.getIndustries().add(industry1);
         var rs = new ReferralSuggestion(potentialReferral);
         var rr = new ReferralRequirement(contact);
+        var refScoring = new ReferralScoring(rr);
         var reason = String.format("Both work in " + String.join(", ", industry1) + " commonIndustries");
 
-        ScoringCriteria.commonIndustries(rs, rr, potentialReferral);
+        refScoring.commonIndustries(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(20);
         assertThat(rs.getReasons()).containsExactly(reason);
     }
@@ -53,9 +55,10 @@ class ScoringCriteriaTest {
         var rs = new ReferralSuggestion(potentialReferral);
         var rr = new ReferralRequirement(contact);
         var commonIndustries = intersection(rr.getIndustries(), potentialReferral.getIndustries());
+        var refScoring = new ReferralScoring(rr);
         var reason = String.format("Both work in " + String.join(", ", commonIndustries) + " commonIndustries");
 
-        ScoringCriteria.commonIndustries(rs, rr, potentialReferral);
+        refScoring.commonIndustries(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(40);
         assertThat(rs.getReasons()).containsExactly(reason);
     }
@@ -66,8 +69,9 @@ class ScoringCriteriaTest {
         var potentialReferral = contact();
         var rs = new ReferralSuggestion(potentialReferral);
         var rr = new ReferralRequirement(contact);
+        var refScoring = new ReferralScoring(rr);
 
-        ScoringCriteria.complementaryServices(rs, rr, potentialReferral);
+        refScoring.complementaryServices(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(0);
         assertThat(rs.getReasons()).isEmpty();
     }
@@ -84,8 +88,9 @@ class ScoringCriteriaTest {
         potentialReferral.setProducts(products);
         var rs = new ReferralSuggestion(potentialReferral);
         var rr = new ReferralRequirement(contact);
+        var refScoring = new ReferralScoring(rr);
 
-        ScoringCriteria.complementaryServices(rs, rr, potentialReferral);
+        refScoring.complementaryServices(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(0);
         assertThat(rs.getReasons()).isEmpty();
     }
@@ -102,9 +107,10 @@ class ScoringCriteriaTest {
         potentialReferral.getProducts().add(product1);
         var rs = new ReferralSuggestion(potentialReferral);
         var rr = new ReferralRequirement(contact);
+        var refScoring = new ReferralScoring(rr);
         var reason = "Offers complementary services you don't provide";
 
-        ScoringCriteria.complementaryServices(rs, rr, potentialReferral);
+        refScoring.complementaryServices(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(15);
         assertThat(rs.getReasons()).containsExactly(reason);
     }
@@ -115,8 +121,9 @@ class ScoringCriteriaTest {
         var potentialReferral = contact();
         var rs = new ReferralSuggestion(potentialReferral);
         var rr = new ReferralRequirement(contact);
+        var refScoring = new ReferralScoring(rr);
 
-        ScoringCriteria.targetMarketsProductsMatch(rs, rr, potentialReferral);
+        refScoring.targetMarketsProductsMatch(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(0);
         assertThat(rs.getReasons()).isEmpty();
     }
@@ -130,9 +137,10 @@ class ScoringCriteriaTest {
         potentialReferral.getProducts().add(product1);
         var rs = new ReferralSuggestion(potentialReferral);
         var rr = new ReferralRequirement(contact);
+        var refScoring = new ReferralScoring(rr);
         var reason = "Their products align with your target clients";
 
-        ScoringCriteria.targetMarketsProductsMatch(rs, rr, potentialReferral);
+        refScoring.targetMarketsProductsMatch(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(25);
         assertThat(rs.getReasons()).containsExactly(reason);
     }
@@ -143,8 +151,9 @@ class ScoringCriteriaTest {
         var potentialReferral = contact();
         var rs = new ReferralSuggestion(potentialReferral);
         var rr = new ReferralRequirement(contact);
+        var refScoring = new ReferralScoring(rr);
 
-        ScoringCriteria.productsTargetMarketsMatch(rs, rr, potentialReferral);
+        refScoring.productsTargetMarketsMatch(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(0);
         assertThat(rs.getReasons()).isEmpty();
     }
@@ -158,9 +167,10 @@ class ScoringCriteriaTest {
         potentialReferral.getTargetMarkets().add(product1);
         var rs = new ReferralSuggestion(potentialReferral);
         var rr = new ReferralRequirement(contact);
+        var refScoring = new ReferralScoring(rr);
         var reason = "Your services align with their target clients";
 
-        ScoringCriteria.productsTargetMarketsMatch(rs, rr, potentialReferral);
+        refScoring.productsTargetMarketsMatch(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(25);
         assertThat(rs.getReasons()).containsExactly(reason);
     }
