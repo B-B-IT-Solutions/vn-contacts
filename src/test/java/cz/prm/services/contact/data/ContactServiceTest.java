@@ -4,6 +4,7 @@ import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.ContactUtils.contactsQuery;
 import static cz.prm.utils.MockitoUtils.returnParamAnswer;
+import static cz.prm.utils.NetworkingUtils.referralRequirement;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertContacts;
 import static cz.prm.utils.assertions.ContactAssertions.assertPage;
@@ -52,17 +53,13 @@ class ContactServiceTest {
 
     @Test
     void getPotentialReferrals() {
-        var contact = contact();
+        var rr = referralRequirement();
         var potentialReferrals = contacts();
-        var predicate1 = new BooleanBuilder();
-        var predicate2 = new BooleanBuilder();
+        var predicate = new BooleanBuilder();
+        when(predicates.potentialReferrals(rr)).thenReturn(predicate);
+        when(repository.findAll(eq(predicate))).thenReturn(potentialReferrals);
 
-        when(predicates.byContactId(contact.getContactId())).thenReturn(predicate1);
-        when(repository.findOne(predicate1)).thenReturn(of(contact));
-        when(predicates.potentialReferrals(any(ReferralRequirement.class))).thenReturn(predicate2);
-        when(repository.findAll(eq(predicate2))).thenReturn(potentialReferrals);
-
-        var result = contactService.getPotentialReferrals(contact.getContactId());
+        var result = contactService.getPotentialReferrals(rr);
         assertContacts(result, potentialReferrals);
     }
 

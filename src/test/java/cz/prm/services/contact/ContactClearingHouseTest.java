@@ -10,11 +10,15 @@ import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.ContactAssertions.assertAbout;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
+import static cz.prm.utils.assertions.ContactAssertions.assertContacts;
 import static cz.prm.utils.assertions.ContactAssertions.assertDecoratedContact;
+import static cz.prm.utils.assertions.NetworkingAssertions.assertReferralRequirement;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import cz.prm.domain.networking.ReferralRequirement;
 import cz.prm.services.TaskService;
 import cz.prm.services.contact.data.AboutService;
 import cz.prm.services.contact.data.ContactService;
@@ -23,6 +27,8 @@ import cz.prm.services.referral.ReferralService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -39,6 +45,8 @@ class ContactClearingHouseTest {
     private TaskService taskService;
     @Mock
     private ReferralService referralService;
+    @Captor
+    private ArgumentCaptor<ReferralRequirement> refRequirementCapt;
 
     private ContactClearingHouse clearingHouse;
 
@@ -100,6 +108,21 @@ class ContactClearingHouseTest {
         verify(referralService).deleteByContactId(contact.getContactId());
         verify(aboutService).deleteAbout(contact.getContactId());
         verify(contactService).deleteContact(contact.getContactId());
+    }
+
+    @Test
+    void getPotentialReferrals() {
+        var contact = contact();
+        var potentialReferrals = contacts();
+
+        when(contactService.getContact(contact.getContactId())).thenReturn(contact);
+        when(contactService.getPotentialReferrals(any(ReferralRequirement.class))).thenReturn(potentialReferrals);
+
+        var result = clearingHouse.getPotentialReferrals(contact.getContactId());
+        verify(contactService).getPotentialReferrals(refRequirementCapt.capture());
+        var refRequirement = refRequirementCapt.getValue();
+        assertReferralRequirement(refRequirement, contact);
+        assertContacts(result, potentialReferrals);
     }
 
     @Test

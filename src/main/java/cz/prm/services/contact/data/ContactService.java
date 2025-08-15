@@ -30,9 +30,7 @@ public class ContactService {
         this.predicates = predicates;
     }
 
-    public List<Contact> getPotentialReferrals(Long contactId) {
-        var contact = getContact(contactId);
-        var rr = new ReferralRequirement(contact);
+    public List<Contact> getPotentialReferrals(ReferralRequirement rr) {
         var predicate = predicates.potentialReferrals(rr);
         return newArrayList(repository.findAll(predicate));
     }
