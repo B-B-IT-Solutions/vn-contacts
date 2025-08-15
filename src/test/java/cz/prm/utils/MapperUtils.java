@@ -1,6 +1,7 @@
 package cz.prm.utils;
 
 import cz.prm.controllers.mappers.ContactMapper;
+import cz.prm.controllers.mappers.NetworkingMapper;
 import cz.prm.controllers.mappers.NoteMapper;
 import cz.prm.controllers.mappers.ReferralMapper;
 import cz.prm.controllers.mappers.SettingsMapper;
@@ -11,6 +12,10 @@ public class MapperUtils {
 
     public static ContactMapper getContactMapper() {
         return Mappers.getMapper(ContactMapper.class);
+    }
+
+    public static NetworkingMapper getNetworkingMapper() {
+        return Mappers.getMapper(NetworkingMapper.class);
     }
 
     public static NoteMapper getNoteMapper() {

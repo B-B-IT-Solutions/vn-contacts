@@ -2,6 +2,8 @@ package cz.prm.utils;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.services.networking.data.scoring.ScoringCriteria.COMMON_INDUSTRIES;
+import static cz.prm.services.networking.data.scoring.ScoringCriteria.COMPLEMENTARY_SERVICES;
+import static cz.prm.services.networking.data.scoring.ScoringCriteria.TARGET_MARKETS_PRODUCTS_MATCH;
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.TestUtils.randomInt;
 import static cz.prm.utils.TestUtils.uuid;
@@ -56,7 +58,11 @@ public class NetworkingUtils {
         rs.setContact(contact());
         rs.setScore(randomInt());
         rs.addJustification(COMMON_INDUSTRIES, uuid());
+        rs.addJustification(COMPLEMENTARY_SERVICES, uuid());
+        rs.addJustification(TARGET_MARKETS_PRODUCTS_MATCH, uuid());
         rs.addCheckedCriteria(COMMON_INDUSTRIES);
+        rs.addCheckedCriteria(COMPLEMENTARY_SERVICES);
+        rs.addCheckedCriteria(TARGET_MARKETS_PRODUCTS_MATCH);
         return rs;
     }
 }

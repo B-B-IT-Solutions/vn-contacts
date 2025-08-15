@@ -4,6 +4,7 @@ import cz.prm.domain.contact.Contact;
 import cz.prm.services.networking.data.scoring.ScoringCriteria;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import lombok.AllArgsConstructor;
@@ -50,5 +51,9 @@ public class ReferralSuggestion {
 
     public boolean isRelevant() {
         return score > 20 && !justifications.isEmpty();
+    }
+
+    public List<String> getReasons() {
+        return justifications.values().stream().toList();
     }
 }

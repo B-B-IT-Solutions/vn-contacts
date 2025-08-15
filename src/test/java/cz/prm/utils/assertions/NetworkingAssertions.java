@@ -3,6 +3,7 @@ package cz.prm.utils.assertions;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.networking.ReferralSuggestionDto;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.networking.ReferralRequirement;
 import cz.prm.domain.networking.ReferralSuggestion;
@@ -42,6 +43,13 @@ public class NetworkingAssertions {
     public static void assertReferralSuggestion(ReferralSuggestion rs1, ReferralSuggestion rs2) {
         assertContact(rs1.getContact(), rs2.getContact());
         assertThat(rs1.getScore()).isEqualTo(rs2.getScore());
-        assertThat(rs1.getJustifications()).containsAllEntriesOf(rs2.getJustifications());
+        assertThat(rs1.getJustifications()).isNotEmpty().containsExactlyEntriesOf(rs2.getJustifications());
+        assertThat(rs1.getCheckedCriterias()).isNotEmpty().containsExactlyElementsOf(rs2.getCheckedCriterias());
+    }
+
+    public static void assertReferralSuggestion(ReferralSuggestion rs, ReferralSuggestionDto dto) {
+        assertContact(rs.getContact(), dto.getContact());
+        assertThat(rs.getScore()).isEqualTo(dto.getScore());
+        assertThat(rs.getReasons()).isNotEmpty().containsExactlyElementsOf(dto.getReasons());
     }
 }
