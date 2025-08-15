@@ -2,6 +2,7 @@ package cz.prm.services.networking.data.scoring;
 
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.TestUtils.uuid;
+import static cz.prm.utils.TestUtils.uuids;
 import static org.apache.commons.collections4.CollectionUtils.intersection;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -56,6 +57,111 @@ class ScoringCriteriaTest {
 
         ScoringCriteria.commonIndustries(rs, rr, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(40);
+        assertThat(rs.getReasons()).containsExactly(reason);
+    }
+
+    @Test
+    void complementaryServices_NoIndustriesIntersection() {
+        var contact = contact();
+        var potentialReferral = contact();
+        var rs = new ReferralSuggestion(potentialReferral);
+        var rr = new ReferralRequirement(contact);
+
+        ScoringCriteria.complementaryServices(rs, rr, potentialReferral);
+        assertThat(rs.getScore()).isEqualTo(0);
+        assertThat(rs.getReasons()).isEmpty();
+    }
+
+    @Test
+    void complementaryServices_NoProductsDisjunction() {
+        var industry1 = uuid();
+        var products = uuids();
+        var contact = contact();
+        var potentialReferral = contact();
+        contact.getIndustries().add(industry1);
+        contact.setProducts(products);
+        potentialReferral.getIndustries().add(industry1);
+        potentialReferral.setProducts(products);
+        var rs = new ReferralSuggestion(potentialReferral);
+        var rr = new ReferralRequirement(contact);
+
+        ScoringCriteria.complementaryServices(rs, rr, potentialReferral);
+        assertThat(rs.getScore()).isEqualTo(0);
+        assertThat(rs.getReasons()).isEmpty();
+    }
+
+    @Test
+    void complementaryServices() {
+        var industry1 = uuid();
+        var product1 = uuid();
+        var contact = contact();
+        var potentialReferral = contact();
+        contact.getIndustries().add(industry1);
+        contact.getProducts().add(product1);
+        potentialReferral.getIndustries().add(industry1);
+        potentialReferral.getProducts().add(product1);
+        var rs = new ReferralSuggestion(potentialReferral);
+        var rr = new ReferralRequirement(contact);
+        var reason = "Offers complementary services you don't provide";
+
+        ScoringCriteria.complementaryServices(rs, rr, potentialReferral);
+        assertThat(rs.getScore()).isEqualTo(15);
+        assertThat(rs.getReasons()).containsExactly(reason);
+    }
+
+    @Test
+    void targetMarketsProductsMatch_NoIntersection() {
+        var contact = contact();
+        var potentialReferral = contact();
+        var rs = new ReferralSuggestion(potentialReferral);
+        var rr = new ReferralRequirement(contact);
+
+        ScoringCriteria.targetMarketsProductsMatch(rs, rr, potentialReferral);
+        assertThat(rs.getScore()).isEqualTo(0);
+        assertThat(rs.getReasons()).isEmpty();
+    }
+
+    @Test
+    void targetMarketsProductsMatch() {
+        var product1 = uuid();
+        var contact = contact();
+        var potentialReferral = contact();
+        contact.getTargetMarkets().add(product1);
+        potentialReferral.getProducts().add(product1);
+        var rs = new ReferralSuggestion(potentialReferral);
+        var rr = new ReferralRequirement(contact);
+        var reason = "Their products align with your target clients";
+
+        ScoringCriteria.targetMarketsProductsMatch(rs, rr, potentialReferral);
+        assertThat(rs.getScore()).isEqualTo(25);
+        assertThat(rs.getReasons()).containsExactly(reason);
+    }
+
+    @Test
+    void productsTargetMarketsMatch_NoIntersection() {
+        var contact = contact();
+        var potentialReferral = contact();
+        var rs = new ReferralSuggestion(potentialReferral);
+        var rr = new ReferralRequirement(contact);
+
+        ScoringCriteria.productsTargetMarketsMatch(rs, rr, potentialReferral);
+        assertThat(rs.getScore()).isEqualTo(0);
+        assertThat(rs.getReasons()).isEmpty();
+    }
+
+    @Test
+    void productsTargetMarketsMatch() {
+        var product1 = uuid();
+        var contact = contact();
+        var potentialReferral = contact();
+        contact.getProducts().add(product1);
+        potentialReferral.getTargetMarkets().add(product1);
+        var rs = new ReferralSuggestion(potentialReferral);
+        var rr = new ReferralRequirement(contact);
+        var reason = "Your services align with their target clients";
+
+        ScoringCriteria.productsTargetMarketsMatch(rs, rr, potentialReferral);
+        assertThat(rs.getScore()).isEqualTo(25);
         assertThat(rs.getReasons()).containsExactly(reason);
     }
 }

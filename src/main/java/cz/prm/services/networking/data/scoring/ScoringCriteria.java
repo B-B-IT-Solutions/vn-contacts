@@ -34,7 +34,7 @@ public class ScoringCriteria {
         }
     }
 
-    public static void productsTargetMarketMatch(ReferralSuggestion rs, ReferralRequirement rr, Contact potentialReferral) {
+    public static void productsTargetMarketsMatch(ReferralSuggestion rs, ReferralRequirement rr, Contact potentialReferral) {
         var productsTargetMarkets = intersection(rr.getProducts(), potentialReferral.getTargetMarkets());
         if (!productsTargetMarkets.isEmpty()) {
             rs.addReason("Your services align with their target clients");
