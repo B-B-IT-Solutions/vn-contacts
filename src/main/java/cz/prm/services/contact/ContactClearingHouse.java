@@ -5,14 +5,12 @@ import cz.prm.domain.contact.About;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.DecoratedContact;
 import cz.prm.domain.contact.query.ContactsQuery;
-import cz.prm.domain.networking.ReferralRequirement;
 import cz.prm.services.TaskService;
 import cz.prm.services.contact.data.AboutService;
 import cz.prm.services.contact.data.ContactService;
 import cz.prm.services.note.NoteService;
 import cz.prm.services.referral.ReferralService;
 import jakarta.transaction.Transactional;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,12 +59,6 @@ public class ContactClearingHouse {
         referralService.deleteByContactId(contactId);
         aboutService.deleteAbout(contactId);
         contactService.deleteContact(contactId);
-    }
-
-    public List<Contact> getPotentialReferrals(Long contactId) {
-        var contact = getContact(contactId);
-        var rr = new ReferralRequirement(contact);
-        return contactService.getPotentialReferrals(rr);
     }
 
     public Page<Contact> getContacts(ContactsQuery query) {
