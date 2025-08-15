@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("networking/referral-suggestions")
+@RequestMapping("networking")
 @RestController
 public class NetworkingController {
 
@@ -23,7 +23,7 @@ public class NetworkingController {
         this.mapper = mapper;
     }
 
-    @GetMapping("/{contactId}")
+    @GetMapping("{contactId}/referral-suggestions")
     public PageDto<ReferralSuggestionDto> getReferralSuggestions(@PathVariable("contactId") Long contactId) {
         var dc = clearingHouse.getReferralSuggestions(contactId);
         return mapper.toPageDto(dc);

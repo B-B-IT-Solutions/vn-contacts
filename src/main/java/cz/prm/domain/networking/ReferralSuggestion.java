@@ -14,6 +14,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class ReferralSuggestion {
 
+    private static final int RELEVANT_SCORE_THRESHOLD = 20;
+
     private Contact contact;
 
     private Integer score;
@@ -50,7 +52,7 @@ public class ReferralSuggestion {
     }
 
     public boolean isRelevant() {
-        return score > 20 && !justifications.isEmpty();
+        return score > RELEVANT_SCORE_THRESHOLD && !justifications.isEmpty();
     }
 
     public List<String> getReasons() {

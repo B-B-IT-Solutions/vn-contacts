@@ -63,7 +63,7 @@ public class NetworkingAssertions {
     public static void assertReferralSuggestionsDto(List<ReferralSuggestion> rss1, List<ReferralSuggestionDto> dtos) {
         assertThat(rss1).isNotEmpty().hasSameSizeAs(dtos);
         rss1.forEach(rs1 -> {
-            var rs2 = dtos.stream().filter(u -> Objects.equals(rs1.getContact(), u.getContact())).findFirst().get();
+            var rs2 = dtos.stream().filter(u -> Objects.equals(rs1.getContact().getContactId(), u.getContact().getContactId())).findFirst().get();
             assertReferralSuggestion(rs1, rs2);
         });
     }
