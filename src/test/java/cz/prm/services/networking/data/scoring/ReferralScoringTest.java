@@ -5,6 +5,7 @@ import static cz.prm.services.networking.data.scoring.ScoringCriteria.COMPLEMENT
 import static cz.prm.services.networking.data.scoring.ScoringCriteria.PRODUCTS_TARGET_MARKETS_MATCH;
 import static cz.prm.services.networking.data.scoring.ScoringCriteria.TARGET_MARKETS_PRODUCTS_MATCH;
 import static cz.prm.utils.ContactUtils.contact;
+import static cz.prm.utils.NetworkingUtils.contactPotentialReferral;
 import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.TestUtils.uuids;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,21 +18,28 @@ class ReferralScoringTest {
 
     @Test
     void toReferralSuggestion() {
-        var industry1 = uuid();
         var contact = contact();
-        var potentialReferral = contact();
-        contact.getIndustries().add(industry1);
-        potentialReferral.getIndustries().add(industry1);
-        var rs = new ReferralSuggestion(potentialReferral);
+        var potentialReferral = contactPotentialReferral(contact);
         var rr = new ReferralRequirement(contact);
         var refScoring = new ReferralScoring(rr);
-        var reason = String.format("Both work in " + String.join(", ", industry1) + " commonIndustries");
 
         var result = refScoring.toReferralSuggestion(potentialReferral);
         assertThat(result).isNotNull();
-        assertThat(rs.getScore()).isEqualTo(20);
-        assertThat(rs.getJustifications()).containsEntry(COMMON_INDUSTRIES, reason);
-        assertThat(rs.getCheckedCriterias()).containsExactly(COMMON_INDUSTRIES);
+        assertThat(result.getScore()).isEqualTo(55);
+        assertThat(result.getCheckedCriterias()).containsExactlyInAnyOrder(COMMON_INDUSTRIES, COMPLEMENTARY_SERVICES);
+    }
+
+    @Test
+    void toReferralSuggestion_Score_Zero() {
+        var contact = contact();
+        var potentialReferral = contact();
+        var rr = new ReferralRequirement(contact);
+        var refScoring = new ReferralScoring(rr);
+
+        var result = refScoring.toReferralSuggestion(potentialReferral);
+        assertThat(result).isNotNull();
+        assertThat(result.getScore()).isEqualTo(0);
+        assertThat(result.getCheckedCriterias()).containsExactlyInAnyOrder(COMMON_INDUSTRIES, COMPLEMENTARY_SERVICES);
     }
 
     @Test

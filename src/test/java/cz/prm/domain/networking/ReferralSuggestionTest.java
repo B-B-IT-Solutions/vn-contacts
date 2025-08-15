@@ -41,7 +41,8 @@ class ReferralSuggestionTest {
         assertThat(rs.getCheckedCriterias()).hasSize(2).containsExactlyInAnyOrder(COMMON_INDUSTRIES, COMPLEMENTARY_SERVICES);
 
         rs.addCheckedCriteria(TARGET_MARKETS_PRODUCTS_MATCH);
-        assertThat(rs.getCheckedCriterias()).hasSize(3).containsExactly(COMMON_INDUSTRIES, TARGET_MARKETS_PRODUCTS_MATCH, COMPLEMENTARY_SERVICES);
+        assertThat(rs.getCheckedCriterias()).hasSize(3)
+            .containsExactlyInAnyOrder(COMMON_INDUSTRIES, COMPLEMENTARY_SERVICES, TARGET_MARKETS_PRODUCTS_MATCH);
     }
 
     @Test

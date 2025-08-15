@@ -15,6 +15,10 @@ import java.util.List;
 
 public class NetworkingUtils {
 
+    public static Contact contactPotentialReferral(Contact contact) {
+        return contactPotentialReferrals(contact, 1).get(0);
+    }
+
     public static List<Contact> contactPotentialReferrals(Contact contact, int count) {
         var industries = contact.getIndustries();
         var industry1 = industries.get(0);
