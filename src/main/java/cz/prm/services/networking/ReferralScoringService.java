@@ -28,17 +28,17 @@ public class ReferralScoringService {
                 rs.addScore(commonIndustries.size(), 20);
             }
 
-            var targetMarketsProducts = intersection(rr.getTargetMarkets(), pr.getProducts());
-            if (!targetMarketsProducts.isEmpty()) {
-                rs.addReason("Their products align with your target clients");
-                rs.addScore(25);
-            }
-
-            var productsTargetMarkets = intersection(rr.getProducts(), pr.getTargetMarkets());
-            if (!productsTargetMarkets.isEmpty()) {
-                rs.addReason("Your services align with their target clients");
-                rs.addScore(25);
-            }
+//            var targetMarketsProducts = intersection(rr.getTargetMarkets(), pr.getProducts());
+//            if (!targetMarketsProducts.isEmpty()) {
+//                rs.addReason("Their products align with your target clients");
+//                rs.addScore(25);
+//            }
+//
+//            var productsTargetMarkets = intersection(rr.getProducts(), pr.getTargetMarkets());
+//            if (!productsTargetMarkets.isEmpty()) {
+//                rs.addReason("Your services align with their target clients");
+//                rs.addScore(25);
+//            }
 
             // Complementary services
             var complementaryServices = disjunction(rr.getProducts(), pr.getProducts());
