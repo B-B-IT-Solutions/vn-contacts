@@ -13,19 +13,6 @@ import org.junit.jupiter.api.Test;
 class ReferralScoringTest {
 
     @Test
-    void commonIndustries_NoIntersection() {
-        var contact = contact();
-        var potentialReferral = contact();
-        var rs = new ReferralSuggestion(potentialReferral);
-        var rr = new ReferralRequirement(contact);
-        var refScoring = new ReferralScoring(rr);
-
-        refScoring.commonIndustries(rs, potentialReferral);
-        assertThat(rs.getScore()).isEqualTo(0);
-        assertThat(rs.getReasons()).isEmpty();
-    }
-
-    @Test
     void commonIndustries_OneIntersection() {
         var industry1 = uuid();
         var contact = contact();
@@ -64,6 +51,39 @@ class ReferralScoringTest {
     }
 
     @Test
+    void commonIndustries_NoIntersection() {
+        var contact = contact();
+        var potentialReferral = contact();
+        var rs = new ReferralSuggestion(potentialReferral);
+        var rr = new ReferralRequirement(contact);
+        var refScoring = new ReferralScoring(rr);
+
+        refScoring.commonIndustries(rs, potentialReferral);
+        assertThat(rs.getScore()).isEqualTo(0);
+        assertThat(rs.getReasons()).isEmpty();
+    }
+
+    @Test
+    void complementaryServices() {
+        var industry1 = uuid();
+        var product1 = uuid();
+        var contact = contact();
+        var potentialReferral = contact();
+        contact.getIndustries().add(industry1);
+        contact.getProducts().add(product1);
+        potentialReferral.getIndustries().add(industry1);
+        potentialReferral.getProducts().add(product1);
+        var rs = new ReferralSuggestion(potentialReferral);
+        var rr = new ReferralRequirement(contact);
+        var refScoring = new ReferralScoring(rr);
+        var reason = "Offers complementary services you don't provide";
+
+        refScoring.complementaryServices(rs, potentialReferral);
+        assertThat(rs.getScore()).isEqualTo(15);
+        assertThat(rs.getReasons()).containsExactly(reason);
+    }
+
+    @Test
     void complementaryServices_NoIndustriesIntersection() {
         var contact = contact();
         var potentialReferral = contact();
@@ -96,39 +116,6 @@ class ReferralScoringTest {
     }
 
     @Test
-    void complementaryServices() {
-        var industry1 = uuid();
-        var product1 = uuid();
-        var contact = contact();
-        var potentialReferral = contact();
-        contact.getIndustries().add(industry1);
-        contact.getProducts().add(product1);
-        potentialReferral.getIndustries().add(industry1);
-        potentialReferral.getProducts().add(product1);
-        var rs = new ReferralSuggestion(potentialReferral);
-        var rr = new ReferralRequirement(contact);
-        var refScoring = new ReferralScoring(rr);
-        var reason = "Offers complementary services you don't provide";
-
-        refScoring.complementaryServices(rs, potentialReferral);
-        assertThat(rs.getScore()).isEqualTo(15);
-        assertThat(rs.getReasons()).containsExactly(reason);
-    }
-
-    @Test
-    void targetMarketsProductsMatch_NoIntersection() {
-        var contact = contact();
-        var potentialReferral = contact();
-        var rs = new ReferralSuggestion(potentialReferral);
-        var rr = new ReferralRequirement(contact);
-        var refScoring = new ReferralScoring(rr);
-
-        refScoring.targetMarketsProductsMatch(rs, potentialReferral);
-        assertThat(rs.getScore()).isEqualTo(0);
-        assertThat(rs.getReasons()).isEmpty();
-    }
-
-    @Test
     void targetMarketsProductsMatch() {
         var product1 = uuid();
         var contact = contact();
@@ -146,14 +133,14 @@ class ReferralScoringTest {
     }
 
     @Test
-    void productsTargetMarketsMatch_NoIntersection() {
+    void targetMarketsProductsMatch_NoIntersection() {
         var contact = contact();
         var potentialReferral = contact();
         var rs = new ReferralSuggestion(potentialReferral);
         var rr = new ReferralRequirement(contact);
         var refScoring = new ReferralScoring(rr);
 
-        refScoring.productsTargetMarketsMatch(rs, potentialReferral);
+        refScoring.targetMarketsProductsMatch(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(0);
         assertThat(rs.getReasons()).isEmpty();
     }
@@ -173,5 +160,18 @@ class ReferralScoringTest {
         refScoring.productsTargetMarketsMatch(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(25);
         assertThat(rs.getReasons()).containsExactly(reason);
+    }
+
+    @Test
+    void productsTargetMarketsMatch_NoIntersection() {
+        var contact = contact();
+        var potentialReferral = contact();
+        var rs = new ReferralSuggestion(potentialReferral);
+        var rr = new ReferralRequirement(contact);
+        var refScoring = new ReferralScoring(rr);
+
+        refScoring.productsTargetMarketsMatch(rs, potentialReferral);
+        assertThat(rs.getScore()).isEqualTo(0);
+        assertThat(rs.getReasons()).isEmpty();
     }
 }
