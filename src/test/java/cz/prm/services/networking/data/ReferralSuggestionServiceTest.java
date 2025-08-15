@@ -19,7 +19,7 @@ class ReferralSuggestionServiceTest {
     }
 
     @Test
-    void scorePotentialReferrals() {
+    void getReferralSuggestions() {
         var rr = referralRequirement();
         var potentialReferrals = contacts();
 
