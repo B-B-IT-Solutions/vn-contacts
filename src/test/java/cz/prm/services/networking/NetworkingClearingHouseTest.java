@@ -2,9 +2,11 @@ package cz.prm.services.networking;
 
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.ContactUtils.contacts;
-import static cz.prm.utils.assertions.ContactAssertions.assertContacts;
+import static cz.prm.utils.NetworkingUtils.referralSuggestions;
 import static cz.prm.utils.assertions.NetworkingAssertions.assertReferralRequirement;
+import static cz.prm.utils.assertions.NetworkingAssertions.assertReferralSuggestions;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -39,14 +41,16 @@ class NetworkingClearingHouseTest {
     void getPotentialReferrals() {
         var contact = contact();
         var potentialReferrals = contacts();
+        var referralSuggestions = referralSuggestions();
 
         when(contactService.getContact(contact.getContactId())).thenReturn(contact);
         when(contactService.getPotentialReferrals(any(ReferralRequirement.class))).thenReturn(potentialReferrals);
+        when(scoringService.scorePotentialReferrals(any(ReferralRequirement.class), eq(potentialReferrals))).thenReturn(referralSuggestions);
 
         var result = clearingHouse.getPotentialReferrals(contact.getContactId());
         verify(contactService).getPotentialReferrals(refRequirementCapt.capture());
         var refRequirement = refRequirementCapt.getValue();
         assertReferralRequirement(refRequirement, contact);
-        assertContacts(result, potentialReferrals);
+        assertReferralSuggestions(result, referralSuggestions);
     }
 }

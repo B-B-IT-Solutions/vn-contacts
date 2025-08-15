@@ -1,7 +1,7 @@
 package cz.prm.services.networking;
 
-import cz.prm.domain.contact.Contact;
 import cz.prm.domain.networking.ReferralRequirement;
+import cz.prm.domain.networking.ReferralSuggestion;
 import cz.prm.services.contact.data.ContactService;
 import jakarta.transaction.Transactional;
 import java.util.List;
@@ -21,9 +21,10 @@ public class NetworkingClearingHouse {
         this.scoringService = scoringService;
     }
 
-    public List<Contact> getPotentialReferrals(Long contactId) {
+    public List<ReferralSuggestion> getPotentialReferrals(Long contactId) {
         var contact = contactService.getContact(contactId);
         var rr = new ReferralRequirement(contact);
-        return contactService.getPotentialReferrals(rr);
+        var potentialReferrals = contactService.getPotentialReferrals(rr);
+        return scoringService.scorePotentialReferrals(rr, potentialReferrals);
     }
 }
