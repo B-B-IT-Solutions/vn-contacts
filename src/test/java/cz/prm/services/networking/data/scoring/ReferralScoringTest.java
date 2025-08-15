@@ -26,7 +26,8 @@ class ReferralScoringTest {
         var result = refScoring.toReferralSuggestion(potentialReferral);
         assertThat(result).isNotNull();
         assertThat(result.getScore()).isEqualTo(55);
-        assertThat(result.getCheckedCriterias()).containsExactlyInAnyOrder(COMMON_INDUSTRIES, COMPLEMENTARY_SERVICES);
+        assertThat(result.getCheckedCriterias()).containsExactlyInAnyOrder(COMMON_INDUSTRIES, COMPLEMENTARY_SERVICES, TARGET_MARKETS_PRODUCTS_MATCH,
+            PRODUCTS_TARGET_MARKETS_MATCH);
     }
 
     @Test
@@ -39,7 +40,8 @@ class ReferralScoringTest {
         var result = refScoring.toReferralSuggestion(potentialReferral);
         assertThat(result).isNotNull();
         assertThat(result.getScore()).isEqualTo(0);
-        assertThat(result.getCheckedCriterias()).containsExactlyInAnyOrder(COMMON_INDUSTRIES, COMPLEMENTARY_SERVICES);
+        assertThat(result.getCheckedCriterias()).containsExactlyInAnyOrder(COMMON_INDUSTRIES, COMPLEMENTARY_SERVICES, TARGET_MARKETS_PRODUCTS_MATCH,
+            PRODUCTS_TARGET_MARKETS_MATCH);
     }
 
     @Test

@@ -23,10 +23,16 @@ public class NetworkingUtils {
         var industries = contact.getIndustries();
         var industry1 = industries.get(0);
         var industry2 = industries.get(1);
+        var products = contact.getProducts();
+        var product1 = products.get(0);
 
         return range(0, count).mapToObj((i) -> {
             var pr = contact();
             pr.getIndustries().addAll(newArrayList(industry1, industry2));
+            if (i % 3 == 1) {
+                pr.getProducts().add(product1);
+                pr.getTargetMarkets().add(product1);
+            }
             return pr;
         }).collect(toList());
     }

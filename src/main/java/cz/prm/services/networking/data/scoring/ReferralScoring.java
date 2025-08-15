@@ -23,6 +23,8 @@ public class ReferralScoring {
         var rs = new ReferralSuggestion(potentialReferral);
         commonIndustries(rs, potentialReferral);
         complementaryServices(rs, potentialReferral);
+        targetMarketsProductsMatch(rs, potentialReferral);
+        productsTargetMarketsMatch(rs, potentialReferral);
         return rs;
     }
 

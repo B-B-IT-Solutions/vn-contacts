@@ -6,9 +6,12 @@ import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.NetworkingUtils.contactPotentialReferrals;
 import static cz.prm.utils.NetworkingUtils.referralRequirement;
 import static cz.prm.utils.assertions.NetworkingAssertions.assertContactReferralSuggestions;
+import static java.util.Collections.sort;
+import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.domain.contact.Contact;
+import cz.prm.domain.networking.ReferralSuggestion;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,7 +41,9 @@ class ReferralSuggestionServiceTest {
         potentialReferrals.addAll(randomContacts);
 
         var result = scoringService.getReferralSuggestions(rr, potentialReferrals);
-        assertThat(result).hasSize(SUGGESTIONS_COUNT);
+        var expectedSortOrder = newArrayList(result);
+        sort(expectedSortOrder, comparing(ReferralSuggestion::getScore).reversed());
+        assertThat(result).hasSize(SUGGESTIONS_COUNT).containsExactlyElementsOf(expectedSortOrder);
         assertContactReferralSuggestions(result, contactReferrals);
     }
 
