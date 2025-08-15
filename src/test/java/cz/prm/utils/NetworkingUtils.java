@@ -25,10 +25,9 @@ public class NetworkingUtils {
         var industry2 = industries.get(1);
 
         return range(0, count).mapToObj((i) -> {
-            var potentialReferral = contact();
-            potentialReferral.getIndustries().add(industry1);
-            potentialReferral.getIndustries().add(industry2);
-            return potentialReferral;
+            var pr = contact();
+            pr.getIndustries().addAll(newArrayList(industry1, industry2));
+            return pr;
         }).collect(toList());
     }
 
