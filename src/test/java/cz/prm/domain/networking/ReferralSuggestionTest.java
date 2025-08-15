@@ -113,4 +113,20 @@ class ReferralSuggestionTest {
         rs.addJustification(COMMON_INDUSTRIES, uuid());
         assertThat(rs.isRelevant()).isTrue();
     }
+
+    @Test
+    void getReasons() {
+        var rs = new ReferralSuggestion(contact());
+        var reason1 = uuid();
+        rs.addJustification(COMMON_INDUSTRIES, reason1);
+        assertThat(rs.getReasons()).hasSize(1).containsExactly(reason1);
+
+        var reason2 = uuid();
+        rs.addJustification(COMPLEMENTARY_SERVICES, reason2);
+        assertThat(rs.getReasons()).hasSize(2).containsExactly(reason1, reason2);
+
+        var reason3 = uuid();
+        rs.addJustification(TARGET_MARKETS_PRODUCTS_MATCH, reason3);
+        assertThat(rs.getReasons()).hasSize(3).containsExactly(reason1, reason2, reason3);
+    }
 }
