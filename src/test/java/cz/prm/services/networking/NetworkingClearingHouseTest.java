@@ -12,6 +12,7 @@ import static org.mockito.Mockito.when;
 
 import cz.prm.domain.networking.ReferralRequirement;
 import cz.prm.services.contact.data.ContactService;
+import cz.prm.services.networking.data.ReferralSuggestionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +27,7 @@ class NetworkingClearingHouseTest {
     @Mock
     private ContactService contactService;
     @Mock
-    private ReferralScoringService scoringService;
+    private ReferralSuggestionService scoringService;
     @Captor
     private ArgumentCaptor<ReferralRequirement> refRequirementCapt;
 
@@ -38,16 +39,16 @@ class NetworkingClearingHouseTest {
     }
 
     @Test
-    void getPotentialReferrals() {
+    void getReferralSuggestions() {
         var contact = contact();
         var potentialReferrals = contacts();
         var referralSuggestions = referralSuggestions();
 
         when(contactService.getContact(contact.getContactId())).thenReturn(contact);
         when(contactService.getPotentialReferrals(any(ReferralRequirement.class))).thenReturn(potentialReferrals);
-        when(scoringService.scorePotentialReferrals(any(ReferralRequirement.class), eq(potentialReferrals))).thenReturn(referralSuggestions);
+        when(scoringService.getReferralSuggestions(any(ReferralRequirement.class), eq(potentialReferrals))).thenReturn(referralSuggestions);
 
-        var result = clearingHouse.getPotentialReferrals(contact.getContactId());
+        var result = clearingHouse.getReferralSuggestions(contact.getContactId());
         verify(contactService).getPotentialReferrals(refRequirementCapt.capture());
         var refRequirement = refRequirementCapt.getValue();
         assertReferralRequirement(refRequirement, contact);
