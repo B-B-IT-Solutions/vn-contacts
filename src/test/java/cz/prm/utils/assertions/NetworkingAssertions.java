@@ -50,6 +50,6 @@ public class NetworkingAssertions {
     public static void assertReferralSuggestion(ReferralSuggestion rs1, ReferralSuggestion rs2) {
         assertContact(rs1.getContact(), rs2.getContact());
         assertThat(rs1.getScore()).isEqualTo(rs2.getScore());
-        assertThat(rs1.getReasons()).containsExactlyElementsOf(rs2.getReasons());
+        assertThat(rs1.getJustifications()).containsAllEntriesOf(rs2.getJustifications());
     }
 }

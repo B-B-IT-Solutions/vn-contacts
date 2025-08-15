@@ -1,9 +1,10 @@
 package cz.prm.utils;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static cz.prm.services.networking.data.scoring.ScoringCriteria.COMMON_INDUSTRIES;
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.TestUtils.randomInt;
-import static cz.prm.utils.TestUtils.uuids;
+import static cz.prm.utils.TestUtils.uuid;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.range;
 
@@ -45,7 +46,8 @@ public class NetworkingUtils {
         var rs = new ReferralSuggestion();
         rs.setContact(contact());
         rs.setScore(randomInt());
-        rs.setReasons(uuids());
+        rs.addJustification(COMMON_INDUSTRIES, uuid());
+        rs.addCheckedCriteria(COMMON_INDUSTRIES);
         return rs;
     }
 }

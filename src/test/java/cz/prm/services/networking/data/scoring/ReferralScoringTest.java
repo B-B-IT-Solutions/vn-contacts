@@ -1,9 +1,12 @@
 package cz.prm.services.networking.data.scoring;
 
+import static cz.prm.services.networking.data.scoring.ScoringCriteria.COMMON_INDUSTRIES;
+import static cz.prm.services.networking.data.scoring.ScoringCriteria.COMPLEMENTARY_SERVICES;
+import static cz.prm.services.networking.data.scoring.ScoringCriteria.PRODUCTS_TARGET_MARKETS_MATCH;
+import static cz.prm.services.networking.data.scoring.ScoringCriteria.TARGET_MARKETS_PRODUCTS_MATCH;
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.TestUtils.uuids;
-import static org.apache.commons.collections4.CollectionUtils.intersection;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.domain.networking.ReferralRequirement;
@@ -13,7 +16,26 @@ import org.junit.jupiter.api.Test;
 class ReferralScoringTest {
 
     @Test
-    void commonIndustries_OneIntersection() {
+    void toReferralSuggestion() {
+        var industry1 = uuid();
+        var contact = contact();
+        var potentialReferral = contact();
+        contact.getIndustries().add(industry1);
+        potentialReferral.getIndustries().add(industry1);
+        var rs = new ReferralSuggestion(potentialReferral);
+        var rr = new ReferralRequirement(contact);
+        var refScoring = new ReferralScoring(rr);
+        var reason = String.format("Both work in " + String.join(", ", industry1) + " commonIndustries");
+
+        var result = refScoring.toReferralSuggestion(potentialReferral);
+        assertThat(result).isNotNull();
+        assertThat(rs.getScore()).isEqualTo(20);
+        assertThat(rs.getJustifications()).containsEntry(COMMON_INDUSTRIES, reason);
+        assertThat(rs.getCheckedCriterias()).containsExactly(COMMON_INDUSTRIES);
+    }
+
+    @Test
+    void commonIndustries() {
         var industry1 = uuid();
         var contact = contact();
         var potentialReferral = contact();
@@ -26,28 +48,8 @@ class ReferralScoringTest {
 
         refScoring.commonIndustries(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(20);
-        assertThat(rs.getReasons()).containsExactly(reason);
-    }
-
-    @Test
-    void commonIndustries_TwoIntersection() {
-        var industry1 = uuid();
-        var industry2 = uuid();
-        var contact = contact();
-        var potentialReferral = contact();
-        contact.getIndustries().add(industry1);
-        contact.getIndustries().add(industry2);
-        potentialReferral.getIndustries().add(industry1);
-        potentialReferral.getIndustries().add(industry2);
-        var rs = new ReferralSuggestion(potentialReferral);
-        var rr = new ReferralRequirement(contact);
-        var commonIndustries = intersection(rr.getIndustries(), potentialReferral.getIndustries());
-        var refScoring = new ReferralScoring(rr);
-        var reason = String.format("Both work in " + String.join(", ", commonIndustries) + " commonIndustries");
-
-        refScoring.commonIndustries(rs, potentialReferral);
-        assertThat(rs.getScore()).isEqualTo(40);
-        assertThat(rs.getReasons()).containsExactly(reason);
+        assertThat(rs.getJustifications()).containsEntry(COMMON_INDUSTRIES, reason);
+        assertThat(rs.getCheckedCriterias()).containsExactly(COMMON_INDUSTRIES);
     }
 
     @Test
@@ -60,7 +62,8 @@ class ReferralScoringTest {
 
         refScoring.commonIndustries(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(0);
-        assertThat(rs.getReasons()).isEmpty();
+        assertThat(rs.getJustifications()).isEmpty();
+        assertThat(rs.getCheckedCriterias()).containsExactly(COMMON_INDUSTRIES);
     }
 
     @Test
@@ -80,7 +83,8 @@ class ReferralScoringTest {
 
         refScoring.complementaryServices(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(15);
-        assertThat(rs.getReasons()).containsExactly(reason);
+        assertThat(rs.getJustifications()).containsEntry(COMPLEMENTARY_SERVICES, reason);
+        assertThat(rs.getCheckedCriterias()).containsExactly(COMPLEMENTARY_SERVICES);
     }
 
     @Test
@@ -93,7 +97,8 @@ class ReferralScoringTest {
 
         refScoring.complementaryServices(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(0);
-        assertThat(rs.getReasons()).isEmpty();
+        assertThat(rs.getJustifications()).isEmpty();
+        assertThat(rs.getCheckedCriterias()).containsExactly(COMPLEMENTARY_SERVICES);
     }
 
     @Test
@@ -112,7 +117,8 @@ class ReferralScoringTest {
 
         refScoring.complementaryServices(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(0);
-        assertThat(rs.getReasons()).isEmpty();
+        assertThat(rs.getJustifications()).isEmpty();
+        assertThat(rs.getCheckedCriterias()).containsExactly(COMPLEMENTARY_SERVICES);
     }
 
     @Test
@@ -129,7 +135,8 @@ class ReferralScoringTest {
 
         refScoring.targetMarketsProductsMatch(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(25);
-        assertThat(rs.getReasons()).containsExactly(reason);
+        assertThat(rs.getJustifications()).containsEntry(TARGET_MARKETS_PRODUCTS_MATCH, reason);
+        assertThat(rs.getCheckedCriterias()).containsExactly(TARGET_MARKETS_PRODUCTS_MATCH);
     }
 
     @Test
@@ -142,7 +149,8 @@ class ReferralScoringTest {
 
         refScoring.targetMarketsProductsMatch(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(0);
-        assertThat(rs.getReasons()).isEmpty();
+        assertThat(rs.getJustifications()).isEmpty();
+        assertThat(rs.getCheckedCriterias()).containsExactly(TARGET_MARKETS_PRODUCTS_MATCH);
     }
 
     @Test
@@ -159,7 +167,8 @@ class ReferralScoringTest {
 
         refScoring.productsTargetMarketsMatch(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(25);
-        assertThat(rs.getReasons()).containsExactly(reason);
+        assertThat(rs.getJustifications()).containsEntry(PRODUCTS_TARGET_MARKETS_MATCH, reason);
+        assertThat(rs.getCheckedCriterias()).containsExactly(PRODUCTS_TARGET_MARKETS_MATCH);
     }
 
     @Test
@@ -172,6 +181,7 @@ class ReferralScoringTest {
 
         refScoring.productsTargetMarketsMatch(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(0);
-        assertThat(rs.getReasons()).isEmpty();
+        assertThat(rs.getJustifications()).isEmpty();
+        assertThat(rs.getCheckedCriterias()).containsExactly(PRODUCTS_TARGET_MARKETS_MATCH);
     }
 }

@@ -1,14 +1,15 @@
 package cz.prm.domain.networking;
 
 import cz.prm.domain.contact.Contact;
-import java.util.ArrayList;
-import java.util.List;
+import cz.prm.services.networking.data.scoring.ScoringCriteria;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class ReferralSuggestion {
 
@@ -16,16 +17,27 @@ public class ReferralSuggestion {
 
     private Integer score;
 
-    private List<String> reasons;
+    private Map<ScoringCriteria, String> justifications;
 
-    public ReferralSuggestion(Contact contact) {
-        this.contact = contact;
+    private Set<ScoringCriteria> checkedCriterias;
+
+    public ReferralSuggestion() {
         this.score = 0;
-        this.reasons = new ArrayList<>();
+        this.justifications = new HashMap<>();
+        this.checkedCriterias = new HashSet<>();
     }
 
-    public void addReason(String reason) {
-        this.reasons.add(reason);
+    public ReferralSuggestion(Contact contact) {
+        this();
+        this.contact = contact;
+    }
+
+    public void addCheckedCriteria(ScoringCriteria criteria) {
+        this.checkedCriterias.add(criteria);
+    }
+
+    public void addJustification(ScoringCriteria criteria, String reason) {
+        this.justifications.put(criteria, reason);
     }
 
     public void addScore(Integer count) {
@@ -37,6 +49,6 @@ public class ReferralSuggestion {
     }
 
     public boolean isRelevant() {
-        return score > 20 && !reasons.isEmpty();
+        return score > 20 && !justifications.isEmpty();
     }
 }

@@ -1,5 +1,9 @@
 package cz.prm.services.networking.data.scoring;
 
+import static cz.prm.services.networking.data.scoring.ScoringCriteria.COMMON_INDUSTRIES;
+import static cz.prm.services.networking.data.scoring.ScoringCriteria.COMPLEMENTARY_SERVICES;
+import static cz.prm.services.networking.data.scoring.ScoringCriteria.PRODUCTS_TARGET_MARKETS_MATCH;
+import static cz.prm.services.networking.data.scoring.ScoringCriteria.TARGET_MARKETS_PRODUCTS_MATCH;
 import static org.apache.commons.collections4.CollectionUtils.disjunction;
 import static org.apache.commons.collections4.CollectionUtils.intersection;
 
@@ -25,33 +29,37 @@ public class ReferralScoring {
     public void commonIndustries(ReferralSuggestion rs, Contact potentialReferral) {
         var commonIndustries = intersection(referralRequirement.getIndustries(), potentialReferral.getIndustries());
         if (!commonIndustries.isEmpty()) {
-            rs.addReason("Both work in " + String.join(", ", commonIndustries) + " commonIndustries");
+            rs.addJustification(COMMON_INDUSTRIES, "Both work in " + String.join(", ", commonIndustries) + " commonIndustries");
             rs.addScore(commonIndustries.size(), 20);
         }
+        rs.addCheckedCriteria(COMMON_INDUSTRIES);
     }
 
     public void complementaryServices(ReferralSuggestion rs, Contact potentialReferral) {
         var commonIndustries = intersection(referralRequirement.getIndustries(), potentialReferral.getIndustries());
         var complementaryServices = disjunction(referralRequirement.getProducts(), potentialReferral.getProducts());
         if (!commonIndustries.isEmpty() && !complementaryServices.isEmpty()) {
-            rs.addReason("Offers complementary services you don't provide");
+            rs.addJustification(COMPLEMENTARY_SERVICES, "Offers complementary services you don't provide");
             rs.addScore(15);
         }
+        rs.addCheckedCriteria(COMPLEMENTARY_SERVICES);
     }
 
     public void targetMarketsProductsMatch(ReferralSuggestion rs, Contact potentialReferral) {
         var targetMarketsProducts = intersection(referralRequirement.getTargetMarkets(), potentialReferral.getProducts());
         if (!targetMarketsProducts.isEmpty()) {
-            rs.addReason("Their products align with your target clients");
+            rs.addJustification(TARGET_MARKETS_PRODUCTS_MATCH, "Their products align with your target clients");
             rs.addScore(25);
         }
+        rs.addCheckedCriteria(TARGET_MARKETS_PRODUCTS_MATCH);
     }
 
     public void productsTargetMarketsMatch(ReferralSuggestion rs, Contact potentialReferral) {
         var productsTargetMarkets = intersection(referralRequirement.getProducts(), potentialReferral.getTargetMarkets());
         if (!productsTargetMarkets.isEmpty()) {
-            rs.addReason("Your services align with their target clients");
+            rs.addJustification(PRODUCTS_TARGET_MARKETS_MATCH, "Your services align with their target clients");
             rs.addScore(25);
         }
+        rs.addCheckedCriteria(PRODUCTS_TARGET_MARKETS_MATCH);
     }
 }
