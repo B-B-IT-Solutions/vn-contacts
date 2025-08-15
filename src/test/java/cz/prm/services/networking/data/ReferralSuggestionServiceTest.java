@@ -41,10 +41,10 @@ class ReferralSuggestionServiceTest {
         potentialReferrals.addAll(randomContacts);
 
         var result = scoringService.getReferralSuggestions(rr, potentialReferrals);
-        var expectedSortOrder = newArrayList(result);
+        var expectedSortOrder = newArrayList(result.getContent());
         sort(expectedSortOrder, comparing(ReferralSuggestion::getScore).reversed());
-        assertThat(result).hasSize(SUGGESTIONS_COUNT).containsExactlyElementsOf(expectedSortOrder);
-        assertContactReferralSuggestions(result, contactReferrals);
+        assertThat(result.getContent()).hasSize(SUGGESTIONS_COUNT).containsExactlyElementsOf(expectedSortOrder);
+        assertContactReferralSuggestions(result.getContent(), contactReferrals);
     }
 
     @Test
@@ -53,13 +53,13 @@ class ReferralSuggestionServiceTest {
         var potentialReferrals = contacts();
 
         var result = scoringService.getReferralSuggestions(rr, potentialReferrals);
-        assertThat(result).isEmpty();
+        assertThat(result.getContent()).isEmpty();
     }
 
     @Test
     void getReferralSuggestions_EmptyPotentialReferrals() {
         var rr = referralRequirement();
         var result = scoringService.getReferralSuggestions(rr, newArrayList());
-        assertThat(result).isEmpty();
+        assertThat(result.getContent()).isEmpty();
     }
 }
