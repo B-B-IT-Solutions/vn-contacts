@@ -8,6 +8,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import cz.prm.domain.contact.query.ContactsFilter;
+import cz.prm.domain.networking.ReferralRequirement;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,6 +22,17 @@ public class ContactPredicates {
     public Predicate byContactId(Long userId) {
         var predicate = dataAccessPredicate();
         return predicate.and(contact.contactId.eq(userId));
+    }
+
+    public Predicate potentialReferrals(ReferralRequirement rr) {
+        var dimensionsPredicate = new BooleanBuilder();
+        dimensionsPredicate.and(contact.industries.any().in(rr.getIndustries()));
+        dimensionsPredicate.or(contact.skills.any().in(rr.getSkills()));
+        dimensionsPredicate.or(contact.products.any().in(rr.getProducts()));
+        dimensionsPredicate.or(contact.targetMarkets.any().in(rr.getTargetMarkets()));
+
+        var contactPredicate = dataAccessPredicate().and(contact.contactId.ne(rr.getContactId()));
+        return contactPredicate.and(dimensionsPredicate);
     }
 
     private BooleanExpression dataAccessPredicate() {

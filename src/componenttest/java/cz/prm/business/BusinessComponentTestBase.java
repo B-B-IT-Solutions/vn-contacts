@@ -1,5 +1,6 @@
 package cz.prm.business;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.ContactComponentTestUtils.about;
 import static cz.prm.utils.ContactComponentTestUtils.contact;
 import static cz.prm.utils.NoteComponentTestUtils.note;
@@ -68,6 +69,28 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         contactRepository.deleteAll();
         contactSettingsRepository.deleteAll();
         noteSettingsRepository.deleteAll();
+    }
+
+    protected List<Contact> createReferralSuggestions(Contact contact, ComponentTestUser user) {
+        return createReferralSuggestions(contact, user, 10);
+    }
+
+    protected List<Contact> createReferralSuggestions(Contact contact, ComponentTestUser user, int numOfContacts) {
+        return IntStream.range(0, numOfContacts).mapToObj((i) -> createReferralSuggestion(contact, user)).collect(toList());
+    }
+
+    protected Contact createReferralSuggestion(Contact contact, ComponentTestUser user) {
+        ensureUserContext(user);
+        var industries = contact.getIndustries();
+        var industry1 = industries.get(0);
+        var industry2 = industries.get(1);
+        var potentialReferral = contact();
+        potentialReferral.getIndustries().addAll(newArrayList(industry1, industry2));
+        var savedPotentialReferral = contactRepository.save(potentialReferral);
+        var about = about(savedPotentialReferral);
+        aboutRepository.save(about);
+        clearContext();
+        return savedPotentialReferral;
     }
 
     protected List<Contact> createDecoratedContacts(ComponentTestUser user) {

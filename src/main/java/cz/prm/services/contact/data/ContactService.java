@@ -1,15 +1,18 @@
 package cz.prm.services.contact.data;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.domain.common.PageRequests.getPageRequest;
 import static java.lang.String.format;
 
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.contact.Contact;
 import cz.prm.domain.contact.query.ContactsQuery;
+import cz.prm.domain.networking.ReferralRequirement;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import java.util.List;
 import java.util.function.Supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,11 @@ public class ContactService {
     public ContactService(ContactRepository repository, ContactPredicates predicates) {
         this.repository = repository;
         this.predicates = predicates;
+    }
+
+    public List<Contact> getPotentialReferrals(ReferralRequirement rr) {
+        var predicate = predicates.potentialReferrals(rr);
+        return newArrayList(repository.findAll(predicate));
     }
 
     public Page<Contact> getContacts(ContactsQuery query) {
