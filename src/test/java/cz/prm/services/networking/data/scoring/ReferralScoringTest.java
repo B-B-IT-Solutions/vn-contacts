@@ -54,7 +54,7 @@ class ReferralScoringTest {
         var rs = new ReferralSuggestion(potentialReferral);
         var rr = new ReferralRequirement(contact);
         var refScoring = new ReferralScoring(rr);
-        var reason = String.format("Both work in " + String.join(", ", industry1) + " commonIndustries");
+        var reason = String.format("Both work in " + String.join(", ", industry1) + " industries");
 
         refScoring.commonIndustries(rs, potentialReferral);
         assertThat(rs.getScore()).isEqualTo(20);
