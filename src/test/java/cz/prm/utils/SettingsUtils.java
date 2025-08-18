@@ -83,6 +83,7 @@ public class SettingsUtils {
 
     public static NotificationSettings notificationSettings() {
         var settings = new NotificationSettings();
+        settings.setSettingsId(randomLong());
         settings.setGlobal(ALL);
         settings.setContact(contactNotifications());
         settings.setReferral(referralNotifications());
@@ -94,6 +95,7 @@ public class SettingsUtils {
 
     public static NotificationSettingsDto notificationSettingsDto() {
         var settings = new NotificationSettingsDto();
+        settings.setSettingsId(randomLong());
         settings.setGlobal(ALL);
         settings.setContact(contactNotificationsDto());
         settings.setReferral(referralNotificationsDto());
