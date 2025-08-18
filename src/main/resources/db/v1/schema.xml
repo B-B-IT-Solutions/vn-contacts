@@ -287,6 +287,27 @@
 	 </changeSet>
 	 
 	 <changeSet author="sergej" id="1.0.7">
+			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
+											sequenceName="notification_settings_seq"/>
+			
+			<createTable tableName="notification_settings">
+				 <column name="settings_id" type="BIGINT">
+						<constraints primaryKey="true" primaryKeyName="notification_settings_pk" nullable="false"/>
+				 </column>
+				 <column name="owner_username" type="VARCHAR(255)"/>
+				 <column name="global_notifications_switch" type="INT"/>
+				 <column name="contact_stale_reminder" type="BOOLEAN"/>
+				 <column name="referral_followup_reminder" type="BOOLEAN"/>
+				 <column name="referral_expiry_reminder" type="BOOLEAN"/>
+				 <column name="referral_stale_reminder" type="BOOLEAN"/>
+				 <column name="task_reminders" type="BOOLEAN"/>
+				 <column name="task_about_to_expire" type="BOOLEAN"/>
+				 <column name="owner_email" type="VARCHAR(255)"/>
+				 <column name="last_edit_date" type="TIMESTAMP WITH TIME ZONE"/>
+			</createTable>
+	 </changeSet>
+	 
+	 <changeSet author="sergej" id="1.0.8">
 			<createSequence cacheSize="1" cycle="false" startValue="1" minValue="1" maxValue="9223372036854775807"
 											sequenceName="ideal_client_seq"/>
 			
@@ -305,7 +326,7 @@
 			</createTable>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.8">
+	 <changeSet author="sergej" id="1.0.9">
 			<createSequence cacheSize="1" cycle="false" startValue="1" minValue="1" maxValue="9223372036854775807"
 											sequenceName="past_client_seq"/>
 			
