@@ -57,7 +57,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     @Autowired
     protected ComponentTestTaskRepository taskRepository;
     @Autowired
-    protected ComponentTestAccountSettingsRepository generalSettingsRepository;
+    protected ComponentTestAccountSettingsRepository accountSettingsRepository;
     @Autowired
     protected ComponentTestContactSettingsRepository contactSettingsRepository;
     @Autowired
@@ -232,7 +232,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     }
 
     protected AccountSettings getAccountSettingsFromDb(AccountSettingsDto dto) {
-        return generalSettingsRepository.getReferenceById(dto.getSettingsId());
+        return accountSettingsRepository.getReferenceById(dto.getSettingsId());
     }
 
     protected ContactSettings getContactSettingsFromDb(ContactSettingsDto dto) {
