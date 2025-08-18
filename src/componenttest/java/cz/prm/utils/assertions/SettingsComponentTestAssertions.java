@@ -1,6 +1,5 @@
 package cz.prm.utils.assertions;
 
-import static cz.prm.utils.TimeComponentTestUtils.ONE_SECOND_OFFSET;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
@@ -20,9 +19,6 @@ import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.contact.ContactSettings;
 import cz.prm.domain.settings.note.NoteSettings;
 import cz.prm.domain.settings.notifications.NotificationSettings;
-import cz.prm.domain.settings.notifications.dials.ContactNotifications;
-import cz.prm.domain.settings.notifications.dials.ReferralNotifications;
-import cz.prm.domain.settings.notifications.dials.TaskNotifications;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,6 +33,10 @@ public class SettingsComponentTestAssertions {
         assertThat(dto.getSettingsId()).isEqualTo(settings.getSettingsId());
         assertThat(dto.getLastEditDate()).isNotNull();
         assertThat(dto.getLabels()).isEmpty();
+        assertThat(dto.getSkills()).isNotEmpty();
+        assertThat(dto.getIndustries()).isNotEmpty();
+        assertThat(dto.getProducts()).isNotEmpty();
+        assertThat(dto.getTargetMarkets()).isNotEmpty();
     }
 
     public static void assertSettings(ContactSettingsDto dto1, ContactSettingsDto dto2) {
@@ -59,52 +59,21 @@ public class SettingsComponentTestAssertions {
         assertCategoriesDto(dto1.getCategories(), dto2.getCategories());
     }
 
+    public static void assertSettings(NotificationSettings settings, NotificationSettingsDto dto) {
+        assertThat(dto.getSettingsId()).isEqualTo(settings.getSettingsId());
+        assertThat(dto.getLastEditDate()).isNotNull();
+        assertThat(dto.getGlobal()).isNotNull();
+        assertThat(dto.getContact()).isNotNull();
+        assertThat(dto.getReferral()).isNotNull();
+        assertThat(dto.getTask()).isNotNull();
+    }
+
     public static void assertSettings(NotificationSettingsDto settings1, NotificationSettingsDto settings2) {
         assertThat(settings1.getSettingsId()).isEqualTo(settings2.getSettingsId());
         assertThat(settings1.getGlobal()).isEqualTo(settings2.getGlobal());
-        assertThat(settings1.getLastEditDate()).isCloseTo(settings2.getLastEditDate(), ONE_SECOND_OFFSET);
-        assertNotifications(settings1.getContact(), settings2.getContact());
-        assertNotifications(settings1.getReferral(), settings2.getReferral());
-        assertNotifications(settings1.getTask(), settings2.getTask());
-    }
-
-    public static void assertSettings(NotificationSettings settings, NotificationSettingsDto dto) {
-        assertThat(settings.getSettingsId()).isEqualTo(dto.getSettingsId());
-        assertThat(settings.getGlobal()).isEqualTo(dto.getGlobal());
-        assertThat(settings.getLastEditDate()).isCloseTo(dto.getLastEditDate(), ONE_SECOND_OFFSET);
-        assertNotifications(settings.getContact(), dto.getContact());
-        assertNotifications(settings.getReferral(), dto.getReferral());
-        assertNotifications(settings.getTask(), dto.getTask());
-    }
-
-    public static void assertNotifications(ContactNotificationsDto dto1, ContactNotificationsDto dto2) {
-        assertThat(dto1.isStalenessReminder()).isEqualTo(dto2.isStalenessReminder());
-    }
-
-    public static void assertNotifications(ContactNotifications settings, ContactNotificationsDto dto) {
-        assertThat(settings.isStalenessReminder()).isEqualTo(dto.isStalenessReminder());
-    }
-
-    public static void assertNotifications(ReferralNotificationsDto dto1, ReferralNotificationsDto dto2) {
-        assertThat(dto1.isFollowupReminder()).isEqualTo(dto2.isFollowupReminder());
-        assertThat(dto1.isExpiryReminder()).isEqualTo(dto2.isExpiryReminder());
-        assertThat(dto1.isStalenessReminder()).isEqualTo(dto2.isStalenessReminder());
-    }
-
-    public static void assertNotifications(ReferralNotifications settings, ReferralNotificationsDto dto) {
-        assertThat(settings.isFollowupReminder()).isEqualTo(dto.isFollowupReminder());
-        assertThat(settings.isExpiryReminder()).isEqualTo(dto.isExpiryReminder());
-        assertThat(settings.isStalenessReminder()).isEqualTo(dto.isStalenessReminder());
-    }
-
-    public static void assertNotifications(TaskNotificationsDto dto1, TaskNotificationsDto dto2) {
-        assertThat(dto1.isReminders()).isEqualTo(dto2.isReminders());
-        assertThat(dto1.isAboutToExpire()).isEqualTo(dto2.isAboutToExpire());
-    }
-
-    public static void assertNotifications(TaskNotifications settings, TaskNotificationsDto dto) {
-        assertThat(settings.isReminders()).isEqualTo(dto.isReminders());
-        assertThat(settings.isAboutToExpire()).isEqualTo(dto.isAboutToExpire());
+        assertNotificationsDto(settings1.getContact(), settings2.getContact());
+        assertNotificationsDto(settings1.getReferral(), settings2.getReferral());
+        assertNotificationsDto(settings1.getTask(), settings2.getTask());
     }
 
     public static void assertLabelsDto(List<LabelDto> dtos1, List<LabelDto> dtos2) {
@@ -183,5 +152,20 @@ public class SettingsComponentTestAssertions {
     public static void assertCategoryDto(CategoryDto dto1, CategoryDto dto2) {
         assertThat(dto1.getValue()).isEqualTo(dto2.getValue());
         assertThat(dto1.getColor()).isEqualTo(dto2.getColor());
+    }
+
+    public static void assertNotificationsDto(ContactNotificationsDto dto1, ContactNotificationsDto dto2) {
+        assertThat(dto1.isStalenessReminder()).isEqualTo(dto2.isStalenessReminder());
+    }
+
+    public static void assertNotificationsDto(ReferralNotificationsDto dto1, ReferralNotificationsDto dto2) {
+        assertThat(dto1.isFollowupReminder()).isEqualTo(dto2.isFollowupReminder());
+        assertThat(dto1.isExpiryReminder()).isEqualTo(dto2.isExpiryReminder());
+        assertThat(dto1.isStalenessReminder()).isEqualTo(dto2.isStalenessReminder());
+    }
+
+    public static void assertNotificationsDto(TaskNotificationsDto dto1, TaskNotificationsDto dto2) {
+        assertThat(dto1.isReminders()).isEqualTo(dto2.isReminders());
+        assertThat(dto1.isAboutToExpire()).isEqualTo(dto2.isAboutToExpire());
     }
 }

@@ -244,8 +244,6 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     }
 
     protected NotificationSettings getNotificationSettingsFromDb(NotificationSettingsDto dto) {
-        var settings = notificationSettingsRepository.getReferenceById(dto.getSettingsId());
-        settings.getGlobal();
-        return settings;
+        return notificationSettingsRepository.getReferenceById(dto.getSettingsId());
     }
 }
