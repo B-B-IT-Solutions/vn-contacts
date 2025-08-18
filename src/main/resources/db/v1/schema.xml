@@ -24,6 +24,9 @@
 				 <column name="job_title" type="VARCHAR(500)"/>
 				 <column name="company" type="VARCHAR(500)"/>
 				 <column name="industry" type="VARCHAR(500)"/>
+				 <column name="country" type="VARCHAR(250)"/>
+				 <column name="city" type="VARCHAR(250)"/>
+				 <column name="trust_score" type="INT"/>
 				 <column name="owner_username" type="VARCHAR(255)"/>
 				 <column name="owner_email" type="VARCHAR(255)"/>
 				 <column name="date_of_birth" type="TIMESTAMP WITH TIME ZONE"/>
@@ -149,6 +152,11 @@
 				 <column name="owner_email" type="VARCHAR(255)"/>
 			</createTable>
 			
+			<createTable tableName="note_category">
+				 <column name="note_id" type="BIGINT"/>
+				 <column name="category" type="VARCHAR(250)"/>
+			</createTable>
+			
 			<addForeignKeyConstraint baseTableName="note" baseColumnNames="contact_id" constraintName="note_contact_id_fkey"
 															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
 															 referencedColumnNames="contact_id" validate="true"/>
@@ -157,7 +165,6 @@
 															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="referral"
 															 referencedColumnNames="referral_id" validate="true"/>
 	 </changeSet>
-	 
 	 
 	 <changeSet author="sergej" id="1.0.4">
 			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
@@ -206,6 +213,8 @@
 				 <column name="outcomes" type="TEXT"/>
 				 <column name="status" type="INT"/>
 				 <column name="priority" type="INT"/>
+				 <column name="start_date" type="TIMESTAMP WITH TIME ZONE"/>
+				 <column name="end_date" type="TIMESTAMP WITH TIME ZONE"/>
 				 <column name="last_edit_date" type="TIMESTAMP WITH TIME ZONE"/>
 				 <column name="creation_date" type="TIMESTAMP WITH TIME ZONE"/>
 				 <column name="owner_username" type="VARCHAR(255)"/>
@@ -221,7 +230,7 @@
 															 referencedColumnNames="referral_id" validate="true"/>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.7">
+	 <changeSet author="sergej" id="1.0.6">
 			<renameColumn tableName="contact_settings_industry" newColumnName="value" oldColumnName="name"
 										columnDataType="VARCHAR(250)"/>
 			
@@ -230,14 +239,7 @@
 			</addColumn>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.8">
-			<createTable tableName="note_category">
-				 <column name="note_id" type="BIGINT"/>
-				 <column name="category" type="VARCHAR(250)"/>
-			</createTable>
-	 </changeSet>
-	 
-	 <changeSet author="sergej" id="1.0.9">
+	 <changeSet author="sergej" id="1.0.7">
 			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
 											sequenceName="note_settings_seq"/>
 			
@@ -263,23 +265,7 @@
 															 referencedColumnNames="settings_id" validate="true"/>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.10">
-			<addColumn tableName="task">
-				 <column name="start_date" type="TIMESTAMP WITH TIME ZONE"/>
-				 <column name="end_date" type="TIMESTAMP WITH TIME ZONE"/>
-			</addColumn>
-	 </changeSet>
-	 
-	 <changeSet author="sergej" id="1.0.11">
-			<addColumn tableName="contact">
-				 <column name="country" type="VARCHAR(250)"/>
-				 <column name="city" type="VARCHAR(250)"/>
-				 <column name="trust_score" type="INT"/>
-			</addColumn>
-	 </changeSet>
-	 
-	 
-	 <changeSet author="sergej" id="1.0.13">
+	 <changeSet author="sergej" id="1.0.8">
 			<createTable tableName="contact_settings_skill">
 				 <column name="settings_id" type="BIGINT"/>
 				 <column name="value" type="VARCHAR(250)"/>
@@ -299,7 +285,7 @@
 			</createTable>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.14">
+	 <changeSet author="sergej" id="1.0.9">
 			<createSequence cacheSize="1" cycle="false" startValue="1" minValue="1" maxValue="9223372036854775807"
 											sequenceName="ideal_client_seq"/>
 			
@@ -318,7 +304,7 @@
 			</createTable>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.15">
+	 <changeSet author="sergej" id="1.0.10">
 			<createSequence cacheSize="1" cycle="false" startValue="1" minValue="1" maxValue="9223372036854775807"
 											sequenceName="past_client_seq"/>
 			
@@ -337,7 +323,7 @@
 			</createTable>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.16">
+	 <changeSet author="sergej" id="1.0.11">
 			<createTable tableName="task_reminders">
 				 <column name="recurrence_id" type="BIGINT"/>
 				 <column name="task_id" type="BIGINT"/>
