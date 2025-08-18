@@ -126,13 +126,11 @@
 															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
 															 referencedColumnNames="contact_id" validate="true"/>
 			
-			
 			<addForeignKeyConstraint baseTableName="reminder" baseColumnNames="recurrence_id"
 															 constraintName="reminder_recurrence_id_fkey"
 															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="recurrence"
 															 referencedColumnNames="recurrence_id" validate="true"/>
-	 
-	 
+			
 	 </changeSet>
 	 
 	 <changeSet author="sergej" id="1.0.3">
@@ -158,6 +156,11 @@
 				 <column name="owner_email" type="VARCHAR(255)"/>
 			</createTable>
 			
+			<createTable tableName="task_reminders">
+				 <column name="recurrence_id" type="BIGINT"/>
+				 <column name="task_id" type="BIGINT"/>
+			</createTable>
+			
 			<addForeignKeyConstraint baseTableName="task" baseColumnNames="contact_id" constraintName="task_contact_id_fkey"
 															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="contact"
 															 referencedColumnNames="contact_id" validate="true"/>
@@ -165,6 +168,15 @@
 			<addForeignKeyConstraint baseTableName="task" baseColumnNames="referral_id" constraintName="task_referral_id_fkey"
 															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="referral"
 															 referencedColumnNames="referral_id" validate="true"/>
+			
+			<addForeignKeyConstraint baseTableName="task_reminders" baseColumnNames="task_id" constraintName="task_task_id_fkey"
+															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="task"
+															 referencedColumnNames="task_id" validate="true"/>
+			
+			<addForeignKeyConstraint baseTableName="task_reminders" baseColumnNames="recurrence_id"
+															 constraintName="recurrence_recurrence_id_fkey"
+															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="recurrence"
+															 referencedColumnNames="recurrence_id" validate="true"/>
 	 </changeSet>
 	 
 	 <changeSet author="sergej" id="1.0.4">
@@ -311,22 +323,6 @@
 				 <column name="past_client_id" type="BIGINT"/>
 				 <column name="characteristic" type="VARCHAR(250)"/>
 			</createTable>
-	 </changeSet>
-	 
-	 <changeSet author="sergej" id="1.0.9">
-			<createTable tableName="task_reminders">
-				 <column name="recurrence_id" type="BIGINT"/>
-				 <column name="task_id" type="BIGINT"/>
-			</createTable>
-			
-			<addForeignKeyConstraint baseTableName="task_reminders" baseColumnNames="task_id" constraintName="task_task_id_fkey"
-															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="task"
-															 referencedColumnNames="task_id" validate="true"/>
-			
-			<addForeignKeyConstraint baseTableName="task_reminders" baseColumnNames="recurrence_id"
-															 constraintName="recurrence_recurrence_id_fkey"
-															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="recurrence"
-															 referencedColumnNames="recurrence_id" validate="true"/>
 	 </changeSet>
 
 </databaseChangeLog>
