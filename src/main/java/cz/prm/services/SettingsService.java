@@ -4,13 +4,19 @@ import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_INDUSTR
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_PRODUCTS;
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_SKILLS;
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_TARGET_MARKETS;
+import static cz.prm.domain.settings.notifications.dials.GlobalNotifications.ALL;
 
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.contact.ContactSettings;
 import cz.prm.domain.settings.note.NoteSettings;
+import cz.prm.domain.settings.notifications.NotificationSettings;
+import cz.prm.domain.settings.notifications.dials.ContactNotifications;
+import cz.prm.domain.settings.notifications.dials.ReferralNotifications;
+import cz.prm.domain.settings.notifications.dials.TaskNotifications;
 import cz.prm.repositories.settings.AccountSettingsRepository;
 import cz.prm.repositories.settings.ContactSettingsRepository;
 import cz.prm.repositories.settings.NoteSettingsRepository;
+import cz.prm.repositories.settings.NotificationSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -24,13 +30,15 @@ public class SettingsService {
     private AccountSettingsRepository accountSettingsRepository;
     private ContactSettingsRepository contactSettingsRepository;
     private NoteSettingsRepository noteSettingsRepository;
+    private NotificationSettingsRepository notificationSettingsRepository;
     private SettingsPredicates predicates;
 
     public SettingsService(AccountSettingsRepository accountSettingsRepository, ContactSettingsRepository contactSettingsRepository,
-        NoteSettingsRepository noteSettingsRepository, SettingsPredicates predicates) {
+        NoteSettingsRepository noteSettingsRepository, NotificationSettingsRepository notificationSettingsRepository, SettingsPredicates predicates) {
         this.accountSettingsRepository = accountSettingsRepository;
         this.contactSettingsRepository = contactSettingsRepository;
         this.noteSettingsRepository = noteSettingsRepository;
+        this.notificationSettingsRepository = notificationSettingsRepository;
         this.predicates = predicates;
     }
 
@@ -48,6 +56,10 @@ public class SettingsService {
         return getOrCreateNoteSettings();
     }
 
+    public NotificationSettings getNotificationSettings() {
+        return getOrCreateNotificationSettings();
+    }
+
     public void updateContactSettings(ContactSettings updatedSettings) {
         var settings = getOrCreateContactSettings();
         updateContactSettingFields(settings, updatedSettings);
@@ -58,6 +70,12 @@ public class SettingsService {
         var settings = getOrCreateNoteSettings();
         updateNoteSettingFields(settings, updatedSettings);
         noteSettingsRepository.save(settings);
+    }
+
+    public NotificationSettings updateNotificationSettings(NotificationSettings updatedSettings) {
+        var settings = getOrCreateNotificationSettings();
+        updateNotificationSettingFields(settings, updatedSettings);
+        return notificationSettingsRepository.save(settings);
     }
 
     private ContactSettings getOrCreateContactSettings() {
@@ -88,6 +106,22 @@ public class SettingsService {
         return optional.get();
     }
 
+    private NotificationSettings getOrCreateNotificationSettings() {
+        var predicate = predicates.notificationSettings();
+        var optional = notificationSettingsRepository.findOne(predicate);
+        if (optional.isEmpty()) {
+            var settings = new NotificationSettings();
+            settings.setGlobal(ALL);
+            settings.setContact(new ContactNotifications());
+            settings.setReferral(new ReferralNotifications());
+            settings.setTask(new TaskNotifications());
+            var savedSettings = notificationSettingsRepository.saveAndFlush(settings);
+            notificationSettingsRepository.refresh(savedSettings);
+            return savedSettings;
+        }
+        return optional.get();
+    }
+
     private void updateContactSettingFields(ContactSettings settings, ContactSettings updatedSettings) {
         settings.setLabels(updatedSettings.getLabels());
         settings.setIndustries(updatedSettings.getIndustries());
@@ -98,6 +132,13 @@ public class SettingsService {
 
     private void updateNoteSettingFields(NoteSettings settings, NoteSettings updatedSettings) {
         settings.setCategories(updatedSettings.getCategories());
+    }
+
+    private void updateNotificationSettingFields(NotificationSettings settings, NotificationSettings updatedSettings) {
+        settings.setGlobal(updatedSettings.getGlobal());
+        settings.setContact(updatedSettings.getContact());
+        settings.setReferral(updatedSettings.getReferral());
+        settings.setTask(updatedSettings.getTask());
     }
 
     private Supplier<EntityNotFoundException> accountSettingsNotFoundSupplier() {

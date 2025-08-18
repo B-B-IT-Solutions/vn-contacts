@@ -31,7 +31,7 @@ public class ReferralScoring {
     public void commonIndustries(ReferralSuggestion rs, Contact potentialReferral) {
         var commonIndustries = intersection(referralRequirement.getIndustries(), potentialReferral.getIndustries());
         if (!commonIndustries.isEmpty()) {
-            rs.addJustification(COMMON_INDUSTRIES, "Both work in " + String.join(", ", commonIndustries) + " commonIndustries");
+            rs.addJustification(COMMON_INDUSTRIES, "Both work in " + String.join(", ", commonIndustries) + " industries");
             rs.addScore(commonIndustries.size(), 20);
         }
         rs.addCheckedCriteria(COMMON_INDUSTRIES);

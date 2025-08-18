@@ -18,6 +18,7 @@ import cz.prm.controllers.dto.referral.ReferralDto;
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
 import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
+import cz.prm.controllers.dto.settings.notifications.NotificationSettingsDto;
 import cz.prm.controllers.dto.task.TaskDto;
 import cz.prm.custom.ComponentTestAboutRepository;
 import cz.prm.custom.ComponentTestAccountSettingsRepository;
@@ -25,6 +26,7 @@ import cz.prm.custom.ComponentTestContactRepository;
 import cz.prm.custom.ComponentTestContactSettingsRepository;
 import cz.prm.custom.ComponentTestNoteRepository;
 import cz.prm.custom.ComponentTestNoteSettingsRepository;
+import cz.prm.custom.ComponentTestNotificationSettingsRepository;
 import cz.prm.custom.ComponentTestReferralRepository;
 import cz.prm.custom.ComponentTestTaskRepository;
 import cz.prm.domain.contact.About;
@@ -34,6 +36,7 @@ import cz.prm.domain.referral.Referral;
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.contact.ContactSettings;
 import cz.prm.domain.settings.note.NoteSettings;
+import cz.prm.domain.settings.notifications.NotificationSettings;
 import cz.prm.domain.task.Task;
 import cz.prm.utils.ComponentTestUser;
 import java.util.List;
@@ -54,11 +57,13 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     @Autowired
     protected ComponentTestTaskRepository taskRepository;
     @Autowired
-    protected ComponentTestAccountSettingsRepository generalSettingsRepository;
+    protected ComponentTestAccountSettingsRepository accountSettingsRepository;
     @Autowired
     protected ComponentTestContactSettingsRepository contactSettingsRepository;
     @Autowired
     protected ComponentTestNoteSettingsRepository noteSettingsRepository;
+    @Autowired
+    protected ComponentTestNotificationSettingsRepository notificationSettingsRepository;
 
     @BeforeEach
     void setUp() {
@@ -69,6 +74,7 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         contactRepository.deleteAll();
         contactSettingsRepository.deleteAll();
         noteSettingsRepository.deleteAll();
+        notificationSettingsRepository.deleteAll();
     }
 
     protected List<Contact> createReferralSuggestions(Contact contact, ComponentTestUser user) {
@@ -225,8 +231,8 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         return taskRepository.getByDescription(dto.getDescription());
     }
 
-    protected AccountSettings getGeneralSettingsFromDb(AccountSettingsDto dto) {
-        return generalSettingsRepository.getReferenceById(dto.getSettingsId());
+    protected AccountSettings getAccountSettingsFromDb(AccountSettingsDto dto) {
+        return accountSettingsRepository.getReferenceById(dto.getSettingsId());
     }
 
     protected ContactSettings getContactSettingsFromDb(ContactSettingsDto dto) {
@@ -235,5 +241,9 @@ public class BusinessComponentTestBase extends ComponentTestBase {
 
     protected NoteSettings getNoteSettingsFromDb(NoteSettingsDto dto) {
         return noteSettingsRepository.getReferenceById(dto.getSettingsId());
+    }
+
+    protected NotificationSettings getNotificationSettingsFromDb(NotificationSettingsDto dto) {
+        return notificationSettingsRepository.getReferenceById(dto.getSettingsId());
     }
 }

@@ -47,4 +47,15 @@ class SettingsPredicatesTest {
             assertThat(query).hasToString(expectedString);
         }
     }
+
+    @Test
+    void notificationSettings() {
+        try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
+            var user = user();
+            context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
+            var query = predicates.notificationSettings();
+            var expectedString = format("notificationSettings.owner.username = %s", user.getUsername());
+            assertThat(query).hasToString(expectedString);
+        }
+    }
 }
