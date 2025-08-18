@@ -56,13 +56,13 @@ public class SettingsController {
         settingsService.updateNoteSettings(settings);
     }
 
-    @GetMapping("/notifications")
+    @GetMapping("/notification")
     public NotificationSettingsDto getNotificationSettings() {
         var settings = settingsService.getNotificationSettings();
         return mapper.toNotificationSettingsDto(settings);
     }
 
-    @PutMapping("/notifications")
+    @PutMapping("/notification")
     public NotificationSettingsDto updateNotificationSettings(@RequestBody NotificationSettingsDto dto) {
         var settings = mapper.toNotificationSettings(dto);
         var response = settingsService.updateNotificationSettings(settings);

@@ -4,6 +4,7 @@ import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_INDUSTR
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_PRODUCTS;
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_SKILLS;
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_TARGET_MARKETS;
+import static cz.prm.domain.settings.notifications.dials.GlobalNotifications.ALL;
 import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.SettingsUtils.accountSettings;
 import static cz.prm.utils.SettingsUtils.contactSettings;
@@ -153,7 +154,7 @@ class SettingsServiceTest {
         when(notificationSettingsRepository.saveAndFlush(any(NotificationSettings.class))).thenAnswer((invocation -> invocation.getArgument(0)));
 
         var result = settingsService.getNotificationSettings();
-        assertThat(result).isNotNull();
+        assertInitialNotificationSetting(result);
         verify(notificationSettingsRepository).refresh(result);
     }
 
@@ -216,6 +217,23 @@ class SettingsServiceTest {
         assertThat(settingsInDb.getSettingsId()).isEqualTo(savedSettings.getSettingsId());
         assertThat(settingsInDb.getOwner()).isEqualTo(savedSettings.getOwner());
         assertThat(savedSettings.getCategories()).isEqualTo(updatedSettings.getCategories());
+    }
+
+    private static void assertInitialNotificationSetting(NotificationSettings settings) {
+        assertThat(settings).isNotNull();
+        assertThat(settings.getGlobal()).isEqualTo(ALL);
+
+        var contactNotifications = settings.getContact();
+        assertThat(contactNotifications.isStalenessReminder()).isFalse();
+
+        var referralNotifications = settings.getReferral();
+        assertThat(referralNotifications.isFollowupReminder()).isFalse();
+        assertThat(referralNotifications.isExpiryReminder()).isFalse();
+        assertThat(referralNotifications.isStalenessReminder()).isFalse();
+
+        var taskNotifications = settings.getTask();
+        assertThat(taskNotifications.isReminders()).isFalse();
+        assertThat(taskNotifications.isAboutToExpire()).isFalse();
     }
 
     private static void assertNotificationSettingFieldsUpdated(NotificationSettings settingsInDb, NotificationSettings updatedSettings,

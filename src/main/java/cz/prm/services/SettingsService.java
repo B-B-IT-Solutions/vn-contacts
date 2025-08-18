@@ -4,11 +4,15 @@ import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_INDUSTR
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_PRODUCTS;
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_SKILLS;
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_TARGET_MARKETS;
+import static cz.prm.domain.settings.notifications.dials.GlobalNotifications.ALL;
 
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.contact.ContactSettings;
 import cz.prm.domain.settings.note.NoteSettings;
 import cz.prm.domain.settings.notifications.NotificationSettings;
+import cz.prm.domain.settings.notifications.dials.ContactNotifications;
+import cz.prm.domain.settings.notifications.dials.ReferralNotifications;
+import cz.prm.domain.settings.notifications.dials.TaskNotifications;
 import cz.prm.repositories.settings.AccountSettingsRepository;
 import cz.prm.repositories.settings.ContactSettingsRepository;
 import cz.prm.repositories.settings.NoteSettingsRepository;
@@ -107,6 +111,10 @@ public class SettingsService {
         var optional = notificationSettingsRepository.findOne(predicate);
         if (optional.isEmpty()) {
             var settings = new NotificationSettings();
+            settings.setGlobal(ALL);
+            settings.setContact(new ContactNotifications());
+            settings.setReferral(new ReferralNotifications());
+            settings.setTask(new TaskNotifications());
             var savedSettings = notificationSettingsRepository.saveAndFlush(settings);
             notificationSettingsRepository.refresh(savedSettings);
             return savedSettings;
