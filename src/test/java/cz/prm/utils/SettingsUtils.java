@@ -104,48 +104,6 @@ public class SettingsUtils {
         return settings;
     }
 
-    public static ContactNotifications contactNotifications() {
-        var settings = new ContactNotifications();
-        settings.setStalenessReminder(true);
-        return settings;
-    }
-
-    public static ContactNotificationsDto contactNotificationsDto() {
-        var dto = new ContactNotificationsDto();
-        dto.setStalenessReminder(true);
-        return dto;
-    }
-
-    public static ReferralNotifications referralNotifications() {
-        var settings = new ReferralNotifications();
-        settings.setFollowupReminder(true);
-        settings.setExpiryReminder(true);
-        settings.setStalenessReminder(true);
-        return settings;
-    }
-
-    public static ReferralNotificationsDto referralNotificationsDto() {
-        var dto = new ReferralNotificationsDto();
-        dto.setFollowupReminder(true);
-        dto.setExpiryReminder(true);
-        dto.setStalenessReminder(true);
-        return dto;
-    }
-
-    public static TaskNotifications taskNotifications() {
-        var settings = new TaskNotifications();
-        settings.setReminders(true);
-        settings.setAboutToExpire(true);
-        return settings;
-    }
-
-    public static TaskNotificationsDto taskNotificationsDto() {
-        var dto = new TaskNotificationsDto();
-        dto.setReminders(true);
-        dto.setAboutToExpire(true);
-        return dto;
-    }
-
     public static List<Label> labels() {
         return newArrayList(label(), label(), label());
     }
@@ -276,5 +234,47 @@ public class SettingsUtils {
         category.setValue(uuid());
         category.setColor(uuid());
         return category;
+    }
+
+    public static ContactNotifications contactNotifications() {
+        var settings = new ContactNotifications();
+        settings.setStalenessReminder(true);
+        return settings;
+    }
+
+    public static ContactNotificationsDto contactNotificationsDto() {
+        var dto = new ContactNotificationsDto();
+        dto.setStalenessReminder(true);
+        return dto;
+    }
+
+    public static ReferralNotifications referralNotifications() {
+        var settings = new ReferralNotifications();
+        settings.setFollowupReminder(true);
+        settings.setExpiryReminder(true);
+        settings.setStalenessReminder(true);
+        return settings;
+    }
+
+    public static ReferralNotificationsDto referralNotificationsDto() {
+        var dto = new ReferralNotificationsDto();
+        dto.setFollowupReminder(true);
+        dto.setExpiryReminder(true);
+        dto.setStalenessReminder(true);
+        return dto;
+    }
+
+    public static TaskNotifications taskNotifications() {
+        var settings = new TaskNotifications();
+        settings.setReminders(true);
+        settings.setAboutToExpire(true);
+        return settings;
+    }
+
+    public static TaskNotificationsDto taskNotificationsDto() {
+        var dto = new TaskNotificationsDto();
+        dto.setReminders(true);
+        dto.setAboutToExpire(true);
+        return dto;
     }
 }
