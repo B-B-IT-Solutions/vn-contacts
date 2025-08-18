@@ -130,7 +130,6 @@
 															 constraintName="reminder_recurrence_id_fkey"
 															 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" referencedTableName="recurrence"
 															 referencedColumnNames="recurrence_id" validate="true"/>
-			
 	 </changeSet>
 	 
 	 <changeSet author="sergej" id="1.0.3">
