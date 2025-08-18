@@ -4,9 +4,12 @@ import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_INDUSTR
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_PRODUCTS;
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_SKILLS;
 import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_TARGET_MARKETS;
+import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.SettingsUtils.accountSettings;
 import static cz.prm.utils.SettingsUtils.contactSettings;
 import static cz.prm.utils.SettingsUtils.noteSettings;
+import static cz.prm.utils.SettingsUtils.notificationSettings;
+import static cz.prm.utils.assertions.SettingsAssertions.assertNotifications;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
@@ -19,9 +22,11 @@ import static org.mockito.Mockito.when;
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.settings.contact.ContactSettings;
 import cz.prm.domain.settings.note.NoteSettings;
+import cz.prm.domain.settings.notifications.NotificationSettings;
 import cz.prm.repositories.settings.AccountSettingsRepository;
 import cz.prm.repositories.settings.ContactSettingsRepository;
 import cz.prm.repositories.settings.NoteSettingsRepository;
+import cz.prm.repositories.settings.NotificationSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,17 +47,22 @@ class SettingsServiceTest {
     @Mock
     private NoteSettingsRepository noteSettingsRepository;
     @Mock
+    private NotificationSettingsRepository notificationSettingsRepository;
+    @Mock
     private SettingsPredicates predicates;
     @Captor
     private ArgumentCaptor<ContactSettings> contactSettingsCapt;
     @Captor
     private ArgumentCaptor<NoteSettings> noteSettingsCapt;
+    @Captor
+    private ArgumentCaptor<NotificationSettings> notificationSettingsCapt;
 
     private SettingsService settingsService;
 
     @BeforeEach
     void setUp() {
-        settingsService = new SettingsService(accountSettingsRepository, contactSettingsRepository, noteSettingsRepository, predicates);
+        settingsService = new SettingsService(accountSettingsRepository, contactSettingsRepository, noteSettingsRepository,
+            notificationSettingsRepository, predicates);
     }
 
     @Test
@@ -125,6 +135,29 @@ class SettingsServiceTest {
     }
 
     @Test
+    void getNotificationSettings() {
+        var settings = notificationSettings();
+        var predicate = new BooleanBuilder();
+        when(predicates.notificationSettings()).thenReturn(predicate);
+        when(notificationSettingsRepository.findOne(predicate)).thenReturn(of(settings));
+
+        var result = settingsService.getNotificationSettings();
+        assertSettings(result, settings);
+    }
+
+    @Test
+    void getNotificationSettings_SettingsNotFound() {
+        var predicate = new BooleanBuilder();
+        when(predicates.notificationSettings()).thenReturn(predicate);
+        when(notificationSettingsRepository.findOne(predicate)).thenReturn(empty());
+        when(notificationSettingsRepository.saveAndFlush(any(NotificationSettings.class))).thenAnswer((invocation -> invocation.getArgument(0)));
+
+        var result = settingsService.getNotificationSettings();
+        assertThat(result).isNotNull();
+        verify(notificationSettingsRepository).refresh(result);
+    }
+
+    @Test
     void updateContactSettings() {
         var settingsInDb = contactSettings();
         var updatedSettings = contactSettings();
@@ -152,6 +185,22 @@ class SettingsServiceTest {
         assertNoteSettingFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
     }
 
+    @Test
+    void updateNotificationSettings() {
+        var settingsInDb = notificationSettings();
+        var updatedSettings = notificationSettings();
+        var predicate = new BooleanBuilder();
+        when(predicates.notificationSettings()).thenReturn(predicate);
+        when(notificationSettingsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
+        when(notificationSettingsRepository.save(any(NotificationSettings.class))).thenAnswer(returnParamAnswer(0));
+
+        var response = settingsService.updateNotificationSettings(updatedSettings);
+        verify(notificationSettingsRepository).save(notificationSettingsCapt.capture());
+        var savedSettings = notificationSettingsCapt.getValue();
+        assertNotificationSettingFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
+        assertNotificationSettingFieldsUpdated(settingsInDb, updatedSettings, response);
+    }
+
     private static void assertContactSettingFieldsUpdated(ContactSettings settingsInDb, ContactSettings updatedSettings,
         ContactSettings savedSettings) {
         assertThat(settingsInDb.getSettingsId()).isEqualTo(savedSettings.getSettingsId());
@@ -167,5 +216,15 @@ class SettingsServiceTest {
         assertThat(settingsInDb.getSettingsId()).isEqualTo(savedSettings.getSettingsId());
         assertThat(settingsInDb.getOwner()).isEqualTo(savedSettings.getOwner());
         assertThat(savedSettings.getCategories()).isEqualTo(updatedSettings.getCategories());
+    }
+
+    private static void assertNotificationSettingFieldsUpdated(NotificationSettings settingsInDb, NotificationSettings updatedSettings,
+        NotificationSettings savedSettings) {
+        assertThat(settingsInDb.getSettingsId()).isEqualTo(savedSettings.getSettingsId());
+        assertThat(settingsInDb.getOwner()).isEqualTo(savedSettings.getOwner());
+        assertThat(savedSettings.getGlobal()).isEqualTo(updatedSettings.getGlobal());
+        assertNotifications(savedSettings.getContact(), updatedSettings.getContact());
+        assertNotifications(savedSettings.getReferral(), updatedSettings.getReferral());
+        assertNotifications(savedSettings.getTask(), updatedSettings.getTask());
     }
 }
