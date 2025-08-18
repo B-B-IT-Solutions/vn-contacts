@@ -36,6 +36,26 @@
 				 <column name="LABEL" type="VARCHAR(250)"/>
 			</createTable>
 			
+			<createTable tableName="contact_industry">
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="industry" type="VARCHAR(250)"/>
+			</createTable>
+			
+			<createTable tableName="contact_skill">
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="skill" type="VARCHAR(250)"/>
+			</createTable>
+			
+			<createTable tableName="contact_product">
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="product" type="VARCHAR(250)"/>
+			</createTable>
+			
+			<createTable tableName="contact_target_market">
+				 <column name="contact_id" type="BIGINT"/>
+				 <column name="target_market" type="VARCHAR(250)"/>
+			</createTable>
+			
 			<createTable tableName="about">
 				 <column name="contact_id" type="BIGINT">
 						<constraints primaryKey="true" primaryKeyName="about_pk" nullable="false"/>
@@ -150,9 +170,9 @@
 				 <column name="app_language" type="VARCHAR(255)"/>
 			</createTable>
 			
-			<createTable tableName="user_settings">
+			<createTable tableName="contact_settings">
 				 <column name="settings_id" type="BIGINT">
-						<constraints primaryKey="true" primaryKeyName="user_settings_pk" nullable="false"/>
+						<constraints primaryKey="true" primaryKeyName="contact_settings_pk" nullable="false"/>
 				 </column>
 				 <column name="owner_username" type="VARCHAR(255)"/>
 				 <column name="owner_email" type="VARCHAR(255)"/>
@@ -201,13 +221,6 @@
 															 referencedColumnNames="referral_id" validate="true"/>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.6">
-			<createTable tableName="contact_industry">
-				 <column name="contact_id" type="BIGINT"/>
-				 <column name="industry" type="VARCHAR(250)"/>
-			</createTable>
-	 </changeSet>
-	 
 	 <changeSet author="sergej" id="1.0.7">
 			<renameColumn tableName="contact_settings_industry" newColumnName="value" oldColumnName="name"
 										columnDataType="VARCHAR(250)"/>
@@ -225,9 +238,6 @@
 	 </changeSet>
 	 
 	 <changeSet author="sergej" id="1.0.9">
-			<renameTable newTableName="contact_settings" oldTableName="user_settings"
-			/>
-			
 			<createSequence cacheSize="1" cycle="false" startValue="1000" minValue="1000" maxValue="9223372036854775807"
 											sequenceName="note_settings_seq"/>
 			
@@ -268,22 +278,6 @@
 			</addColumn>
 	 </changeSet>
 	 
-	 <changeSet author="sergej" id="1.0.12">
-			<createTable tableName="contact_skill">
-				 <column name="contact_id" type="BIGINT"/>
-				 <column name="skill" type="VARCHAR(250)"/>
-			</createTable>
-			
-			<createTable tableName="contact_product">
-				 <column name="contact_id" type="BIGINT"/>
-				 <column name="product" type="VARCHAR(250)"/>
-			</createTable>
-			
-			<createTable tableName="contact_target_market">
-				 <column name="contact_id" type="BIGINT"/>
-				 <column name="target_market" type="VARCHAR(250)"/>
-			</createTable>
-	 </changeSet>
 	 
 	 <changeSet author="sergej" id="1.0.13">
 			<createTable tableName="contact_settings_skill">
