@@ -1,7 +1,7 @@
 package cz.prm.repositories.contacts.contact;
 
 import static cz.prm.utils.CommonUtils.user;
-import static cz.prm.utils.NetworkingUtils.referralRequirement;
+import static cz.prm.utils.data.contacts.NetworkingUtils.referralRequirement;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 

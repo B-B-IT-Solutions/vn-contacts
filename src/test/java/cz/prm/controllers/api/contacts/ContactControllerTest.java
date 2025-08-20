@@ -1,13 +1,6 @@
 package cz.prm.controllers.api.contacts;
 
 import static cz.prm.utils.CommonUtils.page;
-import static cz.prm.utils.ContactUtils.about;
-import static cz.prm.utils.ContactUtils.aboutDto;
-import static cz.prm.utils.ContactUtils.contact;
-import static cz.prm.utils.ContactUtils.contacts;
-import static cz.prm.utils.ContactUtils.contactsQueryDto;
-import static cz.prm.utils.ContactUtils.decoratedContact;
-import static cz.prm.utils.ContactUtils.decoratedContactDto;
 import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.ContactAssertions.assertAbout;
@@ -15,6 +8,13 @@ import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertContactQuery;
 import static cz.prm.utils.assertions.ContactAssertions.assertDecoratedContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertPage;
+import static cz.prm.utils.data.contacts.ContactUtils.about;
+import static cz.prm.utils.data.contacts.ContactUtils.aboutDto;
+import static cz.prm.utils.data.contacts.ContactUtils.contact;
+import static cz.prm.utils.data.contacts.ContactUtils.contacts;
+import static cz.prm.utils.data.contacts.ContactUtils.contactsQueryDto;
+import static cz.prm.utils.data.contacts.ContactUtils.decoratedContact;
+import static cz.prm.utils.data.contacts.ContactUtils.decoratedContactDto;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;

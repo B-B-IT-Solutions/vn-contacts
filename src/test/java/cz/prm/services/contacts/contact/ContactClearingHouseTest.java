@@ -1,16 +1,16 @@
 package cz.prm.services.contacts.contact;
 
 import static cz.prm.utils.CommonUtils.page;
-import static cz.prm.utils.ContactUtils.about;
-import static cz.prm.utils.ContactUtils.contact;
-import static cz.prm.utils.ContactUtils.contacts;
-import static cz.prm.utils.ContactUtils.contactsQuery;
-import static cz.prm.utils.ContactUtils.decoratedContact;
 import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.ContactAssertions.assertAbout;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertDecoratedContact;
+import static cz.prm.utils.data.contacts.ContactUtils.about;
+import static cz.prm.utils.data.contacts.ContactUtils.contact;
+import static cz.prm.utils.data.contacts.ContactUtils.contacts;
+import static cz.prm.utils.data.contacts.ContactUtils.contactsQuery;
+import static cz.prm.utils.data.contacts.ContactUtils.decoratedContact;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

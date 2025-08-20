@@ -1,8 +1,8 @@
 package cz.prm.domain.common;
 
-import static cz.prm.utils.ContactUtils.contacts;
 import static cz.prm.utils.TestUtils.randomInt;
 import static cz.prm.utils.TestUtils.randomLong;
+import static cz.prm.utils.data.contacts.ContactUtils.contacts;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 

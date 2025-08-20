@@ -1,12 +1,12 @@
-package cz.prm.utils;
+package cz.prm.utils.data.contacts;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.services.contacts.networking.data.scoring.ScoringCriteria.COMMON_INDUSTRIES;
 import static cz.prm.services.contacts.networking.data.scoring.ScoringCriteria.COMPLEMENTARY_SERVICES;
 import static cz.prm.services.contacts.networking.data.scoring.ScoringCriteria.TARGET_MARKETS_PRODUCTS_MATCH;
-import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.TestUtils.randomInt;
 import static cz.prm.utils.TestUtils.uuid;
+import static cz.prm.utils.data.contacts.ContactUtils.contact;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.range;
 

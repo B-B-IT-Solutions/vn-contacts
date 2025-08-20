@@ -1,10 +1,10 @@
 package cz.prm.controllers.api.customizations;
 
-import static cz.prm.utils.SettingsUtils.contactSettings;
-import static cz.prm.utils.SettingsUtils.contactSettingsDto;
-import static cz.prm.utils.SettingsUtils.noteSettings;
-import static cz.prm.utils.SettingsUtils.noteSettingsDto;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
+import static cz.prm.utils.data.customizations.CustomizationsUtils.contactSettings;
+import static cz.prm.utils.data.customizations.CustomizationsUtils.contactSettingsDto;
+import static cz.prm.utils.data.customizations.CustomizationsUtils.noteSettings;
+import static cz.prm.utils.data.customizations.CustomizationsUtils.noteSettingsDto;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 

@@ -1,10 +1,10 @@
 package cz.prm.controllers.api.settings;
 
 import static cz.prm.utils.MockitoUtils.returnParamAnswer;
-import static cz.prm.utils.SettingsUtils.accountSettings;
-import static cz.prm.utils.SettingsUtils.notificationSettings;
-import static cz.prm.utils.SettingsUtils.notificationSettingsDto;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
+import static cz.prm.utils.data.settings.SettingsUtils.accountSettings;
+import static cz.prm.utils.data.settings.SettingsUtils.notificationSettings;
+import static cz.prm.utils.data.settings.SettingsUtils.notificationSettingsDto;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

@@ -1,6 +1,6 @@
 package cz.prm.repositories.extensions.repositories;
 
-import static cz.prm.utils.ContactUtils.contact;
+import static cz.prm.utils.data.contacts.ContactUtils.contact;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 

@@ -1,9 +1,9 @@
 package cz.prm.controllers.api.contacts;
 
 import static cz.prm.utils.CommonUtils.page;
-import static cz.prm.utils.NetworkingUtils.referralSuggestions;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.assertions.NetworkingAssertions.assertPage;
+import static cz.prm.utils.data.contacts.NetworkingUtils.referralSuggestions;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 

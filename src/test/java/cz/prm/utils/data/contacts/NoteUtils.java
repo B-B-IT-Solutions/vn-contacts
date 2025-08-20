@@ -1,4 +1,4 @@
-package cz.prm.utils;
+package cz.prm.utils.data.contacts;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.CommonUtils.pagination;

@@ -4,10 +4,10 @@ import static cz.prm.services.contacts.networking.data.scoring.ScoringCriteria.C
 import static cz.prm.services.contacts.networking.data.scoring.ScoringCriteria.COMPLEMENTARY_SERVICES;
 import static cz.prm.services.contacts.networking.data.scoring.ScoringCriteria.PRODUCTS_TARGET_MARKETS_MATCH;
 import static cz.prm.services.contacts.networking.data.scoring.ScoringCriteria.TARGET_MARKETS_PRODUCTS_MATCH;
-import static cz.prm.utils.ContactUtils.contact;
-import static cz.prm.utils.NetworkingUtils.contactPotentialReferral;
 import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.TestUtils.uuids;
+import static cz.prm.utils.data.contacts.ContactUtils.contact;
+import static cz.prm.utils.data.contacts.NetworkingUtils.contactPotentialReferral;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.domain.contacts.networking.ReferralRequirement;

@@ -2,13 +2,13 @@ package cz.prm.controllers.mapper.contacts;
 
 import static cz.prm.utils.CommonUtils.DEFAULT_PAGE_SIZE;
 import static cz.prm.utils.CommonUtils.page;
-import static cz.prm.utils.NoteUtils.note;
-import static cz.prm.utils.NoteUtils.noteDto;
-import static cz.prm.utils.NoteUtils.notes;
-import static cz.prm.utils.NoteUtils.notesQueryDto;
 import static cz.prm.utils.assertions.NoteAssertions.assertNote;
 import static cz.prm.utils.assertions.NoteAssertions.assertNotesQuery;
 import static cz.prm.utils.assertions.NoteAssertions.assertPage;
+import static cz.prm.utils.data.contacts.NoteUtils.note;
+import static cz.prm.utils.data.contacts.NoteUtils.noteDto;
+import static cz.prm.utils.data.contacts.NoteUtils.notes;
+import static cz.prm.utils.data.contacts.NoteUtils.notesQueryDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.contacts.note.query.NotesQueryDto;

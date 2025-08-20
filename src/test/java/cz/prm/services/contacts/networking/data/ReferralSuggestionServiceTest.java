@@ -1,11 +1,11 @@
 package cz.prm.services.contacts.networking.data;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static cz.prm.utils.ContactUtils.contact;
-import static cz.prm.utils.ContactUtils.contacts;
-import static cz.prm.utils.NetworkingUtils.contactPotentialReferrals;
-import static cz.prm.utils.NetworkingUtils.referralRequirement;
 import static cz.prm.utils.assertions.NetworkingAssertions.assertContactReferralSuggestions;
+import static cz.prm.utils.data.contacts.ContactUtils.contact;
+import static cz.prm.utils.data.contacts.ContactUtils.contacts;
+import static cz.prm.utils.data.contacts.NetworkingUtils.contactPotentialReferrals;
+import static cz.prm.utils.data.contacts.NetworkingUtils.referralRequirement;
 import static java.util.Collections.sort;
 import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;

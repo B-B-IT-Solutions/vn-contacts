@@ -1,13 +1,13 @@
 package cz.prm.services.contacts.contact.data;
 
-import static cz.prm.utils.ContactUtils.contact;
-import static cz.prm.utils.ContactUtils.contacts;
-import static cz.prm.utils.ContactUtils.contactsQuery;
 import static cz.prm.utils.MockitoUtils.returnParamAnswer;
-import static cz.prm.utils.NetworkingUtils.referralRequirement;
 import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertContacts;
 import static cz.prm.utils.assertions.ContactAssertions.assertPage;
+import static cz.prm.utils.data.contacts.ContactUtils.contact;
+import static cz.prm.utils.data.contacts.ContactUtils.contacts;
+import static cz.prm.utils.data.contacts.ContactUtils.contactsQuery;
+import static cz.prm.utils.data.contacts.NetworkingUtils.referralRequirement;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;

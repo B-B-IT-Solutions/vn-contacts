@@ -2,13 +2,13 @@ package cz.prm.controllers.mapper.contacts;
 
 import static cz.prm.utils.CommonUtils.DEFAULT_PAGE_SIZE;
 import static cz.prm.utils.CommonUtils.page;
-import static cz.prm.utils.ReferralUtils.referral;
-import static cz.prm.utils.ReferralUtils.referralDto;
-import static cz.prm.utils.ReferralUtils.referrals;
-import static cz.prm.utils.ReferralUtils.referralsQueryDto;
 import static cz.prm.utils.assertions.ReferralAssertions.assertPage;
 import static cz.prm.utils.assertions.ReferralAssertions.assertReferral;
 import static cz.prm.utils.assertions.ReferralAssertions.assertReferralsQuery;
+import static cz.prm.utils.data.contacts.ReferralUtils.referral;
+import static cz.prm.utils.data.contacts.ReferralUtils.referralDto;
+import static cz.prm.utils.data.contacts.ReferralUtils.referrals;
+import static cz.prm.utils.data.contacts.ReferralUtils.referralsQueryDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.contacts.referral.query.ReferralQueryDto;

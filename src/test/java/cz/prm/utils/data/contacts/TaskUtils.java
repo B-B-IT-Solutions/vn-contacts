@@ -1,4 +1,4 @@
-package cz.prm.utils;
+package cz.prm.utils.data.contacts;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.domain.common.Priority.HIGH;
@@ -6,10 +6,10 @@ import static cz.prm.domain.contacts.task.TaskStatus.TO_DO;
 import static cz.prm.utils.CommonUtils.pagination;
 import static cz.prm.utils.CommonUtils.paginationDto;
 import static cz.prm.utils.CommonUtils.user;
-import static cz.prm.utils.RecurrenceUtils.recurrences;
-import static cz.prm.utils.RecurrenceUtils.reminderRules;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
+import static cz.prm.utils.data.contacts.RecurrenceUtils.recurrences;
+import static cz.prm.utils.data.contacts.RecurrenceUtils.reminderRules;
 import static java.time.Instant.now;
 
 import cz.prm.controllers.dto.contacts.task.TaskDto;

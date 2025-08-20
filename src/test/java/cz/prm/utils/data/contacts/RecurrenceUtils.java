@@ -1,4 +1,4 @@
-package cz.prm.utils;
+package cz.prm.utils.data.contacts;
 
 import static cz.prm.utils.TestUtils.randomInt;
 import static cz.prm.utils.TestUtils.randomLong;

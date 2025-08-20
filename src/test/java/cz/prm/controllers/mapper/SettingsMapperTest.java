@@ -1,9 +1,9 @@
 package cz.prm.controllers.mapper;
 
-import static cz.prm.utils.SettingsUtils.accountSettings;
-import static cz.prm.utils.SettingsUtils.notificationSettings;
-import static cz.prm.utils.SettingsUtils.notificationSettingsDto;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
+import static cz.prm.utils.data.settings.SettingsUtils.accountSettings;
+import static cz.prm.utils.data.settings.SettingsUtils.notificationSettings;
+import static cz.prm.utils.data.settings.SettingsUtils.notificationSettingsDto;
 
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.Test;

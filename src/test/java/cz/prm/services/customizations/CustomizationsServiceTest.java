@@ -4,9 +4,9 @@ import static cz.prm.domain.customizations.contact.InitContactCustomizations.INI
 import static cz.prm.domain.customizations.contact.InitContactCustomizations.INITIAL_PRODUCTS;
 import static cz.prm.domain.customizations.contact.InitContactCustomizations.INITIAL_SKILLS;
 import static cz.prm.domain.customizations.contact.InitContactCustomizations.INITIAL_TARGET_MARKETS;
-import static cz.prm.utils.SettingsUtils.contactSettings;
-import static cz.prm.utils.SettingsUtils.noteSettings;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
+import static cz.prm.utils.data.customizations.CustomizationsUtils.contactSettings;
+import static cz.prm.utils.data.customizations.CustomizationsUtils.noteSettings;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;

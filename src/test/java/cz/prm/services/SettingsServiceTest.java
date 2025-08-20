@@ -2,10 +2,10 @@ package cz.prm.services;
 
 import static cz.prm.domain.settings.notifications.dials.GlobalNotifications.ALL;
 import static cz.prm.utils.MockitoUtils.returnParamAnswer;
-import static cz.prm.utils.SettingsUtils.accountSettings;
-import static cz.prm.utils.SettingsUtils.notificationSettings;
 import static cz.prm.utils.assertions.SettingsAssertions.assertNotifications;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
+import static cz.prm.utils.data.settings.SettingsUtils.accountSettings;
+import static cz.prm.utils.data.settings.SettingsUtils.notificationSettings;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;

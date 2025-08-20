@@ -1,8 +1,8 @@
-package cz.prm.utils;
+package cz.prm.utils.data.contacts;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static cz.prm.utils.RecurrenceUtils.recurrence;
 import static cz.prm.utils.TestUtils.randomLong;
+import static cz.prm.utils.data.contacts.RecurrenceUtils.recurrence;
 
 import cz.prm.domain.contacts.reminder.Reminder;
 import java.util.List;
