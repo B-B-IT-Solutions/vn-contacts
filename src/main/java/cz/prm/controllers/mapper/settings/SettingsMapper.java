@@ -1,4 +1,4 @@
-package cz.prm.controllers.mapper;
+package cz.prm.controllers.mapper.settings;
 
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.notifications.NotificationSettingsDto;

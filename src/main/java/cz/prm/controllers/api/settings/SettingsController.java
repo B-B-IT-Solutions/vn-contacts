@@ -2,7 +2,7 @@ package cz.prm.controllers.api.settings;
 
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.notifications.NotificationSettingsDto;
-import cz.prm.controllers.mapper.SettingsMapper;
+import cz.prm.controllers.mapper.settings.SettingsMapper;
 import cz.prm.services.SettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

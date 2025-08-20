@@ -9,7 +9,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import cz.prm.controllers.mapper.SettingsMapper;
+import cz.prm.controllers.mapper.settings.SettingsMapper;
 import cz.prm.domain.settings.notifications.NotificationSettings;
 import cz.prm.services.SettingsService;
 import cz.prm.utils.MapperUtils;

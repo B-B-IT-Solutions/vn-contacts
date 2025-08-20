@@ -1,4 +1,4 @@
-package cz.prm.controllers.mapper;
+package cz.prm.controllers.mapper.settings;
 
 import static cz.prm.utils.assertions.settings.SettingsAssertions.assertSettings;
 import static cz.prm.utils.data.settings.SettingsUtils.accountSettings;

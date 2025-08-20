@@ -393,7 +393,7 @@
 							 <logViolationsToConsole>true</logViolationsToConsole>
 							 <includeTestSourceDirectory>true</includeTestSourceDirectory>
 							 <testSourceDirectories>${basedir}/src/test,${basedir}/scr/componenttest</testSourceDirectories>
-							 <excludes>**/querydsl/Q**.java,**/mappers/**/*MapperImpl.java</excludes>
+							 <excludes>**/querydsl/Q**.java,**/mapper/**/*MapperImpl.java</excludes>
 						</configuration>
 						<executions>
 							 <execution>
