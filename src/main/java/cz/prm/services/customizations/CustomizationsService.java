@@ -21,8 +21,8 @@ public class CustomizationsService {
     private NoteCustomizaitonsRepository noteCustomizaitonsRepository;
     private CustomizationsPredicates predicates;
 
-    public CustomizationsService(ContactCustomizationsRepository contactCustomizationsRepository, NoteCustomizaitonsRepository noteCustomizaitonsRepository,
-        CustomizationsPredicates predicates) {
+    public CustomizationsService(ContactCustomizationsRepository contactCustomizationsRepository,
+        NoteCustomizaitonsRepository noteCustomizaitonsRepository, CustomizationsPredicates predicates) {
         this.contactCustomizationsRepository = contactCustomizationsRepository;
         this.noteCustomizaitonsRepository = noteCustomizaitonsRepository;
         this.predicates = predicates;
