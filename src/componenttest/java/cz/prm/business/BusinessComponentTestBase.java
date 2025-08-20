@@ -1,13 +1,13 @@
 package cz.prm.business;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static cz.prm.utils.ContactComponentTestUtils.about;
-import static cz.prm.utils.ContactComponentTestUtils.contact;
-import static cz.prm.utils.NoteComponentTestUtils.note;
-import static cz.prm.utils.ReferralComponentTestUtils.referral;
 import static cz.prm.utils.SecurityContextComponentTestUtils.clearContext;
 import static cz.prm.utils.SecurityContextComponentTestUtils.ensureUserContext;
-import static cz.prm.utils.TaskComponentTestUtils.task;
+import static cz.prm.utils.data.contacts.ContactComponentTestUtils.about;
+import static cz.prm.utils.data.contacts.ContactComponentTestUtils.contact;
+import static cz.prm.utils.data.contacts.NoteComponentTestUtils.note;
+import static cz.prm.utils.data.contacts.ReferralComponentTestUtils.referral;
+import static cz.prm.utils.data.contacts.TaskComponentTestUtils.task;
 import static java.util.stream.Collectors.toList;
 
 import cz.prm.ComponentTestBase;
@@ -16,28 +16,28 @@ import cz.prm.controllers.dto.contacts.contact.DecoratedContactDto;
 import cz.prm.controllers.dto.contacts.note.NoteDto;
 import cz.prm.controllers.dto.contacts.referral.ReferralDto;
 import cz.prm.controllers.dto.contacts.task.TaskDto;
+import cz.prm.controllers.dto.customizations.contact.ContactCustomizationsDto;
+import cz.prm.controllers.dto.customizations.note.NoteCustomizationsDto;
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
-import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
-import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
 import cz.prm.controllers.dto.settings.notifications.NotificationSettingsDto;
-import cz.prm.custom.ComponentTestAboutRepository;
-import cz.prm.custom.ComponentTestAccountSettingsRepository;
-import cz.prm.custom.ComponentTestContactRepository;
-import cz.prm.custom.ComponentTestContactSettingsRepository;
-import cz.prm.custom.ComponentTestNoteRepository;
-import cz.prm.custom.ComponentTestNoteSettingsRepository;
-import cz.prm.custom.ComponentTestNotificationSettingsRepository;
-import cz.prm.custom.ComponentTestReferralRepository;
-import cz.prm.custom.ComponentTestTaskRepository;
 import cz.prm.domain.contacts.contact.About;
 import cz.prm.domain.contacts.contact.Contact;
 import cz.prm.domain.contacts.note.Note;
 import cz.prm.domain.contacts.referral.Referral;
 import cz.prm.domain.contacts.task.Task;
+import cz.prm.domain.customizations.contact.ContactCustomizations;
+import cz.prm.domain.customizations.note.NoteCustomizations;
 import cz.prm.domain.settings.AccountSettings;
-import cz.prm.domain.settings.contact.ContactSettings;
-import cz.prm.domain.settings.note.NoteSettings;
 import cz.prm.domain.settings.notifications.NotificationSettings;
+import cz.prm.extensions.contacts.ComponentTestAboutRepository;
+import cz.prm.extensions.contacts.ComponentTestContactRepository;
+import cz.prm.extensions.contacts.ComponentTestNoteRepository;
+import cz.prm.extensions.contacts.ComponentTestReferralRepository;
+import cz.prm.extensions.contacts.ComponentTestTaskRepository;
+import cz.prm.extensions.customizations.ComponentTestContactCustomizationsRepository;
+import cz.prm.extensions.customizations.ComponentTestNoteCustomizaitonsRepository;
+import cz.prm.extensions.settings.ComponentTestAccountSettingsRepository;
+import cz.prm.extensions.settings.ComponentTestNotificationSettingsRepository;
 import cz.prm.utils.ComponentTestUser;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -59,9 +59,9 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     @Autowired
     protected ComponentTestAccountSettingsRepository accountSettingsRepository;
     @Autowired
-    protected ComponentTestContactSettingsRepository contactSettingsRepository;
+    protected ComponentTestContactCustomizationsRepository contactSettingsRepository;
     @Autowired
-    protected ComponentTestNoteSettingsRepository noteSettingsRepository;
+    protected ComponentTestNoteCustomizaitonsRepository noteSettingsRepository;
     @Autowired
     protected ComponentTestNotificationSettingsRepository notificationSettingsRepository;
 
@@ -235,11 +235,11 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         return accountSettingsRepository.getReferenceById(dto.getSettingsId());
     }
 
-    protected ContactSettings getContactSettingsFromDb(ContactSettingsDto dto) {
+    protected ContactCustomizations getContactSettingsFromDb(ContactCustomizationsDto dto) {
         return contactSettingsRepository.getReferenceById(dto.getSettingsId());
     }
 
-    protected NoteSettings getNoteSettingsFromDb(NoteSettingsDto dto) {
+    protected NoteCustomizations getNoteSettingsFromDb(NoteCustomizationsDto dto) {
         return noteSettingsRepository.getReferenceById(dto.getSettingsId());
     }
 

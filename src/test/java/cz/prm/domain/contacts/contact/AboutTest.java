@@ -1,7 +1,7 @@
 package cz.prm.domain.contacts.contact;
 
-import static cz.prm.utils.ContactUtils.firstInteraction;
 import static cz.prm.utils.TestUtils.randomLong;
+import static cz.prm.utils.data.contacts.ContactUtils.firstInteraction;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;

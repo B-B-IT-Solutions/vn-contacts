@@ -1,6 +1,6 @@
 package cz.prm.domain.contacts.networking;
 
-import static cz.prm.utils.ContactUtils.contact;
+import static cz.prm.utils.data.contacts.ContactUtils.contact;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;

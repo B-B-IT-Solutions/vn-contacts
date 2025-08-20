@@ -3,7 +3,7 @@ package cz.prm.business.contacts.networking;
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
-import static cz.prm.utils.assertions.ComponentTestNetworkingAssertions.assertReferralSuggestions;
+import static cz.prm.utils.assertions.contacts.ComponentTestNetworkingAssertions.assertReferralSuggestions;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;

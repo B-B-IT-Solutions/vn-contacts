@@ -1,9 +1,9 @@
 package cz.prm.services.contacts;
 
-import static cz.prm.utils.ReminderUtils.reminder;
-import static cz.prm.utils.ReminderUtils.reminders;
-import static cz.prm.utils.assertions.ReminderAssertions.assertReminder;
-import static cz.prm.utils.assertions.ReminderAssertions.assertReminders;
+import static cz.prm.utils.assertions.contacts.ReminderAssertions.assertReminder;
+import static cz.prm.utils.assertions.contacts.ReminderAssertions.assertReminders;
+import static cz.prm.utils.data.contacts.ReminderUtils.reminder;
+import static cz.prm.utils.data.contacts.ReminderUtils.reminders;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;

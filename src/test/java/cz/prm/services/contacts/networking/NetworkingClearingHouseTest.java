@@ -1,11 +1,11 @@
 package cz.prm.services.contacts.networking;
 
 import static cz.prm.utils.CommonUtils.page;
-import static cz.prm.utils.ContactUtils.contact;
-import static cz.prm.utils.ContactUtils.contacts;
-import static cz.prm.utils.NetworkingUtils.referralSuggestions;
-import static cz.prm.utils.assertions.NetworkingAssertions.assertPage;
-import static cz.prm.utils.assertions.NetworkingAssertions.assertReferralRequirement;
+import static cz.prm.utils.assertions.contacts.NetworkingAssertions.assertPage;
+import static cz.prm.utils.assertions.contacts.NetworkingAssertions.assertReferralRequirement;
+import static cz.prm.utils.data.contacts.ContactUtils.contact;
+import static cz.prm.utils.data.contacts.ContactUtils.contacts;
+import static cz.prm.utils.data.contacts.NetworkingUtils.referralSuggestions;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;

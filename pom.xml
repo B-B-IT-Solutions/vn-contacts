@@ -32,7 +32,7 @@
 			<rest-assured.version>5.4.0</rest-assured.version>
 			<maven-surefire.version>3.1.2</maven-surefire.version>
 			<maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
-			<jacoco.exclusions>**/querydsl/Q**.class,**/mappers/**/*MapperImpl.class</jacoco.exclusions>
+			<jacoco.exclusions>**/querydsl/Q**.class,**/mapper/**/*MapperImpl.class</jacoco.exclusions>
 			<jacoco.line.coverage>0.99</jacoco.line.coverage>
 			<jacoco.branch.coverage>0.99</jacoco.branch.coverage>
 			<jacoco.version>0.8.11</jacoco.version>
@@ -393,7 +393,7 @@
 							 <logViolationsToConsole>true</logViolationsToConsole>
 							 <includeTestSourceDirectory>true</includeTestSourceDirectory>
 							 <testSourceDirectories>${basedir}/src/test,${basedir}/scr/componenttest</testSourceDirectories>
-							 <excludes>**/querydsl/Q**.java,**/mappers/**/*MapperImpl.java</excludes>
+							 <excludes>**/querydsl/Q**.java,**/mapper/**/*MapperImpl.java</excludes>
 						</configuration>
 						<executions>
 							 <execution>

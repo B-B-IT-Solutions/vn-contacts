@@ -1,8 +1,8 @@
 package cz.prm.services.contacts;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static cz.prm.utils.RecurrenceUtils.recurrence;
-import static cz.prm.utils.ReminderUtils.reminder;
+import static cz.prm.utils.data.contacts.RecurrenceUtils.recurrence;
+import static cz.prm.utils.data.contacts.ReminderUtils.reminder;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;

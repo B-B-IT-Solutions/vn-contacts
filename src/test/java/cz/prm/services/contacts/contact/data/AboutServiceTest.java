@@ -1,17 +1,17 @@
 package cz.prm.services.contacts.contact.data;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static cz.prm.utils.ContactUtils.about;
-import static cz.prm.utils.ContactUtils.idealClient;
-import static cz.prm.utils.ContactUtils.pastClient;
 import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.TestUtils.uuids;
-import static cz.prm.utils.assertions.ContactAssertions.assertAbout;
-import static cz.prm.utils.assertions.ContactAssertions.assertFirstInteraction;
-import static cz.prm.utils.assertions.ContactAssertions.assertIdealClients;
-import static cz.prm.utils.assertions.ContactAssertions.assertPastClients;
+import static cz.prm.utils.assertions.contacts.ContactAssertions.assertAbout;
+import static cz.prm.utils.assertions.contacts.ContactAssertions.assertFirstInteraction;
+import static cz.prm.utils.assertions.contacts.ContactAssertions.assertIdealClients;
+import static cz.prm.utils.assertions.contacts.ContactAssertions.assertPastClients;
+import static cz.prm.utils.data.contacts.ContactUtils.about;
+import static cz.prm.utils.data.contacts.ContactUtils.idealClient;
+import static cz.prm.utils.data.contacts.ContactUtils.pastClient;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;

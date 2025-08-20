@@ -1,0 +1,40 @@
+package cz.prm.controllers.dto.customizations.contact;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import cz.prm.controllers.dto.customizations.contact.options.IndustryDto;
+import cz.prm.controllers.dto.customizations.contact.options.LabelDto;
+import cz.prm.controllers.dto.customizations.contact.options.ProductDto;
+import cz.prm.controllers.dto.customizations.contact.options.SkillDto;
+import cz.prm.controllers.dto.customizations.contact.options.TargetMarketDto;
+import java.time.Instant;
+import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class ContactCustomizationsDto {
+
+    @JsonProperty("settingsId")
+    private Long settingsId;
+
+    @JsonProperty("labels")
+    private List<LabelDto> labels;
+
+    @JsonProperty("industries")
+    private List<IndustryDto> industries;
+
+    @JsonProperty("skills")
+    private List<SkillDto> skills;
+
+    @JsonProperty("products")
+    private List<ProductDto> products;
+
+    @JsonProperty("targetMarkets")
+    private List<TargetMarketDto> targetMarkets;
+
+    @JsonProperty("lastEditDate")
+    private Instant lastEditDate;
+}

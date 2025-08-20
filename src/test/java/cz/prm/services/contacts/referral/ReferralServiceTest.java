@@ -1,11 +1,11 @@
 package cz.prm.services.contacts.referral;
 
-import static cz.prm.utils.ReferralUtils.referral;
-import static cz.prm.utils.ReferralUtils.referrals;
-import static cz.prm.utils.ReferralUtils.referralsQuery;
 import static cz.prm.utils.TestUtils.randomLong;
-import static cz.prm.utils.assertions.ReferralAssertions.assertPage;
-import static cz.prm.utils.assertions.ReferralAssertions.assertReferral;
+import static cz.prm.utils.assertions.contacts.ReferralAssertions.assertPage;
+import static cz.prm.utils.assertions.contacts.ReferralAssertions.assertReferral;
+import static cz.prm.utils.data.contacts.ReferralUtils.referral;
+import static cz.prm.utils.data.contacts.ReferralUtils.referrals;
+import static cz.prm.utils.data.contacts.ReferralUtils.referralsQuery;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
