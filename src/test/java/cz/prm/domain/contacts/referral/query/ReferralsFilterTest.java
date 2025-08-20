@@ -3,7 +3,6 @@ package cz.prm.domain.contacts.referral.query;
 import static cz.prm.utils.TestUtils.uuid;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.domain.contacts.referral.query.ReferralsFilter;
 import org.junit.jupiter.api.Test;
 
 class ReferralsFilterTest {

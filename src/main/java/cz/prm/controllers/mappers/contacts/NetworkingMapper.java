@@ -4,7 +4,6 @@ import static org.mapstruct.InjectionStrategy.FIELD;
 
 import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contacts.networking.ReferralSuggestionDto;
-import cz.prm.controllers.mappers.contacts.ContactMapper;
 import cz.prm.domain.common.query.Page;
 import cz.prm.domain.contacts.networking.ReferralSuggestion;
 import org.mapstruct.Mapper;

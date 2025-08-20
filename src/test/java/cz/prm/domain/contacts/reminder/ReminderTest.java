@@ -5,7 +5,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import cz.prm.domain.contacts.recurrence.Recurrence;
-import cz.prm.domain.contacts.reminder.Reminder;
 import org.junit.jupiter.api.Test;
 
 class ReminderTest {

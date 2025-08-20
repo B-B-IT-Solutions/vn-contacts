@@ -8,7 +8,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.dmfs.rfc5545.DateTime.parse;
 import static org.mockito.ArgumentMatchers.anyString;
 
-import cz.prm.domain.contacts.recurrence.Recurrence;
 import java.time.Instant;
 import org.dmfs.rfc5545.DateTime;
 import org.junit.jupiter.api.Test;
