@@ -1,4 +1,4 @@
-package cz.prm.custom;
+package cz.prm.extensions.settings;
 
 import cz.prm.repositories.settings.AccountSettingsRepository;
 import org.springframework.context.annotation.Primary;

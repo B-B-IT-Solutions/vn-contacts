@@ -1,4 +1,4 @@
-package cz.prm.custom;
+package cz.prm.extensions.contacts;
 
 import cz.prm.domain.contacts.referral.Referral;
 import cz.prm.repositories.contacts.referral.ReferralRepository;

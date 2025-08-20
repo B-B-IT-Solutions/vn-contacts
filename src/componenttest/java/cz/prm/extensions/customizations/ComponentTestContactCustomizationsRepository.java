@@ -1,4 +1,4 @@
-package cz.prm.custom;
+package cz.prm.extensions.customizations;
 
 import cz.prm.repositories.customizations.ContactCustomizationsRepository;
 import org.springframework.context.annotation.Primary;

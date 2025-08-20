@@ -1,4 +1,4 @@
-package cz.prm.custom;
+package cz.prm.extensions.contacts;
 
 import cz.prm.domain.contacts.contact.Contact;
 import cz.prm.repositories.contacts.contact.ContactRepository;
