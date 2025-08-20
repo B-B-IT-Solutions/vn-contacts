@@ -1,6 +1,6 @@
 package cz.prm.repositories.contact;
 
-import static cz.prm.domain.contact.querydsl.QContact.contact;
+import static cz.prm.domain.contacts.contact.querydsl.QContact.contact;
 import static cz.prm.repositories.common.query.PredicateCriteriaUtils.applyCriteria;
 import static cz.prm.security.SecurityContextUtils.getUser;
 

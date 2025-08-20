@@ -1,6 +1,6 @@
 package cz.prm.repositories.note;
 
-import static cz.prm.domain.note.querydsl.QNote.note;
+import static cz.prm.domain.contacts.note.querydsl.QNote.note;
 import static cz.prm.repositories.common.query.PredicateCriteriaUtils.applyCriteria;
 import static cz.prm.security.SecurityContextUtils.getUser;
 

@@ -1,6 +1,6 @@
 package cz.prm.repositories.reminder;
 
-import static cz.prm.domain.reminder.querydsl.QReminder.reminder;
+import static cz.prm.domain.contacts.reminder.querydsl.QReminder.reminder;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;

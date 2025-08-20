@@ -1,6 +1,6 @@
 package cz.prm.repositories.contact;
 
-import static cz.prm.domain.contact.querydsl.QAbout.about;
+import static cz.prm.domain.contacts.contact.querydsl.QAbout.about;
 import static cz.prm.security.SecurityContextUtils.getUser;
 
 import com.querydsl.core.types.Predicate;

@@ -1,6 +1,6 @@
 package cz.prm.repositories.task;
 
-import static cz.prm.domain.task.querydsl.QTask.task;
+import static cz.prm.domain.contacts.task.querydsl.QTask.task;
 import static cz.prm.repositories.common.query.PredicateCriteriaUtils.applyCriteria;
 import static cz.prm.security.SecurityContextUtils.getUser;
 
