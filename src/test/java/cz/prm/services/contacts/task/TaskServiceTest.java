@@ -2,9 +2,9 @@ package cz.prm.services.contacts.task;
 
 import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.TestUtils.randomLong;
-import static cz.prm.utils.assertions.RecurrenceAssertions.assertRecurrences;
-import static cz.prm.utils.assertions.TaskAssertions.assertPage;
-import static cz.prm.utils.assertions.TaskAssertions.assertTask;
+import static cz.prm.utils.assertions.contacts.RecurrenceAssertions.assertRecurrences;
+import static cz.prm.utils.assertions.contacts.TaskAssertions.assertPage;
+import static cz.prm.utils.assertions.contacts.TaskAssertions.assertTask;
 import static cz.prm.utils.data.contacts.TaskUtils.task;
 import static cz.prm.utils.data.contacts.TaskUtils.tasks;
 import static cz.prm.utils.data.contacts.TaskUtils.tasksQuery;

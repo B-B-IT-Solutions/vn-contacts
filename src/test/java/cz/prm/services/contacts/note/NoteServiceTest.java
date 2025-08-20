@@ -2,7 +2,7 @@ package cz.prm.services.contacts.note;
 
 import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.TestUtils.randomLong;
-import static cz.prm.utils.assertions.NoteAssertions.assertNote;
+import static cz.prm.utils.assertions.contacts.NoteAssertions.assertNote;
 import static cz.prm.utils.data.contacts.NoteUtils.note;
 import static cz.prm.utils.data.contacts.NoteUtils.notes;
 import static cz.prm.utils.data.contacts.NoteUtils.notesQuery;
@@ -20,7 +20,7 @@ import cz.prm.domain.contacts.note.Note;
 import cz.prm.domain.contacts.note.query.NotesFilter;
 import cz.prm.repositories.contacts.note.NotePredicates;
 import cz.prm.repositories.contacts.note.NoteRepository;
-import cz.prm.utils.assertions.NoteAssertions;
+import cz.prm.utils.assertions.contacts.NoteAssertions;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

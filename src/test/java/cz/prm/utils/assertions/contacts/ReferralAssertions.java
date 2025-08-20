@@ -1,4 +1,4 @@
-package cz.prm.utils.assertions;
+package cz.prm.utils.assertions.contacts;
 
 import static cz.prm.utils.assertions.CommonAssertions.assertQuery;
 import static org.assertj.core.api.Assertions.assertThat;

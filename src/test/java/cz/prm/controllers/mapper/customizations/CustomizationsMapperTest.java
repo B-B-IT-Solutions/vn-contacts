@@ -1,6 +1,6 @@
 package cz.prm.controllers.mapper.customizations;
 
-import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
+import static cz.prm.utils.assertions.customizations.CustomizationsAssertions.assertSettings;
 import static cz.prm.utils.data.customizations.CustomizationsUtils.contactCustomizations;
 import static cz.prm.utils.data.customizations.CustomizationsUtils.contactCustomizationsDto;
 import static cz.prm.utils.data.customizations.CustomizationsUtils.noteCustomizations;

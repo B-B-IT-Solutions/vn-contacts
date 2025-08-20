@@ -2,9 +2,9 @@ package cz.prm.controllers.mapper.contacts;
 
 import static cz.prm.utils.CommonUtils.DEFAULT_PAGE_SIZE;
 import static cz.prm.utils.CommonUtils.page;
-import static cz.prm.utils.assertions.NoteAssertions.assertNote;
-import static cz.prm.utils.assertions.NoteAssertions.assertNotesQuery;
-import static cz.prm.utils.assertions.NoteAssertions.assertPage;
+import static cz.prm.utils.assertions.contacts.NoteAssertions.assertNote;
+import static cz.prm.utils.assertions.contacts.NoteAssertions.assertNotesQuery;
+import static cz.prm.utils.assertions.contacts.NoteAssertions.assertPage;
 import static cz.prm.utils.data.contacts.NoteUtils.note;
 import static cz.prm.utils.data.contacts.NoteUtils.noteDto;
 import static cz.prm.utils.data.contacts.NoteUtils.notes;

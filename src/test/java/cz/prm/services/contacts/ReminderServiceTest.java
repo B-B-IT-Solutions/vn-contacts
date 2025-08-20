@@ -1,7 +1,7 @@
 package cz.prm.services.contacts;
 
-import static cz.prm.utils.assertions.ReminderAssertions.assertReminder;
-import static cz.prm.utils.assertions.ReminderAssertions.assertReminders;
+import static cz.prm.utils.assertions.contacts.ReminderAssertions.assertReminder;
+import static cz.prm.utils.assertions.contacts.ReminderAssertions.assertReminders;
 import static cz.prm.utils.data.contacts.ReminderUtils.reminder;
 import static cz.prm.utils.data.contacts.ReminderUtils.reminders;
 import static java.util.Optional.empty;

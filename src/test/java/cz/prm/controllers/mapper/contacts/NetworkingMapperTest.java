@@ -1,8 +1,8 @@
 package cz.prm.controllers.mapper.contacts;
 
 import static cz.prm.utils.CommonUtils.page;
-import static cz.prm.utils.assertions.NetworkingAssertions.assertPage;
-import static cz.prm.utils.assertions.NetworkingAssertions.assertReferralSuggestion;
+import static cz.prm.utils.assertions.contacts.NetworkingAssertions.assertPage;
+import static cz.prm.utils.assertions.contacts.NetworkingAssertions.assertReferralSuggestion;
 import static cz.prm.utils.data.contacts.NetworkingUtils.referralSuggestion;
 import static cz.prm.utils.data.contacts.NetworkingUtils.referralSuggestions;
 

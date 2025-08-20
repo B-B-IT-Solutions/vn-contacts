@@ -2,9 +2,9 @@ package cz.prm.controllers.mapper.contacts;
 
 import static cz.prm.utils.CommonUtils.DEFAULT_PAGE_SIZE;
 import static cz.prm.utils.CommonUtils.page;
-import static cz.prm.utils.assertions.ReferralAssertions.assertPage;
-import static cz.prm.utils.assertions.ReferralAssertions.assertReferral;
-import static cz.prm.utils.assertions.ReferralAssertions.assertReferralsQuery;
+import static cz.prm.utils.assertions.contacts.ReferralAssertions.assertPage;
+import static cz.prm.utils.assertions.contacts.ReferralAssertions.assertReferral;
+import static cz.prm.utils.assertions.contacts.ReferralAssertions.assertReferralsQuery;
 import static cz.prm.utils.data.contacts.ReferralUtils.referral;
 import static cz.prm.utils.data.contacts.ReferralUtils.referralDto;
 import static cz.prm.utils.data.contacts.ReferralUtils.referrals;

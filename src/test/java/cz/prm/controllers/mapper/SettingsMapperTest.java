@@ -1,6 +1,6 @@
 package cz.prm.controllers.mapper;
 
-import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
+import static cz.prm.utils.assertions.settings.SettingsAssertions.assertSettings;
 import static cz.prm.utils.data.settings.SettingsUtils.accountSettings;
 import static cz.prm.utils.data.settings.SettingsUtils.notificationSettings;
 import static cz.prm.utils.data.settings.SettingsUtils.notificationSettingsDto;

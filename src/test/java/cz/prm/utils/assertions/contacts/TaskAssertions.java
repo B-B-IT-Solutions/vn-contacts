@@ -1,8 +1,8 @@
-package cz.prm.utils.assertions;
+package cz.prm.utils.assertions.contacts;
 
 import static cz.prm.utils.assertions.CommonAssertions.assertQuery;
-import static cz.prm.utils.assertions.RecurrenceAssertions.assertRecurrences;
-import static cz.prm.utils.assertions.RecurrenceAssertions.assertRecurrencesDto;
+import static cz.prm.utils.assertions.contacts.RecurrenceAssertions.assertRecurrences;
+import static cz.prm.utils.assertions.contacts.RecurrenceAssertions.assertRecurrencesDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;

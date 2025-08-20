@@ -1,7 +1,7 @@
 package cz.prm.services.contacts.networking.data;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static cz.prm.utils.assertions.NetworkingAssertions.assertContactReferralSuggestions;
+import static cz.prm.utils.assertions.contacts.NetworkingAssertions.assertContactReferralSuggestions;
 import static cz.prm.utils.data.contacts.ContactUtils.contact;
 import static cz.prm.utils.data.contacts.ContactUtils.contacts;
 import static cz.prm.utils.data.contacts.NetworkingUtils.contactPotentialReferrals;
