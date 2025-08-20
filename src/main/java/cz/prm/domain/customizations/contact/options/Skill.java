@@ -1,4 +1,4 @@
-package cz.prm.domain.settings.contact;
+package cz.prm.domain.customizations.contact.options;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

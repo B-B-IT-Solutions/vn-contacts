@@ -1,4 +1,4 @@
-package cz.prm.domain.settings.contact;
+package cz.prm.domain.customizations.contact.options;
 
 import static cz.prm.utils.TestUtils.uuid;
 import static org.assertj.core.api.Assertions.assertThat;

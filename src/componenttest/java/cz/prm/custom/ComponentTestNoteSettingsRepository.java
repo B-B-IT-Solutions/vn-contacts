@@ -1,6 +1,6 @@
 package cz.prm.custom;
 
-import cz.prm.repositories.settings.NoteSettingsRepository;
+import cz.prm.repositories.customizations.NoteSettingsRepository;
 import org.springframework.context.annotation.Primary;
 
 @Primary

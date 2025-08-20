@@ -2,10 +2,6 @@ package cz.prm.controllers;
 
 import static cz.prm.utils.MockitoUtils.returnParamAnswer;
 import static cz.prm.utils.SettingsUtils.accountSettings;
-import static cz.prm.utils.SettingsUtils.contactSettings;
-import static cz.prm.utils.SettingsUtils.contactSettingsDto;
-import static cz.prm.utils.SettingsUtils.noteSettings;
-import static cz.prm.utils.SettingsUtils.noteSettingsDto;
 import static cz.prm.utils.SettingsUtils.notificationSettings;
 import static cz.prm.utils.SettingsUtils.notificationSettingsDto;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
@@ -14,8 +10,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import cz.prm.controllers.mappers.SettingsMapper;
-import cz.prm.domain.settings.contact.ContactSettings;
-import cz.prm.domain.settings.note.NoteSettings;
 import cz.prm.domain.settings.notifications.NotificationSettings;
 import cz.prm.services.SettingsService;
 import cz.prm.utils.MapperUtils;
@@ -33,10 +27,6 @@ class SettingsControllerTest {
     @Mock
     private SettingsService settingsService;
     @Captor
-    private ArgumentCaptor<ContactSettings> contactSettingsCapt;
-    @Captor
-    private ArgumentCaptor<NoteSettings> noteSettingsCapt;
-    @Captor
     private ArgumentCaptor<NotificationSettings> notificationSettingsCapt;
 
     private SettingsMapper mapper = MapperUtils.getSettingsMapper();
@@ -53,40 +43,6 @@ class SettingsControllerTest {
         when(settingsService.getAccountSettings()).thenReturn(settings);
         var result = controller.getAccountSettings();
         assertSettings(settings, result);
-    }
-
-    @Test
-    void getContactSettings() {
-        var settings = contactSettings();
-        when(settingsService.getContactSettings()).thenReturn(settings);
-        var result = controller.getContactSettings();
-        assertSettings(settings, result);
-    }
-
-    @Test
-    void updateContactSettings() {
-        var dto = contactSettingsDto();
-        controller.updateContactSettings(dto);
-        verify(settingsService).updateContactSettings(contactSettingsCapt.capture());
-        var settings = contactSettingsCapt.getValue();
-        assertSettings(settings, dto);
-    }
-
-    @Test
-    void getNoteSettings() {
-        var settings = noteSettings();
-        when(settingsService.getNoteSettings()).thenReturn(settings);
-        var result = controller.getNoteSettings();
-        assertSettings(settings, result);
-    }
-
-    @Test
-    void updateNoteSettings() {
-        var dto = noteSettingsDto();
-        controller.updateNoteSettings(dto);
-        verify(settingsService).updateNoteSettings(noteSettingsCapt.capture());
-        var settings = noteSettingsCapt.getValue();
-        assertSettings(settings, dto);
     }
 
     @Test

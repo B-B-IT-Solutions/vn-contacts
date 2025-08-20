@@ -1,8 +1,9 @@
-package cz.prm.domain.settings.note;
+package cz.prm.domain.customizations.note;
 
 import static jakarta.persistence.FetchType.EAGER;
 
 import cz.prm.domain.common.User;
+import cz.prm.domain.customizations.note.options.Category;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.CollectionTable;

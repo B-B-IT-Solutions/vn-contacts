@@ -1,10 +1,10 @@
-package cz.prm.domain.settings.contact;
+package cz.prm.domain.customizations.contact.options;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_INDUSTRIES;
-import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_PRODUCTS;
-import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_SKILLS;
-import static cz.prm.domain.settings.contact.InitContactSettings.INITIAL_TARGET_MARKETS;
+import static cz.prm.domain.customizations.contact.InitContactSettings.INITIAL_INDUSTRIES;
+import static cz.prm.domain.customizations.contact.InitContactSettings.INITIAL_PRODUCTS;
+import static cz.prm.domain.customizations.contact.InitContactSettings.INITIAL_SKILLS;
+import static cz.prm.domain.customizations.contact.InitContactSettings.INITIAL_TARGET_MARKETS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;

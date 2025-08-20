@@ -1,6 +1,6 @@
 package cz.prm.custom;
 
-import cz.prm.repositories.settings.ContactSettingsRepository;
+import cz.prm.repositories.customizations.ContactSettingsRepository;
 import org.springframework.context.annotation.Primary;
 
 @Primary

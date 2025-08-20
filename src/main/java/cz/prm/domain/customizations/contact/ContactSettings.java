@@ -1,8 +1,13 @@
-package cz.prm.domain.settings.contact;
+package cz.prm.domain.customizations.contact;
 
 import static jakarta.persistence.FetchType.EAGER;
 
 import cz.prm.domain.common.User;
+import cz.prm.domain.customizations.contact.options.Industry;
+import cz.prm.domain.customizations.contact.options.Label;
+import cz.prm.domain.customizations.contact.options.Product;
+import cz.prm.domain.customizations.contact.options.Skill;
+import cz.prm.domain.customizations.contact.options.TargetMarket;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.CollectionTable;

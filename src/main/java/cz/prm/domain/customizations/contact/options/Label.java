@@ -1,4 +1,4 @@
-package cz.prm.domain.settings.note;
+package cz.prm.domain.customizations.contact.options;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
+public class Label {
 
     @Column(name = "VALUE")
     private String value;

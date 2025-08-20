@@ -1,8 +1,12 @@
-package cz.prm.domain.settings.contact;
+package cz.prm.domain.customizations.contact;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static lombok.AccessLevel.PRIVATE;
 
+import cz.prm.domain.customizations.contact.options.Industry;
+import cz.prm.domain.customizations.contact.options.Product;
+import cz.prm.domain.customizations.contact.options.Skill;
+import cz.prm.domain.customizations.contact.options.TargetMarket;
 import java.util.List;
 import lombok.NoArgsConstructor;
 

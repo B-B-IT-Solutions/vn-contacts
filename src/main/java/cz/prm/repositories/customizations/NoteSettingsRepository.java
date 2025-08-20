@@ -1,6 +1,6 @@
-package cz.prm.repositories.settings;
+package cz.prm.repositories.customizations;
 
-import cz.prm.domain.settings.note.NoteSettings;
+import cz.prm.domain.customizations.note.NoteSettings;
 import cz.prm.repositories.extensions.executors.PrmQuerydslPredicateExecutor;
 import cz.prm.repositories.extensions.repositories.RefreshAwareRepository;
 

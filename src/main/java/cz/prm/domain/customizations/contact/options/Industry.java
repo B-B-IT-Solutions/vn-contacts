@@ -1,4 +1,4 @@
-package cz.prm.domain.settings.contact;
+package cz.prm.domain.customizations.contact.options;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TargetMarket {
+public class Industry {
 
     @Column(name = "VALUE")
     private String value;
@@ -18,7 +18,7 @@ public class TargetMarket {
     @Column(name = "COLOR")
     private String color;
 
-    public TargetMarket(String value) {
+    public Industry(String value) {
         this.value = value;
     }
 }
