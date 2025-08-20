@@ -13,7 +13,6 @@ import cz.prm.controllers.dto.contacts.task.TaskDto;
 import cz.prm.controllers.dto.contacts.task.query.TasksFilterDto;
 import cz.prm.controllers.dto.contacts.task.query.TasksQueryDto;
 import cz.prm.domain.contacts.task.Task;
-import cz.prm.utils.TestUtils;
 
 public class TaskComponentTestUtils {
 
@@ -42,7 +41,7 @@ public class TaskComponentTestUtils {
         dto.setReferralId(referralId);
         dto.setName(uuid());
         dto.setDescription(uuid());
-        dto.setOutcomes(TestUtils.uuid());
+        dto.setOutcomes(uuid());
         dto.setStatus(TO_DO);
         dto.setPriority(HIGH);
         dto.setStartDate(todayStartOfDay());
