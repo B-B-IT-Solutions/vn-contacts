@@ -1,4 +1,4 @@
-package cz.prm.controllers.dto.settings.note;
+package cz.prm.controllers.dto.customizations.contact.options;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryDto {
+public class IndustryDto {
 
     @JsonProperty("value")
     private String value;

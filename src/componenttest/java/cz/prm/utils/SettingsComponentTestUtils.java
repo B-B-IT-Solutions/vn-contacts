@@ -3,12 +3,12 @@ package cz.prm.utils;
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 
-import cz.prm.controllers.dto.settings.contact.IndustryDto;
-import cz.prm.controllers.dto.settings.contact.LabelDto;
-import cz.prm.controllers.dto.settings.contact.ProductDto;
-import cz.prm.controllers.dto.settings.contact.SkillDto;
-import cz.prm.controllers.dto.settings.contact.TargetMarketDto;
-import cz.prm.controllers.dto.settings.note.CategoryDto;
+import cz.prm.controllers.dto.customizations.contact.options.IndustryDto;
+import cz.prm.controllers.dto.customizations.contact.options.LabelDto;
+import cz.prm.controllers.dto.customizations.contact.options.ProductDto;
+import cz.prm.controllers.dto.customizations.contact.options.SkillDto;
+import cz.prm.controllers.dto.customizations.contact.options.TargetMarketDto;
+import cz.prm.controllers.dto.customizations.note.options.CategoryDto;
 import java.util.List;
 
 public class SettingsComponentTestUtils {

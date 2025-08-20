@@ -1,6 +1,7 @@
-package cz.prm.controllers.dto.settings.note;
+package cz.prm.controllers.dto.customizations.note;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import cz.prm.controllers.dto.customizations.note.options.CategoryDto;
 import java.time.Instant;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NoteSettingsDto {
+public class NoteCustomizationsDto {
 
     @JsonProperty("settingsId")
     private Long settingsId;

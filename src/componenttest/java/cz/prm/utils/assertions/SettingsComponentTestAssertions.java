@@ -2,21 +2,21 @@ package cz.prm.utils.assertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.customizations.contact.ContactCustomizationsDto;
+import cz.prm.controllers.dto.customizations.contact.options.IndustryDto;
+import cz.prm.controllers.dto.customizations.contact.options.LabelDto;
+import cz.prm.controllers.dto.customizations.contact.options.ProductDto;
+import cz.prm.controllers.dto.customizations.contact.options.SkillDto;
+import cz.prm.controllers.dto.customizations.contact.options.TargetMarketDto;
+import cz.prm.controllers.dto.customizations.note.NoteCustomizationsDto;
+import cz.prm.controllers.dto.customizations.note.options.CategoryDto;
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
-import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
-import cz.prm.controllers.dto.settings.contact.IndustryDto;
-import cz.prm.controllers.dto.settings.contact.LabelDto;
-import cz.prm.controllers.dto.settings.contact.ProductDto;
-import cz.prm.controllers.dto.settings.contact.SkillDto;
-import cz.prm.controllers.dto.settings.contact.TargetMarketDto;
-import cz.prm.controllers.dto.settings.note.CategoryDto;
-import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
 import cz.prm.controllers.dto.settings.notifications.NotificationSettingsDto;
 import cz.prm.controllers.dto.settings.notifications.dials.ContactNotificationsDto;
 import cz.prm.controllers.dto.settings.notifications.dials.ReferralNotificationsDto;
 import cz.prm.controllers.dto.settings.notifications.dials.TaskNotificationsDto;
-import cz.prm.domain.customizations.contact.ContactSettings;
-import cz.prm.domain.customizations.note.NoteSettings;
+import cz.prm.domain.customizations.contact.ContactCustomizations;
+import cz.prm.domain.customizations.note.NoteCustomizations;
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.notifications.NotificationSettings;
 import java.util.List;
@@ -29,7 +29,7 @@ public class SettingsComponentTestAssertions {
         assertThat(dto.getAppLanguage()).isEqualTo(dto.getAppLanguage());
     }
 
-    public static void assertSettings(ContactSettings settings, ContactSettingsDto dto) {
+    public static void assertSettings(ContactCustomizations settings, ContactCustomizationsDto dto) {
         assertThat(dto.getSettingsId()).isEqualTo(settings.getSettingsId());
         assertThat(dto.getLastEditDate()).isNotNull();
         assertThat(dto.getLabels()).isEmpty();
@@ -39,7 +39,7 @@ public class SettingsComponentTestAssertions {
         assertThat(dto.getTargetMarkets()).isNotEmpty();
     }
 
-    public static void assertSettings(ContactSettingsDto dto1, ContactSettingsDto dto2) {
+    public static void assertSettings(ContactCustomizationsDto dto1, ContactCustomizationsDto dto2) {
         assertThat(dto1.getSettingsId()).isEqualTo(dto2.getSettingsId());
         assertLabelsDto(dto1.getLabels(), dto2.getLabels());
         assertIndustriesDto(dto1.getIndustries(), dto2.getIndustries());
@@ -48,13 +48,13 @@ public class SettingsComponentTestAssertions {
         assertTargetMarkets(dto1.getTargetMarkets(), dto2.getTargetMarkets());
     }
 
-    public static void assertSettings(NoteSettings settings, NoteSettingsDto dto) {
+    public static void assertSettings(NoteCustomizations settings, NoteCustomizationsDto dto) {
         assertThat(dto.getSettingsId()).isEqualTo(settings.getSettingsId());
         assertThat(dto.getLastEditDate()).isNotNull();
         assertThat(dto.getCategories()).isEmpty();
     }
 
-    public static void assertSettings(NoteSettingsDto dto1, NoteSettingsDto dto2) {
+    public static void assertSettings(NoteCustomizationsDto dto1, NoteCustomizationsDto dto2) {
         assertThat(dto1.getSettingsId()).isEqualTo(dto2.getSettingsId());
         assertCategoriesDto(dto1.getCategories(), dto2.getCategories());
     }

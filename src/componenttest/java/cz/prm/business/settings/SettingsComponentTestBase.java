@@ -5,9 +5,9 @@ import static cz.prm.utils.ComponentTestUser.USER_2;
 import static cz.prm.utils.ComponentTestUser.USER_3;
 
 import cz.prm.business.BusinessComponentTestBase;
+import cz.prm.controllers.dto.customizations.contact.ContactCustomizationsDto;
+import cz.prm.controllers.dto.customizations.note.NoteCustomizationsDto;
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
-import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
-import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
 import cz.prm.controllers.dto.settings.notifications.NotificationSettingsDto;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
@@ -32,27 +32,27 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
         return getAccountSettings(USER_3);
     }
 
-    protected ContactSettingsDto user1GetContactSettings() {
+    protected ContactCustomizationsDto user1GetContactSettings() {
         return getContactSettings(USER_1);
     }
 
-    protected ContactSettingsDto user2GetContactSettings() {
+    protected ContactCustomizationsDto user2GetContactSettings() {
         return getContactSettings(USER_2);
     }
 
-    protected ContactSettingsDto user3GetContactSettings() {
+    protected ContactCustomizationsDto user3GetContactSettings() {
         return getContactSettings(USER_3);
     }
 
-    protected NoteSettingsDto user1GetNoteSettings() {
+    protected NoteCustomizationsDto user1GetNoteSettings() {
         return getNoteSettings(USER_1);
     }
 
-    protected NoteSettingsDto user2GetNoteSettings() {
+    protected NoteCustomizationsDto user2GetNoteSettings() {
         return getNoteSettings(USER_2);
     }
 
-    protected NoteSettingsDto user3GetNoteSettings() {
+    protected NoteCustomizationsDto user3GetNoteSettings() {
         return getNoteSettings(USER_3);
     }
 
@@ -68,27 +68,27 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
         return getNotificationSettings(USER_3);
     }
 
-    protected void user1UpdateContactSettings(ContactSettingsDto dto) {
+    protected void user1UpdateContactSettings(ContactCustomizationsDto dto) {
         updateContactSettings(dto, USER_1);
     }
 
-    protected void user2UpdateContactSettings(ContactSettingsDto dto) {
+    protected void user2UpdateContactSettings(ContactCustomizationsDto dto) {
         updateContactSettings(dto, USER_2);
     }
 
-    protected void user3UpdateContactSettings(ContactSettingsDto dto) {
+    protected void user3UpdateContactSettings(ContactCustomizationsDto dto) {
         updateContactSettings(dto, USER_3);
     }
 
-    protected void user1UpdateNoteSettings(NoteSettingsDto dto) {
+    protected void user1UpdateNoteSettings(NoteCustomizationsDto dto) {
         updateNoteSettings(dto, USER_1);
     }
 
-    protected void user2UpdateNoteSettings(NoteSettingsDto dto) {
+    protected void user2UpdateNoteSettings(NoteCustomizationsDto dto) {
         updateNoteSettings(dto, USER_2);
     }
 
-    protected void user3UpdateNoteSettings(NoteSettingsDto dto) {
+    protected void user3UpdateNoteSettings(NoteCustomizationsDto dto) {
         updateNoteSettings(dto, USER_3);
     }
 
@@ -110,14 +110,14 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
         return getOne(ACCOUNT_SETTINGS_URL, user, typeRef);
     }
 
-    protected ContactSettingsDto getContactSettings(ComponentTestUser user) {
-        var typeRef = new TypeRef<ContactSettingsDto>() {
+    protected ContactCustomizationsDto getContactSettings(ComponentTestUser user) {
+        var typeRef = new TypeRef<ContactCustomizationsDto>() {
         };
         return getOne(CONTACT_SETTINGS_URL, user, typeRef);
     }
 
-    protected NoteSettingsDto getNoteSettings(ComponentTestUser user) {
-        var typeRef = new TypeRef<NoteSettingsDto>() {
+    protected NoteCustomizationsDto getNoteSettings(ComponentTestUser user) {
+        var typeRef = new TypeRef<NoteCustomizationsDto>() {
         };
         return getOne(NOTE_SETTINGS_URL, user, typeRef);
     }
@@ -128,11 +128,11 @@ public class SettingsComponentTestBase extends BusinessComponentTestBase {
         return getOne(NOTIFICATION_SETTINGS_URL, user, typeRef);
     }
 
-    protected void updateContactSettings(ContactSettingsDto dto, ComponentTestUser user) {
+    protected void updateContactSettings(ContactCustomizationsDto dto, ComponentTestUser user) {
         put(CONTACT_SETTINGS_URL, user, dto);
     }
 
-    protected void updateNoteSettings(NoteSettingsDto dto, ComponentTestUser user) {
+    protected void updateNoteSettings(NoteCustomizationsDto dto, ComponentTestUser user) {
         put(NOTE_SETTINGS_URL, user, dto);
     }
 

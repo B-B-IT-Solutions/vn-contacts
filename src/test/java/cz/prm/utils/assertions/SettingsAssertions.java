@@ -2,26 +2,26 @@ package cz.prm.utils.assertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.customizations.contact.ContactCustomizationsDto;
+import cz.prm.controllers.dto.customizations.contact.options.IndustryDto;
+import cz.prm.controllers.dto.customizations.contact.options.LabelDto;
+import cz.prm.controllers.dto.customizations.contact.options.ProductDto;
+import cz.prm.controllers.dto.customizations.contact.options.SkillDto;
+import cz.prm.controllers.dto.customizations.contact.options.TargetMarketDto;
+import cz.prm.controllers.dto.customizations.note.NoteCustomizationsDto;
+import cz.prm.controllers.dto.customizations.note.options.CategoryDto;
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
-import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
-import cz.prm.controllers.dto.settings.contact.IndustryDto;
-import cz.prm.controllers.dto.settings.contact.LabelDto;
-import cz.prm.controllers.dto.settings.contact.ProductDto;
-import cz.prm.controllers.dto.settings.contact.SkillDto;
-import cz.prm.controllers.dto.settings.contact.TargetMarketDto;
-import cz.prm.controllers.dto.settings.note.CategoryDto;
-import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
 import cz.prm.controllers.dto.settings.notifications.NotificationSettingsDto;
 import cz.prm.controllers.dto.settings.notifications.dials.ContactNotificationsDto;
 import cz.prm.controllers.dto.settings.notifications.dials.ReferralNotificationsDto;
 import cz.prm.controllers.dto.settings.notifications.dials.TaskNotificationsDto;
-import cz.prm.domain.customizations.contact.ContactSettings;
+import cz.prm.domain.customizations.contact.ContactCustomizations;
 import cz.prm.domain.customizations.contact.options.Industry;
 import cz.prm.domain.customizations.contact.options.Label;
 import cz.prm.domain.customizations.contact.options.Product;
 import cz.prm.domain.customizations.contact.options.Skill;
 import cz.prm.domain.customizations.contact.options.TargetMarket;
-import cz.prm.domain.customizations.note.NoteSettings;
+import cz.prm.domain.customizations.note.NoteCustomizations;
 import cz.prm.domain.customizations.note.options.Category;
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.notifications.NotificationSettings;
@@ -43,7 +43,7 @@ public class SettingsAssertions {
         assertThat(settings.getAppLanguage()).isEqualTo(dto.getAppLanguage());
     }
 
-    public static void assertSettings(ContactSettings settings1, ContactSettings settings2) {
+    public static void assertSettings(ContactCustomizations settings1, ContactCustomizations settings2) {
         assertThat(settings1.getSettingsId()).isEqualTo(settings2.getSettingsId());
         assertThat(settings1.getLabels()).containsExactlyElementsOf(settings2.getLabels());
         assertThat(settings1.getIndustries()).containsExactlyElementsOf(settings2.getIndustries());
@@ -52,7 +52,7 @@ public class SettingsAssertions {
         assertThat(settings1.getOwner()).isEqualTo(settings2.getOwner());
     }
 
-    public static void assertSettings(ContactSettings settings, ContactSettingsDto dto) {
+    public static void assertSettings(ContactCustomizations settings, ContactCustomizationsDto dto) {
         assertThat(settings.getSettingsId()).isEqualTo(dto.getSettingsId());
         assertThat(settings.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertLabels(settings.getLabels(), dto.getLabels());
@@ -62,14 +62,14 @@ public class SettingsAssertions {
         assertTargetMarkets(settings.getTargetMarkets(), dto.getTargetMarkets());
     }
 
-    public static void assertSettings(NoteSettings settings1, NoteSettings settings2) {
+    public static void assertSettings(NoteCustomizations settings1, NoteCustomizations settings2) {
         assertThat(settings1.getSettingsId()).isEqualTo(settings2.getSettingsId());
         assertThat(settings1.getCategories()).containsExactlyElementsOf(settings2.getCategories());
         assertThat(settings1.getLastEditDate()).isEqualTo(settings2.getLastEditDate());
         assertThat(settings1.getOwner()).isEqualTo(settings2.getOwner());
     }
 
-    public static void assertSettings(NoteSettings settings, NoteSettingsDto dto) {
+    public static void assertSettings(NoteCustomizations settings, NoteCustomizationsDto dto) {
         assertThat(settings.getSettingsId()).isEqualTo(dto.getSettingsId());
         assertThat(settings.getLastEditDate()).isEqualTo(dto.getLastEditDate());
         assertCategories(settings.getCategories(), dto.getCategories());

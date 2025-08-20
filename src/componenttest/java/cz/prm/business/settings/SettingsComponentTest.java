@@ -9,9 +9,9 @@ import static cz.prm.utils.SettingsComponentTestUtils.skillsDto;
 import static cz.prm.utils.SettingsComponentTestUtils.targetMarketsDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.controllers.dto.customizations.contact.ContactCustomizationsDto;
+import cz.prm.controllers.dto.customizations.note.NoteCustomizationsDto;
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
-import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
-import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
 import cz.prm.controllers.dto.settings.notifications.NotificationSettingsDto;
 import cz.prm.utils.assertions.SettingsComponentTestAssertions;
 import org.junit.jupiter.api.Test;
@@ -164,21 +164,21 @@ public class SettingsComponentTest extends SettingsComponentTestBase {
         SettingsComponentTestAssertions.assertSettings(settings, dto);
     }
 
-    private void assertSettings(ContactSettingsDto dto) {
+    private void assertSettings(ContactCustomizationsDto dto) {
         var settings = getContactSettingsFromDb(dto);
         SettingsComponentTestAssertions.assertSettings(settings, dto);
     }
 
-    private void assertSettings(ContactSettingsDto dto1, ContactSettingsDto dto2) {
+    private void assertSettings(ContactCustomizationsDto dto1, ContactCustomizationsDto dto2) {
         SettingsComponentTestAssertions.assertSettings(dto1, dto2);
     }
 
-    private void assertSettings(NoteSettingsDto dto) {
+    private void assertSettings(NoteCustomizationsDto dto) {
         var settings = getNoteSettingsFromDb(dto);
         SettingsComponentTestAssertions.assertSettings(settings, dto);
     }
 
-    private void assertSettings(NoteSettingsDto dto1, NoteSettingsDto dto2) {
+    private void assertSettings(NoteCustomizationsDto dto1, NoteCustomizationsDto dto2) {
         SettingsComponentTestAssertions.assertSettings(dto1, dto2);
     }
 

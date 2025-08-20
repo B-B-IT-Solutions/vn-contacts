@@ -11,7 +11,7 @@ import java.util.List;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = PRIVATE)
-public final class InitContactSettings {
+public final class InitContactCustomizations {
 
     public static final List<Industry> INITIAL_INDUSTRIES = newArrayList(new Industry("Construction"), new Industry("Data Science"),
         new Industry("Education"), new Industry("Finance"), new Industry("Healthcare"), new Industry("Health & Fitness"),

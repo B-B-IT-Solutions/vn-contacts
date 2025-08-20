@@ -33,7 +33,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NoteSettings {
+public class NoteCustomizations {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "NOTE_SETTINGS_SEQ")

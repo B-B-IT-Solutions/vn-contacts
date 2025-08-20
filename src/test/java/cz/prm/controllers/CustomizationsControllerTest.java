@@ -9,8 +9,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import cz.prm.controllers.mappers.customizations.CustomizationsMapper;
-import cz.prm.domain.customizations.contact.ContactSettings;
-import cz.prm.domain.customizations.note.NoteSettings;
+import cz.prm.domain.customizations.contact.ContactCustomizations;
+import cz.prm.domain.customizations.note.NoteCustomizations;
 import cz.prm.services.customizations.CustomizationsService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,9 +27,9 @@ class CustomizationsControllerTest {
     @Mock
     private CustomizationsService customizationsService;
     @Captor
-    private ArgumentCaptor<ContactSettings> contactSettingsCapt;
+    private ArgumentCaptor<ContactCustomizations> contactSettingsCapt;
     @Captor
-    private ArgumentCaptor<NoteSettings> noteSettingsCapt;
+    private ArgumentCaptor<NoteCustomizations> noteSettingsCapt;
 
     private CustomizationsMapper mapper = MapperUtils.getCustomizationsMapper();
     private CustomizationsController controller;

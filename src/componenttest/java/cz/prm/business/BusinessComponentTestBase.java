@@ -16,9 +16,9 @@ import cz.prm.controllers.dto.contacts.contact.DecoratedContactDto;
 import cz.prm.controllers.dto.contacts.note.NoteDto;
 import cz.prm.controllers.dto.contacts.referral.ReferralDto;
 import cz.prm.controllers.dto.contacts.task.TaskDto;
+import cz.prm.controllers.dto.customizations.contact.ContactCustomizationsDto;
+import cz.prm.controllers.dto.customizations.note.NoteCustomizationsDto;
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
-import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
-import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
 import cz.prm.controllers.dto.settings.notifications.NotificationSettingsDto;
 import cz.prm.custom.ComponentTestAboutRepository;
 import cz.prm.custom.ComponentTestAccountSettingsRepository;
@@ -34,8 +34,8 @@ import cz.prm.domain.contacts.contact.Contact;
 import cz.prm.domain.contacts.note.Note;
 import cz.prm.domain.contacts.referral.Referral;
 import cz.prm.domain.contacts.task.Task;
-import cz.prm.domain.customizations.contact.ContactSettings;
-import cz.prm.domain.customizations.note.NoteSettings;
+import cz.prm.domain.customizations.contact.ContactCustomizations;
+import cz.prm.domain.customizations.note.NoteCustomizations;
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.notifications.NotificationSettings;
 import cz.prm.utils.ComponentTestUser;
@@ -235,11 +235,11 @@ public class BusinessComponentTestBase extends ComponentTestBase {
         return accountSettingsRepository.getReferenceById(dto.getSettingsId());
     }
 
-    protected ContactSettings getContactSettingsFromDb(ContactSettingsDto dto) {
+    protected ContactCustomizations getContactSettingsFromDb(ContactCustomizationsDto dto) {
         return contactSettingsRepository.getReferenceById(dto.getSettingsId());
     }
 
-    protected NoteSettings getNoteSettingsFromDb(NoteSettingsDto dto) {
+    protected NoteCustomizations getNoteSettingsFromDb(NoteCustomizationsDto dto) {
         return noteSettingsRepository.getReferenceById(dto.getSettingsId());
     }
 

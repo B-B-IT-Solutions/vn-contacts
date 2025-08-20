@@ -25,7 +25,7 @@ class CustomizationsPredicatesTest {
             var user = user();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
             var query = predicates.contactSettings();
-            var expectedString = format("contactSettings.owner.username = %s", user.getUsername());
+            var expectedString = format("contactCustomizations.owner.username = %s", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }
     }
@@ -36,7 +36,7 @@ class CustomizationsPredicatesTest {
             var user = user();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
             var query = predicates.noteSettings();
-            var expectedString = format("noteSettings.owner.username = %s", user.getUsername());
+            var expectedString = format("noteCustomizations.owner.username = %s", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }
     }

@@ -1,6 +1,11 @@
-package cz.prm.controllers.dto.settings.contact;
+package cz.prm.controllers.dto.customizations.contact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import cz.prm.controllers.dto.customizations.contact.options.IndustryDto;
+import cz.prm.controllers.dto.customizations.contact.options.LabelDto;
+import cz.prm.controllers.dto.customizations.contact.options.ProductDto;
+import cz.prm.controllers.dto.customizations.contact.options.SkillDto;
+import cz.prm.controllers.dto.customizations.contact.options.TargetMarketDto;
 import java.time.Instant;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -10,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContactSettingsDto {
+public class ContactCustomizationsDto {
 
     @JsonProperty("settingsId")
     private Long settingsId;

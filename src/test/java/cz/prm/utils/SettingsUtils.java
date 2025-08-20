@@ -7,25 +7,25 @@ import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static java.time.Instant.now;
 
-import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
-import cz.prm.controllers.dto.settings.contact.IndustryDto;
-import cz.prm.controllers.dto.settings.contact.LabelDto;
-import cz.prm.controllers.dto.settings.contact.ProductDto;
-import cz.prm.controllers.dto.settings.contact.SkillDto;
-import cz.prm.controllers.dto.settings.contact.TargetMarketDto;
-import cz.prm.controllers.dto.settings.note.CategoryDto;
-import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
+import cz.prm.controllers.dto.customizations.contact.ContactCustomizationsDto;
+import cz.prm.controllers.dto.customizations.contact.options.IndustryDto;
+import cz.prm.controllers.dto.customizations.contact.options.LabelDto;
+import cz.prm.controllers.dto.customizations.contact.options.ProductDto;
+import cz.prm.controllers.dto.customizations.contact.options.SkillDto;
+import cz.prm.controllers.dto.customizations.contact.options.TargetMarketDto;
+import cz.prm.controllers.dto.customizations.note.NoteCustomizationsDto;
+import cz.prm.controllers.dto.customizations.note.options.CategoryDto;
 import cz.prm.controllers.dto.settings.notifications.NotificationSettingsDto;
 import cz.prm.controllers.dto.settings.notifications.dials.ContactNotificationsDto;
 import cz.prm.controllers.dto.settings.notifications.dials.ReferralNotificationsDto;
 import cz.prm.controllers.dto.settings.notifications.dials.TaskNotificationsDto;
-import cz.prm.domain.customizations.contact.ContactSettings;
+import cz.prm.domain.customizations.contact.ContactCustomizations;
 import cz.prm.domain.customizations.contact.options.Industry;
 import cz.prm.domain.customizations.contact.options.Label;
 import cz.prm.domain.customizations.contact.options.Product;
 import cz.prm.domain.customizations.contact.options.Skill;
 import cz.prm.domain.customizations.contact.options.TargetMarket;
-import cz.prm.domain.customizations.note.NoteSettings;
+import cz.prm.domain.customizations.note.NoteCustomizations;
 import cz.prm.domain.customizations.note.options.Category;
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.notifications.NotificationSettings;
@@ -43,8 +43,8 @@ public class SettingsUtils {
         return settings;
     }
 
-    public static ContactSettings contactSettings() {
-        var settings = new ContactSettings();
+    public static ContactCustomizations contactSettings() {
+        var settings = new ContactCustomizations();
         settings.setLabels(labels());
         settings.setIndustries(industries());
         settings.setSkills(skills());
@@ -55,8 +55,8 @@ public class SettingsUtils {
         return settings;
     }
 
-    public static ContactSettingsDto contactSettingsDto() {
-        var settings = new ContactSettingsDto();
+    public static ContactCustomizationsDto contactSettingsDto() {
+        var settings = new ContactCustomizationsDto();
         settings.setLabels(labelsDto());
         settings.setIndustries(industriesDto());
         settings.setSkills(skillsDto());
@@ -66,16 +66,16 @@ public class SettingsUtils {
         return settings;
     }
 
-    public static NoteSettings noteSettings() {
-        var settings = new NoteSettings();
+    public static NoteCustomizations noteSettings() {
+        var settings = new NoteCustomizations();
         settings.setCategories(categories());
         settings.setLastEditDate(now());
         settings.setOwner(user());
         return settings;
     }
 
-    public static NoteSettingsDto noteSettingsDto() {
-        var settings = new NoteSettingsDto();
+    public static NoteCustomizationsDto noteSettingsDto() {
+        var settings = new NoteCustomizationsDto();
         settings.setCategories(categoriesDto());
         settings.setLastEditDate(now());
         return settings;

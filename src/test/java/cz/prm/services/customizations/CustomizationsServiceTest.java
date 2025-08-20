@@ -1,9 +1,9 @@
 package cz.prm.services.customizations;
 
-import static cz.prm.domain.customizations.contact.InitContactSettings.INITIAL_INDUSTRIES;
-import static cz.prm.domain.customizations.contact.InitContactSettings.INITIAL_PRODUCTS;
-import static cz.prm.domain.customizations.contact.InitContactSettings.INITIAL_SKILLS;
-import static cz.prm.domain.customizations.contact.InitContactSettings.INITIAL_TARGET_MARKETS;
+import static cz.prm.domain.customizations.contact.InitContactCustomizations.INITIAL_INDUSTRIES;
+import static cz.prm.domain.customizations.contact.InitContactCustomizations.INITIAL_PRODUCTS;
+import static cz.prm.domain.customizations.contact.InitContactCustomizations.INITIAL_SKILLS;
+import static cz.prm.domain.customizations.contact.InitContactCustomizations.INITIAL_TARGET_MARKETS;
 import static cz.prm.utils.SettingsUtils.contactSettings;
 import static cz.prm.utils.SettingsUtils.noteSettings;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
@@ -15,8 +15,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
-import cz.prm.domain.customizations.contact.ContactSettings;
-import cz.prm.domain.customizations.note.NoteSettings;
+import cz.prm.domain.customizations.contact.ContactCustomizations;
+import cz.prm.domain.customizations.note.NoteCustomizations;
 import cz.prm.repositories.customizations.ContactSettingsRepository;
 import cz.prm.repositories.customizations.CustomizationsPredicates;
 import cz.prm.repositories.customizations.NoteSettingsRepository;
@@ -38,9 +38,9 @@ class CustomizationsServiceTest {
     @Mock
     private CustomizationsPredicates predicates;
     @Captor
-    private ArgumentCaptor<ContactSettings> contactSettingsCapt;
+    private ArgumentCaptor<ContactCustomizations> contactSettingsCapt;
     @Captor
-    private ArgumentCaptor<NoteSettings> noteSettingsCapt;
+    private ArgumentCaptor<NoteCustomizations> noteSettingsCapt;
 
     private CustomizationsService settingsService;
 
@@ -65,7 +65,7 @@ class CustomizationsServiceTest {
         var predicate = new BooleanBuilder();
         when(predicates.contactSettings()).thenReturn(predicate);
         when(contactSettingsRepository.findOne(predicate)).thenReturn(empty());
-        when(contactSettingsRepository.saveAndFlush(any(ContactSettings.class))).thenAnswer((invocation -> invocation.getArgument(0)));
+        when(contactSettingsRepository.saveAndFlush(any(ContactCustomizations.class))).thenAnswer((invocation -> invocation.getArgument(0)));
 
         var result = settingsService.getContactSettings();
         assertThat(result).isNotNull();
@@ -92,7 +92,7 @@ class CustomizationsServiceTest {
         var predicate = new BooleanBuilder();
         when(predicates.noteSettings()).thenReturn(predicate);
         when(noteSettingsRepository.findOne(predicate)).thenReturn(empty());
-        when(noteSettingsRepository.saveAndFlush(any(NoteSettings.class))).thenAnswer((invocation -> invocation.getArgument(0)));
+        when(noteSettingsRepository.saveAndFlush(any(NoteCustomizations.class))).thenAnswer((invocation -> invocation.getArgument(0)));
 
         var result = settingsService.getNoteSettings();
         assertThat(result).isNotNull();
@@ -127,8 +127,8 @@ class CustomizationsServiceTest {
         assertNoteSettingFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
     }
 
-    private static void assertContactSettingFieldsUpdated(ContactSettings settingsInDb, ContactSettings updatedSettings,
-        ContactSettings savedSettings) {
+    private static void assertContactSettingFieldsUpdated(ContactCustomizations settingsInDb, ContactCustomizations updatedSettings,
+        ContactCustomizations savedSettings) {
         assertThat(settingsInDb.getSettingsId()).isEqualTo(savedSettings.getSettingsId());
         assertThat(settingsInDb.getOwner()).isEqualTo(savedSettings.getOwner());
         assertThat(savedSettings.getLabels()).isEqualTo(updatedSettings.getLabels());
@@ -138,7 +138,8 @@ class CustomizationsServiceTest {
         assertThat(savedSettings.getTargetMarkets()).isEqualTo(updatedSettings.getTargetMarkets());
     }
 
-    private static void assertNoteSettingFieldsUpdated(NoteSettings settingsInDb, NoteSettings updatedSettings, NoteSettings savedSettings) {
+    private static void assertNoteSettingFieldsUpdated(
+        NoteCustomizations settingsInDb, NoteCustomizations updatedSettings, NoteCustomizations savedSettings) {
         assertThat(settingsInDb.getSettingsId()).isEqualTo(savedSettings.getSettingsId());
         assertThat(settingsInDb.getOwner()).isEqualTo(savedSettings.getOwner());
         assertThat(savedSettings.getCategories()).isEqualTo(updatedSettings.getCategories());

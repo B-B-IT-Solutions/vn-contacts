@@ -1,22 +1,22 @@
 package cz.prm.controllers.mappers.customizations;
 
-import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
-import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
-import cz.prm.domain.customizations.contact.ContactSettings;
-import cz.prm.domain.customizations.note.NoteSettings;
+import cz.prm.controllers.dto.customizations.contact.ContactCustomizationsDto;
+import cz.prm.controllers.dto.customizations.note.NoteCustomizationsDto;
+import cz.prm.domain.customizations.contact.ContactCustomizations;
+import cz.prm.domain.customizations.note.NoteCustomizations;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface CustomizationsMapper {
 
-    ContactSettingsDto toContactSettingsDto(ContactSettings settings);
+    ContactCustomizationsDto toContactSettingsDto(ContactCustomizations settings);
 
     @Mapping(target = "owner", ignore = true)
-    ContactSettings toContactSettings(ContactSettingsDto dto);
+    ContactCustomizations toContactSettings(ContactCustomizationsDto dto);
 
-    NoteSettingsDto toNoteSettingsDto(NoteSettings settings);
+    NoteCustomizationsDto toNoteSettingsDto(NoteCustomizations settings);
 
     @Mapping(target = "owner", ignore = true)
-    NoteSettings toNoteSettings(NoteSettingsDto dto);
+    NoteCustomizations toNoteSettings(NoteCustomizationsDto dto);
 }

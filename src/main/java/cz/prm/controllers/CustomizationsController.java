@@ -1,7 +1,7 @@
 package cz.prm.controllers;
 
-import cz.prm.controllers.dto.settings.contact.ContactSettingsDto;
-import cz.prm.controllers.dto.settings.note.NoteSettingsDto;
+import cz.prm.controllers.dto.customizations.contact.ContactCustomizationsDto;
+import cz.prm.controllers.dto.customizations.note.NoteCustomizationsDto;
 import cz.prm.controllers.mappers.customizations.CustomizationsMapper;
 import cz.prm.services.customizations.CustomizationsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,25 +25,25 @@ public class CustomizationsController {
     }
 
     @GetMapping("/contact")
-    public ContactSettingsDto getContactSettings() {
+    public ContactCustomizationsDto getContactSettings() {
         var settings = customizationsService.getContactSettings();
         return mapper.toContactSettingsDto(settings);
     }
 
     @PutMapping("/contact")
-    public void updateContactSettings(@RequestBody ContactSettingsDto dto) {
+    public void updateContactSettings(@RequestBody ContactCustomizationsDto dto) {
         var settings = mapper.toContactSettings(dto);
         customizationsService.updateContactSettings(settings);
     }
 
     @GetMapping("/note")
-    public NoteSettingsDto getNoteSettings() {
+    public NoteCustomizationsDto getNoteSettings() {
         var settings = customizationsService.getNoteSettings();
         return mapper.toNoteSettingsDto(settings);
     }
 
     @PutMapping("/note")
-    public void updateNoteSettings(@RequestBody NoteSettingsDto dto) {
+    public void updateNoteSettings(@RequestBody NoteCustomizationsDto dto) {
         var settings = mapper.toNoteSettings(dto);
         customizationsService.updateNoteSettings(settings);
     }
