@@ -49,7 +49,7 @@ public class CustomizationsService {
     }
 
     private ContactCustomizations getOrCreateContactSettings() {
-        var predicate = predicates.contactSettings();
+        var predicate = predicates.contactCustomizations();
         var optional = contactCustomizationsRepository.findOne(predicate);
         if (optional.isEmpty()) {
             var settings = new ContactCustomizations();
@@ -65,7 +65,7 @@ public class CustomizationsService {
     }
 
     private NoteCustomizations getOrCreateNoteSettings() {
-        var predicate = predicates.noteSettings();
+        var predicate = predicates.noteCustomizations();
         var optional = noteCustomizaitonsRepository.findOne(predicate);
         if (optional.isEmpty()) {
             var settings = new NoteCustomizations();

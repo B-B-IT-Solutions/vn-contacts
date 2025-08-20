@@ -20,22 +20,22 @@ class CustomizationsPredicatesTest {
     }
 
     @Test
-    void contactSettings() {
+    void contactCustomizations() {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
             var user = user();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
-            var query = predicates.contactSettings();
+            var query = predicates.contactCustomizations();
             var expectedString = format("contactCustomizations.owner.username = %s", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }
     }
 
     @Test
-    void noteSettings() {
+    void noteCustomizations() {
         try (MockedStatic<SecurityContextUtils> context = Mockito.mockStatic(SecurityContextUtils.class)) {
             var user = user();
             context.when(() -> SecurityContextUtils.getUser()).thenReturn(user);
-            var query = predicates.noteSettings();
+            var query = predicates.noteCustomizations();
             var expectedString = format("noteCustomizations.owner.username = %s", user.getUsername());
             assertThat(query).hasToString(expectedString);
         }

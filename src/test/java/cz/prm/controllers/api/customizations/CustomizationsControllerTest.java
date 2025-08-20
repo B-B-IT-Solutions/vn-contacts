@@ -1,10 +1,10 @@
 package cz.prm.controllers.api.customizations;
 
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
-import static cz.prm.utils.data.customizations.CustomizationsUtils.contactSettings;
-import static cz.prm.utils.data.customizations.CustomizationsUtils.contactSettingsDto;
-import static cz.prm.utils.data.customizations.CustomizationsUtils.noteSettings;
-import static cz.prm.utils.data.customizations.CustomizationsUtils.noteSettingsDto;
+import static cz.prm.utils.data.customizations.CustomizationsUtils.contactCustomizations;
+import static cz.prm.utils.data.customizations.CustomizationsUtils.contactCustomizationsDto;
+import static cz.prm.utils.data.customizations.CustomizationsUtils.noteCustomizations;
+import static cz.prm.utils.data.customizations.CustomizationsUtils.noteCustomizationsDto;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -27,9 +27,9 @@ class CustomizationsControllerTest {
     @Mock
     private CustomizationsService customizationsService;
     @Captor
-    private ArgumentCaptor<ContactCustomizations> contactSettingsCapt;
+    private ArgumentCaptor<ContactCustomizations> contactCustomizationsCapt;
     @Captor
-    private ArgumentCaptor<NoteCustomizations> noteSettingsCapt;
+    private ArgumentCaptor<NoteCustomizations> noteCustomizationsCapt;
 
     private CustomizationsMapper mapper = MapperUtils.getCustomizationsMapper();
     private CustomizationsController controller;
@@ -41,35 +41,35 @@ class CustomizationsControllerTest {
 
     @Test
     void getContactCustomizations() {
-        var settings = contactSettings();
-        when(customizationsService.getContactCustomizations()).thenReturn(settings);
+        var customizations = contactCustomizations();
+        when(customizationsService.getContactCustomizations()).thenReturn(customizations);
         var result = controller.getContactCustomizations();
-        assertSettings(settings, result);
+        assertSettings(customizations, result);
     }
 
     @Test
     void updateContactCustomizations() {
-        var dto = contactSettingsDto();
+        var dto = contactCustomizationsDto();
         controller.updateContactCustomizations(dto);
-        verify(customizationsService).updateContactCustomizations(contactSettingsCapt.capture());
-        var settings = contactSettingsCapt.getValue();
+        verify(customizationsService).updateContactCustomizations(contactCustomizationsCapt.capture());
+        var settings = contactCustomizationsCapt.getValue();
         assertSettings(settings, dto);
     }
 
     @Test
     void getNoteCustomizations() {
-        var settings = noteSettings();
-        when(customizationsService.getNoteCustomizations()).thenReturn(settings);
+        var customizations = noteCustomizations();
+        when(customizationsService.getNoteCustomizations()).thenReturn(customizations);
         var result = controller.getNoteCustomizations();
-        assertSettings(settings, result);
+        assertSettings(customizations, result);
     }
 
     @Test
     void updateNoteCustomizations() {
-        var dto = noteSettingsDto();
+        var dto = noteCustomizationsDto();
         controller.updateNoteCustomizations(dto);
-        verify(customizationsService).updateNoteCustomizations(noteSettingsCapt.capture());
-        var settings = noteSettingsCapt.getValue();
+        verify(customizationsService).updateNoteCustomizations(noteCustomizationsCapt.capture());
+        var settings = noteCustomizationsCapt.getValue();
         assertSettings(settings, dto);
     }
 }

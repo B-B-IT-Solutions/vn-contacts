@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomizationsPredicates {
 
-    public Predicate contactSettings() {
+    public Predicate contactCustomizations() {
         var user = getUser();
         return contactCustomizations.owner.username.eq(user.getUsername());
     }
 
-    public Predicate noteSettings() {
+    public Predicate noteCustomizations() {
         var user = getUser();
         return noteCustomizations.owner.username.eq(user.getUsername());
     }

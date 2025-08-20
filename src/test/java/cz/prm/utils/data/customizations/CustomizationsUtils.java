@@ -25,7 +25,7 @@ import java.util.List;
 
 public class CustomizationsUtils {
 
-    public static ContactCustomizations contactSettings() {
+    public static ContactCustomizations contactCustomizations() {
         var settings = new ContactCustomizations();
         settings.setLabels(labels());
         settings.setIndustries(industries());
@@ -37,7 +37,7 @@ public class CustomizationsUtils {
         return settings;
     }
 
-    public static ContactCustomizationsDto contactSettingsDto() {
+    public static ContactCustomizationsDto contactCustomizationsDto() {
         var settings = new ContactCustomizationsDto();
         settings.setLabels(labelsDto());
         settings.setIndustries(industriesDto());
@@ -48,7 +48,7 @@ public class CustomizationsUtils {
         return settings;
     }
 
-    public static NoteCustomizations noteSettings() {
+    public static NoteCustomizations noteCustomizations() {
         var settings = new NoteCustomizations();
         settings.setCategories(categories());
         settings.setLastEditDate(now());
@@ -56,7 +56,7 @@ public class CustomizationsUtils {
         return settings;
     }
 
-    public static NoteCustomizationsDto noteSettingsDto() {
+    public static NoteCustomizationsDto noteCustomizationsDto() {
         var settings = new NoteCustomizationsDto();
         settings.setCategories(categoriesDto());
         settings.setLastEditDate(now());

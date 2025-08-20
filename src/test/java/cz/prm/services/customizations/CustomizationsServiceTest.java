@@ -5,8 +5,8 @@ import static cz.prm.domain.customizations.contact.InitContactCustomizations.INI
 import static cz.prm.domain.customizations.contact.InitContactCustomizations.INITIAL_SKILLS;
 import static cz.prm.domain.customizations.contact.InitContactCustomizations.INITIAL_TARGET_MARKETS;
 import static cz.prm.utils.assertions.SettingsAssertions.assertSettings;
-import static cz.prm.utils.data.customizations.CustomizationsUtils.contactSettings;
-import static cz.prm.utils.data.customizations.CustomizationsUtils.noteSettings;
+import static cz.prm.utils.data.customizations.CustomizationsUtils.contactCustomizations;
+import static cz.prm.utils.data.customizations.CustomizationsUtils.noteCustomizations;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,9 +38,9 @@ class CustomizationsServiceTest {
     @Mock
     private CustomizationsPredicates predicates;
     @Captor
-    private ArgumentCaptor<ContactCustomizations> contactSettingsCapt;
+    private ArgumentCaptor<ContactCustomizations> contactCustomizationsCapt;
     @Captor
-    private ArgumentCaptor<NoteCustomizations> noteSettingsCapt;
+    private ArgumentCaptor<NoteCustomizations> noteCustomizationsCapt;
 
     private CustomizationsService settingsService;
 
@@ -51,19 +51,19 @@ class CustomizationsServiceTest {
 
     @Test
     void getContactCustomizations() {
-        var settings = contactSettings();
+        var customizations = contactCustomizations();
         var predicate = new BooleanBuilder();
-        when(predicates.contactSettings()).thenReturn(predicate);
-        when(contactCustomizationsRepository.findOne(predicate)).thenReturn(of(settings));
+        when(predicates.contactCustomizations()).thenReturn(predicate);
+        when(contactCustomizationsRepository.findOne(predicate)).thenReturn(of(customizations));
 
         var result = settingsService.getContactCustomizations();
-        assertSettings(result, settings);
+        assertSettings(result, customizations);
     }
 
     @Test
     void getContactCustomizations_CustomizationsNotFound() {
         var predicate = new BooleanBuilder();
-        when(predicates.contactSettings()).thenReturn(predicate);
+        when(predicates.contactCustomizations()).thenReturn(predicate);
         when(contactCustomizationsRepository.findOne(predicate)).thenReturn(empty());
         when(contactCustomizationsRepository.saveAndFlush(any(ContactCustomizations.class))).thenAnswer((invocation -> invocation.getArgument(0)));
 
@@ -78,19 +78,19 @@ class CustomizationsServiceTest {
 
     @Test
     void getNoteCustomizations() {
-        var settings = noteSettings();
+        var customizations = noteCustomizations();
         var predicate = new BooleanBuilder();
-        when(predicates.noteSettings()).thenReturn(predicate);
-        when(noteCustomizaitonsRepository.findOne(predicate)).thenReturn(of(settings));
+        when(predicates.noteCustomizations()).thenReturn(predicate);
+        when(noteCustomizaitonsRepository.findOne(predicate)).thenReturn(of(customizations));
 
         var result = settingsService.getNoteCustomizations();
-        assertSettings(result, settings);
+        assertSettings(result, customizations);
     }
 
     @Test
     void getNoteCustomizations_CustomizationsNotFound() {
         var predicate = new BooleanBuilder();
-        when(predicates.noteSettings()).thenReturn(predicate);
+        when(predicates.noteCustomizations()).thenReturn(predicate);
         when(noteCustomizaitonsRepository.findOne(predicate)).thenReturn(empty());
         when(noteCustomizaitonsRepository.saveAndFlush(any(NoteCustomizations.class))).thenAnswer((invocation -> invocation.getArgument(0)));
 
@@ -101,29 +101,29 @@ class CustomizationsServiceTest {
 
     @Test
     void updateContactCustomizations() {
-        var settingsInDb = contactSettings();
-        var updatedSettings = contactSettings();
+        var settingsInDb = contactCustomizations();
+        var updatedSettings = contactCustomizations();
         var predicate = new BooleanBuilder();
-        when(predicates.contactSettings()).thenReturn(predicate);
+        when(predicates.contactCustomizations()).thenReturn(predicate);
         when(contactCustomizationsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
 
         settingsService.updateContactCustomizations(updatedSettings);
-        verify(contactCustomizationsRepository).save(contactSettingsCapt.capture());
-        var savedSettings = contactSettingsCapt.getValue();
+        verify(contactCustomizationsRepository).save(contactCustomizationsCapt.capture());
+        var savedSettings = contactCustomizationsCapt.getValue();
         assertContactCustomizationFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
     }
 
     @Test
     void updateNoteCustomizations() {
-        var settingsInDb = noteSettings();
-        var updatedSettings = noteSettings();
+        var settingsInDb = noteCustomizations();
+        var updatedSettings = noteCustomizations();
         var predicate = new BooleanBuilder();
-        when(predicates.noteSettings()).thenReturn(predicate);
+        when(predicates.noteCustomizations()).thenReturn(predicate);
         when(noteCustomizaitonsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
 
         settingsService.updateNoteCustomizations(updatedSettings);
-        verify(noteCustomizaitonsRepository).save(noteSettingsCapt.capture());
-        var savedSettings = noteSettingsCapt.getValue();
+        verify(noteCustomizaitonsRepository).save(noteCustomizationsCapt.capture());
+        var savedSettings = noteCustomizationsCapt.getValue();
         assertNoteCustomizationFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
     }
 
