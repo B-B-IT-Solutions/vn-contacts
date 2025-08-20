@@ -12,7 +12,7 @@ import io.restassured.common.mapper.TypeRef;
 
 public class CustomizationsComponentTestBase extends BusinessComponentTestBase {
 
-    protected static String CUSTOMIZATIONS_BASE_URL = "settings";
+    protected static String CUSTOMIZATIONS_BASE_URL = "customizations";
     protected static String CONTACT_CUSTOMIZATIONS_URL = CUSTOMIZATIONS_BASE_URL + "/contact";
     protected static String NOTE_CUSTOMIZATIONS_URL = CUSTOMIZATIONS_BASE_URL + "/note";
 

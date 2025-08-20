@@ -40,35 +40,35 @@ class CustomizationsControllerTest {
     }
 
     @Test
-    void getContactSettings() {
+    void getContactCustomizations() {
         var settings = contactSettings();
-        when(customizationsService.getContactSettings()).thenReturn(settings);
-        var result = controller.getContactSettings();
+        when(customizationsService.getContactCustomizations()).thenReturn(settings);
+        var result = controller.getContactCustomizations();
         assertSettings(settings, result);
     }
 
     @Test
-    void updateContactSettings() {
+    void updateContactCustomizations() {
         var dto = contactSettingsDto();
-        controller.updateContactSettings(dto);
-        verify(customizationsService).updateContactSettings(contactSettingsCapt.capture());
+        controller.updateContactCustomizations(dto);
+        verify(customizationsService).updateContactCustomizations(contactSettingsCapt.capture());
         var settings = contactSettingsCapt.getValue();
         assertSettings(settings, dto);
     }
 
     @Test
-    void getNoteSettings() {
+    void getNoteCustomizations() {
         var settings = noteSettings();
-        when(customizationsService.getNoteSettings()).thenReturn(settings);
-        var result = controller.getNoteSettings();
+        when(customizationsService.getNoteCustomizations()).thenReturn(settings);
+        var result = controller.getNoteCustomizations();
         assertSettings(settings, result);
     }
 
     @Test
-    void updateNoteSettings() {
+    void updateNoteCustomizations() {
         var dto = noteSettingsDto();
-        controller.updateNoteSettings(dto);
-        verify(customizationsService).updateNoteSettings(noteSettingsCapt.capture());
+        controller.updateNoteCustomizations(dto);
+        verify(customizationsService).updateNoteCustomizations(noteSettingsCapt.capture());
         var settings = noteSettingsCapt.getValue();
         assertSettings(settings, dto);
     }

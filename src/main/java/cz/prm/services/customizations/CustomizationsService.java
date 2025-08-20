@@ -28,21 +28,21 @@ public class CustomizationsService {
         this.predicates = predicates;
     }
 
-    public ContactCustomizations getContactSettings() {
+    public ContactCustomizations getContactCustomizations() {
         return getOrCreateContactSettings();
     }
 
-    public NoteCustomizations getNoteSettings() {
+    public NoteCustomizations getNoteCustomizations() {
         return getOrCreateNoteSettings();
     }
 
-    public void updateContactSettings(ContactCustomizations updatedSettings) {
+    public void updateContactCustomizations(ContactCustomizations updatedSettings) {
         var settings = getOrCreateContactSettings();
         updateContactSettingFields(settings, updatedSettings);
         contactCustomizationsRepository.save(settings);
     }
 
-    public void updateNoteSettings(NoteCustomizations updatedSettings) {
+    public void updateNoteCustomizations(NoteCustomizations updatedSettings) {
         var settings = getOrCreateNoteSettings();
         updateNoteSettingFields(settings, updatedSettings);
         noteCustomizaitonsRepository.save(settings);

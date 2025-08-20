@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("settings")
+@RequestMapping("customizations")
 @RestController
 public class CustomizationsController {
 
@@ -25,26 +25,26 @@ public class CustomizationsController {
     }
 
     @GetMapping("/contact")
-    public ContactCustomizationsDto getContactSettings() {
-        var settings = customizationsService.getContactSettings();
-        return mapper.toContactSettingsDto(settings);
+    public ContactCustomizationsDto getContactCustomizations() {
+        var settings = customizationsService.getContactCustomizations();
+        return mapper.toContactCustomizationsDto(settings);
     }
 
     @PutMapping("/contact")
-    public void updateContactSettings(@RequestBody ContactCustomizationsDto dto) {
-        var settings = mapper.toContactSettings(dto);
-        customizationsService.updateContactSettings(settings);
+    public void updateContactCustomizations(@RequestBody ContactCustomizationsDto dto) {
+        var settings = mapper.toContactCustomizations(dto);
+        customizationsService.updateContactCustomizations(settings);
     }
 
     @GetMapping("/note")
-    public NoteCustomizationsDto getNoteSettings() {
-        var settings = customizationsService.getNoteSettings();
-        return mapper.toNoteSettingsDto(settings);
+    public NoteCustomizationsDto getNoteCustomizations() {
+        var settings = customizationsService.getNoteCustomizations();
+        return mapper.toNoteCustomizationsDto(settings);
     }
 
     @PutMapping("/note")
-    public void updateNoteSettings(@RequestBody NoteCustomizationsDto dto) {
-        var settings = mapper.toNoteSettings(dto);
-        customizationsService.updateNoteSettings(settings);
+    public void updateNoteCustomizations(@RequestBody NoteCustomizationsDto dto) {
+        var settings = mapper.toNoteCustomizations(dto);
+        customizationsService.updateNoteCustomizations(settings);
     }
 }

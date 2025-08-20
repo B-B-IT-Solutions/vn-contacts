@@ -14,30 +14,30 @@ class CustomizationsMapperTest {
     private CustomizationsMapper mapper = MapperUtils.getCustomizationsMapper();
 
     @Test
-    void toContactSettingsDto() {
+    void toContactCustomizationsDto() {
         var settings = contactSettings();
-        var dto = mapper.toContactSettingsDto(settings);
+        var dto = mapper.toContactCustomizationsDto(settings);
         assertSettings(settings, dto);
     }
 
     @Test
-    void toContactSettings() {
+    void toContactCustomizations() {
         var dto = contactSettingsDto();
-        var settings = mapper.toContactSettings(dto);
+        var settings = mapper.toContactCustomizations(dto);
         assertSettings(settings, dto);
     }
 
     @Test
-    void toNoteSettingsDto() {
+    void toNoteCustomizationsDto() {
         var settings = noteSettings();
-        var dto = mapper.toNoteSettingsDto(settings);
+        var dto = mapper.toNoteCustomizationsDto(settings);
         assertSettings(settings, dto);
     }
 
     @Test
-    void toNoteSettings() {
+    void toNoteCustomizations() {
         var dto = noteSettingsDto();
-        var settings = mapper.toNoteSettings(dto);
+        var settings = mapper.toNoteCustomizations(dto);
         assertSettings(settings, dto);
     }
 }

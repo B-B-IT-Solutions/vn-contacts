@@ -50,24 +50,24 @@ class CustomizationsServiceTest {
     }
 
     @Test
-    void getContactSettings() {
+    void getContactCustomizations() {
         var settings = contactSettings();
         var predicate = new BooleanBuilder();
         when(predicates.contactSettings()).thenReturn(predicate);
         when(contactCustomizationsRepository.findOne(predicate)).thenReturn(of(settings));
 
-        var result = settingsService.getContactSettings();
+        var result = settingsService.getContactCustomizations();
         assertSettings(result, settings);
     }
 
     @Test
-    void getContactSettings_SettingsNotFound() {
+    void getContactCustomizations_CustomizationsNotFound() {
         var predicate = new BooleanBuilder();
         when(predicates.contactSettings()).thenReturn(predicate);
         when(contactCustomizationsRepository.findOne(predicate)).thenReturn(empty());
         when(contactCustomizationsRepository.saveAndFlush(any(ContactCustomizations.class))).thenAnswer((invocation -> invocation.getArgument(0)));
 
-        var result = settingsService.getContactSettings();
+        var result = settingsService.getContactCustomizations();
         assertThat(result).isNotNull();
         assertThat(result.getIndustries()).containsExactlyElementsOf(INITIAL_INDUSTRIES);
         assertThat(result.getSkills()).containsExactlyElementsOf(INITIAL_SKILLS);
@@ -77,57 +77,57 @@ class CustomizationsServiceTest {
     }
 
     @Test
-    void getNoteSettings() {
+    void getNoteCustomizations() {
         var settings = noteSettings();
         var predicate = new BooleanBuilder();
         when(predicates.noteSettings()).thenReturn(predicate);
         when(noteCustomizaitonsRepository.findOne(predicate)).thenReturn(of(settings));
 
-        var result = settingsService.getNoteSettings();
+        var result = settingsService.getNoteCustomizations();
         assertSettings(result, settings);
     }
 
     @Test
-    void getNoteSettings_SettingsNotFound() {
+    void getNoteCustomizations_CustomizationsNotFound() {
         var predicate = new BooleanBuilder();
         when(predicates.noteSettings()).thenReturn(predicate);
         when(noteCustomizaitonsRepository.findOne(predicate)).thenReturn(empty());
         when(noteCustomizaitonsRepository.saveAndFlush(any(NoteCustomizations.class))).thenAnswer((invocation -> invocation.getArgument(0)));
 
-        var result = settingsService.getNoteSettings();
+        var result = settingsService.getNoteCustomizations();
         assertThat(result).isNotNull();
         verify(noteCustomizaitonsRepository).refresh(result);
     }
 
     @Test
-    void updateContactSettings() {
+    void updateContactCustomizations() {
         var settingsInDb = contactSettings();
         var updatedSettings = contactSettings();
         var predicate = new BooleanBuilder();
         when(predicates.contactSettings()).thenReturn(predicate);
         when(contactCustomizationsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
 
-        settingsService.updateContactSettings(updatedSettings);
+        settingsService.updateContactCustomizations(updatedSettings);
         verify(contactCustomizationsRepository).save(contactSettingsCapt.capture());
         var savedSettings = contactSettingsCapt.getValue();
-        assertContactSettingFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
+        assertContactCustomizationFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
     }
 
     @Test
-    void updateNoteSettings() {
+    void updateNoteCustomizations() {
         var settingsInDb = noteSettings();
         var updatedSettings = noteSettings();
         var predicate = new BooleanBuilder();
         when(predicates.noteSettings()).thenReturn(predicate);
         when(noteCustomizaitonsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
 
-        settingsService.updateNoteSettings(updatedSettings);
+        settingsService.updateNoteCustomizations(updatedSettings);
         verify(noteCustomizaitonsRepository).save(noteSettingsCapt.capture());
         var savedSettings = noteSettingsCapt.getValue();
-        assertNoteSettingFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
+        assertNoteCustomizationFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
     }
 
-    private static void assertContactSettingFieldsUpdated(ContactCustomizations settingsInDb, ContactCustomizations updatedSettings,
+    private static void assertContactCustomizationFieldsUpdated(ContactCustomizations settingsInDb, ContactCustomizations updatedSettings,
         ContactCustomizations savedSettings) {
         assertThat(settingsInDb.getSettingsId()).isEqualTo(savedSettings.getSettingsId());
         assertThat(settingsInDb.getOwner()).isEqualTo(savedSettings.getOwner());
@@ -138,8 +138,8 @@ class CustomizationsServiceTest {
         assertThat(savedSettings.getTargetMarkets()).isEqualTo(updatedSettings.getTargetMarkets());
     }
 
-    private static void assertNoteSettingFieldsUpdated(
-        NoteCustomizations settingsInDb, NoteCustomizations updatedSettings, NoteCustomizations savedSettings) {
+    private static void assertNoteCustomizationFieldsUpdated(NoteCustomizations settingsInDb, NoteCustomizations updatedSettings,
+        NoteCustomizations savedSettings) {
         assertThat(settingsInDb.getSettingsId()).isEqualTo(savedSettings.getSettingsId());
         assertThat(settingsInDb.getOwner()).isEqualTo(savedSettings.getOwner());
         assertThat(savedSettings.getCategories()).isEqualTo(updatedSettings.getCategories());

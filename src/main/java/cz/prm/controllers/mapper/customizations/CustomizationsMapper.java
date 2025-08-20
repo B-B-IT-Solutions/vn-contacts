@@ -10,13 +10,13 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface CustomizationsMapper {
 
-    ContactCustomizationsDto toContactSettingsDto(ContactCustomizations settings);
+    ContactCustomizationsDto toContactCustomizationsDto(ContactCustomizations settings);
 
     @Mapping(target = "owner", ignore = true)
-    ContactCustomizations toContactSettings(ContactCustomizationsDto dto);
+    ContactCustomizations toContactCustomizations(ContactCustomizationsDto dto);
 
-    NoteCustomizationsDto toNoteSettingsDto(NoteCustomizations settings);
+    NoteCustomizationsDto toNoteCustomizationsDto(NoteCustomizations settings);
 
     @Mapping(target = "owner", ignore = true)
-    NoteCustomizations toNoteSettings(NoteCustomizationsDto dto);
+    NoteCustomizations toNoteCustomizations(NoteCustomizationsDto dto);
 }
