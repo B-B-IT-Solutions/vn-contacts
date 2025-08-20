@@ -1,8 +1,7 @@
-package cz.prm.domain.contact.query;
+package cz.prm.domain.contacts.contact.query;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.domain.contacts.contact.query.ContactsQuery;
 import org.junit.jupiter.api.Test;
 
 class ContactsQueryTest {

@@ -1,17 +1,16 @@
-package cz.prm.domain.task.query;
+package cz.prm.domain.contacts.referral.query;
 
-import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.domain.contacts.task.query.TasksFilter;
+import cz.prm.domain.contacts.referral.query.ReferralsFilter;
 import org.junit.jupiter.api.Test;
 
-class TasksFilterTest {
+class ReferralsFilterTest {
 
     @Test
     void isGlobalFilter() {
-        var filter = new TasksFilter();
+        var filter = new ReferralsFilter();
         assertThat(filter.isGlobalFilter()).isFalse();
         filter.setGlobalFilter(null);
         assertThat(filter.isGlobalFilter()).isFalse();
@@ -24,28 +23,8 @@ class TasksFilterTest {
     }
 
     @Test
-    void isContactId() {
-        var filter = new TasksFilter();
-        assertThat(filter.isContactId()).isFalse();
-        filter.setContactId(null);
-        assertThat(filter.isContactId()).isFalse();
-        filter.setContactId(randomLong());
-        assertThat(filter.isContactId()).isTrue();
-    }
-
-    @Test
-    void isReferralId() {
-        var filter = new TasksFilter();
-        assertThat(filter.isReferralId()).isFalse();
-        filter.setReferralId(null);
-        assertThat(filter.isReferralId()).isFalse();
-        filter.setReferralId(randomLong());
-        assertThat(filter.isReferralId()).isTrue();
-    }
-
-    @Test
     void isName() {
-        var filter = new TasksFilter();
+        var filter = new ReferralsFilter();
         assertThat(filter.isName()).isFalse();
         filter.setName(null);
         assertThat(filter.isName()).isFalse();
@@ -59,7 +38,7 @@ class TasksFilterTest {
 
     @Test
     void isStatus() {
-        var filter = new TasksFilter();
+        var filter = new ReferralsFilter();
         assertThat(filter.isStatus()).isFalse();
         filter.setStatus(null);
         assertThat(filter.isStatus()).isFalse();
@@ -69,19 +48,5 @@ class TasksFilterTest {
         assertThat(filter.isStatus()).isFalse();
         filter.setStatus(uuid());
         assertThat(filter.isStatus()).isTrue();
-    }
-
-    @Test
-    void isEndDate() {
-        var filter = new TasksFilter();
-        assertThat(filter.isEndDate()).isFalse();
-        filter.setEndDate(null);
-        assertThat(filter.isEndDate()).isFalse();
-        filter.setEndDate("");
-        assertThat(filter.isEndDate()).isFalse();
-        filter.setEndDate(" ");
-        assertThat(filter.isEndDate()).isFalse();
-        filter.setEndDate(uuid());
-        assertThat(filter.isEndDate()).isTrue();
     }
 }

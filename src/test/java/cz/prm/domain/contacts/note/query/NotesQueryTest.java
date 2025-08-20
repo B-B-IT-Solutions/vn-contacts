@@ -1,8 +1,7 @@
-package cz.prm.domain.note.query;
+package cz.prm.domain.contacts.note.query;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.domain.contacts.note.query.NotesQuery;
 import org.junit.jupiter.api.Test;
 
 class NotesQueryTest {

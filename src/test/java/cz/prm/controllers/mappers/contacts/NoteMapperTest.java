@@ -1,4 +1,4 @@
-package cz.prm.controllers.mappers;
+package cz.prm.controllers.mappers.contacts;
 
 import static cz.prm.utils.CommonUtils.DEFAULT_PAGE_SIZE;
 import static cz.prm.utils.CommonUtils.page;
@@ -12,7 +12,6 @@ import static cz.prm.utils.assertions.NoteAssertions.assertPage;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.contacts.note.query.NotesQueryDto;
-import cz.prm.controllers.mappers.contacts.NoteMapper;
 import cz.prm.domain.contacts.note.query.NotesQuery;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.Test;

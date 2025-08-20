@@ -1,4 +1,4 @@
-package cz.prm.domain.referral.query;
+package cz.prm.domain.contacts.referral.query;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

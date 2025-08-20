@@ -1,4 +1,4 @@
-package cz.prm.controllers.mappers;
+package cz.prm.controllers.mappers.contacts;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.CommonUtils.DEFAULT_PAGE_SIZE;
@@ -16,7 +16,6 @@ import static cz.prm.utils.assertions.TaskAssertions.assertTasksQuery;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.contacts.task.query.TasksQueryDto;
-import cz.prm.controllers.mappers.contacts.TaskMapper;
 import cz.prm.domain.contacts.task.query.TasksQuery;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package cz.prm.domain.task.query;
+package cz.prm.domain.contacts.task.query;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

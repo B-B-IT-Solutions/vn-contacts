@@ -1,4 +1,4 @@
-package cz.prm.controllers.mappers;
+package cz.prm.controllers.mappers.contacts;
 
 import static cz.prm.utils.CommonUtils.DEFAULT_PAGE_SIZE;
 import static cz.prm.utils.CommonUtils.page;
@@ -21,7 +21,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.contacts.contact.AboutDto;
 import cz.prm.controllers.dto.contacts.contact.query.ContactsQueryDto;
-import cz.prm.controllers.mappers.contacts.ContactMapper;
 import cz.prm.domain.contacts.contact.DecoratedContact;
 import cz.prm.domain.contacts.contact.query.ContactsQuery;
 import cz.prm.utils.MapperUtils;

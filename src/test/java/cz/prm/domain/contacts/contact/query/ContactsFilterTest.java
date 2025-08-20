@@ -1,9 +1,8 @@
-package cz.prm.domain.contact.query;
+package cz.prm.domain.contacts.contact.query;
 
 import static cz.prm.utils.TestUtils.uuid;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.domain.contacts.contact.query.ContactsFilter;
 import org.junit.jupiter.api.Test;
 
 class ContactsFilterTest {

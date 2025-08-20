@@ -1,4 +1,4 @@
-package cz.prm.domain.reminder;
+package cz.prm.domain.contacts.reminder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;

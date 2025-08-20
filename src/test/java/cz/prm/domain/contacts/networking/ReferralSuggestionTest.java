@@ -1,4 +1,4 @@
-package cz.prm.domain.networking;
+package cz.prm.domain.contacts.networking;
 
 import static cz.prm.services.networking.data.scoring.ScoringCriteria.COMMON_INDUSTRIES;
 import static cz.prm.services.networking.data.scoring.ScoringCriteria.COMPLEMENTARY_SERVICES;
@@ -8,7 +8,6 @@ import static cz.prm.utils.TestUtils.randomInt;
 import static cz.prm.utils.TestUtils.uuid;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.domain.contacts.networking.ReferralSuggestion;
 import org.junit.jupiter.api.Test;
 
 class ReferralSuggestionTest {

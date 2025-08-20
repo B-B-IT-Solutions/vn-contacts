@@ -1,10 +1,9 @@
-package cz.prm.domain.contact;
+package cz.prm.domain.contacts.contact;
 
 import static cz.prm.utils.ContactUtils.firstInteraction;
 import static cz.prm.utils.TestUtils.randomLong;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.domain.contacts.contact.About;
 import org.junit.jupiter.api.Test;
 
 class AboutTest {
