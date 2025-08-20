@@ -1,4 +1,4 @@
-package cz.prm.business.tasks;
+package cz.prm.business.contacts.task;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.ComponentTestUser.USER_1;

@@ -1,4 +1,4 @@
-package cz.prm.business.referrals;
+package cz.prm.business.contacts.referral;
 
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;

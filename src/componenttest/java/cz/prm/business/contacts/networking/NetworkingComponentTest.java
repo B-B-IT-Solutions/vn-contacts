@@ -1,4 +1,4 @@
-package cz.prm.business.networking;
+package cz.prm.business.contacts.networking;
 
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;

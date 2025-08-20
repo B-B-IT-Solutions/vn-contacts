@@ -1,4 +1,4 @@
-package cz.prm.business.tasks;
+package cz.prm.business.contacts.task;
 
 import static cz.prm.utils.ComponentTestUser.USER_1;
 import static cz.prm.utils.ComponentTestUser.USER_2;
