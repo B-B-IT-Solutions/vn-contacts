@@ -5,9 +5,9 @@ import static cz.prm.utils.TimeUtils.useSystemDefaultTimeZone;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.querydsl.core.BooleanBuilder;
-import cz.prm.domain.contact.querydsl.QContact;
-import cz.prm.domain.note.querydsl.QNote;
-import cz.prm.domain.task.querydsl.QTask;
+import cz.prm.domain.contacts.contact.querydsl.QContact;
+import cz.prm.domain.contacts.note.querydsl.QNote;
+import cz.prm.domain.contacts.task.querydsl.QTask;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

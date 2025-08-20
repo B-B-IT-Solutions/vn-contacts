@@ -1,7 +1,7 @@
 package cz.prm.custom;
 
-import cz.prm.domain.contact.About;
-import cz.prm.repositories.contact.AboutRepository;
+import cz.prm.domain.contacts.contact.About;
+import cz.prm.repositories.contacts.contact.AboutRepository;
 import org.springframework.context.annotation.Primary;
 
 @Primary

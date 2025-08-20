@@ -4,11 +4,11 @@ import static cz.prm.utils.assertions.CommonAssertions.assertQuery;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
-import cz.prm.controllers.dto.referral.ReferralDto;
-import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
+import cz.prm.controllers.dto.contacts.referral.ReferralDto;
+import cz.prm.controllers.dto.contacts.referral.query.ReferralQueryDto;
 import cz.prm.domain.common.query.Page;
-import cz.prm.domain.referral.Referral;
-import cz.prm.domain.referral.query.ReferralsQuery;
+import cz.prm.domain.contacts.referral.Referral;
+import cz.prm.domain.contacts.referral.query.ReferralsQuery;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.data.domain.PageImpl;

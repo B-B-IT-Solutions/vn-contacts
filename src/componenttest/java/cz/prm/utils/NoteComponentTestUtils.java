@@ -7,10 +7,10 @@ import static java.lang.String.format;
 import static org.assertj.core.util.Lists.newArrayList;
 
 import cz.prm.controllers.dto.common.PaginationDto;
-import cz.prm.controllers.dto.note.NoteDto;
-import cz.prm.controllers.dto.note.query.NotesFilterDto;
-import cz.prm.controllers.dto.note.query.NotesQueryDto;
-import cz.prm.domain.note.Note;
+import cz.prm.controllers.dto.contacts.note.NoteDto;
+import cz.prm.controllers.dto.contacts.note.query.NotesFilterDto;
+import cz.prm.controllers.dto.contacts.note.query.NotesQueryDto;
+import cz.prm.domain.contacts.note.Note;
 import java.util.List;
 
 public class NoteComponentTestUtils {

@@ -2,7 +2,7 @@ package cz.prm.utils;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.domain.common.Priority.HIGH;
-import static cz.prm.domain.referral.ReferralStatus.TO_DO;
+import static cz.prm.domain.contacts.referral.ReferralStatus.TO_DO;
 import static cz.prm.utils.CommonUtils.pagination;
 import static cz.prm.utils.CommonUtils.paginationDto;
 import static cz.prm.utils.CommonUtils.user;
@@ -10,10 +10,10 @@ import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static java.time.Instant.now;
 
-import cz.prm.controllers.dto.referral.ReferralDto;
-import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
-import cz.prm.domain.referral.Referral;
-import cz.prm.domain.referral.query.ReferralsQuery;
+import cz.prm.controllers.dto.contacts.referral.ReferralDto;
+import cz.prm.controllers.dto.contacts.referral.query.ReferralQueryDto;
+import cz.prm.domain.contacts.referral.Referral;
+import cz.prm.domain.contacts.referral.query.ReferralsQuery;
 import java.util.List;
 
 public class ReferralUtils {

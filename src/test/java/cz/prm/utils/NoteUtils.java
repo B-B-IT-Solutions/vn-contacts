@@ -9,12 +9,12 @@ import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.TestUtils.uuids;
 import static java.time.Instant.now;
 
-import cz.prm.controllers.dto.note.NoteDto;
-import cz.prm.controllers.dto.note.query.NotesFilterDto;
-import cz.prm.controllers.dto.note.query.NotesQueryDto;
-import cz.prm.domain.note.Note;
-import cz.prm.domain.note.query.NotesFilter;
-import cz.prm.domain.note.query.NotesQuery;
+import cz.prm.controllers.dto.contacts.note.NoteDto;
+import cz.prm.controllers.dto.contacts.note.query.NotesFilterDto;
+import cz.prm.controllers.dto.contacts.note.query.NotesQueryDto;
+import cz.prm.domain.contacts.note.Note;
+import cz.prm.domain.contacts.note.query.NotesFilter;
+import cz.prm.domain.contacts.note.query.NotesQuery;
 import java.util.List;
 
 public class NoteUtils {

@@ -14,10 +14,10 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import cz.prm.controllers.mappers.ReferralMapper;
-import cz.prm.domain.referral.Referral;
-import cz.prm.domain.referral.query.ReferralsQuery;
-import cz.prm.services.referral.ReferralService;
+import cz.prm.controllers.mappers.contacts.ReferralMapper;
+import cz.prm.domain.contacts.referral.Referral;
+import cz.prm.domain.contacts.referral.query.ReferralsQuery;
+import cz.prm.services.contacts.referral.ReferralService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

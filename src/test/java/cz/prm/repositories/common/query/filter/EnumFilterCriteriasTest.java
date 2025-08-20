@@ -5,7 +5,7 @@ import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.domain.common.Priority;
-import cz.prm.domain.task.TaskStatus;
+import cz.prm.domain.contacts.task.TaskStatus;
 import org.junit.jupiter.api.Test;
 
 class EnumFilterCriteriasTest {

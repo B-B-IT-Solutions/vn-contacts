@@ -1,0 +1,83 @@
+package cz.prm.services.contacts.task;
+
+import static cz.prm.domain.common.PageRequests.getPageRequest;
+import static java.lang.String.format;
+
+import cz.prm.domain.common.query.Page;
+import cz.prm.domain.contacts.task.Task;
+import cz.prm.domain.contacts.task.query.TasksFilter;
+import cz.prm.domain.contacts.task.query.TasksQuery;
+import cz.prm.repositories.contacts.task.TaskPredicates;
+import cz.prm.repositories.contacts.task.TaskRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
+import java.util.function.Supplier;
+import org.springframework.stereotype.Service;
+
+@Service
+@Transactional
+public class TaskService {
+
+    private TaskRepository repository;
+    private TaskPredicates predicates;
+
+    public TaskService(TaskRepository repository, TaskPredicates predicates) {
+        this.repository = repository;
+        this.predicates = predicates;
+    }
+
+    public Page<Task> getTasks(TasksQuery query) {
+        var pageRequest = getPageRequest(query.getPagination(), query.resolveSort());
+        var predicate = predicates.tasks(query.getFilter());
+        var page = repository.findAll(predicate, pageRequest);
+        return new Page<>(page);
+    }
+
+    public Task getTask(Long taskId) {
+        return getTaskById(taskId);
+    }
+
+    public Task createTask(Task task) {
+        return repository.save(task);
+    }
+
+    public Task updateTask(Long taskId, Task updatedTask) {
+        var savedTask = getTaskById(taskId);
+        updateTaskFields(savedTask, updatedTask);
+        return repository.save(savedTask);
+    }
+
+    public void deleteTask(Long taskId) {
+        var savedTask = getTaskById(taskId);
+        repository.deleteById(savedTask.getTaskId());
+    }
+
+    public void deleteByContactId(Long contactId) {
+        var filter = new TasksFilter();
+        filter.setContactId(contactId);
+        var predicate = predicates.tasks(filter);
+        var notes = repository.findAll(predicate);
+        repository.deleteAll(notes);
+    }
+
+    private void updateTaskFields(Task savedTask, Task updatedTask) {
+        savedTask.setName(updatedTask.getName());
+        savedTask.setDescription(updatedTask.getDescription());
+        savedTask.setOutcomes(updatedTask.getOutcomes());
+        savedTask.setStatus(updatedTask.getStatus());
+        savedTask.setPriority(updatedTask.getPriority());
+        savedTask.setReminders(updatedTask.getReminders());
+        savedTask.setStartDate(updatedTask.getStartDate());
+        savedTask.setEndDate(updatedTask.getEndDate());
+    }
+
+    private Task getTaskById(Long taskId) {
+        var predicate = predicates.byTaskId(taskId);
+        var optional = repository.findOne(predicate);
+        return optional.orElseThrow(entityNotFoundSupplier(taskId));
+    }
+
+    private Supplier<EntityNotFoundException> entityNotFoundSupplier(Long userId) {
+        return () -> new EntityNotFoundException(format("Task for given id=[%s] not found!", userId));
+    }
+}

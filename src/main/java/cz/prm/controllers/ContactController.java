@@ -1,12 +1,12 @@
 package cz.prm.controllers;
 
 import cz.prm.controllers.dto.common.PageDto;
-import cz.prm.controllers.dto.contact.AboutDto;
-import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.DecoratedContactDto;
-import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
-import cz.prm.controllers.mappers.ContactMapper;
-import cz.prm.services.contact.ContactClearingHouse;
+import cz.prm.controllers.dto.contacts.contact.AboutDto;
+import cz.prm.controllers.dto.contacts.contact.ContactDto;
+import cz.prm.controllers.dto.contacts.contact.DecoratedContactDto;
+import cz.prm.controllers.dto.contacts.contact.query.ContactsQueryDto;
+import cz.prm.controllers.mappers.contacts.ContactMapper;
+import cz.prm.services.contacts.contact.ContactClearingHouse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

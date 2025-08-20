@@ -4,8 +4,8 @@ import static cz.prm.utils.TimeComponentTestUtils.ONE_SECOND_OFFSET;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
-import cz.prm.controllers.dto.referral.ReferralDto;
-import cz.prm.domain.referral.Referral;
+import cz.prm.controllers.dto.contacts.referral.ReferralDto;
+import cz.prm.domain.contacts.referral.Referral;
 import java.util.List;
 import java.util.Objects;
 

@@ -1,12 +1,12 @@
 package cz.prm.repositories.common.query.filter;
 
-import static cz.prm.domain.task.TaskStatus.IN_PROGRESS;
-import static cz.prm.domain.task.TaskStatus.TO_DO;
-import static cz.prm.domain.task.TaskStatus.WAITING;
+import static cz.prm.domain.contacts.task.TaskStatus.IN_PROGRESS;
+import static cz.prm.domain.contacts.task.TaskStatus.TO_DO;
+import static cz.prm.domain.contacts.task.TaskStatus.WAITING;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThrows;
 
-import cz.prm.domain.task.TaskStatus;
+import cz.prm.domain.contacts.task.TaskStatus;
 import org.junit.jupiter.api.Test;
 
 class EnumFilterCriteriaTest {

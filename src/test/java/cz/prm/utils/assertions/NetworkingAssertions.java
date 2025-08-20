@@ -4,11 +4,11 @@ import static cz.prm.utils.assertions.ContactAssertions.assertContact;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
-import cz.prm.controllers.dto.networking.ReferralSuggestionDto;
+import cz.prm.controllers.dto.contacts.networking.ReferralSuggestionDto;
 import cz.prm.domain.common.query.Page;
-import cz.prm.domain.contact.Contact;
-import cz.prm.domain.networking.ReferralRequirement;
-import cz.prm.domain.networking.ReferralSuggestion;
+import cz.prm.domain.contacts.contact.Contact;
+import cz.prm.domain.contacts.networking.ReferralRequirement;
+import cz.prm.domain.contacts.networking.ReferralSuggestion;
 import java.util.List;
 import java.util.Objects;
 

@@ -3,8 +3,8 @@ package cz.prm.utils.assertions;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
-import cz.prm.controllers.dto.note.NoteDto;
-import cz.prm.domain.note.Note;
+import cz.prm.controllers.dto.contacts.note.NoteDto;
+import cz.prm.domain.contacts.note.Note;
 import java.util.List;
 import java.util.Objects;
 

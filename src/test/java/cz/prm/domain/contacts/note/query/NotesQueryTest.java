@@ -1,0 +1,18 @@
+package cz.prm.domain.contacts.note.query;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+
+class NotesQueryTest {
+
+    private static final String DEFAULT_NOTES_SORT = "desc(creationDate)";
+
+    @Test
+    void newInstance() {
+        var query = new NotesQuery();
+        assertThat(query.getSort()).isEqualTo(DEFAULT_NOTES_SORT);
+        assertThat(query.getFilter()).isNotNull();
+        assertThat(query.getPagination()).isNotNull();
+    }
+}

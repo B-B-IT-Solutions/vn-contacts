@@ -1,18 +1,18 @@
 package cz.prm.utils;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static cz.prm.services.networking.data.scoring.ScoringCriteria.COMMON_INDUSTRIES;
-import static cz.prm.services.networking.data.scoring.ScoringCriteria.COMPLEMENTARY_SERVICES;
-import static cz.prm.services.networking.data.scoring.ScoringCriteria.TARGET_MARKETS_PRODUCTS_MATCH;
+import static cz.prm.services.contacts.networking.data.scoring.ScoringCriteria.COMMON_INDUSTRIES;
+import static cz.prm.services.contacts.networking.data.scoring.ScoringCriteria.COMPLEMENTARY_SERVICES;
+import static cz.prm.services.contacts.networking.data.scoring.ScoringCriteria.TARGET_MARKETS_PRODUCTS_MATCH;
 import static cz.prm.utils.ContactUtils.contact;
 import static cz.prm.utils.TestUtils.randomInt;
 import static cz.prm.utils.TestUtils.uuid;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.range;
 
-import cz.prm.domain.contact.Contact;
-import cz.prm.domain.networking.ReferralRequirement;
-import cz.prm.domain.networking.ReferralSuggestion;
+import cz.prm.domain.contacts.contact.Contact;
+import cz.prm.domain.contacts.networking.ReferralRequirement;
+import cz.prm.domain.contacts.networking.ReferralSuggestion;
 import java.util.List;
 
 public class NetworkingUtils {

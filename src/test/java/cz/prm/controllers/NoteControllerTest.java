@@ -15,10 +15,10 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import cz.prm.controllers.mappers.NoteMapper;
-import cz.prm.domain.note.Note;
-import cz.prm.domain.note.query.NotesQuery;
-import cz.prm.services.note.NoteService;
+import cz.prm.controllers.mappers.contacts.NoteMapper;
+import cz.prm.domain.contacts.note.Note;
+import cz.prm.domain.contacts.note.query.NotesQuery;
+import cz.prm.services.contacts.note.NoteService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
