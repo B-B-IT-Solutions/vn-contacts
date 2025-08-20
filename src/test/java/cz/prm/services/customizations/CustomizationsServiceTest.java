@@ -17,9 +17,9 @@ import static org.mockito.Mockito.when;
 import com.querydsl.core.BooleanBuilder;
 import cz.prm.domain.customizations.contact.ContactCustomizations;
 import cz.prm.domain.customizations.note.NoteCustomizations;
-import cz.prm.repositories.customizations.ContactSettingsRepository;
+import cz.prm.repositories.customizations.ContactCustomizationsRepository;
 import cz.prm.repositories.customizations.CustomizationsPredicates;
-import cz.prm.repositories.customizations.NoteSettingsRepository;
+import cz.prm.repositories.customizations.NoteCustomizaitonsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,9 +32,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class CustomizationsServiceTest {
 
     @Mock
-    private ContactSettingsRepository contactSettingsRepository;
+    private ContactCustomizationsRepository contactCustomizationsRepository;
     @Mock
-    private NoteSettingsRepository noteSettingsRepository;
+    private NoteCustomizaitonsRepository noteCustomizaitonsRepository;
     @Mock
     private CustomizationsPredicates predicates;
     @Captor
@@ -46,7 +46,7 @@ class CustomizationsServiceTest {
 
     @BeforeEach
     void setUp() {
-        settingsService = new CustomizationsService(contactSettingsRepository, noteSettingsRepository, predicates);
+        settingsService = new CustomizationsService(contactCustomizationsRepository, noteCustomizaitonsRepository, predicates);
     }
 
     @Test
@@ -54,7 +54,7 @@ class CustomizationsServiceTest {
         var settings = contactSettings();
         var predicate = new BooleanBuilder();
         when(predicates.contactSettings()).thenReturn(predicate);
-        when(contactSettingsRepository.findOne(predicate)).thenReturn(of(settings));
+        when(contactCustomizationsRepository.findOne(predicate)).thenReturn(of(settings));
 
         var result = settingsService.getContactSettings();
         assertSettings(result, settings);
@@ -64,8 +64,8 @@ class CustomizationsServiceTest {
     void getContactSettings_SettingsNotFound() {
         var predicate = new BooleanBuilder();
         when(predicates.contactSettings()).thenReturn(predicate);
-        when(contactSettingsRepository.findOne(predicate)).thenReturn(empty());
-        when(contactSettingsRepository.saveAndFlush(any(ContactCustomizations.class))).thenAnswer((invocation -> invocation.getArgument(0)));
+        when(contactCustomizationsRepository.findOne(predicate)).thenReturn(empty());
+        when(contactCustomizationsRepository.saveAndFlush(any(ContactCustomizations.class))).thenAnswer((invocation -> invocation.getArgument(0)));
 
         var result = settingsService.getContactSettings();
         assertThat(result).isNotNull();
@@ -73,7 +73,7 @@ class CustomizationsServiceTest {
         assertThat(result.getSkills()).containsExactlyElementsOf(INITIAL_SKILLS);
         assertThat(result.getProducts()).containsExactlyElementsOf(INITIAL_PRODUCTS);
         assertThat(result.getTargetMarkets()).containsExactlyElementsOf(INITIAL_TARGET_MARKETS);
-        verify(contactSettingsRepository).refresh(result);
+        verify(contactCustomizationsRepository).refresh(result);
     }
 
     @Test
@@ -81,7 +81,7 @@ class CustomizationsServiceTest {
         var settings = noteSettings();
         var predicate = new BooleanBuilder();
         when(predicates.noteSettings()).thenReturn(predicate);
-        when(noteSettingsRepository.findOne(predicate)).thenReturn(of(settings));
+        when(noteCustomizaitonsRepository.findOne(predicate)).thenReturn(of(settings));
 
         var result = settingsService.getNoteSettings();
         assertSettings(result, settings);
@@ -91,12 +91,12 @@ class CustomizationsServiceTest {
     void getNoteSettings_SettingsNotFound() {
         var predicate = new BooleanBuilder();
         when(predicates.noteSettings()).thenReturn(predicate);
-        when(noteSettingsRepository.findOne(predicate)).thenReturn(empty());
-        when(noteSettingsRepository.saveAndFlush(any(NoteCustomizations.class))).thenAnswer((invocation -> invocation.getArgument(0)));
+        when(noteCustomizaitonsRepository.findOne(predicate)).thenReturn(empty());
+        when(noteCustomizaitonsRepository.saveAndFlush(any(NoteCustomizations.class))).thenAnswer((invocation -> invocation.getArgument(0)));
 
         var result = settingsService.getNoteSettings();
         assertThat(result).isNotNull();
-        verify(noteSettingsRepository).refresh(result);
+        verify(noteCustomizaitonsRepository).refresh(result);
     }
 
     @Test
@@ -105,10 +105,10 @@ class CustomizationsServiceTest {
         var updatedSettings = contactSettings();
         var predicate = new BooleanBuilder();
         when(predicates.contactSettings()).thenReturn(predicate);
-        when(contactSettingsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
+        when(contactCustomizationsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
 
         settingsService.updateContactSettings(updatedSettings);
-        verify(contactSettingsRepository).save(contactSettingsCapt.capture());
+        verify(contactCustomizationsRepository).save(contactSettingsCapt.capture());
         var savedSettings = contactSettingsCapt.getValue();
         assertContactSettingFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
     }
@@ -119,10 +119,10 @@ class CustomizationsServiceTest {
         var updatedSettings = noteSettings();
         var predicate = new BooleanBuilder();
         when(predicates.noteSettings()).thenReturn(predicate);
-        when(noteSettingsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
+        when(noteCustomizaitonsRepository.findOne(predicate)).thenReturn(of(settingsInDb));
 
         settingsService.updateNoteSettings(updatedSettings);
-        verify(noteSettingsRepository).save(noteSettingsCapt.capture());
+        verify(noteCustomizaitonsRepository).save(noteSettingsCapt.capture());
         var savedSettings = noteSettingsCapt.getValue();
         assertNoteSettingFieldsUpdated(settingsInDb, updatedSettings, savedSettings);
     }

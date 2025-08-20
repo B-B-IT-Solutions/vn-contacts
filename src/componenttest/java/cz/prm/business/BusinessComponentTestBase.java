@@ -22,10 +22,10 @@ import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.notifications.NotificationSettingsDto;
 import cz.prm.custom.ComponentTestAboutRepository;
 import cz.prm.custom.ComponentTestAccountSettingsRepository;
+import cz.prm.custom.ComponentTestContactCustomizationsRepository;
 import cz.prm.custom.ComponentTestContactRepository;
-import cz.prm.custom.ComponentTestContactSettingsRepository;
+import cz.prm.custom.ComponentTestNoteCustomizaitonsRepository;
 import cz.prm.custom.ComponentTestNoteRepository;
-import cz.prm.custom.ComponentTestNoteSettingsRepository;
 import cz.prm.custom.ComponentTestNotificationSettingsRepository;
 import cz.prm.custom.ComponentTestReferralRepository;
 import cz.prm.custom.ComponentTestTaskRepository;
@@ -59,9 +59,9 @@ public class BusinessComponentTestBase extends ComponentTestBase {
     @Autowired
     protected ComponentTestAccountSettingsRepository accountSettingsRepository;
     @Autowired
-    protected ComponentTestContactSettingsRepository contactSettingsRepository;
+    protected ComponentTestContactCustomizationsRepository contactSettingsRepository;
     @Autowired
-    protected ComponentTestNoteSettingsRepository noteSettingsRepository;
+    protected ComponentTestNoteCustomizaitonsRepository noteSettingsRepository;
     @Autowired
     protected ComponentTestNotificationSettingsRepository notificationSettingsRepository;
 

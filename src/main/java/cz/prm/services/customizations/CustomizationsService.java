@@ -7,9 +7,9 @@ import static cz.prm.domain.customizations.contact.InitContactCustomizations.INI
 
 import cz.prm.domain.customizations.contact.ContactCustomizations;
 import cz.prm.domain.customizations.note.NoteCustomizations;
-import cz.prm.repositories.customizations.ContactSettingsRepository;
+import cz.prm.repositories.customizations.ContactCustomizationsRepository;
 import cz.prm.repositories.customizations.CustomizationsPredicates;
-import cz.prm.repositories.customizations.NoteSettingsRepository;
+import cz.prm.repositories.customizations.NoteCustomizaitonsRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +17,14 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class CustomizationsService {
 
-    private ContactSettingsRepository contactSettingsRepository;
-    private NoteSettingsRepository noteSettingsRepository;
+    private ContactCustomizationsRepository contactCustomizationsRepository;
+    private NoteCustomizaitonsRepository noteCustomizaitonsRepository;
     private CustomizationsPredicates predicates;
 
-    public CustomizationsService(ContactSettingsRepository contactSettingsRepository, NoteSettingsRepository noteSettingsRepository,
+    public CustomizationsService(ContactCustomizationsRepository contactCustomizationsRepository, NoteCustomizaitonsRepository noteCustomizaitonsRepository,
         CustomizationsPredicates predicates) {
-        this.contactSettingsRepository = contactSettingsRepository;
-        this.noteSettingsRepository = noteSettingsRepository;
+        this.contactCustomizationsRepository = contactCustomizationsRepository;
+        this.noteCustomizaitonsRepository = noteCustomizaitonsRepository;
         this.predicates = predicates;
     }
 
@@ -39,26 +39,26 @@ public class CustomizationsService {
     public void updateContactSettings(ContactCustomizations updatedSettings) {
         var settings = getOrCreateContactSettings();
         updateContactSettingFields(settings, updatedSettings);
-        contactSettingsRepository.save(settings);
+        contactCustomizationsRepository.save(settings);
     }
 
     public void updateNoteSettings(NoteCustomizations updatedSettings) {
         var settings = getOrCreateNoteSettings();
         updateNoteSettingFields(settings, updatedSettings);
-        noteSettingsRepository.save(settings);
+        noteCustomizaitonsRepository.save(settings);
     }
 
     private ContactCustomizations getOrCreateContactSettings() {
         var predicate = predicates.contactSettings();
-        var optional = contactSettingsRepository.findOne(predicate);
+        var optional = contactCustomizationsRepository.findOne(predicate);
         if (optional.isEmpty()) {
             var settings = new ContactCustomizations();
             settings.setIndustries(INITIAL_INDUSTRIES);
             settings.setSkills(INITIAL_SKILLS);
             settings.setProducts(INITIAL_PRODUCTS);
             settings.setTargetMarkets(INITIAL_TARGET_MARKETS);
-            var savedSettings = contactSettingsRepository.saveAndFlush(settings);
-            contactSettingsRepository.refresh(savedSettings);
+            var savedSettings = contactCustomizationsRepository.saveAndFlush(settings);
+            contactCustomizationsRepository.refresh(savedSettings);
             return savedSettings;
         }
         return optional.get();
@@ -66,11 +66,11 @@ public class CustomizationsService {
 
     private NoteCustomizations getOrCreateNoteSettings() {
         var predicate = predicates.noteSettings();
-        var optional = noteSettingsRepository.findOne(predicate);
+        var optional = noteCustomizaitonsRepository.findOne(predicate);
         if (optional.isEmpty()) {
             var settings = new NoteCustomizations();
-            var savedSettings = noteSettingsRepository.saveAndFlush(settings);
-            noteSettingsRepository.refresh(savedSettings);
+            var savedSettings = noteCustomizaitonsRepository.saveAndFlush(settings);
+            noteCustomizaitonsRepository.refresh(savedSettings);
             return savedSettings;
         }
         return optional.get();
