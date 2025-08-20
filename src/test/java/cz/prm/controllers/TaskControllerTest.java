@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 import cz.prm.controllers.mappers.contacts.TaskMapper;
 import cz.prm.domain.contacts.task.Task;
 import cz.prm.domain.contacts.task.query.TasksQuery;
-import cz.prm.services.TaskService;
+import cz.prm.services.contacts.task.TaskService;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

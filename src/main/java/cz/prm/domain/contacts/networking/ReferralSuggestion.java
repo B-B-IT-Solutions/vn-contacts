@@ -1,7 +1,7 @@
 package cz.prm.domain.contacts.networking;
 
 import cz.prm.domain.contacts.contact.Contact;
-import cz.prm.services.networking.data.scoring.ScoringCriteria;
+import cz.prm.services.contacts.networking.data.scoring.ScoringCriteria;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;

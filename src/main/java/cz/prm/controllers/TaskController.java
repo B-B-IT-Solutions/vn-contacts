@@ -4,7 +4,7 @@ import cz.prm.controllers.dto.common.PageDto;
 import cz.prm.controllers.dto.contacts.task.TaskDto;
 import cz.prm.controllers.dto.contacts.task.query.TasksQueryDto;
 import cz.prm.controllers.mappers.contacts.TaskMapper;
-import cz.prm.services.TaskService;
+import cz.prm.services.contacts.task.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
