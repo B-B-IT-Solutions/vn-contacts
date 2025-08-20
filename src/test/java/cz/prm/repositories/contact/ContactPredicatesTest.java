@@ -5,7 +5,7 @@ import static cz.prm.utils.NetworkingUtils.referralRequirement;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.domain.contact.query.ContactsFilter;
+import cz.prm.domain.contacts.contact.query.ContactsFilter;
 import cz.prm.security.SecurityContextUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

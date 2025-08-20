@@ -3,8 +3,8 @@ package cz.prm.services;
 import static com.google.common.collect.Lists.newArrayList;
 import static java.lang.String.format;
 
-import cz.prm.domain.recurrence.Recurrence;
-import cz.prm.domain.reminder.Reminder;
+import cz.prm.domain.contacts.recurrence.Recurrence;
+import cz.prm.domain.contacts.reminder.Reminder;
 import cz.prm.repositories.reminder.ReminderPredicates;
 import cz.prm.repositories.reminder.ReminderRepository;
 import jakarta.persistence.EntityNotFoundException;

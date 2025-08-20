@@ -1,8 +1,8 @@
 package cz.prm.controllers;
 
 import cz.prm.controllers.dto.common.PageDto;
-import cz.prm.controllers.dto.networking.ReferralSuggestionDto;
-import cz.prm.controllers.mappers.NetworkingMapper;
+import cz.prm.controllers.dto.contacts.networking.ReferralSuggestionDto;
+import cz.prm.controllers.mappers.contacts.NetworkingMapper;
 import cz.prm.services.networking.NetworkingClearingHouse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

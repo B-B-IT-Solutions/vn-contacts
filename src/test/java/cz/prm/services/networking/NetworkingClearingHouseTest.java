@@ -11,7 +11,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import cz.prm.domain.networking.ReferralRequirement;
+import cz.prm.domain.contacts.networking.ReferralRequirement;
 import cz.prm.services.contact.data.ContactService;
 import cz.prm.services.networking.data.ReferralSuggestionService;
 import org.junit.jupiter.api.BeforeEach;

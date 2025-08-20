@@ -10,8 +10,8 @@ import static cz.prm.utils.TestUtils.uuid;
 import static cz.prm.utils.TestUtils.uuids;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.domain.networking.ReferralRequirement;
-import cz.prm.domain.networking.ReferralSuggestion;
+import cz.prm.domain.contacts.networking.ReferralRequirement;
+import cz.prm.domain.contacts.networking.ReferralSuggestion;
 import org.junit.jupiter.api.Test;
 
 class ReferralScoringTest {

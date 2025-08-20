@@ -3,6 +3,7 @@ package cz.prm.domain.note.query;
 import static cz.prm.utils.TestUtils.uuid;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.domain.contacts.note.query.NotesFilter;
 import org.junit.jupiter.api.Test;
 
 class NotesFilterTest {

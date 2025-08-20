@@ -6,10 +6,10 @@ import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
-import cz.prm.domain.contact.About;
-import cz.prm.domain.contact.FirstInteraction;
-import cz.prm.domain.contact.IdealClient;
-import cz.prm.domain.contact.PastClient;
+import cz.prm.domain.contacts.contact.About;
+import cz.prm.domain.contacts.contact.FirstInteraction;
+import cz.prm.domain.contacts.contact.IdealClient;
+import cz.prm.domain.contacts.contact.PastClient;
 import cz.prm.repositories.contact.AboutPredicates;
 import cz.prm.repositories.contact.AboutRepository;
 import jakarta.persistence.EntityNotFoundException;

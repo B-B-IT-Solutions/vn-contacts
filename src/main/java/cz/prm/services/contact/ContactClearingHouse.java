@@ -1,10 +1,10 @@
 package cz.prm.services.contact;
 
 import cz.prm.domain.common.query.Page;
-import cz.prm.domain.contact.About;
-import cz.prm.domain.contact.Contact;
-import cz.prm.domain.contact.DecoratedContact;
-import cz.prm.domain.contact.query.ContactsQuery;
+import cz.prm.domain.contacts.contact.About;
+import cz.prm.domain.contacts.contact.Contact;
+import cz.prm.domain.contacts.contact.DecoratedContact;
+import cz.prm.domain.contacts.contact.query.ContactsQuery;
 import cz.prm.services.TaskService;
 import cz.prm.services.contact.data.AboutService;
 import cz.prm.services.contact.data.ContactService;

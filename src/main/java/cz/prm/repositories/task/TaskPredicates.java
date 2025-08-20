@@ -7,7 +7,7 @@ import static cz.prm.security.SecurityContextUtils.getUser;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import cz.prm.domain.task.query.TasksFilter;
+import cz.prm.domain.contacts.task.query.TasksFilter;
 import java.time.Instant;
 import org.springframework.stereotype.Component;
 

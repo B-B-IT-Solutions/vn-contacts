@@ -1,7 +1,7 @@
 package cz.prm.utils;
 
 import static cz.prm.domain.common.Priority.HIGH;
-import static cz.prm.domain.referral.ReferralStatus.TO_DO;
+import static cz.prm.domain.contacts.referral.ReferralStatus.TO_DO;
 import static cz.prm.utils.ComponentTestUtils.randomLong;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static java.lang.String.format;
@@ -9,10 +9,10 @@ import static java.time.Instant.now;
 import static org.assertj.core.util.Lists.newArrayList;
 
 import cz.prm.controllers.dto.common.PaginationDto;
-import cz.prm.controllers.dto.referral.ReferralDto;
-import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
-import cz.prm.controllers.dto.referral.query.ReferralsFilterDto;
-import cz.prm.domain.referral.Referral;
+import cz.prm.controllers.dto.contacts.referral.ReferralDto;
+import cz.prm.controllers.dto.contacts.referral.query.ReferralQueryDto;
+import cz.prm.controllers.dto.contacts.referral.query.ReferralsFilterDto;
+import cz.prm.domain.contacts.referral.Referral;
 import java.util.List;
 
 public class ReferralComponentTestUtils {

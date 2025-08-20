@@ -3,7 +3,7 @@ package cz.prm.utils.assertions;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.domain.recurrence.Recurrence;
+import cz.prm.domain.contacts.recurrence.Recurrence;
 import java.util.List;
 import java.util.Objects;
 

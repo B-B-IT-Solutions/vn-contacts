@@ -4,8 +4,8 @@ import static cz.prm.utils.assertions.RecurrenceComponentTestAssertions.assertRe
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
-import cz.prm.controllers.dto.task.TaskDto;
-import cz.prm.domain.task.Task;
+import cz.prm.controllers.dto.contacts.task.TaskDto;
+import cz.prm.domain.contacts.task.Task;
 import java.util.List;
 import java.util.Objects;
 

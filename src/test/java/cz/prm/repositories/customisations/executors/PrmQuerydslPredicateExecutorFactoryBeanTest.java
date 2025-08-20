@@ -3,7 +3,7 @@ package cz.prm.repositories.customisations.executors;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import cz.prm.domain.contact.Contact;
+import cz.prm.domain.contacts.contact.Contact;
 import jakarta.persistence.EntityManager;
 import org.hibernate.internal.SessionImpl;
 import org.junit.jupiter.api.BeforeEach;

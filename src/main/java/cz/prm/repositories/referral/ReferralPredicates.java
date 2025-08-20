@@ -7,7 +7,7 @@ import static cz.prm.security.SecurityContextUtils.getUser;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import cz.prm.domain.referral.query.ReferralsFilter;
+import cz.prm.domain.contacts.referral.query.ReferralsFilter;
 import org.springframework.stereotype.Component;
 
 @Component

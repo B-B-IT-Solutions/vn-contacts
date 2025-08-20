@@ -10,9 +10,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import cz.prm.business.BusinessComponentTestBase;
 import cz.prm.controllers.dto.common.PageDto;
-import cz.prm.controllers.dto.note.NoteDto;
-import cz.prm.controllers.dto.note.query.NotesFilterDto;
-import cz.prm.controllers.dto.note.query.NotesQueryDto;
+import cz.prm.controllers.dto.contacts.note.NoteDto;
+import cz.prm.controllers.dto.contacts.note.query.NotesFilterDto;
+import cz.prm.controllers.dto.contacts.note.query.NotesQueryDto;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 

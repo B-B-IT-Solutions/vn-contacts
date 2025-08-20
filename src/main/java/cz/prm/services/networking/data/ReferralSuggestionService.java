@@ -4,9 +4,9 @@ import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.toList;
 
 import cz.prm.domain.common.query.Page;
-import cz.prm.domain.contact.Contact;
-import cz.prm.domain.networking.ReferralRequirement;
-import cz.prm.domain.networking.ReferralSuggestion;
+import cz.prm.domain.contacts.contact.Contact;
+import cz.prm.domain.contacts.networking.ReferralRequirement;
+import cz.prm.domain.contacts.networking.ReferralSuggestion;
 import cz.prm.services.networking.data.scoring.ReferralScoring;
 import jakarta.transaction.Transactional;
 import java.util.List;

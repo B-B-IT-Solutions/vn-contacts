@@ -28,7 +28,7 @@ import static java.util.Collections.sort;
 import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.controllers.dto.task.TaskDto;
+import cz.prm.controllers.dto.contacts.task.TaskDto;
 import org.junit.jupiter.api.Test;
 
 public class TaskComponentTest extends TaskComponentTestBase {

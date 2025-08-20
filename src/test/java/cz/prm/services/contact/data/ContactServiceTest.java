@@ -19,8 +19,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
-import cz.prm.domain.contact.Contact;
-import cz.prm.domain.networking.ReferralRequirement;
+import cz.prm.domain.contacts.contact.Contact;
 import cz.prm.repositories.contact.ContactPredicates;
 import cz.prm.repositories.contact.ContactRepository;
 import jakarta.persistence.EntityNotFoundException;

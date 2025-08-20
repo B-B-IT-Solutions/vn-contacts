@@ -10,9 +10,9 @@ import static cz.prm.utils.TestUtils.uuid;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.range;
 
-import cz.prm.domain.contact.Contact;
-import cz.prm.domain.networking.ReferralRequirement;
-import cz.prm.domain.networking.ReferralSuggestion;
+import cz.prm.domain.contacts.contact.Contact;
+import cz.prm.domain.contacts.networking.ReferralRequirement;
+import cz.prm.domain.contacts.networking.ReferralSuggestion;
 import java.util.List;
 
 public class NetworkingUtils {

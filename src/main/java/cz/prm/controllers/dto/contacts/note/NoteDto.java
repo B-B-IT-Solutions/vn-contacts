@@ -1,0 +1,29 @@
+package cz.prm.controllers.dto.contacts.note;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.Instant;
+import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class NoteDto {
+
+    @JsonProperty("noteId")
+    private Long noteId;
+
+    @JsonProperty("text")
+    private String text;
+
+    @JsonProperty("categories")
+    private List<String> categories;
+
+    @JsonProperty("lastEditDate")
+    private Instant lastEditDate;
+
+    @JsonProperty("creationDate")
+    private Instant creationDate;
+}

@@ -11,12 +11,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import cz.prm.business.BusinessComponentTestBase;
 import cz.prm.controllers.dto.common.PageDto;
-import cz.prm.controllers.dto.contact.AboutDto;
-import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.DecoratedContactDto;
-import cz.prm.controllers.dto.contact.query.ContactsFilterDto;
-import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
-import cz.prm.domain.contact.Contact;
+import cz.prm.controllers.dto.contacts.contact.AboutDto;
+import cz.prm.controllers.dto.contacts.contact.ContactDto;
+import cz.prm.controllers.dto.contacts.contact.DecoratedContactDto;
+import cz.prm.controllers.dto.contacts.contact.query.ContactsFilterDto;
+import cz.prm.controllers.dto.contacts.contact.query.ContactsQueryDto;
+import cz.prm.domain.contacts.contact.Contact;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 import java.util.List;

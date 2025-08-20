@@ -6,6 +6,7 @@ import static cz.prm.utils.NetworkingUtils.referralSuggestions;
 import static cz.prm.utils.assertions.NetworkingAssertions.assertPage;
 import static cz.prm.utils.assertions.NetworkingAssertions.assertReferralSuggestion;
 
+import cz.prm.controllers.mappers.contacts.NetworkingMapper;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.Test;
 

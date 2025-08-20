@@ -4,8 +4,8 @@ import static cz.prm.utils.assertions.ContractComponentTestAssertions.assertCont
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.common.PageDto;
-import cz.prm.controllers.dto.networking.ReferralSuggestionDto;
-import cz.prm.domain.contact.Contact;
+import cz.prm.controllers.dto.contacts.networking.ReferralSuggestionDto;
+import cz.prm.domain.contacts.contact.Contact;
 import java.util.List;
 import java.util.Objects;
 

@@ -10,9 +10,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import cz.prm.business.BusinessComponentTestBase;
 import cz.prm.controllers.dto.common.PageDto;
-import cz.prm.controllers.dto.task.TaskDto;
-import cz.prm.controllers.dto.task.query.TasksFilterDto;
-import cz.prm.controllers.dto.task.query.TasksQueryDto;
+import cz.prm.controllers.dto.contacts.task.TaskDto;
+import cz.prm.controllers.dto.contacts.task.query.TasksFilterDto;
+import cz.prm.controllers.dto.contacts.task.query.TasksQueryDto;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 

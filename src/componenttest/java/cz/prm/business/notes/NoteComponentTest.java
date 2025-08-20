@@ -24,7 +24,7 @@ import static java.util.Collections.sort;
 import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.controllers.dto.note.NoteDto;
+import cz.prm.controllers.dto.contacts.note.NoteDto;
 import org.junit.jupiter.api.Test;
 
 public class NoteComponentTest extends NoteComponentTestBase {

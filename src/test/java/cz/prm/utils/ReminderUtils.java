@@ -4,7 +4,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.RecurrenceUtils.recurrence;
 import static cz.prm.utils.TestUtils.randomLong;
 
-import cz.prm.domain.reminder.Reminder;
+import cz.prm.domain.contacts.reminder.Reminder;
 import java.util.List;
 
 public class ReminderUtils {

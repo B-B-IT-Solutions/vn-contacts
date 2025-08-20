@@ -19,10 +19,11 @@ import static cz.prm.utils.assertions.ContactAssertions.assertDecoratedContact;
 import static cz.prm.utils.assertions.ContactAssertions.assertPage;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.controllers.dto.contact.AboutDto;
-import cz.prm.controllers.dto.contact.query.ContactsQueryDto;
-import cz.prm.domain.contact.DecoratedContact;
-import cz.prm.domain.contact.query.ContactsQuery;
+import cz.prm.controllers.dto.contacts.contact.AboutDto;
+import cz.prm.controllers.dto.contacts.contact.query.ContactsQueryDto;
+import cz.prm.controllers.mappers.contacts.ContactMapper;
+import cz.prm.domain.contacts.contact.DecoratedContact;
+import cz.prm.domain.contacts.contact.query.ContactsQuery;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.Test;
 

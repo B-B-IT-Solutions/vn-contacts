@@ -4,7 +4,7 @@ import static cz.prm.utils.assertions.RecurrenceAssertions.assertRecurrence;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.domain.common.query.Page;
-import cz.prm.domain.reminder.Reminder;
+import cz.prm.domain.contacts.reminder.Reminder;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.data.domain.PageImpl;

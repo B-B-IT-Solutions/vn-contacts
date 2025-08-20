@@ -4,9 +4,9 @@ import static cz.prm.domain.common.PageRequests.getPageRequest;
 import static java.lang.String.format;
 
 import cz.prm.domain.common.query.Page;
-import cz.prm.domain.referral.Referral;
-import cz.prm.domain.referral.query.ReferralsFilter;
-import cz.prm.domain.referral.query.ReferralsQuery;
+import cz.prm.domain.contacts.referral.Referral;
+import cz.prm.domain.contacts.referral.query.ReferralsFilter;
+import cz.prm.domain.contacts.referral.query.ReferralsQuery;
 import cz.prm.repositories.referral.ReferralPredicates;
 import cz.prm.repositories.referral.ReferralRepository;
 import jakarta.persistence.EntityNotFoundException;

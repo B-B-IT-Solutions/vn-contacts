@@ -1,6 +1,6 @@
 package cz.prm.custom;
 
-import cz.prm.domain.task.Task;
+import cz.prm.domain.contacts.task.Task;
 import cz.prm.repositories.task.TaskRepository;
 import org.springframework.context.annotation.Primary;
 

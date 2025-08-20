@@ -7,9 +7,9 @@ import static cz.prm.services.networking.data.scoring.ScoringCriteria.TARGET_MAR
 import static org.apache.commons.collections4.CollectionUtils.disjunction;
 import static org.apache.commons.collections4.CollectionUtils.intersection;
 
-import cz.prm.domain.contact.Contact;
-import cz.prm.domain.networking.ReferralRequirement;
-import cz.prm.domain.networking.ReferralSuggestion;
+import cz.prm.domain.contacts.contact.Contact;
+import cz.prm.domain.contacts.networking.ReferralRequirement;
+import cz.prm.domain.contacts.networking.ReferralSuggestion;
 
 public class ReferralScoring {
 

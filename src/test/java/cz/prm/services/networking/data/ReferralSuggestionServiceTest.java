@@ -10,8 +10,8 @@ import static java.util.Collections.sort;
 import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.domain.contact.Contact;
-import cz.prm.domain.networking.ReferralSuggestion;
+import cz.prm.domain.contacts.contact.Contact;
+import cz.prm.domain.contacts.networking.ReferralSuggestion;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

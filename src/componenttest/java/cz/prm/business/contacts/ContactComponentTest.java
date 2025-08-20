@@ -22,8 +22,8 @@ import static java.util.Collections.sort;
 import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.controllers.dto.contact.ContactDto;
-import cz.prm.controllers.dto.contact.DecoratedContactDto;
+import cz.prm.controllers.dto.contacts.contact.ContactDto;
+import cz.prm.controllers.dto.contacts.contact.DecoratedContactDto;
 import org.junit.jupiter.api.Test;
 
 public class ContactComponentTest extends ContactComponentTestBase {

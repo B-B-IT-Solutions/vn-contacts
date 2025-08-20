@@ -11,8 +11,9 @@ import static cz.prm.utils.assertions.NoteAssertions.assertNotesQuery;
 import static cz.prm.utils.assertions.NoteAssertions.assertPage;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.controllers.dto.note.query.NotesQueryDto;
-import cz.prm.domain.note.query.NotesQuery;
+import cz.prm.controllers.dto.contacts.note.query.NotesQueryDto;
+import cz.prm.controllers.mappers.contacts.NoteMapper;
+import cz.prm.domain.contacts.note.query.NotesQuery;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.Test;
 

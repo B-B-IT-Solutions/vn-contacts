@@ -13,7 +13,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
-import cz.prm.domain.reminder.Reminder;
+import cz.prm.domain.contacts.reminder.Reminder;
 import cz.prm.repositories.reminder.ReminderPredicates;
 import cz.prm.repositories.reminder.ReminderRepository;
 import jakarta.persistence.EntityNotFoundException;

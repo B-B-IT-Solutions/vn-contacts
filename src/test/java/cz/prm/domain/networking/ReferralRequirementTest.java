@@ -3,6 +3,7 @@ package cz.prm.domain.networking;
 import static cz.prm.utils.ContactUtils.contact;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.domain.contacts.networking.ReferralRequirement;
 import org.junit.jupiter.api.Test;
 
 class ReferralRequirementTest {

@@ -7,7 +7,7 @@ import static java.lang.String.format;
 
 import cz.prm.business.BusinessComponentTestBase;
 import cz.prm.controllers.dto.common.PageDto;
-import cz.prm.controllers.dto.networking.ReferralSuggestionDto;
+import cz.prm.controllers.dto.contacts.networking.ReferralSuggestionDto;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 

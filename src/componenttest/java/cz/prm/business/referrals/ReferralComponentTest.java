@@ -20,7 +20,7 @@ import static java.util.Collections.sort;
 import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.controllers.dto.referral.ReferralDto;
+import cz.prm.controllers.dto.contacts.referral.ReferralDto;
 import org.junit.jupiter.api.Test;
 
 public class ReferralComponentTest extends ReferralComponentTestBase {

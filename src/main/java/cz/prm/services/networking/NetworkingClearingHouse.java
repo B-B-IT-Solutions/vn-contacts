@@ -1,8 +1,8 @@
 package cz.prm.services.networking;
 
 import cz.prm.domain.common.query.Page;
-import cz.prm.domain.networking.ReferralRequirement;
-import cz.prm.domain.networking.ReferralSuggestion;
+import cz.prm.domain.contacts.networking.ReferralRequirement;
+import cz.prm.domain.contacts.networking.ReferralSuggestion;
 import cz.prm.services.contact.data.ContactService;
 import cz.prm.services.networking.data.ReferralSuggestionService;
 import jakarta.transaction.Transactional;

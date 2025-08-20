@@ -11,8 +11,9 @@ import static cz.prm.utils.assertions.ReferralAssertions.assertReferral;
 import static cz.prm.utils.assertions.ReferralAssertions.assertReferralsQuery;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
-import cz.prm.domain.referral.query.ReferralsQuery;
+import cz.prm.controllers.dto.contacts.referral.query.ReferralQueryDto;
+import cz.prm.controllers.mappers.contacts.ReferralMapper;
+import cz.prm.domain.contacts.referral.query.ReferralsQuery;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.Test;
 

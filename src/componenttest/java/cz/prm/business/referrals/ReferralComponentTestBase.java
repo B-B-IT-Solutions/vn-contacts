@@ -10,9 +10,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import cz.prm.business.BusinessComponentTestBase;
 import cz.prm.controllers.dto.common.PageDto;
-import cz.prm.controllers.dto.referral.ReferralDto;
-import cz.prm.controllers.dto.referral.query.ReferralQueryDto;
-import cz.prm.controllers.dto.referral.query.ReferralsFilterDto;
+import cz.prm.controllers.dto.contacts.referral.ReferralDto;
+import cz.prm.controllers.dto.contacts.referral.query.ReferralQueryDto;
+import cz.prm.controllers.dto.contacts.referral.query.ReferralsFilterDto;
 import cz.prm.utils.ComponentTestUser;
 import io.restassured.common.mapper.TypeRef;
 

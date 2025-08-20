@@ -22,7 +22,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
-import cz.prm.domain.contact.About;
+import cz.prm.domain.contacts.contact.About;
 import cz.prm.repositories.contact.AboutPredicates;
 import cz.prm.repositories.contact.AboutRepository;
 import jakarta.persistence.EntityNotFoundException;

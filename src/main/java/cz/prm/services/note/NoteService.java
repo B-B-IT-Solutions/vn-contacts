@@ -4,9 +4,9 @@ import static cz.prm.domain.common.PageRequests.getPageRequest;
 import static java.lang.String.format;
 
 import cz.prm.domain.common.query.Page;
-import cz.prm.domain.note.Note;
-import cz.prm.domain.note.query.NotesFilter;
-import cz.prm.domain.note.query.NotesQuery;
+import cz.prm.domain.contacts.note.Note;
+import cz.prm.domain.contacts.note.query.NotesFilter;
+import cz.prm.domain.contacts.note.query.NotesQuery;
 import cz.prm.repositories.note.NotePredicates;
 import cz.prm.repositories.note.NoteRepository;
 import jakarta.persistence.EntityNotFoundException;

@@ -7,7 +7,7 @@ import static java.util.stream.Collectors.toList;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.dmfs.rfc5545.DateTime.now;
 
-import cz.prm.domain.recurrence.Recurrence;
+import cz.prm.domain.contacts.recurrence.Recurrence;
 import java.util.List;
 import org.dmfs.rfc5545.recur.Freq;
 import org.dmfs.rfc5545.recur.RecurrenceRule;

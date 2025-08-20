@@ -16,8 +16,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
-import cz.prm.domain.referral.Referral;
-import cz.prm.domain.referral.query.ReferralsFilter;
+import cz.prm.domain.contacts.referral.Referral;
+import cz.prm.domain.contacts.referral.query.ReferralsFilter;
 import cz.prm.repositories.referral.ReferralPredicates;
 import cz.prm.repositories.referral.ReferralRepository;
 import jakarta.persistence.EntityNotFoundException;

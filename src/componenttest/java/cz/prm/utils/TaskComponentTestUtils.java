@@ -1,7 +1,7 @@
 package cz.prm.utils;
 
 import static cz.prm.domain.common.Priority.HIGH;
-import static cz.prm.domain.task.TaskStatus.TO_DO;
+import static cz.prm.domain.contacts.task.TaskStatus.TO_DO;
 import static cz.prm.utils.ComponentTestUtils.uuid;
 import static cz.prm.utils.RecurrenceComponentTestUtils.recurrences;
 import static cz.prm.utils.RecurrenceComponentTestUtils.reminderRules;
@@ -9,10 +9,10 @@ import static cz.prm.utils.TimeComponentTestUtils.todayStartOfDay;
 import static java.lang.String.format;
 
 import cz.prm.controllers.dto.common.PaginationDto;
-import cz.prm.controllers.dto.task.TaskDto;
-import cz.prm.controllers.dto.task.query.TasksFilterDto;
-import cz.prm.controllers.dto.task.query.TasksQueryDto;
-import cz.prm.domain.task.Task;
+import cz.prm.controllers.dto.contacts.task.TaskDto;
+import cz.prm.controllers.dto.contacts.task.query.TasksFilterDto;
+import cz.prm.controllers.dto.contacts.task.query.TasksQueryDto;
+import cz.prm.domain.contacts.task.Task;
 
 public class TaskComponentTestUtils {
 

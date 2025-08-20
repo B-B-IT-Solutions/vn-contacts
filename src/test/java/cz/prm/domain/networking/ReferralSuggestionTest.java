@@ -8,6 +8,7 @@ import static cz.prm.utils.TestUtils.randomInt;
 import static cz.prm.utils.TestUtils.uuid;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.domain.contacts.networking.ReferralSuggestion;
 import org.junit.jupiter.api.Test;
 
 class ReferralSuggestionTest {

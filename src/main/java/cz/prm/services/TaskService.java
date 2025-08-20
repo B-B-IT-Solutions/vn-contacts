@@ -4,9 +4,9 @@ import static cz.prm.domain.common.PageRequests.getPageRequest;
 import static java.lang.String.format;
 
 import cz.prm.domain.common.query.Page;
-import cz.prm.domain.task.Task;
-import cz.prm.domain.task.query.TasksFilter;
-import cz.prm.domain.task.query.TasksQuery;
+import cz.prm.domain.contacts.task.Task;
+import cz.prm.domain.contacts.task.query.TasksFilter;
+import cz.prm.domain.contacts.task.query.TasksQuery;
 import cz.prm.repositories.task.TaskPredicates;
 import cz.prm.repositories.task.TaskRepository;
 import jakarta.persistence.EntityNotFoundException;

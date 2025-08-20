@@ -7,7 +7,7 @@ import static cz.prm.utils.assertions.NetworkingAssertions.assertPage;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import cz.prm.controllers.mappers.NetworkingMapper;
+import cz.prm.controllers.mappers.contacts.NetworkingMapper;
 import cz.prm.services.networking.NetworkingClearingHouse;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;

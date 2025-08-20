@@ -20,10 +20,10 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import cz.prm.controllers.mappers.ContactMapper;
-import cz.prm.domain.contact.About;
-import cz.prm.domain.contact.DecoratedContact;
-import cz.prm.domain.contact.query.ContactsQuery;
+import cz.prm.controllers.mappers.contacts.ContactMapper;
+import cz.prm.domain.contacts.contact.About;
+import cz.prm.domain.contacts.contact.DecoratedContact;
+import cz.prm.domain.contacts.contact.query.ContactsQuery;
 import cz.prm.services.contact.ContactClearingHouse;
 import cz.prm.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;

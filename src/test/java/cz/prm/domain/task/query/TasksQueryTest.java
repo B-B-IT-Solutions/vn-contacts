@@ -2,6 +2,7 @@ package cz.prm.domain.task.query;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.domain.contacts.task.query.TasksQuery;
 import org.junit.jupiter.api.Test;
 
 class TasksQueryTest {

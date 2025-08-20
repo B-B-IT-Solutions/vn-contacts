@@ -18,8 +18,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
-import cz.prm.domain.task.Task;
-import cz.prm.domain.task.query.TasksFilter;
+import cz.prm.domain.contacts.task.Task;
+import cz.prm.domain.contacts.task.query.TasksFilter;
 import cz.prm.repositories.task.TaskPredicates;
 import cz.prm.repositories.task.TaskRepository;
 import jakarta.persistence.EntityNotFoundException;

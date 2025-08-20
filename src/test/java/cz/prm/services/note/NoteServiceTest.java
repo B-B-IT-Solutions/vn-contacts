@@ -16,8 +16,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.querydsl.core.BooleanBuilder;
-import cz.prm.domain.note.Note;
-import cz.prm.domain.note.query.NotesFilter;
+import cz.prm.domain.contacts.note.Note;
+import cz.prm.domain.contacts.note.query.NotesFilter;
 import cz.prm.repositories.note.NotePredicates;
 import cz.prm.repositories.note.NoteRepository;
 import cz.prm.utils.assertions.NoteAssertions;

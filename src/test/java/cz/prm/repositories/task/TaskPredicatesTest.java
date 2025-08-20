@@ -6,7 +6,7 @@ import static cz.prm.utils.TimeUtils.useSystemDefaultTimeZone;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cz.prm.domain.task.query.TasksFilter;
+import cz.prm.domain.contacts.task.query.TasksFilter;
 import cz.prm.security.SecurityContextUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

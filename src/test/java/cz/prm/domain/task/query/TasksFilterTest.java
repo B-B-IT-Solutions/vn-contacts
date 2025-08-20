@@ -4,6 +4,7 @@ import static cz.prm.utils.TestUtils.randomLong;
 import static cz.prm.utils.TestUtils.uuid;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.prm.domain.contacts.task.query.TasksFilter;
 import org.junit.jupiter.api.Test;
 
 class TasksFilterTest {

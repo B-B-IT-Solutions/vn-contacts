@@ -1,11 +1,11 @@
 package cz.prm.utils;
 
-import cz.prm.controllers.mappers.ContactMapper;
-import cz.prm.controllers.mappers.NetworkingMapper;
-import cz.prm.controllers.mappers.NoteMapper;
-import cz.prm.controllers.mappers.ReferralMapper;
+import cz.prm.controllers.mappers.contacts.ContactMapper;
+import cz.prm.controllers.mappers.contacts.NetworkingMapper;
+import cz.prm.controllers.mappers.contacts.NoteMapper;
+import cz.prm.controllers.mappers.contacts.ReferralMapper;
 import cz.prm.controllers.mappers.SettingsMapper;
-import cz.prm.controllers.mappers.TaskMapper;
+import cz.prm.controllers.mappers.contacts.TaskMapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.test.util.ReflectionTestUtils;
 

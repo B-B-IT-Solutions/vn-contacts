@@ -4,7 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import cz.prm.domain.recurrence.Recurrence;
+import cz.prm.domain.contacts.recurrence.Recurrence;
+import cz.prm.domain.contacts.reminder.Reminder;
 import org.junit.jupiter.api.Test;
 
 class ReminderTest {
