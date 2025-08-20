@@ -1,13 +1,13 @@
 package cz.prm.business;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static cz.prm.utils.ContactComponentTestUtils.about;
-import static cz.prm.utils.ContactComponentTestUtils.contact;
-import static cz.prm.utils.NoteComponentTestUtils.note;
-import static cz.prm.utils.ReferralComponentTestUtils.referral;
 import static cz.prm.utils.SecurityContextComponentTestUtils.clearContext;
 import static cz.prm.utils.SecurityContextComponentTestUtils.ensureUserContext;
-import static cz.prm.utils.TaskComponentTestUtils.task;
+import static cz.prm.utils.data.contacts.ContactComponentTestUtils.about;
+import static cz.prm.utils.data.contacts.ContactComponentTestUtils.contact;
+import static cz.prm.utils.data.contacts.NoteComponentTestUtils.note;
+import static cz.prm.utils.data.contacts.ReferralComponentTestUtils.referral;
+import static cz.prm.utils.data.contacts.TaskComponentTestUtils.task;
 import static java.util.stream.Collectors.toList;
 
 import cz.prm.ComponentTestBase;

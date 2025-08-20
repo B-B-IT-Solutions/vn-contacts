@@ -1,4 +1,4 @@
-package cz.prm.utils.assertions;
+package cz.prm.utils.assertions.contacts;
 
 import static cz.prm.utils.TimeComponentTestUtils.ONE_SECOND_OFFSET;
 import static org.assertj.core.api.Assertions.assertThat;

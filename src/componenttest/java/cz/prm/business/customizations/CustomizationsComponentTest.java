@@ -1,16 +1,16 @@
 package cz.prm.business.customizations;
 
-import static cz.prm.utils.SettingsComponentTestUtils.categoriesDto;
-import static cz.prm.utils.SettingsComponentTestUtils.industriesDto;
-import static cz.prm.utils.SettingsComponentTestUtils.labelsDto;
-import static cz.prm.utils.SettingsComponentTestUtils.productsDto;
-import static cz.prm.utils.SettingsComponentTestUtils.skillsDto;
-import static cz.prm.utils.SettingsComponentTestUtils.targetMarketsDto;
+import static cz.prm.utils.data.customizations.CustomizationsComponentTestUtils.categoriesDto;
+import static cz.prm.utils.data.customizations.CustomizationsComponentTestUtils.industriesDto;
+import static cz.prm.utils.data.customizations.CustomizationsComponentTestUtils.labelsDto;
+import static cz.prm.utils.data.customizations.CustomizationsComponentTestUtils.productsDto;
+import static cz.prm.utils.data.customizations.CustomizationsComponentTestUtils.skillsDto;
+import static cz.prm.utils.data.customizations.CustomizationsComponentTestUtils.targetMarketsDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.customizations.contact.ContactCustomizationsDto;
 import cz.prm.controllers.dto.customizations.note.NoteCustomizationsDto;
-import cz.prm.utils.assertions.SettingsComponentTestAssertions;
+import cz.prm.utils.assertions.customizations.CustomizationsComponentTestAssertions;
 import org.junit.jupiter.api.Test;
 
 public class CustomizationsComponentTest extends CustomizationsComponentTestBase {
@@ -107,19 +107,19 @@ public class CustomizationsComponentTest extends CustomizationsComponentTestBase
 
     private void assertSettings(ContactCustomizationsDto dto) {
         var settings = getContactSettingsFromDb(dto);
-        SettingsComponentTestAssertions.assertSettings(settings, dto);
+        CustomizationsComponentTestAssertions.assertSettings(settings, dto);
     }
 
     private void assertSettings(ContactCustomizationsDto dto1, ContactCustomizationsDto dto2) {
-        SettingsComponentTestAssertions.assertSettings(dto1, dto2);
+        CustomizationsComponentTestAssertions.assertSettings(dto1, dto2);
     }
 
     private void assertSettings(NoteCustomizationsDto dto) {
         var settings = getNoteSettingsFromDb(dto);
-        SettingsComponentTestAssertions.assertSettings(settings, dto);
+        CustomizationsComponentTestAssertions.assertSettings(settings, dto);
     }
 
     private void assertSettings(NoteCustomizationsDto dto1, NoteCustomizationsDto dto2) {
-        SettingsComponentTestAssertions.assertSettings(dto1, dto2);
+        CustomizationsComponentTestAssertions.assertSettings(dto1, dto2);
     }
 }

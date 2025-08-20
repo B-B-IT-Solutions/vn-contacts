@@ -1,4 +1,4 @@
-package cz.prm.utils;
+package cz.prm.utils.data.customizations;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static cz.prm.utils.ComponentTestUtils.uuid;
@@ -11,7 +11,7 @@ import cz.prm.controllers.dto.customizations.contact.options.TargetMarketDto;
 import cz.prm.controllers.dto.customizations.note.options.CategoryDto;
 import java.util.List;
 
-public class SettingsComponentTestUtils {
+public class CustomizationsComponentTestUtils {
 
     public static List<LabelDto> labelsDto() {
         return newArrayList(labelDto(), labelDto(), labelDto());

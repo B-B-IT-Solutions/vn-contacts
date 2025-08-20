@@ -1,4 +1,4 @@
-package cz.prm.utils;
+package cz.prm.utils.data.contacts;
 
 import static cz.prm.domain.common.Priority.HIGH;
 import static cz.prm.domain.contacts.referral.ReferralStatus.TO_DO;

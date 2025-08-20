@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.prm.controllers.dto.settings.AccountSettingsDto;
 import cz.prm.controllers.dto.settings.notifications.NotificationSettingsDto;
-import cz.prm.utils.assertions.SettingsComponentTestAssertions;
+import cz.prm.utils.assertions.settings.SettingsComponentTestAssertions;
 import org.junit.jupiter.api.Test;
 
 public class SettingsComponentTest extends SettingsComponentTestBase {
