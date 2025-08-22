@@ -110,16 +110,16 @@ class SettingsServiceTest {
         assertThat(settings.getGlobal()).isEqualTo(ALL);
 
         var contactNotifications = settings.getContact();
-        assertThat(contactNotifications.isStalenessReminder()).isFalse();
+        assertThat(contactNotifications.isStalenessReminder()).isTrue();
 
         var referralNotifications = settings.getReferral();
-        assertThat(referralNotifications.isFollowupReminder()).isFalse();
-        assertThat(referralNotifications.isExpiryReminder()).isFalse();
-        assertThat(referralNotifications.isStalenessReminder()).isFalse();
+        assertThat(referralNotifications.isFollowupReminder()).isTrue();
+        assertThat(referralNotifications.isExpiryReminder()).isTrue();
+        assertThat(referralNotifications.isStalenessReminder()).isTrue();
 
         var taskNotifications = settings.getTask();
-        assertThat(taskNotifications.isReminders()).isFalse();
-        assertThat(taskNotifications.isAboutToExpire()).isFalse();
+        assertThat(taskNotifications.isReminders()).isTrue();
+        assertThat(taskNotifications.isAboutToExpire()).isTrue();
     }
 
     private static void assertNotificationSettingFieldsUpdated(NotificationSettings settingsInDb, NotificationSettings updatedSettings,
