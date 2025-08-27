@@ -12,6 +12,6 @@ class SkillTest {
         var value = uuid();
         var skill = new Skill(value);
         assertThat(skill.getValue()).isEqualTo(value);
-        assertThat(skill.getColor()).isNull();
+        assertThat(skill.getDescription()).isNull();
     }
 }

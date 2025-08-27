@@ -1,12 +1,9 @@
 package cz.prm.services;
 
-import static cz.prm.domain.settings.notifications.dials.GlobalNotifications.ALL;
+import static cz.prm.domain.settings.notifications.InitNotificationSettings.iniNotificationSettings;
 
 import cz.prm.domain.settings.AccountSettings;
 import cz.prm.domain.settings.notifications.NotificationSettings;
-import cz.prm.domain.settings.notifications.dials.ContactNotifications;
-import cz.prm.domain.settings.notifications.dials.ReferralNotifications;
-import cz.prm.domain.settings.notifications.dials.TaskNotifications;
 import cz.prm.repositories.settings.AccountSettingsRepository;
 import cz.prm.repositories.settings.NotificationSettingsRepository;
 import cz.prm.repositories.settings.SettingsPredicates;
@@ -50,11 +47,7 @@ public class SettingsService {
         var predicate = predicates.notificationSettings();
         var optional = notificationSettingsRepository.findOne(predicate);
         if (optional.isEmpty()) {
-            var settings = new NotificationSettings();
-            settings.setGlobal(ALL);
-            settings.setContact(new ContactNotifications());
-            settings.setReferral(new ReferralNotifications());
-            settings.setTask(new TaskNotifications());
+            var settings = iniNotificationSettings();
             var savedSettings = notificationSettingsRepository.saveAndFlush(settings);
             notificationSettingsRepository.refresh(savedSettings);
             return savedSettings;

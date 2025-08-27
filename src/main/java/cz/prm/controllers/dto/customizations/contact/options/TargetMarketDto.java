@@ -13,6 +13,6 @@ public class TargetMarketDto {
     @JsonProperty("value")
     private String value;
 
-    @JsonProperty("color")
-    private String color;
+    @JsonProperty("description")
+    private String description;
 }

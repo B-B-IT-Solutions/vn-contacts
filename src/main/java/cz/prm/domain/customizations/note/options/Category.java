@@ -15,6 +15,6 @@ public class Category {
     @Column(name = "VALUE")
     private String value;
 
-    @Column(name = "COLOR")
-    private String color;
+    @Column(name = "DESCRIPTION")
+    private String description;
 }

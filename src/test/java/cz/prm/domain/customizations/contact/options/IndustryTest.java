@@ -12,6 +12,6 @@ class IndustryTest {
         var value = uuid();
         var industry = new Industry(value);
         assertThat(industry.getValue()).isEqualTo(value);
-        assertThat(industry.getColor()).isNull();
+        assertThat(industry.getDescription()).isNull();
     }
 }

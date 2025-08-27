@@ -20,7 +20,7 @@ public class CustomizationsComponentTestUtils {
     public static LabelDto labelDto() {
         var label = new LabelDto();
         label.setValue(uuid());
-        label.setColor(uuid());
+        label.setDescription(uuid());
         return label;
     }
 
@@ -31,7 +31,7 @@ public class CustomizationsComponentTestUtils {
     public static IndustryDto industryDto() {
         var industry = new IndustryDto();
         industry.setValue(uuid());
-        industry.setColor(uuid());
+        industry.setDescription(uuid());
         return industry;
     }
 
@@ -42,7 +42,7 @@ public class CustomizationsComponentTestUtils {
     public static SkillDto skillDto() {
         var skill = new SkillDto();
         skill.setValue(uuid());
-        skill.setColor(uuid());
+        skill.setDescription(uuid());
         return skill;
     }
 
@@ -53,7 +53,7 @@ public class CustomizationsComponentTestUtils {
     public static ProductDto productDto() {
         var product = new ProductDto();
         product.setValue(uuid());
-        product.setColor(uuid());
+        product.setDescription(uuid());
         return product;
     }
 
@@ -64,7 +64,7 @@ public class CustomizationsComponentTestUtils {
     public static TargetMarketDto targetMarketDto() {
         var targetMarket = new TargetMarketDto();
         targetMarket.setValue(uuid());
-        targetMarket.setColor(uuid());
+        targetMarket.setDescription(uuid());
         return targetMarket;
     }
 
@@ -75,7 +75,7 @@ public class CustomizationsComponentTestUtils {
     public static CategoryDto categoryDto() {
         var category = new CategoryDto();
         category.setValue(uuid());
-        category.setColor(uuid());
+        category.setDescription(uuid());
         return category;
     }
 }

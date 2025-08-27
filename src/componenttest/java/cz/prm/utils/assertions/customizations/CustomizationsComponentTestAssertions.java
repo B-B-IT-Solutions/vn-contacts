@@ -68,7 +68,7 @@ public class CustomizationsComponentTestAssertions {
 
     public static void assertLabelDto(LabelDto dto1, LabelDto dto2) {
         assertThat(dto1.getValue()).isEqualTo(dto2.getValue());
-        assertThat(dto1.getColor()).isEqualTo(dto2.getColor());
+        assertThat(dto1.getDescription()).isEqualTo(dto2.getDescription());
     }
 
     public static void assertIndustriesDto(List<IndustryDto> dtos1, List<IndustryDto> dtos2) {
@@ -81,7 +81,7 @@ public class CustomizationsComponentTestAssertions {
 
     public static void assertIndustryDto(IndustryDto dto1, IndustryDto dto2) {
         assertThat(dto1.getValue()).isEqualTo(dto2.getValue());
-        assertThat(dto1.getColor()).isEqualTo(dto2.getColor());
+        assertThat(dto1.getDescription()).isEqualTo(dto2.getDescription());
     }
 
     public static void assertSkillsDto(List<SkillDto> dtos1, List<SkillDto> dtos2) {
@@ -94,7 +94,7 @@ public class CustomizationsComponentTestAssertions {
 
     public static void assertSkill(SkillDto dto1, SkillDto dto2) {
         assertThat(dto1.getValue()).isEqualTo(dto2.getValue());
-        assertThat(dto1.getColor()).isEqualTo(dto2.getColor());
+        assertThat(dto1.getDescription()).isEqualTo(dto2.getDescription());
     }
 
     public static void assertProducts(List<ProductDto> dtos1, List<ProductDto> dtos2) {
@@ -107,7 +107,7 @@ public class CustomizationsComponentTestAssertions {
 
     public static void assertProduct(ProductDto dto1, ProductDto dto2) {
         assertThat(dto1.getValue()).isEqualTo(dto2.getValue());
-        assertThat(dto1.getColor()).isEqualTo(dto2.getColor());
+        assertThat(dto1.getDescription()).isEqualTo(dto2.getDescription());
     }
 
     public static void assertTargetMarkets(List<TargetMarketDto> dtos1, List<TargetMarketDto> dtos2) {
@@ -120,7 +120,7 @@ public class CustomizationsComponentTestAssertions {
 
     public static void assertTargetMarket(TargetMarketDto dto1, TargetMarketDto dto2) {
         assertThat(dto1.getValue()).isEqualTo(dto2.getValue());
-        assertThat(dto1.getColor()).isEqualTo(dto2.getColor());
+        assertThat(dto1.getDescription()).isEqualTo(dto2.getDescription());
     }
 
     public static void assertCategoriesDto(List<CategoryDto> dtos1, List<CategoryDto> dtos2) {
@@ -133,6 +133,6 @@ public class CustomizationsComponentTestAssertions {
 
     public static void assertCategoryDto(CategoryDto dto1, CategoryDto dto2) {
         assertThat(dto1.getValue()).isEqualTo(dto2.getValue());
-        assertThat(dto1.getColor()).isEqualTo(dto2.getColor());
+        assertThat(dto1.getDescription()).isEqualTo(dto2.getDescription());
     }
 }

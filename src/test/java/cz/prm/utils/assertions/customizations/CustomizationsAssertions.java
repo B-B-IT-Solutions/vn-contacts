@@ -65,7 +65,7 @@ public class CustomizationsAssertions {
 
     public static void assertIndustry(Industry industry, IndustryDto dto) {
         assertThat(industry.getValue()).isEqualTo(dto.getValue());
-        assertThat(industry.getColor()).isEqualTo(dto.getColor());
+        assertThat(industry.getDescription()).isEqualTo(dto.getDescription());
     }
 
     public static void assertSkills(List<Skill> skills, List<SkillDto> dtos) {
@@ -78,7 +78,7 @@ public class CustomizationsAssertions {
 
     public static void assertSkill(Skill skill, SkillDto dto) {
         assertThat(skill.getValue()).isEqualTo(dto.getValue());
-        assertThat(skill.getColor()).isEqualTo(dto.getColor());
+        assertThat(skill.getDescription()).isEqualTo(dto.getDescription());
     }
 
     public static void assertProducts(List<Product> products, List<ProductDto> dtos) {
@@ -91,7 +91,7 @@ public class CustomizationsAssertions {
 
     public static void assertProduct(Product product, ProductDto dto) {
         assertThat(product.getValue()).isEqualTo(dto.getValue());
-        assertThat(product.getColor()).isEqualTo(dto.getColor());
+        assertThat(product.getDescription()).isEqualTo(dto.getDescription());
     }
 
     public static void assertTargetMarkets(List<TargetMarket> targetMarkets, List<TargetMarketDto> dtos) {
@@ -104,7 +104,7 @@ public class CustomizationsAssertions {
 
     public static void assertTargetMarket(TargetMarket targetMarket, TargetMarketDto dto) {
         assertThat(targetMarket.getValue()).isEqualTo(dto.getValue());
-        assertThat(targetMarket.getColor()).isEqualTo(dto.getColor());
+        assertThat(targetMarket.getDescription()).isEqualTo(dto.getDescription());
     }
 
     public static void assertLabels(List<Label> labels, List<LabelDto> dtos) {
@@ -117,7 +117,7 @@ public class CustomizationsAssertions {
 
     public static void assertLabel(Label label, LabelDto dto) {
         assertThat(label.getValue()).isEqualTo(dto.getValue());
-        assertThat(label.getColor()).isEqualTo(dto.getColor());
+        assertThat(label.getDescription()).isEqualTo(dto.getDescription());
     }
 
     public static void assertCategories(List<Category> categories, List<CategoryDto> dtos) {
@@ -130,6 +130,6 @@ public class CustomizationsAssertions {
 
     public static void assertCategory(Category category, CategoryDto dto) {
         assertThat(category.getValue()).isEqualTo(dto.getValue());
-        assertThat(category.getColor()).isEqualTo(dto.getColor());
+        assertThat(category.getDescription()).isEqualTo(dto.getDescription());
     }
 }

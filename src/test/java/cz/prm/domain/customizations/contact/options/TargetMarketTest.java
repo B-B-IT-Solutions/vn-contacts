@@ -12,6 +12,6 @@ class TargetMarketTest {
         var value = uuid();
         var targetMarket = new TargetMarket(value);
         assertThat(targetMarket.getValue()).isEqualTo(value);
-        assertThat(targetMarket.getColor()).isNull();
+        assertThat(targetMarket.getDescription()).isNull();
     }
 }
