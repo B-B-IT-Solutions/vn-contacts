@@ -15,8 +15,8 @@ public class Skill {
     @Column(name = "VALUE")
     private String value;
 
-    @Column(name = "COLOR")
-    private String color;
+    @Column(name = "DESCRIPTION")
+    private String description;
 
     public Skill(String value) {
         this.value = value;

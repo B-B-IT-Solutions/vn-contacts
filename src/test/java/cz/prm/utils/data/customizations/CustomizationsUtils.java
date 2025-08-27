@@ -74,14 +74,14 @@ public class CustomizationsUtils {
     public static Label label() {
         var label = new Label();
         label.setValue(uuid());
-        label.setColor(uuid());
+        label.setDescription(uuid());
         return label;
     }
 
     public static LabelDto labelDto() {
         var label = new LabelDto();
         label.setValue(uuid());
-        label.setColor(uuid());
+        label.setDescription(uuid());
         return label;
     }
 
@@ -96,14 +96,14 @@ public class CustomizationsUtils {
     public static Industry industry() {
         var industry = new Industry();
         industry.setValue(uuid());
-        industry.setColor(uuid());
+        industry.setDescription(uuid());
         return industry;
     }
 
     public static IndustryDto industryDto() {
         var industry = new IndustryDto();
         industry.setValue(uuid());
-        industry.setColor(uuid());
+        industry.setDescription(uuid());
         return industry;
     }
 
@@ -118,14 +118,14 @@ public class CustomizationsUtils {
     public static Skill skill() {
         var skill = new Skill();
         skill.setValue(uuid());
-        skill.setColor(uuid());
+        skill.setDescription(uuid());
         return skill;
     }
 
     public static SkillDto skillDto() {
         var skill = new SkillDto();
         skill.setValue(uuid());
-        skill.setColor(uuid());
+        skill.setDescription(uuid());
         return skill;
     }
 
@@ -140,14 +140,14 @@ public class CustomizationsUtils {
     public static Product product() {
         var product = new Product();
         product.setValue(uuid());
-        product.setColor(uuid());
+        product.setDescription(uuid());
         return product;
     }
 
     public static ProductDto productDto() {
         var product = new ProductDto();
         product.setValue(uuid());
-        product.setColor(uuid());
+        product.setDescription(uuid());
         return product;
     }
 
@@ -162,14 +162,14 @@ public class CustomizationsUtils {
     public static TargetMarket targetMarket() {
         var targetMarket = new TargetMarket();
         targetMarket.setValue(uuid());
-        targetMarket.setColor(uuid());
+        targetMarket.setDescription(uuid());
         return targetMarket;
     }
 
     public static TargetMarketDto targetMarketDto() {
         var targetMarket = new TargetMarketDto();
         targetMarket.setValue(uuid());
-        targetMarket.setColor(uuid());
+        targetMarket.setDescription(uuid());
         return targetMarket;
     }
 
@@ -184,14 +184,14 @@ public class CustomizationsUtils {
     public static Category category() {
         var category = new Category();
         category.setValue(uuid());
-        category.setColor(uuid());
+        category.setDescription(uuid());
         return category;
     }
 
     public static CategoryDto categoryDto() {
         var category = new CategoryDto();
         category.setValue(uuid());
-        category.setColor(uuid());
+        category.setDescription(uuid());
         return category;
     }
 }

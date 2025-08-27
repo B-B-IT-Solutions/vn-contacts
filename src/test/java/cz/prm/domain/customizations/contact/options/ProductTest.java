@@ -12,6 +12,6 @@ class ProductTest {
         var value = uuid();
         var product = new Product(value);
         assertThat(product.getValue()).isEqualTo(value);
-        assertThat(product.getColor()).isNull();
+        assertThat(product.getDescription()).isNull();
     }
 }

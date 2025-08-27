@@ -232,31 +232,31 @@
 			<createTable tableName="contact_settings_label">
 				 <column name="settings_id" type="BIGINT"/>
 				 <column name="value" type="VARCHAR(250)"/>
-				 <column name="color" type="VARCHAR(50)"/>
+				 <column name="description" type="VARCHAR(50)"/>
 			</createTable>
 			
 			<createTable tableName="contact_settings_industry">
 				 <column name="settings_id" type="BIGINT"/>
 				 <column name="value" type="VARCHAR(250)"/>
-				 <column name="color" type="varchar(255)"/>
+				 <column name="description" type="varchar(255)"/>
 			</createTable>
 			
 			<createTable tableName="contact_settings_skill">
 				 <column name="settings_id" type="BIGINT"/>
 				 <column name="value" type="VARCHAR(250)"/>
-				 <column name="color" type="VARCHAR(50)"/>
+				 <column name="description" type="VARCHAR(50)"/>
 			</createTable>
 			
 			<createTable tableName="contact_settings_product">
 				 <column name="settings_id" type="BIGINT"/>
 				 <column name="value" type="VARCHAR(250)"/>
-				 <column name="color" type="VARCHAR(50)"/>
+				 <column name="description" type="VARCHAR(50)"/>
 			</createTable>
 			
 			<createTable tableName="contact_settings_target_market">
 				 <column name="settings_id" type="BIGINT"/>
 				 <column name="value" type="VARCHAR(250)"/>
-				 <column name="color" type="VARCHAR(50)"/>
+				 <column name="description" type="VARCHAR(50)"/>
 			</createTable>
 	 </changeSet>
 	 
@@ -276,7 +276,7 @@
 			<createTable tableName="note_settings_category">
 				 <column name="settings_id" type="BIGINT"/>
 				 <column name="value" type="VARCHAR(250)"/>
-				 <column name="color" type="VARCHAR(50)"/>
+				 <column name="description" type="VARCHAR(50)"/>
 			</createTable>
 			
 			<addForeignKeyConstraint baseTableName="note_settings_category" baseColumnNames="settings_id"
