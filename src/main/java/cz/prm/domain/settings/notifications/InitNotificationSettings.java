@@ -1,11 +1,14 @@
 package cz.prm.domain.settings.notifications;
 
 import static cz.prm.domain.settings.notifications.dials.GlobalNotifications.ALL;
+import static lombok.AccessLevel.PRIVATE;
 
 import cz.prm.domain.settings.notifications.dials.ContactNotifications;
 import cz.prm.domain.settings.notifications.dials.ReferralNotifications;
 import cz.prm.domain.settings.notifications.dials.TaskNotifications;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = PRIVATE)
 public class InitNotificationSettings {
 
     public static NotificationSettings iniNotificationSettings() {
